@@ -31,7 +31,7 @@ import { FavoriteLibrariesComponent } from './components/favorite-libraries/favo
 import { SearchResultsComponent } from './components/search/search-results/search-results.component';
 import { SearchLibrariesResultsComponent } from './components/search/search-libraries-results/search-libraries-results.component';
 import { LoginComponent } from './components/login/login.component';
-import { AppSharedRuleGuard, GenericErrorComponent, ExtensionsDataLoaderGuard } from '@alfresco/aca-shared';
+import { AppSharedRuleGuard, ExtensionsDataLoaderGuard, GenericErrorComponent } from '@alfresco/aca-shared';
 import { AuthGuard, BlankPageComponent } from '@alfresco/adf-core';
 import { FavoritesComponent } from './components/favorites/favorites.component';
 import { RecentFilesComponent } from './components/recent-files/recent-files.component';
@@ -44,18 +44,18 @@ import { ViewProfileRuleGuard } from './components/view-profile/view-profile.gua
 export const APP_ROUTES: Routes = [
     {
         path: 'blank',
-        component: BlankPageComponent
+        component: BlankPageComponent,
     },
     {
         path: 'login',
         component: LoginComponent,
         data: {
-            title: 'APP.SIGN_IN'
-        }
+            title: 'APP.SIGN_IN',
+        },
     },
     {
         path: 'preview/s/:id',
-        loadChildren: () => import('./components/shared-link-view/shared-link-view.module').then((m) => m.AppSharedLinkViewModule)
+        loadChildren: () => import('./components/shared-link-view/shared-link-view.module').then((m) => m.AppSharedLinkViewModule),
     },
     {
         path: 'view',
@@ -67,11 +67,11 @@ export const APP_ROUTES: Routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule)
-                    }
-                ]
-            }
-        ]
+                        loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule),
+                    },
+                ],
+            },
+        ],
     },
     {
         path: '',
@@ -81,15 +81,19 @@ export const APP_ROUTES: Routes = [
             {
                 path: 'profile',
                 canActivate: [ViewProfileRuleGuard],
-                component: ViewProfileComponent
+                component: ViewProfileComponent,
             },
             {
                 path: '',
-                component: HomeComponent
+                component: HomeComponent,
             },
             {
                 path: 'javascript-console',
                 loadChildren: () => import('../../../../../libs/mgmt/js-console/src/lib/js-console.module').then((m) => m.ContezzaJsConsoleModule),
+            },
+            {
+                path: 'node-browser',
+                loadChildren: () => import('../../../../../libs/mgmt/node-browser/src/lib/node-browser.module').then((m) => m.ContezzaNodeBrowserModule),
             },
             {
                 path: 'personal-files',
@@ -100,8 +104,8 @@ export const APP_ROUTES: Routes = [
                         data: {
                             sortingPreferenceKey: 'personal-files',
                             title: 'APP.BROWSE.PERSONAL.TITLE',
-                            defaultNodeId: '-my-'
-                        }
+                            defaultNodeId: '-my-',
+                        },
                     },
                     {
                         path: 'details/:nodeId',
@@ -110,26 +114,26 @@ export const APP_ROUTES: Routes = [
                                 path: '',
                                 component: DetailsComponent,
                                 data: {
-                                    navigateSource: 'personal-files'
-                                }
+                                    navigateSource: 'personal-files',
+                                },
                             },
                             {
                                 path: ':activeTab',
                                 component: DetailsComponent,
                                 data: {
                                     title: 'APP.BROWSE.PERSONAL.PERMISSIONS.TITLE',
-                                    navigateSource: 'personal-files'
-                                }
-                            }
-                        ]
+                                    navigateSource: 'personal-files',
+                                },
+                            },
+                        ],
                     },
                     // deprecated, backwards compatibility with ACA 1.8
                     {
                         path: 'preview/:nodeId',
                         loadChildren: () => import('./components/preview/preview.module').then((m) => m.PreviewModule),
                         data: {
-                            navigateSource: 'personal-files'
-                        }
+                            navigateSource: 'personal-files',
+                        },
                     },
                     {
                         path: 'view/:nodeId',
@@ -138,11 +142,11 @@ export const APP_ROUTES: Routes = [
                             {
                                 path: '',
                                 data: {
-                                    navigateSource: 'personal-files'
+                                    navigateSource: 'personal-files',
                                 },
-                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule)
-                            }
-                        ]
+                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule),
+                            },
+                        ],
                     },
                     {
                         path: 'view/:nodeId/:versionId',
@@ -151,13 +155,13 @@ export const APP_ROUTES: Routes = [
                             {
                                 path: '',
                                 data: {
-                                    navigateSource: 'personal-files'
+                                    navigateSource: 'personal-files',
                                 },
-                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule)
-                            }
-                        ]
-                    }
-                ]
+                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule),
+                            },
+                        ],
+                    },
+                ],
             },
             {
                 path: 'personal-files/:folderId',
@@ -167,8 +171,8 @@ export const APP_ROUTES: Routes = [
                         component: FilesComponent,
                         data: {
                             title: 'APP.BROWSE.PERSONAL.TITLE',
-                            sortingPreferenceKey: 'personal-files'
-                        }
+                            sortingPreferenceKey: 'personal-files',
+                        },
                     },
                     {
                         path: 'view/:nodeId/:versionId',
@@ -177,27 +181,27 @@ export const APP_ROUTES: Routes = [
                             {
                                 path: '',
                                 data: {
-                                    navigateSource: 'personal-files'
+                                    navigateSource: 'personal-files',
                                 },
-                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule)
-                            }
-                        ]
+                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule),
+                            },
+                        ],
                     },
                     // deprecated, backwards compatibility with ACA 1.8
                     {
                         path: 'preview/:nodeId',
                         loadChildren: () => import('./components/preview/preview.module').then((m) => m.PreviewModule),
                         data: {
-                            navigateSource: 'personal-files'
-                        }
+                            navigateSource: 'personal-files',
+                        },
                     },
                     // deprecated, backwards compatibility with ACA 1.8
                     {
                         path: ':folderId/preview/:nodeId',
                         loadChildren: () => import('./components/preview/preview.module').then((m) => m.PreviewModule),
                         data: {
-                            navigateSource: 'personal-files'
-                        }
+                            navigateSource: 'personal-files',
+                        },
                     },
                     {
                         path: 'view/:nodeId',
@@ -206,13 +210,13 @@ export const APP_ROUTES: Routes = [
                             {
                                 path: '',
                                 data: {
-                                    navigateSource: 'personal-files'
+                                    navigateSource: 'personal-files',
                                 },
-                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule)
-                            }
-                        ]
-                    }
-                ]
+                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule),
+                            },
+                        ],
+                    },
+                ],
             },
             {
                 path: 'libraries',
@@ -222,10 +226,10 @@ export const APP_ROUTES: Routes = [
                         component: LibrariesComponent,
                         data: {
                             title: 'APP.BROWSE.LIBRARIES.MENU.MY_LIBRARIES.TITLE',
-                            sortingPreferenceKey: 'libraries'
-                        }
-                    }
-                ]
+                            sortingPreferenceKey: 'libraries',
+                        },
+                    },
+                ],
             },
             {
                 path: 'libraries/:folderId',
@@ -235,16 +239,16 @@ export const APP_ROUTES: Routes = [
                         component: FilesComponent,
                         data: {
                             title: 'APP.BROWSE.LIBRARIES.MENU.MY_LIBRARIES.TITLE',
-                            sortingPreferenceKey: 'libraries-files'
-                        }
+                            sortingPreferenceKey: 'libraries-files',
+                        },
                     },
                     // deprecated, backwards compatibility with ACA 1.8
                     {
                         path: 'preview/:nodeId',
                         loadChildren: () => import('./components/preview/preview.module').then((m) => m.PreviewModule),
                         data: {
-                            navigateSource: 'libraries'
-                        }
+                            navigateSource: 'libraries',
+                        },
                     },
                     {
                         path: 'view/:nodeId',
@@ -253,11 +257,11 @@ export const APP_ROUTES: Routes = [
                             {
                                 path: '',
                                 data: {
-                                    navigateSource: 'libraries'
+                                    navigateSource: 'libraries',
                                 },
-                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule)
-                            }
-                        ]
+                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule),
+                            },
+                        ],
                     },
                     {
                         path: 'view/:nodeId/:versionId',
@@ -266,13 +270,13 @@ export const APP_ROUTES: Routes = [
                             {
                                 path: '',
                                 data: {
-                                    navigateSource: 'libraries'
+                                    navigateSource: 'libraries',
                                 },
-                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule)
-                            }
-                        ]
-                    }
-                ]
+                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule),
+                            },
+                        ],
+                    },
+                ],
             },
             {
                 path: 'favorite',
@@ -280,17 +284,17 @@ export const APP_ROUTES: Routes = [
                     {
                         path: '',
                         pathMatch: 'full',
-                        redirectTo: 'libraries'
+                        redirectTo: 'libraries',
                     },
                     {
                         path: 'libraries',
                         component: FavoriteLibrariesComponent,
                         data: {
                             title: 'APP.BROWSE.LIBRARIES.MENU.FAVORITE_LIBRARIES.TITLE',
-                            sortingPreferenceKey: 'favorite-libraries'
-                        }
-                    }
-                ]
+                            sortingPreferenceKey: 'favorite-libraries',
+                        },
+                    },
+                ],
             },
             {
                 path: 'favorite/libraries/:folderId',
@@ -300,8 +304,8 @@ export const APP_ROUTES: Routes = [
                         component: FilesComponent,
                         data: {
                             title: 'APP.BROWSE.LIBRARIES.MENU.FAVORITE_LIBRARIES.TITLE',
-                            sortingPreferenceKey: 'libraries-files'
-                        }
+                            sortingPreferenceKey: 'libraries-files',
+                        },
                     },
                     {
                         path: 'view/:nodeId',
@@ -310,11 +314,11 @@ export const APP_ROUTES: Routes = [
                             {
                                 path: '',
                                 data: {
-                                    navigateSource: 'libraries'
+                                    navigateSource: 'libraries',
                                 },
-                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule)
-                            }
-                        ]
+                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule),
+                            },
+                        ],
                     },
                     {
                         path: 'view/:nodeId/:versionId',
@@ -323,18 +327,18 @@ export const APP_ROUTES: Routes = [
                             {
                                 path: '',
                                 data: {
-                                    navigateSource: 'libraries'
+                                    navigateSource: 'libraries',
                                 },
-                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule)
-                            }
-                        ]
-                    }
-                ]
+                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule),
+                            },
+                        ],
+                    },
+                ],
             },
             {
                 path: 'favorites',
                 data: {
-                    sortingPreferenceKey: 'favorites'
+                    sortingPreferenceKey: 'favorites',
                 },
                 children: [
                     {
@@ -342,8 +346,8 @@ export const APP_ROUTES: Routes = [
                         component: FavoritesComponent,
                         data: {
                             title: 'APP.BROWSE.FAVORITES.TITLE',
-                            sortingPreferenceKey: 'favorites'
-                        }
+                            sortingPreferenceKey: 'favorites',
+                        },
                         // loadChildren:
                         //   './components/favorites/favorites.module#AppFavoritesModule'
                     },
@@ -352,8 +356,8 @@ export const APP_ROUTES: Routes = [
                         path: 'preview/:nodeId',
                         loadChildren: () => import('./components/preview/preview.module').then((m) => m.PreviewModule),
                         data: {
-                            navigateSource: 'favorites'
-                        }
+                            navigateSource: 'favorites',
+                        },
                     },
                     {
                         path: 'view/:nodeId',
@@ -362,11 +366,11 @@ export const APP_ROUTES: Routes = [
                             {
                                 path: '',
                                 data: {
-                                    navigateSource: 'favorites'
+                                    navigateSource: 'favorites',
                                 },
-                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule)
-                            }
-                        ]
+                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule),
+                            },
+                        ],
                     },
                     {
                         path: 'view/:nodeId/:versionId',
@@ -375,26 +379,26 @@ export const APP_ROUTES: Routes = [
                             {
                                 path: '',
                                 data: {
-                                    navigateSource: 'favorites'
+                                    navigateSource: 'favorites',
                                 },
-                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule)
-                            }
-                        ]
-                    }
-                ]
+                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule),
+                            },
+                        ],
+                    },
+                ],
             },
             {
                 path: 'recent-files',
                 data: {
-                    sortingPreferenceKey: 'recent-files'
+                    sortingPreferenceKey: 'recent-files',
                 },
                 children: [
                     {
                         path: '',
                         component: RecentFilesComponent,
                         data: {
-                            title: 'APP.BROWSE.RECENT.TITLE'
-                        }
+                            title: 'APP.BROWSE.RECENT.TITLE',
+                        },
                         // loadChildren:
                         //   './components/recent-files/recent-files.module#AppRecentFilesModule'
                     },
@@ -403,8 +407,8 @@ export const APP_ROUTES: Routes = [
                         path: 'preview/:nodeId',
                         loadChildren: () => import('./components/preview/preview.module').then((m) => m.PreviewModule),
                         data: {
-                            navigateSource: 'recent-files'
-                        }
+                            navigateSource: 'recent-files',
+                        },
                     },
                     {
                         path: 'view/:nodeId',
@@ -413,11 +417,11 @@ export const APP_ROUTES: Routes = [
                             {
                                 path: '',
                                 data: {
-                                    navigateSource: 'recent-files'
+                                    navigateSource: 'recent-files',
                                 },
-                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule)
-                            }
-                        ]
+                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule),
+                            },
+                        ],
                     },
                     {
                         path: 'view/:nodeId/:versionId',
@@ -426,13 +430,13 @@ export const APP_ROUTES: Routes = [
                             {
                                 path: '',
                                 data: {
-                                    navigateSource: 'recent-files'
+                                    navigateSource: 'recent-files',
                                 },
-                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule)
-                            }
-                        ]
-                    }
-                ]
+                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule),
+                            },
+                        ],
+                    },
+                ],
             },
             {
                 path: 'shared',
@@ -441,9 +445,9 @@ export const APP_ROUTES: Routes = [
                         path: '',
                         data: {
                             title: 'APP.BROWSE.SHARED.TITLE',
-                            sortingPreferenceKey: 'shared-files'
+                            sortingPreferenceKey: 'shared-files',
                         },
-                        component: SharedFilesComponent
+                        component: SharedFilesComponent,
                         // loadChildren:
                         //   './components/shared-files/shared-files.module#AppSharedFilesModule'
                     },
@@ -452,8 +456,8 @@ export const APP_ROUTES: Routes = [
                         path: 'preview/:nodeId',
                         loadChildren: () => import('./components/preview/preview.module').then((m) => m.PreviewModule),
                         data: {
-                            navigateSource: 'shared'
-                        }
+                            navigateSource: 'shared',
+                        },
                     },
                     {
                         path: 'view/:nodeId',
@@ -462,11 +466,11 @@ export const APP_ROUTES: Routes = [
                             {
                                 path: '',
                                 data: {
-                                    navigateSource: 'shared'
+                                    navigateSource: 'shared',
                                 },
-                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule)
-                            }
-                        ]
+                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule),
+                            },
+                        ],
                     },
                     {
                         path: 'view/:nodeId/:versionId',
@@ -475,19 +479,19 @@ export const APP_ROUTES: Routes = [
                             {
                                 path: '',
                                 data: {
-                                    navigateSource: 'shared'
+                                    navigateSource: 'shared',
                                 },
-                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule)
-                            }
-                        ]
-                    }
+                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule),
+                            },
+                        ],
+                    },
                 ],
                 canActivateChild: [AppSharedRuleGuard],
-                canActivate: [AppSharedRuleGuard]
+                canActivate: [AppSharedRuleGuard],
             },
             {
                 path: 'trashcan',
-                loadChildren: () => import('./components/trashcan/trashcan.module').then((m) => m.AppTrashcanModule)
+                loadChildren: () => import('./components/trashcan/trashcan.module').then((m) => m.AppTrashcanModule),
             },
             {
                 path: 'search',
@@ -496,16 +500,16 @@ export const APP_ROUTES: Routes = [
                         path: '',
                         component: SearchResultsComponent,
                         data: {
-                            title: 'APP.BROWSE.SEARCH.TITLE'
-                        }
+                            title: 'APP.BROWSE.SEARCH.TITLE',
+                        },
                     },
                     // deprecated, backwards compatibility with ACA 1.8
                     {
                         path: 'preview/:nodeId',
                         loadChildren: () => import('./components/preview/preview.module').then((m) => m.PreviewModule),
                         data: {
-                            navigateSource: 'search'
-                        }
+                            navigateSource: 'search',
+                        },
                     },
                     {
                         path: 'view/:nodeId',
@@ -514,11 +518,11 @@ export const APP_ROUTES: Routes = [
                             {
                                 path: '',
                                 data: {
-                                    navigateSource: 'search'
+                                    navigateSource: 'search',
                                 },
-                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule)
-                            }
-                        ]
+                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule),
+                            },
+                        ],
                     },
                     {
                         path: 'view/:nodeId/:versionId',
@@ -527,13 +531,13 @@ export const APP_ROUTES: Routes = [
                             {
                                 path: '',
                                 data: {
-                                    navigateSource: 'search'
+                                    navigateSource: 'search',
                                 },
-                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule)
-                            }
-                        ]
-                    }
-                ]
+                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule),
+                            },
+                        ],
+                    },
+                ],
             },
             {
                 path: 'search-libraries',
@@ -542,8 +546,8 @@ export const APP_ROUTES: Routes = [
                         path: '',
                         component: SearchLibrariesResultsComponent,
                         data: {
-                            title: 'APP.BROWSE.SEARCH.TITLE'
-                        }
+                            title: 'APP.BROWSE.SEARCH.TITLE',
+                        },
                     },
                     {
                         path: 'view/:nodeId',
@@ -552,28 +556,28 @@ export const APP_ROUTES: Routes = [
                             {
                                 path: '',
                                 data: {
-                                    navigateSource: 'search'
+                                    navigateSource: 'search',
                                 },
-                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule)
-                            }
-                        ]
-                    }
-                ]
+                                loadChildren: () => import('./components/viewer/viewer.module').then((m) => m.AppViewerModule),
+                            },
+                        ],
+                    },
+                ],
             },
             {
                 path: 'nodes/:nodeId',
                 children: [
                     {
                         path: '',
-                        loadChildren: () => import('@alfresco/aca-folder-rules').then((m) => m.AcaFolderRulesModule)
-                    }
-                ]
+                        loadChildren: () => import('@alfresco/aca-folder-rules').then((m) => m.AcaFolderRulesModule),
+                    },
+                ],
             },
             {
                 path: '**',
-                component: GenericErrorComponent
-            }
+                component: GenericErrorComponent,
+            },
         ],
-        canActivateChild: [AuthGuard]
-    }
+        canActivateChild: [AuthGuard],
+    },
 ];

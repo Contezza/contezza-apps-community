@@ -7,7 +7,7 @@ import { NodeBrowserSearchParentColumnComponent } from './components/columns/sea
 import { NodeBrowserSearchLinkColumnComponent } from './components/columns/search-link-column.component';
 import { NodeBrowserTextColumnComponent } from './components/columns/browse-text-column.component';
 import { NodeBrowserValuesColumnComponent } from './components/columns/browse-values-column.component';
-import { CommonModule } from "@angular/common";
+import { CommonModule } from '@angular/common';
 
 @NgModule({
     imports: [CommonModule],
