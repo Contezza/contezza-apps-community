@@ -1,0 +1,21 @@
+.js-console-content-tabs {
+    .mat-tab-body {
+        background-color: var(--theme-card-background-color) !important;
+    }
+    .mat-tab-label:last-child {
+        display: flex;
+        justify-content: flex-end;
+        opacity: 1;
+        width: 100%;
+        min-width: 100px;
+    }
+    &-execution-time {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .js-console-editor {
+        height: 100%;
+    }
+}

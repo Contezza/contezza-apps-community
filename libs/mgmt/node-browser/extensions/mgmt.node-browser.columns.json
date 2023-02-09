@@ -1,0 +1,334 @@
+{
+    "$id": "lib.mgmt.node-browser.columns",
+    "$version": "@@project.version@@",
+    "$name": "Contezza Node Browser Columns",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "columns": [
+            {
+                "id": "mgmt.node-browser.columns.search",
+                "columns": [
+                    {
+                        "name": "name",
+                        "displayName": "APP.NODE_BROWSER.COLUMNS.NAME",
+                        "hidden": false,
+                        "type": "component",
+                        "key": "name.prefixedName",
+                        "component": "node-browser.link.column.component",
+                        "class": "node-browser-link-column",
+                        "onSmallScreen": true
+                    },
+                    {
+                        "name": "parent",
+                        "displayName": "APP.NODE_BROWSER.COLUMNS.PARENT",
+                        "hidden": false,
+                        "type": "component",
+                        "component": "node-browser.search.parent.column.component",
+                        "class": "node-browser-text-column",
+                        "onSmallScreen": false
+                    },
+                    {
+                        "name": "reference",
+                        "displayName": "APP.NODE_BROWSER.COLUMNS.REFERENCE",
+                        "hidden": false,
+                        "type": "component",
+                        "key": "nodeRef",
+                        "component": "node-browser.link.column.component",
+                        "class": "node-browser-link-column",
+                        "onSmallScreen": false
+                    }
+                ]
+            },
+            {
+                "id": "mgmt.node-browser.columns.browse",
+                "properties": [
+                    {
+                        "name": "name",
+                        "displayName": "APP.NODE_BROWSER.COLUMNS.NAME",
+                        "hidden": false,
+                        "type": "component",
+                        "key": "name.prefixedName",
+                        "component": "node-browser.text.column.component",
+                        "class": "node-browser-text-column",
+                        "onSmallScreen": true
+                    },
+                    {
+                        "name": "type",
+                        "displayName": "APP.NODE_BROWSER.COLUMNS.TYPE",
+                        "hidden": false,
+                        "type": "component",
+                        "key": "type.prefixedName",
+                        "component": "node-browser.text.column.component",
+                        "class": "node-browser-text-column",
+                        "onSmallScreen": false
+                    },
+                    {
+                        "name": "value",
+                        "displayName": "APP.NODE_BROWSER.COLUMNS.VALUE",
+                        "hidden": false,
+                        "type": "component",
+                        "key": "values",
+                        "component": "node-browser.values.column.component",
+                        "class": "node-browser-text-column",
+                        "onSmallScreen": true
+                    },
+                    {
+                        "name": "residual",
+                        "displayName": "APP.NODE_BROWSER.COLUMNS.RESIDUAL",
+                        "hidden": false,
+                        "type": "component",
+                        "key": "residual",
+                        "component": "node-browser.text.column.component",
+                        "class": "node-browser-text-column",
+                        "onSmallScreen": false
+                    }
+                ],
+                "children": [
+                    {
+                        "name": "name",
+                        "displayName": "APP.NODE_BROWSER.COLUMNS.CHILD_NAME",
+                        "hidden": false,
+                        "type": "component",
+                        "key": "name.prefixedName",
+                        "component": "node-browser.link.column.component",
+                        "class": "node-browser-link-column",
+                        "onSmallScreen": true
+                    },
+                    {
+                        "name": "type",
+                        "displayName": "APP.NODE_BROWSER.COLUMNS.CHILD_TYPE",
+                        "hidden": false,
+                        "type": "component",
+                        "key": "type.prefixedName",
+                        "component": "node-browser.text.column.component",
+                        "class": "node-browser-text-column",
+                        "onSmallScreen": false
+                    },
+                    {
+                        "name": "reference",
+                        "displayName": "APP.NODE_BROWSER.COLUMNS.CHILD_REFERENCE",
+                        "hidden": false,
+                        "type": "component",
+                        "key": "nodeRef",
+                        "component": "node-browser.text.column.component",
+                        "class": "node-browser-text-column",
+                        "onSmallScreen": false
+                    },
+                    {
+                        "name": "primary",
+                        "displayName": "APP.NODE_BROWSER.COLUMNS.PRIMARY",
+                        "hidden": false,
+                        "type": "component",
+                        "key": "primary",
+                        "component": "node-browser.text.column.component",
+                        "class": "node-browser-text-column",
+                        "onSmallScreen": false
+                    },
+                    {
+                        "name": "assocType",
+                        "displayName": "APP.NODE_BROWSER.COLUMNS.ASSOC_TYPE",
+                        "hidden": false,
+                        "type": "component",
+                        "key": "assocType.prefixedName",
+                        "component": "node-browser.text.column.component",
+                        "class": "node-browser-text-column",
+                        "onSmallScreen": false
+                    },
+                    {
+                        "name": "index",
+                        "displayName": "APP.NODE_BROWSER.COLUMNS.INDEX",
+                        "hidden": false,
+                        "type": "component",
+                        "key": "index",
+                        "component": "node-browser.text.column.component",
+                        "class": "node-browser-text-column",
+                        "onSmallScreen": false
+                    }
+                ],
+                "parents": [
+                    {
+                        "name": "name",
+                        "displayName": "APP.NODE_BROWSER.COLUMNS.PARENT_NAME",
+                        "hidden": false,
+                        "type": "component",
+                        "key": "name.prefixedName",
+                        "component": "node-browser.link.column.component",
+                        "class": "node-browser-link-column",
+                        "onSmallScreen": true
+                    },
+                    {
+                        "name": "type",
+                        "displayName": "APP.NODE_BROWSER.COLUMNS.PARENT_TYPE",
+                        "hidden": false,
+                        "type": "component",
+                        "key": "type.prefixedName",
+                        "component": "node-browser.text.column.component",
+                        "class": "node-browser-text-column",
+                        "onSmallScreen": false
+                    },
+                    {
+                        "name": "reference",
+                        "displayName": "APP.NODE_BROWSER.COLUMNS.PARENT_REFERENCE",
+                        "hidden": false,
+                        "type": "component",
+                        "key": "nodeRef",
+                        "component": "node-browser.text.column.component",
+                        "class": "node-browser-text-column",
+                        "onSmallScreen": false
+                    },
+                    {
+                        "name": "primary",
+                        "displayName": "Primary",
+                        "hidden": false,
+                        "type": "component",
+                        "key": "APP.NODE_BROWSER.COLUMNS.PRIMARY",
+                        "component": "node-browser.text.column.component",
+                        "class": "node-browser-text-column",
+                        "onSmallScreen": false
+                    },
+                    {
+                        "name": "assocType",
+                        "displayName": "APP.NODE_BROWSER.COLUMNS.ASSOC_TYPE",
+                        "hidden": false,
+                        "type": "component",
+                        "key": "assocType.prefixedName",
+                        "component": "node-browser.text.column.component",
+                        "class": "node-browser-text-column",
+                        "onSmallScreen": false
+                    }
+                ],
+                "assocs": [
+                    {
+                        "name": "assocType",
+                        "displayName": "APP.NODE_BROWSER.COLUMNS.ASSOC_TYPE",
+                        "hidden": false,
+                        "type": "component",
+                        "key": "assocType.prefixedName",
+                        "component": "node-browser.link.column.component",
+                        "class": "node-browser-link-column",
+                        "onSmallScreen": true
+                    },
+                    {
+                        "name": "targetRef",
+                        "displayName": "APP.NODE_BROWSER.COLUMNS.TARGET_REFERENCE",
+                        "hidden": false,
+                        "type": "component",
+                        "key": "targetRef",
+                        "component": "node-browser.text.column.component",
+                        "class": "node-browser-text-column",
+                        "onSmallScreen": false
+                    },
+                    {
+                        "name": "targetType",
+                        "displayName": "APP.NODE_BROWSER.COLUMNS.TARGET_TYPE",
+                        "hidden": false,
+                        "type": "component",
+                        "key": "type.prefixedName",
+                        "component": "node-browser.text.column.component",
+                        "class": "node-browser-text-column",
+                        "onSmallScreen": false
+                    }
+                ],
+                "sourceAssocs": [
+                    {
+                        "name": "assocType",
+                        "displayName": "APP.NODE_BROWSER.COLUMNS.ASSOC_TYPE",
+                        "hidden": false,
+                        "type": "component",
+                        "key": "assocType.prefixedName",
+                        "component": "node-browser.link.column.component",
+                        "class": "node-browser-link-column",
+                        "onSmallScreen": true
+                    },
+                    {
+                        "name": "sourceRef",
+                        "displayName": "APP.NODE_BROWSER.COLUMNS.SOURCE_REFERENCE",
+                        "hidden": false,
+                        "type": "component",
+                        "key": "sourceRef",
+                        "component": "node-browser.text.column.component",
+                        "class": "node-browser-text-column",
+                        "onSmallScreen": false
+                    },
+                    {
+                        "name": "sourceType",
+                        "displayName": "APP.NODE_BROWSER.COLUMNS.SOURCE_TYPE",
+                        "hidden": false,
+                        "type": "component",
+                        "key": "type.prefixedName",
+                        "component": "node-browser.text.column.component",
+                        "class": "node-browser-text-column",
+                        "onSmallScreen": false
+                    }
+                ],
+                "permissions": {
+                    "entries": [
+                        {
+                            "name": "permission",
+                            "displayName": "APP.NODE_BROWSER.COLUMNS.PERMISSION",
+                            "hidden": false,
+                            "type": "component",
+                            "key": "permission",
+                            "component": "node-browser.text.column.component",
+                            "class": "node-browser-text-column",
+                            "onSmallScreen": true
+                        },
+                        {
+                            "name": "authority",
+                            "displayName": "APP.NODE_BROWSER.COLUMNS.AUTHORITY",
+                            "hidden": false,
+                            "type": "component",
+                            "key": "authority",
+                            "component": "node-browser.text.column.component",
+                            "class": "node-browser-text-column",
+                            "onSmallScreen": true
+                        },
+                        {
+                            "name": "access",
+                            "displayName": "APP.NODE_BROWSER.COLUMNS.ACCESS",
+                            "hidden": false,
+                            "type": "component",
+                            "key": "rel",
+                            "component": "node-browser.text.column.component",
+                            "class": "node-browser-text-column",
+                            "onSmallScreen": true
+                        }
+                    ],
+                    "masks": [
+                        {
+                            "name": "APP.NODE_BROWSER.COLUMNS.STORE_PERMISSION",
+                            "displayName": "Store Permission",
+                            "hidden": false,
+                            "type": "component",
+                            "key": "authority",
+                            "component": "node-browser.text.column.component",
+                            "class": "node-browser-text-column",
+                            "onSmallScreen": true
+                        },
+                        {
+                            "name": "authority",
+                            "displayName": "APP.NODE_BROWSER.COLUMNS.AUTHORITY",
+                            "hidden": false,
+                            "type": "component",
+                            "key": "authority",
+                            "component": "node-browser.text.column.component",
+                            "class": "node-browser-text-column",
+                            "onSmallScreen": true
+                        },
+                        {
+                            "name": "access",
+                            "displayName": "APP.NODE_BROWSER.COLUMNS.ACCESS",
+                            "hidden": false,
+                            "type": "component",
+                            "key": "rel",
+                            "component": "node-browser.text.column.component",
+                            "class": "node-browser-text-column",
+                            "onSmallScreen": true
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

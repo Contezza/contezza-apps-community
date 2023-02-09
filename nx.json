@@ -1,0 +1,52 @@
+{
+    "$schema": "./node_modules/nx/schemas/nx-schema.json",
+    "npmScope": "contezza-apps",
+    "affected": {
+        "defaultBase": "main"
+    },
+    "cli": {
+        "packageManager": "npm"
+    },
+    "tasksRunnerOptions": {
+        "default": {
+            "runner": "@nrwl/workspace/tasks-runners/default",
+            "options": {
+                "cacheableOperations": ["build", "lint"],
+                "cacheDirectory": "nxcache"
+            }
+        }
+    },
+    "targetDefaults": {
+        "build": {
+            "dependsOn": ["^build"],
+            "inputs": ["production", "^production"]
+        },
+        "lint": {
+            "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
+        }
+    },
+    "namedInputs": {
+        "default": ["{projectRoot}/**/*", "sharedGlobals"],
+        "sharedGlobals": [],
+        "production": [
+            "default",
+            "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+            "!{projectRoot}/tsconfig.spec.json",
+            "!{projectRoot}/jest.config.[jt]s",
+            "!{projectRoot}/.eslintrc.json"
+        ]
+    },
+    "defaultProject": "aca",
+    "generators": {
+        "@nrwl/angular:application": {
+            "style": "scss",
+            "linter": "eslint"
+        },
+        "@nrwl/angular:library": {
+            "linter": "eslint"
+        },
+        "@nrwl/angular:component": {
+            "style": "scss"
+        }
+    }
+}

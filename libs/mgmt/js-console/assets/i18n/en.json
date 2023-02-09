@@ -1,0 +1,96 @@
+{
+    "APP": {
+        "JS_CONSOLE": {
+            "NAVBAR": {
+                "TITLE": "Javascript console",
+                "DESCRIPTION": "View javascript console"
+            },
+            "HEADER": {
+                "NODE_REFS": {
+                    "SPACE": {
+                        "DEFAULT": "Company Home",
+                        "VIEW_TITLE": "spaceNoderef",
+                        "SELECT_TITLE": "Select spaceNoderef"
+                    },
+                    "DOCUMENT": {
+                        "EMPTY": "not defined",
+                        "VIEW_TITLE": "document",
+                        "SELECT_TITLE": "Select document"
+                    },
+                    "SCRIPT": {
+                        "VIEW_TITLE": "script"
+                    }
+                },
+                "ACTIONS": {
+                    "EXECUTE": "Execute script (⌘ + ⏎)",
+                    "SAVE": "Save (⌘ + S)",
+                    "THEME": "Editor theme",
+                    "SCRIPTS": "Scripts"
+                }
+            },
+            "CONTENT": {
+                "TABS": {
+                    "JS": "Javascript",
+                    "FM": "Freemarker",
+                    "SETTINGS": "Settings"
+                },
+                "EXECUTION_PARAMS": {
+                    "ARGS": "Webscript URL arguments",
+                    "RUNAS": "Run script as",
+                    "TRANSACRION_ISOLATION": "Transaction isolation"
+                }
+            },
+            "OUTPUT": {
+                "TABS": {
+                    "CONSOLE": {
+                        "TITLE": "Console",
+                        "ERROR": {
+                            "MESSAGE": "Message",
+                            "CALLSTACK": "Callstack"
+                        }
+                    },
+                    "FM_HTML": {
+                        "TITLE": "Freemarker html"
+                    },
+                    "FM_TEXT": {
+                        "TITLE": "Freemarker text"
+                    },
+                    "JSON": {
+                        "TITLE": "Json"
+                    },
+                    "DUMP": {
+                        "TITLE": "Dump"
+                    }
+                }
+            },
+            "SCRIPTS": {
+                "TITLE": "Scripts",
+                "ACTIONS": {
+                    "DUPLICATE": "Duplicate",
+                    "REMOVE": "Remove"
+                }
+            },
+            "DIALOGS": {
+                "SAVE_SCRIPT": {
+                    "TITLE": "Save script as",
+                    "NAME_INPUT": "Script name",
+                    "SAVE_BUTTON": "Save",
+                    "CLOSE_BUTTON": "Cancel"
+                },
+                "DELETE_SCRIPT": {
+                    "TITLE": "Remove script",
+                    "MESSAGE": "Are you sure?",
+                    "YES_LABEL": "Ok",
+                    "NO_LABEL": "Cancel"
+                }
+            },
+            "MESSAGES": {
+                "SCRIPT_UPDATED_SUCCESSFULLY": "Script updated successfully.",
+                "SCRIPT_CREATED_SUCCESSFULLY": "Script created successfully."
+            },
+            "ACTIONS": {
+                "OPEN_IN_CONSOLE": "Open in Javascript console"
+            }
+        }
+    }
+}

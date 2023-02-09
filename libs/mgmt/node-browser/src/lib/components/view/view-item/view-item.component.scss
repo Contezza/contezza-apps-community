@@ -1,0 +1,39 @@
+.mat-expansion-panel {
+    margin-bottom: 5px !important;
+
+    &-header {
+        font-size: larger;
+    }
+}
+
+.text-content-section {
+    display: flex;
+    flex-direction: column;
+
+    &-keyValue,
+    &-permissions {
+        display: flex;
+        flex-direction: column;
+        padding: 10px 0 10px 30px;
+        background-color: var(--theme-card-background-color);
+        overflow: hidden;
+        gap: 5px;
+
+        &-item {
+            display: flex;
+            &-key {
+                min-width: 150px;
+            }
+        }
+    }
+    &-chipsArray {
+        padding: 10px 0 10px 30px;
+    }
+    &-array {
+        display: flex;
+        flex-direction: column;
+        padding: 10px 0 10px 30px;
+        background-color: var(--theme-card-background-color);
+        gap: 5px;
+    }
+}

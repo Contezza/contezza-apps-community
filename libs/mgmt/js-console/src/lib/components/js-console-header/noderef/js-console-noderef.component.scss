@@ -1,0 +1,66 @@
+.js-console-noderef {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--theme-toolbar-background);
+    border: 1px solid transparent;
+    border-radius: 3%;
+    padding-right: 5px;
+
+    &:hover {
+        border: 1px solid var(--theme-border-color);
+        cursor: default;
+
+        .js-console-noderef-action {
+            visibility: visible;
+        }
+    }
+
+    &-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 5px;
+
+        &-title {
+            color: var(--theme-text-color);
+            font-size: var(--theme-caption-font-size);
+            word-wrap: break-word;
+        }
+        &-value {
+            color: var(--theme-primary-color);
+            font-size: var(--theme-body-1-font-size);
+            max-width: 200px;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            white-space: nowrap !important;
+        }
+    }
+
+    &-action {
+        visibility: hidden;
+        display: flex;
+
+        .mat-icon-button {
+            width: 32px !important;
+            height: 32px !important;
+            line-height: 32px !important;
+
+            .mat-icon {
+                width: 18px !important;
+                height: 18px !important;
+                line-height: 18px !important;
+
+                color: var(--theme-text-color);
+
+                &:hover {
+                    color: var(--theme-primary-color);
+                }
+            }
+
+            .material-icons {
+                font-size: 18px !important;
+            }
+        }
+    }
+}

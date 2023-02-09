@@ -1,0 +1,76 @@
+{
+    "APP": {
+        "NODE_BROWSER": {
+            "NAVBAR": {
+                "TITLE": "Node Browser",
+                "DESCRIPTION": "View node browser"
+            },
+            "SEARCH": {
+                "FORM_FIELDS": {
+                    "STORE": "Store",
+                    "LANG": "Lang"
+                },
+                "BUTTON": {
+                    "TITLE": "Search",
+                    "TOOLTIP": "Search (⌘ + ⏎)"
+                },
+                "TEXTAREA": {
+                    "PLACEHOLDER": "Enter your search here ..."
+                },
+                "RESULT_TOOLBAR": {
+                    "QUERY": "Search for",
+                    "MAX_RESULTS": "Showing first 100 only.",
+                    "TOTAL_RESULTS": "results",
+                    "ELAPSED_TIME": "search took"
+                },
+                "EMPTY": "No items found"
+            },
+            "BROWSE": {
+                "ACTIONS": {
+                    "BACK": {
+                        "TITLE": "Back to search"
+                    },
+                    "TOGGLE_PANELS": {
+                        "EXPAND": "Expand panels",
+                        "COLLAPSE": "Collapse panels"
+                    }
+                },
+                "VIEW_ITEMS": {
+                    "ABOUT": "About",
+                    "ASPECTS": "Aspects",
+                    "PROPERTIES": "Properties",
+                    "CHILDREN": "Children",
+                    "PARENTS": "Parents",
+                    "PERMISSIONS": "Permissions",
+                    "ASSOCIATIONS": "Associations",
+                    "SOURCE_ASSOCIATIONS": "Source Associations"
+                }
+            },
+            "COLUMNS": {
+                "NAME": "Name",
+                "CHILD_NAME": "Child name",
+                "PARENT_NAME": "Parent name",
+                "PARENT": "Parent",
+                "REFERENCE": "Reference",
+                "CHILD_REFERENCE": "Child reference",
+                "PARENT_REFERENCE": "Parent reference",
+                "TYPE": "Type",
+                "CHILD_TYPE": "Child type",
+                "PARENT_TYPE": "Parent type",
+                "VALUE": "Value",
+                "RESIDUAL": "Residual",
+                "PRIMARY": "Primary",
+                "ASSOC_TYPE": "Association type",
+                "INDEX": "Index",
+                "PERMISSION": "Permission",
+                "STORE_PERMISSION": "Store permission",
+                "AUTHORITY": "Authority",
+                "ACCESS": "Access",
+                "TARGET_REFERENCE": "Target reference",
+                "SOURCE_REFERENCE": "Source reference",
+                "TARGET_TYPE": "Target type",
+                "SOURCE_TYPE": "Source type"
+            }
+        }
+    }
+}

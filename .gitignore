@@ -1,0 +1,75 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/dist
+/tmp
+/.tmp
+**/.tmp
+/data
+/out-tsc
+/nxcache
+/e2e-output
+/e2e-artefacts
+/reports
+**/e2e-output
+.angular
+
+# dependencies
+/node_modules
+**/node_modules
+
+# IDEs and editors
+/.idea
+*.iml
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/closest-config-finder.sh
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+.history
+
+# misc
+/.angular/cache
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
+/www
+.env
+.eslintcache
+
+# e2e
+/e2e/*.map
+/e2e-downloads
+.protractor-fail-fast
+.protractor-smartrunner
+/protractorFailuresReport
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# ACA integration
+/apps/content-ce/
+libs/dist
+.docker-build
+target/
+.builds/
+.tmp/
+ci.env
+/apps/content-ce/app/src/app.config.prod.json
+/apps/content-ce/app/src/app.config.test.json
+/apps/content-ce/app/src/assets/i18n/nl.json

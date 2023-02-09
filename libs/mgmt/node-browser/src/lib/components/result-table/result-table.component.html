@@ -1,0 +1,49 @@
+<div class="nb-result-table">
+    <div class="nb-result-table-container">
+        <table mat-table [dataSource]="_dataSource" multiTemplateDataRows>
+            <ng-container *ngFor="let column of columns; trackBy: trackByName">
+                <ng-container matColumnDef="{{ column.name }}">
+                    <th mat-header-cell *matHeaderCellDef class="nb-result-table-container-column">
+                        <span>{{ column.displayName | translate }}</span>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <ng-container [ngSwitch]="column.type">
+                            <ng-container *ngSwitchCase="'icon'">
+                                <adf-icon [value]="column.value"></adf-icon>
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'component'">
+                                <adf-dynamic-component
+                                    [data]="{ element: element, columns: columns, dataSource: _dataSource.filteredData, class: column.class, key: column.key }"
+                                    [id]="column.component"
+                                ></adf-dynamic-component>
+                            </ng-container>
+                            <ng-container *ngSwitchDefault>
+                                <ng-container *contezzaLet="element | tableCellProperty: column.key:column.type:column.format as cellValue">
+                                    <span title="{{ cellValue }}">
+                                        {{ cellValue }}
+                                    </span>
+                                </ng-container>
+                            </ng-container>
+                        </ng-container>
+                    </td>
+                </ng-container>
+            </ng-container>
+
+            <ng-content></ng-content>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr
+                mat-row
+                *matRowDef="let row; columns: displayedColumns"
+                class="nb-result-table-container-column-row"
+                [ngClass]="{ 'nb-result-table-hovered': row.hovered }"
+                (mouseover)="row.hovered = true"
+                (mouseout)="row.hovered = false"
+            ></tr>
+        </table>
+        <div class="nb-result-table-container-empty" *ngIf="_dataSource?.data?.length < 1 && !errorMessage; else error">{{ 'APP.NODE_BROWSER.SEARCH.EMPTY' | translate }}</div>
+        <ng-template #error>
+            <span class="nb-result-table-container-empty-error">{{ errorMessage }}</span>
+        </ng-template>
+    </div>
+</div>

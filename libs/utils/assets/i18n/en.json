@@ -1,0 +1,142 @@
+{
+    "APP": {
+        "PROFILE": {
+            "TITLE": "My profile"
+        },
+        "CONSOLE": {
+            "TITLE": "Admin console",
+            "DESCRIPTION": "Admin console"
+        },
+        "PAGINATOR": {
+            "ITEMS_PER_PAGE_LABEL": "Items per page:",
+            "NEXT_PAGE_LABEL": "Next page",
+            "PREVIOUS_PAGE_LABEL": "Previous page",
+            "FIRST_PAGE_LABEL": "First page",
+            "LAST_PAGE_LABEL": "Last page",
+            "RANGE_PAGE_LABEL_1": "0 of {{length}}",
+            "RANGE_PAGE_LABEL_2": "{{startIndex}} - {{endIndex}} of {{length}}"
+        },
+        "LOGIN": {
+            "PASSWORD_RESET": {
+                "TITLE": "Forgot your password?",
+                "INFO": "Enter the email address with which you are registered in Alfresco. You will receive a new password and username at this email address.",
+                "EMAIL_INVALID": "Invalid email address",
+                "SUCCESS_MESSAGE": "The email with the new password has been sent.",
+                "BUTTONS": {
+                    "CANCEL": "Cancel",
+                    "CONFIRM": "Confirm details"
+                }
+            }
+        },
+        "LOGOUT": {
+            "TITLE": "Logout"
+        },
+        "ACTIONS": {
+            "FILTER": "Filter",
+            "REFRESH": "Refresh page",
+            "CLEAR_PREFERENCES": "Clear table preferences",
+            "EDIT_COLUMNS": "Edit columns"
+        },
+        "AUTOCOMPLETE": {
+            "NO_SUGGESTIONS": "No suggestions found",
+            "TOTAL_ITEMS": "Number of options",
+            "LOADING": "Loading...",
+            "TOOLTIP": {
+                "MIN_CHARS": "Search requires at least {{minChars}} characters"
+            }
+        },
+        "FILTER": {
+            "TITLE": "Filter",
+            "SELECT_ALL_OPTION": "All",
+            "OPTIONS": {
+                "CREATED_FROM": "Created from",
+                "ADJUSTED_FROM": "Adjusted from",
+                "REGISTERED_FROM": "Registered from",
+                "PLANNED_FROM": "Planned from",
+                "END_FROM": "End date from",
+                "STARTDATE_FROM": "Start date from",
+                "CREATED": "Created",
+                "ADJUSTED": "Adjusted",
+                "REGISTERED": "Registered",
+                "PLANNED": "Planned",
+                "END": "End date",
+                "FOLDER": "Folder",
+                "STARTDATE": "Start date",
+                "TILL": "Till",
+                "NAME": "Name",
+                "DESCRIPTION": "Description",
+                "TITLE": "Title",
+                "OBJECT_CODE": "Object code",
+                "IO_TYPE": "Information-Object type*",
+                "STATUS": "Status",
+                "CASE_TYPE": "Type",
+                "OBJECT_TYPE": "Type",
+                "SITES": "Sites",
+                "HANDLERS": "Assignees",
+                "CLOSED": "Closed",
+                "ZAAK_IDENTIFICATIE": "Zaak identification",
+                "ZAAK_TYPE": "Zaak type",
+                "ARCHIVED": "Archived",
+                "TYPE": "Type",
+                "CLEAR_ALL": "Clear all"
+            }
+        },
+        "PEOPLE_GROUP_PICKER": {
+            "PEOPLE": {
+                "PLACEHOLDER": "Enter username..."
+            },
+            "GROUP": {
+                "PLACEHOLDER": "Enter groupname..."
+            }
+        },
+        "VALIDATIONS": {
+            "REQUIRED": "* This is required field",
+            "EMAIL": "* Invalid email"
+        },
+        "COLUMNS": {
+            "ACTIONS": "Actions"
+        },
+        "CONTENT_TYPES": {
+            "PLACEHOLDER": "Type",
+            "ALL": "All",
+            "FOLDER": "Folder",
+            "FILE": "File"
+        },
+        "MORE": "Show more",
+        "MESSAGES": {
+            "FILE_UPLOAD_SUCCESS": "{{ number }} file(s) uploaded. It may take a while before they are available.",
+            "PREFERENCES_CLEARED": "User preferences has been cleared. Refresh the browser to see default settings.",
+            "ERROR": "Error"
+        },
+        "BUTTONS": {
+            "OK": "Ok",
+            "COMPLETE": "Complete",
+            "CLOSE": "Close",
+            "CANCEL": "Cancel",
+            "PREVIOUS": "Back",
+            "NEXT": "Next",
+            "CLEAR_ALL": "Clear all fields"
+        }
+    },
+    "SEARCH": {
+        "CATEGORIES": {
+            "SIZE": "File size",
+            "CREATED_DATE": "Creation date"
+        },
+        "FACET_QUERIES": {
+            "SIZE": {
+                "SMALL": "Small",
+                "MEDIUM": "Medium",
+                "LARGE": "Large",
+                "HUGE": "Huge"
+            },
+            "CREATED_DATE": {
+                "TODAY": "Today",
+                "THIS_WEEK": "This week",
+                "THIS_MONTH": "This month",
+                "LAST_6_MONTHS": "In the last 6 months",
+                "THIS_YEAR": "This year"
+            }
+        }
+    }
+}

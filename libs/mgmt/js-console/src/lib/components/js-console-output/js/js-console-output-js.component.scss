@@ -1,0 +1,32 @@
+@mixin console-output-style {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    padding: 5px;
+}
+
+.console-output {
+    height: 100%;
+    overflow: auto;
+    word-break: break-all;
+    font-family: 'Courier New', Courier, monospace !important;
+    color: black;
+    white-space: pre-wrap;
+    background-color: var(--theme-card-background-color);
+
+    &-success {
+        @include console-output-style;
+        background-color: #e2fdd2;
+    }
+    &-error {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        @include console-output-style;
+        background-color: #ffe0e0;
+        &-title {
+            margin-right: 10px;
+            font-weight: 600;
+        }
+    }
+}

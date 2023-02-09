@@ -1,0 +1,96 @@
+{
+    "APP": {
+        "JS_CONSOLE": {
+            "NAVBAR": {
+                "TITLE": "Javascript console",
+                "DESCRIPTION": "Javascript console weergeven"
+            },
+            "HEADER": {
+                "NODE_REFS": {
+                    "SPACE": {
+                        "DEFAULT": "Company Home",
+                        "VIEW_TITLE": "spaceNoderef",
+                        "SELECT_TITLE": "SpaceNoderef selecteren"
+                    },
+                    "DOCUMENT": {
+                        "EMPTY": "niet gedefineerd",
+                        "VIEW_TITLE": "document",
+                        "SELECT_TITLE": "Document selecteren"
+                    },
+                    "SCRIPT": {
+                        "VIEW_TITLE": "script"
+                    }
+                },
+                "ACTIONS": {
+                    "EXECUTE": "Script uitvoeren (⌘ + ⏎)",
+                    "SAVE": "Opslaan (⌘ + S)",
+                    "TOGGLE_THEME": "Editor theme",
+                    "SCRIPTS_LIST": "Scripts"
+                }
+            },
+            "CONTENT": {
+                "TABS": {
+                    "JS": "Javascript",
+                    "FM": "Freemarker",
+                    "SETTINGS": "Instellingen"
+                },
+                "EXECUTION_PARAMS": {
+                    "ARGS": "Webscript URL argumenten",
+                    "RUNAS": "Script uitvoeren als",
+                    "TRANSACRION_ISOLATION": "Transactie isolatie"
+                }
+            },
+            "OUTPUT": {
+                "TABS": {
+                    "CONSOLE": {
+                        "TITLE": "Console",
+                        "ERROR": {
+                            "MESSAGE": "Bericht",
+                            "CALLSTACK": "Callstack"
+                        }
+                    },
+                    "FM_HTML": {
+                        "TITLE": "Freemarker html"
+                    },
+                    "FM_TEXT": {
+                        "TITLE": "Freemarker text"
+                    },
+                    "JSON": {
+                        "TITLE": "Json"
+                    },
+                    "DUMP": {
+                        "TITLE": "Dump"
+                    }
+                }
+            },
+            "SCRIPTS": {
+                "TITLE": "Scripts",
+                "ACTIONS": {
+                    "DUPLICATE": "Dupliceren",
+                    "REMOVE": "Verwijderen"
+                }
+            },
+            "DIALOGS": {
+                "SAVE_SCRIPT": {
+                    "TITLE": "Script opslaan als",
+                    "NAME_INPUT": "Script naam",
+                    "SAVE_BUTTON": "Opslaan",
+                    "CLOSE_BUTTON": "Annuleren"
+                },
+                "DELETE_SCRIPT": {
+                    "TITLE": "Script verwijderen",
+                    "MESSAGE": "Weet je het zeker?",
+                    "YES_LABEL": "Ok",
+                    "NO_LABEL": "Annuleren"
+                }
+            },
+            "MESSAGES": {
+                "SCRIPT_UPDATED_SUCCESSFULLY": "Script is met success geüpdated.",
+                "SCRIPT_CREATED_SUCCESSFULLY": "Script is met success aangemaakt."
+            },
+            "ACTIONS": {
+                "OPEN_IN_CONSOLE": "Open in Javascript console"
+            }
+        }
+    }
+}

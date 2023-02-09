@@ -1,0 +1,57 @@
+<aca-page-layout>
+    <aca-page-layout-header class="tezza-div">
+        {{ title | translate }}
+    </aca-page-layout-header>
+
+    <aca-page-layout-content>
+        <div class="main-content">
+            <ng-container *contezzaLet="loading$ | async as loading">
+                <ng-container *contezzaLet="data$ | async as data">
+                    <div *ngIf="loading" class="node-browser-loading">
+                        <mat-spinner></mat-spinner>
+                    </div>
+
+                    <div class="node-browser-view" *ngIf="!loading">
+                        <mat-card class="node-browser-view-card">
+                            <mat-card-content>
+                                <div class="node-browser-view-card-header">
+                                    <div class="node-browser-view-card-header-title">
+                                        {{ data?.name?.prefixedName }}
+                                    </div>
+                                    <div class="node-browser-view-card-header-actions">
+                                        <button
+                                            class="node-browser-view-card-header-actions-back"
+                                            mat-raised-button
+                                            color="primary"
+                                            (click)="store.dispatch({ type: 'NAVIGATE_ROUTE', payload: ['node-browser'] })"
+                                        >
+                                            <mat-icon matPrefix> arrow_back </mat-icon>
+                                            {{ 'APP.NODE_BROWSER.BROWSE.ACTIONS.BACK.TITLE' | translate }}
+                                        </button>
+                                        <ng-container *contezzaLet="expandedPanelState$ | async as expanded">
+                                            <button
+                                                mat-icon-button
+                                                [matTooltip]="
+                                                    (expanded ? 'APP.NODE_BROWSER.BROWSE.ACTIONS.TOGGLE_PANELS.COLLAPSE' : 'APP.NODE_BROWSER.BROWSE.ACTIONS.TOGGLE_PANELS.EXPAND')
+                                                        | translate
+                                                "
+                                                (click)="togglePanels(!expanded)"
+                                            >
+                                                <adf-icon [value]="expanded ? 'svg:arrow-collapse' : 'svg:arrow-expand'"></adf-icon>
+                                            </button>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                        <mat-accordion class="node-browser-view-accordion" multi="true">
+                            <ng-container *ngFor="let item of viewItems; trackBy: trackById">
+                                <node-browser-view-item [item]="item" [data]="data"></node-browser-view-item>
+                            </ng-container>
+                        </mat-accordion>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </div>
+    </aca-page-layout-content>
+</aca-page-layout>

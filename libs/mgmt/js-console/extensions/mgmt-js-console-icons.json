@@ -1,0 +1,39 @@
+{
+    "$id": "lib.mgmt.js-console.icons",
+    "$version": "@@project.version@@",
+    "$name": "Contezza JS Console Navbar",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "icons": [
+            {
+                "id": "svg:console",
+                "value": "./assets/mgmt/js-console/images/console.svg"
+            },
+            {
+                "id": "svg:language-javascript",
+                "value": "./assets/contezza-core/images/language-javascript.svg"
+            },
+            {
+                "id": "svg:backburger",
+                "value": "./assets/mgmt/js-console/images/backburger.svg"
+            },
+            {
+                "id": "svg:forwardburger",
+                "value": "./assets/mgmt/js-console/images/forwardburger.svg"
+            },
+            {
+                "id": "svg:content-save-edit-outline",
+                "value": "./assets/mgmt/js-console/images/content-save-edit-outline.svg"
+            },
+            {
+                "id": "svg:dark_mode",
+                "value": "./assets/mgmt/js-console/images/dark_mode.svg"
+            },
+            {
+                "id": "svg:light_mode",
+                "value": "./assets/mgmt/js-console/images/light_mode.svg"
+            }
+        ]
+    }
+}

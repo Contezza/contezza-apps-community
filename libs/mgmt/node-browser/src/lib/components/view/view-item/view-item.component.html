@@ -1,0 +1,46 @@
+<ng-container>
+    <ng-container [ngSwitch]="_item.type">
+        <mat-expansion-panel [expanded]="_item.expanded">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{ _item.title | translate }}
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div [ngClass]="'text-content-section-' + _item.type" *ngIf="data">
+                <ng-container *ngSwitchCase="'keyValue'">
+                    <ng-container *ngFor="let dataset of _item.keyValueDataset | keyvalue">
+                        <span [class]="'text-content-section-' + _item.type + '-item'">
+                            <span [class]="'text-content-section-' + _item.type + '-item-key'">{{ dataset.key | translate }}:</span>
+                            <span [class]="'text-content-section-' + _item.type + '-item-value'">{{ data | columnProperty: dataset.value }}</span>
+                        </span>
+                    </ng-container>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'chipsArray'">
+                    <mat-chip-list>
+                        <ng-container *ngFor="let arrayItem of data[_item.key]">
+                            <mat-chip>{{ _item.displayKey ? (arrayItem | columnProperty: _item.displayKey) : arrayItem }}</mat-chip>
+                        </ng-container>
+                    </mat-chip-list>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'table'">
+                    <node-browser-result-table [dataSource]="data[_item.key]" [columns]="columns[_item.key]"></node-browser-result-table>
+                </ng-container>
+                <ng-container *ngSwitchCase="'permissions'">
+                    <ng-container *ngFor="let dataset of _item.keyValueDataset | keyvalue">
+                        <span [class]="'text-content-section-' + _item.type + '-item'">
+                            <span [class]="'text-content-section-' + _item.type + '-item-key'">{{ dataset.key | translate }}:</span>
+                            <span [class]="'text-content-section-' + _item.type + '-item-value'" style="margin-bottom: 10px">{{
+                                data[_item.key] | columnProperty: dataset.value
+                            }}</span>
+                        </span>
+                    </ng-container>
+                    <ng-container *ngFor="let table of _item.multipleTables">
+                        <node-browser-result-table [dataSource]="data[_item.key][table]" [columns]="columns[_item.key][table]"></node-browser-result-table>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </mat-expansion-panel>
+    </ng-container>
+</ng-container>

@@ -1,0 +1,11 @@
+node_modules
+e2e-output
+dist
+coverage
+.github
+.travis
+.vscode
+scripts
+apps/content-ce
+docs/**/*.md
+/angular.json

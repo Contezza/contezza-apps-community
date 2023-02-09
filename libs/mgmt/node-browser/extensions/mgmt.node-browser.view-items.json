@@ -1,0 +1,78 @@
+{
+    "$id": "lib.mgmt.node-browser.view-items",
+    "$version": "@@project.version@@",
+    "$name": "Contezza Node Browser View Items",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "view-items": [
+            {
+                "id:": "general",
+                "type": "keyValue",
+                "title": "APP.NODE_BROWSER.BROWSE.VIEW_ITEMS.ABOUT",
+                "expanded": true,
+                "keyValueDataset": {
+                    "Reference": "nodeRef",
+                    "PrimaryPath": "qnamePath.prefixedName",
+                    "Type": "type.prefixedName",
+                    "Parent": "parentNodeRef"
+                }
+            },
+            {
+                "id:": "aspects",
+                "type": "chipsArray",
+                "title": "APP.NODE_BROWSER.BROWSE.VIEW_ITEMS.ASPECTS",
+                "expanded": false,
+                "key": "aspects",
+                "displayKey": "prefixedName"
+            },
+            {
+                "id:": "properties",
+                "type": "table",
+                "title": "APP.NODE_BROWSER.BROWSE.VIEW_ITEMS.PROPERTIES",
+                "expanded": false,
+                "key": "properties"
+            },
+            {
+                "id:": "children",
+                "type": "table",
+                "title": "APP.NODE_BROWSER.BROWSE.VIEW_ITEMS.CHILDREN",
+                "expanded": false,
+                "key": "children"
+            },
+            {
+                "id:": "parents",
+                "type": "table",
+                "title": "APP.NODE_BROWSER.BROWSE.VIEW_ITEMS.PARENTS",
+                "expanded": false,
+                "key": "parents"
+            },
+            {
+                "id:": "associations",
+                "type": "table",
+                "title": "APP.NODE_BROWSER.BROWSE.VIEW_ITEMS.ASSOCIATIONS",
+                "expanded": false,
+                "key": "assocs"
+            },
+            {
+                "id:": "source_associations",
+                "type": "table",
+                "title": "APP.NODE_BROWSER.BROWSE.VIEW_ITEMS.SOURCE_ASSOCIATIONS",
+                "expanded": false,
+                "key": "sourceAssocs"
+            },
+            {
+                "id:": "permissions",
+                "type": "permissions",
+                "title": "APP.NODE_BROWSER.BROWSE.VIEW_ITEMS.PERMISSIONS",
+                "expanded": false,
+                "key": "permissions",
+                "keyValueDataset": {
+                    "Inherits": "inherit",
+                    "Owner": "owner"
+                },
+                "multipleTables": ["entries", "masks"]
+            }
+        ]
+    }
+}

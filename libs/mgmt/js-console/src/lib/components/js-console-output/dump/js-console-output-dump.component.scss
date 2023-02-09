@@ -1,0 +1,61 @@
+.js-console-output-dump {
+    display: flex;
+    flex-direction: column;
+    padding: 0 !important;
+    margin: 0 8px;
+
+    &-header {
+        display: flex;
+        justify-content: space-between;
+        background-color: var(--theme-card-background-color);
+        border-bottom: 1px solid var(--theme-border-color);
+        margin-bottom: 5px;
+        border-radius: 5px;
+
+        &-search-formfield {
+            .mat-form-field {
+                font-size: 15px;
+                margin: 0;
+            }
+        }
+    }
+    &-content {
+        display: flex;
+        flex-direction: column;
+        height: calc(100% - 70px);
+
+        &-container {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: var(--theme-card-background-color);
+
+            table {
+                width: 100%;
+
+                .mat-column-label {
+                    width: 250px !important;
+                    min-width: 250px !important;
+                }
+
+                .mat-column-column0,
+                .mat-column-column1 {
+                    color: var(--theme-text-bold-color) !important;
+                }
+
+                tr td.mat-cell {
+                    font-size: 14px !important;
+                    color: var(--theme-text-color);
+                    white-space: pre-line;
+                    padding: 5px 15px 5px 25px;
+                    overflow: hidden !important;
+                    text-overflow: ellipsis !important;
+                }
+
+                .mat-row.contezza-mat-table-hovered {
+                    background-color: var(--theme-mat-table-hover-color);
+                }
+            }
+        }
+    }
+}

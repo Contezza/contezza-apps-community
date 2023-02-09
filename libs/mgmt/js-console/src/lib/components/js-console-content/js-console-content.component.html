@@ -1,0 +1,43 @@
+<ng-container *ngIf="editorOptions$ | async as editorOptions">
+    <mat-tab-group [@.disabled]="true" class="js-console-content-tabs console-tab-group">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <span>{{ 'APP.JS_CONSOLE.CONTENT.TABS.JS' | translate }}</span>
+            </ng-template>
+            <ngx-monaco-editor
+                class="js-console-editor"
+                [options]="editorOptions.js"
+                [ngModel]="jsConsoleContent$ | async"
+                (ngModelChange)="setJsConsoleContent($event)"
+                (select)="onSelectionChange($event)"
+                (keydown)="onKeyDown($event)"
+            ></ngx-monaco-editor>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <span>{{ 'APP.JS_CONSOLE.CONTENT.TABS.FM' | translate }}</span>
+            </ng-template>
+            <ngx-monaco-editor
+                class="js-console-editor"
+                [options]="editorOptions.fm"
+                [ngModel]="fmConsoleContent$ | async"
+                (ngModelChange)="setFmConsoleContent($event)"
+                (keydown)="onKeyDown($event)"
+            ></ngx-monaco-editor>
+        </mat-tab>
+        <mat-tab label="{{ 'APP.JS_CONSOLE.CONTENT.TABS.SETTINGS' | translate }}">
+            <contezza-js-console-content-execution-params></contezza-js-console-content-execution-params
+        ></mat-tab>
+
+        <mat-tab disabled>
+            <ng-template mat-tab-label>
+                <ng-container *ngIf="scriptExecutionTime$ | async as executionTime">
+                    <div class="js-console-content-tabs-execution-time">
+                        <div class="js-console-noderef-content-value">executed in {{ executionTime.ms }} ms</div>
+                        <div class="js-console-noderef-content-title">{{ executionTime.timestamp | adfTimeAgo }}</div>
+                    </div>
+                </ng-container>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+</ng-container>

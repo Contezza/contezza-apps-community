@@ -1,0 +1,23 @@
+{
+    "$id": "lib.mgmt.node-browser.icons",
+    "$version": "@@project.version@@",
+    "$name": "Contezza Node Browser Icons",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "icons": [
+            {
+                "id": "svg:travel_explore",
+                "value": "./assets/mgmt/node-browser/images/travel_explore.svg"
+            },
+            {
+                "id": "svg:arrow-collapse",
+                "value": "./assets/mgmt/node-browser/images/arrow-collapse.svg"
+            },
+            {
+                "id": "svg:arrow-expand",
+                "value": "./assets/mgmt/node-browser/images/arrow-expand.svg"
+            }
+        ]
+    }
+}

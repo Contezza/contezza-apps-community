@@ -1,0 +1,27 @@
+<div class="js-console">
+    <aca-page-layout>
+        <aca-page-layout-header class="tezza-div">
+            <contezza-js-console-header (toggleScriptListOpenState)="showScriptsList = $event"></contezza-js-console-header>
+        </aca-page-layout-header>
+
+        <aca-page-layout-content>
+            <div class="main-content">
+                <div class="flex-container">
+                    <div class="flex-item" #topElement>
+                        <contezza-js-console-content></contezza-js-console-content>
+                    </div>
+                    <div class="grabber" jsConsoleResize [topResize]="topElement" [bottomResize]="bottomElement">
+                        <mat-progress-bar *ngIf="executeScriptLoading$ | async" mode="indeterminate"></mat-progress-bar>
+                    </div>
+                    <div class="flex-item" #bottomElement>
+                        <contezza-js-console-output class="js-console-output"></contezza-js-console-output>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar" *ngIf="showScriptsList">
+                <contezza-js-console-scripts-list></contezza-js-console-scripts-list>
+            </div>
+        </aca-page-layout-content>
+    </aca-page-layout>
+</div>

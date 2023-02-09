@@ -1,0 +1,142 @@
+{
+    "APP": {
+        "PROFILE": {
+            "TITLE": "Mijn profiel"
+        },
+        "CONSOLE": {
+            "TITLE": "Beheertools",
+            "DESCRIPTION": "Beheertools weergeven"
+        },
+        "PAGINATOR": {
+            "ITEMS_PER_PAGE_LABEL": "Items per pagina:",
+            "NEXT_PAGE_LABEL": "Volgende pagina",
+            "PREVIOUS_PAGE_LABEL": "Vorige pagina",
+            "FIRST_PAGE_LABEL": "Eerste pagina",
+            "LAST_PAGE_LABEL": "Laatste pagina",
+            "RANGE_PAGE_LABEL_1": "0 van {{length}}",
+            "RANGE_PAGE_LABEL_2": "{{startIndex}} - {{endIndex}} van {{length}}"
+        },
+        "LOGIN": {
+            "PASSWORD_RESET": {
+                "TITLE": "Wachtwoord vergeten?",
+                "INFO": "Geef het emailadres op waarmee je geregistreerd bent in Alfresco. Je ontvangt op dit emailadres een nieuw wachtwoord en gebruikersnaam.",
+                "EMAIL_INVALID": "Ongeldig e-mailadres",
+                "SUCCESS_MESSAGE": "De email met het nieuwe wachtwoord is verzonden.",
+                "BUTTONS": {
+                    "CANCEL": "Annuleren",
+                    "CONFIRM": "Bevestig gevevens"
+                }
+            }
+        },
+        "LOGOUT": {
+            "TITLE": "Afmelden"
+        },
+        "ACTIONS": {
+            "FILTER": "Filter",
+            "REFRESH": "Ververs pagina",
+            "CLEAR_PREFERENCES": "Verwijder tabelvoorkeursinstellingen",
+            "EDIT_COLUMNS": "Bewerk kolommen"
+        },
+        "AUTOCOMPLETE": {
+            "NO_SUGGESTIONS": "Geen suggesties gevonden",
+            "TOTAL_ITEMS": "Aantal opties",
+            "LOADING": "Bezig met laden...",
+            "TOOLTIP": {
+                "MIN_CHARS": "Zoekactie moet tenminste {{minChars}} karakters bevatten"
+            }
+        },
+        "FILTER": {
+            "TITLE": "Filter",
+            "SELECT_ALL_OPTION": "Alles",
+            "OPTIONS": {
+                "CREATED_FROM": "Gemaakt vanaf",
+                "ADJUSTED_FROM": "Aangepast vanaf",
+                "REGISTERED_FROM": "Geregistreerd vanaf",
+                "PLANNED_FROM": "Gepland vanaf",
+                "END_FROM": "Einddatum vanaf",
+                "STARTDATE_FROM": "Startdatum vanaf",
+                "CREATED": "Gemaakt",
+                "ADJUSTED": "Aangepast",
+                "REGISTERED": "Geregistreerd",
+                "PLANNED": "Gepland",
+                "END": "Einddatum",
+                "FOLDER": "Map",
+                "STARTDATE": "Startdatum",
+                "TILL": "Tot",
+                "NAME": "Naam",
+                "DESCRIPTION": "Omschrijving",
+                "TITLE": "Titel",
+                "OBJECT_CODE": "Objectcode",
+                "IO_TYPE": "Informatieobjecttype*",
+                "STATUS": "Status",
+                "CASE_TYPE": "Type",
+                "OBJECT_TYPE": "Type",
+                "SITES": "Sites",
+                "HANDLERS": "Behandelaars",
+                "CLOSED": "Afgerond",
+                "ZAAK_IDENTIFICATIE": "Zaak identificatie",
+                "ZAAK_TYPE": "Zaak type",
+                "TYPE": "Type",
+                "ARCHIVED": "Gearchiveerd",
+                "CLEAR_ALL": "Alles wissen"
+            }
+        },
+        "PEOPLE_GROUP_PICKER": {
+            "PEOPLE": {
+                "PLACEHOLDER": "Voer de gebruikersnaam in..."
+            },
+            "GROUP": {
+                "PLACEHOLDER": "Voer de groepsnaam in..."
+            }
+        },
+        "VALIDATIONS": {
+            "REQUIRED": "* Dit veld is verplicht",
+            "EMAIL": "* Ongeldig emailadres"
+        },
+        "COLUMNS": {
+            "ACTIONS": "Acties"
+        },
+        "CONTENT_TYPES": {
+            "PLACEHOLDER": "Type",
+            "ALL": "Alle",
+            "FOLDER": "Mappen",
+            "FILE": "Documenten"
+        },
+        "MORE": "Meer tonen",
+        "MESSAGES": {
+            "FILE_UPLOAD_SUCCESS": "{{number}} bestand(en) geüpload. Het kan even duren voordat de bestanden beschikbaar zijn.",
+            "PREFERENCES_CLEARED": "Voorkeursinstellingen verwijderd. Ververs de browser om de standaardinstellingen te zien.",
+            "ERROR": "Error"
+        },
+        "BUTTONS": {
+            "OK": "Ok",
+            "COMPLETE": "Voltooien",
+            "CLOSE": "Sluiten",
+            "CANCEL": "Annuleren",
+            "PREVIOUS": "Vorige",
+            "NEXT": "Volgende",
+            "CLEAR_ALL": "Wis alle velden"
+        }
+    },
+    "SEARCH": {
+        "CATEGORIES": {
+            "SIZE": "Bestandsgrootte",
+            "CREATED_DATE": "Datum gemaakt"
+        },
+        "FACET_QUERIES": {
+            "SIZE": {
+                "SMALL": "Klein",
+                "MEDIUM": "Gemiddeld",
+                "LARGE": "Groot",
+                "HUGE": "Zeer groot"
+            },
+            "CREATED_DATE": {
+                "TODAY": "Vandaag",
+                "THIS_WEEK": "Deze week",
+                "THIS_MONTH": "Deze maand",
+                "LAST_6_MONTHS": "In de afgelopen 6 maanden",
+                "THIS_YEAR": "Dit jaar"
+            }
+        }
+    }
+}

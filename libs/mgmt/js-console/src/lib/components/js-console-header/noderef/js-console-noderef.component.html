@@ -1,0 +1,18 @@
+<div class="js-console-noderef">
+    <div class="js-console-noderef-content">
+        <span [title]="value | translate" class="js-console-noderef-content-value">
+            {{ value | translate }}
+        </span>
+        <span class="js-console-noderef-content-title">
+            {{ title | translate }}
+        </span>
+    </div>
+    <div class="js-console-noderef-action">
+        <button mat-icon-button *ngIf="actionIcon" (click)="actionClick.emit()">
+            <mat-icon>{{ actionIcon }}</mat-icon>
+        </button>
+        <button mat-icon-button *ngIf="secondActionIcon" (click)="secondActionClick.emit()">
+            <mat-icon>{{ secondActionIcon }}</mat-icon>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="search">
+    <div class="search-form">
+        <mat-form-field floatLabel="never" class="search-form-field">
+            <input matInput type="text" [value]="searchTerm" [formControl]="searchInput" placeholder="{{ (title ? title : 'NODE_SELECTOR.SEARCH') | translate }}" #input />
+
+            <mat-icon matSuffix *ngIf="!loading && searchTerm?.length" (click)="clear($event)" class="search-form-field-icon"> clear </mat-icon>
+            <mat-icon matSuffix *ngIf="!searchTerm.length" class="search-form-field-icon">search </mat-icon>
+            <mat-spinner matSuffix *ngIf="loading && searchTerm?.length" color="primary" diameter="30" class="search-form-field-spinner"> </mat-spinner>
+        </mat-form-field>
+
+        <mat-form-field floatLabel="auto" class="search-form-type" *ngIf="showContentTypeFilter">
+            <input type="text" placeholder="{{ 'APP.CONTENT_TYPES.PLACEHOLDER' | translate }}" matInput [formControl]="contentTypeControl" [matAutocomplete]="auto" />
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onTypeSelected($event.option.value)" [displayWith]="displayContentTypeFn.bind(this)">
+                <mat-option *ngFor="let option of filteredContentTypeOptions | async" [value]="option">
+                    {{ option.name | translate }}
+                </mat-option>
+            </mat-autocomplete>
+            <button matSuffix class="mat-button my-arrow-wrapper" style="padding: 0; min-width: 0" tabindex="-1">
+                <div class="my-arrow"></div>
+            </button>
+        </mat-form-field>
+    </div>
+</div>

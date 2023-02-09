@@ -1,0 +1,103 @@
+<aca-page-layout>
+    <aca-page-layout-header class="tezza-div"> {{ title | translate }} </aca-page-layout-header>
+
+    <aca-page-layout-content>
+        <div class="main-content">
+            <ng-container *contezzaLet="searchParams$ | async as searchParams">
+                <ng-container *contezzaLet="stores$ | async as stores">
+                    <div class="nb-search">
+                        <form [formGroup]="form">
+                            <div class="nb-search-header">
+                                <div class="nb-search-header-options">
+                                    <mat-form-field class="nb-search-header-options-select" appearance="outline">
+                                        <mat-label>{{ 'APP.NODE_BROWSER.SEARCH.FORM_FIELDS.STORE' | translate }}</mat-label>
+                                        <mat-select formControlName="store" required [disableOptionCentering]="true" panelClass="nb-search-header-options-select-panel">
+                                            <mat-option *ngFor="let store of stores" [value]="store">
+                                                {{ store }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field class="nb-search-header-options-select" appearance="outline">
+                                        <mat-label>{{ 'APP.NODE_BROWSER.SEARCH.FORM_FIELDS.LANG' | translate }}</mat-label>
+                                        <mat-select formControlName="lang" required [disableOptionCentering]="true" panelClass="nb-search-header-options-select-panel">
+                                            <mat-option *ngFor="let lang of langs" [value]="lang">
+                                                {{ lang }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div *ngIf="searchParams" class="nb-search-header-action">
+                                    <ng-container *contezzaLet="searchLoading$ | async as loading">
+                                        <button
+                                            class="nb-search-header-action-search"
+                                            mat-raised-button
+                                            color="primary"
+                                            [disabled]="textareaValue.length < 1"
+                                            [matTooltip]="'APP.NODE_BROWSER.SEARCH.BUTTON.TOOLTIP' | translate"
+                                            (click)="executeSearch(searchParams, stores)"
+                                        >
+                                            <mat-icon *ngIf="loading" matPrefix><mat-spinner diameter="20"> </mat-spinner></mat-icon>
+                                            <mat-icon *ngIf="!loading" matPrefix> search </mat-icon>
+                                            {{ 'APP.NODE_BROWSER.SEARCH.BUTTON.TITLE' | translate }}
+                                        </button>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </form>
+
+                        <textarea
+                            class="nb-search-textarea"
+                            spellcheck="false"
+                            [placeholder]="'APP.NODE_BROWSER.SEARCH.TEXTAREA.PLACEHOLDER' | translate"
+                            [(ngModel)]="textareaValue"
+                            (ngModelChange)="setParam('q', $event)"
+                            (keydown)="onKeyDown($event, searchParams, stores)"
+                            rows="4"
+                        ></textarea>
+
+                        <ng-container *ngIf="searchResponse$ | async as searchResponse">
+                            <div class="nb-search-results">
+                                <mat-toolbar class="nb-search-results-toolbar">
+                                    <span class="nb-search-results-toolbar-message">
+                                        <span class="nb-search-results-toolbar-message-query">
+                                            <ng-container *contezzaLet="lastSearchQuery$ | async as lastSearchQuery">
+                                                <span class="nb-search-results-toolbar-message-query-label">{{ 'APP.NODE_BROWSER.SEARCH.RESULT_TOOLBAR.QUERY' | translate }}</span>
+                                                <span [title]="lastSearchQuery" class="nb-search-results-toolbar-message-query-value">{{ lastSearchQuery }}</span>
+                                            </ng-container>
+                                        </span>
+                                        <span *ngIf="searchResponse.success?.numResults === 100" class="nb-search-results-toolbar-message-max-results">{{
+                                            'APP.NODE_BROWSER.SEARCH.RESULT_TOOLBAR.MAX_RESULTS' | translate
+                                        }}</span>
+                                    </span>
+                                    <span class="nb-search-results-toolbar-side">
+                                        <span class="nb-search-results-toolbar-side-results">
+                                            <span class="nb-search-results-toolbar-side-results-number">{{ searchResponse.success?.numResults || 0 }}</span>
+                                            <span class="nb-search-results-toolbar-side-results-label">{{
+                                                'APP.NODE_BROWSER.SEARCH.RESULT_TOOLBAR.TOTAL_RESULTS' | translate
+                                            }}</span>
+                                        </span>
+
+                                        <span *ngIf="searchResponse.success" class="nb-search-results-toolbar-side-elapsed">
+                                            <span class="nb-search-results-toolbar-side-elapsed-label">{{
+                                                'APP.NODE_BROWSER.SEARCH.RESULT_TOOLBAR.ELAPSED_TIME' | translate
+                                            }}</span>
+                                            <span class="nb-search-results-toolbar-side-elapsed-time">{{ searchResponse.success.searchElapsedTime }}ms</span>
+                                        </span>
+                                    </span>
+                                </mat-toolbar>
+
+                                <node-browser-result-table
+                                    class="nb-search-results-table"
+                                    [dataSource]="searchResponse.success?.results || []"
+                                    [columns]="columns"
+                                    [errorMessage]="searchResponse.error"
+                                ></node-browser-result-table>
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </div>
+    </aca-page-layout-content>
+</aca-page-layout>

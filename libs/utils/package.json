@@ -1,0 +1,13 @@
+{
+    "name": "@contezza/utils",
+    "version": "0.0.1",
+    "description": "Contezza Utils",
+    "author": "Contezza BV.",
+    "peerDependencies": {
+        "@angular/common": "^14.2.12",
+        "@angular/core": "^14.2.12"
+    },
+    "dependencies": {
+        "tslib": "^2.4.1"
+    }
+}

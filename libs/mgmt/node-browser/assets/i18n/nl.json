@@ -1,0 +1,75 @@
+{
+    "APP": {
+        "NODE_BROWSER": {
+            "NAVBAR": {
+                "TITLE": "Node Browser",
+                "DESCRIPTION": "View node weergeven"
+            },
+            "SEARCH": {
+                "FORM_FIELDS": {
+                    "STORE": "Store",
+                    "LANG": "Taal"
+                },
+                "BUTTON": {
+                    "TITLE": "Zoeken",
+                    "TOOLTIP": "Zoeken (⌘ + ⏎)"
+                },
+                "TEXTAREA": {
+                    "PLACEHOLDER": "Vul je zoekopdracht hier ..."
+                },
+                "RESULT_TOOLBAR": {
+                    "QUERY": "Zoek op",
+                    "MAX_RESULTS": "Alleen de eerste 100 worden weergegeven.",
+                    "TOTAL_RESULTS": "resultaten",
+                    "ELAPSED_TIME": "zoeken duurde"
+                },
+                "EMPTY": "Geen items gevonden"
+            },
+            "BROWSE": {
+                "ACTIONS": {
+                    "BACK": {
+                        "TITLE": "Naar Zoeken"
+                    },
+                    "TOGGLE_PANELS": {
+                        "EXPAND": "Uitvouwen",
+                        "COLLAPSE": "Samenvouwen"
+                    }
+                },
+                "VIEW_ITEMS": {
+                    "ABOUT": "Algemeen",
+                    "ASPECTS": "Aspecten",
+                    "PROPERTIES": "Eigenschappen",
+                    "CHILDREN": "Children",
+                    "PARENTS": "Parents",
+                    "PERMISSIONS": "Rechten",
+                    "ASSOCIATIONS": "Associaties",
+                    "SOURCE_ASSOCIATIONS": "Bronassociaties"
+                }
+            },
+            "COLUMNS": {
+                "NAME": "Naam",
+                "CHILD_NAME": "Child naam",
+                "PARENT": "Parent",
+                "REFERENCE": "Referentie",
+                "CHILD_REFERENCE": "Child referentie",
+                "PARENT_REFERENCE": "Parent referentie",
+                "TYPE": "Type",
+                "CHILD_TYPE": "Child type",
+                "PARENT_TYPE": "Parent type",
+                "VALUE": "Waarde",
+                "RESIDUAL": "Residu",
+                "PRIMARY": "Primair",
+                "ASSOC_TYPE": "Associatietype",
+                "INDEX": "Index",
+                "PERMISSION": "Permission",
+                "STORE_PERMISSION": "Store permission",
+                "AUTHORITY": "Authority",
+                "ACCESS": "Access",
+                "TARGET_REFERENCE": "Target referentie",
+                "SOURCE_REFERENCE": "Source referentie",
+                "TARGET_TYPE": "Target type",
+                "SOURCE_TYPE": "Source type"
+            }
+        }
+    }
+}

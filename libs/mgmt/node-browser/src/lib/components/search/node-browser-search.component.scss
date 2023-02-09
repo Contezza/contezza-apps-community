@@ -1,0 +1,146 @@
+.nb-search {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+    height: 100%;
+    gap: 10px;
+    &-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0 0;
+
+        &-options {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            &-select {
+                font-size: 12.5px;
+                .mat-form-field-wrapper {
+                    padding-bottom: 0;
+                    background-color: var(--theme-card-background-color);
+                }
+                &.mat-form-field-invalid {
+                    .mat-form-field-wrapper {
+                        padding-bottom: 18px;
+                    }
+                }
+                &-panel {
+                    margin-top: 30px !important;
+                }
+            }
+        }
+        &-action {
+            .mat-progress-spinner circle,
+            .mat-spinner circle {
+                stroke: var(--theme-card-background-color) !important;
+            }
+        }
+    }
+    &-textarea {
+        display: flex;
+        width: 99% !important;
+        min-height: 20px;
+        padding: 5px !important;
+        background-color: var(--theme-card-background-color);
+        color: var(--theme-text-bold-color);
+        border-color: var(--theme-border-color);
+        font-family: Menlo, Monaco, 'Courier New', monospace;
+        font-weight: normal;
+        font-size: 13.5px;
+        line-height: 20px;
+        letter-spacing: 0.2px;
+
+        &:focus {
+            outline: none !important;
+            box-shadow: 0 2px 1px -1px var(--theme-card-background-box-shadow-color), 0px 1px 1px 0px var(--theme-card-background-box-shadow-color),
+                0px 1px 3px 0px var(--theme-card-background-box-shadow-color);
+        }
+    }
+    &-results {
+        min-height: 100px;
+        height: 100%;
+
+        &-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: auto !important;
+            min-height: 75px;
+            padding: 0 24px;
+            line-height: 24px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+            color: var(--theme-text-bold-color) !important;
+            background-color: var(--theme-card-background-color) !important;
+            border: 1px solid var(--theme-border-color);
+            border-bottom: none;
+            gap: 30px;
+
+            &-message {
+                display: flex;
+                width: 100%;
+                flex-direction: column;
+                white-space: pre-wrap;
+                gap: 5px;
+                &-query {
+                    display: flex;
+                    gap: 5px;
+                    &-label {
+                        width: 100%;
+                        max-width: 70px;
+                        color: var(--theme-text-color);
+                    }
+                    &-value {
+                        display: -webkit-box;
+                        min-width: min-content;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                    }
+                }
+                &-max-results {
+                    color: var(--theme-text-color);
+                }
+            }
+            &-side {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                &-results {
+                    display: flex;
+                    align-items: baseline;
+                    gap: 5px;
+                    &-number {
+                        font-size: larger;
+                    }
+                    &-label {
+                        color: var(--theme-text-color);
+                    }
+                }
+                &-elapsed {
+                    display: flex;
+                    align-items: baseline;
+                    gap: 5px;
+                    &-label {
+                        color: var(--theme-text-color);
+                    }
+                }
+            }
+        }
+        &-table {
+            height: calc(100% - 80px) !important;
+        }
+    }
+
+    .nb-result-table {
+        height: 100%;
+
+        .nb-result-table-container-empty {
+            height: calc(100% - 80px);
+        }
+    }
+}

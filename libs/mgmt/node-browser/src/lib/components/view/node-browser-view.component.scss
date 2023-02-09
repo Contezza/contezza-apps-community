@@ -1,0 +1,41 @@
+.node-browser {
+    &-loading {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+    &-view {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        overflow: auto;
+        &-card {
+            margin: 5px;
+            padding: 5px;
+            &-header {
+                padding: 5px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                &-title {
+                    padding: 0 15px;
+                    font-size: medium;
+                    color: var(--theme-primary-color);
+                }
+                &-actions {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+            }
+        }
+
+        &-accordion {
+            padding: 5px;
+        }
+    }
+}
