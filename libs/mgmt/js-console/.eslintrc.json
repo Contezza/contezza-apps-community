@@ -5,7 +5,7 @@
         {
             "files": ["*.ts"],
             "parserOptions": {
-                "project": ["libs/mgmt/js-console/tsconfig.lib.json"],
+                "project": ["./tsconfig.lib.json"],
                 "createDefaultProgram": true
             },
             "plugins": ["eslint-plugin-rxjs", "eslint-plugin-unicorn"],

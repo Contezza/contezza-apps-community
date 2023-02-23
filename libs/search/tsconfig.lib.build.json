@@ -4,8 +4,8 @@
         "outDir": "../../dist/core/search/",
         "baseUrl": "src",
         "paths": {
-            "@contezza/core": ["../../../dist/core/common"],
-            "@contezza/core/*": ["../../../dist/core/common/*"]
+            "@contezza/utils": ["../../../dist/core/common"],
+            "@contezza/utils/*": ["../../../dist/core/common/*"]
         }
     },
     "angularCompilerOptions": {

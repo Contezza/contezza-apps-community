@@ -3,6 +3,7 @@ import moment from 'moment';
 
 @Pipe({
     name: 'tableCellProperty',
+    standalone: true,
     pure: true,
 })
 export class NodeBrowserTableCellPropertyPipe implements PipeTransform {

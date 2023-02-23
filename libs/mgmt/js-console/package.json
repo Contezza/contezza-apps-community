@@ -1,11 +1,11 @@
 {
-    "name": "@contezza/js-console",
+    "name": "@contezza/mgmt/js-console",
     "version": "0.0.1",
     "peerDependencies": {
-        "@angular/common": "^14.2.12",
-        "@angular/core": "^14.2.12"
+        "@angular/common": "^10.2.0",
+        "@angular/core": "^10.2.0"
     },
     "dependencies": {
-        "tslib": "^2.4.1"
+        "tslib": "^2.0.0"
     }
 }

@@ -3,6 +3,12 @@
     "dest": "../../dist/content/mat-table-table",
     "lib": {
         "entryFile": "src/public-api.ts",
-        "flatModuleFile": "contezza-material-table"
+        "flatModuleFile": "contezza-material-table",
+        "umdModuleIds": {
+            "@ngx-translate/core": "@ngx-translate/core",
+            "@alfresco/adf-core": "@alfresco/adf-core",
+            "@alfresco/adf-content-services": "@alfresco/adf-content-services",
+            "@alfresco/adf-extensions": "@alfresco/adf-extensions"
+        }
     }
 }

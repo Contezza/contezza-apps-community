@@ -1,9 +1,0 @@
-{
-    "extends": "../../tsconfig.json",
-    "compilerOptions": {
-        "outDir": "../../out-tsc/aca",
-        "types": ["node"]
-    },
-    "files": ["../content-ce/app/src/main.ts", "../content-ce/app/src/polyfills.ts"],
-    "include": ["../content-ce/app/src/**/*.d.ts", "./src/overrides/app"]
-}

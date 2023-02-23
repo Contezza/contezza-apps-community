@@ -1,17 +1,11 @@
 {
     "$schema": "./node_modules/nx/schemas/nx-schema.json",
-    "npmScope": "contezza-apps",
-    "affected": {
-        "defaultBase": "main"
-    },
-    "cli": {
-        "packageManager": "npm"
-    },
+    "npmScope": "contezza-apps-community",
     "tasksRunnerOptions": {
         "default": {
-            "runner": "@nrwl/workspace/tasks-runners/default",
+            "runner": "nx/tasks-runners/default",
             "options": {
-                "cacheableOperations": ["build", "lint"],
+                "cacheableOperations": ["build", "lint", "test", "e2e"],
                 "cacheDirectory": "nxcache"
             }
         }
@@ -22,21 +16,20 @@
             "inputs": ["production", "^production"]
         },
         "lint": {
-            "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
+            "inputs": ["default", "{workspaceRoot}/.eslintrc.json", "{workspaceRoot}/.eslintignore"]
         }
     },
     "namedInputs": {
         "default": ["{projectRoot}/**/*", "sharedGlobals"],
-        "sharedGlobals": [],
         "production": [
             "default",
             "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
             "!{projectRoot}/tsconfig.spec.json",
             "!{projectRoot}/jest.config.[jt]s",
             "!{projectRoot}/.eslintrc.json"
-        ]
+        ],
+        "sharedGlobals": []
     },
-    "defaultProject": "aca",
     "generators": {
         "@nrwl/angular:application": {
             "style": "scss",

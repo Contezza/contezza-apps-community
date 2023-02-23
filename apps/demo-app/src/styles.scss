@@ -1,0 +1,148 @@
+@use '@angular/material' as mat;
+@import '@alfresco/adf-core/lib/prebuilt-themes/adf-blue-orange.css';
+@import '@alfresco/aca-content/ui/application';
+
+$app-typography: mat.define-typography-config(
+    $font-family: 'Open Sans',
+);
+
+$grey-background: rgba(33, 33, 33, 0.12);
+$grey-text-background: rgba(33, 33, 33, 0.05);
+$blue-border: rgb(42, 125, 225);
+$grey-font: rgba(33, 35, 40, 0.6);
+$font-color: rgba(70, 64, 64, 0.87);
+$focus-color: rgb(31, 116, 219);
+
+body,
+html {
+    height: 100%;
+    font-family: 'Open Sans', 'Helvetica', 'Arial', sans-serif !important;
+}
+
+body {
+    margin: 0;
+}
+
+$foreground: map-get($custom-theme, foreground);
+$background: map-get($custom-theme, background);
+$warn: map-get($custom-theme, warn);
+$accent: map-get($custom-theme, accent);
+$primary: map-get($custom-theme, primary);
+
+// map SCSS variables to expose as CSS variables
+$defaults: (
+    --theme-black-font-color: $font-color,
+    --theme-grey-font-color: $grey-font,
+    --theme-grey-text-background: $grey-text-background,
+    --theme-grey-background: $grey-background,
+    --theme-blue-border-color: $blue-border,
+    --theme-primary-color: mat.get-color-from-palette($primary),
+    --theme-primary-color-default-contrast: mat.get-color-from-palette($primary, default-contrast),
+    --theme-warn-color: mat.get-color-from-palette($warn),
+    --theme-warn-color-default-contrast: mat.get-color-from-palette($warn, default-contrast),
+    --theme-accent-color: mat.get-color-from-palette($accent),
+    --theme-background-color: mat.get-color-from-palette($background, background),
+    --theme-text-fg-color: mat.get-color-from-palette($foreground, text),
+    --theme-text-color: mat.get-color-from-palette($foreground, text, 0.54),
+    --theme-text-bold-color: mat.get-color-from-palette($foreground, text, 0.87),
+    --theme-title-color: mat.get-color-from-palette($foreground, text, 0.87),
+    --theme-text-disabled-color: mat.get-color-from-palette($foreground, text, 0.38),
+    --theme-text-selection-color: mat.get-color-from-palette($foreground, text, 0.3),
+    --theme-border-color: mat.get-color-from-palette($foreground, text, 0.07),
+    --theme-border-color-light: mat.get-color-from-palette($foreground, text, 0.2),
+    --theme-card-background-color: mat.get-color-from-palette($background, card),
+    --theme-foreground-text-color: mat.get-color-from-palette($foreground, text, 0.72),
+    --theme-foreground-text-bold-color: mat.get-color-from-palette($foreground, text, 0.87),
+    --theme-secondary-text-color: mat.get-color-from-palette($foreground, secondary-text),
+    --theme-divider-color: mat.get-color-from-palette($foreground, divider, 0.07),
+    --theme-divider-color-light: lighten(mat.get-color-from-palette($foreground, divider, 0.07), 30),
+    --theme-dialog-bg-color: mat.get-color-from-palette($background, dialog),
+    --theme-app-bar-bg-color: mat.get-color-from-palette($background, app-bar),
+    --theme-status-bar-bg-color: mat.get-color-from-palette($background, status-bar, 0.7),
+    --theme-unselected-chip-bg-color: mat.get-color-from-palette($background, unselected-chip),
+    --theme-disabled-text-color: mat.get-color-from-palette($foreground, disabled-text),
+    --theme-selected-button-bg-color: mat.get-color-from-palette($background, selected-button),
+    --theme-raised-button-bg-color: mat.get-color-from-palette($background, raised-button),
+    --theme-icons-fg-color: mat.get-color-from-palette($foreground, icons),
+    --theme-slider-off-fg-color: mat.get-color-from-palette($foreground, slider-off),
+    --theme-ama-palette-header-bg-color: mat.get-color-from-palette($foreground, text, 0.08),
+    --theme-ama-palette-bg-color: mat.get-color-from-palette($foreground, text, 0.03),
+    --theme-ama-palette-separator-color: mat.get-color-from-palette($foreground, text, 0.05),
+    --theme-ama-var-selector-bg-color: mat.get-color-from-palette($foreground, text, 0.05),
+    --theme-ama-var-selector-selected-text-bg-color: mat.get-color-from-palette($foreground, text, 0.1),
+    --theme-ama-form-editor-btn-color: mat.get-color-from-palette($foreground, text, 0.25),
+    --theme-ama-form-editor-btn-hover-color: mat.get-color-from-palette($foreground, text, 1),
+    --theme-ama-form-editor-text-drag-color: mat.get-color-from-palette($foreground, text, 0.4),
+    --theme-ama-condition-builder-primary-text-color: mat.get-color-from-palette($primary, text, 0.75),
+    --theme-ama-condition-builder-accent-text-color: mat.get-color-from-palette($accent, text, 0.75),
+    --theme-disabled-bg-color: mat.get-color-from-palette($foreground, text, 0.05),
+    --theme-hint-bg-color: mat.get-color-from-palette($foreground, text, 0.5),
+    --theme-font-family: mat.font-family($app-typography),
+    --theme-body-1-font-size: mat.font-size($app-typography, body-1),
+    --theme-body-1-line-height: mat.line-height($app-typography, body-1),
+    --theme-caption-font-size: mat.font-size($app-typography, caption),
+    --theme-title-font-size: mat.font-size($app-typography, title),
+    --theme-subheading-2-font-size: mat.font-size($app-typography, subheading-2),
+    --theme-governance-name-color: lighten(mat.get-contrast-color-from-palette($primary, A700), 20),
+    --theme-governance-reject-bg-color: lighten(mat.get-color-from-palette($warn, 600), 35),
+    --theme-governance-reject-color: darken(mat.get-color-from-palette($warn, 600), 10),
+    --theme-governance-loading-color: mat.get-color-from-palette($accent, 900),
+    --theme-colors-mat-grey: mat.get-color-from-palette(mat.$grey-palette, A200),
+    --theme-colors-mat-blue: mat.get-color-from-palette(mat.$blue-palette, 50),
+    --theme-button-font-size: mat.font-size($app-typography, button),
+    --theme-focus-color: $focus-color,
+);
+
+// propagates SCSS variables into the CSS variables scope
+:root {
+    @each $name, $value in $defaults {
+        #{$name}: #{$value};
+    }
+}
+
+.adf-breadcrumb-item {
+    padding-right: 2px;
+    overflow: hidden;
+    display: flex;
+    line-height: 33px;
+    font-size: var(--theme-body-1-font-size);
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    text-align: left;
+    color: var(--theme-text-color);
+    flex: 0 1 auto;
+    min-width: 35px;
+    margin-top: auto;
+    text-overflow: ellipsis;
+
+    &:hover,
+    &.adf-active {
+        color: var(--adf-breadcrumb-item-active-hover-color);
+    }
+
+    &.adf-active {
+        color: var(--adf-breadcrumb-item-active-color);
+    }
+
+    &-chevron {
+        opacity: 1;
+        margin-top: 9px;
+        font-size: 17px;
+    }
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.adf-full-width {
+    width: 100%;
+}
+
+.adf-fill-remaining-space {
+    flex: 1 1 auto;
+}
+
+.adf-dialog-buttons button {
+    text-transform: uppercase;
+}

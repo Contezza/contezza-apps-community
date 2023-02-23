@@ -6,6 +6,4 @@ coverage
 .travis
 .vscode
 scripts
-apps/content-ce
 docs/**/*.md
-/angular.json

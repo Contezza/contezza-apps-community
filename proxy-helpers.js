@@ -4,6 +4,7 @@ module.exports = {
     host: {
         LOCALHOST_ECM: 'http://127.0.0.1:8080',
         LOCALHOST_BPM: 'http://127.0.0.1:9080',
+        DEV_TEZZA: 'https://dev.tezza.eu',
     },
 
     // PROXIES:

@@ -2,6 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
     name: 'columnProperty',
+    standalone: true,
     pure: true,
 })
 export class NodeBrowserColumnPropertyPipe implements PipeTransform {

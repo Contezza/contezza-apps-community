@@ -1,0 +1,44 @@
+{
+    "$id": "app.demo-app.navbar",
+    "$version": "@@project.version@@",
+    "$name": "Demo App App Navbar",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "navbar": [
+            {
+                "id": "app.navbar.mgmt.console",
+                "items": [
+                    {
+                        "id": "app.mgmt.console",
+                        "order": 1000,
+                        "icon": "settings",
+                        "title": "APP.CONSOLE.TITLE",
+                        "description": "APP.CONSOLE.DESCRIPTION",
+                        "rules": {
+                            "visible": "user.isAdmin"
+                        },
+                        "children": [
+                            {
+                                "id": "app.console.js-console.component",
+                                "order": 100,
+                                "icon": "svg:console",
+                                "title": "APP.JS_CONSOLE.NAVBAR.TITLE",
+                                "description": "APP.JS_CONSOLE.NAVBAR.DESCRIPTION",
+                                "route": "javascript-console"
+                            },
+                            {
+                                "id": "app.console.node-browser.component",
+                                "order": 200,
+                                "icon": "svg:travel_explore",
+                                "title": "APP.NODE_BROWSER.NAVBAR.TITLE",
+                                "description": "APP.NODE_BROWSER.NAVBAR.DESCRIPTION",
+                                "route": "node-browser"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

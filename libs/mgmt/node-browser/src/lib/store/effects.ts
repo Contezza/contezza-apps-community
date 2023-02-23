@@ -5,11 +5,10 @@ import { Store } from '@ngrx/store';
 
 import { map, switchMap } from 'rxjs/operators';
 
-import { NavigateRouteAction } from '@alfresco/aca-shared/store';
-
 import { NodeBrowserActions } from './index';
 import { executeSearch, loadStores, nodeBrowse } from './actions';
 import { NodeBrowserService } from '../services/node-browser.service';
+import { NavigateRouteAction } from '@alfresco/aca-shared/store';
 
 @Injectable()
 export class NodeBrowserEffects {

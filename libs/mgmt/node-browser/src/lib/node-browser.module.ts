@@ -14,17 +14,12 @@ import { IconModule } from '@alfresco/adf-core';
 import { ContezzaLetModule } from '@contezza/utils';
 
 import { NodeBrowserStoreModule } from './store/store.module';
-import { NodeBrowserTableCellPropertyPipe } from './pipes/table-cell-prop.pipe';
-import { NodeBrowserColumnParentPathPipe } from './pipes/column-parent-path.pipe';
-import { NodeBrowserColumnPropertyPipe } from './pipes/column-property.pipe';
 
 import { NodeBrowserResultTableComponent } from './components/result-table/result-table.component';
-import { NodeBrowserSearchParentColumnComponent } from './components/columns/search-parent-column.component';
-import { NodeBrowserSearchLinkColumnComponent } from './components/columns/search-link-column.component';
-import { NodeBrowserTextColumnComponent } from './components/columns/browse-text-column.component';
-import { NodeBrowserValuesColumnComponent } from './components/columns/browse-values-column.component';
 import { NodeBrowserViewItemComponent } from './components/view/view-item/view-item.component';
 import { NodeBrowserMaterialModule } from './node-browser-material.module';
+import { NodeBrowserTableCellPropertyPipe } from './pipes/table-cell-prop.pipe';
+import { NodeBrowserColumnPropertyPipe } from './pipes/column-property.pipe';
 
 const routes: Routes = [
     {
@@ -61,19 +56,9 @@ const routes: Routes = [
         ContezzaLetModule,
         NodeBrowserMaterialModule,
         NodeBrowserStoreModule,
-    ],
-    declarations: [
-        NodeBrowserSearchComponent,
-        NodeBrowserViewComponent,
-        NodeBrowserResultTableComponent,
         NodeBrowserTableCellPropertyPipe,
-        NodeBrowserColumnParentPathPipe,
         NodeBrowserColumnPropertyPipe,
-        NodeBrowserSearchLinkColumnComponent,
-        NodeBrowserSearchParentColumnComponent,
-        NodeBrowserTextColumnComponent,
-        NodeBrowserValuesColumnComponent,
-        NodeBrowserViewItemComponent,
     ],
+    declarations: [NodeBrowserSearchComponent, NodeBrowserViewComponent, NodeBrowserResultTableComponent, NodeBrowserViewItemComponent],
 })
 export class ContezzaNodeBrowserModule {}

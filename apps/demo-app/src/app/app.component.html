@@ -1,0 +1,4 @@
+<ng-container *ngIf="pageHeading$ | async | translate as pageHeading">
+    <h1 class="app-sr-only" title="{{ pageHeading }}">{{ pageHeading }}</h1>
+</ng-container>
+<router-outlet></router-outlet>

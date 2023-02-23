@@ -13,7 +13,7 @@ case $1 in
     "ng-inspect")
         "$DIR"/ng-build.sh "$APP" inspect --stats-json; npx webpack-bundle-analyzer dist/"$APP"/stats.json;;
     "start")
-        "$DIR"/setup.sh $APP; "$DIR"/start.sh "$APP";;
+        "$DIR"/start.sh "$APP";;
     "prod")
-        "$DIR"/setup.sh $APP ; "$DIR"/start.sh "$APP" "$1";;
+        "$DIR"/start.sh "$APP" "$1";;
 esac

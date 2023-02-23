@@ -6,9 +6,6 @@ NODE_MEMORY=8192
 NODE_MODULES_DIR="node_modules"
 INSTALL_NM_MESSAGE="Installing node modules"
 
-. "$DIR"/helpers/_show-header.sh
-show_header "$APP" "starting" "$2"
-
 if [ "$2" == "prod" ]; then
     # start in prod mode
     NODE_OPTIONS=--max_old_space_size=$NODE_MEMORY ${NG_CLI:-nx} serve "$APP" --configuration production --watch false

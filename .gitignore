@@ -12,7 +12,6 @@
 /e2e-artefacts
 /reports
 **/e2e-output
-.angular
 
 # dependencies
 /node_modules
@@ -63,13 +62,9 @@ testem.log
 Thumbs.db
 
 # ACA integration
-/apps/content-ce/
 libs/dist
 .docker-build
 target/
 .builds/
 .tmp/
 ci.env
-/apps/content-ce/app/src/app.config.prod.json
-/apps/content-ce/app/src/app.config.test.json
-/apps/content-ce/app/src/assets/i18n/nl.json

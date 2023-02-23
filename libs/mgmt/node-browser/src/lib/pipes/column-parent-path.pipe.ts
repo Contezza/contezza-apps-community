@@ -2,6 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
     name: 'parentPath',
+    standalone: true,
     pure: true,
 })
 export class NodeBrowserColumnParentPathPipe implements PipeTransform {
