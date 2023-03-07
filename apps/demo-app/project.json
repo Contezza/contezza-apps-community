@@ -34,7 +34,9 @@
                     "pdfjs-dist/web/pdf_viewer"
                 ],
                 "inlineStyleLanguage": "scss",
-                "stylePreprocessorOptions": { "includePaths": ["node_modules"] },
+                "stylePreprocessorOptions": {
+                    "includePaths": ["node_modules"]
+                },
                 "assets": [
                     {
                         "input": "apps/demo-app/config",
@@ -128,7 +130,7 @@
                     },
                     {
                         "input": "libs/utils/assets",
-                        "output": "./assets/contezza-utils",
+                        "output": "./assets/contezza-common",
                         "glob": "**/*"
                     },
                     {

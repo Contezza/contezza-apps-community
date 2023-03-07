@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, filter, map, switchMap } from 'rxjs/operators';
 
-import { WebscriptService } from '@contezza/utils';
+import { WebscriptService } from '@contezza/common';
 
 import { JsConsoleScriptSaveDialogService } from '../dialogs/script-save/script-save-dialog.service';
 import { ConsoleScript, OpenSaveScriptDialogPayload, SaveScriptPayload } from '../interfaces/js-console';

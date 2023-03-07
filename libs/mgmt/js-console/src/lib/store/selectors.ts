@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector, MemoizedSelector } from '@ngrx/store';
 import { RouterReducerState } from '@ngrx/router-store';
 
-import { ContezzaRouterState } from '@contezza/utils';
+import { ContezzaRouterState } from '@contezza/common';
 
 import { ContezzaJsConsoleState, JsConsoleState } from './state';
 import { featureKey } from './feature-key';

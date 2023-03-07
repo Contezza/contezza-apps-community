@@ -1,8 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { ContezzaObjectUtils } from '@contezza/utils';
-
 import moment from 'moment';
+
+import { ContezzaObjectUtils } from '@contezza/core/utils';
 
 @Pipe({
     name: 'materialTableCellProperty',

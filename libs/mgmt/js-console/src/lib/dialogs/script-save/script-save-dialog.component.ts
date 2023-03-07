@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormControl, Validators } from '@angular/forms';
 
-import { DestroyService } from '@contezza/utils';
+import { DestroyService } from '@contezza/common';
 import { JsConsoleScriptSaveDialogService } from './script-save-dialog.service';
 
 @Component({

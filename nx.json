@@ -17,6 +17,9 @@
         },
         "lint": {
             "inputs": ["default", "{workspaceRoot}/.eslintrc.json", "{workspaceRoot}/.eslintignore"]
+        },
+        "test": {
+            "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
         }
     },
     "namedInputs": {
@@ -33,10 +36,13 @@
     "generators": {
         "@nrwl/angular:application": {
             "style": "scss",
-            "linter": "eslint"
+            "linter": "eslint",
+            "unitTestRunner": "jest",
+            "e2eTestRunner": "none"
         },
         "@nrwl/angular:library": {
-            "linter": "eslint"
+            "linter": "eslint",
+            "unitTestRunner": "jest"
         },
         "@nrwl/angular:component": {
             "style": "scss"

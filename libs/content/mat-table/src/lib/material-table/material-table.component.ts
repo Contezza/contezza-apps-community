@@ -19,7 +19,7 @@ import { MatPaginator } from '@angular/material/paginator';
 
 import { takeUntil } from 'rxjs/operators';
 
-import { DestroyService } from '@contezza/utils';
+import { DestroyService } from '@contezza/common';
 
 import { ColumnInfo, MaterialTableAction, MaterialTableEmptyContent } from '../material-table-interfaces';
 import { SelectionModel } from '@angular/cdk/collections';

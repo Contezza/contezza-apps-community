@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { catchError, finalize, map } from 'rxjs/operators';
 
-import { WebscriptService } from '@contezza/utils';
+import { WebscriptService } from '@contezza/common';
 
 import { NodeBrowserSearchParams, NodeBrowserSearchResponse } from '../interfaces/node-browser-search';
 import { NodeBrowserViewResponse } from '../interfaces/node-browser-view';

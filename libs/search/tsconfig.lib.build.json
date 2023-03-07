@@ -2,11 +2,7 @@
     "extends": "../../../tsconfig.json",
     "compilerOptions": {
         "outDir": "../../dist/core/search/",
-        "baseUrl": "src",
-        "paths": {
-            "@contezza/utils": ["../../../dist/core/common"],
-            "@contezza/utils/*": ["../../../dist/core/common/*"]
-        }
+        "baseUrl": "src"
     },
     "angularCompilerOptions": {
         "skipTemplateCodegen": true,

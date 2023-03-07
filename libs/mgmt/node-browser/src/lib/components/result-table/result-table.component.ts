@@ -4,7 +4,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 import { takeUntil } from 'rxjs/operators';
 
-import { DestroyService } from '@contezza/utils';
+import { DestroyService } from '@contezza/common';
 import { MaterialTableEmptyContent } from '@contezza/material-table';
 
 import { ColumnInfo } from '../../interfaces/column-info';

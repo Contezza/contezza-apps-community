@@ -1,6 +1,6 @@
 import { RouterReducerState } from '@ngrx/router-store';
 
-import { ContezzaRouterState } from '@contezza/utils';
+import { ContezzaRouterState } from '@contezza/common';
 
 import { NodeBrowserSearchParams, NodeBrowserSearchResponse } from '../interfaces/node-browser-search';
 

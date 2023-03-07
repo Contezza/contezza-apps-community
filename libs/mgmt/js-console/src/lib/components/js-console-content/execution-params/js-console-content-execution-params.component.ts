@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { takeUntil } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
 
-import { DestroyService } from '@contezza/utils';
+import { DestroyService } from '@contezza/common';
 
 import { getRunas, getTransaction, getUrlargs } from '../../../store/selectors';
 import { setRunas, setTransaction, setUrlargs } from '../../../store/actions';

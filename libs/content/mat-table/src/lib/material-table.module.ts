@@ -10,7 +10,7 @@ import { ExtensionsModule } from '@alfresco/adf-extensions';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MaterialTableCellPropertyPipe } from './pipes/material-table-cell-property.pipe';
-import { ContezzaLetModule } from '@contezza/utils';
+import { ContezzaLetModule } from '@contezza/common';
 import { MaterialTableActionsColumnComponent } from './columns/material-table-actions-column.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';

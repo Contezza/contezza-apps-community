@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { WebscriptService } from '@contezza/utils';
+import { WebscriptService } from '@contezza/common';
 
 import { alfrescoAutocomplete, alfrescoSnippets } from '../utils/alfresco.autocomplete';
 import { TernModel, TernToTs } from '../utils/tern-to-ts';

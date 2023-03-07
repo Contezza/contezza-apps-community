@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 
 import { debounceTime, filter, map, startWith, takeUntil } from 'rxjs/operators';
 
-import { DestroyService } from '@contezza/utils';
+import { DestroyService } from '@contezza/common';
 import { Observable, of } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 

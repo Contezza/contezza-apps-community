@@ -7,7 +7,7 @@ import { catchError, map, take } from 'rxjs/operators';
 
 import { ContentService } from '@alfresco/adf-core';
 
-import { WebscriptService } from '@contezza/utils';
+import { WebscriptService } from '@contezza/common';
 
 import { setScriptExecutionTime } from '../store/actions';
 import { ConsoleScript, ExecuteConsolePayload, ExecuteConsoleResponse } from '../interfaces/js-console';

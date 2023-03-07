@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ComponentType } from '@angular/cdk/portal';
 
-import { ContezzaAsyncDialogService } from '@contezza/utils';
+import { ContezzaAsyncDialogService } from '@contezza/common';
 
 import { JsConsoleScriptSaveDialogComponent } from './script-save-dialog.component';
 import { ConsoleScript } from '../../interfaces/js-console';

@@ -11,7 +11,7 @@ import { ExtensionsModule } from '@alfresco/adf-extensions';
 import { PageLayoutModule } from '@alfresco/aca-shared';
 import { IconModule } from '@alfresco/adf-core';
 
-import { ContezzaLetModule } from '@contezza/utils';
+import { ContezzaLetModule } from '@contezza/common';
 
 import { NodeBrowserStoreModule } from './store/store.module';
 
