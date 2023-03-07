@@ -52,7 +52,7 @@ build_libs:
 #----------------------------
 
 publish_libs:
-    stage: deploy
+    stage: publish
     image: harbor.contezza.nl/tooling/docker-npm-maven:1.0.7
     variables:
         MAVEN_CLI_OPTS: '-s ../../.m2/settings.xml --batch-mode'
