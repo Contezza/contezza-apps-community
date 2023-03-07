@@ -129,7 +129,7 @@
                         "glob": "extension.schema.json"
                     },
                     {
-                        "input": "libs/utils/assets",
+                        "input": "libs/common/assets",
                         "output": "./assets/contezza-common",
                         "glob": "**/*"
                     },
