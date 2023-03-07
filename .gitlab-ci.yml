@@ -3,19 +3,18 @@
 # ----------------------------------
 
 stages:
-    - build
-    - publish
+    - build-publish
 
 variables:
     MAVEN_CLI_OPTS: '-s .m2/settings.xml --batch-mode'
     MAVEN_OPTS: '-Dmaven.repo.local=/data/gitlabrunner-cicd/.m2/repository'
 
 #----------------------------
-# BUILD LIBS
+# BUILD + PUBLISH LIBS
 #----------------------------
 
-build_libs:
-    stage: build
+build_publish_libs:
+    stage: build-publish
     image: harbor.contezza.nl/tooling/docker-npm-maven:1.0.7
     variables:
         MAVEN_CLI_OPTS: '-s ../../.m2/settings.xml --batch-mode'
@@ -31,35 +30,11 @@ build_libs:
         - npm config set legacy-peer-deps true
         - npm i -g nx && npm ci
         - npm run build-libs
-    only:
-        variables:
-            - $CI_COMMIT_MESSAGE =~ /publish-libs/
-    tags:
-        - cntz-cicd
-
-#----------------------------
-# PUBLISH LIBS
-#----------------------------
-
-publish_libs:
-    stage: publish
-    image: harbor.contezza.nl/tooling/docker-npm-maven:1.0.7
-    variables:
-        MAVEN_CLI_OPTS: '-s ../../.m2/settings.xml --batch-mode'
-    before_script:
-        - mkdir -p $HOME/.docker
-        - echo $DOCKER_AUTH_CONFIG > $HOME/.docker/config.json
-    script:
-        - docker login -u $CNTZ_DOCKER_QUAY_USER -p $CNTZ_DOCKER_QUAY_PASSWD quay.io
-        - docker login -u $CNTZ_DOCKER_HARBOR_USER -p $CNTZ_DOCKER_HARBOR_PASSWD harbor.contezza.nl
         - echo "BEFORE PUBLISH.........."
         - npm run publish-libs
         - echo "AFTER PUBLISH.........."
     only:
         variables:
-            - $CI_COMMIT_MESSAGE =~ /publish-libs/
-    dependencies:
-        - build_libs
+            - $CI_COMMIT_MESSAGE =~ /build-publish-libs/
     tags:
-        - transip
-        - test
+        - cntz-cicd
