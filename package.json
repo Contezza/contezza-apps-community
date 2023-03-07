@@ -7,6 +7,7 @@
         "affected:libs": "nx affected:libs",
         "build": "./scripts/compile.sh build",
         "build-libs": "ng build core",
+        "publish-libs": "cd dist/@contezza/core && npm version patch && npm publish",
         "ng-build": "./scripts/compile.sh ng-build",
         "ng-inspect": "./scripts/compile.sh ng-inspect",
         "start": "./scripts/compile.sh start",
