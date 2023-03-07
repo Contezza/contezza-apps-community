@@ -43,7 +43,7 @@ build_libs:
         - echo "AFTER BUILD.........."
     only:
         variables:
-            - $CI_COMMIT_MESSAGE =~ /publish_libs/
+            - $CI_COMMIT_MESSAGE =~ /publish-libs/
     tags:
         - cntz-cicd
 
@@ -67,7 +67,7 @@ publish_libs:
         - echo "AFTER PUBLISH.........."
     only:
         variables:
-            - $CI_COMMIT_MESSAGE =~ /publish_libs/
+            - $CI_COMMIT_MESSAGE =~ /publish-libs/
     dependencies:
         - build_libs
     tags:
