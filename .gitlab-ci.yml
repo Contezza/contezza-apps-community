@@ -6,12 +6,6 @@ stages:
     - build
     - publish
 
-cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-        - node_modules/
-        - libs/
-
 variables:
     MAVEN_CLI_OPTS: '-s .m2/settings.xml --batch-mode'
     MAVEN_OPTS: '-Dmaven.repo.local=/data/gitlabrunner-cicd/.m2/repository'
@@ -35,12 +29,8 @@ build_libs:
         - npm config set @contezza:registry https://nexus.contezza.nl/repository/npm-releases/
         - npm config set //nexus.contezza.nl/repository/npm-releases/:_authToken ${NPM_TOKEN}
         - npm config set legacy-peer-deps true
-        - node -v
         - npm i -g nx && npm ci
-        - nx report
-        - echo "BEFORE BUILD.........."
-        - npm run start build-libs
-        - echo "AFTER BUILD.........."
+        - npm run build-libs
     only:
         variables:
             - $CI_COMMIT_MESSAGE =~ /publish-libs/
@@ -63,7 +53,7 @@ publish_libs:
         - docker login -u $CNTZ_DOCKER_QUAY_USER -p $CNTZ_DOCKER_QUAY_PASSWD quay.io
         - docker login -u $CNTZ_DOCKER_HARBOR_USER -p $CNTZ_DOCKER_HARBOR_PASSWD harbor.contezza.nl
         - echo "BEFORE PUBLISH.........."
-        - npm run start publish-libs
+        - npm run publish-libs
         - echo "AFTER PUBLISH.........."
     only:
         variables:
