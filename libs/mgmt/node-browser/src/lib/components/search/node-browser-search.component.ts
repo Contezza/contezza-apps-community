@@ -9,11 +9,12 @@ import { takeUntil } from 'rxjs/operators';
 
 import { ExtensionService } from '@alfresco/adf-extensions';
 
-import { ColumnInfo, DestroyService } from '@contezza/utils';
+import { DestroyService } from '@contezza/utils';
 
 import { nodeBrowserLangs, NodeBrowserSearchParams, NodeBrowserSearchResponse } from '../../interfaces/node-browser-search';
 import { getLastSearchQuery, getSearchLoading, getSearchParams, getSearchResponse, getStores } from '../../store/selectors';
 import { executeSearch, loadStores, setSearchParam } from '../../store/actions';
+import { ColumnInfo } from '../../interfaces/column-info';
 
 @Component({
     selector: 'mgmt-node-browser-search',

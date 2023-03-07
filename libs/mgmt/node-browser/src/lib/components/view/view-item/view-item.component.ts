@@ -2,9 +2,8 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, ViewEncap
 
 import { ExtensionService } from '@alfresco/adf-extensions';
 
-import { ColumnInfo } from '@contezza/utils';
-
 import { NodeBrowserViewItem, NodeBrowserViewResponse } from '../../../interfaces/node-browser-view';
+import { ColumnInfo } from '../../../interfaces/column-info';
 
 @Component({
     selector: 'node-browser-view-item',
