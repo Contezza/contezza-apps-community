@@ -30,9 +30,7 @@ build_publish_libs:
         - npm config set legacy-peer-deps true
         - npm i -g nx && npm ci
         - npm run build-libs
-        - echo "BEFORE PUBLISH.........."
         - npm run publish-libs
-        - echo "AFTER PUBLISH.........."
     only:
         variables:
             - $CI_COMMIT_MESSAGE =~ /build-publish-libs/
