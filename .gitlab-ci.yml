@@ -1,0 +1,75 @@
+# ----------------------------------
+# Contezza Apps Community
+# ----------------------------------
+
+stages:
+    - build
+    - publish
+
+cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+        - node_modules/
+        - libs/
+
+variables:
+    MAVEN_CLI_OPTS: '-s .m2/settings.xml --batch-mode'
+    MAVEN_OPTS: '-Dmaven.repo.local=/data/gitlabrunner-cicd/.m2/repository'
+
+#----------------------------
+# BUILD LIBS
+#----------------------------
+
+build_libs:
+    stage: build
+    image: harbor.contezza.nl/tooling/docker-npm-maven:1.0.7
+    variables:
+        MAVEN_CLI_OPTS: '-s ../../.m2/settings.xml --batch-mode'
+    before_script:
+        - mkdir -p $HOME/.docker
+        - echo $DOCKER_AUTH_CONFIG > $HOME/.docker/config.json
+    script:
+        - docker login -u $CNTZ_DOCKER_QUAY_USER -p $CNTZ_DOCKER_QUAY_PASSWD quay.io
+        - docker login -u $CNTZ_DOCKER_HARBOR_USER -p $CNTZ_DOCKER_HARBOR_PASSWD harbor.contezza.nl
+        - git config --global advice.detachedHead false
+        - npm config set @contezza:registry https://nexus.contezza.nl/repository/npm-releases/
+        - npm config set //nexus.contezza.nl/repository/npm-releases/:_authToken ${NPM_TOKEN}
+        - npm config set legacy-peer-deps true
+        - node -v
+        - npm i -g nx && npm ci
+        - nx report
+        - echo "BEFORE BUILD.........."
+        - npm run start build-libs
+        - echo "AFTER BUILD.........."
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE =~ /publish_libs/
+    tags:
+        - cntz-cicd
+
+#----------------------------
+# PUBLISH LIBS
+#----------------------------
+
+publish_libs:
+    stage: deploy
+    image: harbor.contezza.nl/tooling/docker-npm-maven:1.0.7
+    variables:
+        MAVEN_CLI_OPTS: '-s ../../.m2/settings.xml --batch-mode'
+    before_script:
+        - mkdir -p $HOME/.docker
+        - echo $DOCKER_AUTH_CONFIG > $HOME/.docker/config.json
+    script:
+        - docker login -u $CNTZ_DOCKER_QUAY_USER -p $CNTZ_DOCKER_QUAY_PASSWD quay.io
+        - docker login -u $CNTZ_DOCKER_HARBOR_USER -p $CNTZ_DOCKER_HARBOR_PASSWD harbor.contezza.nl
+        - echo "BEFORE PUBLISH.........."
+        - npm run start publish-libs
+        - echo "AFTER PUBLISH.........."
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE =~ /publish_libs/
+    dependencies:
+        - build_libs
+    tags:
+        - transip
+        - test
