@@ -19,9 +19,9 @@ import { MatPaginator } from '@angular/material/paginator';
 
 import { takeUntil } from 'rxjs/operators';
 
-import { ColumnInfo, DestroyService } from '@contezza/utils';
+import { DestroyService } from '@contezza/utils';
 
-import { MaterialTableAction, MaterialTableEmptyContent } from '../material-table-interfaces';
+import { ColumnInfo, MaterialTableAction, MaterialTableEmptyContent } from '../material-table-interfaces';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Store } from '@ngrx/store';
 import { NodeEntry } from '@alfresco/js-api';
