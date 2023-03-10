@@ -34,7 +34,7 @@ import { ContezzaJsConsoleExtensionModule } from '@contezza/mgmt/js-console-exte
 }
 ```
 
-**Include javascript console in navbar** 
+**Include javascript console in navbar**
 ```json
 {
     "id": "app.console.js-console.component",

@@ -3,10 +3,7 @@
     "version": "1.0.0-A.1",
     "scripts": {
         "ng": "nx",
-        "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main",
-        "update-webdriver": "./scripts/update-webdriver.sh",
-        "affected:libs": "nx affected:libs",
-        "build": "./scripts/compile.sh build",
+        "postinstall": "node ./decorate-angular-cli.js",
         "build-libs": "ng build core && ng build third-party",
         "publish-libs": "./scripts/publish-libs.sh",
         "ng-build": "./scripts/compile.sh ng-build",
@@ -14,18 +11,11 @@
         "start": "./scripts/compile.sh start",
         "prod": "./scripts/compile.sh prod",
         "inspect": "./scripts/compile.sh inspect",
-        "test": "./scripts/test.sh",
-        "lint": "ng lint",
-        "affected": "nx affected",
-        "affected:dep-graph": "nx affected:dep-graph",
-        "dep-graph": "nx dep-graph",
+        "test": "nx test",
+        "lint": "nx lint",
         "start:demo-app": "npm run start demo-app"
     },
     "private": true,
-    "browser": {
-        "crypto": false,
-        "fs": false
-    },
     "dependencies": {
         "@alfresco/aca-about": "4.0.0-A.3",
         "@alfresco/aca-content": "4.0.0-A.3",
@@ -127,7 +117,7 @@
         "jest-environment-jsdom": "^29.4.1",
         "jest-preset-angular": "~12.2.3",
         "lint-staged": "^13.2.0",
-        "ng-packagr": "~14.3.0",
+        "ng-packagr": "~14.2.0",
         "nx": "15.8.5",
         "path": "^0.12.7",
         "postcss": "8.4.21",
