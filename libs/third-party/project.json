@@ -2,7 +2,7 @@
     "name": "third-party",
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
-    "sourceRoot": "libs/third-party",
+    "sourceRoot": "libs/third-party/src",
     "prefix": "contezza",
     "targets": {
         "build": {
