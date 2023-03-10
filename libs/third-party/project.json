@@ -1,0 +1,47 @@
+{
+    "name": "third-party",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/third-party/src",
+    "prefix": "contezza",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:package",
+            "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+            "options": {
+                "project": "libs/third-party/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/third-party/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/third-party/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/third-party/jest.config.ts",
+                "passWithNoTests": true
+            },
+            "configurations": {
+                "ci": {
+                    "ci": true,
+                    "codeCoverage": true
+                }
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["libs/third-party/**/*.ts", "libs/third-party/**/*.html", "libs/third-party/monaco/**/*.ts", "libs/third-party/monaco/**/*.html"]
+            }
+        }
+    },
+    "tags": []
+}

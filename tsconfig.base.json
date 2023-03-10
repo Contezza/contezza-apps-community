@@ -27,19 +27,18 @@
         "removeComments": true,
         "paths": {
             "@contezza/common": ["libs/common/public-api"],
-
             "@contezza/core": ["libs/core/src/index.ts"],
             "@contezza/core/context": ["libs/core/context/src/index.ts"],
             "@contezza/core/extensions": ["libs/core/extensions/src/index.ts"],
             "@contezza/core/utils": ["libs/core/utils/src/index.ts"],
-
             "@contezza/js-console": ["libs/mgmt/js-console/src/public-api"],
             "@contezza/js-console-extensions": ["libs/mgmt/js-console/src/public-extensions-api"],
             "@contezza/material-table": ["libs/content/mat-table/src/public-api"],
             "@contezza/node-browser": ["libs/mgmt/node-browser/src/public-api"],
             "@contezza/node-browser-extensions": ["libs/mgmt/node-browser/src/public-extensions-api"],
             "@contezza/search": ["libs/search/src/public-api"],
-            "@contezza/third-party/monaco": ["libs/third-party/monaco/src/public-api"]
+            "@contezza/third-party": ["libs/third-party/src/index.ts"],
+            "@contezza/third-party/monaco": ["libs/third-party/monaco/src/index.ts"]
         }
     },
     "exclude": ["node_modules", "tmp"],
