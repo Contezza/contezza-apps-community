@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
 import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
 
-import { MaterialTableColumnData } from '@contezza/material-table';
+import { MaterialTableColumnData } from '../../interfaces/table';
 
 import { nodeBrowse } from '../../store/actions';
 import { NodeBrowserColumnPropertyPipe } from '../../pipes/column-property.pipe';
