@@ -16,7 +16,7 @@ for LIB in "${LIBS[@]}"
 do
     echo "Update ${LIB} version to ${VERSION_IN_PACKAGE_JSON}"
 
-    cd LIBS_DIR/${LIB}
+    cd $LIBS_DIR/${LIB}
     npm version ${VERSION_IN_PACKAGE_JSON};
 done
 
