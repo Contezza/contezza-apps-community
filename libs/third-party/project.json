@@ -39,7 +39,14 @@
             "executor": "@nrwl/linter:eslint",
             "outputs": ["{options.outputFile}"],
             "options": {
-                "lintFilePatterns": ["libs/third-party/**/*.ts", "libs/third-party/**/*.html", "libs/third-party/monaco/**/*.ts", "libs/third-party/monaco/**/*.html"]
+                "lintFilePatterns": [
+                    "libs/third-party/**/*.ts",
+                    "libs/third-party/**/*.html",
+                    "libs/third-party/monaco/**/*.ts",
+                    "libs/third-party/monaco/**/*.html",
+                    "libs/third-party/gridster/**/*.ts",
+                    "libs/third-party/gridster/**/*.html"
+                ]
             }
         }
     },
