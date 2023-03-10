@@ -1,13 +1,14 @@
 {
     "name": "contezza-apps-community",
+    "version": "1.0.0-A.1",
     "scripts": {
         "ng": "nx",
         "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main",
         "update-webdriver": "./scripts/update-webdriver.sh",
         "affected:libs": "nx affected:libs",
         "build": "./scripts/compile.sh build",
-        "build-libs": "ng build core",
-        "publish-libs": "cd dist/@contezza/core && npm publish",
+        "build-libs": "ng build core && ng build third-party",
+        "publish-libs": "./scripts/publish-libs.sh",
         "ng-build": "./scripts/compile.sh ng-build",
         "ng-inspect": "./scripts/compile.sh ng-inspect",
         "start": "./scripts/compile.sh start",

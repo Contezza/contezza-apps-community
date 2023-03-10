@@ -29,7 +29,6 @@ build_publish_libs:
         - npm config set //nexus.contezza.nl/repository/npm-releases/:_authToken ${NPM_TOKEN}
         - npm config set legacy-peer-deps true
         - npm i -g nx && npm ci
-        - npm run build-libs
         - npm run publish-libs
     only:
         variables:
