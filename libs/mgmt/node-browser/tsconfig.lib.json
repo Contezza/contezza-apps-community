@@ -1,11 +1,13 @@
 {
-    "extends": "../../../tsconfig.base.json",
-    "angularCompilerOptions": {
-        "skipTemplateCodegen": true,
-        "strictMetadataEmit": true,
-        "fullTemplateTypeCheck": true,
-        "strictInjectionParameters": true,
-        "enableResourceInlining": true
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "../../../dist/out-tsc",
+        "declaration": true,
+        "declarationMap": true,
+        "inlineSources": true,
+        "types": [],
+        "experimentalDecorators": true
     },
-    "exclude": ["src/test.ts", "**/*.spec.ts"]
+    "exclude": ["src/test-setup.ts", "src/**/*.spec.ts", "jest.config.ts", "src/**/*.test.ts"],
+    "include": ["src/**/*.ts"]
 }

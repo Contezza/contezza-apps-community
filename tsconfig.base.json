@@ -32,8 +32,8 @@
             "@contezza/core/utils": ["libs/core/utils/src/index.ts"],
             "@contezza/js-console": ["libs/mgmt/js-console/src/index.ts"],
             "@contezza/js-console-extensions": ["libs/mgmt/js-console/src/public-extensions-api"],
-            "@contezza/node-browser": ["libs/mgmt/node-browser/src/public-api"],
-            "@contezza/node-browser-extensions": ["libs/mgmt/node-browser/src/public-extensions-api"],
+            "@contezza/node-browser": ["libs/mgmt/node-browser/src/index.ts"],
+            "@contezza/node-browser-extensions": ["libs/mgmt/node-browser/src/lib/extensions/index.ts"],
             "@contezza/search": ["libs/search/src/public-api"],
             "@contezza/third-party/gridster": ["libs/third-party/gridster/src/index.ts"],
             "@contezza/third-party/monaco": ["libs/third-party/monaco/src/index.ts"]
