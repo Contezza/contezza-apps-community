@@ -17,6 +17,7 @@
         "skipDefaultLibCheck": true,
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
         "resolveJsonModule": true,
         "typeRoots": ["node_modules/@types"],
         "types": ["jasmine", "node", "jasminewd2"],
@@ -26,7 +27,7 @@
         "noImplicitReturns": true,
         "removeComments": true,
         "paths": {
-            "@contezza/common": ["libs/common/src/index.ts"],
+            "@contezza/core/common": ["libs/core/common/src/index.ts"],
             "@contezza/core/context": ["libs/core/context/src/index.ts"],
             "@contezza/core/directives": ["libs/core/directives/src/index.ts"],
             "@contezza/core/extensions": ["libs/core/extensions/src/index.ts"],

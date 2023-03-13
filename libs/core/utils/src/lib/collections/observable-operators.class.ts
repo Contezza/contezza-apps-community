@@ -4,7 +4,7 @@ import { filter, map, scan, startWith, tap } from 'rxjs/operators';
 import { GenericBucket } from '@alfresco/js-api';
 import { ObjectUtils } from '@alfresco/adf-core';
 
-import moment from 'moment-es6';
+import moment from 'moment';
 
 import { ContezzaArrayUtils } from './array-utils.class';
 import { ContezzaObjectUtils } from './object-utils.class';
