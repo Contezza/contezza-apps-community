@@ -1,6 +1,6 @@
 import { Action, on } from '@ngrx/store';
 
-import { createLocalStorageRehydrateReducer } from '@contezza/common';
+import { createLocalStorageRehydrateReducer } from '@contezza/core/utils';
 
 import { JsConsoleActions } from './index';
 import { initialState, JsConsoleState } from './state';

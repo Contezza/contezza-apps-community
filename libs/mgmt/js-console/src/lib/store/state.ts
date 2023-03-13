@@ -1,6 +1,6 @@
 import { RouterReducerState } from '@ngrx/router-store';
 
-import { ContezzaRouterState } from '@contezza/common';
+import { ContezzaRouterState } from '@contezza/core/utils';
 
 import { ConsoleEditorOptions, ConsoleScript, ExecuteConsoleResponse, ScriptExecutionTime, SelectedNode } from '../interfaces/js-console';
 

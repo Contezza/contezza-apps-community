@@ -8,6 +8,7 @@
         "inlineSources": true,
         "types": [],
         "paths": {
+            "@contezza/common/*": ["./dist/@contezza/common/*"],
             "@contezza/core/*": ["./dist/@contezza/core/*"],
             "@contezza/search/*": ["./dist/@contezza/search/*"],
             "@contezza/third-party/*": ["./dist/@contezza/third-party/*"]

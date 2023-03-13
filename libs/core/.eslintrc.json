@@ -14,7 +14,7 @@
                     "error",
                     {
                         "type": "element",
-                        "prefix": ["aca", "adf", "app", "contezza", "mgmt", "admin", "js"],
+                        "prefix": ["aca", "adf", "app", "contezza"],
                         "style": "kebab-case"
                     }
                 ],
@@ -22,7 +22,7 @@
                     "error",
                     {
                         "type": "attribute",
-                        "prefix": ["aca", "adf", "app", "contezza", "mgmt", "js"],
+                        "prefix": ["aca", "adf", "app", "contezza"],
                         "style": "camelCase"
                     }
                 ],

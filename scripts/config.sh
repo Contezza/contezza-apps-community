@@ -9,6 +9,7 @@ VERSION_IN_PACKAGE_JSON=`node -p "require('$ROOT_DIR/package.json')".version;`;
 TAG_NPM=latest
 
 LIBS=(
+    'common'
     'core'
     'search'
     'third-party'

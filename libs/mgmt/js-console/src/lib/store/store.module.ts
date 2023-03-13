@@ -4,7 +4,7 @@ import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
-import { ContezzaRouterSerializer, routerFeatureKey } from '@contezza/common';
+import { ContezzaRouterSerializer, routerFeatureKey } from '@contezza/core/utils';
 
 import { jsConsoleKey, jsConsoleReducer } from './reducer';
 import { JsConsoleEffects } from './effects';

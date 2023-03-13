@@ -4,6 +4,9 @@
     "scripts": {
         "ng": "nx",
         "postinstall": "node ./decorate-angular-cli.js",
+        "build:core": "ng build core",
+        "build:search": "ng build search",
+        "build:third-party": "ng build third-party",
         "build-libs": "./scripts/build-libs.sh",
         "publish-libs": "./scripts/publish-libs.sh",
         "lint": "nx lint",
@@ -112,7 +115,7 @@
         "jest-environment-jsdom": "^29.5.0",
         "jest-preset-angular": "~13.0.0",
         "lint-staged": "^13.2.0",
-        "ng-packagr": "~14.3.0",
+        "ng-packagr": "~14.2.0",
         "nx": "15.8.6",
         "path": "^0.12.7",
         "postcss": "8.4.21",

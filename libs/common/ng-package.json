@@ -1,8 +1,20 @@
 {
     "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-    "dest": "../../dist/common",
+    "dest": "../../dist/@contezza/common",
+    "assets": [
+        {
+            "glob": "i18n/*.json",
+            "input": "./assets",
+            "output": "/assets/contezza-common/"
+        },
+        {
+            "glob": "images/**/*",
+            "input": "./assets",
+            "output": "/assets/contezza-common/"
+        }
+    ],
     "lib": {
-        "entryFile": "./public-api.ts",
+        "entryFile": "src/index.ts",
         "flatModuleFile": "contezza-common"
     }
 }

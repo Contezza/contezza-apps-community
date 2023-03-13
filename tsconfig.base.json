@@ -26,19 +26,19 @@
         "noImplicitReturns": true,
         "removeComments": true,
         "paths": {
-            "@contezza/common": ["libs/common/public-api"],
+            "@contezza/common": ["libs/common/src/index.ts"],
             "@contezza/core/context": ["libs/core/context/src/index.ts"],
             "@contezza/core/directives": ["libs/core/directives/src/index.ts"],
             "@contezza/core/extensions": ["libs/core/extensions/src/index.ts"],
             "@contezza/core/services": ["libs/core/services/src/index.ts"],
             "@contezza/core/utils": ["libs/core/utils/src/index.ts"],
-            "@contezza/search/form": ["libs/search/form/src/index.ts"],
-            "@contezza/third-party/gridster": ["libs/third-party/gridster/src/index.ts"],
-            "@contezza/third-party/monaco": ["libs/third-party/monaco/src/index.ts"],
             "@contezza/js-console": ["libs/mgmt/js-console/src/index.ts"],
             "@contezza/js-console-extensions": ["libs/mgmt/js-console/src/public-extensions-api"],
             "@contezza/node-browser": ["libs/mgmt/node-browser/src/index.ts"],
-            "@contezza/node-browser-extensions": ["libs/mgmt/node-browser/src/lib/extensions/index.ts"]
+            "@contezza/node-browser-extensions": ["libs/mgmt/node-browser/src/lib/extensions/index.ts"],
+            "@contezza/search/form": ["libs/search/form/src/index.ts"],
+            "@contezza/third-party/gridster": ["libs/third-party/gridster/src/index.ts"],
+            "@contezza/third-party/monaco": ["libs/third-party/monaco/src/index.ts"]
         }
     },
     "exclude": ["node_modules", "tmp"],
