@@ -7,7 +7,7 @@ import { catchError, map, take } from 'rxjs/operators';
 
 import { ContentService } from '@alfresco/adf-core';
 
-import { WebscriptService } from '@contezza/common';
+import { WebscriptService } from '@contezza/core/services';
 
 import { setScriptExecutionTime } from '../store/actions';
 import { ConsoleScript, ExecuteConsolePayload, ExecuteConsoleResponse } from '../interfaces/js-console';
@@ -25,7 +25,7 @@ export class JsConsoleService {
         const startTime = new Date();
 
         return this.webscript.post(this.EXECUTE_URL, payload).pipe(
-            map((response) => {
+            map((response: ExecuteConsoleResponse) => {
                 this.store.dispatch(
                     setScriptExecutionTime({
                         executionTime: {
@@ -53,7 +53,7 @@ export class JsConsoleService {
     }
 
     getScriptsList(): Observable<Array<ConsoleScript>> {
-        return this.webscript.get(this.LIST_SCRIPTS_URL).pipe(map((list) => list.scripts));
+        return this.webscript.get(this.LIST_SCRIPTS_URL).pipe(map((list: { scripts }) => list.scripts));
     }
 
     getNodeContent(nodeId: string): Observable<string | ArrayBuffer> {

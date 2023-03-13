@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { catchError, finalize, map } from 'rxjs/operators';
 
-import { WebscriptService } from '@contezza/common';
+import { WebscriptService } from '@contezza/core/services';
 
 import { NodeBrowserSearchParams, NodeBrowserSearchResponse } from '../interfaces/node-browser-search';
 import { NodeBrowserViewResponse } from '../interfaces/node-browser-view';
@@ -22,7 +22,7 @@ export class NodeBrowserService {
     constructor(private readonly webscript: WebscriptService, private readonly store: Store<unknown>) {}
 
     getStores(): Observable<Array<string>> {
-        return this.webscript.get(this.STORES_URL).pipe(map((response) => response?.stores));
+        return this.webscript.get(this.STORES_URL).pipe(map((response: { stores }) => response?.stores));
     }
 
     search(params: NodeBrowserSearchParams): Observable<NodeBrowserSearchResponse> {
@@ -30,7 +30,7 @@ export class NodeBrowserService {
         this.store.dispatch(setSearchLoading({ searchLoading: true }));
 
         return this.webscript.get(url).pipe(
-            map((response) => ({ success: response, error: null })),
+            map((response: any) => ({ success: response, error: null })),
             catchError((error) => {
                 const parsedError = JSON.parse(JSON.stringify(error));
                 this.store.dispatch(setSearchLoading({ searchLoading: false }));

@@ -11,8 +11,9 @@ import { PageLayoutModule } from '@alfresco/aca-shared';
 import { BreadcrumbModule } from '@alfresco/adf-content-services';
 import { IconModule, PipeModule, ToolbarModule } from '@alfresco/adf-core';
 
-import { ContezzaLetModule } from '@contezza/common';
-import { ContezzaSearchFormModule } from '@contezza/search';
+import { ContezzaLetModule } from '@contezza/core/directives';
+import { ContezzaSearchFormComponent } from '@contezza/search/form';
+
 import { JsConsoleMaterialModule } from './js-console-material.module';
 
 import { JsConsoleSanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
@@ -53,7 +54,7 @@ export const monacoEditorConfigFactory = (monacoEditorService: JsConsoleMonacoEd
         IconModule,
         PipeModule,
         ContezzaLetModule,
-        ContezzaSearchFormModule,
+        ContezzaSearchFormComponent,
         JsConsoleMaterialModule,
     ],
     declarations: [

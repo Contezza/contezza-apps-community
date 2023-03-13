@@ -2,24 +2,16 @@
     "name": "third-party",
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
-    "sourceRoot": "libs/third-party/src",
+    "sourceRoot": "libs/third-party",
     "prefix": "contezza",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
-            "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+            "executor": "@angular-devkit/build-angular:ng-packagr",
+            "outputs": ["dist/@contezza/third-party"],
             "options": {
+                "tsConfig": "tsconfig.build.json",
                 "project": "libs/third-party/ng-package.json"
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/third-party/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/third-party/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
+            }
         },
         "test": {
             "executor": "@nrwl/jest:jest",

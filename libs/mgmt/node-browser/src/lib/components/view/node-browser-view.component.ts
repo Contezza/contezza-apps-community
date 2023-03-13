@@ -9,7 +9,7 @@ import { filter, switchMap, takeUntil } from 'rxjs/operators';
 
 import { ExtensionService } from '@alfresco/adf-extensions';
 
-import { DestroyService } from '@contezza/common';
+import { DestroyService } from '@contezza/core/services';
 
 import { setExpandedPanelState, togglePanels } from '../../store/actions';
 import { getBrowseLoading, getBrowseNodeRef, getExpandedPanelState } from '../../store/selectors';

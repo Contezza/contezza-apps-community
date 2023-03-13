@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, filter, map, switchMap } from 'rxjs/operators';
 
-import { WebscriptService } from '@contezza/common';
+import { WebscriptService } from '@contezza/core/services';
 
 import { JsConsoleScriptSaveDialogService } from '../dialogs/script-save/script-save-dialog.service';
 import { ConsoleScript, OpenSaveScriptDialogPayload, SaveScriptPayload } from '../interfaces/js-console';
@@ -74,6 +74,6 @@ export class JsConsoleSaveScriptService {
                         errorMessage: parsedError.message.split(':').pop(),
                     });
                 })
-            );
+            ) as Observable<{ scripts: Array<ConsoleScript> }>;
     }
 }

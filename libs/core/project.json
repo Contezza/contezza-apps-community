@@ -6,20 +6,12 @@
     "prefix": "contezza",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
-            "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+            "executor": "@angular-devkit/build-angular:ng-packagr",
+            "outputs": ["dist/@contezza/core"],
             "options": {
+                "tsConfig": "tsconfig.build.json",
                 "project": "libs/core/ng-package.json"
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/core/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
+            }
         },
         "test": {
             "executor": "@nrwl/jest:jest",
@@ -47,7 +39,11 @@
                     "libs/core/context/**/*.ts",
                     "libs/core/context/**/*.html",
                     "libs/core/extensions/**/*.ts",
-                    "libs/core/extensions/**/*.html"
+                    "libs/core/extensions/**/*.html",
+                    "libs/core/services/**/*.ts",
+                    "libs/core/services/**/*.html",
+                    "libs/core/directives/**/*.ts",
+                    "libs/core/directives/**/*.html"
                 ]
             }
         }

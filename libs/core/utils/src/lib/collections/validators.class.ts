@@ -18,12 +18,12 @@ export class ContezzaValidators {
                 : null;
     };
 
-    static hasProperties =
-        (properties: string[]): ValidatorFn =>
-        (control: AbstractControl): ValidationErrors | null =>
+    static hasProperties = (properties: string[]): ValidatorFn => {
+        return (control: AbstractControl): ValidationErrors | null =>
             control.value && (typeof control.value !== 'object' || !properties.every((prop) => Object.keys(control.value).includes(prop)))
                 ? { hasProperties: { value: control.value } }
                 : null;
+    };
 
     static isString = (control: AbstractControl): ValidationErrors | null => {
         return typeof control.value !== 'string' ? { isString: { value: control.value } } : null;

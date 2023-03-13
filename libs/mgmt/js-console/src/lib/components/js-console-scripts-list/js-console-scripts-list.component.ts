@@ -9,7 +9,7 @@ import { map, startWith, take, takeUntil } from 'rxjs/operators';
 import { ContentService } from '@alfresco/adf-core';
 import { AppHookService } from '@alfresco/aca-shared';
 
-import { DestroyService } from '@contezza/common';
+import { DestroyService } from '@contezza/core/services';
 
 import { ConsoleScript } from '../../interfaces/js-console';
 import { getScriptsList, getSelectedScript } from '../../store/selectors';

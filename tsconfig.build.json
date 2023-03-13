@@ -1,0 +1,19 @@
+{
+    "extends": "./tsconfig.base.json",
+    "exclude": ["libs/**/test.ts", "**/*.spec.ts"],
+    "compilerOptions": {
+        "declaration": true,
+        "sourceMap": true,
+        "inlineSourceMap": true,
+        "inlineSources": true,
+        "types": [],
+        "paths": {
+            "@contezza/core/*": ["./dist/@contezza/core/*"],
+            "@contezza/search/*": ["./dist/@contezza/search/*"],
+            "@contezza/third-party/*": ["./dist/@contezza/third-party/*"]
+        }
+    },
+    "angularCompilerOptions": {
+        "compilationMode": "partial"
+    }
+}

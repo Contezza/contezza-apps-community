@@ -6,8 +6,6 @@ module.exports = {
         LOCALHOST_BPM: 'http://127.0.0.1:9080',
         DEV_TEZZA: 'https://dev.tezza.eu',
     },
-
-    // PROXIES:
     getIdentityProxy: function (host) {
         console.log('Target for /auth', host);
         return {

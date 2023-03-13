@@ -8,9 +8,9 @@ import { map } from 'rxjs/operators';
 import { ContentActionRef, ContentActionType, ExtensionService, reduceEmptyMenus, reduceSeparators, RuleContext } from '@alfresco/adf-extensions';
 import { AppExtensionService } from '@alfresco/aca-shared';
 
-import { RuleContextService } from './rule-context.service';
-
 import { ContezzaAdfUtils } from '@contezza/core/utils';
+
+import { RuleContextService } from './rule-context.service';
 
 const FEATURE_KEY = new InjectionToken<string>('feature-key');
 

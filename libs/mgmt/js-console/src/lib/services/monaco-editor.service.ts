@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { WebscriptService } from '@contezza/common';
+import { WebscriptService } from '@contezza/core/services';
 
 import { alfrescoAutocomplete, alfrescoSnippets } from '../utils/alfresco.autocomplete';
 import { TernModel, TernToTs } from '../utils/tern-to-ts';
@@ -27,7 +27,7 @@ export class JsConsoleMonacoEditorService {
     }
 
     private onMonacoLoad() {
-        forkJoin([this.webscript.get(this.API_COMMANDS_URL), this.alfrescoNamespace]).subscribe(([commands, typing]) => {
+        forkJoin([this.webscript.get<any>(this.API_COMMANDS_URL), this.alfrescoNamespace]).subscribe(([commands, typing]) => {
             (window as any).monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
                 validate: true,
                 enableSchemaRequest: true,
@@ -36,7 +36,7 @@ export class JsConsoleMonacoEditorService {
 
             (window as any).monaco.languages.registerCompletionItemProvider('javascript', {
                 triggerCharacters: ['.'],
-                provideCompletionItems(model, position) {
+                provideCompletionItems: function (model, position) {
                     const textUntilPosition = model.getValueInRange({
                         startLineNumber: position.lineNumber,
                         startColumn: 1,
@@ -44,6 +44,7 @@ export class JsConsoleMonacoEditorService {
                         endColumn: position.column,
                     });
 
+                    // @ts-ignore
                     return {
                         suggestions: alfrescoAutocomplete((<any>window).monaco, textUntilPosition, commands.methods) ?? [],
                     };

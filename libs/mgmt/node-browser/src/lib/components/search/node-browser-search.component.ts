@@ -9,7 +9,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { ExtensionService } from '@alfresco/adf-extensions';
 
-import { DestroyService } from '@contezza/common';
+import { DestroyService } from '@contezza/core/services';
 
 import { nodeBrowserLangs, NodeBrowserSearchParams, NodeBrowserSearchResponse } from '../../interfaces/node-browser-search';
 import { getLastSearchQuery, getSearchLoading, getSearchParams, getSearchResponse, getStores } from '../../store/selectors';

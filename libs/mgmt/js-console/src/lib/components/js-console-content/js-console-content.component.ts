@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { DestroyService } from '@contezza/common';
+import { DestroyService } from '@contezza/core/services';
 
 import { ConsoleEditorOptions, ScriptExecutionTime } from '../../interfaces/js-console';
 import { getEditorOptions, getFmConsoleContent, getJsConsoleContent, getScriptExecutionTime } from '../../store/selectors';
