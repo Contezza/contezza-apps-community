@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 . scripts/config.sh
 
-for LIB in "${LIBS[@]}"
+for LIB_PATH in "${LIBS_PATHS[@]}"
 do
-    echo "Update ${LIB} version to ${VERSION_IN_PACKAGE_JSON}"
+    echo "Update ${LIB_PATH} version to ${VERSION_IN_PACKAGE_JSON}"
 
-    cd $LIBS_DIR/${LIB}
+    cd $LIBS_DIR/${LIB_PATH}
     npm version ${VERSION_IN_PACKAGE_JSON};
 done
 

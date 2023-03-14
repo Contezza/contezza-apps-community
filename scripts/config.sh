@@ -15,3 +15,11 @@ LIBS=(
     'js-console'
     'node-browser'
 );
+
+LIBS_PATHS=(
+    'core'
+    'search'
+    'third-party'
+    'mgmt/js-console'
+    'mgmt/node-browser'
+);
