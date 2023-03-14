@@ -1,0 +1,15 @@
+<div class="contezza-dynamic-form-filter">
+    <div class="contezza-dynamic-form-filter-title" *ngIf="!hideTitle">
+        {{ 'APP.FILTER.TITLE' | translate }}
+    </div>
+
+    <mat-card>
+        <mat-card-content>
+            <contezza-dynamic-form [dynamicForm]="dynamicForm"></contezza-dynamic-form>
+            <button mat-raised-button class="contezza-dynamic-form-filter-clear-button" color="primary" (click)="clearFilters()">
+                <mat-icon style="margin-right: 10px">clear_all</mat-icon>{{ 'APP.FILTER.OPTIONS.CLEAR_ALL' | translate }}
+            </button>
+        </mat-card-content>
+    </mat-card>
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+</div>

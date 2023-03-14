@@ -1,0 +1,32 @@
+<ng-container *contezzaLet="readonly$ | async as readonly">
+    <mat-form-field
+        class="contezza-form-field contezza-date-range-single-form-field adf-property-field adf-card-textitem-field"
+        [class.mat-form-field-disabled]="readonly"
+        floatLabel="auto"
+        [appearance]="field.settings?.appearance"
+    >
+        <mat-label *ngIf="field.label">{{ field.label | translate }}</mat-label>
+
+        <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate [required]="required" [readonly]="readonly" [formControl]="fromSubcontrol" class="adf-property-value" />
+            <input matEndDate [required]="required" [readonly]="readonly" [formControl]="toSubcontrol" class="adf-property-value" />
+        </mat-date-range-input>
+
+        <button
+            type="button"
+            mat-icon-button
+            matSuffix
+            class="adf-property-clear-value"
+            aria-label="Clear"
+            *ngIf="!readonly && !control.disabled"
+            tabindex="-1"
+            (click)="clear($event)"
+        >
+            <mat-icon>cancel</mat-icon>
+        </button>
+
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker [disabled]="readonly"></mat-date-range-picker>
+        <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control"></mat-error>
+    </mat-form-field>
+</ng-container>

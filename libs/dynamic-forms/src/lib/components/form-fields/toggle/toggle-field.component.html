@@ -1,0 +1,3 @@
+<ng-container *contezzaLet="field.rules?.readonly | async as readonly">
+    <mat-slide-toggle class="mat-form-field contezza-toggle-form-field" [formControl]="control" [disabled]="readonly">{{ field.label | translate }}</mat-slide-toggle>
+</ng-container>

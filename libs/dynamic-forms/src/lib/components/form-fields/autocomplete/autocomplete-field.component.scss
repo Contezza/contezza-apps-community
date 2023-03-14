@@ -1,0 +1,99 @@
+.contezza-autocomplete-form-field {
+    width: 100%;
+
+    &-trigger{
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+
+    &.contezza-form-field-loading {
+        label {
+            height: 100%;
+            position: unset;
+            mat-label.loading {
+                height: 100%;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                .mat-spinner {
+                    height: 100% !important;
+                    width: 100% !important;
+                    svg {
+                        height: 100% !important;
+                        width: 100% !important;
+                    }
+                }
+            }
+        }
+    }
+    &.mat-form-field-appearance-outline .mat-form-field-flex {
+        display: flex;
+        align-items: center;
+        .mat-form-field-suffix {
+            display: flex;
+        }
+    }
+}
+
+.total-items {
+    position: sticky !important;
+    z-index: 1;
+    top: 0;
+    background-color: var(--theme-card-background-color);
+}
+
+.contezza-autocomplete-form-field mat-option.loading .mat-option-text {
+    height: 100%;
+}
+
+mat-option.loading .mat-option-text .mat-spinner {
+    height: 100% !important;
+    width: 100% !important;
+}
+
+mat-option.loading .mat-option-text .mat-spinner svg {
+    height: 100% !important;
+    width: 100% !important;
+}
+
+.autocomplete-fake-select .mat-select-value {
+    cursor: text !important;
+}
+
+.autocomplete-fake-select .mat-select-value .option-icon {
+    height: 1.2em;
+}
+
+.autocomplete-fake-select mat-select .mat-select-arrow {
+    border: none;
+}
+
+.my-arrow-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.my-arrow {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid;
+    margin: 0 4px;
+    color: var(--theme-text-color);
+}
+
+.mat-form-field.mat-focused.mat-primary .my-arrow {
+    color: var(--theme-primary-color);
+}
+
+.contezza-form-field.mat-form-field-disabled {
+    color: var(--theme-text-disabled-color);
+}
+
+.mat-autocomplete-panel {
+    .mat-option {
+        font-size: inherit;
+    }
+}

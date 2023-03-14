@@ -31,7 +31,8 @@
                     "editorjs-html",
                     "editorjs-text-color-plugin",
                     "pdfjs-dist",
-                    "pdfjs-dist/web/pdf_viewer"
+                    "pdfjs-dist/web/pdf_viewer",
+                    "inputmask"
                 ],
                 "inlineStyleLanguage": "scss",
                 "stylePreprocessorOptions": {

@@ -1,0 +1,53 @@
+{
+    "name": "dynamic-forms",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/dynamic-forms/src",
+    "prefix": "contezza",
+    "targets": {
+        "build": {
+            "executor": "@angular-devkit/build-angular:ng-packagr",
+            "outputs": ["dist/@contezza/dynamic-forms"],
+            "options": {
+                "tsConfig": "tsconfig.build.json",
+                "project": "libs/dynamic-forms/ng-package.json"
+            },
+            "dependsOn": [
+                {
+                    "target": "build",
+                    "projects": "dependencies",
+                    "params": "forward"
+                }
+            ]
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/dynamic-forms/jest.config.ts",
+                "passWithNoTests": true
+            },
+            "configurations": {
+                "ci": {
+                    "ci": true,
+                    "codeCoverage": true
+                }
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": [
+                    "libs/dynamic-forms/**/*.ts",
+                    "libs/dynamic-forms/**/*.html",
+                    "libs/dynamic-forms/shared/**/*.ts",
+                    "libs/dynamic-forms/shared/**/*.html",
+                    "libs/dynamic-forms/dialog/**/*.ts",
+                    "libs/dynamic-forms/dialog/**/*.html"
+                ]
+            }
+        }
+    },
+    "tags": []
+}

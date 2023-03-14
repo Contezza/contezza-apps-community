@@ -1,0 +1,17 @@
+.contezza-date-range-form-field {
+    &-label {
+        width: 258px;
+        height: 15px;
+        opacity: 0.64;
+        font-size: 16px;
+    }
+    &-dates {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        contezza-date-field {
+            flex: 1;
+            min-width: 0;
+        }
+    }
+}

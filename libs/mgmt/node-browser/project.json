@@ -6,20 +6,12 @@
     "prefix": "contezza",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:package",
-            "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+            "executor": "@angular-devkit/build-angular:ng-packagr",
+            "outputs": ["dist/@contezza/node-browser"],
             "options": {
+                "tsConfig": "tsconfig.build.json",
                 "project": "libs/mgmt/node-browser/ng-package.json"
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/mgmt/node-browser/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/mgmt/node-browser/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
+            }
         },
         "test": {
             "executor": "@nrwl/jest:jest",

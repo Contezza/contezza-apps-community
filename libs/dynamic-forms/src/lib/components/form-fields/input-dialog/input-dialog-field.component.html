@@ -1,0 +1,4 @@
+<contezza-input-field class="input-subfield" [control]="subcontrol" [field]="$any(field)" [readonly]="true" (click)="openDialog()"></contezza-input-field>
+<button mat-icon-button color="primary" [title]="field.label | translate" (click)="openDialog()">
+    <mat-icon [class.mat-form-field-wrapper]="field.settings?.appearance === 'outline'">search</mat-icon>
+</button>

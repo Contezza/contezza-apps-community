@@ -1,0 +1,162 @@
+.dynamicforms-title {
+    font-weight: bold;
+}
+
+.dynamicforms-section {
+    .dynamicforms-title {
+        font-size: 1.17em;
+        padding: 1em 0;
+    }
+}
+
+.dynamicforms-card {
+    background-color: var(--theme-card-background-color);
+    box-shadow: 0 2px 1px -1px var(--theme-card-background-box-shadow-color), 0 1px 1px 0 var(--theme-card-background-box-shadow-color),
+        0 1px 3px 0 var(--theme-card-background-box-shadow-color);
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    display: block;
+    position: relative;
+    padding: 16px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.dynamicforms-subsection {
+    .dynamicforms-title {
+        color: red;
+    }
+}
+
+.dynamicforms-row {
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 15px;
+    & > * {
+        flex: 1;
+    }
+}
+
+.dynamicforms-nogrow {
+    flex-grow: 0 !important;
+    flex-basis: 0 !important;
+    &-10 {
+        flex-basis: 10% !important;
+    }
+}
+
+.dynamicforms-text-right {
+    display: flex;
+    justify-content: flex-end !important;
+    gap: 15px;
+}
+
+.dynamicforms-with-border {
+    border: 1.5px solid var(--theme-text-color);
+    border-radius: 5px;
+
+    .dynamicforms-title {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+.dynamicforms-expansionpanel {
+    max-height: calc(2.2em + 3px); // title size (1em) + top margin (0.6em) + bottom margin (0.6em) + top border (1.5px) + bottom border (1.5px)
+    transition: max-height 1s cubic-bezier(0, 1, 0, 1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+
+    & > .dynamicforms-node {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .dynamicforms-title {
+        font-size: 1em;
+        padding-top: 0.6em;
+        padding-bottom: 0.6em;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        visibility: visible;
+    }
+    &.dynamicforms-expansionpanel-open {
+        max-height: 100em;
+        transition: max-height 1s ease-in-out;
+    }
+
+    &.dynamicforms-expansionpanel-open :not(.dynamicforms-title) {
+    }
+
+    &:not(.dynamicforms-expansionpanel-open) :not(.dynamicforms-title) {
+        visibility: hidden;
+        transition: visibility 0.5s;
+    }
+    &:focus {
+        .dynamicforms-title:after {
+            animation-name: jump;
+            animation-duration: 0.2s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            animation-timing-function: ease-out;
+        }
+    }
+
+    .dynamicforms-title:after {
+        content: '';
+        border: solid var(--theme-text-color);
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+
+        width: 10px;
+        height: 10px;
+        margin-top: var(--margin);
+        transform: scale(0.6) rotate(var(--rotation));
+    }
+    &:not(.dynamicforms-expansionpanel-open) .dynamicforms-title:after {
+        --margin: 2px;
+        --rotation: 45deg;
+    }
+    &.dynamicforms-expansionpanel-open .dynamicforms-title:after {
+        --margin: calc(2px + 0.35 * 10px); // pivoting around the half-diagonal midpoint of a square of side 10px (0.35 ~ sqrt(2) / 2 / 2)
+        --rotation: -135deg;
+    }
+}
+
+@keyframes jump {
+    from {
+        margin-top: var(--margin);
+    }
+    to {
+        margin-top: calc(var(--margin) - 8px);
+    }
+}
+
+.dynamicforms-node {
+    &:not(.dynamicforms-title) {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .dynamicforms-hide-if-no-options .contezza-form-field.contezza-form-field-no-options,
+    .dynamicforms-hidden {
+        visibility: hidden;
+        position: absolute;
+    }
+}
+
+.contezza-form-field.mat-form-field {
+    &:not(:hover) {
+        .mat-form-field-suffix {
+            .contezza-form-field-clear {
+                flex: 0;
+                min-width: 0;
+                width: 0;
+                overflow: hidden;
+            }
+        }
+    }
+}

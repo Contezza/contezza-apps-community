@@ -47,7 +47,11 @@
                     "libs/core/common/**/*.ts",
                     "libs/core/common/**/*.html",
                     "libs/core/stores/**/*.ts",
-                    "libs/core/stores/**/*.html"
+                    "libs/core/stores/**/*.html",
+                    "libs/core/dialogs/**/*.ts",
+                    "libs/core/dialogs/**/*.html",
+                    "libs/core/pipes/**/*.ts",
+                    "libs/core/pipes/**/*.html"
                 ]
             }
         }

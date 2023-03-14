@@ -1,0 +1,3 @@
+<ng-container *ngIf="active$ | async">
+    <app-toolbar-button [actionRef]="actionRef$ | async" [color]="color$ | async" (click)="toggle()"></app-toolbar-button>
+</ng-container>

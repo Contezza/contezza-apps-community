@@ -1,0 +1,21 @@
+.contezza-dynamic-form-filter {
+    padding: 0 7px;
+    height: 100%;
+    overflow-y: auto;
+
+    &-title {
+        height: 32px;
+        font-size: 20px;
+        line-height: 1.6;
+        letter-spacing: -0.5px;
+        text-align: left;
+        color: var(--theme-text-color);
+        padding: 15px 0 15px 23px;
+    }
+    &-clear-button {
+        margin-top: 25px;
+    }
+    mat-card-content {
+        padding-top: 21px !important;
+    }
+}

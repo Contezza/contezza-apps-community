@@ -1,0 +1,22 @@
+<ng-container *contezzaLet="readonly$ | async as readonly">
+    <mat-form-field
+        class="contezza-form-field contezza-input-form-field adf-property-field adf-card-textitem-field"
+        [class.mat-form-field-disabled]="readonly"
+        floatLabel="auto"
+        [appearance]="field.settings?.appearance"
+    >
+        <mat-label>{{ field.label | translate }}</mat-label>
+        <textarea
+            matInput
+            [formControl]="control"
+            [placeholder]="field.placeholder | translate"
+            [rows]="field.settings?.rows || ''"
+            [cols]="field.settings?.cols || ''"
+            [required]="required"
+            [readonly]="readonly"
+            (keydown.enter)="$event.stopPropagation()"
+        >
+        </textarea>
+        <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control"></mat-error>
+    </mat-form-field>
+</ng-container>

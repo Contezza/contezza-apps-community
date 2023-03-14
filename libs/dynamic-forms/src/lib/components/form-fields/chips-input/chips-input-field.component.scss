@@ -1,0 +1,17 @@
+.contezza-input-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.contezza-input-form-field {
+    width: 100%;
+}
+
+.contezza-input-form-field-label {
+    margin-right: 5px;
+}
+
+.contezza-form-field.mat-form-field-disabled {
+    color: var(--theme-text-disabled-color);
+}

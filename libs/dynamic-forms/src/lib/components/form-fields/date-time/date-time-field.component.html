@@ -1,0 +1,32 @@
+<mat-form-field class="adf-full-width adf-property-field adf-card-textitem-field" floatLabel="auto" [appearance]="field.settings?.appearance">
+    <mat-label>{{ field.label | translate }}</mat-label>
+    <input
+        #input
+        matInput
+        [matDatetimepicker]="picker"
+        [formControl]="control"
+        [placeholder]="field.placeholder | translate"
+        (focus)="picker.open()"
+        (blur)="input.blur()"
+        (focusout)="input.blur()"
+        [required]="required"
+        class="adf-property-value"
+        data-lpignore="true"
+    />
+    <button
+        type="button"
+        mat-icon-button
+        matSuffix
+        class="adf-property-clear-value"
+        aria-label="Clear"
+        *ngIf="!readonly && !control.disabled"
+        tabindex="-1"
+        (click)="clear($event)"
+    >
+        <mat-icon>cancel</mat-icon>
+    </button>
+
+    <mat-datetimepicker-toggle class="mat-datepicker-toggle" matSuffix [for]="picker"></mat-datetimepicker-toggle>
+    <mat-datetimepicker #picker type="datetime" [timeInterval]="5"></mat-datetimepicker>
+    <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control"></mat-error>
+</mat-form-field>

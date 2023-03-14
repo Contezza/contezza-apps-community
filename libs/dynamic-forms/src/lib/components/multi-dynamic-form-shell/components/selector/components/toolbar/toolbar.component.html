@@ -1,0 +1,7 @@
+<adf-toolbar class="adf-toolbar--inline">
+    <ng-container *ngIf="actions$ | async as actions">
+        <ng-container *ngFor="let action of actions">
+            <aca-toolbar-action [actionRef]="action" (click)="onActionClick(action); $event.stopPropagation()"></aca-toolbar-action>
+        </ng-container>
+    </ng-container>
+</adf-toolbar>

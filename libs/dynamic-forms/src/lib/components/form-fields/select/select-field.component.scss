@@ -1,0 +1,35 @@
+.contezza-select-form-field {
+    .mat-select {
+        .mat-select-trigger {
+            width: 100%;
+        }
+        .mat-select-arrow-wrapper {
+            display: none;
+        }
+    }
+    .my-arrow-wrapper {
+        display: table-cell;
+        vertical-align: middle;
+        .my-arrow {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid;
+            margin: 0 4px;
+            color: var(--theme-text-color);
+        }
+    }
+
+    &.mat-form-field-appearance-outline .mat-form-field-flex {
+        display: flex;
+        align-items: center;
+        .mat-form-field-suffix {
+            display: flex;
+        }
+    }
+}
+
+.mat-form-field.mat-focused.mat-primary .my-arrow {
+    color: var(--theme-primary-color);
+}

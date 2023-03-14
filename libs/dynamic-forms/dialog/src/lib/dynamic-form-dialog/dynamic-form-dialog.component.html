@@ -1,0 +1,23 @@
+<div mat-dialog-title>{{ data.title | translate: data.titleParams }}</div>
+
+<mat-dialog-content class="dialog-content-container">
+    <div class="form">
+        <contezza-dynamic-form
+            #dynamicForm
+            [fields]="data.fields"
+            [dynamicFormId]="data.dynamicFormId"
+            [providedDependencies]="data.providedDependencies"
+            (keydown.enter)="$event.preventDefault(); submitButton._getHostElement().click()"
+        ></contezza-dynamic-form>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="adf-dialog-buttons">
+    <span class="adf-fill-remaining-space"></span>
+    <button mat-button mat-dialog-close="">
+        {{ data.buttons.cancel | translate }}
+    </button>
+    <button #submitButton="matButton" mat-raised-button color="primary" [mat-dialog-close]="dynamicForm?.form?.value" [disabled]="dynamicForm?.form?.invalid">
+        {{ data.buttons.submit | translate }}
+    </button>
+</mat-dialog-actions>

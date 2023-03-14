@@ -1,0 +1,10 @@
+<ng-container *ngIf="!(fieldLoading$ | async); else loading">
+    <ng-container *ngIf="dynamicField">
+        <contezza-dynamic-form-field [field]="dynamicField" [control]="control"></contezza-dynamic-form-field>
+    </ng-container>
+</ng-container>
+<ng-template #loading>
+    <div style="display: flex; justify-content: center; padding: 20px">
+        <mat-spinner color="primary"> </mat-spinner>
+    </div>
+</ng-template>

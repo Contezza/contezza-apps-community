@@ -1,0 +1,13 @@
+:host,
+contezza-input-dialog-field {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    .input-subfield {
+        flex: 1;
+        & * {
+            cursor: pointer !important;
+        }
+    }
+}

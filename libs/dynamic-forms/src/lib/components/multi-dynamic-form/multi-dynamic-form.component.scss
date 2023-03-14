@@ -1,0 +1,15 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .form {
+        overflow: auto;
+        flex: 1;
+        max-height: 0;
+        min-height: 0;
+        &.active {
+            max-height: unset;
+        }
+    }
+}

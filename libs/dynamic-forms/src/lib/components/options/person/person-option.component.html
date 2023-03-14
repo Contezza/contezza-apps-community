@@ -1,0 +1,7 @@
+<div class="adf-people-widget-row">
+    <div [outerHTML]="value | usernameInitials: 'adf-people-widget-pic'"></div>
+    <div *ngIf="value?.avatar" class="adf-people-widget-image-row">
+        <img class="adf-people-widget-avatar" [alt]="displayName" [src]="value.avatar | avatarImage" />
+    </div>
+    <span class="adf-people-label-name" [title]="displayName">{{ displayName }}</span>
+</div>

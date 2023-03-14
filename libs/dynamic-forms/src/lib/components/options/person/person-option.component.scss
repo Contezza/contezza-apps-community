@@ -1,0 +1,39 @@
+.adf-people-widget-avatar {
+    margin-left: -40px;
+    margin-bottom: 4px;
+    left: 21px;
+    background: white;
+    border-radius: 100px;
+    width: 42px;
+    height: 42px;
+    vertical-align: middle;
+    display: inline-block;
+    padding: 0;
+}
+
+.adf-people-widget-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.adf-people-widget-pic {
+    background-color: var(--theme-primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    color: var(--theme-primary-color-default-contrast);
+    font-weight: bolder;
+    font-size: 18px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+}
+
+.adf-people-label-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

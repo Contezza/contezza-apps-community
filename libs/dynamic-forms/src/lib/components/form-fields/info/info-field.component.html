@@ -1,0 +1,7 @@
+<div class="contezza-info-field">
+    <mat-icon *ngIf="field.icon" class="contezza-info-field-icon">{{ field.icon }}</mat-icon>
+    <div *ngIf="field.label" class="contezza-info-field-label">{{ field.label | translate }}:</div>
+    <ng-container *ngIf="valueSource | async as value">
+        <div class="contezza-info-field-value" [title]="value">{{ value }}</div>
+    </ng-container>
+</div>

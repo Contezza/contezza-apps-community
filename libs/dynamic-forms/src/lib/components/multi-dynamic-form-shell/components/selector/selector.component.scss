@@ -1,0 +1,45 @@
+.title {
+    font-size: 1.2em;
+    margin-top: 20px;
+}
+
+.table {
+    .hidden {
+        display: none;
+    }
+    .row:hover {
+        cursor: pointer;
+        background-color: var(--theme-mat-table-hover-color);
+    }
+    &.collapsed {
+        .mat-cell {
+            padding: 0 10px;
+        }
+
+        .row:not(.selected) {
+            display: none;
+        }
+        .row.active {
+            background-color: var(--theme-selected-button-bg-color);
+        }
+    }
+    &.expanded {
+        .row.selected {
+            background-color: var(--theme-selected-button-bg-color);
+        }
+    }
+}
+
+.mat-header-cell,
+.mat-cell {
+    width: 0;
+    padding: 0 10px;
+}
+
+.contezza-expand-cell {
+    width: unset !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    max-width: 0 !important;
+}

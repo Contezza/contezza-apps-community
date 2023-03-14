@@ -1,0 +1,74 @@
+<ng-container *contezzaLet="readonly$ | async as readonly">
+    <div class="contezza-input-wrapper">
+        <label class="contezza-input-form-field-label" *ngIf="field.settings?.labelPosition">
+            {{ field.label | translate }}
+        </label>
+        <mat-form-field
+            class="contezza-form-field contezza-input-form-field adf-property-field adf-card-textitem-field"
+            [class.mat-form-field-disabled]="readonly"
+            [floatLabel]="field.settings?.floatLabel"
+            [appearance]="field.settings?.appearance"
+        >
+            <mat-label *ngIf="field.label">{{ field.label | translate }}</mat-label>
+            <ng-container [ngSwitch]="inputType">
+                <ng-container *ngSwitchCase="'number'">
+                    <input
+                        matInput
+                        spellcheck="false"
+                        [formControl]="control"
+                        [placeholder]="field.placeholder | translate"
+                        type="number"
+                        [required]="required"
+                        [readonly]="readonly"
+                        class="adf-property-value"
+                        data-lpignore="true"
+                        autocomplete="off"
+                    />
+                </ng-container>
+                <ng-container *ngSwitchCase="'text'">
+                    <ng-container *ngIf="inputMask">
+                        <input
+                            matInput
+                            spellcheck="false"
+                            [formControl]="control"
+                            [placeholder]="field.placeholder | translate"
+                            type="text"
+                            [required]="required"
+                            [readonly]="readonly"
+                            class="adf-property-value"
+                            [inputMask]="inputMask"
+                            data-lpignore="true"
+                            autocomplete="off"
+                        />
+                    </ng-container>
+                    <ng-container *ngIf="!inputMask">
+                        <input
+                            matInput
+                            spellcheck="false"
+                            [formControl]="control"
+                            [placeholder]="field.placeholder | translate"
+                            type="text"
+                            [required]="required"
+                            [readonly]="readonly"
+                            class="adf-property-value"
+                            data-lpignore="true"
+                        />
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+            <button
+                type="button"
+                mat-icon-button
+                matSuffix
+                class="adf-property-clear-value contezza-form-field-clear"
+                aria-label="Clear"
+                *ngIf="!readonly && !control.disabled && control.value"
+                tabindex="-1"
+                (click)="clear($event)"
+            >
+                <mat-icon>cancel</mat-icon>
+            </button>
+            <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length || control.errors" [validations]="field.validations" [control]="control"></mat-error>
+        </mat-form-field>
+    </div>
+</ng-container>

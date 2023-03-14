@@ -29,22 +29,27 @@
         "paths": {
             "@contezza/common": ["libs/common/src/index.ts"],
             "@contezza/core/context": ["libs/core/context/src/index.ts"],
+            "@contezza/core/dialogs": ["libs/core/dialogs/src/index.ts"],
             "@contezza/core/directives": ["libs/core/directives/src/index.ts"],
             "@contezza/core/extensions": ["libs/core/extensions/src/index.ts"],
+            "@contezza/core/pipes": ["libs/core/pipes/src/index.ts"],
             "@contezza/core/services": ["libs/core/services/src/index.ts"],
             "@contezza/core/stores": ["libs/core/stores/src/index.ts"],
             "@contezza/core/utils": ["libs/core/utils/src/index.ts"],
+            "@contezza/dynamic-forms": ["libs/dynamic-forms/src/index.ts"],
+            "@contezza/dynamic-forms/dialog": ["libs/dynamic-forms/dialog/src/index.ts"],
+            "@contezza/dynamic-forms/shared": ["libs/dynamic-forms/shared/src/index.ts"],
             "@contezza/js-console": ["libs/mgmt/js-console/src/index.ts"],
             "@contezza/js-console-extensions": ["libs/mgmt/js-console/src/public-extensions-api"],
             "@contezza/node-browser": ["libs/mgmt/node-browser/src/index.ts"],
             "@contezza/node-browser-extensions": ["libs/mgmt/node-browser/src/lib/extensions/index.ts"],
+            "@contezza/people-group-picker": ["libs/people-group-picker/src/index.ts"],
             "@contezza/search/form": ["libs/search/form/src/index.ts"],
             "@contezza/third-party/gridster": ["libs/third-party/gridster/src/index.ts"],
             "@contezza/third-party/monaco": ["libs/third-party/monaco/src/index.ts"]
         }
     },
     "exclude": ["node_modules", "tmp"],
-    "include": ["libs/**/*.ts"],
     "angularCompilerOptions": {
         "preserveWhitespaces": false,
         "fullTemplateTypeCheck": true,

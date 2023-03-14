@@ -1,0 +1,18 @@
+.contezza-info-field {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 15px;
+    flex: 1;
+    align-items: center;
+    &-icon {
+    }
+    &-label {
+        flex-basis: 30%;
+    }
+    &-value {
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

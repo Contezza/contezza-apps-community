@@ -1,0 +1,28 @@
+<mat-form-field
+    class="contezza-form-field contezza-button-toggle-form-field contezza-form-field-appearance-{{ field.settings?.appearance }}"
+    [class.contezza-form-field-full-width]="!field.label"
+    floatLabel="always"
+    [appearance]="field.settings?.appearance"
+>
+    <mat-label *ngIf="field.label && field.settings?.appearance === 'outline'">{{ field.label | translate }}</mat-label>
+    <label class="mat-form-field-label" *ngIf="field.label && field.settings?.appearance !== 'outline'">{{ field.label | translate }}</label>
+    <input matInput [formControl]="control" style="display: none" />
+    <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control"></mat-error>
+    <ng-container *contezzaLet="selectableOptions$ | async as selectableOptions">
+        <ng-container *contezzaLet="optionsLoading$ | async as optionsLoading">
+            <mat-button-toggle-group [formControl]="control" [multiple]="multiple" [style.border]="optionsLoading ? 'none' : ''" (click)="onClick()" (change)="onChange()">
+                <ng-container *ngIf="optionsLoading">
+                    <mat-button-toggle class="contezza-form-field-loading" disabled>
+                        <mat-spinner color="primary"></mat-spinner>
+                    </mat-button-toggle>
+                </ng-container>
+                <ng-container *ngIf="!optionsLoading">
+                    <mat-button-toggle *ngFor="let option of selectableOptions" [value]="option" title="{{ option.contezzaDisplay.option.tooltip | translate }}">
+                        <adf-icon *ngIf="option.contezzaDisplay.option.icon" [value]="option.contezzaDisplay.option.icon"></adf-icon>
+                        {{ option.contezzaDisplay.option.label || '' }}
+                    </mat-button-toggle>
+                </ng-container>
+            </mat-button-toggle-group>
+        </ng-container>
+    </ng-container>
+</mat-form-field>

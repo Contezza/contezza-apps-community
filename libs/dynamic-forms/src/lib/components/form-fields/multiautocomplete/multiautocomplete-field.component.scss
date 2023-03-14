@@ -1,0 +1,114 @@
+.contezza-multiautocomplete-form-field {
+    width: 100%;
+
+    .mat-select {
+        .mat-select-trigger {
+            width: 100%;
+        }
+        .mat-select-arrow-wrapper {
+            display: none;
+        }
+    }
+
+    &.contezza-form-field-loading {
+        label {
+            height: 100%;
+            position: unset;
+            mat-label.loading {
+                height: 100%;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                .mat-spinner {
+                    height: 100% !important;
+                    width: 100% !important;
+                    svg {
+                        height: 100% !important;
+                        width: 100% !important;
+                    }
+                }
+            }
+        }
+    }
+    &.mat-form-field-appearance-outline .mat-form-field-flex {
+        display: flex;
+        align-items: center;
+        .mat-form-field-suffix {
+            display: flex;
+        }
+    }
+
+    &-panel {
+        height: 100%;
+        &-content {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            &-input {
+                margin: 0 30px;
+            }
+
+            &-select-all {
+                flex: 1 0 auto;
+                .mat-pseudo-checkbox {
+                    display: none;
+                }
+                .mat-checkbox-ripple {
+                    display: none;
+                }
+            }
+
+            &-options {
+                overflow: auto;
+                mat-option.mat-option-disabled {
+                    .mat-pseudo-checkbox {
+                        display: none;
+                    }
+                }
+                mat-option.loading .mat-option-text {
+                    height: 100%;
+                    .mat-spinner {
+                        height: 100% !important;
+                        width: 100% !important;
+                        svg {
+                            height: 100% !important;
+                            width: 100% !important;
+                        }
+                    }
+                }
+
+                .mat-option-text {
+                    display: flex;
+                    gap: 8px;
+                    &-label {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.my-arrow-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.my-arrow {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid;
+    margin: 0 4px;
+    color: var(--theme-text-color);
+}
+
+.mat-form-field.mat-focused.mat-primary .my-arrow {
+    color: var(--theme-primary-color);
+}
+
+.contezza-form-field.mat-form-field-disabled {
+    color: var(--theme-text-disabled-color);
+}

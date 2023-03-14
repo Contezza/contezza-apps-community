@@ -1,0 +1,39 @@
+<mat-form-field
+    class="contezza-form-field contezza-chips-input-form-field adf-property-field adf-card-textitem-field"
+    [class.mat-form-field-disabled]="readonly"
+    floatLabel="auto"
+    [appearance]="field.settings?.appearance"
+>
+    <mat-label>{{ field.label | translate }}</mat-label>
+    <mat-chip-list #chipList [formControl]="control">
+        <mat-chip *ngFor="let chip of control.value || []" [selectable]="selectable" [removable]="removable" (removed)="remove(chip)">
+            {{ chip }}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input
+            spellcheck="false"
+            [placeholder]="field.placeholder | translate"
+            [required]="required"
+            [readonly]="readonly"
+            class="adf-property-value"
+            data-lpignore="true"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)"
+        />
+    </mat-chip-list>
+    <button
+        type="button"
+        mat-icon-button
+        matSuffix
+        class="adf-property-clear-value"
+        aria-label="Clear"
+        *ngIf="!readonly && !control.disabled"
+        tabindex="-1"
+        (click)="clear($event)"
+    >
+        <mat-icon>cancel</mat-icon>
+    </button>
+    <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control"></mat-error>
+</mat-form-field>

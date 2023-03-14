@@ -1,0 +1,14 @@
+{
+    "APP": {
+        "FORM_FIELDS": {
+            "AUTOCOMPLETE": {},
+            "DATE_RANGE": {
+                "FROM": "from",
+                "TO": "to"
+            },
+            "SELECT" : {
+                "SELECT_ALL": "Select all"
+            }
+        }
+    }
+}

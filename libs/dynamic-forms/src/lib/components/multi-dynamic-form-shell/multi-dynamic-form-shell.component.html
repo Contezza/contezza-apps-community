@@ -1,0 +1,12 @@
+<ng-container *contezzaLet="lastStep$ | async as lastStep">
+    <div class="selectors">
+        <ng-container *ngFor="let group of groups$ | async">
+            <ng-container *ngIf="group.items.length">
+                <contezza-selector [group]="group" [expanded]="expandedSelector$ | async"></contezza-selector>
+            </ng-container>
+        </ng-container>
+    </div>
+    <div class="forms" [class.expanded]="lastStep">
+        <contezza-multi-dynamic-form [items]="items" [activeItem]="activeItem$ | async"></contezza-multi-dynamic-form>
+    </div>
+</ng-container>

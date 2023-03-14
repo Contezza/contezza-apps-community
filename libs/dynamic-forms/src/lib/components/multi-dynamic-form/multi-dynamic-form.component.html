@@ -1,0 +1,7 @@
+<ng-container *ngIf="dynamicForms$ | async as forms">
+    <ng-container *contezzaLet="activeForm$ | async as activeForm">
+        <ng-container *ngFor="let form of forms">
+            <contezza-dynamic-form class="form" [class.active]="form === activeForm" [dynamicForm]="form"></contezza-dynamic-form>
+        </ng-container>
+    </ng-container>
+</ng-container>

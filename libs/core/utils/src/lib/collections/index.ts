@@ -7,6 +7,7 @@ export * from './object-utils.class';
 export * from './observable-operators.class';
 export * from './observables.class';
 export * from './queries.class';
+export * from './store-utils.class';
 export * from './utils.class';
 export * from './validators.class';
 export * from './xml-utils.class';

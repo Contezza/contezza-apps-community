@@ -1,0 +1,12 @@
+<ng-container *ngIf="control.hasError('required')">
+    <mat-error>
+        {{ requiredValidation?.message || 'APP.VALIDATIONS.REQUIRED' | translate }}
+    </mat-error>
+</ng-container>
+<ng-container *ngIf="!control.hasError('required')">
+    <ng-container *ngFor="let validation of otherValidations">
+        <mat-error>
+            {{ validation.message | translate }}
+        </mat-error>
+    </ng-container>
+</ng-container>

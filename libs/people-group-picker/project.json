@@ -1,0 +1,39 @@
+{
+    "name": "people-group-picker",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/people-group-picker/src",
+    "prefix": "contezza",
+    "targets": {
+        "build": {
+            "executor": "@angular-devkit/build-angular:ng-packagr",
+            "outputs": ["dist/@contezza/people-group-picker"],
+            "options": {
+                "tsConfig": "tsconfig.build.json",
+                "project": "libs/people-group-picker/ng-package.json"
+            }
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/people-group-picker/jest.config.ts",
+                "passWithNoTests": true
+            },
+            "configurations": {
+                "ci": {
+                    "ci": true,
+                    "codeCoverage": true
+                }
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["libs/people-group-picker/**/*.ts", "libs/people-group-picker/**/*.html"]
+            }
+        }
+    },
+    "tags": []
+}

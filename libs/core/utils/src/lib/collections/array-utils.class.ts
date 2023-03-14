@@ -60,7 +60,62 @@ export class ContezzaArrayUtils {
         return output;
     }
 
+    /**
+     * Checks for array equality. Allows to define a custom comparison function and to specify if order matters.
+     *
+     * @param v First array.
+     * @param w Second array.
+     * @param options Optional parameters: * `comparator` allows to define a custom comparison function, defaults to `===`; * `ordered` specifies if order matters when comparing arrays, in other words "shuffled" arrays are equal if this parameters is `false`, defaults to `false`.
+     */
+    static areEqual<T>(v: T[], w: T[], options?: { comparator: (x: T, y: T) => boolean; ordered: boolean }): boolean {
+        // setting default options
+        const comparator = options?.comparator || ((x, y) => x === y);
+        const ordered = options?.ordered;
+
+        if (v.length !== w.length) {
+            // if arrays have different length, then they are not equal
+            return false;
+        } else if (ordered) {
+            // if order matters, then every element of the first array is compared with the corresponding element of the second array
+            return ContezzaArrayUtils.range(v.length).every((i) => comparator(v[i], w[i]));
+        } else {
+            // otherwise, for each element of the first array a match in the second array must be found
+            // a copy of the second array is used, so that matched element can be deleted, to take repetitions into account
+            const wCopy = [...w];
+            let i = 0;
+            let equal = true;
+            while (i < v.length && equal) {
+                const match = wCopy.findIndex((y) => comparator(v[i], y));
+                if (match > -1) {
+                    wCopy.splice(match, 1);
+                } else {
+                    equal = false;
+                }
+                i++;
+            }
+            return equal;
+        }
+    }
+
     static asArray<T>(x: OrArray<T>): T[] {
         return Array.isArray(x) ? x : [x];
+    }
+
+    /**
+     * Implements https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findLast
+     *
+     * @param array
+     * @param callbackFn
+     */
+    static findLast<T>(array: T[], callbackFn: (item: T) => boolean): T {
+        let match: T;
+        let i = array.length - 1;
+        while (!match && i >= 0) {
+            if (callbackFn(array[i])) {
+                match = array[i];
+            }
+            i--;
+        }
+        return match;
     }
 }

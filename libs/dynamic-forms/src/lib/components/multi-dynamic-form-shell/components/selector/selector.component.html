@@ -1,0 +1,50 @@
+<div *ngIf="title && expanded" class="title">{{ title | translate }}</div>
+<ng-container *contezzaLet="expanded ? 'expanded' : 'collapsed' as mode">
+    <table mat-table [dataSource]="dataSource" matSort class="table" [class]="mode">
+        <ng-container *ngFor="let column of columns">
+            <ng-container [matColumnDef]="column.key">
+                <ng-container *ngIf="column.type === 'select'">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="" [disabled]="!column.sortable" [class]="column.class">
+                        <ng-container *contezzaLet="totalSelected$ | async as totalSelected">
+                            <mat-checkbox
+                                [checked]="totalSelected === dataSource.data.length"
+                                [indeterminate]="totalSelected > 0 && totalSelected < dataSource.data.length"
+                                (change)="onSelectAll($event.checked)"
+                            >
+                            </mat-checkbox>
+                        </ng-container>
+                    </th>
+                    <td mat-cell *matCellDef="let item" [class]="column.class">
+                        <mat-checkbox
+                            #selectable="contezzaSelectable"
+                            [contezzaSelectable]="item"
+                            [isToggle]="true"
+                            [checked]="selectable.selected$ | async"
+                            (click)="$event.preventDefault(); $event['selectionPrevented'] = true"
+                        ></mat-checkbox>
+                    </td>
+                </ng-container>
+                <ng-container *ngIf="column.type !== 'select'">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="" [disabled]="!column.sortable" [class]="column.class">{{ column.title | translate }}</th>
+                    <td mat-cell *matCellDef="let item" contezza-table-cell [item]="item" [column]="column"></td>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns[mode]" [class.hidden]="!(showHeader && mode === 'expanded')"></tr>
+        <tr
+            mat-row
+            *matRowDef="let row; columns: displayedColumns[mode]"
+            class="row"
+            #selectable="contezzaSelectable"
+            [contezzaSelectable]="row"
+            [isToggle]="true"
+            [selectionDisabled]="mode === 'collapsed'"
+            [class.selected]="selectable.selected$ | async"
+            #activable="contezzaActivable"
+            [contezzaActivable]="row"
+            [activationDisabled]="mode !== 'collapsed'"
+            [class.active]="activable.active$ | async"
+        ></tr>
+    </table>
+</ng-container>

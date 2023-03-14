@@ -1,0 +1,14 @@
+{
+    "APP": {
+        "FORM_FIELDS": {
+            "AUTOCOMPLETE": {},
+            "DATE_RANGE": {
+                "FROM": "vanaf",
+                "TO": "tot"
+            },
+            "SELECT" : {
+                "SELECT_ALL": "Alles selecteren"
+            }
+        }
+    }
+}
