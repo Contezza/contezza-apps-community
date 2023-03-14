@@ -14,7 +14,6 @@
         }
     ],
     "lib": {
-        "entryFile": "index.ts",
-        "flatModuleFile": "contezza-core"
+        "entryFile": "index.ts"
     }
 }

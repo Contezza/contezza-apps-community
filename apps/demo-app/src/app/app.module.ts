@@ -68,9 +68,9 @@ registerLocaleData(localeSv);
             enableTracing: false, // enable for debug only
             relativeLinkResolution: 'legacy',
         }),
-        AppExtensionsModule,
         ShellModule.withRoutes({ shellChildren: [shellChildren()] }),
         ContentServiceExtensionModule,
+        AppExtensionsModule,
     ],
     providers: [
         { provide: AppService, useClass: AppService },

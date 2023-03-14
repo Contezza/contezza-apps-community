@@ -10,7 +10,6 @@ import { MonacoEditorModule, NGX_MONACO_EDITOR_CONFIG } from '@contezza/third-pa
 import { PageLayoutModule } from '@alfresco/aca-shared';
 import { BreadcrumbModule } from '@alfresco/adf-content-services';
 import { IconModule, PipeModule, ToolbarModule } from '@alfresco/adf-core';
-
 import { ContezzaLetModule } from '@contezza/core/directives';
 import { ContezzaSearchFormComponent } from '@contezza/search/form';
 

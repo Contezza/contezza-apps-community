@@ -2,14 +2,7 @@ import { Params, RouterStateSnapshot } from '@angular/router';
 
 import { RouterStateSerializer } from '@ngrx/router-store';
 
-export interface ContezzaRouterState {
-    url: string;
-    params: Params;
-    queryParams: Params;
-    fragment: string;
-}
-
-export const routerFeatureKey = 'router';
+import { ContezzaRouterState } from './state';
 
 export class ContezzaRouterSerializer implements RouterStateSerializer<ContezzaRouterState> {
     serialize(routerState: RouterStateSnapshot): ContezzaRouterState {

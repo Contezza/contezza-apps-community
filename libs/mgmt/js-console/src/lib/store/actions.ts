@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 
 import { ConsoleScript, ExecuteConsoleResponse, ScriptExecutionTime, SelectedNode, SelectScriptPayloadNode } from '../interfaces/js-console';
 
-enum JsConsoleActionTypes {
+export enum JsConsoleActionTypes {
     ExecuteScript = '[JS CONSOLE] EXECUTE_SCRIPT',
     SetExecuteScriptLoading = '[JS CONSOLE] SET_EXECUTE_SCRIPT_LOADING',
     SetScriptExecutionTime = '[JS CONSOLE] SET_SCRIPT_EXECUTION_TIME',

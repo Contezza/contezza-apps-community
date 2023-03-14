@@ -5,7 +5,7 @@ import { createLocalStorageRehydrateReducer } from '@contezza/core/utils';
 import { NodeBrowserActions } from './index';
 import { initialState, NodeBrowserState } from './state';
 
-export const nodeBrowserKey = 'nodeBrowser';
+export const nodeBrowserKey = 'nodeBrowserState';
 
 const reducer = createLocalStorageRehydrateReducer(
     nodeBrowserKey,

@@ -12,4 +12,6 @@ LIBS=(
     'core'
     'search'
     'third-party'
+    'js-console'
+    'node-browser'
 );

@@ -45,7 +45,9 @@
                     "libs/core/directives/**/*.ts",
                     "libs/core/directives/**/*.html",
                     "libs/core/common/**/*.ts",
-                    "libs/core/common/**/*.html"
+                    "libs/core/common/**/*.html",
+                    "libs/core/stores/**/*.ts",
+                    "libs/core/stores/**/*.html"
                 ]
             }
         }

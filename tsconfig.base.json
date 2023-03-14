@@ -32,6 +32,7 @@
             "@contezza/core/directives": ["libs/core/directives/src/index.ts"],
             "@contezza/core/extensions": ["libs/core/extensions/src/index.ts"],
             "@contezza/core/services": ["libs/core/services/src/index.ts"],
+            "@contezza/core/stores": ["libs/core/stores/src/index.ts"],
             "@contezza/core/utils": ["libs/core/utils/src/index.ts"],
             "@contezza/js-console": ["libs/mgmt/js-console/src/index.ts"],
             "@contezza/js-console-extensions": ["libs/mgmt/js-console/src/public-extensions-api"],
@@ -43,6 +44,7 @@
         }
     },
     "exclude": ["node_modules", "tmp"],
+    "include": ["libs/**/*.ts"],
     "angularCompilerOptions": {
         "preserveWhitespaces": false,
         "fullTemplateTypeCheck": true,

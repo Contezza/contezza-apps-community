@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 
 import { NodeBrowserSearchParams, NodeBrowserSearchResponse } from '../interfaces/node-browser-search';
 
-enum NodeBrowserActionTypes {
+export enum NodeBrowserActionTypes {
     LoadStores = '[NODE BROWSER] LOAD_STORES',
     SetStores = '[NODE BROWSER] SET_STORES',
     ExecuteSearch = '[NODE BROWSER] EXECUTE_SEARCH',
