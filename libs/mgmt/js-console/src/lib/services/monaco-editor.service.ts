@@ -13,7 +13,7 @@ import { TernModel, TernToTs } from '../utils/tern-to-ts';
     providedIn: 'root',
 })
 export class JsConsoleMonacoEditorService {
-    static readonly URL_TYPING = './assets/mgmt/js-console/defs/alfresco.json';
+    static readonly URL_TYPING = './assets/js-console/defs/alfresco.json';
     private readonly API_COMMANDS_URL = 'de/fme/jsconsole/apicommands';
 
     constructor(private readonly http: HttpClient, private readonly webscript: WebscriptService) {}

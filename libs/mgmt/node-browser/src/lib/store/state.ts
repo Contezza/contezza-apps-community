@@ -1,7 +1,7 @@
 import { NodeBrowserSearchParams, NodeBrowserSearchResponse } from '../interfaces/node-browser-search';
 
 export interface ContezzaNodeBrowserState {
-    nodeBrowser: NodeBrowserState;
+    nodeBrowserState: NodeBrowserState;
 }
 
 export interface NodeBrowserState {

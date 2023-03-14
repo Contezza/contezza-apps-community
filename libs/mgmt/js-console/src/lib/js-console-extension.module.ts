@@ -14,7 +14,7 @@ import { JsConsoleStoreModule } from './store/store.module';
 })
 export class ContezzaJsConsoleExtensionModule {
     constructor(readonly extensions: ExtensionService, readonly translation: TranslationService) {
-        translation.addTranslationFolder('mgmt/js-console', 'assets/mgmt/js-console');
+        translation.addTranslationFolder('js-console', 'assets/js-console');
         extensions.setEvaluators({ 'jsconsole.selection.canOpenInJavascriptConsole': canOpenInJavascriptConsole });
     }
 }

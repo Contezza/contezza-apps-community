@@ -1,18 +1,6 @@
 {
     "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
     "dest": "../../dist/@contezza/core",
-    "assets": [
-        {
-            "glob": "i18n/*.json",
-            "input": "./common/assets",
-            "output": "/assets/"
-        },
-        {
-            "glob": "images/**/*",
-            "input": "./common/assets",
-            "output": "/assets/"
-        }
-    ],
     "lib": {
         "entryFile": "index.ts"
     }

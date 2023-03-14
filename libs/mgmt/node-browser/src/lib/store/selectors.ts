@@ -8,7 +8,7 @@ import { featureKey } from './feature-key';
 // eslint-disable-next-line @typescript-eslint/ban-types
 export const selectNodeBrowser: MemoizedSelector<object, NodeBrowserState> = createSelector(
     createFeatureSelector<ContezzaNodeBrowserState>(featureKey),
-    (state: ContezzaNodeBrowserState) => state.nodeBrowser
+    (state: ContezzaNodeBrowserState) => state.nodeBrowserState
 );
 
 export const getStores = createSelector(selectNodeBrowser, (state) => state.stores);

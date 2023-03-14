@@ -27,7 +27,7 @@
         "noImplicitReturns": true,
         "removeComments": true,
         "paths": {
-            "@contezza/core/common": ["libs/core/common/src/index.ts"],
+            "@contezza/common": ["libs/common/src/index.ts"],
             "@contezza/core/context": ["libs/core/context/src/index.ts"],
             "@contezza/core/directives": ["libs/core/directives/src/index.ts"],
             "@contezza/core/extensions": ["libs/core/extensions/src/index.ts"],
