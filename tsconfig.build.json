@@ -12,10 +12,10 @@
             "@contezza/core/*": ["./dist/@contezza/core/*"],
             "@contezza/search/*": ["./dist/@contezza/search/*"],
             "@contezza/third-party/*": ["./dist/@contezza/third-party/*"],
-            "@contezza/people-group-picker/*": ["./dist/@contezza/people-group-picker/*"],
             "@contezza/dynamic-forms/*": ["./dist/@contezza/dynamic-forms/*"],
             "@contezza/js-console/*": ["./dist/@contezza/js-console/*"],
-            "@contezza/node-browser/*": ["./dist/@contezza/node-browser/*"]
+            "@contezza/node-browser/*": ["./dist/@contezza/node-browser/*"],
+            "@contezza/people-group-picker/*": ["./dist/@contezza/people-group-picker/*"]
         }
     },
     "angularCompilerOptions": {

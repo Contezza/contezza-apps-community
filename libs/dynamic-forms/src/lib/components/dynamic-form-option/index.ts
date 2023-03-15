@@ -1,1 +1,3 @@
-export * from './public-api';
+export * from './dynamic-form-option.component';
+export * from './dynamic-form-option.directive';
+export * from './dynamic-form-option.module';
