@@ -7,7 +7,8 @@ do
 
     cd $LIBS_DIR/${LIB_PATH}
 #    npm version ${VERSION_IN_PACKAGE_JSON};
-    npm version minor;
+    npm version 'latest';
+#    npm version preminor;
 done
 
 echo -e "\n\nBuild projects"
