@@ -14,8 +14,6 @@
         "build:third-party": "ng build third-party",
         "build-libs": "./scripts/build-libs.sh",
         "publish-libs": "./scripts/publish-libs.sh",
-        "release": "./scripts/release.sh",
-        "prerelease": "./scripts/prerelease.sh",
         "lint": "nx lint",
         "test": "nx test",
         "start:demo-app": "ng serve demo-app"
