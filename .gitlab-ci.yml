@@ -1,13 +1,5 @@
-# ----------------------------------
-# Contezza Apps Community
-# ----------------------------------
-
 stages:
     - build-publish
-
-variables:
-    MAVEN_CLI_OPTS: '-s .m2/settings.xml --batch-mode'
-    MAVEN_OPTS: '-Dmaven.repo.local=/data/gitlabrunner-cicd/.m2/repository'
 
 #----------------------------
 # BUILD + PUBLISH LIBS
@@ -16,8 +8,6 @@ variables:
 build_publish:
     stage: build-publish
     image: harbor.contezza.nl/tooling/docker-npm-maven:1.0.7
-    variables:
-        MAVEN_CLI_OPTS: '-s ../../.m2/settings.xml --batch-mode'
     before_script:
         - mkdir -p $HOME/.docker
         - echo $DOCKER_AUTH_CONFIG > $HOME/.docker/config.json
