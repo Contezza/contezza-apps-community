@@ -13,6 +13,31 @@ variables:
 # BUILD + PUBLISH LIBS
 #----------------------------
 
+publish-latest:
+    stage: build-publish
+    image: harbor.contezza.nl/tooling/docker-npm-maven:1.0.7
+    variables:
+        MAVEN_CLI_OPTS: '-s ../../.m2/settings.xml --batch-mode'
+    before_script:
+        - mkdir -p $HOME/.docker
+        - echo $DOCKER_AUTH_CONFIG > $HOME/.docker/config.json
+    script:
+        - docker login -u $CNTZ_DOCKER_QUAY_USER -p $CNTZ_DOCKER_QUAY_PASSWD quay.io
+        - docker login -u $CNTZ_DOCKER_HARBOR_USER -p $CNTZ_DOCKER_HARBOR_PASSWD harbor.contezza.nl
+        - git config --global advice.detachedHead false
+        - npm config set @contezza:registry https://nexus.contezza.nl/repository/npm-releases/
+        - npm config set //nexus.contezza.nl/repository/npm-releases/:_authToken ${NPM_TOKEN}
+        - npm config set legacy-peer-deps true
+        - npm i -g nx && npm ci
+        - echo $NPM_VERSION
+        - npm run publish-libs latest
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE =~ /publish-latest/
+    tags:
+        - cntz-cicd
+
+
 build_publish_libs:
     stage: build-publish
     image: harbor.contezza.nl/tooling/docker-npm-maven:1.0.7

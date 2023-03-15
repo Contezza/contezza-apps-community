@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 . scripts/config.sh
 
+VERSION=${1}
+
 for LIB_PATH in "${LIBS_PATHS[@]}"
 do
     echo "Update ${LIB_PATH} version to ${VERSION_IN_PACKAGE_JSON}"
 
     cd $LIBS_DIR/${LIB_PATH}
 #    npm version ${VERSION_IN_PACKAGE_JSON};
-    npm version 'latest';
+    npm version $VERSION;
 #    npm version preminor;
 done
 
