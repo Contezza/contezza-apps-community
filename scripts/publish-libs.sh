@@ -8,9 +8,7 @@ do
     echo "Update ${LIB_PATH} version to ${VERSION_IN_PACKAGE_JSON}"
 
     cd $LIBS_DIR/${LIB_PATH}
-#    npm version ${VERSION_IN_PACKAGE_JSON};
-    npm version $VERSION;
-#    npm version preminor;
+    npm version ${VERSION_IN_PACKAGE_JSON};
 done
 
 echo -e "\n\nBuild projects"
