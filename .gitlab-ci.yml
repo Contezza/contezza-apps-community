@@ -32,7 +32,7 @@ prerelease:
         - npm run prerelease
     only:
         variables:
-            - $CI_COMMIT_MESSAGE =~ /create-latest/
+            - $CI_COMMIT_MESSAGE =~ /build-latest/
     tags:
         - cntz-cicd
 
