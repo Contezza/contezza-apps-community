@@ -9,13 +9,28 @@
         "types": [],
         "paths": {
             "@contezza/common/*": ["./dist/@contezza/common/*"],
+            "@contezza/common": ["./dist/@contezza/common/index"],
+
             "@contezza/core/*": ["./dist/@contezza/core/*"],
-            "@contezza/search/*": ["./dist/@contezza/search/*"],
-            "@contezza/third-party/*": ["./dist/@contezza/third-party/*"],
+            "@contezza/core": ["./dist/@contezza/core/index"],
+
             "@contezza/dynamic-forms/*": ["./dist/@contezza/dynamic-forms/*"],
+            "@contezza/dynamic-forms": ["./dist/@contezza/dynamic-forms/index"],
+
             "@contezza/js-console/*": ["./dist/@contezza/js-console/*"],
+            "@contezza/js-console": ["./dist/@contezza/js-console/index"],
+
             "@contezza/node-browser/*": ["./dist/@contezza/node-browser/*"],
-            "@contezza/people-group-picker/*": ["./dist/@contezza/people-group-picker/*"]
+            "@contezza/node-browser": ["./dist/@contezza/node-browser/index"],
+
+            "@contezza/people-group-picker/*": ["./dist/@contezza/people-group-picker/*"],
+            "@contezza/people-group-picker": ["./dist/@contezza/people-group-picker/index"],
+
+            "@contezza/search/*": ["./dist/@contezza/search/*"],
+            "@contezza/search": ["./dist/@contezza/search/index"],
+
+            "@contezza/third-party/*": ["./dist/@contezza/third-party/*"],
+            "@contezza/third-party": ["./dist/@contezza/third-party/index"]
         }
     },
     "angularCompilerOptions": {
