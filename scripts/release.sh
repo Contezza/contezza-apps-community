@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 . scripts/config.sh
 
-VERSION=${1}
-
 for LIB_PATH in "${LIBS_PATHS[@]}"
 do
     echo "Update ${LIB_PATH} version to ${VERSION_IN_PACKAGE_JSON}"
@@ -21,7 +19,7 @@ do
     cd $DIST_DIR/${LIB}
 
     echo -e "======== Publishing library: $LIB ========\n"
-    echo -e "npm publish --tag $TAG_NPM\n"
+    echo -e "npm publish --tag ${VERSION_IN_PACKAGE_JSON}\n"
 
-    npm publish --tag $TAG_NPM
+    npm publish --tag ${VERSION_IN_PACKAGE_JSON}
 done
