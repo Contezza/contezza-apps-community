@@ -1,0 +1,58 @@
+<div class="picker">
+    <div class="picker-source">
+        <div class="picker-source-input">
+            <div [class.adf-invalid]="!field.isValid" [class.adf-readonly]="field.readOnly">
+                <mat-form-field class="adf-full-width">
+                    <mat-chip-list #chipList aria-label="Users / Groups selection">
+                        <mat-chip *ngFor="let item of selectedItems" [selectable]="selectable" [removable]="removable" (removed)="removeItem(item)">
+                            {{ item.id ? item.displayName : (item | userFullName) }}
+                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <div style="display: flex; flex-direction: row; align-items: center; width: 100%">
+                            <input
+                                #inputValue
+                                matInput
+                                type="text"
+                                spellcheck="false"
+                                matChipInputAddOnBlur="false"
+                                placeholder="{{ (_pickerType === 'people' ? peoplePlaceholder : groupPlaceholder) | translate }}"
+                                [formControl]="searchTerm"
+                                [matAutocomplete]="matAutocomplete"
+                                [matChipInputFor]="chipList"
+                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                data-lpignore="true"
+                            />
+
+                            <mat-select style="width: 50px" (selectionChange)="onTypeChange($event.value)">
+                                <mat-option *ngFor="let type of filteredTypes" [value]="type">
+                                    <mat-icon *ngIf="_pickerType === 'people'" color="primary">person</mat-icon>
+                                    <mat-icon *ngIf="_pickerType === 'group'" color="primary">group</mat-icon>
+                                    {{ type.label | translate }}
+                                </mat-option>
+
+                                <mat-select-trigger>
+                                    <mat-icon *ngIf="_pickerType === 'people'" color="primary">person</mat-icon>
+                                    <mat-icon *ngIf="_pickerType === 'group'" color="primary">group</mat-icon>
+                                </mat-select-trigger>
+                            </mat-select>
+                        </div>
+                    </mat-chip-list>
+
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onItemSelect($event.option.value)" class="picker-autocomplete">
+                        <mat-option *ngFor="let item of _pickerType === 'people' ? (users$ | async) : (groups$ | async)" [value]="item" [disabled]="itemExist(item)">
+                            <div class="adf-people-widget-row">
+                                <div [outerHTML]="item | usernameInitials: 'adf-people-widget-pic'"></div>
+                                <div *ngIf="item?.avatar" class="adf-people-widget-image-row">
+                                    <img class="adf-people-widget-avatar" [alt]="item | displayName" [src]="item.avatar | avatarImage" />
+                                </div>
+                                <span class="adf-people-label-name" [title]="item | displayName">{{ item | displayName }}</span>
+                            </div>
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <error-widget [error]="field.validationSummary"></error-widget>
+                <error-widget *ngIf="isInvalidFieldRequired()" required="{{ 'FORM.FIELD.REQUIRED' | translate }}"> </error-widget>
+            </div>
+        </div>
+    </div>
+</div>
