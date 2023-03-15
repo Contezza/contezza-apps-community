@@ -6,9 +6,15 @@ import { catchError, map, switchMap, take } from 'rxjs/operators';
 import { ResultSetPaging } from '@alfresco/js-api';
 import { AlfrescoApiService, AuthenticationService, ContentService } from '@alfresco/adf-core';
 import { ExtensionConfig, mergeObjects } from '@alfresco/adf-extensions';
-import { SearchService } from '@alfresco/adf-content-services';
 
 import { ContezzaObservables } from '@contezza/core/utils';
+
+/*
+ * Temporary workaround.
+ * Alfresco `SearchService` import is different in versions 5.1.0 (contezza-apps) and 6.0.0-A.3 (contezza-apps-community), therefore we cannot use it.
+ * TODO: replace with Alfresco SearchService when contezza-apps is updated.
+ */
+import { TmpSearchService } from './tmp-search.service';
 
 @Injectable({ providedIn: 'root' })
 export class ContezzaDynamicExtensionService {
@@ -16,7 +22,7 @@ export class ContezzaDynamicExtensionService {
         private readonly apiService: AlfrescoApiService,
         private readonly auth: AuthenticationService,
         private readonly contentService: ContentService,
-        private readonly search: SearchService
+        private readonly search: TmpSearchService
     ) {}
 
     load(queries: string[]): Observable<ExtensionConfig> {
