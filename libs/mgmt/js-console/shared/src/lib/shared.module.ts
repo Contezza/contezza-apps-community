@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { TranslateModule } from '@ngx-translate/core';
 
 import { TranslationService } from '@alfresco/adf-core';
 import { ExtensionService, provideExtensionConfig } from '@alfresco/adf-extensions';
 
-import { canOpenInJavascriptConsole } from './rules/rules';
-import { JsConsoleStoreModule } from './store/store.module';
+import { canOpenInJavascriptConsole } from './rules';
 
 @NgModule({
-    imports: [JsConsoleStoreModule, TranslateModule],
+    imports: [CommonModule, TranslateModule],
     providers: [provideExtensionConfig(['mgmt-js-console-icons.json'])],
 })
-export class ContezzaJsConsoleExtensionModule {
+export class ContezzaJsConsoleSharedModule {
     constructor(readonly extensions: ExtensionService, readonly translation: TranslationService) {
         translation.addTranslationFolder('js-console', 'assets/js-console');
         extensions.setEvaluators({ 'jsconsole.selection.canOpenInJavascriptConsole': canOpenInJavascriptConsole });

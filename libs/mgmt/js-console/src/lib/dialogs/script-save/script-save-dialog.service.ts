@@ -6,6 +6,12 @@ import { ContezzaAsyncDialogService } from '@contezza/core/services';
 import { JsConsoleScriptSaveDialogComponent } from './script-save-dialog.component';
 import { ConsoleScript } from '../../interfaces/js-console';
 
+import { JsConsoleScriptSaveDialogModule } from './script-save-dialog.module';
+
+export function getApplicationsModule() {
+    return JsConsoleScriptSaveDialogModule;
+}
+
 @Injectable({
     providedIn: 'root',
 })
@@ -13,8 +19,7 @@ export class JsConsoleScriptSaveDialogService extends ContezzaAsyncDialogService
     private readonly COPY = 'Kopie';
 
     protected async getDialogComponent(): Promise<ComponentType<JsConsoleScriptSaveDialogComponent>> {
-        const { JsConsoleScriptSaveDialogModule } = await import('./script-save-dialog.module');
-        return JsConsoleScriptSaveDialogModule.getComponent();
+        return getApplicationsModule().getComponent();
     }
 
     getDuplicateTitle(title: string, scripts: Array<ConsoleScript>): string {

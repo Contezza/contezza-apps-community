@@ -4,12 +4,12 @@ import { AosExtensionModule } from '@alfresco/adf-office-services-ext';
 import { AcaAboutModule } from '@alfresco/aca-about';
 import { AcaSettingsModule } from '@alfresco/aca-settings';
 
-import { ContezzaCommonModule } from '@contezza/common';
-import { ContezzaJsConsoleExtensionModule } from '@contezza/js-console-extensions';
-import { ContezzaNodeBrowserSharedModule } from '@contezza/node-browser/shared';
-
 import { provideExtensionConfig } from '@alfresco/adf-extensions';
 import { TranslationService } from '@alfresco/adf-core';
+
+import { ContezzaCommonModule } from '@contezza/common';
+import { ContezzaJsConsoleSharedModule } from '@contezza/js-console/shared';
+import { ContezzaNodeBrowserSharedModule } from '@contezza/node-browser/shared';
 
 import { environment } from '../environments/environment';
 
@@ -18,7 +18,7 @@ import { environment } from '../environments/environment';
         AosExtensionModule,
         ...(environment.devTools ? [AcaAboutModule.forRoot(environment.production), AcaSettingsModule] : []),
         ContezzaCommonModule,
-        ContezzaJsConsoleExtensionModule,
+        ContezzaJsConsoleSharedModule,
         ContezzaNodeBrowserSharedModule,
     ],
     providers: [provideExtensionConfig(['demo-app-navbar.json'])],

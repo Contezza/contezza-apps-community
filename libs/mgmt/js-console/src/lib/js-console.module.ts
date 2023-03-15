@@ -5,14 +5,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import { MonacoEditorModule, NGX_MONACO_EDITOR_CONFIG } from '@contezza/third-party/monaco';
-
 import { PageLayoutModule } from '@alfresco/aca-shared';
 import { BreadcrumbModule } from '@alfresco/adf-content-services';
 import { IconModule, PipeModule, ToolbarModule } from '@alfresco/adf-core';
+
 import { ContezzaLetModule } from '@contezza/core/directives';
 import { ContezzaSearchFormComponent } from '@contezza/search/form';
+import { MonacoEditorModule, NGX_MONACO_EDITOR_CONFIG } from '@contezza/third-party/monaco';
 
+import { JsConsoleStoreModule } from './store/store.module';
 import { JsConsoleMaterialModule } from './js-console-material.module';
 
 import { JsConsoleSanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
@@ -55,6 +56,7 @@ export const monacoEditorConfigFactory = (monacoEditorService: JsConsoleMonacoEd
         ContezzaLetModule,
         ContezzaSearchFormComponent,
         JsConsoleMaterialModule,
+        JsConsoleStoreModule,
     ],
     declarations: [
         JsConsoleComponent,
@@ -69,7 +71,6 @@ export const monacoEditorConfigFactory = (monacoEditorService: JsConsoleMonacoEd
         JsConsoleNoderefComponent,
         JsConsoleResizeDirective,
     ],
-    exports: [JsConsoleScriptsListComponent],
     providers: [
         {
             provide: NGX_MONACO_EDITOR_CONFIG,

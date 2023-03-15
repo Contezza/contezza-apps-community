@@ -11,7 +11,14 @@
             "options": {
                 "tsConfig": "tsconfig.build.json",
                 "project": "libs/mgmt/js-console/ng-package.json"
-            }
+            },
+            "dependsOn": [
+                {
+                    "target": "build",
+                    "projects": "dependencies",
+                    "params": "forward"
+                }
+            ]
         },
         "test": {
             "executor": "@nrwl/jest:jest",
@@ -31,7 +38,12 @@
             "executor": "@nrwl/linter:eslint",
             "outputs": ["{options.outputFile}"],
             "options": {
-                "lintFilePatterns": ["libs/mgmt/js-console/**/*.ts", "libs/mgmt/js-console/**/*.html"]
+                "lintFilePatterns": [
+                    "libs/mgmt/js-console/**/*.ts",
+                    "libs/mgmt/js-console/**/*.html",
+                    "libs/mgmt/js-console/shared/**/*.ts",
+                    "libs/mgmt/js-console/shared/**/*.html"
+                ]
             }
         }
     },

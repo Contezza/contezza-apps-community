@@ -1,7 +1,6 @@
 import { createFeatureSelector, createSelector, MemoizedSelector } from '@ngrx/store';
 
 import { selectQueryParams } from '@contezza/core/stores';
-
 import { ContezzaJsConsoleState, JsConsoleState } from './state';
 import { featureKey } from './feature-key';
 
