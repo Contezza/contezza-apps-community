@@ -2,8 +2,6 @@
 . scripts/config.sh
 
 STAGE=$1
-echo $STAGE
-echo -e "======== STAGE: $STAGE ========\n"
 
 for LIB_PATH in "${LIBS_PATHS[@]}"
 do
@@ -11,8 +9,11 @@ do
 
     case $1 in
         "release")
+            echo -e "======== STAGE: release ========\n";
+            echo -e "${VERSION_IN_PACKAGE_JSON}\n";
             npm version ${VERSION_IN_PACKAGE_JSON};;
         "prerelease")
+            echo -e "======== STAGE: prerelease ========\n";
             npm version prerelease --preid=A;;
     esac
 done
