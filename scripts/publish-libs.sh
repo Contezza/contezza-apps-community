@@ -2,6 +2,7 @@
 . scripts/config.sh
 
 STAGE=$1
+ echo -e "======== STAGE: $STAGE ========\n";
 
 for LIB_PATH in "${LIBS_PATHS[@]}"
 do
@@ -9,11 +10,8 @@ do
 
     case $1 in
         "release")
-            echo -e "======== STAGE: release ========\n";
-            echo -e "${VERSION_IN_PACKAGE_JSON}\n";
             npm version ${VERSION_IN_PACKAGE_JSON};;
         "prerelease")
-            echo -e "======== STAGE: prerelease ========\n";
             npm version prerelease --preid=A;;
     esac
 done
@@ -30,5 +28,12 @@ do
     echo -e "======== Publishing library: $LIB ========\n"
     echo -e "npm publish --tag ${VERSION_IN_PACKAGE_JSON}\n"
 
-    npm publish --tag ${VERSION_IN_PACKAGE_JSON}
+    case $1 in
+        "release")
+            echo -e "npm publish --tag stable\n"
+            npm publish --tag stable;;
+        "prerelease")
+            echo -e "npm publish --tag latest\n"
+            npm publish --tag latest;;
+    esac
 done
