@@ -151,7 +151,7 @@
                     },
                     {
                         "input": "libs/mgmt/node-browser/assets",
-                        "output": "./assets/mgmt/node-browser",
+                        "output": "./assets/node-browser",
                         "glob": "**/*"
                     },
                     {

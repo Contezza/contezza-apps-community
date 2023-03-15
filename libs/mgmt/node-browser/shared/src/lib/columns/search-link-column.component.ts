@@ -3,10 +3,8 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
 import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
 
-import { MaterialTableColumnData } from '../../interfaces/table';
-
-import { nodeBrowse } from '../../store/actions';
-import { NodeBrowserColumnPropertyPipe } from '../../pipes/column-property.pipe';
+import { MaterialTableColumnData } from '../interfaces/table';
+import { NodeBrowserColumnPropertyPipe } from '../pipes/column-property.pipe';
 
 @Component({
     selector: 'node-browser-search-link-column',
@@ -27,6 +25,6 @@ export class NodeBrowserSearchLinkColumnComponent {
     constructor(private readonly store: Store<unknown>) {}
 
     onClick() {
-        this.store.dispatch(nodeBrowse({ nodeRef: this.data.element.nodeRef }));
+        this.store.dispatch({ type: '[NODE BROWSER] NODE_BROWSE', nodeRef: this.data.element.nodeRef });
     }
 }

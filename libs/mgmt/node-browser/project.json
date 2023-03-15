@@ -31,7 +31,12 @@
             "executor": "@nrwl/linter:eslint",
             "outputs": ["{options.outputFile}"],
             "options": {
-                "lintFilePatterns": ["libs/mgmt/node-browser/**/*.ts", "libs/mgmt/node-browser/**/*.html"]
+                "lintFilePatterns": [
+                    "libs/mgmt/node-browser/**/*.ts",
+                    "libs/mgmt/node-browser/**/*.html",
+                    "libs/mgmt/node-browser/shared/**/*.ts",
+                    "libs/mgmt/node-browser/shared/**/*.html"
+                ]
             }
         }
     },

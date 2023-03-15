@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MaterialTableColumnData } from '../../interfaces/table';
+import { MaterialTableColumnData } from '../interfaces/table';
 
-import { NodeBrowserColumnPropertyPipe } from '../../pipes/column-property.pipe';
+import { NodeBrowserColumnPropertyPipe } from '../pipes/column-property.pipe';
 
 @Component({
     selector: 'node-browser-values-column',

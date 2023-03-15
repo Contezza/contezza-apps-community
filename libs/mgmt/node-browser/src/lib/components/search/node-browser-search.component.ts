@@ -14,7 +14,7 @@ import { DestroyService } from '@contezza/core/services';
 import { nodeBrowserLangs, NodeBrowserSearchParams, NodeBrowserSearchResponse } from '../../interfaces/node-browser-search';
 import { getLastSearchQuery, getSearchLoading, getSearchParams, getSearchResponse, getStores } from '../../store/selectors';
 import { executeSearch, loadStores, setSearchParam } from '../../store/actions';
-import { ColumnInfo } from '../../interfaces/column-info';
+import { ColumnInfo } from '@contezza/node-browser/shared';
 
 @Component({
     selector: 'mgmt-node-browser-search',

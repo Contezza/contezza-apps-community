@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { TranslationService } from '@alfresco/adf-core';
 import { ExtensionService, provideExtensionConfig } from '@alfresco/adf-extensions';
-import { CommonModule } from '@angular/common';
 
 @NgModule({
     imports: [CommonModule],
     providers: [provideExtensionConfig(['mgmt.node-browser.icons.json', 'mgmt.node-browser.columns.json', 'mgmt.node-browser.view-items.json'])],
 })
-export class ContezzaNodeBrowserExtensionModule {
+export class ContezzaNodeBrowserSharedModule {
     constructor(readonly extensions: ExtensionService, readonly translation: TranslationService) {
-        translation.addTranslationFolder('mgmt/node-browser', 'assets/mgmt/node-browser');
+        translation.addTranslationFolder('node-browser', 'assets/node-browser');
 
         import('./columns/search-parent-column.component')
             .then((c) => c.NodeBrowserSearchParentColumnComponent)

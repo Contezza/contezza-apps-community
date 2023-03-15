@@ -5,9 +5,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { takeUntil } from 'rxjs/operators';
 
 import { DestroyService } from '@contezza/core/services';
-
-import { MaterialTableEmptyContent } from '../../interfaces/table';
-import { ColumnInfo } from '../../interfaces/column-info';
+import { ColumnInfo, MaterialTableEmptyContent } from '@contezza/node-browser/shared';
 
 @Component({
     selector: 'node-browser-result-table',
