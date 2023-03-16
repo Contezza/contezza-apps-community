@@ -18,7 +18,6 @@ export * from './date-time/date-time-field.component';
 export * from './date-time/date-time-field.module';
 
 export * from './dynamic';
-export * from './dynamic-form-field';
 
 export * from './info/info-field.component';
 export * from './info/info-field.module';

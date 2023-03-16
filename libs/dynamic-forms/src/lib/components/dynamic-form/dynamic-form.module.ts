@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ContezzaDynamicFormFieldModule } from '../form-fields/dynamic-form-field/dynamic-form-field.module';
+import { ContezzaDynamicFormFieldModule } from '../dynamic-form-field/dynamic-form-field.module';
 import { ContezzaDynamicFormComponent } from './dynamic-form.component';
 import { ContezzaDynamicSubformComponent } from './dynamic-subform.component';
 import { IsTabbablePipe } from './is-tabbable.pipe';
