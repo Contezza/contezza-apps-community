@@ -8,15 +8,15 @@
         "icons": [
             {
                 "id": "svg:travel_explore",
-                "value": "./assets/mgmt/node-browser/images/travel_explore.svg"
+                "value": "./assets/node-browser/images/travel_explore.svg"
             },
             {
                 "id": "svg:arrow-collapse",
-                "value": "./assets/mgmt/node-browser/images/arrow-collapse.svg"
+                "value": "./assets/node-browser/images/arrow-collapse.svg"
             },
             {
                 "id": "svg:arrow-expand",
-                "value": "./assets/mgmt/node-browser/images/arrow-expand.svg"
+                "value": "./assets/node-browser/images/arrow-expand.svg"
             }
         ]
     }
