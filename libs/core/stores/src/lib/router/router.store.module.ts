@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 
-import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { routerReducer, RouterStateSerializer } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 
 import { featureKey } from './feature-key';
-import { ContezzaRouterSerializer } from './serializer';
+import { SerializerService } from './serializer.service';
 
 @NgModule({
-    imports: [StoreModule.forFeature(featureKey, routerReducer), StoreRouterConnectingModule.forRoot({ serializer: ContezzaRouterSerializer })],
+    imports: [StoreModule.forFeature(featureKey, routerReducer)],
+    providers: [{ provide: RouterStateSerializer, useExisting: SerializerService }],
 })
 export class RouterStoreModule {}

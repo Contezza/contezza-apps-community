@@ -1,10 +1,12 @@
+import { Injectable } from '@angular/core';
 import { Params, RouterStateSnapshot } from '@angular/router';
 
 import { RouterStateSerializer } from '@ngrx/router-store';
 
 import { ContezzaRouterState } from './state';
 
-export class ContezzaRouterSerializer implements RouterStateSerializer<ContezzaRouterState> {
+@Injectable({ providedIn: 'root' })
+export class SerializerService implements RouterStateSerializer<ContezzaRouterState> {
     serialize(routerState: RouterStateSnapshot): ContezzaRouterState {
         const { url } = routerState;
         const { queryParams } = routerState.root;
