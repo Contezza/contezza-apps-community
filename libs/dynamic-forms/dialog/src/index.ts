@@ -1,1 +1,1 @@
-export * from './lib/dynamic-form-dialog';
+export * from './lib';

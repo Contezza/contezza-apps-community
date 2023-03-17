@@ -6,7 +6,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ContezzaDynamicFormModule } from '@contezza/dynamic-forms';
+import { ContezzaDynamicFormModule } from '../dynamic-form';
 import { DynamicFormDialogComponent } from './dynamic-form-dialog.component';
 
 @NgModule({

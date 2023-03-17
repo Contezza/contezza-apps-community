@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { DynamicFormDialogData } from './dynamic-form-dialog-data.interface';
+import { DynamicFormDialogData } from '@contezza/dynamic-forms/shared';
 
 @Component({
     selector: 'contezza-dynamic-form-dialog',

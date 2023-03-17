@@ -1,4 +1,6 @@
-import { ContezzaDynamicForm, ContezzaDynamicFormField, DynamicFormOptions } from '@contezza/dynamic-forms/shared';
+import { ContezzaDynamicForm } from '../classes';
+import { ContezzaDynamicFormField } from './dynamic-form-field.interface';
+import { DynamicFormOptions } from './dynamic-form-options.interface';
 
 export interface DynamicFormDialogData {
     title: string;

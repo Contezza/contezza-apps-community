@@ -1,4 +1,5 @@
 export * from './dynamic-form';
+export * from './dynamic-form-dialog';
 export * from './dynamic-form-field-error';
 export * from './dynamic-form-filter';
 export * from './dynamic-form-field';
