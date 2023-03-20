@@ -1,5 +1,5 @@
-import { OperatorFunction } from 'rxjs';
-import { filter, map, scan, startWith, tap } from 'rxjs/operators';
+import { EMPTY, OperatorFunction, pipe, timer } from 'rxjs';
+import { debounce, filter, map, pluck, scan, startWith, tap } from 'rxjs/operators';
 
 import { GenericBucket } from '@alfresco/js-api';
 import { ObjectUtils } from '@alfresco/adf-core';
@@ -12,6 +12,18 @@ import { ContezzaStringTemplate } from '../classes';
 import { DateRange } from '../interfaces';
 
 export class ContezzaObservableOperators {
+    /**
+     * Implements a variation of rxjs `debounceTime` operator which allows to select the duration based on the difference between two emitted values.
+     *
+     * @param evaluator A function that evaluates the difference between two emitted values and returns the debounce duration. Duration `null` means that `debounce(EMPTY)` is used.
+     */
+    static debounceDiff = <T>(evaluator: (oldValue: T | undefined, newValue: T | undefined) => number | null): OperatorFunction<T, T> =>
+        pipe(
+            scan<T, [T, number | null]>(([oldValue], newValue) => [newValue, evaluator(oldValue, newValue)], [undefined, evaluator(undefined, undefined)]),
+            debounce(([, time]) => (time !== null ? timer(time) : EMPTY)),
+            pluck(0)
+        );
+
     static removeDuplicates = <T>(keys: string | string[]): OperatorFunction<T[], T[]> =>
         map((value: T[]) => value?.filter((item, pos, self) => self.findIndex((item2) => ContezzaArrayUtils.asArray(keys).every((key) => item[key] === item2[key])) === pos));
 

@@ -26,7 +26,7 @@ export class ContezzaStringTemplate<ValueType> {
             this.evaluate = (value) =>
                 template.replace(syntax.regex, (match) => {
                     const dependency: ParsedMatch = ContezzaStringTemplate.parseMatch(match, syntax);
-                    return dependency.property && typeof value !== 'string' ? ObjectUtils.getValue(value, dependency.property) ?? match : value;
+                    return dependency.property && typeof value !== 'string' && typeof value !== 'number' ? ObjectUtils.getValue(value, dependency.property) ?? match : value;
                 });
         } else {
             this.evaluate = (_) => template;

@@ -15,6 +15,25 @@ export class ContezzaArrayUtils {
         );
     }
 
+    /**
+     * Partitions the given array based on the given function.
+     * The function associates a key to each array element, elements having the same key are grouped together.
+     * The object having these keys as keys and the corresponding element groups as values is returned.
+     *
+     * @param array An array to be partitioned.
+     * @param keyExtractor Function which associates a key to each array element
+     */
+    static partitionByKey<T, KeyType extends string = string>(array: T[], keyExtractor: (item: T) => KeyType): Record<KeyType, T[]> {
+        return array.reduce((acc, item) => {
+            const key = keyExtractor(item);
+            if (!acc[key]) {
+                acc[key] = [];
+            }
+            acc[key].push(item);
+            return acc;
+        }, {} as Record<KeyType, T[]>);
+    }
+
     static sortBy<T>(array: T[], property: keyof T): T[] {
         return array.sort((a, b) => {
             const nameA = a[property];

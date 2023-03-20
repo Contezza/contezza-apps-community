@@ -1,5 +1,7 @@
 import { ObjectUtils } from '@alfresco/adf-core';
 
+import { ObjectEntry } from '../types';
+
 export class ContezzaObjectUtils {
     /**
      * Wraps Alfresco ObjectUtils.getValue(target, key), in addition:
@@ -89,5 +91,14 @@ export class ContezzaObjectUtils {
      */
     static findMatch<T>(item: Partial<T>, list: T[]): T | undefined {
         return list.find((item2) => Object.keys(item).every((key) => item[key] === item2[key]));
+    }
+
+    /**
+     * Builds an object from an array of key-value pairs. Inverse of Object.entries().
+     *
+     * @param entries Array of key-value pairs.
+     */
+    static fromEntries<T>(entries: ObjectEntry<T>[]): T {
+        return entries.map(([key, value]) => ({ [key]: value })).reduce((acc, entry) => Object.assign(acc, entry), {} as T);
     }
 }
