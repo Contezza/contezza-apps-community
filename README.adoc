@@ -7,12 +7,16 @@ Overzicht van de release notities.
 === Overzicht
 
 
-[cols=20,10,70]
+[cols="20,10,70"]
 .Overzicht releases
 |===
 |Datum |Versie  |Omschrijving
 
-|2023-03-15
+|2023-03-20
+|1.0.1
+|Libraries uitbreiden.
+
+|2023-03-17
 |1.0.0
 |Bekijk de <<Release 1.0.0,release details>>.
 
