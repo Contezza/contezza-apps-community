@@ -26,7 +26,7 @@
         "importHelpers": true,
         "noUnusedLocals": true,
         "noImplicitReturns": true,
-        "removeComments": true,
+        "removeComments": false,
         "paths": {
             "@contezza/common": ["libs/common/src/index.ts"],
             "@contezza/core/context": ["libs/core/context/src/index.ts"],
