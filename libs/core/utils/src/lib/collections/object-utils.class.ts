@@ -1,6 +1,8 @@
 import { ObjectUtils } from '@alfresco/adf-core';
+import { mergeObjects } from '@alfresco/adf-extensions';
 
-import { ObjectEntry } from '../types';
+import { ObjectEntry, Tree } from '../types';
+import { ContezzaArrayUtils } from './array-utils.class';
 
 export class ContezzaObjectUtils {
     /**
@@ -94,11 +96,127 @@ export class ContezzaObjectUtils {
     }
 
     /**
+     * Returns the index of the item of the given list whose properties are a superset of the properties of the given item. If no match is found then returns `-1`.
+     *
+     * @param item
+     * @param list
+     */
+    static findIndexMatch<T>(item: Partial<T>, list: T[]): number {
+        return list.findIndex((item2) => Object.keys(item).every((key) => item[key] === item2[key]));
+    }
+
+    /**
      * Builds an object from an array of key-value pairs. Inverse of Object.entries().
      *
      * @param entries Array of key-value pairs.
      */
     static fromEntries<T>(entries: ObjectEntry<T>[]): T {
         return entries.map(([key, value]) => ({ [key]: value })).reduce((acc, entry) => Object.assign(acc, entry), {} as T);
+    }
+
+    /**
+     * Processes the given object resolving imports between subobjects.
+     *
+     * @param object
+     * @param options
+     */
+    static resolveImports<T>(object: T, options: { tagImportant: string; importsKey: string } = { tagImportant: '!important', importsKey: 'imports' }) {
+        const { tagImportant, importsKey } = options;
+        const keysWithImport = ContezzaObjectUtils.findKeys(object, (el) => typeof el === 'object' && importsKey in el);
+
+        // resolve array element matchers into array indexes
+        keysWithImport.forEach((key) => {
+            const objectWithImports = ContezzaObjectUtils.getValue(object, key);
+            objectWithImports[importsKey] = ContezzaArrayUtils.asArray(objectWithImports[importsKey]).map((importId) => {
+                let important = false;
+                if (importId.endsWith(tagImportant)) {
+                    important = true;
+                    importId = importId.slice(0, -tagImportant.length);
+                }
+
+                let text = importId;
+                let replaced;
+
+                while (text !== replaced) {
+                    if (replaced) {
+                        text = replaced;
+                    }
+                    replaced = text.replace(/\[[^\[\]]*\]/, (match: string, offset: number, s: string) => {
+                        const subkey = s.substring(0, offset);
+                        const array = ContezzaObjectUtils.getValue(object, subkey);
+                        if (!Array.isArray(array)) {
+                            throw new Error('Object element with key ' + subkey + ' is expected to be an array.');
+                        }
+                        let index!: number;
+                        const slicedKey = match.slice(1, -1);
+                        try {
+                            index = ContezzaObjectUtils.findIndexMatch(JSON.parse(slicedKey), array);
+                        } catch (e) {
+                            index = array.findIndex((item) => item.id === slicedKey);
+                        }
+                        if (index === -1) {
+                            throw new Error('No matching import for key ' + s);
+                        }
+                        return '.' + index;
+                    });
+                }
+                if (!replaced) {
+                    replaced = text;
+                }
+
+                return replaced + (important ? tagImportant : '');
+            });
+        });
+
+        // make base import trees
+        const importTrees: Tree<{ id: string }, 'dependsOn', '*'>[] = keysWithImport.map((id) => ({
+            id,
+            dependsOn: ContezzaArrayUtils.asArray(ContezzaObjectUtils.getValue(object, id)[importsKey]).map((importId) => ({
+                id: importId.endsWith(tagImportant) ? importId.slice(0, -tagImportant.length) : importId,
+            })),
+        }));
+
+        // chain dependencies in import trees
+        importTrees.forEach((tree) => tree.dependsOn.forEach((dep) => (dep.dependsOn = importTrees.filter(({ id }) => id.startsWith(dep.id)))));
+
+        // detect circular dependencies
+        try {
+            JSON.stringify(importTrees);
+        } catch (e) {
+            throw new Error('Circular dependency detected while processing object imports.');
+        }
+
+        // follow the import trees to resolve the dependencies
+        const processedKeys = [];
+        const recursion = (tree: Tree<{ id: string }, 'dependsOn', '*'>) => {
+            tree.dependsOn?.forEach((subtree) => recursion(subtree));
+            const key = tree.id;
+            if (keysWithImport.includes(key) && !processedKeys.includes(key)) {
+                const objectWithImports = ContezzaObjectUtils.getValue(object, key);
+                const [important, notImportant] = ContezzaArrayUtils.partition(ContezzaArrayUtils.asArray(objectWithImports[importsKey]), (importKey) =>
+                    importKey.endsWith(tagImportant)
+                );
+                // merging order: not important imports < object self < important imports
+                // assign the result to the object self
+                Object.assign(
+                    objectWithImports,
+                    mergeObjects(
+                        ...notImportant.map((importKey) => {
+                            const { id, ...imported } = ContezzaObjectUtils.getValue(object, importKey);
+                            return imported;
+                        }),
+                        objectWithImports,
+                        ...important.map((importKey) => {
+                            const { id, ...imported } = ContezzaObjectUtils.getValue(object, importKey.slice(0, -tagImportant.length));
+                            return imported;
+                        })
+                    )
+                );
+                delete objectWithImports[importsKey];
+
+                processedKeys.push(key);
+            }
+        };
+        importTrees.forEach((tree) => recursion(tree));
     }
 }
