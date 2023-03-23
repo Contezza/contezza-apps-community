@@ -59,7 +59,7 @@ export class ContezzaObjectUtils {
         const recursiveMap = (subtarget: any, path: string[] = []) => {
             if (evaluator(subtarget)) {
                 keys.push(path.join('.'));
-            } else if (typeof subtarget === 'object') {
+            } else if (subtarget && typeof subtarget === 'object') {
                 parser(subtarget).forEach(([key, val]) => {
                     // note: this recursion is not well-defined in general (an object may loop into itself)
                     recursiveMap(val, path.concat([key]));
@@ -122,7 +122,7 @@ export class ContezzaObjectUtils {
      */
     static resolveImports<T>(object: T, options: { tagImportant: string; importsKey: string } = { tagImportant: '!important', importsKey: 'imports' }) {
         const { tagImportant, importsKey } = options;
-        const keysWithImport = ContezzaObjectUtils.findKeys(object, (el) => typeof el === 'object' && importsKey in el);
+        const keysWithImport = ContezzaObjectUtils.findKeys(object, (el) => el && typeof el === 'object' && importsKey in el);
 
         // resolve array element matchers into array indexes
         keysWithImport.forEach((key) => {
