@@ -60,7 +60,10 @@ export class ContezzaDependenciesService {
         };
 
         const matches = text.match(ContezzaDependencySyntax.Regex);
-        if (matches.length === 1 && matches[0] === text) {
+        if (!matches) {
+            // if there is no match
+            return text;
+        } else if (matches.length === 1 && matches[0] === text) {
             // if the full text perfectly matches the regex
             return replacer(text);
         } else {
