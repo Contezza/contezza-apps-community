@@ -12,9 +12,13 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2023-03-29
+|1.0.2
+|Bekijk de <<Release 1.0.2,release details>>.
+
 |2023-03-20
 |1.0.1
-|Libraries uitbreiden.
+|Bekijk de <<Release 1.0.1,release details>>.
 
 |2023-03-17
 |1.0.0
@@ -27,6 +31,16 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 1.0.2
+Algemeen: Comments worden meegenomen en zijn beschikbaar als documentatie.
+
+@contezza/core/extensions: bugfix.
+
+@contezza/core/utils: `map` operator uitbreiden om generieke callbacks te ondersteunen.
+
+==== Release 1.0.1
+Libraries uitbreiden.
 
 ==== Release 1.0.0
 
