@@ -8,6 +8,7 @@ import moment from 'moment';
 
 import { ContezzaArrayUtils } from './array-utils.class';
 import { ContezzaObjectUtils } from './object-utils.class';
+import { ContezzaUtils } from './utils.class';
 import { ContezzaStringTemplate } from '../classes';
 import { DateRange } from '../interfaces';
 
@@ -69,16 +70,22 @@ export class ContezzaObservableOperators {
     static template = (template: string): OperatorFunction<any, any> =>
         map((value) => new ContezzaStringTemplate(template).evaluate(typeof value === 'string' ? { value } : value));
 
-    static map = (property: string): OperatorFunction<any, any> =>
-        map((value) => {
-            if (value) {
-                if (Array.isArray(value)) {
-                    return value.map((entry) => (entry ? ContezzaObjectUtils.getValue(entry, property) : undefined));
-                } else {
-                    return value ? ContezzaObjectUtils.getValue(value, property) : undefined;
+    static map = (propertyOrCallback: string): OperatorFunction<any, any> => {
+        const newFunction = ContezzaUtils.stringToFunction(propertyOrCallback);
+        if (newFunction) {
+            return map((...args) => newFunction(...args));
+        } else {
+            return map((value) => {
+                if (value) {
+                    if (Array.isArray(value)) {
+                        return value.map((entry) => (entry ? ContezzaObjectUtils.getValue(entry, propertyOrCallback) : undefined));
+                    } else {
+                        return value ? ContezzaObjectUtils.getValue(value, propertyOrCallback) : undefined;
+                    }
                 }
-            }
-        });
+            });
+        }
+    };
 
     static stringToObject = (property: string): OperatorFunction<string | string[], any> =>
         map((value) => {

@@ -51,6 +51,27 @@ export class ContezzaUtils {
             .replace(/_./g, (match) => match[1].toUpperCase());
 
     /**
+     * Parses a string as a function. The string must contain `=>`, otherwise returns `undefined`. Throws an error if the `Function`-constructor call fails.
+     *
+     * @param f A string to be parsed as a function.
+     */
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    static stringToFunction = (f: string): Function | undefined => {
+        if (f.includes('=>')) {
+            const split = f.split('=>').map((x) => x.trim());
+            const parsedArgs = split[0].match(/^\(.*\)$/) ? split[0].slice(1, -1) : split[0];
+            const body = split.slice(1).join('=>');
+            try {
+                return new Function(parsedArgs, body);
+            } catch (e) {
+                throw new Error(`Failed to parse ${f} as a function. Detected arguments: ${parsedArgs}, body: ${body}`);
+            }
+        } else {
+            return undefined;
+        }
+    };
+
+    /**
      * If the given Injectable is not provided, then provides it.
      *
      * @param type
