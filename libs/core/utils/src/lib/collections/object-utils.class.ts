@@ -133,6 +133,7 @@ export class ContezzaObjectUtils {
 
         interface Import {
             id: string;
+            idPrefix?: string;
             replace?: Replacer[];
         }
 
@@ -179,7 +180,7 @@ export class ContezzaObjectUtils {
                     replaced = text;
                 }
 
-                return { id: replaced + (important ? tagImportant : ''), replace: importObject.replace };
+                return { ...importObject, id: replaced + (important ? tagImportant : '') };
             });
         });
 
@@ -208,7 +209,21 @@ export class ContezzaObjectUtils {
             const { id, ...imported } = getValue(object, importObject.id.endsWith(tagImportant) ? importObject.id.slice(0, -tagImportant.length) : importObject.id);
             // deep copy to allow the imported object to be imported multiple times with different replacers
             const copy = JSON.parse(JSON.stringify(imported));
-            ContezzaObjectUtils.replace(copy, importObject.replace);
+            const { replace, idPrefix } = importObject;
+
+            // replace
+            ContezzaObjectUtils.replace(copy, replace);
+
+            // prefix ids
+            if (idPrefix) {
+                const idKeys = ContezzaObjectUtils.findKeys(
+                    copy,
+                    (el) => typeof el === 'string',
+                    (subtarget) => Object.entries(subtarget).filter(([key, val]) => val && (key === 'id' || typeof val === 'object'))
+                );
+                idKeys.forEach((idKey) => ContezzaObjectUtils.setValue(copy, idKey, idPrefix + ContezzaObjectUtils.getValue(copy, idKey)));
+            }
+
             return copy;
         };
         const recursion = (tree: Tree<{ id: string }, 'dependsOn', '*'>) => {
