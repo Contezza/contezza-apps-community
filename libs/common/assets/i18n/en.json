@@ -119,6 +119,21 @@
         }
     },
     "SEARCH": {
+        "LABEL": "Search",
+        "RESULTS": {
+            "LABEL": "Search results"
+        },
+        "PAGINATION": {
+            "OF": "{{count}} of {{total}}"
+        },
+        "LOCATION": {
+            "LABEL": "Location",
+            "FOUND_IN_SITE": "Found in: {{site}}"
+        },
+        "NO_SUGGESTIONS": "Sorry, no suggestions were found",
+        "ERRORS": {
+            "MIN_CHARS": "Search requires at least {{minChars}} characters"
+        },
         "CATEGORIES": {
             "SIZE": "File size",
             "CREATED_DATE": "Creation date"
