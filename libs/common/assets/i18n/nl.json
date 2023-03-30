@@ -119,6 +119,21 @@
         }
     },
     "SEARCH": {
+        "LABEL": "Zoeken",
+        "RESULTS": {
+            "LABEL": "Zoekresultaten"
+        },
+        "PAGINATION": {
+            "OF": "{{count}} van {{total}}"
+        },
+        "LOCATION": {
+            "LABEL": "Locatie",
+            "FOUND_IN_SITE": "Bevindt zich in: {{site}}"
+        },
+        "NO_SUGGESTIONS": "Sorry, er zijn geen suggesties gevonden",
+        "ERRORS": {
+            "MIN_CHARS": "Zoekactie moet tenminste {{minChars}} karakters bevatten"
+        },
         "CATEGORIES": {
             "SIZE": "Bestandsgrootte",
             "CREATED_DATE": "Datum gemaakt"
