@@ -20,21 +20,28 @@ N.B.:
 * Imports can also be nested, in this case they are processed in the correct order.
 * Circular dependencies are detected and throw errors.
 
-### Replacers
-
-Each import can also define a list of replacers. In this case the import implements the interface
+Each import can also define a list of replacers and an id prefix. The full import interface is
 ```
 interface Import {
    id: string;
-   replace?: { replaced: string; replacer: any }[]
+   replace?: { replaced: string; replacer: any }[];
+   prefixIds?: string;
 }
 ```
-An object can have imports with and without replacers at the same time, therefore the complete typing of the property `imports` is
+and the property `imports` has type
 ```
 string | Import | (string | Import)[]
 ```
+allowing to mix imports with and without these optional properties.
+
+### Replacers
+
 If an object is imported and replacers are defined, then a replace operation is performed (replace `replaced` with `replacer`) on each object property of type `string`.
 
 N.B.:
-* The same replacer can be applied multiple times in multiple proeprties of the imported object.
+* The same replacer can be applied multiple times in multiple properties of the imported object.
 * The same object can be imported multiple times with different replacers.
+
+### Id prefix
+
+If an object is imported and an id prefix is defined, then this prefix is applied to each `id` (sub)property.
