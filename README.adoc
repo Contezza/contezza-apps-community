@@ -33,13 +33,14 @@ In onderstaande paragrafen worden de release details beschreven.
 :sectnums!:
 
 ==== Release 1.0.2
-Algemeen: Comments worden meegenomen en zijn beschikbaar als documentatie.
 
-@contezza/core/extensions: bugfix.
-
-@contezza/core/utils: `map` operator uitbreiden om generieke callbacks te ondersteunen.
+- Algemeen: comments worden meegenomen en zijn beschikbaar als documentatie.
+- @contezza/common: i18n uitbreiden.
+- @contezza/core/extensions: bugfix.
+- @contezza/core/utils: `map` operator uitbreiden om generieke callbacks te ondersteunen.
 
 ==== Release 1.0.1
+
 Libraries uitbreiden.
 
 ==== Release 1.0.0
