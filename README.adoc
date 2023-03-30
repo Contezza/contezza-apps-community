@@ -34,6 +34,12 @@ In onderstaande paragrafen worden de release details beschreven.
 
 ==== Release 1.0.2
 
+Nieuwe features:
+
+- @contezza/core/extensions: imports worden ondersteund in extension bestanden https://support.contezza.nl/issues/23966[[#23966]]
+
+Bugfixes/minor changes:
+
 - Algemeen: comments worden meegenomen en zijn beschikbaar als documentatie.
 - @contezza/common: i18n uitbreiden.
 - @contezza/core/extensions: bugfix.
