@@ -2,7 +2,12 @@ import { ObjectUtils } from '@alfresco/adf-core';
 import { mergeObjects } from '@alfresco/adf-extensions';
 
 import { ObjectEntry, Tree } from '../types';
-import { ContezzaArrayUtils } from './array-utils.class';
+import { ContezzaArrayUtils, OrArray } from './array-utils.class';
+
+interface Replacer {
+    replaced: string;
+    replacer: any;
+}
 
 export class ContezzaObjectUtils {
     /**
@@ -121,13 +126,23 @@ export class ContezzaObjectUtils {
      * @param options
      */
     static resolveImports<T>(object: T, options: { tagImportant: string; importsKey: string } = { tagImportant: '!important', importsKey: 'imports' }) {
+        const { getValue } = ContezzaObjectUtils;
+
         const { tagImportant, importsKey } = options;
         const keysWithImport = ContezzaObjectUtils.findKeys(object, (el) => el && typeof el === 'object' && importsKey in el);
 
+        interface Import {
+            id: string;
+            replace?: Replacer[];
+        }
+
         // resolve array element matchers into array indexes
         keysWithImport.forEach((key) => {
-            const objectWithImports = ContezzaObjectUtils.getValue(object, key);
-            objectWithImports[importsKey] = ContezzaArrayUtils.asArray(objectWithImports[importsKey]).map((importId) => {
+            const objectWithImports = getValue(object, key);
+            objectWithImports[importsKey] = ContezzaArrayUtils.asArray(objectWithImports[importsKey] as OrArray<string | Import>).map((importStringOrObject) => {
+                const importObject = typeof importStringOrObject === 'string' ? { id: importStringOrObject } : importStringOrObject;
+                let importId = importObject.id;
+
                 let important = false;
                 if (importId.endsWith(tagImportant)) {
                     important = true;
@@ -143,7 +158,7 @@ export class ContezzaObjectUtils {
                     }
                     replaced = text.replace(/\[[^\[\]]*\]/, (match: string, offset: number, s: string) => {
                         const subkey = s.substring(0, offset);
-                        const array = ContezzaObjectUtils.getValue(object, subkey);
+                        const array = getValue(object, subkey);
                         if (!Array.isArray(array)) {
                             throw new Error('Object element with key ' + subkey + ' is expected to be an array.');
                         }
@@ -164,15 +179,15 @@ export class ContezzaObjectUtils {
                     replaced = text;
                 }
 
-                return replaced + (important ? tagImportant : '');
+                return { id: replaced + (important ? tagImportant : ''), replace: importObject.replace };
             });
         });
 
         // make base import trees
         const importTrees: Tree<{ id: string }, 'dependsOn', '*'>[] = keysWithImport.map((id) => ({
             id,
-            dependsOn: ContezzaArrayUtils.asArray(ContezzaObjectUtils.getValue(object, id)[importsKey]).map((importId) => ({
-                id: importId.endsWith(tagImportant) ? importId.slice(0, -tagImportant.length) : importId,
+            dependsOn: ContezzaArrayUtils.asArray(getValue(object, id)[importsKey]).map((importObject) => ({
+                id: importObject.id.endsWith(tagImportant) ? importObject.id.slice(0, -tagImportant.length) : importObject.id,
             })),
         }));
 
@@ -188,35 +203,60 @@ export class ContezzaObjectUtils {
 
         // follow the import trees to resolve the dependencies
         const processedKeys = [];
+        const processImportObject = (importObject: Import) => {
+            // destructure to exclude id
+            const { id, ...imported } = getValue(object, importObject.id.endsWith(tagImportant) ? importObject.id.slice(0, -tagImportant.length) : importObject.id);
+            // deep copy to allow the imported object to be imported multiple times with different replacers
+            const copy = JSON.parse(JSON.stringify(imported));
+            ContezzaObjectUtils.replace(copy, importObject.replace);
+            return copy;
+        };
         const recursion = (tree: Tree<{ id: string }, 'dependsOn', '*'>) => {
             tree.dependsOn?.forEach((subtree) => recursion(subtree));
             const key = tree.id;
             if (keysWithImport.includes(key) && !processedKeys.includes(key)) {
-                const objectWithImports = ContezzaObjectUtils.getValue(object, key);
-                const [important, notImportant] = ContezzaArrayUtils.partition(ContezzaArrayUtils.asArray(objectWithImports[importsKey]), (importKey) =>
-                    importKey.endsWith(tagImportant)
-                );
+                const objectWithImports = getValue(object, key);
+                const [important, notImportant] = ContezzaArrayUtils.partition(objectWithImports[importsKey] as Import[], (importObject) => importObject.id.endsWith(tagImportant));
                 // merging order: not important imports < object self < important imports
                 // assign the result to the object self
-                Object.assign(
-                    objectWithImports,
-                    mergeObjects(
-                        ...notImportant.map((importKey) => {
-                            const { id, ...imported } = ContezzaObjectUtils.getValue(object, importKey);
-                            return imported;
-                        }),
-                        objectWithImports,
-                        ...important.map((importKey) => {
-                            const { id, ...imported } = ContezzaObjectUtils.getValue(object, importKey.slice(0, -tagImportant.length));
-                            return imported;
-                        })
-                    )
-                );
+                Object.assign(objectWithImports, mergeObjects(...notImportant.map(processImportObject), objectWithImports, ...important.map(processImportObject)));
                 delete objectWithImports[importsKey];
 
                 processedKeys.push(key);
             }
         };
         importTrees.forEach((tree) => recursion(tree));
+    }
+
+    /**
+     * Replaces string (sub)values in the given object, using the given `replacers`. Any replacer consists of two properties, `replaced` and `replacer`. Any occurrence of the first will be replaced with the second.
+     *
+     * @param target An object whose string (sub)values must be replaced.
+     * @param replacers A list of replacers.
+     */
+    static replace<T>(target: T, replacers: Replacer[] = []): T {
+        if (replacers.length) {
+            ContezzaObjectUtils.findKeys(target, (el) => typeof el === 'string').forEach((importedObjectKey) =>
+                ContezzaObjectUtils.setValue(
+                    target,
+                    importedObjectKey,
+                    replacers.reduce(
+                        (acc, { replaced, replacer }) =>
+                            // if the replaced fully matches the value, then it directly replaces the value
+                            // this allows non-string replacer's to be effective
+                            acc === replaced
+                                ? replacer
+                                : typeof acc === 'string'
+                                ? // before turning the replaced into a regex, all special characters must be escaped
+                                  acc.replace(new RegExp(replaced.replace(/[\!\#\$\%\^\&\*\)\(\+\=\.\<\>\{\}\[\]\:\;\'\"\|\~\`\_\-]/g, '\\$&'), 'g'), replacer)
+                                : // this can only happen if the value has already been replaced with a non-string replacer
+                                  // in this case we do nothing
+                                  acc,
+                        ContezzaObjectUtils.getValue(target, importedObjectKey)
+                    )
+                )
+            );
+        }
+        return target;
     }
 }
