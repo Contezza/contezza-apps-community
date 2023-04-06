@@ -237,7 +237,7 @@ export class ContezzaDynamicFormLoaderService {
                     field.initialValue[ContezzaDynamicSourceProcessorService.PARAM_SOURCE] =
                         '${' + ContezzaDynamicFormLoaderService.PLACEHOLDER_INITIAL_VALUE + '$raw->' + path.slice(1).concat([field.id]).join('.') + '}';
                 }
-                 if (!field.defaultValue) {
+                if (!field.defaultValue) {
                     field.defaultValue = { type: 'value', [ContezzaDynamicSourceProcessorService.PARAM_SOURCE] : field.defaultValue === undefined ? null : field.defaultValue };
                 }
 
