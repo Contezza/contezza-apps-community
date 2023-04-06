@@ -237,10 +237,10 @@ export class ContezzaDynamicFormLoaderService {
                     field.initialValue[ContezzaDynamicSourceProcessorService.PARAM_SOURCE] =
                         '${' + ContezzaDynamicFormLoaderService.PLACEHOLDER_INITIAL_VALUE + '$raw->' + path.slice(1).concat([field.id]).join('.') + '}';
                 }
-                if (!field.defaultValue) {
-                    field.defaultValue = { type: 'value' };
-                    field.defaultValue[ContezzaDynamicSourceProcessorService.PARAM_SOURCE] = null;
+                 if (!field.defaultValue) {
+                    field.defaultValue = { type: 'value', [ContezzaDynamicSourceProcessorService.PARAM_SOURCE] : field.defaultValue === undefined ? null : field.defaultValue };
                 }
+
             }
 
             field.subfields?.forEach((subfield) => recursiveMap(subfield, path.concat(field.id)));
