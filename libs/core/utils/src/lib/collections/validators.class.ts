@@ -18,24 +18,21 @@ export class ContezzaValidators {
                 : null;
     };
 
-    static hasProperties = (properties: string[]): ValidatorFn => {
-        return (control: AbstractControl): ValidationErrors | null =>
+    static hasProperties =
+        (properties: string[]): ValidatorFn =>
+        (control: AbstractControl): ValidationErrors | null =>
             control.value && (typeof control.value !== 'object' || !properties.every((prop) => Object.keys(control.value).includes(prop)))
                 ? { hasProperties: { value: control.value } }
                 : null;
-    };
 
-    static isString = (control: AbstractControl): ValidationErrors | null => {
-        return typeof control.value !== 'string' ? { isString: { value: control.value } } : null;
-    };
+    static isString = (control: AbstractControl): ValidationErrors | null => (typeof control.value !== 'string' ? { isString: { value: control.value } } : null);
 
-    static blacklist = (blacklist: string[]): ValidatorFn => {
-        return Validators.pattern('^(?![\\s]*(' + blacklist.join('|') + ')[\\s]*$).*$');
-    };
+    static blacklist = (blacklist: string[]): ValidatorFn => Validators.pattern('^(?![\\s]*(' + blacklist.join('|') + ')[\\s]*$).*$');
 
-    static requiredDateRange = (control: AbstractControl<DateRange>): ValidationErrors | null => {
-        return control.value?.from && control.value?.to && moment.isMoment(control.value.from) && moment.isMoment(control.value.to)
+    static requiredDateRange = (control: AbstractControl<DateRange>): ValidationErrors | null =>
+        control.value?.from && control.value?.to && moment.isMoment(control.value.from) && moment.isMoment(control.value.to)
             ? null
             : { requiredDateRange: { value: control.value } };
-    };
+
+    static isDirty = (control: AbstractControl): ValidationErrors | null => (control.pristine ? { isDirty: { value: control.value } } : null);
 }
