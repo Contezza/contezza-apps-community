@@ -172,7 +172,7 @@ export class ContezzaObservableOperators {
         map((list) => list.find((item) => Object.entries(properties).every(([key, value]) => item[key] === value)));
 
     static trackFacetBucketBy = (key: string): OperatorFunction<GenericBucket[], GenericBucket[]> =>
-        scan((oldList, newList) => {
+        scan((oldList: GenericBucket[], newList) => {
             oldList.forEach((oldItem) => {
                 const matchingNewItem = newList?.find((newItem) => newItem[key] === oldItem[key]);
                 if (matchingNewItem) {
@@ -191,6 +191,10 @@ export class ContezzaObservableOperators {
             });
 
             // always return the updated old list
-            return oldList;
+            return oldList.sort((a, b) => {
+                // sort by count
+                const count = (x: GenericBucket): number => x.metrics.find(({ type }) => type === 'count')?.value.count || 0;
+                return count(b) - count(a);
+            });
         }, []);
 }
