@@ -12,6 +12,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2023-04-06
+|1.0.3
+|Bekijk de <<Release 1.0.3,release details>>.
+
 |2023-03-29
 |1.0.2
 |Bekijk de <<Release 1.0.2,release details>>.
@@ -31,6 +35,13 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 1.0.3
+
+Bugfixes/minor changes:
+
+- @contezza/dynamicforms return false waarde voor boolean
+- @contezza/dynamicforms toevoegen validator isDirty
 
 ==== Release 1.0.2
 
