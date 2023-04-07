@@ -27,6 +27,9 @@ contezza-button-toggle-field {
             }
         }
 
+        .mat-form-field-wrapper {
+            padding-bottom: 0;
+        }
         .mat-form-field-infix {
             display: flex;
             flex-direction: row;
@@ -34,6 +37,7 @@ contezza-button-toggle-field {
             align-items: center;
             gap: 20px;
             width: unset;
+            border-top: 0;
         }
         .mat-form-field-underline {
             display: none;
