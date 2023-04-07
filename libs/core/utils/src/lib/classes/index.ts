@@ -1,3 +1,4 @@
+export * from './base-api.class';
 export * from './child-module-factory.class';
 export * from './date.class';
 export * from './json-registry.class';

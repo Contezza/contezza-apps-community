@@ -5,14 +5,7 @@ import { Observable } from 'rxjs';
 import { WebscriptApi } from '@alfresco/js-api';
 import { AlfrescoApiService } from '@alfresco/adf-core';
 
-import { ContezzaObservables, HttpClient } from '@contezza/core/utils';
-
-enum HttpMethodType {
-    Get = 'get',
-    Post = 'post',
-    Put = 'put',
-    Delete = 'delete',
-}
+import { ContezzaObservables, HttpClient, HttpMethod } from '@contezza/core/utils';
 
 /**
  * Facilitates Alfresco `WebscriptApi`.
@@ -30,24 +23,24 @@ export class WebscriptService implements HttpClient {
     constructor(private readonly apiService: AlfrescoApiService) {}
 
     get<T>(url: string): Observable<T> {
-        return this.execute(HttpMethodType.Get, url);
+        return this.execute(HttpMethod.Get, url);
     }
 
     post<T>(url: string, body: any): Observable<T> {
-        return this.execute(HttpMethodType.Post, url, body);
+        return this.execute(HttpMethod.Post, url, body);
     }
 
     put<T>(url: string, body: any): Observable<T> {
-        return this.execute(HttpMethodType.Put, url, body);
+        return this.execute(HttpMethod.Put, url, body);
     }
 
     delete<T>(url: string): Observable<T> {
-        return this.execute(HttpMethodType.Delete, url);
+        return this.execute(HttpMethod.Delete, url);
     }
 
-    execute<T>(httpMethod: HttpMethodType.Get | HttpMethodType.Delete, url: string): Observable<T>;
-    execute<T>(httpMethod: HttpMethodType.Post | HttpMethodType.Put, url: string, body?: any): Observable<T>;
-    execute<T>(httpMethod: HttpMethodType, url: string, body?: any): Observable<T> {
+    execute<T>(httpMethod: HttpMethod.Get | HttpMethod.Delete, url: string): Observable<T>;
+    execute<T>(httpMethod: HttpMethod.Post | HttpMethod.Put, url: string, body: any): Observable<T>;
+    execute<T>(httpMethod: HttpMethod, url: string, body?: any): Observable<T> {
         return ContezzaObservables.from(this.webscript.executeWebScript(httpMethod.toString().toUpperCase(), url, '', '', '', body));
     }
 }
