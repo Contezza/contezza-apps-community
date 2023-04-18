@@ -1,6 +1,6 @@
 {
     "name": "@contezza/node-browser",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "peerDependencies": {
         "@angular/common": "^14.2.0",
         "@angular/core": "^14.2.0"
