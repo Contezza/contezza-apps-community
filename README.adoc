@@ -12,6 +12,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2023-04-18
+|1.0.5
+|Bekijk de <<Release 1.0.5,release details>>.
+
 |2023-04-07
 |1.0.4
 |Bekijk de <<Release 1.0.4,release details>>.
@@ -40,15 +44,25 @@ In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
 
+==== Release 1.0.5
+
+Bugfixes/minor changes:
+
+- @contezza/core/extensions: imports in extension bestanden ondersteunen nu ook primitive types.
+- @contezza/core/utils: `ContezzaObservables.while` fixen en uitbreiden.
+- @contezza/core/utils: `ContezzaObjectUtils.findKeys` ondersteunt nu parameter `allowNestedKeys`.
+
+Let op: interfaces van `ContezzaObservables.while` en `ContezzaObjectUtils.findKeys` zijn hiermee aangepast en niet compatibel met de oude interfaces.
+
 ==== Release 1.0.4
 
 Bugfixes/minor changes:
 
-- @contezza/context: `ActionsService` uitbreiden, `featureKey` kan nu via input gegeven worden.
+- @contezza/core/context: `ActionsService` uitbreiden, `featureKey` kan nu via input gegeven worden.
 - @contezza/dynamicforms: fix stijl van button-toggle.
 - @contezza/dynamicforms: date format kan via token geconfigureerd worden.
-- @contezza/utils: operator `trackFacetBucketBy` sorteert nu de facets.
-- @contezza/utils: class `BaseApi` en type `HttpMethod` toegevoegd.
+- @contezza/core/utils: operator `trackFacetBucketBy` sorteert nu de facets.
+- @contezza/core/utils: class `BaseApi` en type `HttpMethod` toegevoegd.
 
 ==== Release 1.0.3
 
