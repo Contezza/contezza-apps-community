@@ -1,12 +1,17 @@
 import { ObjectUtils } from '@alfresco/adf-core';
 import { mergeObjects } from '@alfresco/adf-extensions';
 
-import { ObjectEntry, Tree } from '../types';
+import { KeyOf, ObjectEntry, Tree } from '../types';
 import { ContezzaArrayUtils, OrArray } from './array-utils.class';
 
 interface Replacer {
     replaced: string;
     replacer: any;
+}
+
+interface FindKeysOptions {
+    parser: (_: any) => [string, any][];
+    allowNestedKeys: boolean;
 }
 
 export class ContezzaObjectUtils {
@@ -58,13 +63,28 @@ export class ContezzaObjectUtils {
     /**
      * Returns the list of all nested keys of the target object whose values satisfy the given evaluator.
      * In other words, for every key returned by this method, evaluator(ContezzaObjectUtils.getValue(target, key)) is true.
+     *
+     * @param target The target object.
+     * @param evaluator A boolean function, keys whose value satisfies this function are included in the output.
+     * @param options Optional parameters are <ul><li>`parser` - Function defining how the target object must be parsed.</li><li>`allowNestedKeys` - Boolean parameter saying whether the parsing must go deeper once a match is found.</li></ul>
      */
-    static findKeys(target: any, evaluator: (_: any) => boolean, parser: (_: any) => [string, any][] = (subtarget) => Object.entries(subtarget)): string[] {
+    static findKeys<T>(target: T, evaluator: (_: any) => boolean, options: Partial<FindKeysOptions> = {}): KeyOf<T>[] {
+        const defaultOptions: FindKeysOptions = {
+            parser: (subtarget) => Object.entries(subtarget),
+            allowNestedKeys: false,
+        };
+
+        const { parser, allowNestedKeys } = Object.assign(defaultOptions, options);
+
         const keys: string[] = [];
         const recursiveMap = (subtarget: any, path: string[] = []) => {
+            let match = false;
             if (evaluator(subtarget)) {
+                match = true;
                 keys.push(path.join('.'));
-            } else if (subtarget && typeof subtarget === 'object') {
+            }
+            // if allowNestedKeys === true then we use 'match' to let this works as an 'else if'
+            if ((allowNestedKeys || !match) && subtarget && typeof subtarget === 'object') {
                 parser(subtarget).forEach(([key, val]) => {
                     // note: this recursion is not well-defined in general (an object may loop into itself)
                     recursiveMap(val, path.concat([key]));
@@ -72,7 +92,7 @@ export class ContezzaObjectUtils {
             }
         };
         recursiveMap(target);
-        return keys;
+        return keys as KeyOf<T>[];
     }
 
     /**

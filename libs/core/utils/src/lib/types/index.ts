@@ -1,3 +1,4 @@
+export * from './construct-tuple.type';
 export * from './difference.type';
 export * from './disjoint.type';
 export * from './join.type';

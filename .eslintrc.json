@@ -73,6 +73,7 @@
                     }
                 ],
                 "@typescript-eslint/type-annotation-spacing": "off",
+                "@typescript-eslint/unified-signatures": "off",
                 "arrow-parents": ["off", "always"],
                 "brace-style": ["off", "off"],
                 "eol-last": "off",
