@@ -149,7 +149,7 @@ export class ContezzaObjectUtils {
         const { getValue } = ContezzaObjectUtils;
 
         const { tagImportant, importsKey } = options;
-        const keysWithImport = ContezzaObjectUtils.findKeys(object, (el) => el && typeof el === 'object' && importsKey in el);
+        const keysWithImport = ContezzaObjectUtils.findKeys(object, (el) => el && typeof el === 'object' && importsKey in el, { allowNestedKeys: true });
 
         interface Import {
             id: string;
@@ -206,7 +206,7 @@ export class ContezzaObjectUtils {
             });
 
             // make base import trees
-            const importTrees: Tree<{ id: string }, 'dependsOn', '*'>[] = keysWithImport.map((id) => ({
+            const importTrees: Tree<{ id: KeyOf<T> }, 'dependsOn', '*'>[] = keysWithImport.map((id) => ({
                 id,
                 dependsOn: ContezzaArrayUtils.asArray(getValue(object, id)[importsKey]).map((importObject) => ({
                     id: importObject.id.endsWith(tagImportant) ? importObject.id.slice(0, -tagImportant.length) : importObject.id,
@@ -215,6 +215,9 @@ export class ContezzaObjectUtils {
 
             // chain dependencies in import trees
             importTrees.forEach((tree) => tree.dependsOn.forEach((dep) => (dep.dependsOn = importTrees.filter(({ id }) => id.startsWith(dep.id)))));
+
+            // add dependencies for nested keys
+            importTrees.forEach((tree, i, trees) => tree.dependsOn.push(...trees.filter((tree2) => tree2 !== tree).filter((tree2) => tree.id.startsWith(tree2.id))));
 
             // detect circular dependencies
             try {
@@ -226,28 +229,31 @@ export class ContezzaObjectUtils {
             // follow the import trees to resolve the dependencies
             const processedKeys = [];
             const processImportObject = (importObject: Import) => {
-                // destructure to exclude id
-                const { id, ...imported } = getValue(object, importObject.id.endsWith(tagImportant) ? importObject.id.slice(0, -tagImportant.length) : importObject.id);
-                // deep copy to allow the imported object to be imported multiple times with different replacers
-                const copy = JSON.parse(JSON.stringify(imported));
-                const { replace, prefixIds } = importObject;
+                const value = getValue(object, importObject.id.endsWith(tagImportant) ? importObject.id.slice(0, -tagImportant.length) : importObject.id);
+                if (typeof value === 'object') {
+                    // destructure to exclude id
+                    const { id, ...imported } = getValue(object, importObject.id.endsWith(tagImportant) ? importObject.id.slice(0, -tagImportant.length) : importObject.id);
+                    // deep copy to allow the imported object to be imported multiple times with different replacers
+                    const copy = JSON.parse(JSON.stringify(imported));
+                    const { replace, prefixIds } = importObject;
 
-                // replace
-                ContezzaObjectUtils.replace(copy, replace);
+                    // replace
+                    ContezzaObjectUtils.replace(copy, replace);
 
-                // prefix ids
-                if (prefixIds) {
-                    const idKeys = ContezzaObjectUtils.findKeys(
-                        copy,
-                        (el) => typeof el === 'string',
-                        (subtarget) => Object.entries(subtarget).filter(([key, val]) => val && (key === 'id' || typeof val === 'object'))
-                    );
-                    idKeys.forEach((idKey) => ContezzaObjectUtils.setValue(copy, idKey, prefixIds + ContezzaObjectUtils.getValue(copy, idKey)));
+                    // prefix ids
+                    if (prefixIds) {
+                        const idKeys = ContezzaObjectUtils.findKeys(copy, (el) => typeof el === 'string', {
+                            parser: (subtarget) => Object.entries(subtarget).filter(([key, val]) => val && (key === 'id' || typeof val === 'object')),
+                        });
+                        idKeys.forEach((idKey) => ContezzaObjectUtils.setValue(copy, idKey, prefixIds + ContezzaObjectUtils.getValue(copy, idKey)));
+                    }
+
+                    return copy;
+                } else {
+                    return { 'tmp-wrapper-key': value };
                 }
-
-                return copy;
             };
-            const recursion = (tree: Tree<{ id: string }, 'dependsOn', '*'>) => {
+            const recursion = (tree: Tree<{ id: KeyOf<T> }, 'dependsOn', '*'>) => {
                 tree.dependsOn?.forEach((subtree) => recursion(subtree));
                 const key = tree.id;
                 if (keysWithImport.includes(key) && !processedKeys.includes(key)) {
@@ -259,6 +265,10 @@ export class ContezzaObjectUtils {
                     // assign the result to the object self
                     Object.assign(objectWithImports, mergeObjects(...notImportant.map(processImportObject), objectWithImports, ...important.map(processImportObject)));
                     delete objectWithImports[importsKey];
+
+                    if ('tmp-wrapper-key' in objectWithImports) {
+                        ContezzaObjectUtils.setValue(object, key, objectWithImports['tmp-wrapper-key']);
+                    }
 
                     processedKeys.push(key);
                 }
