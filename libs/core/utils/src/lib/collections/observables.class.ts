@@ -6,24 +6,37 @@ import { finalize, map, switchMap } from 'rxjs/operators';
 export class ContezzaObservables {
     /**
      * Concatenates a list of observables and returns the merged observed values.
-     * The observables are generated using the given `observableGenerator`, for values 0,1,2,... until the given `whileCondition` evaluates to false.
+     * The observables are generated using the given `observableGenerator` until the given `whileCondition` evaluates to `false`.
      * The observed values are merged using the given `valueMerger`.
+     * Surrogates
+     * <pre>
+     *     let value = undefined;
+     *     let index = 0;
+     *     while(value === undefined || whileCondition(value, index)) {
+     *          newValue = observableGenerator(value, index);
+     *          value = valueMerger(value, newValue);
+     *          index++;
+     *     }
+     *     return value;
+     * </pre>
      *
-     * @param whileCondition
-     * @param observableGenerator
-     * @param valueMerger
+     * @param whileCondition Boolean function of observed value and index. The loop stops if it evaluates to `false`.
+     * @param observableGenerator Function of observed value and index which returns the following observable to be concatenated.
+     * @param valueMerger Function defining how any two observed values must be merged.
      */
     static while<T>(
-        whileCondition: (response: T, index: number) => boolean,
-        observableGenerator: (index: number) => Observable<T>,
-        valueMerger: (response1: T, response2: T) => T = (_, response2) => response2
+        whileCondition: (value: T, index: number) => boolean,
+        observableGenerator: (value: T, index: number) => Observable<T>,
+        valueMerger: (value1: T, value2: T) => T = (_, value2) => value2
     ): Observable<T> {
-        const recursion = (obs: (i: number) => Observable<T>, i: number) =>
-            obs(i).pipe(
-                switchMap((response) => (whileCondition(response, i) ? recursion(obs, i + 1) : of(undefined)).pipe(map((newResponse: T) => [response, newResponse]))),
-                map(([response, newResponse]) => (newResponse ? valueMerger(response, newResponse) : response))
-            );
-        return recursion(observableGenerator, 0);
+        const recursion = (obs: (value: T, index: number) => Observable<T>, value: T = undefined, index: number = 0) =>
+            value === undefined || whileCondition(value, index)
+                ? obs(value, index).pipe(
+                      map((newValue: T) => (value && newValue ? valueMerger(value, newValue) : value || newValue)),
+                      switchMap((newValue) => recursion(obs, newValue, index + 1))
+                  )
+                : of(value);
+        return recursion(observableGenerator);
     }
 
     static from<T>(promise: Promise<T>): Observable<T> {
