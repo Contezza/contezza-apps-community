@@ -2,12 +2,12 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewChild, ViewEncapsulatio
 import { FormControl } from '@angular/forms';
 
 import { MatInput } from '@angular/material/input';
-import { MatSelect } from '@angular/material/select';
+import { MatSelect, MatSelectChange } from '@angular/material/select';
 
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, pairwise, startWith, tap } from 'rxjs/operators';
 
-import { ContezzaDisplayableValue, ContezzaDynamicForm } from '@contezza/dynamic-forms/shared';
+import { ContezzaDisplayableValue, ContezzaDynamicForm, ContezzaFormField } from '@contezza/dynamic-forms/shared';
 
 import { ContezzaBaseFieldComponent } from '../base-field.component';
 
@@ -19,12 +19,13 @@ import { ContezzaBaseFieldComponent } from '../base-field.component';
     encapsulation: ViewEncapsulation.None,
 })
 export class MultiautocompleteFieldComponent<BaseValueType> extends ContezzaBaseFieldComponent<BaseValueType, BaseValueType[]> implements OnInit {
+    selectAllOption?: ContezzaFormField['settings']['selectAllOption'];
     selectableOptions$: Observable<ContezzaDisplayableValue<BaseValueType>[]>;
 
     private readonly optionsLoadingSource = new BehaviorSubject<boolean>(false);
     readonly optionsLoading$: Observable<boolean> = this.optionsLoadingSource.asObservable();
 
-    readonly subcontrol = new FormControl('');
+    subcontrol: FormControl<string>;
 
     @ViewChild(MatInput)
     input: MatInput;
@@ -34,6 +35,9 @@ export class MultiautocompleteFieldComponent<BaseValueType> extends ContezzaBase
 
     ngOnInit() {
         super.ngOnInit();
+
+        const subcontrolId: string = this.field.settings?.subcontrolId;
+        this.subcontrol = subcontrolId ? (this.control.parent.get(subcontrolId) as FormControl<string>) : new FormControl('');
         this.initializeOptions();
     }
 
@@ -98,7 +102,24 @@ export class MultiautocompleteFieldComponent<BaseValueType> extends ContezzaBase
                 map(([searchTerm, options]) => (searchTerm && searchTerm !== '*' ? this.filterOptions(searchTerm, options) : options))
             );
         } else {
-            this.selectableOptions$ = loadedOptions;
+            this.selectAllOption = this.field.settings?.selectAllOption;
+            this.selectableOptions$ = loadedOptions.pipe(
+                map((options) => options || []),
+                tap((options) => {
+                    const toPush = [];
+                    this.control.value
+                        ?.filter((value) => !this.selectAllOption || value !== this.selectAllOption.value)
+                        .forEach((value, index, array) => {
+                            const match = this.findMatchingValue(value, options);
+                            if (match) {
+                                array[index] = match;
+                            } else {
+                                toPush.push(value);
+                            }
+                        });
+                    options.push(...toPush);
+                })
+            );
         }
     }
 
@@ -118,5 +139,15 @@ export class MultiautocompleteFieldComponent<BaseValueType> extends ContezzaBase
             // let the view update, so that the real input is available
             this.input?.focus();
         }, 0);
+    }
+
+    onSelectionChange({ value }: MatSelectChange) {
+        if (this.selectAllOption) {
+            const index = value.indexOf(this.selectAllOption.value);
+            if (index >= 0) {
+                value.splice(index, 1);
+                this.control.setValue(value);
+            }
+        }
     }
 }

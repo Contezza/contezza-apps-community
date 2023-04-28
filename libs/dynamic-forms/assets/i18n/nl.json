@@ -6,9 +6,16 @@
                 "FROM": "vanaf",
                 "TO": "tot"
             },
-            "SELECT" : {
+            "SELECT": {
                 "SELECT_ALL": "Alles selecteren"
             }
         }
+    },
+    "DYNAMIC_FORMS": {
+        "LOADING": "Bezig met laden...",
+        "NO_SUGGESTIONS": "Geen suggesties gevonden",
+        "HINT_MIN_CHARS": "Zoekactie moet tenminste {{minChars}} karakters bevatten",
+        "SELECT_ALL": "Alles selecteren",
+        "OPTIONS": "Opties"
     }
 }

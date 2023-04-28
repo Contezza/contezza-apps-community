@@ -13,6 +13,8 @@ export interface DynamicFormFieldSettings {
     minChars?: number;
     showTotalItems?: boolean;
     autocompletingMode?: 'server' | 'client';
+    subcontrolId?: string;
+    selectAllOption?: { label: string; value: any };
 
     // subform
     setFormValueChangedValidator?: boolean;

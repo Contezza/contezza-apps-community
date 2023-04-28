@@ -48,41 +48,56 @@
                 margin: 0 30px;
             }
 
-            &-select-all {
-                flex: 1 0 auto;
-                .mat-pseudo-checkbox {
-                    display: none;
-                }
-                .mat-checkbox-ripple {
-                    display: none;
-                }
-            }
-
             &-options {
                 overflow: auto;
-                mat-option.mat-option-disabled {
+
+                &-select-all {
+                    position: sticky !important;
+                    z-index: 1;
+                    top: 0;
+                    background-color: var(--theme-card-background-color) !important;
+                    &:hover,
+                    &.mat-active {
+                        // same color as default mat-option, but with no transparency
+                        background-color: rgba(240, 240, 240, 1) !important;
+                    }
+                    //flex: 1 0 auto;
                     .mat-pseudo-checkbox {
                         display: none;
                     }
-                }
-                mat-option.loading .mat-option-text {
-                    height: 100%;
-                    .mat-spinner {
-                        height: 100% !important;
-                        width: 100% !important;
-                        svg {
-                            height: 100% !important;
-                            width: 100% !important;
-                        }
+                    .mat-checkbox-ripple {
+                        display: none;
                     }
                 }
 
-                .mat-option-text {
-                    display: flex;
-                    gap: 8px;
-                    &-label {
-                        overflow: hidden;
-                        text-overflow: ellipsis;
+                mat-option {
+                    &:not(.contezza-multiautocomplete-form-field-panel-content-options-select-all) .mat-option-text {
+                        display: flex;
+                        gap: 8px;
+                        &-label {
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                    }
+                    &.mat-option-disabled {
+                        .mat-pseudo-checkbox {
+                            display: none;
+                        }
+                        .mat-checkbox-ripple {
+                            display: none;
+                        }
+                    }
+
+                    &.loading .mat-option-text {
+                        height: 100%;
+                        .mat-spinner {
+                            height: 100% !important;
+                            width: 100% !important;
+                            svg {
+                                height: 100% !important;
+                                width: 100% !important;
+                            }
+                        }
                     }
                 }
             }

@@ -6,9 +6,16 @@
                 "FROM": "from",
                 "TO": "to"
             },
-            "SELECT" : {
+            "SELECT": {
                 "SELECT_ALL": "Select all"
             }
         }
+    },
+    "DYNAMIC_FORMS": {
+        "LOADING": "Loading...",
+        "NO_SUGGESTIONS": "No suggestions found",
+        "HINT_MIN_CHARS": "Search requires at least {{minChars}} characters",
+        "SELECT_ALL": "Select all",
+        "OPTIONS": "Options"
     }
 }
