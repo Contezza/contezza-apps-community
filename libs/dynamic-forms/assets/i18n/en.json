@@ -15,7 +15,7 @@
         "LOADING": "Loading...",
         "NO_SUGGESTIONS": "No suggestions found",
         "HINT_MIN_CHARS": "Search requires at least {{minChars}} characters",
-        "SELECT_ALL": "Select all",
+        "SELECT_ALL_SUGGESTIONS": "Select all ({{total}}) suggestions",
         "OPTIONS": "Options"
     }
 }

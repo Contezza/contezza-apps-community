@@ -15,7 +15,7 @@
         "LOADING": "Bezig met laden...",
         "NO_SUGGESTIONS": "Geen suggesties gevonden",
         "HINT_MIN_CHARS": "Zoekactie moet tenminste {{minChars}} karakters bevatten",
-        "SELECT_ALL": "Alles selecteren",
+        "SELECT_ALL_SUGGESTIONS": "Alle ({{total}}) suggesties selecteren",
         "OPTIONS": "Opties"
     }
 }
