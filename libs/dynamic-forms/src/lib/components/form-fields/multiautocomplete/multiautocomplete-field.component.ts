@@ -5,7 +5,7 @@ import { MatInput } from '@angular/material/input';
 import { MatSelect, MatSelectChange } from '@angular/material/select';
 
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, pairwise, startWith, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, pairwise, pluck, startWith, tap } from 'rxjs/operators';
 
 import { ContezzaDisplayableValue, ContezzaDynamicForm, ContezzaFormField } from '@contezza/dynamic-forms/shared';
 
@@ -103,22 +103,22 @@ export class MultiautocompleteFieldComponent<BaseValueType> extends ContezzaBase
             );
         } else {
             this.selectAllOption = this.field.settings?.selectAllOption;
-            this.selectableOptions$ = loadedOptions.pipe(
-                map((options) => options || []),
-                tap((options) => {
+            this.selectableOptions$ = combineLatest([this.control.valueChanges.pipe(startWith(this.control.value)), loadedOptions.pipe(map((options) => options || []))]).pipe(
+                tap(([value, options]: [any, any]) => {
                     const toPush = [];
-                    this.control.value
-                        ?.filter((value) => !this.selectAllOption || value !== this.selectAllOption.value)
-                        .forEach((value, index) => {
-                            const match = this.findMatchingValue(value, options);
+                    value?.forEach((val, index) => {
+                        if (!this.selectAllOption || val !== this.selectAllOption.value) {
+                            const match = this.findMatchingValue(val, options);
                             if (match) {
-                                this.control.value[index] = match;
+                                value[index] = match;
                             } else {
-                                toPush.push(value);
+                                toPush.push(val);
                             }
-                        });
+                        }
+                    });
                     options.push(...toPush);
-                })
+                }),
+                pluck(1)
             );
         }
     }
