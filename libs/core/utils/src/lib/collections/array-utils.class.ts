@@ -34,13 +34,23 @@ export class ContezzaArrayUtils {
         }, {} as Record<KeyType, T[]>);
     }
 
-    static sortBy<T>(array: T[], property: keyof T): T[] {
+    /**
+     * Sorts the element of the given array in ascending order based on the value corresponding to the given key.
+     *
+     * @param array An array to be sorted.
+     * @param key A key of the array elements. The array elements are sorted based on the corresponding value.
+     */
+    static sortBy<T>(array: T[], key: keyof T): T[] {
         return array.sort((a, b) => {
-            const nameA = a[property];
-            const nameB = b[property];
-            if (nameA < nameB) {
+            const getLabel = (element: T): T[keyof T] | string => {
+                const label = element[key];
+                return typeof label === 'string' ? label.toLowerCase() : label;
+            };
+            const labelA = getLabel(a);
+            const labelB = getLabel(b);
+            if (labelA < labelB) {
                 return -1;
-            } else if (nameA > nameB) {
+            } else if (labelA > labelB) {
                 return 1;
             } else {
                 return 0;
