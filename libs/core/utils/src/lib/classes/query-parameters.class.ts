@@ -1,5 +1,5 @@
 export interface ContezzaQueryParametersInterface {
-    [key: string]: string | number;
+    [key: string]: string | number | boolean;
 }
 
 export class ContezzaQueryParameters {
@@ -13,7 +13,7 @@ export class ContezzaQueryParameters {
     }
 
     static fromString(query: string): ContezzaQueryParametersInterface {
-        const queryParameters = {};
+        const queryParameters: ContezzaQueryParametersInterface = {};
         query
             ?.split('&')
             .filter((value) => value.includes('='))
