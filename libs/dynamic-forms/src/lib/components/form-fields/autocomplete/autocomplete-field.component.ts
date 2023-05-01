@@ -49,7 +49,7 @@ export class AutocompleteFieldComponent<ValueType> extends ContezzaBaseFieldComp
     protected initializeOptions() {
         const loadedOptions: Observable<ContezzaDisplayableValue<ValueType>[]> = this.field.options.filterLoadingValues(this.optionsLoadingSource);
 
-        if (!this.field.settings?.autocompletingMode || this.field.settings.autocompletingMode === 'client') {
+        if (!this.field.settings?.preFilteredOptions) {
             // TODO: every time the following flow changes, check impact in:
             // version selection in 'register object'
             // iot direction selection in postintake
