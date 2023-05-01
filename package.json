@@ -1,6 +1,6 @@
 {
     "name": "contezza-apps-community",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "scripts": {
         "ng": "nx",
         "postinstall": "node ./decorate-angular-cli.js",
