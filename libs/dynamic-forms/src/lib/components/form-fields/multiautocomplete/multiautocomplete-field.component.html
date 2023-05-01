@@ -52,9 +52,17 @@
                                 >
                                     {{ selectAllOption.label | translate }}
                                 </mat-option>
-                                <ng-container *ngIf="!field.settings?.minChars || (subcontrol.value && field.settings?.minChars <= subcontrol.value.length); else tooltipMinChars">
+                                <ng-container
+                                    *contezzaLet="!(!field.settings?.minChars || (subcontrol.value && field.settings?.minChars <= subcontrol.value.length)) as showTooltipMinChars"
+                                >
+                                    <ng-container *ngIf="showTooltipMinChars">
+                                        <ng-container *ngTemplateOutlet="tooltipMinChars"></ng-container>
+                                    </ng-container>
                                     <ng-container *ngIf="!optionsLoading; else loading">
-                                        <ng-container *ngIf="selectableOptions && selectableOptions.length > 0; else noResults">
+                                        <ng-container *ngIf="!selectableOptions?.length && !showTooltipMinChars">
+                                            <ng-container *ngTemplateOutlet="noResults"></ng-container>
+                                        </ng-container>
+                                        <ng-container *ngIf="selectableOptions?.length">
                                             <ng-container
                                                 *contezzaLet="
                                                     (!selectAllOption || !control.value?.includes(selectAllOption.value)) &&
@@ -67,21 +75,21 @@
                                                     (onSelectionChange)="
                                                         $event.source.deselect(); control.setValue(checkbox.indeterminate || !checkbox.checked ? selectableOptions : [])
                                                     "
-                                                    ><mat-checkbox
-                                                        #checkbox
-                                                        color="primary"
-                                                        class="mat-option-pseudo-checkbox"
-                                                        [class.mat-checkbox-disabled]="false"
-                                                        disableRipple
-                                                        [checked]="checked"
-                                                        [indeterminate]="
-                                                                (!selectAllOption || !control.value?.includes(selectAllOption.value)) &&
-                                                                0 < control.value?.length &&
-                                                                control.value?.length < selectableOptions.length
-                                                            "
-                                                        disabled
-                                                    ></mat-checkbox
-                                                    >{{ 'DYNAMIC_FORMS.SELECT_ALL_SUGGESTIONS' | translate : { total: selectableOptions.length } }}</mat-option
+                                                ><mat-checkbox
+                                                    #checkbox
+                                                    color="primary"
+                                                    class="mat-option-pseudo-checkbox"
+                                                    [class.mat-checkbox-disabled]="false"
+                                                    disableRipple
+                                                    [checked]="checked"
+                                                    [indeterminate]="
+                                                            (!selectAllOption || !control.value?.includes(selectAllOption.value)) &&
+                                                            0 < control.value?.length &&
+                                                            control.value?.length < selectableOptions.length
+                                                        "
+                                                    disabled
+                                                ></mat-checkbox
+                                                >{{ 'DYNAMIC_FORMS.SELECT_ALL_SUGGESTIONS' | translate : { total: selectableOptions.length } }}</mat-option
                                                 >
                                             </ng-container>
                                             <ng-container *ngFor="let selectableOption of selectableOptions">
@@ -118,9 +126,7 @@
                         </div>
                         <ng-template #noResults>
                             <mat-option disabled title="{{ 'DYNAMIC_FORMS.NO_SUGGESTIONS' | translate }}" class="no-suggestions">
-                                <span>
-                                    {{ 'DYNAMIC_FORMS.NO_SUGGESTIONS' | translate }}
-                                </span>
+                                {{ 'DYNAMIC_FORMS.NO_SUGGESTIONS' | translate }}
                             </mat-option>
                         </ng-template>
                         <ng-template #loading>
@@ -130,9 +136,7 @@
                         </ng-template>
                         <ng-template #tooltipMinChars>
                             <mat-option disabled title="{{ 'DYNAMIC_FORMS.HINT_MIN_CHARS' | translate : { minChars: field.settings?.minChars } }}">
-                                <span>
-                                    {{ 'DYNAMIC_FORMS.HINT_MIN_CHARS' | translate : { minChars: field.settings?.minChars } }}
-                                </span>
+                                {{ 'DYNAMIC_FORMS.HINT_MIN_CHARS' | translate : { minChars: field.settings?.minChars } }}
                             </mat-option>
                         </ng-template>
                     </mat-select>

@@ -109,10 +109,10 @@ export class MultiautocompleteFieldComponent<BaseValueType> extends ContezzaBase
                     const toPush = [];
                     this.control.value
                         ?.filter((value) => !this.selectAllOption || value !== this.selectAllOption.value)
-                        .forEach((value, index, array) => {
+                        .forEach((value, index) => {
                             const match = this.findMatchingValue(value, options);
                             if (match) {
-                                array[index] = match;
+                                this.control.value[index] = match;
                             } else {
                                 toPush.push(value);
                             }
