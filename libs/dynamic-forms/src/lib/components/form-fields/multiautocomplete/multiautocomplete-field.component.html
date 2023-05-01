@@ -1,7 +1,7 @@
 <ng-container *contezzaLet="readonly$ | async as readonly">
     <ng-container *contezzaLet="selectableOptions$ | async as selectableOptions">
         <ng-container *contezzaLet="optionsLoading$ | async as optionsLoading">
-            <ng-container *contezzaLet="optionsLoading && (!field.settings?.autocompletingMode || field.settings.autocompletingMode === 'client') as formLoading">
+            <ng-container *contezzaLet="optionsLoading && (!field.settings?.preFilteredOptions) as formLoading">
                 <mat-form-field
                     *ngIf="formLoading"
                     class="contezza-form-field contezza-multiautocomplete-form-field adf-property-field adf-card-textitem-field"
