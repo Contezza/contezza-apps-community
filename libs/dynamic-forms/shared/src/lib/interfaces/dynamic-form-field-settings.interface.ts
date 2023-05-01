@@ -12,7 +12,7 @@ export interface DynamicFormFieldSettings {
     // autocomplete
     minChars?: number;
     showTotalItems?: boolean;
-    autocompletingMode?: 'server' | 'client';
+    preFilteredOptions?: boolean;
     subcontrolId?: string;
     selectAllOption?: { label: string; value: any };
 

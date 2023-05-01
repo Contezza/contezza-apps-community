@@ -44,7 +44,7 @@ export class MultiautocompleteFieldComponent<BaseValueType> extends ContezzaBase
     protected initializeOptions() {
         const loadedOptions: Observable<ContezzaDisplayableValue<BaseValueType>[]> = this.field.options.filterLoadingValues(this.optionsLoadingSource);
 
-        if (!this.field.settings?.autocompletingMode || this.field.settings.autocompletingMode === 'client') {
+        if (!this.field.settings?.preFilteredOptions) {
             this.selectableOptions$ = combineLatest([
                 // startWith to trigger the flow, otherwise no option is shown
                 this.subcontrol.valueChanges.pipe(startWith(this.subcontrol.value), debounceTime(this.TYPING_DEBOUNCE_TIME), distinctUntilChanged()),
