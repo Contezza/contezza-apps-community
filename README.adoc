@@ -12,6 +12,11 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+
+|2023-05-01
+|1.0.6
+|Bekijk de <<Release 1.0.6,release details>>.
+
 |2023-04-18
 |1.0.5
 |Bekijk de <<Release 1.0.5,release details>>.
@@ -43,6 +48,17 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 1.0.6
+
+Nieuwe features:
+
+- @contezza/dynamic-forms: veld `multiautocomplete` is uitgebreid zodat suggesties extern (buiten de component zelf, bijvoorbeeld server-side) gefilterd kunnen worden.
+
+Bugfixes/minor changes:
+
+- @contezza/core/utils: `ContezzaArrayUtils.sortBy` is case-insensitive.
+- @contezza/core/utils: `ContezzaQueryParametersInterface` accepteert keys met boolean waarde.
 
 ==== Release 1.0.5
 
