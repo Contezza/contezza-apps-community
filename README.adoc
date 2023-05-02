@@ -54,6 +54,7 @@ In onderstaande paragrafen worden de release details beschreven.
 Nieuwe features:
 
 - @contezza/dynamic-forms - Veld `multiautocomplete` is uitgebreid zodat suggesties extern (buiten de component zelf, bijvoorbeeld server-side) gefilterd kunnen worden.
+- @contezza/dynamic-forms - Veld `radio-button` aangemaakt.
 
 Bugfixes/minor changes:
 
