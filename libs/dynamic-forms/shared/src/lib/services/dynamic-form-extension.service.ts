@@ -1,11 +1,11 @@
 import { Injectable, Type } from '@angular/core';
-import { Validators } from '@angular/forms';
+import { AbstractControl, ValidationErrors, Validators } from '@angular/forms';
 
 import { Observable, of } from 'rxjs';
 
 import { ContezzaAsyncDialogService } from '@contezza/core/services';
 import { ContezzaIdResolverService } from '@contezza/core/extensions';
-import { ContezzaValidators } from '@contezza/core/utils';
+import { ContezzaUtils, ContezzaValidators } from '@contezza/core/utils';
 
 import moment from 'moment';
 
@@ -30,6 +30,21 @@ export class ContezzaDynamicFormExtensionService {
         );
         this.setValidators(angularValidators);
         this.setValidators({ ...ContezzaValidators });
+        this.setValidators({
+            /**
+             * Resolves a validator based on the given id. The function given as parameter is applied to the `control` which is being validated and the returned value is given as parameter to the resolved validator.
+             *
+             * @param id An id which resolves to a validator.
+             * @param parameters A string which resolves to a JS function. This function is applied to the `control` which is being validated and the returned value is given as parameter to the resolved validator.
+             */
+            dynamic: ({ id, parameters }: { id: string; parameters: string }) => {
+                const validator = this.idResolver.resolve(id, 'validator');
+                if (!validator) {
+                    throw new Error(`Cannot find validator with id ${id}`);
+                }
+                return (control: AbstractControl): ValidationErrors | null => (parameters ? validator(ContezzaUtils.stringToFunction(parameters)(control)) : validator)(control);
+            },
+        });
 
         this.setSourceTypes({
             custom: (source) => {
