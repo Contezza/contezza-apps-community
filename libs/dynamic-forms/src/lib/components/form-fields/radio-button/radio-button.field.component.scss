@@ -1,0 +1,17 @@
+:host,
+contezza-radio-button-field {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .contezza-button-toggle-form-field {
+        .mat-form-field-underline {
+            display: none;
+        }
+
+        .mat-radio-group {
+            display: flex;
+            gap: 12px;
+        }
+    }
+}
