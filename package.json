@@ -13,6 +13,7 @@
         "build:search": "ng build search",
         "build:third-party": "ng build third-party",
         "build-libs": "./scripts/build-libs.sh",
+        "pack-libs": "./scripts/pack-libs.sh",
         "publish-libs": "./scripts/publish-libs.sh",
         "lint": "nx lint",
         "test": "nx test",
