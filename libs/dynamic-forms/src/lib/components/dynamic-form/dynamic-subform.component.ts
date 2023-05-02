@@ -24,11 +24,15 @@ export class ContezzaDynamicSubformComponent implements OnInit {
     @HostBinding('class')
     hostClass: string;
 
+    @HostBinding('style')
+    hostStyle: string;
+
     @HostBinding('tabindex')
     hostTabindex: number;
 
     ngOnInit() {
         this.hostClass = (this.layout.class || '') + ' dynamicforms-node';
+        this.hostStyle = this.layout.style || '';
         this.hostTabindex = this.isTabbable(this.hostClass) ? 0 : -1;
         if (this.layout.type === 'field') {
             this.field = this.dynamicForm.getFieldById(this.layout.id);
