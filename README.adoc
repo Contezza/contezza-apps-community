@@ -13,7 +13,7 @@ Overzicht van de release notities.
 |Datum |Versie  |Omschrijving
 
 
-|2023-05-01
+|2023-05-02
 |1.0.6
 |Bekijk de <<Release 1.0.6,release details>>.
 
@@ -53,12 +53,13 @@ In onderstaande paragrafen worden de release details beschreven.
 
 Nieuwe features:
 
-- @contezza/dynamic-forms: veld `multiautocomplete` is uitgebreid zodat suggesties extern (buiten de component zelf, bijvoorbeeld server-side) gefilterd kunnen worden.
+- @contezza/dynamic-forms - Veld `multiautocomplete` is uitgebreid zodat suggesties extern (buiten de component zelf, bijvoorbeeld server-side) gefilterd kunnen worden.
 
 Bugfixes/minor changes:
 
-- @contezza/core/utils: `ContezzaArrayUtils.sortBy` is case-insensitive.
-- @contezza/core/utils: `ContezzaQueryParametersInterface` accepteert keys met boolean waarde.
+- @contezza/core/utils - `ContezzaArrayUtils.sortBy` is case-insensitive.
+- @contezza/core/utils - `ContezzaQueryParametersInterface` accepteert keys met boolean waarde.
+- @contezza/dynamic-forms - Interface `DynamicFormFieldSettings` is uitgebreid met eigenschap `hideRequiredMarker`. Deze wordt ondersteund door veld `input`.
 
 ==== Release 1.0.5
 
