@@ -19,6 +19,7 @@ import { ContezzaInfoFieldModule } from '../form-fields/info/info-field.module';
 import { ContezzaDateRangeChipFieldModule } from '../form-fields/date-range-chip/date-range-chip-field.module';
 import { ContezzaDateRangeSingleFieldModule } from '../form-fields/date-range-single/date-range-single-field.module';
 import { ContezzaPeopleGroupPickerFieldModule } from '../form-fields/people-group-picker/people-grop-picker-field.module';
+import { ContezzaRadioButtonFieldModule } from '../form-fields/radio-button/radio-button.field.module';
 
 @NgModule({
     imports: [
@@ -35,6 +36,7 @@ import { ContezzaPeopleGroupPickerFieldModule } from '../form-fields/people-grou
         ContezzaInputFieldModule,
         ContezzaInputDialogFieldModule,
         ContezzaMultiautocompleteFieldModule,
+        ContezzaRadioButtonFieldModule,
         ContezzaSelectFieldModule,
         ContezzaTextareaFieldModule,
         ContezzaToggleFieldModule,

@@ -1,0 +1,22 @@
+<mat-form-field class="contezza-form-field contezza-button-toggle-form-field" [floatLabel]="field.settings?.floatLabel" [appearance]="field.settings?.appearance">
+    <mat-label *ngIf="field.label">{{ field.label | translate }}</mat-label>
+    <input matInput [formControl]="control" style="display: none" />
+    <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control"></mat-error>
+    <ng-container *contezzaLet="selectableOptions$ | async as selectableOptions">
+        <ng-container *contezzaLet="optionsLoading$ | async as optionsLoading">
+            <mat-radio-group [formControl]="control" color="primary" [style.border]="optionsLoading ? 'none' : ''">
+                <!--                <ng-container *ngIf="optionsLoading">-->
+                <!--                    <mat-button-toggle class="contezza-form-field-loading" disabled>-->
+                <!--                        <mat-spinner color="primary"></mat-spinner>-->
+                <!--                    </mat-button-toggle>-->
+                <!--                </ng-container>-->
+                <ng-container *ngIf="!optionsLoading">
+                    <mat-radio-button *ngFor="let option of selectableOptions" [value]="option" title="{{ option.contezzaDisplay.option.tooltip | translate }}">
+                        <adf-icon *ngIf="option.contezzaDisplay.option.icon" [value]="option.contezzaDisplay.option.icon"></adf-icon>
+                        {{ option.contezzaDisplay.option.label || '' }}
+                    </mat-radio-button>
+                </ng-container>
+            </mat-radio-group>
+        </ng-container>
+    </ng-container>
+</mat-form-field>

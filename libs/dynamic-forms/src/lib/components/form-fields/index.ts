@@ -28,6 +28,8 @@ export * from './input-dialog/input-dialog-field.module';
 export * from './multiautocomplete/multiautocomplete-field.component';
 export * from './multiautocomplete/multiautocomplete-field.module';
 export * from './people-group-picker/people-group-picker-field.component';
+export * from './radio-button/radio-button.field.component';
+export * from './radio-button/radio-button.field.module';
 export * from './select/select-field.component';
 export * from './select/select-field.module';
 
