@@ -6,12 +6,13 @@
         [matDatetimepicker]="picker"
         [formControl]="control"
         [placeholder]="field.placeholder | translate"
-        (focus)="picker.open()"
         (blur)="input.blur()"
         (focusout)="input.blur()"
         [required]="required"
-        class="adf-property-value"
         data-lpignore="true"
+        autocomplete="off"
+        class="adf-property-value"
+        [min]="min$ | async"
     />
     <button
         type="button"
