@@ -58,8 +58,10 @@ Nieuwe features:
 Bugfixes/minor changes:
 
 - @contezza/core/utils - `ContezzaArrayUtils.sortBy` is case-insensitive.
+- @contezza/core/utils - `ContezzaObservableOperators.dateToMoment` aangemaakt.
 - @contezza/core/utils - `ContezzaQueryParametersInterface` accepteert keys met boolean waarde.
 - @contezza/dynamic-forms - Interface `DynamicFormFieldSettings` is uitgebreid met eigenschap `hideRequiredMarker`. Deze wordt ondersteund door veld `input`.
+- @contezza/dynamic-forms - Validator `dynamic` aangemaakt.
 
 ==== Release 1.0.5
 
