@@ -1,9 +1,10 @@
-import { FloatLabelType, MatFormFieldAppearance } from '@angular/material/form-field';
+import { MatFormField } from '@angular/material/form-field';
 
 export interface DynamicFormFieldSettings {
     labelPosition?: 'before' | 'after';
-    floatLabel?: FloatLabelType;
-    appearance?: MatFormFieldAppearance;
+    floatLabel?: MatFormField['floatLabel'];
+    appearance?: MatFormField['appearance'];
+    hideRequiredMarker?: MatFormField['hideRequiredMarker'];
 
     // textarea
     rows?: number;
