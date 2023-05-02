@@ -36,6 +36,11 @@ export class ContezzaObservableOperators {
 
     static tapLog = tap((value) => console.log(value));
 
+    /**
+     * Maps a JS `Date` into a `moment`.
+     */
+    static dateToMoment = map((date: Date) => moment(date));
+
     static parseJson: OperatorFunction<any, any> = map((value) => {
         try {
             return JSON.parse(value);
