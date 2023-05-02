@@ -7,6 +7,7 @@ export interface ContezzaFormLayout {
     readonly type: ContezzaFormLayoutType;
     readonly id: string;
     readonly class?: string;
+    readonly style?: string;
     readonly subfields?: ContezzaFormLayout[];
     readonly text?: string;
     readonly order?: number;
