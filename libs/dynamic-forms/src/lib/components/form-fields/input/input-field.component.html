@@ -8,6 +8,7 @@
             [class.mat-form-field-disabled]="readonly"
             [floatLabel]="field.settings?.floatLabel"
             [appearance]="field.settings?.appearance"
+            [hideRequiredMarker]="field.settings?.hideRequiredMarker"
         >
             <mat-label *ngIf="field.label">{{ field.label | translate }}</mat-label>
             <ng-container [ngSwitch]="inputType">
