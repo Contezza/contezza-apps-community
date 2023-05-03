@@ -1,0 +1,56 @@
+{
+    "$id": "app.demo-app.dynamicforms",
+    "$version": "@@project.version@@",
+    "$name": "Demo App Dynamic Forms",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "dynamicforms": [
+            {
+                "id": "demo-shell",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "formId",
+                            "type": "input",
+                            "label": "Form ID",
+                            "initialValue": "${form->formId}",
+                            "validations": ["required"]
+                        },
+                        {
+                            "id": "layoutId",
+                            "type": "input",
+                            "label": "Layout ID",
+                            "initialValue": "${form->layoutId}"
+                        },
+                        {
+                            "id": "style",
+                            "type": "input",
+                            "label": "Style",
+                            "initialValue": "${form->style}"
+                        }
+                    ]
+                },
+                "layouts": [
+                    {
+                        "id": "default",
+                        "layout": {
+                            "class": "dynamicforms-row",
+                            "subfields": [
+                                {
+                                    "id": "formId"
+                                },
+                                {
+                                    "id": "layoutId"
+                                },
+                                {
+                                    "id": "style"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}

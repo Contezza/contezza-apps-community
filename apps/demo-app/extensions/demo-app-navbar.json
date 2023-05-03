@@ -7,6 +7,17 @@
     "features": {
         "navbar": [
             {
+                "id": "app.navbar.dynamic-forms-demo-shell",
+                "items": [
+                    {
+                        "id": "app.dynamic-forms-demo-shell",
+                        "icon": "star",
+                        "title": "Dynamic Forms demo shell",
+                        "route": "dynamic-forms-demo-shell"
+                    }
+                ]
+            },
+            {
                 "id": "app.navbar.mgmt.console",
                 "items": [
                     {

@@ -1,0 +1,25 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 12px;
+
+    contezza-dynamic-form {
+        flex: 1;
+    }
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: 12px;
+    border: 1px solid var(--theme-border-color);
+}

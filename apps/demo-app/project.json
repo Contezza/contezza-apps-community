@@ -135,6 +135,11 @@
                         "glob": "**/*"
                     },
                     {
+                        "input": "libs/dynamic-forms/assets",
+                        "output": "./assets/dynamic-forms",
+                        "glob": "**/*"
+                    },
+                    {
                         "input": "libs/mgmt/js-console/extensions",
                         "output": "./assets/plugins",
                         "glob": "*.json"
