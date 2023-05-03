@@ -13,7 +13,7 @@ Overzicht van de release notities.
 |Datum |Versie  |Omschrijving
 
 
-|2023-05-02
+|2023-05-04
 |1.0.6
 |Bekijk de <<Release 1.0.6,release details>>.
 
@@ -65,6 +65,11 @@ Bugfixes/minor changes:
 - @contezza/dynamic-forms - Interface `DynamicFormFieldSettings` is uitgebreid met eigenschap `hideRequiredMarker`. Deze wordt ondersteund door veld `input`.
 - @contezza/dynamic-forms - Interface `ContezzaFormLayout` is uitgebreid met eigenschap `style`.
 - @contezza/dynamic-forms - Validator `dynamic` aangemaakt.
+
+Interne changes:
+
+- Dynamic Forms demo shell aangemaakt in Demo App https://support.contezza.nl/issues/24435[[#24435]].
+- Script `pack-libs` aangemaakt.
 
 ==== Release 1.0.5
 
