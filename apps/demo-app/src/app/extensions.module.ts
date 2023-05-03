@@ -21,7 +21,7 @@ import { environment } from '../environments/environment';
         ContezzaJsConsoleSharedModule,
         ContezzaNodeBrowserSharedModule,
     ],
-    providers: [provideExtensionConfig(['demo-app-navbar.json'])],
+    providers: [provideExtensionConfig(['demo-app-navbar.json', 'dynamicforms.json'])],
 })
 export class AppExtensionsModule {
     constructor(translation: TranslationService) {

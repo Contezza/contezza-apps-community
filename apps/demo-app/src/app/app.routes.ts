@@ -11,6 +11,7 @@ export const APP_ROUTES: Routes = [
 ];
 
 const APP_LAYOUT_ROUTES: Routes = [
+    { path: 'dynamic-forms-demo-shell', loadComponent: () => import('./components/dynamic-forms-demo-shell/demo-shell.component').then((m) => m.DemoShellComponent) },
     { path: 'javascript-console', loadChildren: () => import('@contezza/js-console').then((m) => m.ContezzaJsConsoleModule) },
     { path: 'node-browser', loadChildren: () => import('@contezza/node-browser').then((m) => m.ContezzaNodeBrowserModule) },
 ];
