@@ -150,4 +150,10 @@ export class MultiautocompleteFieldComponent<BaseValueType> extends ContezzaBase
             }
         }
     }
+
+    onOpenedChange(open: boolean) {
+        if (!open) {
+            this.subcontrol.setValue('');
+        }
+    }
 }

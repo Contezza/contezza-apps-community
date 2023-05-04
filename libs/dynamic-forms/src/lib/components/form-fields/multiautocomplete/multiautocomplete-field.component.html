@@ -1,7 +1,7 @@
 <ng-container *contezzaLet="readonly$ | async as readonly">
     <ng-container *contezzaLet="selectableOptions$ | async as selectableOptions">
         <ng-container *contezzaLet="optionsLoading$ | async as optionsLoading">
-            <ng-container *contezzaLet="optionsLoading && (!field.settings?.preFilteredOptions) as formLoading">
+            <ng-container *contezzaLet="optionsLoading && !field.settings?.preFilteredOptions as formLoading">
                 <mat-form-field
                     *ngIf="formLoading"
                     class="contezza-form-field contezza-multiautocomplete-form-field adf-property-field adf-card-textitem-field"
@@ -37,6 +37,7 @@
                         (selectionChange)="onSelectionChange($event)"
                         (focus)="!readonly && beginEditing()"
                         (click)="!readonly && beginEditing()"
+                        (openedChange)="onOpenedChange($event)"
                     >
                         <div class="contezza-multiautocomplete-form-field-panel-content">
                             <div class="contezza-multiautocomplete-form-field-panel-content-input">
@@ -75,21 +76,21 @@
                                                     (onSelectionChange)="
                                                         $event.source.deselect(); control.setValue(checkbox.indeterminate || !checkbox.checked ? selectableOptions : [])
                                                     "
-                                                ><mat-checkbox
-                                                    #checkbox
-                                                    color="primary"
-                                                    class="mat-option-pseudo-checkbox"
-                                                    [class.mat-checkbox-disabled]="false"
-                                                    disableRipple
-                                                    [checked]="checked"
-                                                    [indeterminate]="
+                                                    ><mat-checkbox
+                                                        #checkbox
+                                                        color="primary"
+                                                        class="mat-option-pseudo-checkbox"
+                                                        [class.mat-checkbox-disabled]="false"
+                                                        disableRipple
+                                                        [checked]="checked"
+                                                        [indeterminate]="
                                                             (!selectAllOption || !control.value?.includes(selectAllOption.value)) &&
                                                             0 < control.value?.length &&
                                                             control.value?.length < selectableOptions.length
                                                         "
-                                                    disabled
-                                                ></mat-checkbox
-                                                >{{ 'DYNAMIC_FORMS.SELECT_ALL_SUGGESTIONS' | translate : { total: selectableOptions.length } }}</mat-option
+                                                        disabled
+                                                    ></mat-checkbox
+                                                    >{{ 'DYNAMIC_FORMS.SELECT_ALL_SUGGESTIONS' | translate : { total: selectableOptions.length } }}</mat-option
                                                 >
                                             </ng-container>
                                             <ng-container *ngFor="let selectableOption of selectableOptions">
