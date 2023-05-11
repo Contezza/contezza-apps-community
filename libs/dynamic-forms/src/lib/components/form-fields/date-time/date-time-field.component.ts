@@ -1,15 +1,16 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
-import { DateAdapter } from '@angular/material/core';
+import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { DatetimeAdapter, MAT_DATETIME_FORMATS } from '@mat-datetimepicker/core';
 import { MAT_MOMENT_DATETIME_FORMATS, MomentDatetimeAdapter } from '@mat-datetimepicker/moment';
 
 import { Observable, of } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { UserPreferencesService, UserPreferenceValues } from '@alfresco/adf-core';
+import { MomentDateAdapter, UserPreferencesService, UserPreferenceValues } from '@alfresco/adf-core';
 
 import { DestroyService } from '@contezza/core/services';
+import { DATE_FORMATS } from '@contezza/core/utils';
 
 import { Moment } from 'moment';
 
@@ -20,7 +21,9 @@ import { ContezzaBaseFieldComponent } from '../base-field.component';
     templateUrl: './date-time-field.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
+        { provide: DateAdapter, useClass: MomentDateAdapter },
         { provide: DatetimeAdapter, useClass: MomentDatetimeAdapter },
+        { provide: MAT_DATE_FORMATS, useExisting: DATE_FORMATS },
         { provide: MAT_DATETIME_FORMATS, useValue: MAT_MOMENT_DATETIME_FORMATS },
     ],
 })
