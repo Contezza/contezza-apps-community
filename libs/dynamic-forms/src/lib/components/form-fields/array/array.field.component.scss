@@ -1,0 +1,28 @@
+.contezza-array-form-field {
+    display: flex;
+    flex-direction: column;
+
+    &-header {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    &-label {
+        position: relative;
+        top: 0;
+        font: 400 16px / 1.25 Muli, Roboto, 'Helvetica Neue', sans-serif;
+        letter-spacing: normal;
+        width: unset;
+    }
+
+    &-item {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        contezza-dynamic-form {
+            flex: 1;
+        }
+    }
+}

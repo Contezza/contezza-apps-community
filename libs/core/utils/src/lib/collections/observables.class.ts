@@ -1,7 +1,7 @@
 import { EventEmitter } from '@angular/core';
 
 import { forkJoin, from, Observable, of, Subject, Subscriber, TeardownLogic } from 'rxjs';
-import { finalize, map, switchMap } from 'rxjs/operators';
+import { filter, finalize, map, switchMap, tap } from 'rxjs/operators';
 
 export class ContezzaObservables {
     /**
@@ -50,6 +50,35 @@ export class ContezzaObservables {
      */
     static forkJoin(observables: Observable<any>[]): Observable<any[]> {
         return observables?.length ? forkJoin(observables) : of([]);
+    }
+
+    /**
+     * Cross filters two observables, i.e. prevents the one from emitting based on the other's value.
+     * Returns a tuple containing the filtered observables.
+     * This is useful to prevent an infinite loop in situations where each observable causes a new emission of the other, e.g. synchronizing two form values.
+     *
+     * @param source1 First observable to be cross filtered.
+     * @param source2 Second observable to be cross filtered.
+     * @param emitIf Boolean function allowing to compare the to-be-emitted value of one source with the last-emitted value of the other. The new value is only emitted if this function evaluates to `true`. Defaults to `!==`.
+     */
+    static crossFilter<T>(
+        source1: Observable<T>,
+        source2: Observable<T>,
+        emitIf: (value1: T, value2: T) => boolean = (value1, value2) => value1 !== value2
+    ): [Observable<T>, Observable<T>] {
+        let lastSource1Value: T;
+        let lastSource2Value: T;
+
+        return [
+            source1.pipe(
+                filter((value) => emitIf(value, lastSource2Value)),
+                tap((value) => (lastSource1Value = value))
+            ),
+            source2.pipe(
+                filter((value) => emitIf(lastSource1Value, value)),
+                tap((value) => (lastSource2Value = value))
+            ),
+        ];
     }
 
     static fromCallbackable<T>(callbackable: (_: (_: T) => void) => void): Observable<T> {

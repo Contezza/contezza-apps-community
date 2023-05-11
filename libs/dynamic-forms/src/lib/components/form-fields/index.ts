@@ -1,3 +1,5 @@
+export * from './array';
+
 export * from './autocomplete/autocomplete-field.component';
 export * from './autocomplete/autocomplete-field.module';
 export * from './button-toggle/button-toggle-field.component';
