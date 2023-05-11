@@ -2,9 +2,10 @@ import { MomentDateAdapter, UserPreferencesService, UserPreferenceValues } from 
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 
-import { Moment } from 'moment';
+import moment, { Moment } from 'moment';
 
-import { takeUntil } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 
 import { DestroyService } from '@contezza/core/services';
 import { DATE_FORMATS } from '@contezza/core/utils';
@@ -23,6 +24,9 @@ import { ContezzaBaseFieldComponent } from '../base-field.component';
     ],
 })
 export class DateFieldComponent extends ContezzaBaseFieldComponent<Moment> implements OnInit {
+    min$: Observable<Moment>;
+    max$: Observable<Moment>;
+
     constructor(private readonly dateAdapter: DateAdapter<Moment>, private readonly userPreferencesService: UserPreferencesService, destroy$: DestroyService) {
         super(destroy$);
     }
@@ -35,5 +39,8 @@ export class DateFieldComponent extends ContezzaBaseFieldComponent<Moment> imple
             .subscribe((locale) => {
                 this.dateAdapter.setLocale(locale);
             });
+
+        this.min$ = this.field.extras?.min.pipe(map((date) => moment(date))) || of(undefined);
+        this.max$ = this.field.extras?.max.pipe(map((date) => moment(date))) || of(undefined);
     }
 }
