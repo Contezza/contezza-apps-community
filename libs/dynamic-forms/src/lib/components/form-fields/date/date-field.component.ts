@@ -40,7 +40,7 @@ export class DateFieldComponent extends ContezzaBaseFieldComponent<Moment> imple
                 this.dateAdapter.setLocale(locale);
             });
 
-        this.min$ = this.field.extras?.min.pipe(map((date) => moment(date))) || of(undefined);
-        this.max$ = this.field.extras?.max.pipe(map((date) => moment(date))) || of(undefined);
+        this.min$ = this.field.extras?.min?.pipe(map((date) => moment(date))) || of(undefined);
+        this.max$ = this.field.extras?.max?.pipe(map((date) => moment(date))) || of(undefined);
     }
 }
