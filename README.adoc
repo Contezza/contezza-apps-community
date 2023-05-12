@@ -61,7 +61,7 @@ Nieuwe features:
 Bugfixes/minor changes:
 
 - @contezza/core/utils - `ContezzaObservables.crossFilter` aangemaakt.
-- @contezza/dynamic-forms - Velden `date` en `dateTime` zijn uitgebreid om eigenschappen `extras.min` en `extras.max` te ondersteunen.
+- @contezza/dynamic-forms - Velden `date` en `dateTime` zijn uitgebreid om eigenschappen `extras.min` en `extras.max` te ondersteunen https://support.contezza.nl/issues/24505[[#24505]].
 
 ==== Release 1.0.6
 
