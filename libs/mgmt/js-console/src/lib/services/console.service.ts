@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
 
-import { ContentService } from '@alfresco/adf-core';
+import { NodesApiService } from '@alfresco/adf-content-services';
 
 import { WebscriptService } from '@contezza/core/services';
 
@@ -19,7 +19,7 @@ export class JsConsoleService {
     private readonly EXECUTE_URL = 'de/fme/jsconsole/execute';
     private readonly LIST_SCRIPTS_URL = 'de/fme/jsconsole/listscripts';
 
-    constructor(private readonly webscript: WebscriptService, private readonly contentService: ContentService, private readonly store: Store<unknown>) {}
+    constructor(private readonly webscript: WebscriptService, private readonly nodesApiService: NodesApiService, private readonly store: Store<unknown>) {}
 
     executeScript(payload: ExecuteConsolePayload): Observable<ExecuteConsoleResponse> {
         const startTime = new Date();
@@ -59,7 +59,7 @@ export class JsConsoleService {
     getNodeContent(nodeId: string): Observable<string | ArrayBuffer> {
         const contentSource = new BehaviorSubject<string | ArrayBuffer>(null);
         if (nodeId) {
-            this.contentService
+            this.nodesApiService
                 .getNodeContent(nodeId)
                 .pipe(take(1))
                 .subscribe(

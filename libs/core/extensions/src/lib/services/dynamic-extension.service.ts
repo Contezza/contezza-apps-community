@@ -4,25 +4,19 @@ import { forkJoin, Observable, of } from 'rxjs';
 import { catchError, map, switchMap, take } from 'rxjs/operators';
 
 import { ResultSetPaging } from '@alfresco/js-api';
-import { AlfrescoApiService, AuthenticationService, ContentService } from '@alfresco/adf-core';
+import { AlfrescoApiService, AuthenticationService } from '@alfresco/adf-core';
+import { NodesApiService, SearchService } from '@alfresco/adf-content-services';
 import { ExtensionConfig, mergeObjects } from '@alfresco/adf-extensions';
 
 import { ContezzaObservables } from '@contezza/core/utils';
-
-/*
- * Temporary workaround.
- * Alfresco `SearchService` import is different in versions 5.1.0 (contezza-apps) and 6.0.0-A.3 (contezza-apps-community), therefore we cannot use it.
- * TODO: replace with Alfresco SearchService when contezza-apps is updated.
- */
-import { TmpSearchService } from './tmp-search.service';
 
 @Injectable({ providedIn: 'root' })
 export class ContezzaDynamicExtensionService {
     constructor(
         private readonly apiService: AlfrescoApiService,
         private readonly auth: AuthenticationService,
-        private readonly contentService: ContentService,
-        private readonly search: TmpSearchService
+        private readonly nodesApiService: NodesApiService,
+        private readonly search: SearchService
     ) {}
 
     load(queries: string[]): Observable<ExtensionConfig> {
@@ -80,7 +74,7 @@ export class ContezzaDynamicExtensionService {
     }
 
     private getNodeContent(nodeId: string): Observable<string> {
-        return this.contentService.getNodeContent(nodeId).pipe(
+        return this.nodesApiService.getNodeContent(nodeId).pipe(
             switchMap((content) =>
                 ContezzaObservables.fromEmitter<string>((emitter) => {
                     const reader = new FileReader();

@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { map, startWith, take, takeUntil } from 'rxjs/operators';
 
-import { ContentService } from '@alfresco/adf-core';
+import { NodesApiService } from '@alfresco/adf-content-services';
 import { AppHookService } from '@alfresco/aca-shared';
 
 import { DestroyService } from '@contezza/core/services';
@@ -34,7 +34,7 @@ export class JsConsoleScriptsListComponent implements OnInit {
 
     constructor(
         readonly store: Store<unknown>,
-        private readonly contentService: ContentService,
+        private readonly nodesApiService: NodesApiService,
         private readonly appHookService: AppHookService,
         @Inject(DestroyService) readonly destroy$: DestroyService
     ) {}
@@ -67,7 +67,7 @@ export class JsConsoleScriptsListComponent implements OnInit {
     deleteScript(script: ConsoleScript) {
         const nodeId = script.value.split('/').pop();
 
-        this.contentService
+        this.nodesApiService
             .getNode(nodeId)
             .pipe(take(1))
             .subscribe((node) => this.store.dispatch(deleteScript({ payload: [node] })));

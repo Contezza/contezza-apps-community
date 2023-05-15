@@ -7,10 +7,10 @@ import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { filter, map, switchMap, take } from 'rxjs/operators';
 
-import { AppConfigService, NodesApiService, ObjectUtils } from '@alfresco/adf-core';
+import { AppConfigService, ObjectUtils } from '@alfresco/adf-core';
+import { NodesApiService, SearchService } from '@alfresco/adf-content-services';
 import { getUserProfile } from '@alfresco/aca-shared/store';
 import { ExtensionService } from '@alfresco/adf-extensions';
-import { SearchService } from '@alfresco/adf-content-services';
 
 import { WebscriptService } from '@contezza/core/services';
 import { ContezzaIdResolverService } from '@contezza/core/extensions';

@@ -7,8 +7,8 @@ import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 
-import { ContentNodeDialogService, ContentNodeSelectorComponent, ContentNodeSelectorComponentData, ShareDataRow } from '@alfresco/adf-content-services';
-import { AppConfigService, ContentService, DataColumn, ThumbnailService, TranslationService } from '@alfresco/adf-core';
+import { ContentNodeDialogService, ContentNodeSelectorComponent, ContentNodeSelectorComponentData, ContentService, ShareDataRow } from '@alfresco/adf-content-services';
+import { AppConfigService, DataColumn, ThumbnailService, TranslationService } from '@alfresco/adf-core';
 import { MinimalNodeEntryEntity } from '@alfresco/js-api';
 
 import { setSelectedSpaceNode } from '../store/actions';
