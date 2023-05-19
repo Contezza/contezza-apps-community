@@ -139,5 +139,8 @@
         "typescript": "~4.8.4",
         "webdriver-manager": "12.1.9",
         "webpack-bundle-analyzer": "4.8.0"
+    },
+    "optionalDependencies": {
+        "@nrwl/nx-linux-x64-musl": "^15.8.5"
     }
 }
