@@ -1,6 +1,6 @@
 {
     "name": "@contezza/people-group-picker",
-    "version": "2.0.0",
+    "version": "2.0.0-A.0",
     "peerDependencies": {
         "@angular/common": "^14.2.0",
         "@angular/core": "^14.2.0"
