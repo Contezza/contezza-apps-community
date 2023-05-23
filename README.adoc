@@ -12,6 +12,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2023-05-23
+|1.0.8
+|Bekijk de <<Release 1.0.8,release details>>.
+
 |2023-05-12
 |1.0.7
 |Bekijk de <<Release 1.0.7,release details>>.
@@ -51,6 +55,12 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 1.0.8
+
+Bugfixes/minor changes:
+
+- @contezza/core/utils - `ContezzaAdfUtils.makeRules` aangemaakt.
 
 ==== Release 1.0.7
 
