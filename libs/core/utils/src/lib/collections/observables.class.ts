@@ -39,8 +39,13 @@ export class ContezzaObservables {
         return recursion(observableGenerator);
     }
 
-    static from<T>(promise: Promise<T>): Observable<T> {
-        return of(null).pipe(switchMap(() => from(promise)));
+    /**
+     * Variant of rxjs `from` which only triggers the underlying asynchronous operation by subscription.
+     *
+     * @param generator A function returning an asynchronous operation.
+     */
+    static from<T>(generator: () => Promise<T>): Observable<T> {
+        return of(null).pipe(switchMap(() => from(generator())));
     }
 
     /**
