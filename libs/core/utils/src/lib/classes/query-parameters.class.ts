@@ -1,19 +1,16 @@
-export interface ContezzaQueryParametersInterface {
-    [key: string]: string | number | boolean;
-}
-
-export class ContezzaQueryParameters {
-    constructor(private readonly queryParameters: ContezzaQueryParametersInterface) {}
+export class ContezzaQueryParameters<T> {
+    constructor(private readonly queryParameters: T & Partial<Record<keyof T, string | number | boolean>>) {}
 
     toString(): string {
         const queryParametersAsString: string = Object.entries(this.queryParameters)
+            .filter(([, value]) => value !== null && value !== undefined)
             .map(([key, value]) => `${key}=${value}`)
             .join('&');
         return queryParametersAsString ? '?' + queryParametersAsString : '';
     }
 
-    static fromString(query: string): ContezzaQueryParametersInterface {
-        const queryParameters: ContezzaQueryParametersInterface = {};
+    static fromString(query: string): Record<string, string> {
+        const queryParameters: Record<string, string> = {};
         query
             ?.split('&')
             .filter((value) => value.includes('='))
