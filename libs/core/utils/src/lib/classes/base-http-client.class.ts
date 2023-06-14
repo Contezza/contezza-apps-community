@@ -2,6 +2,9 @@ import { Observable } from 'rxjs';
 
 import { HttpClient } from '../interfaces';
 
+/**
+ * Straightforward `HttpClient` implementation.
+ */
 export class BaseHttpClient implements HttpClient {
     constructor(protected readonly http: HttpClient) {}
 
