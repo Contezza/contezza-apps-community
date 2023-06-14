@@ -12,6 +12,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2023-06-14
+|1.1.0
+|Bekijk de <<Release 1.1.0,release details>>.
+
 |2023-05-23
 |1.0.8
 |Bekijk de <<Release 1.0.8,release details>>.
@@ -55,6 +59,17 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 1.1.0
+
+Bugfixes/minor changes:
+
+- @contezza/core/utils - Classes `BaseHttpClient` en `EncryptedHttpClient` aangemaakt.
+- @contezza/core/utils - In class `ContezzaQueryParameters`: constructor argument type is aangepast; method `toString` negeert `null` waardes.
+- @contezza/core/utils - `ContezzaObservables.from` voert de gegeven promise uit alleen bij subscriptie.
+- @contezza/core/utils - Types `DistributiveKeyof` en `DistributiveOmit` aangemaakt. Type `Tree` hiermee refactored.
+
+Let op: interface `ContezzaQueryParametersInterface` is verwijderd; input type van `ContezzaObservables.from` is gewijzigd.
 
 ==== Release 1.0.8
 
