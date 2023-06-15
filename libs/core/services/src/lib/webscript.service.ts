@@ -41,6 +41,6 @@ export class WebscriptService implements HttpClient {
     execute<T>(httpMethod: HttpMethod.Get | HttpMethod.Delete, url: string): Observable<T>;
     execute<T>(httpMethod: HttpMethod.Post | HttpMethod.Put, url: string, body: any): Observable<T>;
     execute<T>(httpMethod: HttpMethod, url: string, body?: any): Observable<T> {
-        return ContezzaObservables.from(this.webscript.executeWebScript(httpMethod.toString().toUpperCase(), url, '', '', '', body));
+        return ContezzaObservables.from(() => this.webscript.executeWebScript(httpMethod.toString().toUpperCase(), url, '', '', '', body));
     }
 }
