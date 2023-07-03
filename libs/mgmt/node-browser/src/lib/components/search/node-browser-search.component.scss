@@ -69,10 +69,10 @@
             height: auto !important;
             min-height: 75px;
             padding: 0 24px;
-            line-height: 24px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: -0.2px;
+            line-height: 24px !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            letter-spacing: -0.2px !important;
             color: var(--theme-text-bold-color) !important;
             background-color: var(--theme-card-background-color) !important;
             border: 1px solid var(--theme-border-color);
