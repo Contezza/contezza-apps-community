@@ -1,52 +1,55 @@
-<mat-form-field class="contezza-form-field contezza-select-form-field adf-property-field adf-card-textitem-field" floatLabel="auto" [appearance]="field.settings?.appearance">
-    <mat-label *ngIf="field.label">{{ field.label | translate }}</mat-label>
-    <mat-select
-        #select
-        [formControl]="control"
-        [multiple]="field.type === 'multiselect'"
-        (selectionChange)="control.markAsTouched()"
-        [required]="required"
-        [compareWith]="displayFn"
-    >
-        <mat-select-trigger *ngIf="select.value?.contezzaDisplay">
-            <div title="{{ select.value?.contezzaDisplay.value.tooltip | translate }}">
-                <adf-icon *ngIf="select.value?.contezzaDisplay.value.icon" [value]="select.value?.contezzaDisplay.value.icon"></adf-icon>
-                {{ select.value?.contezzaDisplay.value.label || '' }}
-            </div>
-        </mat-select-trigger>
-        <ng-container *contezzaLet="selectableOptions$ | async as options">
-            <!--                <mat-option *ngIf="!field.disabledDefaultSelectOption && field.type === 'select'" [value]="'*'">{{ 'Alle' | translate }}</mat-option>-->
-            <mat-checkbox
-                *ngIf="field.type === 'multiselect'"
-                class="checkbox mat-option"
-                color="primary"
-                [checked]="control?.value?.length === options?.length"
-                [indeterminate]="control?.value?.length > 0 && control?.value?.length < options?.length"
-                (change)="setAll($event.checked); control.markAsTouched()"
-            >
-                {{ 'APP.FORM_FIELDS.SELECT.SELECT_ALL' | translate }}
-            </mat-checkbox>
-            <mat-divider *ngIf="field.type === 'multiselect'"></mat-divider>
-            <mat-option *ngFor="let option of options" [value]="option" title="{{ option.contezzaDisplay.option.tooltip | translate }}">
-                <adf-icon *ngIf="option.contezzaDisplay.option.icon" [value]="option.contezzaDisplay.option.icon"></adf-icon>
-                {{ option.contezzaDisplay.option.label || '' }}
-            </mat-option>
-        </ng-container>
-    </mat-select>
-    <button
-        type="button"
-        mat-icon-button
-        matSuffix
-        class="adf-property-clear-value"
-        aria-label="Clear"
-        (click)="clear($event)"
-        *ngIf="!required && !readonly && !control.disabled"
-        tabindex="-1"
-    >
-        <mat-icon>cancel</mat-icon>
-    </button>
-    <button type="button" matSuffix class="mat-button my-arrow-wrapper" style="padding: 0; min-width: 0" *ngIf="!readonly && !control.disabled" tabindex="-1">
-        <div class="my-arrow"></div>
-    </button>
-    <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control"></mat-error>
-</mat-form-field>
+<ng-container *contezzaLet="readonly$ | async as readonly">
+    <mat-form-field class="contezza-form-field contezza-select-form-field adf-property-field adf-card-textitem-field" floatLabel="auto" [appearance]="field.settings?.appearance">
+        <mat-label *ngIf="field.label">{{ field.label | translate }}</mat-label>
+        <mat-select
+            #select
+            [formControl]="control"
+            [multiple]="field.type === 'multiselect'"
+            (selectionChange)="control.markAsTouched()"
+            [required]="required"
+            [compareWith]="displayFn"
+            [disabled]="readonly"
+        >
+            <mat-select-trigger *ngIf="select.value?.contezzaDisplay">
+                <div title="{{ select.value?.contezzaDisplay.value.tooltip | translate }}">
+                    <adf-icon *ngIf="select.value?.contezzaDisplay.value.icon" [value]="select.value?.contezzaDisplay.value.icon"></adf-icon>
+                    {{ select.value?.contezzaDisplay.value.label || '' }}
+                </div>
+            </mat-select-trigger>
+            <ng-container *contezzaLet="selectableOptions$ | async as options">
+                <!--                <mat-option *ngIf="!field.disabledDefaultSelectOption && field.type === 'select'" [value]="'*'">{{ 'Alle' | translate }}</mat-option>-->
+                <mat-checkbox
+                    *ngIf="field.type === 'multiselect'"
+                    class="checkbox mat-option"
+                    color="primary"
+                    [checked]="control?.value?.length === options?.length"
+                    [indeterminate]="control?.value?.length > 0 && control?.value?.length < options?.length"
+                    (change)="setAll($event.checked); control.markAsTouched()"
+                >
+                    {{ 'APP.FORM_FIELDS.SELECT.SELECT_ALL' | translate }}
+                </mat-checkbox>
+                <mat-divider *ngIf="field.type === 'multiselect'"></mat-divider>
+                <mat-option *ngFor="let option of options" [value]="option" title="{{ option.contezzaDisplay.option.tooltip | translate }}">
+                    <adf-icon *ngIf="option.contezzaDisplay.option.icon" [value]="option.contezzaDisplay.option.icon"></adf-icon>
+                    {{ option.contezzaDisplay.option.label || '' }}
+                </mat-option>
+            </ng-container>
+        </mat-select>
+        <button
+            type="button"
+            mat-icon-button
+            matSuffix
+            class="adf-property-clear-value"
+            aria-label="Clear"
+            (click)="clear($event)"
+            *ngIf="!required && !readonly && !control.disabled"
+            tabindex="-1"
+        >
+            <mat-icon>cancel</mat-icon>
+        </button>
+        <button type="button" matSuffix class="mat-button my-arrow-wrapper" style="padding: 0; min-width: 0" *ngIf="!readonly && !control.disabled" tabindex="-1">
+            <div class="my-arrow"></div>
+        </button>
+        <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control"></mat-error>
+    </mat-form-field>
+</ng-container>
