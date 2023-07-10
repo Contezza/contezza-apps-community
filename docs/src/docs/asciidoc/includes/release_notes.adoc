@@ -1,5 +1,3 @@
-= Contezza Community Libraries
-
 == Release notities
 
 Overzicht van de release notities.
