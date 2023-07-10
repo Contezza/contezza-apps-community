@@ -33,7 +33,7 @@
                         [formControl]="control"
                         [placeholder]="field.placeholder | translate"
                         [multiple]="true"
-                        panelClass="contezza-multiautocomplete-form-field-panel"
+                        [panelClass]="field.settings?.appearance === 'outline' ? 'contezza-multiautocomplete-form-field-panel contezza-multiautocomplete-form-field-panel-outline' : 'contezza-multiautocomplete-form-field-panel'"
                         (selectionChange)="onSelectionChange($event)"
                         (focus)="!readonly && beginEditing()"
                         (click)="!readonly && beginEditing()"
