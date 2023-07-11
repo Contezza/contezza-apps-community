@@ -1,7 +1,7 @@
 .contezza-autocomplete-form-field {
     width: 100%;
 
-    &-trigger{
+    &-trigger {
         display: flex;
         gap: 8px;
         align-items: center;
@@ -43,7 +43,7 @@
     background-color: var(--theme-card-background-color);
 }
 
-.contezza-autocomplete-form-field mat-option.loading .mat-option-text {
+.contezza-autocomplete-form-field-panel mat-option.loading .mat-option-text {
     height: 100%;
 }
 

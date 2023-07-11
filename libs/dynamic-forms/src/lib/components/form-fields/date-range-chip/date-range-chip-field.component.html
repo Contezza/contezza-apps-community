@@ -18,7 +18,7 @@
 
         <mat-menu #menu="matMenu" backdropClass="adf-search-filter-chip-menu">
             <div #menuContainer [attr.data-automation-id]="'search-field-' + field.label">
-                <div class="adf-search-filter-menu-card" (click)="$event.stopPropagation();">
+                <div class="adf-search-filter-menu-card" (click)="$event.stopPropagation();" (keydown)="$event.stopPropagation()">
                     <div class="adf-search-filter-content">
                         <div class="contezza-form-field contezza-date-range-form-field">
                             <div class="contezza-date-range-form-field-dates">

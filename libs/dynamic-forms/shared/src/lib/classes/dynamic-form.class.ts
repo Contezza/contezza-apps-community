@@ -103,7 +103,7 @@ export class ContezzaDynamicForm {
         }
     }
 
-    build(form?: FormGroup) {
+    build(form?: FormGroup): ContezzaDynamicForm {
         if (!this.built && !this.form) {
             if (!form) {
                 form = ContezzaDynamicForm.makeFormFromFields(this) as FormGroup;
@@ -120,6 +120,7 @@ export class ContezzaDynamicForm {
 
             (this.form.get('initialValue')?.valueChanges.pipe(debounceTime(0), take(1)) || of(undefined)).subscribe(() => this._built.next(true));
         }
+        return this;
     }
 
     destroy(force: boolean = false) {
@@ -136,13 +137,14 @@ export class ContezzaDynamicForm {
         return force || !this.protected;
     }
 
-    protect() {
+    protect(): ContezzaDynamicForm {
         this.protected = true;
         const protect = (field: ContezzaFormField) => {
             ContezzaObjectUtils.setValue(field, 'settings.protected', true);
             field.subfields?.forEach((subfield) => protect(subfield));
         };
         protect(this.rootField);
+        return this;
     }
 
     enable(
@@ -228,10 +230,11 @@ export class ContezzaDynamicForm {
         return ContezzaDynamicForm.getFieldById(this.layout, id);
     }
 
-    provideDependencies(dependencies: Record<string, Observable<any>>) {
+    provideDependencies(dependencies: Record<string, Observable<any>>): ContezzaDynamicForm {
         if (dependencies) {
             Object.assign(this.providedDependencies, dependencies);
         }
+        return this;
     }
 
     private bindValues() {

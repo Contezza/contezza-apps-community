@@ -47,15 +47,6 @@ export class DateRangeChipFieldComponent extends ContezzaBaseFieldComponent<Date
 
     static DATE_FORMAT = 'DD-MM-YYYY';
 
-    static makeDateRangeFormControlValue(from: Moment, to: Moment): DateRange {
-        return from || to
-            ? {
-                  from,
-                  to,
-              }
-            : null;
-    }
-
     constructor(readonly destroy$: DestroyService) {
         super(destroy$);
     }
@@ -74,7 +65,12 @@ export class DateRangeChipFieldComponent extends ContezzaBaseFieldComponent<Date
                 if (this.fromSubcontrol.touched || this.toSubcontrol.touched) {
                     this.control.markAsTouched();
                 }
-                this.control.setValue(DateRangeChipFieldComponent.makeDateRangeFormControlValue(from, to));
+                if (from || to) {
+                    this.control.setValue({
+                        from,
+                        to,
+                    });
+                }
                 this.updateDisplayValue(from, to);
             });
 

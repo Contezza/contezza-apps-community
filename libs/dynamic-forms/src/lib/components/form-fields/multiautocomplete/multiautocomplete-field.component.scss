@@ -40,6 +40,11 @@
 
     &-panel {
         height: 100%;
+
+        &-outline{
+            margin-top: 40px !important;
+        }
+
         &-content {
             display: flex;
             flex-direction: column;
