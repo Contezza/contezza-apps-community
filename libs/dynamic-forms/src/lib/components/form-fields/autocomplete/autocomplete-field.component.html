@@ -1,157 +1,159 @@
 <ng-container *contezzaLet="readonly$ | async as readonly">
     <ng-container *contezzaLet="selectableOptions$ | async as selectableOptions">
         <ng-container *contezzaLet="optionsLoading$ | async as optionsLoading">
-            <mat-form-field
-                *ngIf="optionsLoading"
-                class="contezza-form-field contezza-autocomplete-form-field adf-property-field adf-card-textitem-field"
-                [class.contezza-form-field-loading]="optionsLoading"
-                [class.mat-form-field-disabled]="readonly"
-                floatLabel="auto"
-                [appearance]="field.settings?.appearance"
-            >
-                <mat-label title="{{ 'APP.AUTOCOMPLETE.LOADING' | translate }}" class="loading">
-                    <mat-spinner color="primary"> </mat-spinner>
-                </mat-label>
-                <input matInput type="text" spellcheck="false" data-lpignore="true" class="adf-property-value" [readonly]="true" />
-            </mat-form-field>
-
-            <mat-form-field
-                *ngIf="!optionsLoading"
-                class="contezza-form-field contezza-autocomplete-form-field adf-property-field adf-card-textitem-field"
-                [class.contezza-form-field-no-options]="!selectableOptions || selectableOptions.length === 0"
-                [class.contezza-form-field-loading]="optionsLoading"
-                [class.mat-form-field-disabled]="readonly"
-                floatLabel="auto"
-                [appearance]="field.settings?.appearance"
-                (click)="!readonly && beginEditing()"
-            >
-                <mat-label *ngIf="field.label">{{ field.label | translate }}</mat-label>
-                <input
-                    #trigger
-                    matInput
-                    type="text"
-                    spellcheck="false"
-                    data-lpignore="true"
-                    class="adf-property-value"
-                    [formControl]="control"
-                    [placeholder]="field.placeholder | translate"
-                    [matAutocomplete]="auto"
-                    [required]="required"
-                    [readonly]="readonly"
-                    (keyup.enter)="onEnter()"
-                    (blur)="onBlur($event)"
-                    [style.position]="!control.value?.contezzaDisplay?.value.html || editing ? '' : 'absolute'"
-                    [style.width]="!control.value?.contezzaDisplay?.value.html || editing ? '' : '0'"
-                    [style.display]="(!control.value?.contezzaDisplay?.value.html && !control.value?.contezzaDisplay?.value.icon) || editing ? 'unset' : 'none'"
-                />
-                <div *ngIf="control.value?.contezzaDisplay?.value.html && !editing" [innerHTML]="control.value?.contezzaDisplay?.value.html | sanitizeHtml"></div>
-                <div class="contezza-autocomplete-form-field-trigger" *ngIf="control.value?.contezzaDisplay?.value.icon && !editing">
-                    <mat-icon svgIcon="{{ 'svg:' + control.value?.contezzaDisplay?.value.icon }}"></mat-icon><span>{{ control.value?.contezzaDisplay?.value.label }}</span>
-                </div>
-
-                <mat-autocomplete
-                    #auto="matAutocomplete"
-                    class="contezza-autocomplete-form-field-panel"
-                    autoActiveFirstOption
-                    [displayWith]="displayFn"
-                    (opened)="onAutocompleteOpened(trigger, auto)"
-                    (closed)="endEditing()"
+            <ng-container *contezzaLet="optionsLoading && !field.settings?.preFilteredOptions as formLoading">
+                <mat-form-field
+                    *ngIf="formLoading"
+                    class="contezza-form-field contezza-autocomplete-form-field adf-property-field adf-card-textitem-field"
+                    [class.contezza-form-field-loading]="formLoading"
+                    [class.mat-form-field-disabled]="readonly"
+                    floatLabel="auto"
+                    [appearance]="field.settings?.appearance"
                 >
-                    <ng-container *ngIf="!field.settings?.minChars || (control.value && field.settings?.minChars <= control.value.length); else tooltipMinChars">
-                        <!--                <ng-container *ngIf="selectableOptions$ | async as selectableOptions; else allResults">-->
-                        <ng-container *ngIf="!optionsLoading; else loading">
-                            <div *ngIf="selectableOptions && selectableOptions.length > 0; else noResults">
-                                <mat-option *ngIf="field.settings?.showTotalItems" disabled class="total-items">
-                                    {{ 'APP.AUTOCOMPLETE.TOTAL_ITEMS' | translate }}: {{ selectableOptions.length }}
-                                </mat-option>
-                                <ng-container *ngFor="let selectableOption of selectableOptions">
-                                    <!-- prio: component -> html -> label -->
-                                    <ng-container *ngIf="!selectableOption.contezzaDisplay.option.component">
-                                        <ng-container *ngIf="!selectableOption.contezzaDisplay.option.html && !selectableOption.contezzaDisplay.option.icon">
-                                            <mat-option [value]="selectableOption" title="{{ selectableOption.contezzaDisplay.option.tooltip | translate }}">
-                                                {{ selectableOption.contezzaDisplay.option.label }}
-                                                <ng-container *ngIf="$any(selectableOption).metrics?.[0] as metric">
-                                                    <span>({{ metric.value[metric.type] }})</span>
-                                                </ng-container>
-                                            </mat-option>
+                    <mat-label title="{{ 'APP.AUTOCOMPLETE.LOADING' | translate }}" class="loading">
+                        <mat-spinner color="primary"> </mat-spinner>
+                    </mat-label>
+                    <input matInput type="text" spellcheck="false" data-lpignore="true" class="adf-property-value" [readonly]="true" />
+                </mat-form-field>
+
+                <mat-form-field
+                    *ngIf="!formLoading"
+                    class="contezza-form-field contezza-autocomplete-form-field adf-property-field adf-card-textitem-field"
+                    [class.contezza-form-field-no-options]="!selectableOptions || selectableOptions.length === 0"
+                    [class.contezza-form-field-loading]="formLoading"
+                    [class.mat-form-field-disabled]="readonly"
+                    floatLabel="auto"
+                    [appearance]="field.settings?.appearance"
+                    (click)="!readonly && beginEditing()"
+                >
+                    <mat-label *ngIf="field.label">{{ field.label | translate }}</mat-label>
+                    <input
+                        #trigger
+                        matInput
+                        type="text"
+                        spellcheck="false"
+                        data-lpignore="true"
+                        class="adf-property-value"
+                        [formControl]="control"
+                        [placeholder]="field.placeholder | translate"
+                        [matAutocomplete]="auto"
+                        [required]="required"
+                        [readonly]="readonly"
+                        (keyup.enter)="onEnter()"
+                        (blur)="onBlur($event)"
+                        [style.position]="!control.value?.contezzaDisplay?.value.html || editing ? '' : 'absolute'"
+                        [style.width]="!control.value?.contezzaDisplay?.value.html || editing ? '' : '0'"
+                        [style.display]="(!control.value?.contezzaDisplay?.value.html && !control.value?.contezzaDisplay?.value.icon) || editing ? 'unset' : 'none'"
+                    />
+                    <div *ngIf="control.value?.contezzaDisplay?.value.html && !editing" [innerHTML]="control.value?.contezzaDisplay?.value.html | sanitizeHtml"></div>
+                    <div class="contezza-autocomplete-form-field-trigger" *ngIf="control.value?.contezzaDisplay?.value.icon && !editing">
+                        <mat-icon svgIcon="{{ 'svg:' + control.value?.contezzaDisplay?.value.icon }}"></mat-icon><span>{{ control.value?.contezzaDisplay?.value.label }}</span>
+                    </div>
+
+                    <mat-autocomplete
+                        #auto="matAutocomplete"
+                        class="contezza-autocomplete-form-field-panel"
+                        autoActiveFirstOption
+                        [displayWith]="displayFn"
+                        (opened)="onAutocompleteOpened(trigger, auto)"
+                        (closed)="endEditing()"
+                    >
+                        <ng-container *ngIf="!field.settings?.minChars || (control.value && field.settings?.minChars <= control.value.length); else tooltipMinChars">
+                            <!--                <ng-container *ngIf="selectableOptions$ | async as selectableOptions; else allResults">-->
+                            <ng-container *ngIf="!optionsLoading; else loading">
+                                <div *ngIf="selectableOptions && selectableOptions.length > 0; else noResults">
+                                    <mat-option *ngIf="field.settings?.showTotalItems" disabled class="total-items">
+                                        {{ 'APP.AUTOCOMPLETE.TOTAL_ITEMS' | translate }}: {{ selectableOptions.length }}
+                                    </mat-option>
+                                    <ng-container *ngFor="let selectableOption of selectableOptions">
+                                        <!-- prio: component -> html -> label -->
+                                        <ng-container *ngIf="!selectableOption.contezzaDisplay.option.component">
+                                            <ng-container *ngIf="!selectableOption.contezzaDisplay.option.html && !selectableOption.contezzaDisplay.option.icon">
+                                                <mat-option [value]="selectableOption" title="{{ selectableOption.contezzaDisplay.option.tooltip | translate }}">
+                                                    {{ selectableOption.contezzaDisplay.option.label }}
+                                                    <ng-container *ngIf="$any(selectableOption).metrics?.[0] as metric">
+                                                        <span>({{ metric.value[metric.type] }})</span>
+                                                    </ng-container>
+                                                </mat-option>
+                                            </ng-container>
+                                            <ng-container *ngIf="selectableOption.contezzaDisplay.option.html">
+                                                <mat-option
+                                                    [value]="selectableOption"
+                                                    title="{{ selectableOption.contezzaDisplay.option.tooltip | translate }}"
+                                                    [innerHtml]="selectableOption.contezzaDisplay.option.html | highlight : (isHotDynamicCell ? trigger.value : '') | sanitizeHtml"
+                                                >
+                                                </mat-option>
+                                            </ng-container>
+                                            <ng-container *ngIf="selectableOption.contezzaDisplay.option.icon">
+                                                <mat-option [value]="selectableOption" title="{{ selectableOption.contezzaDisplay.option.tooltip | translate }}">
+                                                    <mat-icon svgIcon="{{ 'svg:' + selectableOption.contezzaDisplay.option.icon }}"></mat-icon>
+                                                    {{ selectableOption.contezzaDisplay.option.label }}
+                                                </mat-option>
+                                            </ng-container>
                                         </ng-container>
-                                        <ng-container *ngIf="selectableOption.contezzaDisplay.option.html">
-                                            <mat-option
-                                                [value]="selectableOption"
-                                                title="{{ selectableOption.contezzaDisplay.option.tooltip | translate }}"
-                                                [innerHtml]="selectableOption.contezzaDisplay.option.html | highlight: (isHotDynamicCell ? trigger.value : '') | sanitizeHtml"
-                                            >
-                                            </mat-option>
-                                        </ng-container>
-                                        <ng-container *ngIf="selectableOption.contezzaDisplay.option.icon">
-                                            <mat-option [value]="selectableOption" title="{{ selectableOption.contezzaDisplay.option.tooltip | translate }}">
-                                                <mat-icon svgIcon="{{ 'svg:' + selectableOption.contezzaDisplay.option.icon }}"></mat-icon>
-                                                {{ selectableOption.contezzaDisplay.option.label }}
+                                        <ng-container *ngIf="selectableOption.contezzaDisplay.option.component">
+                                            <mat-option [value]="selectableOption">
+                                                <contezza-dynamic-form-option
+                                                    [component]="selectableOption.contezzaDisplay.option.component"
+                                                    [value]="selectableOption"
+                                                ></contezza-dynamic-form-option>
                                             </mat-option>
                                         </ng-container>
                                     </ng-container>
-                                    <ng-container *ngIf="selectableOption.contezzaDisplay.option.component">
-                                        <mat-option [value]="selectableOption">
-                                            <contezza-dynamic-form-option
-                                                [component]="selectableOption.contezzaDisplay.option.component"
-                                                [value]="selectableOption"
-                                            ></contezza-dynamic-form-option>
-                                        </mat-option>
-                                    </ng-container>
-                                </ng-container>
-                            </div>
+                                </div>
+                            </ng-container>
+                            <!--                </ng-container>-->
                         </ng-container>
-                        <!--                </ng-container>-->
-                    </ng-container>
-                    <ng-template #allResults>
-                        <!--            <mat-option *ngFor="let option of field.options" [value]="option">-->
-                        <!--                {{ option[field.optionKey] || option }}-->
-                        <!--            </mat-option>-->
-                    </ng-template>
-                    <ng-template #noResults>
-                        <mat-option disabled title="{{ 'APP.AUTOCOMPLETE.NO_SUGGESTIONS' | translate }}">
-                            <span>
-                                {{ 'APP.AUTOCOMPLETE.NO_SUGGESTIONS' | translate }}
-                            </span>
-                        </mat-option>
-                    </ng-template>
-                    <ng-template #loading>
-                        <mat-option disabled title="{{ 'APP.AUTOCOMPLETE.LOADING' | translate }}" class="loading">
-                            <mat-spinner color="primary"> </mat-spinner>
-                        </mat-option>
-                    </ng-template>
-                    <ng-template #tooltipMinChars>
-                        <mat-option disabled title="{{ 'APP.AUTOCOMPLETE.TOOLTIP.MIN_CHARS' | translate: { minChars: field.settings?.minChars } }}">
-                            <span>
-                                {{ 'APP.AUTOCOMPLETE.TOOLTIP.MIN_CHARS' | translate: { minChars: field.settings?.minChars } }}
-                            </span>
-                        </mat-option>
-                    </ng-template>
-                </mat-autocomplete>
-                <button
-                    type="button"
-                    mat-icon-button
-                    matSuffix
-                    class="adf-property-clear-value contezza-form-field-clear"
-                    aria-label="Clear"
-                    *ngIf="!readonly && !optionsLoading && !control.disabled && control.value"
-                    tabindex="-1"
-                    (click)="clear($event)"
-                >
-                    <mat-icon>cancel</mat-icon>
-                </button>
-                <button
-                    type="button"
-                    matSuffix
-                    class="mat-button my-arrow-wrapper"
-                    style="padding: 0; min-width: 0"
-                    *ngIf="!readonly && !optionsLoading && !control.disabled"
-                    tabindex="-1"
-                >
-                    <div class="contezza-select-arrow"></div>
-                </button>
-                <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control"></mat-error>
-            </mat-form-field>
+                        <ng-template #allResults>
+                            <!--            <mat-option *ngFor="let option of field.options" [value]="option">-->
+                            <!--                {{ option[field.optionKey] || option }}-->
+                            <!--            </mat-option>-->
+                        </ng-template>
+                        <ng-template #noResults>
+                            <mat-option disabled title="{{ 'APP.AUTOCOMPLETE.NO_SUGGESTIONS' | translate }}">
+                                <span>
+                                    {{ 'APP.AUTOCOMPLETE.NO_SUGGESTIONS' | translate }}
+                                </span>
+                            </mat-option>
+                        </ng-template>
+                        <ng-template #loading>
+                            <mat-option disabled title="{{ 'APP.AUTOCOMPLETE.LOADING' | translate }}" class="loading">
+                                <mat-spinner color="primary"> </mat-spinner>
+                            </mat-option>
+                        </ng-template>
+                        <ng-template #tooltipMinChars>
+                            <mat-option disabled title="{{ 'APP.AUTOCOMPLETE.TOOLTIP.MIN_CHARS' | translate : { minChars: field.settings?.minChars } }}">
+                                <span>
+                                    {{ 'APP.AUTOCOMPLETE.TOOLTIP.MIN_CHARS' | translate : { minChars: field.settings?.minChars } }}
+                                </span>
+                            </mat-option>
+                        </ng-template>
+                    </mat-autocomplete>
+                    <button
+                        type="button"
+                        mat-icon-button
+                        matSuffix
+                        class="adf-property-clear-value contezza-form-field-clear"
+                        aria-label="Clear"
+                        *ngIf="!readonly && !optionsLoading && !control.disabled && control.value"
+                        tabindex="-1"
+                        (click)="clear($event)"
+                    >
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                    <button
+                        type="button"
+                        matSuffix
+                        class="mat-button my-arrow-wrapper"
+                        style="padding: 0; min-width: 0"
+                        *ngIf="!readonly && !optionsLoading && !control.disabled"
+                        tabindex="-1"
+                    >
+                        <div class="contezza-select-arrow"></div>
+                    </button>
+                    <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control"></mat-error>
+                </mat-form-field>
+            </ng-container>
         </ng-container>
     </ng-container>
 </ng-container>
