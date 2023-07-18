@@ -65,12 +65,10 @@ export class DateRangeChipFieldComponent extends ContezzaBaseFieldComponent<Date
                 if (this.fromSubcontrol.touched || this.toSubcontrol.touched) {
                     this.control.markAsTouched();
                 }
-                if (from || to) {
-                    this.control.setValue({
-                        from,
-                        to,
-                    });
-                }
+                this.control.setValue({
+                    from: from ?? null,
+                    to: to ?? null,
+                });
                 this.updateDisplayValue(from, to);
             });
 
