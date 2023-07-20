@@ -10,6 +10,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2023-07-20
+|2.0.2
+|Bekijk de <<Release 2.0.2,release details>>.
+
 |2023-07-11
 |2.0.1
 |Bekijk de <<Release 2.0.1,release details>>.
@@ -65,6 +69,13 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 2.0.2
+
+Bugfixes/minor changes:
+
+- @contezza/dynamic-forms - Veld `dateRangeChip` zet waarden op null bij reset.
+
 
 ==== Release 2.0.1
 
