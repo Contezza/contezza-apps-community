@@ -9,6 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, shareReplay, takeUntil } from 'rxjs/operators';
 
+import { ContezzaLetModule } from '@contezza/core/directives';
 import { DestroyService } from '@contezza/core/services';
 import { ContezzaArrayUtils, ContezzaObservables } from '@contezza/core/utils';
 import { ContezzaDynamicForm } from '@contezza/dynamic-forms/shared';
@@ -20,23 +21,25 @@ import { ContezzaBaseFieldComponent } from '../base-field.component';
 @Component({
     selector: 'contezza-array-field',
     standalone: true,
-    imports: [CommonModule, MatButtonModule, MatIconModule, TranslateModule, ContezzaDynamicFormModule],
-    template: `<div class="contezza-form-field contezza-array-form-field adf-property-field adf-card-textitem-field">
-        <div class="contezza-array-form-field-header">
-            <div class="mat-form-field-label mat-form-field-empty contezza-array-form-field-label" *ngIf="field.label">{{ field.label | translate }}</div>
-            <button mat-icon-button class="app-toolbar-button" (keydown.enter)="add()" (click)="add()">
-                <mat-icon>add</mat-icon>
-            </button>
-        </div>
-        <ng-container *ngFor="let form of forms$ | async | keyvalue; trackBy: trackByKey">
-            <div class="contezza-array-form-field-item">
-                <contezza-dynamic-form [dynamicForm]="form.value"></contezza-dynamic-form>
-                <button mat-icon-button class="app-toolbar-button" (keydown.enter)="delete(form.key)" (click)="delete(form.key)">
-                    <mat-icon>delete</mat-icon>
+    imports: [CommonModule, MatButtonModule, MatIconModule, TranslateModule, ContezzaLetModule, ContezzaDynamicFormModule],
+    template: `<ng-container *contezzaLet="readonly$ | async as readonly">
+        <div class="contezza-form-field contezza-array-form-field adf-property-field adf-card-textitem-field">
+            <div class="contezza-array-form-field-header">
+                <div class="mat-form-field-label mat-form-field-empty contezza-array-form-field-label" *ngIf="field.label">{{ field.label | translate }}</div>
+                <button *ngIf="!readonly" mat-icon-button class="app-toolbar-button" (keydown.enter)="add()" (click)="add()">
+                    <mat-icon>add</mat-icon>
                 </button>
             </div>
-        </ng-container>
-    </div>`,
+            <ng-container *ngFor="let form of forms$ | async | keyvalue; trackBy: trackByKey">
+                <div class="contezza-array-form-field-item">
+                    <contezza-dynamic-form [dynamicForm]="form.value"></contezza-dynamic-form>
+                    <button *ngIf="!readonly" mat-icon-button class="app-toolbar-button" (keydown.enter)="delete(form.key)" (click)="delete(form.key)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </ng-container>
+        </div>
+    </ng-container>`,
     styleUrls: ['./array.field.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
