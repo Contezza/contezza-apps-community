@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
-
-import { ContezzaDynamicForm } from '@contezza/dynamic-forms/shared';
+import { startWith } from 'rxjs/operators';
 
 import { ContezzaBaseFieldComponent } from '../base-field.component';
 
@@ -17,6 +16,6 @@ export class InfoFieldComponent extends ContezzaBaseFieldComponent<string> imple
 
     ngOnInit() {
         super.ngOnInit();
-        this.valueSource = ContezzaDynamicForm.getValueSource(this.field);
+        this.valueSource = this.control.valueChanges.pipe(startWith(this.control.value));
     }
 }
