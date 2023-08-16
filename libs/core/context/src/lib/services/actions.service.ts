@@ -2,7 +2,7 @@ import { Inject, Injectable, InjectionToken, Optional, Provider } from '@angular
 
 import { Store } from '@ngrx/store';
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, merge, Observable } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
 
 import { ContentActionRef, ContentActionType, ExtensionService, reduceEmptyMenus, reduceSeparators, RuleContext } from '@alfresco/adf-extensions';
@@ -24,9 +24,13 @@ export class ActionsService {
     ];
 
     private readonly featureKeySource = new BehaviorSubject<string>(undefined);
-    private readonly allActions$: Observable<ContentActionRef[]> = this.featureKeySource.pipe(
-        filter((value) => !!value),
-        map((featureKey) => ContezzaAdfUtils.filterAndSortFeature(this.extensions.getFeature(featureKey)))
+    private readonly allActionsSource = new BehaviorSubject<ContentActionRef[]>(undefined);
+    private readonly allActions$: Observable<ContentActionRef[]> = merge(
+        this.featureKeySource.pipe(
+            filter((value) => !!value),
+            map((featureKey) => ContezzaAdfUtils.filterAndSortFeature(this.extensions.getFeature(featureKey)))
+        ),
+        this.allActionsSource.pipe(filter((value) => !!value))
     );
 
     readonly actions$: Observable<ContentActionRef[]> = this.allActions$.pipe(
@@ -46,6 +50,10 @@ export class ActionsService {
 
     set featureKey(key: string) {
         this.featureKeySource.next(key);
+    }
+
+    set actions(actions: ContentActionRef[]) {
+        this.allActionsSource.next(actions);
     }
 
     runActionById(id: string) {
