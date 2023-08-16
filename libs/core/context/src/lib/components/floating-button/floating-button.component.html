@@ -1,0 +1,68 @@
+<ng-container *ngIf="action$ | async as action">
+    <button
+        #trigger="matMenuTrigger"
+        [id]="action.id"
+        class="contezza-floating-button-trigger"
+        [class.menu-open]="trigger.menuOpen"
+        color="primary"
+        mat-fab
+        [attr.aria-label]="action.description || action.title | translate"
+        [attr.title]="action.description || action.title | translate"
+        [matMenuTriggerFor]="action.children ? menu : undefined"
+        [disabled]="action.disabled"
+        (click)="!action.children && runAction(action)"
+    >
+        <adf-icon [value]="action.icon"></adf-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+        <ng-container *ngFor="let child of action.children; trackBy: trackById">
+            <ng-container [ngSwitch]="child.type">
+                <ng-container *ngSwitchCase="'custom'">
+                    <adf-dynamic-component [id]="child.component" [data]="child.data"></adf-dynamic-component>
+                </ng-container>
+                <ng-container *ngSwitchCase="'separator'">
+                    <mat-divider></mat-divider>
+                </ng-container>
+                <ng-container *ngSwitchCase="'menu'">
+                    <div>
+                        <button [id]="child.id" mat-menu-item tabindex="0" [disabled]="child.disabled" [matMenuTriggerFor]="childMenu">
+                            <adf-icon [value]="child.icon"></adf-icon>
+                            <span data-automation-id="menu-item-title">{{ child.title | translate }}</span>
+                        </button>
+                        <mat-menu #childMenu="matMenu">
+                            <ng-container *ngFor="let subchild of child.children; trackBy: trackById">
+                                <button
+                                    [id]="subchild.id"
+                                    role="menuitem"
+                                    mat-menu-item
+                                    tabindex="0"
+                                    [disabled]="subchild.disabled"
+                                    [attr.title]="(subchild.disabled ? subchild['description-disabled'] : subchild.description || subchild.title) | translate"
+                                    (click)="runAction(subchild)"
+                                >
+                                    <adf-icon [value]="subchild.icon"></adf-icon>
+                                    <span data-automation-id="menu-item-title">{{ subchild.title | translate }}</span>
+                                </button>
+                            </ng-container>
+                        </mat-menu>
+                    </div>
+                </ng-container>
+                <ng-container *ngSwitchDefault>
+                    <button
+                        [id]="child.id"
+                        role="menuitem"
+                        mat-menu-item
+                        tabindex="0"
+                        [disabled]="child.disabled"
+                        [attr.title]="(child.disabled ? child['description-disabled'] : child.description || child.title) | translate"
+                        (click)="runAction(child)"
+                    >
+                        <adf-icon [value]="child.icon"></adf-icon>
+                        <span data-automation-id="menu-item-title">{{ child.title | translate }}</span>
+                    </button>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+    </mat-menu>
+</ng-container>
