@@ -66,7 +66,7 @@ export class DemoShellComponent implements AfterViewInit {
 
     refresh(value) {
         this.showFormSource.next(false);
-        this.form = this.service.get(value.formId, value.layoutId);
+        this.form = this.service.get(value.formId, value.layoutId || undefined);
         const providedDependencies: Record<string, Observable<any>> = {};
         this.form.provideDependencies(providedDependencies);
         this.style = value.style;
