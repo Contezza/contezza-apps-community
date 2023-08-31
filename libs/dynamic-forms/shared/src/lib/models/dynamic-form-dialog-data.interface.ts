@@ -1,16 +1,13 @@
 import { ContezzaDynamicForm } from '../classes';
-import { ContezzaDynamicFormField } from './dynamic-form-field.interface';
-import { DynamicFormOptions } from './dynamic-form-options.interface';
+import { ExtendedDynamicFormDefinition } from './dynamic-form-id';
 
-export interface DynamicFormDialogData {
+export interface DialogData {
     title: string;
     titleParams?: any;
-    fields?: ContezzaDynamicFormField[];
-    dynamicFormId?: string;
-    providedDependencies?: ContezzaDynamicForm['providedDependencies'];
     buttons: DynamicFormDialogButtons;
-    options?: DynamicFormOptions;
 }
+
+export type DynamicFormDialogData = DialogData & { dynamicForm?: ContezzaDynamicForm; dynamicFormId?: ExtendedDynamicFormDefinition };
 
 export interface DynamicFormDialogButtons {
     cancel: string;
