@@ -4,8 +4,7 @@ import { combineLatest, Observable } from 'rxjs';
 import { debounceTime, filter, map, startWith, takeUntil } from 'rxjs/operators';
 
 import { ContezzaDynamicForm } from './dynamic-form.class';
-import { ContezzaDynamicFormField } from '../interfaces/dynamic-form-field.interface';
-import { ContezzaDynamicSearchField } from '../interfaces/dynamic-search-field.interface';
+import { ContezzaDynamicFormField, ContezzaDynamicSearchField } from '../models';
 
 export class ContezzaDynamicSearchForm extends ContezzaDynamicForm {
     private _query: Observable<string>;
