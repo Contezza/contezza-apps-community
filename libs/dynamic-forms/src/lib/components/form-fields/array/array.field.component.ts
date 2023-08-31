@@ -30,7 +30,7 @@ import { ContezzaBaseFieldComponent } from '../base-field.component';
                     <mat-icon>add</mat-icon>
                 </button>
             </div>
-            <ng-container *ngFor="let form of forms$ | async | keyvalue; trackBy: trackByKey">
+            <ng-container *ngFor="let form of forms$ | async; trackBy: trackByKey">
                 <div class="contezza-array-form-field-item">
                     <contezza-dynamic-form [dynamicForm]="form.value"></contezza-dynamic-form>
                     <button *ngIf="!readonly" mat-icon-button class="app-toolbar-button" (keydown.enter)="delete(form.key)" (click)="delete(form.key)">
@@ -52,7 +52,9 @@ export class ArrayFieldComponent<TBaseValue> extends ContezzaBaseFieldComponent<
     private readonly subform = new FormGroup<Record<string, AbstractControl<TBaseValue>>>({});
     private readonly forms: Record<string, ContezzaDynamicForm> = {};
     private readonly formsSource = new BehaviorSubject<Record<string, ContezzaDynamicForm>>(this.forms);
-    readonly forms$ = this.formsSource.asObservable();
+    readonly forms$: Observable<{ key: string; value: ContezzaDynamicForm }[]> = this.formsSource
+        .asObservable()
+        .pipe(map((forms) => Object.entries(forms).map(([key, value]) => ({ key, value }))));
 
     constructor(private readonly dynamicFormService: ContezzaDynamicFormService, destroy$: DestroyService) {
         super(destroy$);
