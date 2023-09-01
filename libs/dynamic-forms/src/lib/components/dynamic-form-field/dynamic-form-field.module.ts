@@ -10,7 +10,6 @@ import { ContezzaDateTimeFieldModule } from '../form-fields/date-time/date-time-
 import { ContezzaInputFieldModule } from '../form-fields/input/input-field.module';
 import { ContezzaSelectFieldModule } from '../form-fields/select/select-field.module';
 import { ContezzaTextareaFieldModule } from '../form-fields/textarea/textarea-field.module';
-import { DynamicFormFieldDirective } from './dynamic-form-field.directive';
 import { ContezzaMultiautocompleteFieldModule } from '../form-fields/multiautocomplete/multiautocomplete-field.module';
 import { ContezzaInputDialogFieldModule } from '../form-fields/input-dialog/input-dialog-field.module';
 import { ContezzaToggleFieldModule } from '../form-fields/toggle/toggle-field.module';
@@ -41,8 +40,9 @@ import { ContezzaRadioButtonFieldModule } from '../form-fields/radio-button/radi
         ContezzaTextareaFieldModule,
         ContezzaToggleFieldModule,
         ContezzaPeopleGroupPickerFieldModule,
+        DynamicFormFieldComponent,
     ],
-    declarations: [DynamicFormFieldComponent, DynamicFormFieldDirective],
-    exports: [DynamicFormFieldComponent, DynamicFormFieldDirective],
+    // declarations: [DynamicFormFieldComponent, DynamicFormFieldDirective],
+    exports: [DynamicFormFieldComponent],
 })
 export class ContezzaDynamicFormFieldModule {}
