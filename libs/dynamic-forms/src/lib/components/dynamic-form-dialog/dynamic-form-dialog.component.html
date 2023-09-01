@@ -1,4 +1,6 @@
-<div mat-dialog-title>{{ data.title | translate : data.titleParams }}</div>
+<div mat-dialog-title>
+    <contezza-dialog-title [title]="data.title"></contezza-dialog-title>
+</div>
 
 <mat-dialog-content class="dialog-content-container">
     <div class="form">
