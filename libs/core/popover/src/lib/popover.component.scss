@@ -1,0 +1,66 @@
+.contezza-popover-tooltip {
+    // box style
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    padding: 16px;
+    background: var(--theme-card-background-color);
+    border: 1px solid var(--theme-border-color);
+    border-radius: 10px;
+    max-width: 480px;
+
+    // box and arrow position
+    &:before {
+        content: '';
+        width: 0;
+        height: 0;
+        position: absolute;
+        border: 15px solid transparent;
+        z-index: -1;
+    }
+
+    &.above {
+        margin-bottom: 12px;
+        &:before {
+            margin-bottom: 4px;
+            border-top: 15px solid var(--theme-border-color);
+            border-bottom: 0 solid transparent;
+            bottom: -5px;
+            left: calc(50% - 15px);
+        }
+    }
+
+    &.below {
+        margin-top: 12px;
+        &:before {
+            margin-top: 4px;
+            border-bottom: 15px solid var(--theme-border-color);
+            border-top: 0 solid transparent;
+            top: -5px;
+            left: calc(50% - 15px);
+        }
+    }
+
+    &.right {
+        margin-left: 12px;
+        &:before {
+            margin-left: 4px;
+            border-right: 15px solid var(--theme-border-color);
+            border-left: 0 solid transparent;
+            left: -5px;
+            top: calc(50% - 15px);
+        }
+    }
+    &.left {
+        margin-right: 12px;
+        &:before {
+            margin-right: 4px;
+            border-left: 15px solid var(--theme-border-color);
+            border-right: 0 solid transparent;
+            right: -5px;
+            top: calc(50% - 15px);
+        }
+    }
+
+    // text style
+    font-size: 16px;
+    white-space: pre-line;
+}

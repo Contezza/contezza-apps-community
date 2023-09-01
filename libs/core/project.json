@@ -51,7 +51,9 @@
                     "libs/core/dialogs/**/*.ts",
                     "libs/core/dialogs/**/*.html",
                     "libs/core/pipes/**/*.ts",
-                    "libs/core/pipes/**/*.html"
+                    "libs/core/pipes/**/*.html",
+                    "libs/core/popover/**/*.ts",
+                    "libs/core/popover/**/*.html"
                 ]
             }
         }
