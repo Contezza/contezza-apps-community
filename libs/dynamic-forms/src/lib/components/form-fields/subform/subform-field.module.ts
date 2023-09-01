@@ -5,11 +5,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { ContezzaDynamicFormExtensionService } from '@contezza/dynamic-forms/shared';
 
-import { ContezzaDynamicFormModule } from '../../dynamic-form';
+import { ContezzaDynamicFormComponent } from '../../dynamic-form';
 import { SubformFieldComponent } from './subform-field.component';
 
 @NgModule({
-    imports: [CommonModule, ContezzaDynamicFormModule, MatProgressSpinnerModule],
+    imports: [CommonModule, ContezzaDynamicFormComponent, MatProgressSpinnerModule],
     declarations: [SubformFieldComponent],
     exports: [SubformFieldComponent],
 })

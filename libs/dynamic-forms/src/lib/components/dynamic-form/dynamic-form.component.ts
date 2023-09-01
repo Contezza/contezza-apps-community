@@ -1,15 +1,19 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { ContezzaDynamicForm, ContezzaDynamicFormLayout, DynamicFormDefinition, ExtendedDynamicFormDefinition } from '@contezza/dynamic-forms/shared';
 
 import { ContezzaDynamicFormService } from '../../services';
+import { ContezzaDynamicSubformComponent } from './dynamic-subform.component';
 
 /**
  * Displays a dynamic form.
  * Input can be either an already constructed ContezzaDynamicForm object or its definition (form id, layout id and dependencies).
  */
 @Component({
+    standalone: true,
+    imports: [CommonModule, ReactiveFormsModule, ContezzaDynamicSubformComponent],
     selector: 'contezza-dynamic-form',
     template: `
         <form class="dynamic-form" [formGroup]="form" (keydown.enter)="onEnterPressed($event)">

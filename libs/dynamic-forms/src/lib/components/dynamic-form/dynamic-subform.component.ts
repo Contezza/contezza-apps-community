@@ -1,9 +1,16 @@
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormControl } from '@angular/forms';
+
+import { TranslateModule } from '@ngx-translate/core';
 
 import { ContezzaDynamicForm, ContezzaDynamicFormField, ContezzaDynamicFormLayout } from '@contezza/dynamic-forms/shared';
 
+import { DynamicFormFieldComponent } from '../dynamic-form-field/dynamic-form-field.component';
+
 @Component({
+    standalone: true,
+    imports: [CommonModule, TranslateModule, DynamicFormFieldComponent],
     selector: 'contezza-dynamic-subform',
     templateUrl: './dynamic-subform.component.html',
     styleUrls: ['./dynamic-subform.component.scss'],

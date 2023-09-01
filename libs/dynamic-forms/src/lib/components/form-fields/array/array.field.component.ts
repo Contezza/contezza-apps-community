@@ -15,13 +15,13 @@ import { ContezzaArrayUtils, ContezzaObservables } from '@contezza/core/utils';
 import { ContezzaDynamicForm } from '@contezza/dynamic-forms/shared';
 
 import { ContezzaDynamicFormService } from '../../../services';
-import { ContezzaDynamicFormModule } from '../../dynamic-form';
+import { ContezzaDynamicFormComponent } from '../../dynamic-form';
 import { ContezzaBaseFieldComponent } from '../base-field.component';
 
 @Component({
     selector: 'contezza-array-field',
     standalone: true,
-    imports: [CommonModule, MatButtonModule, MatIconModule, TranslateModule, ContezzaLetModule, ContezzaDynamicFormModule],
+    imports: [CommonModule, MatButtonModule, MatIconModule, TranslateModule, ContezzaLetModule, ContezzaDynamicFormComponent],
     template: `<ng-container *contezzaLet="readonly$ | async as readonly">
         <div class="contezza-form-field contezza-array-form-field adf-property-field adf-card-textitem-field">
             <div class="contezza-array-form-field-header">
