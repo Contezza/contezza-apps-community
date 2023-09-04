@@ -8,6 +8,7 @@ import { TranslationService } from '@alfresco/adf-core';
 import { ContezzaCommonModule } from '@contezza/common';
 import { ContezzaJsConsoleSharedModule } from '@contezza/js-console/shared';
 import { ContezzaNodeBrowserSharedModule } from '@contezza/node-browser/shared';
+import { MatDialogService } from '@contezza/core/dialogs';
 
 @NgModule({
     imports: [
@@ -17,7 +18,7 @@ import { ContezzaNodeBrowserSharedModule } from '@contezza/node-browser/shared';
         ContezzaJsConsoleSharedModule,
         ContezzaNodeBrowserSharedModule,
     ],
-    providers: [provideExtensionConfig(['demo-app-navbar.json', 'dynamicforms.json'])],
+    providers: [MatDialogService.provider, provideExtensionConfig(['demo-app-navbar.json', 'dynamicforms.json'])],
 })
 export class AppExtensionsModule {
     constructor(translation: TranslationService) {

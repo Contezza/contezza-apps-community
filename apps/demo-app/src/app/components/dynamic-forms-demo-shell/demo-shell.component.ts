@@ -7,9 +7,16 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 
 import { ContezzaLetModule } from '@contezza/core/directives';
 import { ContezzaDynamicFormModule, ContezzaDynamicFormService } from '@contezza/dynamic-forms';
+import { DynamicFormDialogService } from '@contezza/dynamic-forms/dialog';
 import { ContezzaDynamicForm } from '@contezza/dynamic-forms/shared';
 
 import { ContezzaDynamicSourceLoaderService } from './dynamic-source-loader.service';
+
+interface FormValue {
+    formId: string;
+    layoutId?: string;
+    style?: string;
+}
 
 @Component({
     standalone: true,
@@ -20,6 +27,7 @@ import { ContezzaDynamicSourceLoaderService } from './dynamic-source-loader.serv
             <contezza-dynamic-form [dynamicForm]="headerForm" (keydown.enter)="$event.preventDefault(); button._getHostElement().click()"></contezza-dynamic-form>
             <div>
                 <button #button mat-icon-button [disabled]="!valid" (click)="refresh(headerForm.form.value)"><mat-icon>refresh</mat-icon></button>
+                <button #button mat-icon-button [disabled]="!valid" (click)="showDialog(headerForm.form.value)"><mat-icon>expand_more</mat-icon></button>
                 <button #button mat-icon-button [disabled]="!form" (click)="log(form)"><mat-icon>info</mat-icon></button>
             </div>
         </div>
@@ -48,6 +56,7 @@ export class DemoShellComponent implements AfterViewInit {
     constructor(
         private readonly cd: ChangeDetectorRef,
         private readonly service: ContezzaDynamicFormService,
+        private readonly dialog: DynamicFormDialogService,
         // default sources are loaded in the constructor
         // add more if needed
         loader: ContezzaDynamicSourceLoaderService
@@ -64,7 +73,7 @@ export class DemoShellComponent implements AfterViewInit {
         }, 500);
     }
 
-    refresh(value) {
+    refresh(value: FormValue) {
         this.showFormSource.next(false);
         this.form = this.service.get(value.formId, value.layoutId || undefined);
         const providedDependencies: Record<string, Observable<any>> = {};
@@ -72,6 +81,21 @@ export class DemoShellComponent implements AfterViewInit {
         this.style = value.style;
         this.cd.detectChanges();
         this.showFormSource.next(true);
+    }
+
+    showDialog(value: FormValue) {
+        this.dialog
+            .open({
+                data: {
+                    title: {
+                        label: 'Test dialog',
+                        tooltip: 'test tooltip',
+                    },
+                    dynamicFormId: { id: value.formId, layoutId: value.layoutId },
+                    buttons: { submit: 'OK', cancel: 'NOPE' },
+                },
+            })
+            .subscribe((response) => console.log(response));
     }
 
     log(form) {
