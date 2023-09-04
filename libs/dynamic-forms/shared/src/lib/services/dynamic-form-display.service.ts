@@ -7,8 +7,8 @@ import { ObjectUtils } from '@alfresco/adf-core';
 import { ContezzaIdResolverService } from '@contezza/core/extensions';
 import { ContezzaStringTemplate } from '@contezza/core/utils';
 
-import { ContezzaDisplaySource, ContezzaSimpleDisplaySource } from '../interfaces';
-import { ContezzaDynamicFormDisplay } from '../interfaces/dynamic-form-display.interface';
+import { ContezzaDisplaySource, ContezzaSimpleDisplaySource } from '../models';
+import { ContezzaDynamicFormDisplay } from '../models/dynamic-form-display.interface';
 
 @Injectable({
     providedIn: 'root',

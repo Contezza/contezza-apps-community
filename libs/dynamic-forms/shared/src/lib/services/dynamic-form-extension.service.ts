@@ -1,7 +1,7 @@
 import { Injectable, Type } from '@angular/core';
 import { AbstractControl, ValidationErrors, Validators } from '@angular/forms';
 
-import { Observable, of } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 
 import { ContezzaAsyncDialogService } from '@contezza/core/services';
 import { ContezzaIdResolverService } from '@contezza/core/extensions';
@@ -15,7 +15,7 @@ import { ContezzaBaseFieldComponentInterface, ContezzaBaseOptionComponentInterfa
     providedIn: 'root',
 })
 export class ContezzaDynamicFormExtensionService {
-    private readonly fieldComponents: Record<string, Type<ContezzaBaseFieldComponentInterface>> = {};
+    private readonly fieldComponents: Record<string, Type<ContezzaBaseFieldComponentInterface> | (() => Promise<Type<ContezzaBaseFieldComponentInterface>>)> = {};
     private readonly optionComponents: Record<string, Type<ContezzaBaseOptionComponentInterface>> = {};
     private readonly dialogServices: Record<string, ContezzaAsyncDialogService<any, any, any>> = {};
 
@@ -58,18 +58,40 @@ export class ContezzaDynamicFormExtensionService {
         });
     }
 
-    setFieldComponents(values: Record<string, Type<ContezzaBaseFieldComponentInterface>>) {
+    /**
+     * Registers the given record of field components.
+     * Field components are defined via promises (e.g.: `input: () => import('./input-field.component').then((m) => m.InputFieldComponent)`) and lazy loaded when/if needed.
+     *
+     * @param values A record of field components.
+     */
+    setFieldComponents(values: Record<string, () => Promise<Type<ContezzaBaseFieldComponentInterface>>>);
+    /**
+     * @deprecated Lazy loading of field components is preferred. Use overload `setFieldComponents(values: Record<string, () => Promise<Type<ContezzaBaseFieldComponentInterface>>>)`.
+     */
+    setFieldComponents(values: ContezzaDynamicFormExtensionService['fieldComponents']);
+    setFieldComponents(values: ContezzaDynamicFormExtensionService['fieldComponents']) {
         if (values) {
             Object.assign(this.fieldComponents, values);
         }
     }
 
-    getFieldComponentById<T extends ContezzaBaseFieldComponentInterface>(id: string): Type<T> {
-        return this.fieldComponents[id] as Type<T>;
+    getFieldComponentById(id: string): Observable<Type<ContezzaBaseFieldComponentInterface>> {
+        const component$: () => Promise<Type<ContezzaBaseFieldComponentInterface>> = this.fieldComponents[id] as any;
+
+        if (!component$) {
+            throw new Error('Unknown dynamic-form field component: ' + id);
+        }
+
+        try {
+            return from(component$());
+        } catch (e) {
+            // console.warn('Non-lazy dynamic-form loading is deprecated, please fix it for field component: ' + id);
+            return of(component$ as any);
+        }
     }
 
     hasFieldComponentById(id: string): boolean {
-        return !!this.getFieldComponentById(id);
+        return !!this.fieldComponents[id];
     }
 
     setOptionComponents(values: Record<string, Type<ContezzaBaseOptionComponentInterface>>) {

@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { ContezzaDisplayableValue } from '../interfaces';
+import { ContezzaDisplayableValue } from '../models';
 
 export interface ContezzaDynamicFormDialog<ValueType> {
     readonly afterClosed: Observable<ValueType>;

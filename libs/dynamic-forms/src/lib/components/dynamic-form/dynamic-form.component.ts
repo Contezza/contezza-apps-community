@@ -1,11 +1,19 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { ContezzaDynamicForm, ContezzaDynamicFormField, ContezzaDynamicFormLayout } from '@contezza/dynamic-forms/shared';
+import { ContezzaDynamicForm, ContezzaDynamicFormLayout, DynamicFormDefinition, ExtendedDynamicFormDefinition } from '@contezza/dynamic-forms/shared';
 
 import { ContezzaDynamicFormService } from '../../services';
+import { ContezzaDynamicSubformComponent } from './dynamic-subform.component';
 
+/**
+ * Displays a dynamic form.
+ * Input can be either an already constructed ContezzaDynamicForm object or its definition (form id, layout id and dependencies).
+ */
 @Component({
+    standalone: true,
+    imports: [CommonModule, ReactiveFormsModule, ContezzaDynamicSubformComponent],
     selector: 'contezza-dynamic-form',
     template: `
         <form class="dynamic-form" [formGroup]="form" (keydown.enter)="onEnterPressed($event)">
@@ -17,21 +25,13 @@ import { ContezzaDynamicFormService } from '../../services';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContezzaDynamicFormComponent implements OnInit, OnDestroy {
-    form: FormGroup;
-
     @Input()
-    dynamicFormId: string;
-
-    @Input()
-    providedDependencies: ContezzaDynamicForm['providedDependencies'];
+    dynamicFormId: ExtendedDynamicFormDefinition;
 
     @Input()
     dynamicForm: ContezzaDynamicForm;
 
-    @Input()
-    fields: ContezzaDynamicFormField[];
-
-    @Input()
+    form: FormGroup;
     layout: ContezzaDynamicFormLayout;
 
     @Output()
@@ -40,20 +40,26 @@ export class ContezzaDynamicFormComponent implements OnInit, OnDestroy {
     constructor(private readonly dynamicFormService: ContezzaDynamicFormService) {}
 
     ngOnInit() {
-        if (!this.dynamicForm && this.dynamicFormId) {
-            this.dynamicForm = this.dynamicFormService.get(this.dynamicFormId);
-            if (this.providedDependencies) {
-                this.dynamicForm.provideDependencies(this.providedDependencies);
+        // require dynamicForm or dynamicFormId to initialise
+        if (!this.dynamicForm && !this.dynamicFormId) {
+            throw new Error('No dynamic form or dynamic-form definition provided.');
+        }
+
+        // initialise dynamicForm from dynamicFormId
+        if (this.dynamicFormId) {
+            if (this.dynamicForm) {
+                // if both are given, prioritise dynamicForm
+                console.warn('Dynamic form and dynamic-form definition are both provided. Dynamic form is used.');
+            } else {
+                // resolve dynamic form from definition
+                const def: DynamicFormDefinition = typeof this.dynamicFormId === 'string' ? { id: this.dynamicFormId } : this.dynamicFormId;
+                this.dynamicForm = this.dynamicFormService.get(def.id, def.layoutId).provideDependencies(def.providedDependencies);
             }
         }
-        if (this.dynamicForm?.rootField?.subfields) {
-            this.fields = this.dynamicForm?.rootField.subfields;
-        }
-        if (this.dynamicForm?.layout) {
-            this.layout = this.dynamicForm?.layout;
-        }
+
         this.dynamicForm.build();
         this.form = this.dynamicForm.form;
+        this.layout = this.dynamicForm.layout;
     }
 
     ngOnDestroy() {

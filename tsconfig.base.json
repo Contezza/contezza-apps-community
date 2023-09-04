@@ -34,6 +34,7 @@
             "@contezza/core/directives": ["libs/core/directives/src/index.ts"],
             "@contezza/core/extensions": ["libs/core/extensions/src/index.ts"],
             "@contezza/core/pipes": ["libs/core/pipes/src/index.ts"],
+            "@contezza/core/popover": ["libs/core/popover/src/index.ts"],
             "@contezza/core/services": ["libs/core/services/src/index.ts"],
             "@contezza/core/stores": ["libs/core/stores/src/index.ts"],
             "@contezza/core/utils": ["libs/core/utils/src/index.ts"],

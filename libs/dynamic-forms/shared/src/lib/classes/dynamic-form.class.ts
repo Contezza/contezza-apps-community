@@ -6,7 +6,7 @@ import { debounceTime, distinctUntilChanged, filter, map, switchMap, take, takeU
 import { ContezzaDependency } from '@contezza/core/extensions';
 import { ContezzaObjectUtils } from '@contezza/core/utils';
 
-import { ContezzaDynamicFormField, ContezzaDynamicFormLayout, ContezzaDynamicFormValidation, ContezzaFormField } from '../interfaces';
+import { ContezzaDynamicFormField, ContezzaDynamicFormLayout, ContezzaDynamicFormValidation, ContezzaFormField } from '../models';
 
 export class ContezzaDynamicForm {
     form?: FormGroup;

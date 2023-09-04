@@ -5,7 +5,7 @@ import { ContezzaIdResolverService, ContezzaIdResolverSource } from '@contezza/c
 
 import { createMask } from '@ngneat/input-mask';
 
-import { ContezzaDynamicFormValidation, ValidationSource } from '../interfaces';
+import { ContezzaDynamicFormValidation, ValidationSource } from '../models';
 
 @Injectable({
     providedIn: 'root',
