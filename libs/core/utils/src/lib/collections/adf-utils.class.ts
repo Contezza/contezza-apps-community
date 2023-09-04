@@ -22,26 +22,26 @@ export class ContezzaAdfUtils {
      * The returned object can be directly given as parameter to `ExtensionService.setEvaluators`.
      *
      * @param id Unique rule id used to make the unique id of the `RuleEvaluator`.
-     * @param evaluator Boolean function which takes a node as parameter and the rest of the rule context as optional parameter.
+     * @param evaluator Boolean function which takes a node as parameter and the rest of the rule context and arguments as optional parameters.
      * @param options Optional parameters: `prefix` (defaults to `app`) and `separator` (defaults to `.`) are used to make the unique id of the `RuleEvaluator`.
      * @returns `RuleEvaluator` record that can be directly given as parameter to `ExtensionService.setEvaluators`.
      */
     static makeRules(
         id: string,
-        evaluator: (node: Node, context?: Omit<RuleContext, 'selection' | 'navigation'>) => boolean,
+        evaluator: (node: Node, context?: Omit<RuleContext, 'selection' | 'navigation'>, ...args: any[]) => boolean,
         options?: { prefix?: string; separator?: string }
     ): Record<string, RuleEvaluator> {
+        const prefix = options?.prefix ?? 'app';
+        const separator = options?.separator ?? '.';
         return {
-            [[options?.prefix ?? 'app', 'selection', id].join(options?.separator ?? '.')]: (context) =>
-                !context.selection.isEmpty && context.selection.nodes.every(({ entry }) => evaluator(entry, context)),
-            [[options?.prefix ?? 'app', 'selection', `!${id}`].join(options?.separator ?? '.')]: (context) =>
-                !context.selection.isEmpty && context.selection.nodes?.every(({ entry }) => !evaluator(entry, context)),
-            [[options?.prefix ?? 'app', 'selection', 'file', id].join(options?.separator ?? '.')]: (context) =>
-                context.selection.file && evaluator(context.selection.file.entry, context),
-            [[options?.prefix ?? 'app', 'selection', 'folder', id].join(options?.separator ?? '.')]: (context) =>
-                context.selection.folder && evaluator(context.selection.folder.entry, context),
-            [[options?.prefix ?? 'app', 'current-folder', id].join(options?.separator ?? '.')]: (context) =>
-                !!context.navigation.currentFolder && evaluator(context.navigation.currentFolder, context),
+            [[prefix, 'selection', id].join(separator)]: (context, ...args) =>
+                !context.selection.isEmpty && context.selection.nodes.every(({ entry }) => evaluator(entry, context, args)),
+            [[prefix, 'selection', `!${id}`].join(separator)]: (context, ...args) =>
+                !context.selection.isEmpty && context.selection.nodes?.every(({ entry }) => !evaluator(entry, context, args)),
+            [[prefix, 'selection', 'file', id].join(separator)]: (context, ...args) => context.selection.file && evaluator(context.selection.file.entry, context, args),
+            [[prefix, 'selection', 'folder', id].join(separator)]: (context, ...args) => context.selection.folder && evaluator(context.selection.folder.entry, context, args),
+            [[prefix, 'current-folder', id].join(separator)]: (context, ...args) =>
+                !!context.navigation.currentFolder && evaluator(context.navigation.currentFolder, context, args),
         };
     }
 }
