@@ -1,6 +1,6 @@
 import { EventEmitter } from '@angular/core';
 
-import { forkJoin, from, Observable, of, Subject, Subscriber, TeardownLogic } from 'rxjs';
+import { forkJoin, from, Observable, ObservedValueOf, of, Subject, Subscriber, TeardownLogic } from 'rxjs';
 import { filter, finalize, map, switchMap, tap } from 'rxjs/operators';
 
 export class ContezzaObservables {
@@ -48,13 +48,15 @@ export class ContezzaObservables {
         return of(null).pipe(switchMap(() => from(generator())));
     }
 
+    static forkJoin<T>(observables: Observable<T>[]): Observable<T[]>;
+    static forkJoin<T>(sourcesObject: T): Observable<{ [K in keyof T]: ObservedValueOf<T[K]> }>;
     /**
-     * Extends rxjs forkJoin by allowing an empty array as input
+     * Extends rxjs forkJoin by allowing an empty array or an empty object as input.
      *
-     * @param observables
+     * @param source
      */
-    static forkJoin(observables: Observable<any>[]): Observable<any[]> {
-        return observables?.length ? forkJoin(observables) : of([]);
+    static forkJoin(source: Observable<any>[]): Observable<any> {
+        return Array.isArray(source) ? (source?.length ? forkJoin(source) : of([])) : Object.keys(source).length ? forkJoin(source) : of({});
     }
 
     /**
