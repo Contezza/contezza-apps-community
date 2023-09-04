@@ -58,6 +58,17 @@ export class ContezzaDynamicFormExtensionService {
         });
     }
 
+    /**
+     * Registers the given record of field components.
+     * Field components are defined via promises (e.g.: `input: () => import('./input-field.component').then((m) => m.InputFieldComponent)`) and lazy loaded when/if needed.
+     *
+     * @param values A record of field components.
+     */
+    setFieldComponents(values: Record<string, () => Promise<Type<ContezzaBaseFieldComponentInterface>>>);
+    /**
+     * @deprecated Lazy loading of field components is preferred. Use overload `setFieldComponents(values: Record<string, () => Promise<Type<ContezzaBaseFieldComponentInterface>>>)`.
+     */
+    setFieldComponents(values: ContezzaDynamicFormExtensionService['fieldComponents']);
     setFieldComponents(values: ContezzaDynamicFormExtensionService['fieldComponents']) {
         if (values) {
             Object.assign(this.fieldComponents, values);
