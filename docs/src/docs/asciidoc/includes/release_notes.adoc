@@ -10,6 +10,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2023-09-13
+|2.2.1
+|Bekijk de <<Release 2.2.1,release details>>.
+
 |2023-09-04
 |2.2.0
 |Bekijk de <<Release 2.2.0,release details>>.
@@ -77,6 +81,22 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 2.2.1
+
+Bugfixes/minor changes:
+
+- @contezza/core/dialogs - `DialogLoaderService` aangemaakt.
+- @contezza/core/utils - `ContezzaArrayUtils.sortBy` ondersteunt een extra parameter `options?: { ascending?: boolean }`.
+- @contezza/core/utils - `ContezzaArrayUtils.pluck` aangemaakt.
+- @contezza/core/utils - `ObjectUtils.getValue` aangemaakt.
+- @contezza/core/utils - `ObjectUtils.resolveImports` en `ObjectUtils.replace` verwijderd.
+- @contezza/core/utils - Type `KeyOf` herwerkt.
+- @contezza/core/utils - Type `TypeOf` aangemaakt.
+- @contezza/common - i18n uitbreiden.
+- @contezza/dynamic-forms - `ContezzaDynamicFormService.get` en `ContezzaDynamicSearchFormService.get` ondersteunen input van type ExtendedDynamicFormId
+- @contezza/dynamic-forms - Veld `help` aangemaakt.
+- @contezza/dynamic-forms - Veld `multiautocomplete` toont als het `required` is.
 
 ==== Release 2.2.0
 
