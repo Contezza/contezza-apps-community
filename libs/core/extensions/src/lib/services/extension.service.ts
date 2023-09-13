@@ -14,8 +14,7 @@ import {
     RuleService,
 } from '@alfresco/adf-extensions';
 
-import { ContezzaObjectUtils } from '@contezza/core/utils';
-
+import { Utils } from '../utils';
 import { ContezzaDynamicExtensionService } from './dynamic-extension.service';
 
 const EXTENSION_QUERIES = new InjectionToken<string[][]>('extension-queries', {
@@ -78,7 +77,7 @@ export class ContezzaExtensionService extends ExtensionService {
     async load(): Promise<ExtensionConfig> {
         this.loadTrigger.next();
         const config = await this.config$.pipe(take(1)).toPromise();
-        ContezzaObjectUtils.resolveImports(config);
+        Utils.resolveImports(config);
         this.setup(config);
         return config;
     }
