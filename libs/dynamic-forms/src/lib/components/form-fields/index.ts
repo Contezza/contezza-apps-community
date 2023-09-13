@@ -21,6 +21,7 @@ export * from './date-time/date-time-field.module';
 
 export * from './dynamic';
 
+export * from './help/help.field.module';
 export * from './info/info-field.component';
 export * from './info/info-field.module';
 export * from './input/input-field.component';

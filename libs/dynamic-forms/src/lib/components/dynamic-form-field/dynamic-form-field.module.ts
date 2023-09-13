@@ -23,6 +23,7 @@ import {
     ContezzaSubformFieldModule,
     ContezzaTextareaFieldModule,
     ContezzaToggleFieldModule,
+    HelpFieldModule,
 } from '../form-fields';
 
 @NgModule({
@@ -49,6 +50,7 @@ import {
         ContezzaToggleFieldModule,
         ContezzaPeopleGroupPickerFieldModule,
         DynamicFormFieldComponent,
+        HelpFieldModule,
     ],
     exports: [DynamicFormFieldComponent],
 })
