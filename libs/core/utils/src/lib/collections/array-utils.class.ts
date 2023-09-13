@@ -1,3 +1,6 @@
+import { KeyOf, TypeOf } from '../types';
+import { ObjectUtils } from './object-utils.class';
+
 export type OrArray<T> = T | T[];
 
 export class ContezzaArrayUtils {
@@ -148,5 +151,18 @@ export class ContezzaArrayUtils {
             i--;
         }
         return match;
+    }
+
+    /**
+     * Applies `ObjectUtils.getValue` itemwise to the given array, i.e. creates a new array by extracting values from the items of the given array by following the given keys.
+     *
+     * @param array An array whose items are parsed to extract a value.
+     * @param keys  A list of keys used to parse the array items.
+     * @returns A new array whose items are extracted from the items of the given array by following the given keys.
+     */
+    static pluck<T, TKey extends KeyOf<T> & (string | number)[]>(array: T[], ...keys: TKey): TypeOf<T, TKey>[] {
+        // @ts-ignore
+        // otherwise TS2321: Excessive stack depth comparing types...
+        return array.map((item) => ObjectUtils.getValue(item, ...keys));
     }
 }
