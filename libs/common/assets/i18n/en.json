@@ -116,6 +116,12 @@
             "PREVIOUS": "Back",
             "NEXT": "Next",
             "CLEAR_ALL": "Clear all fields"
+        },
+        "DOCUMENT_LIST": {
+            "COLUMNS": {
+                "CREATED": "Created",
+                "CREATED_BY": "Created by"
+            }
         }
     },
     "SEARCH": {
