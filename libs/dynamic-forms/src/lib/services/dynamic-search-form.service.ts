@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { ContezzaDynamicSearchForm } from '@contezza/dynamic-forms/shared';
+import { ContezzaDynamicSearchForm, ExtendedDynamicFormId } from '@contezza/dynamic-forms/shared';
 
 import { ContezzaDynamicFormService } from './dynamic-form.service';
 import { ContezzaDynamicFormLoaderService } from './dynamic-form-loader.service';
@@ -14,7 +14,9 @@ export class ContezzaDynamicSearchFormService extends ContezzaDynamicFormService
         super(loader, adapter);
     }
 
-    get(formId: string, layoutId: string = ContezzaDynamicFormLoaderService.DEFAULT): ContezzaDynamicSearchForm {
-        return super.get(formId, layoutId) as ContezzaDynamicSearchForm;
+    get(formId: ExtendedDynamicFormId, forceNew?: boolean): ContezzaDynamicSearchForm;
+    get(formId: string, layoutId?: string, forceNew?: boolean): ContezzaDynamicSearchForm;
+    get(...args: [ExtendedDynamicFormId, boolean?] | [string, string?, boolean?]): ContezzaDynamicSearchForm {
+        return super.get(...(args as [any])) as ContezzaDynamicSearchForm;
     }
 }
