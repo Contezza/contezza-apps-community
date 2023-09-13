@@ -116,6 +116,12 @@
             "PREVIOUS": "Vorige",
             "NEXT": "Volgende",
             "CLEAR_ALL": "Wis alle velden"
+        },
+        "DOCUMENT_LIST": {
+            "COLUMNS": {
+                "CREATED": "Aangemaakt",
+                "CREATED_BY": "Aangemaakt door"
+            }
         }
     },
     "SEARCH": {
