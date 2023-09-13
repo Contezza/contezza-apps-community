@@ -35,12 +35,14 @@ export class ContezzaArrayUtils {
     }
 
     /**
-     * Sorts the element of the given array in ascending order based on the value corresponding to the given key.
+     * Sorts the element of the given array in place based on the value corresponding to the given key.
      *
      * @param array An array to be sorted.
      * @param key A key of the array elements. The array elements are sorted based on the corresponding value.
+     * @param options Optional parameters: `ascending` (defaults to `true`).
      */
-    static sortBy<T>(array: T[], key: keyof T): T[] {
+    static sortBy<T>(array: T[], key: keyof T, options?: { ascending?: boolean }): T[] {
+        const ascendingFactor = options?.ascending === false ? -1 : 1;
         return array.sort((a, b) => {
             const getLabel = (element: T): T[keyof T] | string => {
                 const label = element[key];
@@ -49,9 +51,9 @@ export class ContezzaArrayUtils {
             const labelA = getLabel(a);
             const labelB = getLabel(b);
             if (labelA < labelB) {
-                return -1;
+                return -1 * ascendingFactor;
             } else if (labelA > labelB) {
-                return 1;
+                return 1 * ascendingFactor;
             } else {
                 return 0;
             }
