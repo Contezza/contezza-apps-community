@@ -1,3 +1,6 @@
+import { KeyOf, TypeOf } from '../types';
+import { ObjectUtils } from './object-utils.class';
+
 export type OrArray<T> = T | T[];
 
 export class ContezzaArrayUtils {
@@ -35,12 +38,14 @@ export class ContezzaArrayUtils {
     }
 
     /**
-     * Sorts the element of the given array in ascending order based on the value corresponding to the given key.
+     * Sorts the element of the given array in place based on the value corresponding to the given key.
      *
      * @param array An array to be sorted.
      * @param key A key of the array elements. The array elements are sorted based on the corresponding value.
+     * @param options Optional parameters: `ascending` (defaults to `true`).
      */
-    static sortBy<T>(array: T[], key: keyof T): T[] {
+    static sortBy<T>(array: T[], key: keyof T, options?: { ascending?: boolean }): T[] {
+        const ascendingFactor = options?.ascending === false ? -1 : 1;
         return array.sort((a, b) => {
             const getLabel = (element: T): T[keyof T] | string => {
                 const label = element[key];
@@ -49,9 +54,9 @@ export class ContezzaArrayUtils {
             const labelA = getLabel(a);
             const labelB = getLabel(b);
             if (labelA < labelB) {
-                return -1;
+                return -1 * ascendingFactor;
             } else if (labelA > labelB) {
-                return 1;
+                return 1 * ascendingFactor;
             } else {
                 return 0;
             }
@@ -146,5 +151,18 @@ export class ContezzaArrayUtils {
             i--;
         }
         return match;
+    }
+
+    /**
+     * Applies `ObjectUtils.getValue` itemwise to the given array, i.e. creates a new array by extracting values from the items of the given array by following the given keys.
+     *
+     * @param array An array whose items are parsed to extract a value.
+     * @param keys  A list of keys used to parse the array items.
+     * @returns A new array whose items are extracted from the items of the given array by following the given keys.
+     */
+    static pluck<T, TKey extends KeyOf<T> & (string | number)[]>(array: T[], ...keys: TKey): TypeOf<T, TKey>[] {
+        // @ts-ignore
+        // otherwise TS2321: Excessive stack depth comparing types...
+        return array.map((item) => ObjectUtils.getValue(item, ...keys));
     }
 }
