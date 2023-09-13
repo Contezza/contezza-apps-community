@@ -32,6 +32,7 @@
                         class="adf-property-value"
                         [formControl]="control"
                         [placeholder]="field.placeholder | translate"
+                        [required]="required"
                         [multiple]="true"
                         [panelClass]="field.settings?.appearance === 'outline' ? 'contezza-multiautocomplete-form-field-panel contezza-multiautocomplete-form-field-panel-outline' : 'contezza-multiautocomplete-form-field-panel'"
                         (selectionChange)="onSelectionChange($event)"
