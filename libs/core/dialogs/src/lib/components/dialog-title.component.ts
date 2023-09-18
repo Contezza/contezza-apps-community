@@ -24,10 +24,10 @@ import { DialogTitle } from '../models';
                 display: flex;
                 align-items: center;
                 gap: 8px;
+            }
 
-                mat-icon {
-                    color: var(--theme-text-color);
-                }
+            :host mat-icon {
+                color: var(--theme-text-color);
             }
         `,
     ],
