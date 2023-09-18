@@ -43,6 +43,7 @@ export class ContezzaDynamicFormValidationService {
         }
         return {
             id,
+            parameters: validation.parameters,
             message,
             mask,
             validator,
