@@ -141,10 +141,19 @@
             "MIN_CHARS": "Zoekactie moet tenminste {{minChars}} karakters bevatten"
         },
         "CATEGORIES": {
+            "MODIFIED_DATE": "Datum gewijzigd",
             "SIZE": "Bestandsgrootte",
             "CREATED_DATE": "Datum gemaakt"
         },
+        "FACET_FIELDS": {
+            "FILE_TYPE": "Bestandstype"
+        },
         "FACET_QUERIES": {
+            "TODAY": "Vandaag",
+            "THIS_WEEK": "Deze week",
+            "THIS_MONTH": "Deze maand",
+            "LAST_6_MONTHS": "In de afgelopen 6 maanden",
+            "THIS_YEAR": "Dit jaar",
             "SIZE": {
                 "SMALL": "Klein",
                 "MEDIUM": "Gemiddeld",

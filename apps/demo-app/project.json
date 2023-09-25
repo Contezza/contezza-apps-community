@@ -75,33 +75,13 @@
                         "glob": "**/*"
                     },
                     {
-                        "input": "node_modules/@alfresco/aca-about/assets",
-                        "output": "/assets/plugins",
-                        "glob": "about.plugin.json"
-                    },
-                    {
-                        "input": "node_modules/@alfresco/aca-settings/assets",
-                        "output": "/assets/plugins",
-                        "glob": "settings.plugin.json"
-                    },
-                    {
-                        "input": "node_modules/@alfresco/aca-folder-rules/assets",
+                        "input": "node_modules/@alfresco/aca-content/folder-rules/assets",
                         "output": "/assets/plugins",
                         "glob": "folder-rules.plugin.json"
                     },
                     {
-                        "input": "node_modules/@alfresco/aca-folder-rules/assets/i18n",
-                        "output": "/assets/aca-folder-rules/i18n",
-                        "glob": "**/*"
-                    },
-                    {
-                        "input": "node_modules/@alfresco/adf-office-services-ext/assets",
-                        "output": "/assets/plugins",
-                        "glob": "aos.plugin.json"
-                    },
-                    {
-                        "input": "node_modules/@alfresco/adf-office-services-ext/assets/i18n",
-                        "output": "/assets/adf-office-services-ext/i18n",
+                        "input": "node_modules/@alfresco/aca-content/folder-rules/assets/i18n",
+                        "output": "/assets/folder-rules/i18n",
                         "glob": "**/*"
                     },
                     {
