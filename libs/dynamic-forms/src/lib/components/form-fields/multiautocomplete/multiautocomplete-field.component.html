@@ -43,7 +43,16 @@
                         <div class="contezza-multiautocomplete-form-field-panel-content">
                             <div class="contezza-multiautocomplete-form-field-panel-content-input">
                                 <mat-form-field>
-                                    <input matInput type="text" spellcheck="false" data-lpignore="true" class="adf-property-value" [formControl]="subcontrol" autocomplete="off" />
+                                    <input
+                                        matInput
+                                        type="text"
+                                        spellcheck="false"
+                                        data-lpignore="true"
+                                        class="adf-property-value"
+                                        [formControl]="subcontrol"
+                                        autocomplete="off"
+                                        (keydown.space)="$event.stopPropagation()"
+                                    />
                                 </mat-form-field>
                             </div>
                             <div class="contezza-multiautocomplete-form-field-panel-content-options">
