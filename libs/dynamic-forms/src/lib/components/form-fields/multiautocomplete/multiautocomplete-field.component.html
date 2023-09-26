@@ -43,7 +43,16 @@
                         <div class="contezza-multiautocomplete-form-field-panel-content">
                             <div class="contezza-multiautocomplete-form-field-panel-content-input">
                                 <mat-form-field>
-                                    <input matInput type="text" spellcheck="false" data-lpignore="true" class="adf-property-value" [formControl]="subcontrol" autocomplete="off" />
+                                    <input
+                                        matInput
+                                        type="text"
+                                        spellcheck="false"
+                                        data-lpignore="true"
+                                        class="adf-property-value"
+                                        [formControl]="subcontrol"
+                                        autocomplete="off"
+                                        (keydown.space)="$event.stopPropagation()"
+                                    />
                                 </mat-form-field>
                             </div>
                             <div class="contezza-multiautocomplete-form-field-panel-content-options">
@@ -65,34 +74,36 @@
                                             <ng-container *ngTemplateOutlet="noResults"></ng-container>
                                         </ng-container>
                                         <ng-container *ngIf="selectableOptions?.length">
-                                            <ng-container
-                                                *contezzaLet="
-                                                    (!selectAllOption || !control.value?.includes(selectAllOption.value)) &&
-                                                    control.value?.length === selectableOptions.length as checked
-                                                "
-                                            >
-                                                <mat-option
-                                                    class="contezza-multiautocomplete-form-field-panel-content-options-select-all"
-                                                    [class.mat-selected]="checked"
-                                                    (onSelectionChange)="
-                                                        $event.source.deselect(); control.setValue(checkbox.indeterminate || !checkbox.checked ? selectableOptions : [])
+                                            <ng-container *ngIf="showSelectAllOption">
+                                                <ng-container
+                                                    *contezzaLet="
+                                                        (!selectAllOption || !control.value?.includes(selectAllOption.value)) &&
+                                                        control.value?.length === selectableOptions.length as checked
                                                     "
-                                                    ><mat-checkbox
-                                                        #checkbox
-                                                        color="primary"
-                                                        class="mat-option-pseudo-checkbox"
-                                                        [class.mat-checkbox-disabled]="false"
-                                                        disableRipple
-                                                        [checked]="checked"
-                                                        [indeterminate]="
-                                                            (!selectAllOption || !control.value?.includes(selectAllOption.value)) &&
-                                                            0 < control.value?.length &&
-                                                            control.value?.length < selectableOptions.length
-                                                        "
-                                                        disabled
-                                                    ></mat-checkbox
-                                                    >{{ 'DYNAMIC_FORMS.SELECT_ALL_SUGGESTIONS' | translate : { total: selectableOptions.length } }}</mat-option
                                                 >
+                                                    <mat-option
+                                                        class="contezza-multiautocomplete-form-field-panel-content-options-select-all"
+                                                        [class.mat-selected]="checked"
+                                                        (onSelectionChange)="
+                                                            $event.source.deselect(); control.setValue(checkbox.indeterminate || !checkbox.checked ? selectableOptions : [])
+                                                        "
+                                                        ><mat-checkbox
+                                                            #checkbox
+                                                            color="primary"
+                                                            class="mat-option-pseudo-checkbox"
+                                                            [class.mat-checkbox-disabled]="false"
+                                                            disableRipple
+                                                            [checked]="checked"
+                                                            [indeterminate]="
+                                                                (!selectAllOption || !control.value?.includes(selectAllOption.value)) &&
+                                                                0 < control.value?.length &&
+                                                                control.value?.length < selectableOptions.length
+                                                            "
+                                                            disabled
+                                                        ></mat-checkbox
+                                                        >{{ 'DYNAMIC_FORMS.SELECT_ALL_SUGGESTIONS' | translate : { total: selectableOptions.length } }}</mat-option
+                                                    >
+                                                </ng-container>
                                             </ng-container>
                                             <ng-container *ngFor="let selectableOption of selectableOptions">
                                                 <ng-container *ngIf="!selectableOption.contezzaDisplay.option.component">

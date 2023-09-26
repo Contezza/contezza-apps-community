@@ -16,6 +16,7 @@ export interface DynamicFormFieldSettings {
     preFilteredOptions?: boolean;
     subcontrolId?: string;
     selectAllOption?: { label: string; value: any };
+    showSelectAllOption?: boolean;
 
     // subform
     setFormValueChangedValidator?: boolean;
