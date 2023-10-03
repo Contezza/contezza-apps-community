@@ -20,6 +20,7 @@ import { ContezzaBaseFieldComponent } from '../base-field.component';
 })
 export class MultiautocompleteFieldComponent<BaseValueType> extends ContezzaBaseFieldComponent<BaseValueType, BaseValueType[]> implements OnInit {
     selectAllOption?: ContezzaFormField['settings']['selectAllOption'];
+    showSelectAllOption?: ContezzaFormField['settings']['showSelectAllOption'];
     selectableOptions$: Observable<ContezzaDisplayableValue<BaseValueType>[]>;
 
     private readonly optionsLoadingSource = new BehaviorSubject<boolean>(false);
@@ -45,6 +46,7 @@ export class MultiautocompleteFieldComponent<BaseValueType> extends ContezzaBase
         const loadedOptions: Observable<ContezzaDisplayableValue<BaseValueType>[]> = this.field.options.filterLoadingValues(this.optionsLoadingSource);
 
         if (!this.field.settings?.preFilteredOptions) {
+            this.showSelectAllOption = this.field.settings?.showSelectAllOption ?? true;
             this.selectableOptions$ = combineLatest([
                 // startWith to trigger the flow, otherwise no option is shown
                 this.subcontrol.valueChanges.pipe(startWith(this.subcontrol.value), debounceTime(this.TYPING_DEBOUNCE_TIME), distinctUntilChanged()),
