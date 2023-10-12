@@ -21,6 +21,7 @@ import { ContezzaBaseFieldComponent } from '../base-field.component';
 export class MultiautocompleteFieldComponent<BaseValueType> extends ContezzaBaseFieldComponent<BaseValueType, BaseValueType[]> implements OnInit {
     selectAllOption?: ContezzaFormField['settings']['selectAllOption'];
     showSelectAllOption?: ContezzaFormField['settings']['showSelectAllOption'];
+    preSelectAllOption?: ContezzaFormField['settings']['preSelectAllOption'];
     selectableOptions$: Observable<ContezzaDisplayableValue<BaseValueType>[]>;
 
     private readonly optionsLoadingSource = new BehaviorSubject<boolean>(false);
@@ -91,10 +92,14 @@ export class MultiautocompleteFieldComponent<BaseValueType> extends ContezzaBase
                     // if a new value comes, then look for a match with the options
                     // if a new list of options comes, then the selection must reset
                     tap(([value, options]) => {
-                        const matchingValue = this.findMatchingValue(value, options);
-                        if (!this.optionsLoadingSource.value) {
-                            // only change the value if the options are loaded
-                            this.control.setValue(matchingValue);
+                        if (this.field.settings?.preSelectAllOption) {
+                            this.control.setValue(options);
+                        } else {
+                            const matchingValue = this.findMatchingValue(value, options);
+                            if (!this.optionsLoadingSource.value) {
+                                // only change the value if the options are loaded
+                                this.control.setValue(matchingValue);
+                            }
                         }
                     }),
                     map(([, options]) => options)
