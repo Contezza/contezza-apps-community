@@ -5,7 +5,7 @@ import { MatInput } from '@angular/material/input';
 import { MatSelect, MatSelectChange } from '@angular/material/select';
 
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, pairwise, pluck, startWith, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, pairwise, pluck, startWith, take, tap } from 'rxjs/operators';
 
 import { ContezzaDisplayableValue, ContezzaDynamicForm, ContezzaFormField } from '@contezza/dynamic-forms/shared';
 
@@ -41,6 +41,13 @@ export class MultiautocompleteFieldComponent<BaseValueType> extends ContezzaBase
         const subcontrolId: string = this.field.settings?.subcontrolId;
         this.subcontrol = subcontrolId ? (this.control.parent.get(subcontrolId) as FormControl<string>) : new FormControl('');
         this.initializeOptions();
+
+        // on first option load, select all when settings are preSelectAllOption
+        this.selectableOptions$.pipe(take(1)).subscribe((options) => {
+            if (this.field.settings?.preSelectAllOption) {
+                this.control.setValue(options);
+            }
+        });
     }
 
     protected initializeOptions() {
@@ -92,14 +99,10 @@ export class MultiautocompleteFieldComponent<BaseValueType> extends ContezzaBase
                     // if a new value comes, then look for a match with the options
                     // if a new list of options comes, then the selection must reset
                     tap(([value, options]) => {
-                        if (this.field.settings?.preSelectAllOption) {
-                            this.control.setValue(options);
-                        } else {
-                            const matchingValue = this.findMatchingValue(value, options);
-                            if (!this.optionsLoadingSource.value) {
-                                // only change the value if the options are loaded
-                                this.control.setValue(matchingValue);
-                            }
+                        const matchingValue = this.findMatchingValue(value, options);
+                        if (!this.optionsLoadingSource.value) {
+                            // only change the value if the options are loaded
+                            this.control.setValue(matchingValue);
                         }
                     }),
                     map(([, options]) => options)
