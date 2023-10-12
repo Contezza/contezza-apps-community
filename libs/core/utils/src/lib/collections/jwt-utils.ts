@@ -1,5 +1,15 @@
+/**
+ * @deprecated
+ * Use class Jwt instead.
+ */
 export class JwtUtils {
-    static parse(token: string): any {
+    /**
+     * Decodes a JWT token.
+     *
+     * @param token A JWT token
+     * @returns The decoded token
+     */
+    static decode<T>(token: string): T & { exp: number } {
         const base64Url = token.split('.')[1];
         const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
         const jsonPayload = decodeURIComponent(
@@ -12,7 +22,7 @@ export class JwtUtils {
     }
 
     static isValid(token: string): boolean {
-        const { exp } = JwtUtils.parse(token);
+        const { exp } = JwtUtils.decode(token);
         return Date.now() < exp * 1000;
     }
 
