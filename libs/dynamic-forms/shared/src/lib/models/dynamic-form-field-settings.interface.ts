@@ -4,6 +4,7 @@ export interface DynamicFormFieldSettings {
     labelPosition?: 'before' | 'after';
     floatLabel?: MatFormField['floatLabel'];
     appearance?: MatFormField['appearance'];
+    color?: MatFormField['color'];
     hideRequiredMarker?: MatFormField['hideRequiredMarker'];
 
     // textarea
