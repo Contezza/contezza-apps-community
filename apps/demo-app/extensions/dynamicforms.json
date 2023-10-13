@@ -28,6 +28,60 @@
                             "type": "input",
                             "label": "Style",
                             "initialValue": "${form->style}"
+                        },
+                        {
+                            "id": "multi",
+                            "type": "multiautocomplete",
+                            "label": "Multi",
+                            "options": {
+                                "dynamic-source": [
+                                    {
+                                        "id": "DIV",
+                                        "label": "DIV"
+                                    },
+                                    {
+                                        "id": "FDV",
+                                        "label": "FDV"
+                                    },
+                                    {
+                                        "id": "SDV",
+                                        "label": "SDV"
+                                    },
+                                    {
+                                        "id": "RTT",
+                                        "label": "RTT"
+                                    },
+                                    {
+                                        "id": "QWE",
+                                        "label": "QWE"
+                                    },
+                                    {
+                                        "id": "POI",
+                                        "label": "POI"
+                                    },
+                                    {
+                                        "id": "LOP",
+                                        "label": "LOP"
+                                    },
+                                    {
+                                        "id": "NJI",
+                                        "label": "NJI"
+                                    },
+                                    {
+                                        "id": "MHY",
+                                        "label": "MHY"
+                                    },
+                                    {
+                                        "id": "FGF",
+                                        "label": "FGF"
+                                    }
+                                ],
+                                "labelKey": "label"
+                            },
+                            "settings": {
+                                "appearance": "outline",
+                                "preSelectAllOption": true
+                            }
                         }
                     ]
                 },
@@ -44,7 +98,7 @@
                                     "id": "layoutId"
                                 },
                                 {
-                                    "id": "style"
+                                    "id": "multi"
                                 }
                             ]
                         }

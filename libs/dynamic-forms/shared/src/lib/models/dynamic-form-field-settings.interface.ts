@@ -16,8 +16,15 @@ export interface DynamicFormFieldSettings {
     showTotalItems?: boolean;
     preFilteredOptions?: boolean;
     subcontrolId?: string;
-    selectAllOption?: { label: string; value: any };
     showSelectAllOption?: boolean;
+    preSelectAllOption?: boolean;
+
+    /**
+     * a custom selection option for the multi-autocomplete field
+     * the option is exclusive, meaning it can't be chosen simultaneously with any other options.
+     * common use case: select all for server side filter
+     */
+    customOption?: { label: string; value: any };
 
     // subform
     setFormValueChangedValidator?: boolean;

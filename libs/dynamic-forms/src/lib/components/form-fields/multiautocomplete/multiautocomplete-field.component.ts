@@ -5,7 +5,7 @@ import { MatInput } from '@angular/material/input';
 import { MatSelect, MatSelectChange } from '@angular/material/select';
 
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, pairwise, pluck, startWith, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, pairwise, pluck, startWith, take, tap } from 'rxjs/operators';
 
 import { ContezzaDisplayableValue, ContezzaDynamicForm, ContezzaFormField } from '@contezza/dynamic-forms/shared';
 
@@ -19,8 +19,9 @@ import { ContezzaBaseFieldComponent } from '../base-field.component';
     encapsulation: ViewEncapsulation.None,
 })
 export class MultiautocompleteFieldComponent<BaseValueType> extends ContezzaBaseFieldComponent<BaseValueType, BaseValueType[]> implements OnInit {
-    selectAllOption?: ContezzaFormField['settings']['selectAllOption'];
+    customOption?: ContezzaFormField['settings']['customOption'];
     showSelectAllOption?: ContezzaFormField['settings']['showSelectAllOption'];
+    preSelectAllOption?: ContezzaFormField['settings']['preSelectAllOption'];
     selectableOptions$: Observable<ContezzaDisplayableValue<BaseValueType>[]>;
 
     private readonly optionsLoadingSource = new BehaviorSubject<boolean>(false);
@@ -40,6 +41,14 @@ export class MultiautocompleteFieldComponent<BaseValueType> extends ContezzaBase
         const subcontrolId: string = this.field.settings?.subcontrolId;
         this.subcontrol = subcontrolId ? (this.control.parent.get(subcontrolId) as FormControl<string>) : new FormControl('');
         this.initializeOptions();
+
+        // on first option load, select all when settings are preSelectAllOption
+        this.selectableOptions$.pipe(take(1)).subscribe((options) => {
+            this.preSelectAllOption = this.field.settings?.preSelectAllOption ?? false;
+            if (this.preSelectAllOption) {
+                this.control.setValue(options);
+            }
+        });
     }
 
     protected initializeOptions() {
@@ -104,12 +113,12 @@ export class MultiautocompleteFieldComponent<BaseValueType> extends ContezzaBase
                 map(([searchTerm, options]) => (searchTerm && searchTerm !== '*' ? this.filterOptions(searchTerm, options) : options))
             );
         } else {
-            this.selectAllOption = this.field.settings?.selectAllOption;
+            this.customOption = this.field.settings?.customOption;
             this.selectableOptions$ = combineLatest([this.control.valueChanges.pipe(startWith(this.control.value)), loadedOptions.pipe(map((options) => options || []))]).pipe(
                 tap(([value, options]: [any, any]) => {
                     const toPush = [];
                     value?.forEach((val, index) => {
-                        if (!this.selectAllOption || val !== this.selectAllOption.value) {
+                        if (!this.customOption || val !== this.customOption.value) {
                             const match = this.findMatchingValue(val, options);
                             if (match) {
                                 value[index] = match;
@@ -144,8 +153,8 @@ export class MultiautocompleteFieldComponent<BaseValueType> extends ContezzaBase
     }
 
     onSelectionChange({ value }: MatSelectChange) {
-        if (this.selectAllOption) {
-            const index = value.indexOf(this.selectAllOption.value);
+        if (this.customOption) {
+            const index = value.indexOf(this.customOption.value);
             if (index >= 0) {
                 value.splice(index, 1);
                 this.control.setValue(value);
