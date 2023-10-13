@@ -101,6 +101,8 @@ Bugfixes/minor changes:
 - @contezza/core/context - `ActionsService` filtert en sorteert alle actions onafhankelijk van hun bron.
 - @contezza/core/utils - `Jwt` class aangemaakt. `ContezzaJwtUtils` hernoemd naar `JwtUtils`.
 - @contezza/dynamic-forms - Velden `checkbox` en `toggle` ondersteunen `settings.color`.
+- @contezza/dynamic-forms - selectAllOption hernoemd naar customOption.
+- @contezza/dynamic-forms - preSelectAllOption toegevoegd voor multiautocomplete field.
 
 ==== Release 2.2.3
 
