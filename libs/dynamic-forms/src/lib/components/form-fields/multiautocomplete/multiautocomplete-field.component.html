@@ -57,11 +57,11 @@
                             </div>
                             <div class="contezza-multiautocomplete-form-field-panel-content-options">
                                 <mat-option
-                                    *ngIf="selectAllOption"
-                                    [value]="selectAllOption.value"
-                                    (onSelectionChange)="$event.isUserInput && control.setValue($event.source.selected ? [selectAllOption.value] : [])"
+                                    *ngIf="customOption"
+                                    [value]="customOption.value"
+                                    (onSelectionChange)="$event.isUserInput && control.setValue($event.source.selected ? [customOption.value] : [])"
                                 >
-                                    {{ selectAllOption.label | translate }}
+                                    {{ customOption.label | translate }}
                                 </mat-option>
                                 <ng-container
                                     *contezzaLet="!(!field.settings?.minChars || (subcontrol.value && field.settings?.minChars <= subcontrol.value.length)) as showTooltipMinChars"
@@ -77,7 +77,7 @@
                                             <ng-container *ngIf="showSelectAllOption">
                                                 <ng-container
                                                     *contezzaLet="
-                                                        (!selectAllOption || !control.value?.includes(selectAllOption.value)) &&
+                                                        (!customOption || !control.value?.includes(customOption.value)) &&
                                                         control.value?.length === selectableOptions.length as checked
                                                     "
                                                 >
@@ -95,7 +95,7 @@
                                                             disableRipple
                                                             [checked]="checked"
                                                             [indeterminate]="
-                                                                (!selectAllOption || !control.value?.includes(selectAllOption.value)) &&
+                                                                (!customOption || !control.value?.includes(customOption.value)) &&
                                                                 0 < control.value?.length &&
                                                                 control.value?.length < selectableOptions.length
                                                             "
