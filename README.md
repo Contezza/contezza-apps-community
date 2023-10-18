@@ -11,6 +11,13 @@ Contezza has made different libraries for personal purposes and also for the com
 ## APP
 
 There is 1 [demo-app](apps/demo-app) (shell) available and this project.
+
+Connection with Alfresco is set via [proxy.conf.js](apps/demo-app/proxy.conf.js) and [proxy-helpers.js](proxy-helpers.js). To connect with a specific Alfresco environment, set its url as value of
+```js
+const ALFRESCO_URL = 'https://...';
+```
+in [proxy-helpers.js](proxy-helpers.js).
+
 This project can be build with the following commands
 
 `npm install`
