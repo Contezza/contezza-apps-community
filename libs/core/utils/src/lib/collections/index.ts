@@ -2,7 +2,7 @@ export * from './aca-utils.class';
 export * from './adf-utils.class';
 export * from './array-utils.class';
 export * from './dependency-syntax.class';
-export * from './jwt-utils.class';
+export * from './jwt-utils';
 export * from './object-utils.class';
 export * from './observable-operators.class';
 export * from './observables.class';

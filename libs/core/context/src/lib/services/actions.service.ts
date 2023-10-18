@@ -28,12 +28,13 @@ export class ActionsService {
     private readonly allActions$: Observable<ContentActionRef[]> = merge(
         this.featureKeySource.pipe(
             filter((value) => !!value),
-            map((featureKey) => ContezzaAdfUtils.filterAndSortFeature(this.extensions.getFeature(featureKey)))
+            map((featureKey) => this.extensions.getFeature(featureKey))
         ),
         this.allActionsSource.pipe(filter((value) => !!value))
     );
 
     readonly actions$: Observable<ContentActionRef[]> = this.allActions$.pipe(
+        map((allActions) => ContezzaAdfUtils.filterAndSortFeature(allActions)),
         switchMap((allActions) => this.ruleContext$.pipe(map((context) => this.getAllowedActions(allActions, context))))
     );
 
