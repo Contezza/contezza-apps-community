@@ -1,10 +1,12 @@
 /* eslint-env es6 */
 
+const ALFRESCO_URL = 'https://dev-tezza.contezza.cloud';
+
 module.exports = {
     host: {
         LOCALHOST_ECM: 'http://127.0.0.1:8080',
         LOCALHOST_BPM: 'http://127.0.0.1:9080',
-        DEV_TEZZA: 'https://dev.tezza.eu',
+        ALFRESCO_URL: ALFRESCO_URL,
     },
     getIdentityProxy: function (host) {
         console.log('Target for /auth', host);

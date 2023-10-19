@@ -1,6 +1,6 @@
 const { getIdentityProxy, getEcmProxy, host } = require('../../proxy-helpers');
 
 module.exports = {
-    ...getIdentityProxy(host.DEV_TEZZA),
-    ...getEcmProxy(host.DEV_TEZZA),
+    ...getIdentityProxy(host.ALFRESCO_URL),
+    ...getEcmProxy(host.ALFRESCO_URL),
 };
