@@ -1,11 +1,23 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInput, MatInputModule } from '@angular/material/input';
+
+import { TranslateModule } from '@ngx-translate/core';
+
+import { InputMaskModule } from '@ngneat/input-mask';
 
 import { DestroyService } from '@contezza/core/services';
-import { MatInput } from '@angular/material/input';
 
 import { ContezzaBaseFieldComponent } from '../base-field.component';
+import { ContezzaDynamicFormsCommonModule } from '../../../dynamic-forms.common.module';
 
 @Component({
+    standalone: true,
+    imports: [CommonModule, ReactiveFormsModule, MatButtonModule, MatIconModule, MatInputModule, TranslateModule, InputMaskModule, ContezzaDynamicFormsCommonModule],
     selector: 'contezza-input-field',
     templateUrl: './input-field.component.html',
     styleUrls: ['./input-field.component.scss'],
