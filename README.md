@@ -57,8 +57,9 @@ Similar to the share/repo nodebrowser, but with extra:
 - Remembers last search
 - If only a uuid has been pasted, the library will include the workspace spacestore before it
 
+## Ontwikkeling
 
-## Nexus Configuratie
+### Nexus Configuratie
 
 De libraries kunnen worden geïmporteerd vanuit contezza-apps-community repository. Deze repository zit in [Nexus](https://nexus.contezza.nl) en om toegang tot Nexus te hebben moet de bestand `.npmrc` in de gebruikersmap zo eruit zien:
 
@@ -76,7 +77,7 @@ Waar:
 * `email@contezza.nl` is de email van de gebruiker
 * `encoded_password` is het wachtwoord van de gebruiker encoded via de commando `echo -n "password" | base64`
 
-## Ontwikkeling
+### Importeren zonder releasen
 
 De handigste manier om wijzigingen in deze repository te kunnen testen binnen de contezza-apps repository, bijvoorbeeld ter voorbereiding voor een release, is om alle libraries van deze repository te exporteren als `.tgz` bestanden. Hieronder wordt er beschreven hoe dit gedaan wordt.
 
@@ -96,4 +97,13 @@ In contezza-apps repository:
 "@contezza/core": "file:contezza-core-2.3.0.tgz"
 ```
 * run `npm i`
+
+### Community branch
+
+The `community` branch is meant to be shared in [Github](https://github.com/Contezza/contezza-apps-community). After any release, the `main` branch is merged into the `community` branch and this is pushed into Github. To push `community` into Github:
+* open this project with VS code
+* from Source Control, select More Actions -> Remote -> Add remote, then copy `https://github.com/Contezza/contezza-apps-community` in the popup, press Enter and choose a name (e.g. `github`); this needs to be done only once
+* from Source Control, select More Actions -> Pull, Push -> Push to... and select the name previously chosen from the popup.
+
+Ideally, this will be included in a pipeline in the future. 
 
