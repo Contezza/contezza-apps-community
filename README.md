@@ -2,7 +2,7 @@
 
 ## Release notes
 
-Release notes are written in dutch in [asciidoc](docs/src/docs/asciidoc/contezza-apps-community.adoc).
+Release notes are written in Dutch in [asciidoc](docs/src/docs/asciidoc/contezza-apps-community.adoc).
 
 ## Libraries
 
@@ -10,7 +10,7 @@ Contezza has made different libraries for personal purposes and also for the com
 
 ## APP
 
-There is 1 [demo-app](apps/demo-app) (shell) available and this project.
+There is 1 [demo-app](apps/demo-app) (shell) available in this project.
 
 Connection with Alfresco is set via [proxy.conf.js](apps/demo-app/proxy.conf.js) and [proxy-helpers.js](proxy-helpers.js). To connect with a specific Alfresco environment, set its url as value of
 ```js
