@@ -10,6 +10,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2023-10-19
+|2.3.1
+|Bekijk de <<Release 2.3.1,release details>>.
+
 |2023-10-12
 |2.3.0
 |Bekijk de <<Release 2.3.0,release details>>.
@@ -93,6 +97,14 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 2.3.1
+
+Bugfixes/minor changes:
+
+- @contezza/dynamic-forms - Field `input` is now standalone. This fix an issue with `@ngneat/input-mask` injector.
+
+Interne changes: Readme is expanded with documentation for the community and for the developers.
 
 ==== Release 2.3.0
 
