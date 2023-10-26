@@ -30,7 +30,6 @@ import { ContezzaDynamicSearchFormService } from '../../../services';
 interface Settings {
     dynamicFormId: ExtendedDynamicFormId;
     columnsId: string;
-    queryTemplate?: Partial<Omit<SearchRequest, 'query'>>;
 }
 
 @Component({
@@ -54,12 +53,10 @@ interface Settings {
     host: { class: 'contezza-search-field contezza-form-field mat-form-field adf-property-field adf-card-textitem-field' },
 })
 export class SearchFieldComponent<T> extends ContezzaBaseFieldComponent<T, T> implements OnInit, OnDestroy {
-    static readonly DEFAULTS: Partial<Settings> = {
-        queryTemplate: {
-            include: ['path', 'properties', 'aspectNames', 'allowableOperations'],
-            sort: [{ type: 'FIELD', field: 'cm:modified', ascending: false }],
-            paging: { maxItems: 10 },
-        },
+    static readonly DEFAULT_QUERY_TEMPLATE: Omit<SearchRequest, 'query'> = {
+        include: ['path', 'properties', 'aspectNames', 'allowableOperations'],
+        sort: [{ type: 'FIELD', field: 'cm:modified', ascending: false }],
+        paging: { maxItems: 10 },
     };
 
     private readonly loadingSource = new BehaviorSubject<boolean>(false);
@@ -88,17 +85,24 @@ export class SearchFieldComponent<T> extends ContezzaBaseFieldComponent<T, T> im
         this.searchForm.build();
         this.columns = ContezzaAdfUtils.filterAndSortFeature(this.extensions.getFeature('columns')?.find(({ id }) => id === settings.columnsId)?.columns ?? []);
 
-        // static queryTemplate from defaults and settings
-        const queryTemplate = { ...SearchFieldComponent.DEFAULTS.queryTemplate, ...settings.queryTemplate };
         // dynamic queryTemplate from extras
-        const queryTemplate$: Observable<Partial<Omit<SearchRequest, 'query'>>> = this.field.extras.queryTemplate;
+        const queryTemplate$: Observable<Partial<Omit<SearchRequest, 'query'>>> = this.field.extras?.queryTemplate || of({});
 
         // search only when triggered
         this.searchResults$ = this.searchTrigger$.pipe(
             tap(() => this.loadingSource.next(true)),
             withLatestFrom(queryTemplate$.pipe(startWith({}))),
             withLatestFrom(this.searchForm.query),
-            switchMap(([[, template], query]) => this.doSearch({ ...queryTemplate, ...template, query: { query, language: 'afts' } })),
+            switchMap(([[, template], query]) =>
+                this.doSearch({
+                    // default template
+                    ...SearchFieldComponent.DEFAULT_QUERY_TEMPLATE,
+                    // template from df configuration
+                    ...template,
+                    // query from search subform
+                    query: { query, language: 'afts' },
+                })
+            ),
             tap(() => this.loadingSource.next(false))
         );
 
