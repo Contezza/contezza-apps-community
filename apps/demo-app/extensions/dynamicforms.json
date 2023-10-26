@@ -94,13 +94,18 @@
                                                 "dynamic-source": "${filter-ids}",
                                                 "filters": [
                                                     {
+                                                        "id": "startWith",
+                                                        "parameters": []
+                                                    },
+                                                    {
                                                         "id": "map",
                                                         "parameters": "ids=>return (ids||[]).map(id=>`NOT sys:node-uuid:${id}`).join(' AND ') || '*'"
                                                     }
                                                 ]
                                             }
                                         }
-                                    ]
+                                    ],
+                                    "sort": [{ "type": "FIELD", "field": "name", "ascending": true }]
                                 }
                             },
                             "settings": {
@@ -108,10 +113,7 @@
                                     "id": "test-search-subform",
                                     "layoutId": "lay0"
                                 },
-                                "columnsId": "test-search-subform-columns",
-                                "queryTemplate": {
-                                    "sort": [{ "type": "FIELD", "field": "name", "ascending": true }]
-                                }
+                                "columnsId": "test-search-subform-columns"
                             },
                             "validations": ["required"]
                         }
