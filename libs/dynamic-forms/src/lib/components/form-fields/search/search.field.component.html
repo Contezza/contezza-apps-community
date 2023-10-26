@@ -1,0 +1,87 @@
+<div class="contezza-search-field-title" *ngIf="field.label">{{ field.label | translate }}</div>
+
+<ng-container *contezzaLet="searchResults$ | async as searchResults">
+    <ng-container *contezzaLet="selectedItem$ | async as item">
+        <ng-container *contezzaLet="searchForm.valid$ | async as searchFormValid">
+            <div class="contezza-search-field-form" [class.hidden]="!!item">
+                <contezza-dynamic-form [dynamicForm]="searchForm" (enterPressed)="searchFormValid && search()"></contezza-dynamic-form>
+                <div class="contezza-search-field-form-buttons">
+                    <button mat-button (click)="clearSearchForm()">
+                        <mat-icon>clear_all</mat-icon>
+                        {{ 'APP.BUTTONS.CLEAR_ALL' | translate }}
+                    </button>
+                    <ng-container *ngIf="!(loading$ | async); else loading">
+                        <button mat-icon-button (click)="search()" [disabled]="!searchFormValid" [title]="'SEARCH.LABEL' | translate">
+                            <mat-icon>search</mat-icon>
+                        </button>
+                    </ng-container>
+                    <ng-template #loading>
+                        <button mat-icon-button disabled>
+                            <mat-progress-spinner mode="indeterminate" diameter="20"></mat-progress-spinner>
+                        </button>
+                    </ng-template>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="item; else results">
+            <div class="contezza-search-field-selection">
+                <ng-container *ngTemplateOutlet="itemTemplate; context: { item }"></ng-container>
+                <div class="mat-form-field-suffix">
+                    <button
+                        type="button"
+                        mat-icon-button
+                        class="adf-property-clear-value contezza-form-field-clear"
+                        aria-label="Clear"
+                        *ngIf="!readonly && !control.disabled && control.value"
+                        tabindex="-1"
+                        (click)="clear($event)"
+                    >
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+
+    <ng-template #results>
+        <ng-container *ngIf="searchResults">
+            <ng-container *ngIf="searchResults.entries.length > 0; else noResults">
+                <div class="contezza-search-field-pagination">
+                    {{ 'SEARCH.PAGINATION.' + (searchResults.pagination.hasMoreItems ? 'MORE_RESULTS' : 'TOTAL_RESULTS') | translate : searchResults.pagination }}
+                </div>
+                <div class="contezza-search-field-results">
+                    <ng-container *ngFor="let item of searchResults.entries">
+                        <ng-container *ngTemplateOutlet="itemTemplate; context: { item, selectable: true }"></ng-container>
+                    </ng-container>
+                </div>
+            </ng-container>
+        </ng-container>
+        <ng-template #noResults>
+            <div class="contezza-search-field-no-results">{{ 'APP.BROWSE.SEARCH.NO_FILTER_RESULTS' | translate }}</div>
+        </ng-template>
+    </ng-template>
+</ng-container>
+
+<ng-template #itemTemplate let-item="item" let-selectable="selectable">
+    <mat-card class="contezza-search-field-results-item" [class.selectable]="selectable" (click)="selectable && select(item)">
+        <ng-container *ngFor="let column of columns">
+            <div class="contezza-search-field-results-item-property" [class]="column.class" [style]="column.style">
+                <div *ngIf="column.title" class="contezza-search-field-results-item-property-title">{{ column.title | translate }}:</div>
+                <ng-container *ngIf="item.entry | getValue : $any(column.key).split('.') as value">
+                    <ng-container [ngSwitch]="column.type">
+                        <ng-container *ngSwitchCase="'date'">
+                            <ng-container *ngTemplateOutlet="valueTemplate; context: { value: value | adfLocalizedDate }"></ng-container>
+                        </ng-container>
+                        <ng-container *ngSwitchDefault>
+                            <ng-container *ngTemplateOutlet="valueTemplate; context: { value }"></ng-container>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </ng-container>
+    </mat-card>
+</ng-template>
+
+<ng-template #valueTemplate let-value="value">
+    <div class="contezza-search-field-results-item-property-value" [title]="value">{{ value }}</div>
+</ng-template>
