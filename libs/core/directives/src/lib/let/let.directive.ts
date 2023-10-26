@@ -6,6 +6,7 @@ import { ContezzaLetContext } from './let-context';
  * the result of pipes calculation (i.e. async pipe)
  */
 @Directive({
+    standalone: true,
     selector: '[contezzaLet]',
 })
 export class ContezzaLetDirective<T> {
