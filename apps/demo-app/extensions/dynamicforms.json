@@ -28,60 +28,6 @@
                             "type": "input",
                             "label": "Style",
                             "initialValue": "${form->style}"
-                        },
-                        {
-                            "id": "multi",
-                            "type": "multiautocomplete",
-                            "label": "Multi",
-                            "options": {
-                                "dynamic-source": [
-                                    {
-                                        "id": "DIV",
-                                        "label": "DIV"
-                                    },
-                                    {
-                                        "id": "FDV",
-                                        "label": "FDV"
-                                    },
-                                    {
-                                        "id": "SDV",
-                                        "label": "SDV"
-                                    },
-                                    {
-                                        "id": "RTT",
-                                        "label": "RTT"
-                                    },
-                                    {
-                                        "id": "QWE",
-                                        "label": "QWE"
-                                    },
-                                    {
-                                        "id": "POI",
-                                        "label": "POI"
-                                    },
-                                    {
-                                        "id": "LOP",
-                                        "label": "LOP"
-                                    },
-                                    {
-                                        "id": "NJI",
-                                        "label": "NJI"
-                                    },
-                                    {
-                                        "id": "MHY",
-                                        "label": "MHY"
-                                    },
-                                    {
-                                        "id": "FGF",
-                                        "label": "FGF"
-                                    }
-                                ],
-                                "labelKey": "label"
-                            },
-                            "settings": {
-                                "appearance": "outline",
-                                "preSelectAllOption": true
-                            }
                         }
                     ]
                 },
@@ -98,10 +44,184 @@
                                     "id": "layoutId"
                                 },
                                 {
-                                    "id": "multi"
+                                    "id": "style"
                                 }
                             ]
                         }
+                    }
+                ]
+            },
+            {
+                "id": "test-search-form-field",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "filter-ids",
+                            "type": "chipsInput",
+                            "label": "filter ids",
+                            "initialValue": ["ca985080-7581-4fd5-844b-d49fb05caba6"]
+                        },
+                        {
+                            "id": "selected-id",
+                            "type": "input",
+                            "label": "selected ids",
+                            "initialValue": ["ca985080-7581-4fd5-844b-d49fb05caba6"]
+                        },
+                        {
+                            "id": "search",
+                            "type": "search",
+                            "label": "test search odnhn",
+                            "initialValue": {
+                                "dynamic-source": "${selected-id}",
+                                "filters": [
+                                    {
+                                        "id": "ifDefined",
+                                        "parameters": [
+                                            "getNodeById",
+                                            {
+                                                "id": "map",
+                                                "parameters": "entry=>return {entry}"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "extras": {
+                                "queryTemplate": {
+                                    "filterQueries": [
+                                        {
+                                            "query": {
+                                                "dynamic-source": "${filter-ids}",
+                                                "filters": [
+                                                    {
+                                                        "id": "startWith",
+                                                        "parameters": []
+                                                    },
+                                                    {
+                                                        "id": "map",
+                                                        "parameters": "ids=>return (ids||[]).map(id=>`NOT sys:node-uuid:${id}`).join(' AND ') || '*'"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    "sort": [{ "type": "FIELD", "field": "name", "ascending": true }]
+                                }
+                            },
+                            "settings": {
+                                "dynamicFormId": {
+                                    "id": "test-search-subform",
+                                    "layoutId": "lay0"
+                                },
+                                "columnsId": "test-search-subform-columns"
+                            },
+                            "validations": ["required"]
+                        }
+                    ]
+                },
+                "layouts": [
+                    {
+                        "id": "with-filter",
+                        "layout": {
+                            "subfields": [{ "id": "filter-ids" }, { "id": "search" }]
+                        }
+                    },
+                    {
+                        "id": "with-selection",
+                        "layout": {
+                            "subfields": [{ "id": "selected-id" }, { "id": "search" }]
+                        }
+                    },
+                    {
+                        "id": "only-search",
+                        "layout": {
+                            "subfields": [{ "id": "search" }]
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "test-search-subform",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "name",
+                            "type": "input",
+                            "label": "name",
+                            "initialValue": "ZAAK*",
+                            "query": {
+                                "property": "name"
+                            },
+                            "validations": ["required"]
+                        },
+                        {
+                            "id": "description",
+                            "type": "input",
+                            "label": "description",
+                            "query": {
+                                "property": "cm:description"
+                            },
+                            "validations": ["required"]
+                        },
+                        {
+                            "id": "ASPECT",
+                            "type": "input",
+                            "label": "ASPECT",
+                            "initialValue": "tza:zaak",
+                            "query": {
+                                "property": "ASPECT"
+                            },
+                            "validations": ["required"]
+                        }
+                    ]
+                },
+                "layouts": [
+                    {
+                        "id": "lay0",
+                        "layout": {
+                            "subfields": [
+                                {
+                                    "id": "name"
+                                },
+                                {
+                                    "id": "description"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "id": "lay1",
+                        "layout": {
+                            "subfields": [
+                                {
+                                    "id": "ASPECT"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ],
+        "columns": [
+            {
+                "id": "test-search-subform-columns",
+                "columns": [
+                    {
+                        "id": "name",
+                        "key": "name",
+                        "style": "font-size:1.2em;padding: 0 0 4px 0",
+                        "class": "test-class"
+                    },
+                    {
+                        "id": "zaaktype",
+                        "title": "zaaktype zaaktype zaaktype zaaktype",
+                        "key": "properties.tza:zaaktypeOmschrijving"
+                    },
+                    {
+                        "id": "created",
+                        "title": "created",
+                        "key": "createdAt",
+                        "type": "date"
                     }
                 ]
             }

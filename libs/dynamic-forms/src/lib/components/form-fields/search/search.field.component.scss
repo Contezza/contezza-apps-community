@@ -1,0 +1,78 @@
+:host,
+.contezza-search-field {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-height: 500px;
+    overflow: hidden;
+
+    &-title {
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+
+    &-selection {
+        display: flex;
+        align-items: center;
+    }
+
+    &-form {
+        &.hidden {
+            display: none;
+        }
+
+        &-buttons {
+            display: flex;
+            justify-content: flex-end;
+            mat-progress-spinner {
+                margin: auto;
+            }
+        }
+    }
+
+    &-results {
+        display: flex;
+        justify-content: space-around;
+        gap: 8px;
+        flex-wrap: wrap;
+        overflow: auto;
+
+        &-item {
+            max-width: 200px;
+            margin: 2px;
+
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+
+            &.selectable {
+                cursor: pointer;
+            }
+
+            &-property {
+                display: flex;
+                gap: 4px;
+
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+
+                &-title,
+                &-value {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                &-title {
+                    color: var(--theme-text-color);
+                }
+                &-value {
+                }
+            }
+        }
+    }
+
+    &-pagination,
+    &-no-results {
+        margin: auto;
+    }
+}

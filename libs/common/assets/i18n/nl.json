@@ -130,7 +130,9 @@
             "LABEL": "Zoekresultaten"
         },
         "PAGINATION": {
-            "OF": "{{count}} van {{total}}"
+            "OF": "{{count}} van {{total}}",
+            "MORE_RESULTS": "{{totalItems}} resultaten gevonden, alleen eerste {{maxItems}} weergegeven",
+            "TOTAL_RESULTS": "{{totalItems}} resultaten gevonden"
         },
         "LOCATION": {
             "LABEL": "Locatie",
