@@ -1,11 +1,13 @@
-import { MomentDateAdapter, UserPreferencesService, UserPreferenceValues } from '@alfresco/adf-core';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
 import { Moment } from 'moment';
 
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
+
+import { UserPreferencesService, UserPreferenceValues } from '@alfresco/adf-core';
 
 import { DestroyService } from '@contezza/core/services';
 import { DATE_FORMATS, DateRange } from '@contezza/core/utils';
