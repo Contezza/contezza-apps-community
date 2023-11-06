@@ -27,9 +27,17 @@ import { ContezzaBaseFieldComponent } from '../base-field.component';
 import { ContezzaDynamicFormComponent } from '../../dynamic-form';
 import { ContezzaDynamicSearchFormService } from '../../../services';
 
+interface StyleEntry {
+    class?: string;
+    style?: string;
+}
+
 interface Settings {
     dynamicFormId: ExtendedDynamicFormId;
     columnsId: string;
+    styles?: {
+        item?: StyleEntry;
+    };
 }
 
 @Component({
@@ -67,6 +75,8 @@ export class SearchFieldComponent<T> extends ContezzaBaseFieldComponent<T, T> im
     columns: (DocumentListPresetRef & { style?: string })[];
     searchResults$: Observable<ResultSetPagingList>;
     selectedItem$: Observable<T>;
+
+    styles?: Settings['styles'];
 
     constructor(
         destroy$: DestroyService,
@@ -107,6 +117,8 @@ export class SearchFieldComponent<T> extends ContezzaBaseFieldComponent<T, T> im
         );
 
         this.selectedItem$ = this.control.valueChanges;
+
+        this.styles = settings.styles;
     }
 
     private doSearch(request: SearchRequest): Observable<ResultSetPagingList> {
