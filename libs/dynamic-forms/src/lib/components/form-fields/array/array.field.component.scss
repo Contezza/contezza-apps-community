@@ -1,12 +1,7 @@
 .contezza-array-form-field {
     display: flex;
     flex-direction: column;
-
-    &-header {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-    }
+    gap: 4px;
 
     &-label {
         position: relative;
@@ -16,29 +11,23 @@
         width: unset;
     }
 
-    &-item {
-        display: flex;
-        align-items: center;
-        gap: 4px;
+    &-list {
+        &-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
 
-        contezza-dynamic-form {
-            flex: 1;
+            contezza-dynamic-form {
+                flex: 1;
+            }
         }
     }
 }
 
-// superposition of dialog title and array form field title
-// this makes 'add' appear by the dialog title
 ::ng-deep .dynamicforms-array-dialog {
     contezza-dynamic-form-dialog {
-        position: relative;
-        .contezza-array-form-field-header {
-            position: absolute;
-            top: -4px;
-            .mat-form-field-label {
-                visibility: hidden;
-                font: 500 20px / 32px Open Sans;
-            }
+        .contezza-array-form-field-label {
+            display: none;
         }
     }
 }
