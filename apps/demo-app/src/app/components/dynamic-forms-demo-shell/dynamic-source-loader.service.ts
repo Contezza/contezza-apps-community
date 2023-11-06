@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngrx/store';
 
 import { Observable, of } from 'rxjs';
-import { filter, map, startWith, switchMap, take } from 'rxjs/operators';
+import { filter, map, switchMap, take } from 'rxjs/operators';
 
 import { AppConfigService, ObjectUtils } from '@alfresco/adf-core';
 import { NodesApiService, SearchService } from '@alfresco/adf-content-services';
@@ -34,7 +34,6 @@ export class ContezzaDynamicSourceLoaderService {
     }
 
     loadDefault() {
-        this.setOperators({ startWith });
         this.setOperators({ ...ContezzaObservableOperators });
         this.setOperators({ translate: map((value: string) => this.translate.instant(value)) });
         this.setOperators({
