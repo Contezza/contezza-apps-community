@@ -104,7 +104,7 @@ export class DialogFieldComponent<ValueType> extends ContezzaBaseFieldComponent<
     openDialog() {
         if (this.settings?.dynamicFormId) {
             this.dialog
-                .open(() => import('../../dynamic-form-dialog').then((m) => m.DynamicFormDialogModule), {
+                .open(() => import('../../dynamic-form-dialog').then((m) => m.DynamicFormDialogComponent), {
                     ...(this.settings.matDialogConfig || {}),
                     data: {
                         title: this.settings.title ?? this.field.label,
