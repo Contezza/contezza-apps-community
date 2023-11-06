@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, shareReplay, takeUntil } from 'rxjs/operators';
 
+import { ContentActionRef, ContentActionType } from '@alfresco/adf-extensions';
 import { SharedToolbarModule } from '@alfresco/aca-shared';
 
 import { ContezzaLetModule } from '@contezza/core/directives';
@@ -24,24 +25,32 @@ import { ContezzaBaseFieldComponent } from '../base-field.component';
     imports: [CommonModule, TranslateModule, SharedToolbarModule, ContezzaLetModule, ContezzaDynamicFormComponent],
     template: `<ng-container *contezzaLet="readonly$ | async as readonly">
         <div class="contezza-form-field contezza-array-form-field adf-property-field adf-card-textitem-field">
-            <div class="contezza-array-form-field-header">
-                <div class="mat-form-field-label mat-form-field-empty contezza-array-form-field-label" *ngIf="field.label">{{ field.label | translate }}</div>
-                <app-toolbar-button *ngIf="!readonly" [actionRef]="$any({ icon: 'add' })" (keydown.enter)="add()" (click)="add()"></app-toolbar-button>
+            <div class="mat-form-field-label mat-form-field-empty contezza-array-form-field-label" *ngIf="field.label">{{ field.label | translate }}</div>
+            <div *ngIf="forms$ | async as forms" class="contezza-array-form-field-list">
+                <ng-container *ngFor="let form of forms; trackBy: trackByKey">
+                    <div class="contezza-array-form-field-list-item">
+                        <contezza-dynamic-form [dynamicForm]="form.value"></contezza-dynamic-form>
+                        <aca-toolbar-action *ngIf="!readonly" [actionRef]="deleteAction" (keydown.enter)="delete(form.key)" (click)="delete(form.key)"></aca-toolbar-action>
+                    </div>
+                </ng-container>
             </div>
-            <ng-container *ngFor="let form of forms$ | async; trackBy: trackByKey">
-                <div class="contezza-array-form-field-item">
-                    <contezza-dynamic-form [dynamicForm]="form.value"></contezza-dynamic-form>
-                    <app-toolbar-button *ngIf="!readonly" [actionRef]="$any({ icon: 'delete' })" (keydown.enter)="delete(form.key)" (click)="delete(form.key)"></app-toolbar-button>
-                </div>
-            </ng-container>
+            <aca-toolbar-action *ngIf="!readonly" [actionRef]="addAction" (keydown.enter)="add()" (click)="add()"></aca-toolbar-action>
         </div>
     </ng-container>`,
     styleUrls: ['./array.field.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArrayFieldComponent<TBaseValue> extends ContezzaBaseFieldComponent<TBaseValue, TBaseValue[]> implements OnInit {
-    settings: { formId: string; layoutId?: string };
+    static readonly ACTION_ADD_ID = 'add';
+    static readonly ACTION_ADD_DEFAULT: ContentActionRef = { id: ArrayFieldComponent.ACTION_ADD_ID, icon: 'add', type: ContentActionType.button };
+    static readonly ACTION_DELETE_ID = 'delete';
+    static readonly ACTION_DELETE_DEFAULT: ContentActionRef = { id: ArrayFieldComponent.ACTION_DELETE_ID, icon: 'delete', type: ContentActionType.button };
+
+    settings: { formId: string; layoutId?: string; actions?: Partial<ContentActionRef>[] };
     dependencies: Record<string, Observable<any>>;
+
+    addAction: ContentActionRef;
+    deleteAction: ContentActionRef;
 
     private count = 0;
 
@@ -63,6 +72,9 @@ export class ArrayFieldComponent<TBaseValue> extends ContezzaBaseFieldComponent<
             acc[key] = dep.pipe(shareReplay());
             return acc;
         }, {});
+
+        this.addAction = { ...ArrayFieldComponent.ACTION_ADD_DEFAULT, ...(this.settings.actions?.find(({ id }) => id === ArrayFieldComponent.ACTION_ADD_ID) || {}) };
+        this.deleteAction = { ...ArrayFieldComponent.ACTION_DELETE_DEFAULT, ...(this.settings.actions?.find(({ id }) => id === ArrayFieldComponent.ACTION_DELETE_ID) || {}) };
 
         // this.control is linked with the extern dynamic form, value type TBaseValue[]
         // this.subform is intern, value type Record<string, TBaseValue>
