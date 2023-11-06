@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AbstractControl, FormGroup } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 
 import { TranslateModule } from '@ngx-translate/core';
 
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, shareReplay, takeUntil } from 'rxjs/operators';
+
+import { SharedToolbarModule } from '@alfresco/aca-shared';
 
 import { ContezzaLetModule } from '@contezza/core/directives';
 import { DestroyService } from '@contezza/core/services';
@@ -21,21 +21,17 @@ import { ContezzaBaseFieldComponent } from '../base-field.component';
 @Component({
     selector: 'contezza-array-field',
     standalone: true,
-    imports: [CommonModule, MatButtonModule, MatIconModule, TranslateModule, ContezzaLetModule, ContezzaDynamicFormComponent],
+    imports: [CommonModule, TranslateModule, SharedToolbarModule, ContezzaLetModule, ContezzaDynamicFormComponent],
     template: `<ng-container *contezzaLet="readonly$ | async as readonly">
         <div class="contezza-form-field contezza-array-form-field adf-property-field adf-card-textitem-field">
             <div class="contezza-array-form-field-header">
                 <div class="mat-form-field-label mat-form-field-empty contezza-array-form-field-label" *ngIf="field.label">{{ field.label | translate }}</div>
-                <button *ngIf="!readonly" mat-icon-button class="app-toolbar-button" (keydown.enter)="add()" (click)="add()">
-                    <mat-icon>add</mat-icon>
-                </button>
+                <app-toolbar-button *ngIf="!readonly" [actionRef]="$any({ icon: 'add' })" (keydown.enter)="add()" (click)="add()"></app-toolbar-button>
             </div>
             <ng-container *ngFor="let form of forms$ | async; trackBy: trackByKey">
                 <div class="contezza-array-form-field-item">
                     <contezza-dynamic-form [dynamicForm]="form.value"></contezza-dynamic-form>
-                    <button *ngIf="!readonly" mat-icon-button class="app-toolbar-button" (keydown.enter)="delete(form.key)" (click)="delete(form.key)">
-                        <mat-icon>delete</mat-icon>
-                    </button>
+                    <app-toolbar-button *ngIf="!readonly" [actionRef]="$any({ icon: 'delete' })" (keydown.enter)="delete(form.key)" (click)="delete(form.key)"></app-toolbar-button>
                 </div>
             </ng-container>
         </div>
@@ -103,7 +99,7 @@ export class ArrayFieldComponent<TBaseValue> extends ContezzaBaseFieldComponent<
         form.build();
 
         if (value) {
-            form.form.setValue(value);
+            form.form.patchValue(value);
         }
 
         const id = this.generateId();

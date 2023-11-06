@@ -30,12 +30,15 @@
 // superposition of dialog title and array form field title
 // this makes 'add' appear by the dialog title
 ::ng-deep .dynamicforms-array-dialog {
-    .contezza-array-form-field-header {
-        position: absolute;
-        top: -4px;
-        .mat-form-field-label {
-            visibility: hidden;
-            font: 500 20px / 32px Open Sans;
+    contezza-dynamic-form-dialog {
+        position: relative;
+        .contezza-array-form-field-header {
+            position: absolute;
+            top: -4px;
+            .mat-form-field-label {
+                visibility: hidden;
+                font: 500 20px / 32px Open Sans;
+            }
         }
     }
 }
