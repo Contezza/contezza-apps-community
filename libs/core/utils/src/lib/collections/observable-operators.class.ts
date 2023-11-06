@@ -8,7 +8,6 @@ import moment from 'moment';
 
 import { ContezzaArrayUtils } from './array-utils.class';
 import { ContezzaObjectUtils } from './object-utils.class';
-import { ContezzaUtils } from './utils.class';
 import { ContezzaStringTemplate } from '../classes';
 import { DateRange } from '../interfaces';
 
@@ -75,10 +74,9 @@ export class ContezzaObservableOperators {
     static template = (template: string): OperatorFunction<any, any> =>
         map((value) => new ContezzaStringTemplate(template).evaluate(typeof value === 'string' ? { value } : value));
 
-    static map = (propertyOrCallback: string): OperatorFunction<any, any> => {
-        const newFunction = ContezzaUtils.stringToFunction(propertyOrCallback);
-        if (newFunction) {
-            return map((...args) => newFunction(...args));
+    static map = (propertyOrCallback: string | Function): OperatorFunction<any, any> => {
+        if (typeof propertyOrCallback !== 'string') {
+            return map((...args) => propertyOrCallback(...args));
         } else {
             return map((value) => {
                 if (value) {
