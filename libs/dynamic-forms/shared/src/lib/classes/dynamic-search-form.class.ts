@@ -1,7 +1,9 @@
 import { AbstractControl } from '@angular/forms';
 
-import { combineLatest, Observable } from 'rxjs';
-import { debounceTime, filter, map, startWith, takeUntil } from 'rxjs/operators';
+import { combineLatest, Observable, of } from 'rxjs';
+import { debounceTime, filter, map, pluck, startWith, switchMap, takeUntil } from 'rxjs/operators';
+
+import { ContezzaObjectUtils } from '@contezza/core/utils';
 
 import { ContezzaDynamicForm } from './dynamic-form.class';
 import { ContezzaDynamicFormField, ContezzaDynamicSearchField } from '../models';
@@ -34,32 +36,43 @@ export class ContezzaDynamicSearchForm extends ContezzaDynamicForm {
     }
 
     private bindQueries(): Observable<string> {
-        const reducer = (acc, { field, form }: { field: ContezzaDynamicFormField; form: AbstractControl }): Observable<string>[] => {
-            const matchingControl = form.get(field.id);
-            if (matchingControl && ContezzaDynamicSearchForm.isSearchField(field)) {
-                acc.push(
-                    field.query(
-                        combineLatest([matchingControl.valueChanges, matchingControl.statusChanges]).pipe(
-                            debounceTime(0),
-                            map(([value, status]) => (status === 'VALID' ? value : undefined)),
-                            startWith(undefined)
-                        )
-                    )
-                );
-            }
-            return field.subfields?.map((subfield) => ({ field: subfield, form: matchingControl || form })).reduce(reducer, acc) || acc;
+        const recursion = ({ field, form }: { field: ContezzaDynamicFormField; form: AbstractControl }): Observable<{ id: string; query: string }> => {
+            const matchingControl = field.id && form.get(field.id);
+            return (
+                matchingControl && !('controls' in matchingControl)
+                    ? // base case: form control -> query
+                      ContezzaDynamicSearchForm.isSearchField(field)
+                        ? field.query(
+                              combineLatest([matchingControl.valueChanges, matchingControl.statusChanges]).pipe(
+                                  debounceTime(0),
+                                  map(([value, status]) => (status === 'VALID' ? value : undefined)),
+                                  startWith(undefined)
+                              )
+                          )
+                        : of('')
+                    : // induction step: collect queries from subfields
+                      combineLatest((field.subfields || []).map((subfield) => recursion({ field: subfield, form: matchingControl || form }))).pipe(
+                          // let queries wait for each other
+                          debounceTime(0),
+                          map((value) => (this.form.valid ? value : [])),
+                          // convert {id, query}[] into {id: query}
+                          map((queries) =>
+                              ContezzaObjectUtils.fromEntries<any>(
+                                  queries.filter(({ query }) => !!query).map(({ id, query }) => [id, query.includes(' OR ') ? `(${query})` : query])
+                              )
+                          ),
+                          // combine queries using a wrapper query
+                          ContezzaDynamicSearchForm.isSearchField(field)
+                              ? // apply wrapper query from configuration if defined
+                                switchMap((queries) => field.query(of(queries)))
+                              : // apply default wrapper query otherwise
+                                map((queries) => Object.values(queries).join(' AND '))
+                      )
+            ).pipe(
+                // wrap query to make field id available
+                map((query) => ({ id: field.id, query }))
+            );
         };
-        const queries: Observable<string>[] = [{ field: this.rootField, form: this.form }].reduce(reducer, []);
-        return combineLatest(queries).pipe(
-            // let queries wait for each other
-            debounceTime(0),
-            filter(() => this.form.valid),
-            map((combinedQueries) =>
-                combinedQueries
-                    .filter((value) => !!value)
-                    .map((query) => (query.includes('OR') ? `(${query})` : query))
-                    .join(' AND ')
-            )
-        );
+        return recursion({ field: this.rootField, form: this.form }).pipe(pluck('query'));
     }
 }
