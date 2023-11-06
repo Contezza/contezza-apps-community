@@ -10,6 +10,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2023-11-06
+|2.4.0
+|View <<Release 2.4.0,release details>>.
+
 |2023-10-26
 |2.3.2
 |View <<Release 2.3.2,release details>>.
@@ -101,6 +105,18 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 2.4.0
+
+Bugfixes/minor changes:
+
+- @core/extensions - All `rxjs/operators` are available as filters for dynamic-source JSON objects.
+- @contezza/dynamic-forms - Support configuration of form-group queries.
+- @contezza/dynamic-forms - `DynamicFormDialogComponent` is now standalone.
+- @contezza/dynamic-forms - Field `array`: add custom style to use this field in dialogs; fix initialization and style.
+- @contezza/dynamic-forms - Field `dialog` is added.
+- @contezza/dynamic-forms - Fix date localization in fields: `date`, `dateRange`, `dateRangeChip`, `dateRangeSingle`, `dateTime`.
+- @contezza/dynamic-forms - Field `search` supports item-style configuration.
 
 ==== Release 2.3.2
 
