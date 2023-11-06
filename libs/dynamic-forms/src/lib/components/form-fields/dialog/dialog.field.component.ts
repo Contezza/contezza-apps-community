@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatDialogConfig } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -14,11 +15,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { filter, shareReplay, takeUntil, throttleTime } from 'rxjs/operators';
 
+import { DialogLoaderService } from '@contezza/core/dialogs';
 import { DisplayWithPipe } from '@contezza/core/pipes';
 import { ContezzaStringTemplate } from '@contezza/core/utils';
-import { DynamicFormDialogService } from '@contezza/dynamic-forms/dialog';
 import { DynamicFormDialogData, ExtendedDynamicFormDefinition } from '@contezza/dynamic-forms/shared';
-import { MatDialogConfig } from '@angular/material/dialog';
 import { ContezzaIdResolverService } from '@contezza/core/extensions';
 
 import { ContezzaDynamicFormFieldErrorModule } from '../../dynamic-form-field-error';
@@ -64,7 +64,7 @@ type Settings = {
 })
 export class DialogFieldComponent<ValueType> extends ContezzaBaseFieldComponent<ValueType> implements OnInit {
     private readonly idResolver = inject(ContezzaIdResolverService);
-    private readonly dialog = inject(DynamicFormDialogService);
+    private readonly dialog = inject(DialogLoaderService);
 
     settings: Partial<DynamicFormDialogData> & Settings;
     displayFn: (value: ValueType) => string;
@@ -104,7 +104,7 @@ export class DialogFieldComponent<ValueType> extends ContezzaBaseFieldComponent<
     openDialog() {
         if (this.settings?.dynamicFormId) {
             this.dialog
-                .open({
+                .open(() => import('../../dynamic-form-dialog').then((m) => m.DynamicFormDialogModule), {
                     ...(this.settings.matDialogConfig || {}),
                     data: {
                         title: this.settings.title ?? this.field.label,
