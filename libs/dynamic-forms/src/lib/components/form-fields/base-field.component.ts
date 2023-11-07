@@ -67,7 +67,7 @@ export abstract class ContezzaBaseFieldComponent<BaseValueType = any, ValueType 
     }
 
     protected initializeValue() {
-        if (!this.protected && !this.control.value) {
+        if (!this.protected && (this.control.value === null || this.control.value === undefined)) {
             ContezzaDynamicForm.initializeValue(this.field);
         }
     }
