@@ -111,6 +111,7 @@ In onderstaande paragrafen worden de release details beschreven.
 Bugfixes/minor changes:
 
 - @core/extensions - All `rxjs/operators` are available as filters for dynamic-source JSON objects.
+- @core/utils - Fix an issue with `ContezzaObservableOperators.trackFacetBucketBy` not resetting correctly.
 - @contezza/dynamic-forms - Support configuration of form-group queries.
 - @contezza/dynamic-forms - `DynamicFormDialogComponent` is now standalone.
 - @contezza/dynamic-forms - Field `array`: add custom style to use this field in dialogs; fix initialization and style.
