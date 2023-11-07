@@ -201,5 +201,5 @@ export class ContezzaObservableOperators {
                 const count = (x: GenericBucket): number => x.metrics.find(({ type }) => type === 'count')?.value.count || 0;
                 return count(b) - count(a);
             });
-        }, []);
+        });
 }
