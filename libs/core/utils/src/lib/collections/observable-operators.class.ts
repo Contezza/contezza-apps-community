@@ -175,7 +175,8 @@ export class ContezzaObservableOperators {
         map((list) => list.find((item) => Object.entries(properties).every(([key, value]) => item[key] === value)));
 
     static trackFacetBucketBy = (key: string): OperatorFunction<GenericBucket[], GenericBucket[]> =>
-        scan((oldList: GenericBucket[], newList) => {
+        scan((oldList?: GenericBucket[], newList?) => {
+            oldList ??= [];
             oldList.forEach((oldItem) => {
                 const matchingNewItem = newList?.find((newItem) => newItem[key] === oldItem[key]);
                 if (matchingNewItem) {
