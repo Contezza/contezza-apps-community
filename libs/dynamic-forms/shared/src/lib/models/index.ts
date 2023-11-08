@@ -8,3 +8,5 @@ export * from './dynamic-search-field.interface';
 export * from './dynamic-form-options.interface';
 
 export * from './extended-dynamic-form-field.interface';
+
+export * from './settings';
