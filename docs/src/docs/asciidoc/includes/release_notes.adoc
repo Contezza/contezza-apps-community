@@ -10,7 +10,7 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
-|2023-11-06
+|2023-11-09
 |2.4.0
 |View <<Release 2.4.0,release details>>.
 
