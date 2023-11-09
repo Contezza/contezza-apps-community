@@ -1,0 +1,56 @@
+<mat-form-field
+    class="contezza-form-field contezza-input-form-field"
+    [class.mat-form-field-disabled]="readonly"
+    [floatLabel]="field.settings?.floatLabel"
+    [appearance]="field.settings?.appearance"
+>
+    <mat-label *ngIf="field.label">{{ field.label | translate }}</mat-label>
+
+    <ng-container *ngIf="!settings?.multiple; else multiple">
+        <input
+            matInput
+            type="text"
+            spellcheck="false"
+            [formControl]="control"
+            [placeholder]="field.placeholder | translate"
+            [required]="required"
+            [readonly]="readonly"
+            data-lpignore="true"
+            [matAutocomplete]="auto"
+            (focusin)="openDialog$.next()"
+        />
+        <!-- fake autocomplete to use displayWith -->
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"></mat-autocomplete>
+    </ng-container>
+
+    <ng-template #multiple>
+        <mat-chip-list #chipList [formControl]="control" [required]="required">
+            <mat-chip *ngFor="let chip of control.value || []" (removed)="remove(chip)">
+                {{ chip | displayWith : displayFn }}
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <input
+                spellcheck="false"
+                [placeholder]="field.placeholder | translate"
+                [readonly]="readonly"
+                data-lpignore="true"
+                [matChipInputFor]="chipList"
+                (focusin)="openDialog$.next()"
+            />
+        </mat-chip-list>
+    </ng-template>
+
+    <button
+        type="button"
+        mat-icon-button
+        matSuffix
+        class="adf-property-clear-value contezza-form-field-clear"
+        aria-label="Clear"
+        *ngIf="!readonly && !control.disabled && control.value"
+        tabindex="-1"
+        (click)="clear($event)"
+    >
+        <mat-icon>cancel</mat-icon>
+    </button>
+    <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length || control.errors" [validations]="field.validations" [control]="control"></mat-error>
+</mat-form-field>

@@ -38,7 +38,7 @@
         overflow: auto;
 
         &-item {
-            max-width: 200px;
+            overflow: hidden;
             margin: 2px;
 
             display: flex;

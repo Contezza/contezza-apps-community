@@ -25,6 +25,7 @@ import {
     ContezzaToggleFieldModule,
     HelpFieldModule,
 } from '../form-fields';
+import { DialogFieldModule } from '../form-fields/dialog/dialog.field.module';
 import { SearchFieldModule } from '../form-fields/search/search.field.module';
 
 @NgModule({
@@ -51,6 +52,7 @@ import { SearchFieldModule } from '../form-fields/search/search.field.module';
         ContezzaToggleFieldModule,
         ContezzaPeopleGroupPickerFieldModule,
         DynamicFormFieldComponent,
+        DialogFieldModule,
         HelpFieldModule,
         SearchFieldModule,
     ],

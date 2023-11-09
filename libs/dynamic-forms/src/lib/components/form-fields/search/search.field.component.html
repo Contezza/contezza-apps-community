@@ -63,7 +63,13 @@
     </ng-container>
 </ng-container>
 <ng-template #itemTemplate let-item="item" let-selectable="selectable">
-    <mat-card class="contezza-search-field-results-item" [class.selectable]="selectable" (click)="selectable && select(item)">
+    <mat-card
+        class="contezza-search-field-results-item"
+        [class.selectable]="selectable"
+        [class]="styles?.item?.class || ''"
+        [style]="styles?.item?.style || ''"
+        (click)="selectable && select(item)"
+    >
         <ng-container *ngFor="let column of columns">
             <div class="contezza-search-field-results-item-property" [class]="column.class" [style]="column.style">
                 <div *ngIf="column.title" class="contezza-search-field-results-item-property-title">{{ column.title | translate }}:</div>

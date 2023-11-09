@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 
+import * as rxjs from 'rxjs/operators';
+
+import { ContezzaUtils } from '@contezza/core/utils';
+
 @Injectable({
     providedIn: 'root',
 })
@@ -24,9 +28,14 @@ export class ContezzaIdResolverService {
             id = source.id;
             parameters = source.parameters;
         }
-        const resolved = (type ? this.registry[type] : Object.values(this.registry).reduce((acc, val) => Object.assign(acc, val), {}))?.[id];
+        let resolved = (type ? this.registry[type] : Object.values(this.registry).reduce((acc, val) => Object.assign(acc, val), {}))?.[id];
+        if (!resolved && type === 'operator') {
+            // if the source cannot be resolved and it is of type operator, then try to resolve it from rxjs/operators
+            resolved = rxjs[id];
+        }
         if (resolved) {
-            return parameters ? resolved(parameters) : resolved;
+            // try to use parameters as callback
+            return parameters ? resolved((typeof parameters === 'string' && ContezzaUtils.stringToFunction(parameters)) || parameters) : resolved;
         } else {
             console.warn('Cannot resolve source ' + id + (type && ' of type ' + type));
             return defaultValue;
