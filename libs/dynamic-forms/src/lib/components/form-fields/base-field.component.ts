@@ -1,17 +1,17 @@
-import { Directive, Input, OnDestroy, OnInit } from '@angular/core';
+import { Directive, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, ValidatorFn, Validators } from '@angular/forms';
 
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { DestroyService } from '@contezza/core/services';
-import { ContezzaBaseFieldComponentInterface, ContezzaDynamicForm, ContezzaDynamicFormField } from '@contezza/dynamic-forms/shared';
+import { ContezzaBaseFieldComponentInterface, ContezzaDynamicForm, ContezzaDynamicFormField, SettingsService } from '@contezza/dynamic-forms/shared';
 
 @Directive()
 export abstract class ContezzaBaseFieldComponent<BaseValueType = any, ValueType extends BaseValueType | BaseValueType[] = BaseValueType>
     implements ContezzaBaseFieldComponentInterface<BaseValueType, ValueType>, OnInit, OnDestroy
 {
-    protected readonly TYPING_DEBOUNCE_TIME = 500;
+    protected readonly formSettings: SettingsService = inject(SettingsService);
 
     @Input()
     readonly field: ContezzaDynamicFormField<BaseValueType, ValueType>;
@@ -67,7 +67,7 @@ export abstract class ContezzaBaseFieldComponent<BaseValueType = any, ValueType 
     }
 
     protected initializeValue() {
-        if (!this.protected && !this.control.value) {
+        if (!this.protected && (this.control.value === null || this.control.value === undefined)) {
             ContezzaDynamicForm.initializeValue(this.field);
         }
     }

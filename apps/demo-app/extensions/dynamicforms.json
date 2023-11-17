@@ -52,6 +52,57 @@
                 ]
             },
             {
+                "id": "test-array",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "dialog",
+                            "type": "array",
+                            "label": "dialog",
+                            "initialValue": "${initialValue}",
+                            "settings": {
+                                "formId": "demo-shell"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "id": "test-dialog",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "dialog",
+                            "type": "dialog",
+                            "label": "dialog",
+                            "extras": {
+                                "initialValue": [
+                                    {
+                                        "formId": "test1"
+                                    },
+                                    {
+                                        "formId": "test2"
+                                    }
+                                ]
+                            },
+                            "settings": {
+                                "dynamicFormId": "test-array",
+                                "multiple": true,
+                                "embedded": true,
+                                "labelTemplate": "${value.formId}",
+                                "matDialogConfig": {
+                                    "width": "1000px",
+                                    "maxWidth": "80vw",
+                                    "height": "50vh",
+                                    "autoFocus": false,
+                                    "panelClass": "dynamicforms-array-dialog"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
                 "id": "test-search-form-field",
                 "form": {
                     "subfields": [
@@ -94,10 +145,6 @@
                                                 "dynamic-source": "${filter-ids}",
                                                 "filters": [
                                                     {
-                                                        "id": "startWith",
-                                                        "parameters": []
-                                                    },
-                                                    {
                                                         "id": "map",
                                                         "parameters": "ids=>return (ids||[]).map(id=>`NOT sys:node-uuid:${id}`).join(' AND ') || '*'"
                                                     }
@@ -113,7 +160,12 @@
                                     "id": "test-search-subform",
                                     "layoutId": "lay0"
                                 },
-                                "columnsId": "test-search-subform-columns"
+                                "columnsId": "test-search-subform-columns",
+                                "styles": {
+                                    "item": {
+                                        "style": ""
+                                    }
+                                }
                             },
                             "validations": ["required"]
                         }
@@ -200,6 +252,28 @@
                         }
                     }
                 ]
+            },
+            {
+                "id": "test-dates",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "date",
+                            "type": "date",
+                            "label": "date"
+                        },
+                        {
+                            "id": "dateRange",
+                            "type": "dateRange",
+                            "label": "dateRange"
+                        },
+                        {
+                            "id": "dateTime",
+                            "type": "dateTime",
+                            "label": "dateTime"
+                        }
+                    ]
+                }
             }
         ],
         "columns": [

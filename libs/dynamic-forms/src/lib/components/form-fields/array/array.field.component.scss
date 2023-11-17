@@ -1,12 +1,7 @@
 .contezza-array-form-field {
     display: flex;
     flex-direction: column;
-
-    &-header {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-    }
+    gap: 4px;
 
     &-label {
         position: relative;
@@ -16,13 +11,23 @@
         width: unset;
     }
 
-    &-item {
-        display: flex;
-        align-items: center;
-        gap: 4px;
+    &-list {
+        &-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
 
-        contezza-dynamic-form {
-            flex: 1;
+            contezza-dynamic-form {
+                flex: 1;
+            }
+        }
+    }
+}
+
+::ng-deep .dynamicforms-array-dialog {
+    contezza-dynamic-form-dialog {
+        .contezza-array-form-field-label {
+            display: none;
         }
     }
 }

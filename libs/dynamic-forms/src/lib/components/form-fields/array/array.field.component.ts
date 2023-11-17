@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AbstractControl, FormGroup } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 
 import { TranslateModule } from '@ngx-translate/core';
 
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, shareReplay, takeUntil } from 'rxjs/operators';
+
+import { ContentActionRef, ContentActionType } from '@alfresco/adf-extensions';
+import { SharedToolbarModule } from '@alfresco/aca-shared';
 
 import { ContezzaLetModule } from '@contezza/core/directives';
 import { DestroyService } from '@contezza/core/services';
@@ -21,31 +22,35 @@ import { ContezzaBaseFieldComponent } from '../base-field.component';
 @Component({
     selector: 'contezza-array-field',
     standalone: true,
-    imports: [CommonModule, MatButtonModule, MatIconModule, TranslateModule, ContezzaLetModule, ContezzaDynamicFormComponent],
+    imports: [CommonModule, TranslateModule, SharedToolbarModule, ContezzaLetModule, ContezzaDynamicFormComponent],
     template: `<ng-container *contezzaLet="readonly$ | async as readonly">
         <div class="contezza-form-field contezza-array-form-field adf-property-field adf-card-textitem-field">
-            <div class="contezza-array-form-field-header">
-                <div class="mat-form-field-label mat-form-field-empty contezza-array-form-field-label" *ngIf="field.label">{{ field.label | translate }}</div>
-                <button *ngIf="!readonly" mat-icon-button class="app-toolbar-button" (keydown.enter)="add()" (click)="add()">
-                    <mat-icon>add</mat-icon>
-                </button>
+            <div class="mat-form-field-label mat-form-field-empty contezza-array-form-field-label" *ngIf="field.label">{{ field.label | translate }}</div>
+            <div *ngIf="forms$ | async as forms" class="contezza-array-form-field-list">
+                <ng-container *ngFor="let form of forms; trackBy: trackByKey">
+                    <div class="contezza-array-form-field-list-item">
+                        <contezza-dynamic-form [dynamicForm]="form.value"></contezza-dynamic-form>
+                        <aca-toolbar-action *ngIf="!readonly" [actionRef]="deleteAction" (keydown.enter)="delete(form.key)" (click)="delete(form.key)"></aca-toolbar-action>
+                    </div>
+                </ng-container>
             </div>
-            <ng-container *ngFor="let form of forms$ | async; trackBy: trackByKey">
-                <div class="contezza-array-form-field-item">
-                    <contezza-dynamic-form [dynamicForm]="form.value"></contezza-dynamic-form>
-                    <button *ngIf="!readonly" mat-icon-button class="app-toolbar-button" (keydown.enter)="delete(form.key)" (click)="delete(form.key)">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                </div>
-            </ng-container>
+            <aca-toolbar-action *ngIf="!readonly" [actionRef]="addAction" (keydown.enter)="add()" (click)="add()"></aca-toolbar-action>
         </div>
     </ng-container>`,
     styleUrls: ['./array.field.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArrayFieldComponent<TBaseValue> extends ContezzaBaseFieldComponent<TBaseValue, TBaseValue[]> implements OnInit {
-    settings: { formId: string; layoutId?: string };
+    static readonly ACTION_ADD_ID = 'add';
+    static readonly ACTION_ADD_DEFAULT: ContentActionRef = { id: ArrayFieldComponent.ACTION_ADD_ID, icon: 'add', type: ContentActionType.button };
+    static readonly ACTION_DELETE_ID = 'delete';
+    static readonly ACTION_DELETE_DEFAULT: ContentActionRef = { id: ArrayFieldComponent.ACTION_DELETE_ID, icon: 'delete', type: ContentActionType.button };
+
+    settings: { formId: string; layoutId?: string; actions?: Partial<ContentActionRef>[] };
     dependencies: Record<string, Observable<any>>;
+
+    addAction: ContentActionRef;
+    deleteAction: ContentActionRef;
 
     private count = 0;
 
@@ -67,6 +72,9 @@ export class ArrayFieldComponent<TBaseValue> extends ContezzaBaseFieldComponent<
             acc[key] = dep.pipe(shareReplay());
             return acc;
         }, {});
+
+        this.addAction = { ...ArrayFieldComponent.ACTION_ADD_DEFAULT, ...(this.settings.actions?.find(({ id }) => id === ArrayFieldComponent.ACTION_ADD_ID) || {}) };
+        this.deleteAction = { ...ArrayFieldComponent.ACTION_DELETE_DEFAULT, ...(this.settings.actions?.find(({ id }) => id === ArrayFieldComponent.ACTION_DELETE_ID) || {}) };
 
         // this.control is linked with the extern dynamic form, value type TBaseValue[]
         // this.subform is intern, value type Record<string, TBaseValue>
@@ -103,7 +111,7 @@ export class ArrayFieldComponent<TBaseValue> extends ContezzaBaseFieldComponent<
         form.build();
 
         if (value) {
-            form.form.setValue(value);
+            form.form.patchValue(value);
         }
 
         const id = this.generateId();

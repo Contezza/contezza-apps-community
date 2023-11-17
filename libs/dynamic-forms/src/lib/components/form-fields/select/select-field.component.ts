@@ -36,7 +36,7 @@ export class SelectFieldComponent<BaseValueType, ValueType extends BaseValueType
             this.control.valueChanges.pipe(
                 startWith(this.control.value),
                 // apply debounceTime only on typing
-                debounce((value) => (value && typeof value === 'string' ? timer(this.TYPING_DEBOUNCE_TIME) : of({}))),
+                debounce((value) => (value && typeof value === 'string' ? timer(this.formSettings.typingDebounceTime) : of({}))),
                 // prevent a self-loop
                 distinctUntilChanged(),
                 distinctUntilChanged((oldValue, newValue) => {
