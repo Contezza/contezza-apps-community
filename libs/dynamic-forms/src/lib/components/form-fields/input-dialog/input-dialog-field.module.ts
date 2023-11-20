@@ -11,10 +11,10 @@ import { ContezzaDynamicFormExtensionService } from '@contezza/dynamic-forms/sha
 
 import { InputDialogFieldComponent } from './input-dialog-field.component';
 import { ContezzaDynamicFormsCommonModule } from '../../../dynamic-forms.common.module';
-import { ContezzaInputFieldModule } from '../input/input-field.module';
+import { InputFieldComponent } from '../input/input-field.component';
 
 @NgModule({
-    imports: [CommonModule, ContezzaDynamicFormsCommonModule, ContezzaInputFieldModule, MatButtonModule, MatIconModule, ReactiveFormsModule, TranslateModule],
+    imports: [CommonModule, ContezzaDynamicFormsCommonModule, InputFieldComponent, MatButtonModule, MatIconModule, ReactiveFormsModule, TranslateModule],
     declarations: [InputDialogFieldComponent],
     exports: [InputDialogFieldComponent],
 })

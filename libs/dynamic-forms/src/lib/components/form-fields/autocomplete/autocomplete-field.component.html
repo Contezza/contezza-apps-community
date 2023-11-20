@@ -54,6 +54,7 @@
                         #auto="matAutocomplete"
                         class="contezza-autocomplete-form-field-panel"
                         autoActiveFirstOption
+                        [panelWidth]="field.settings?.panelWidth"
                         [displayWith]="displayFn"
                         (opened)="onAutocompleteOpened(trigger, auto)"
                         (closed)="endEditing()"
@@ -80,7 +81,9 @@
                                                 <mat-option
                                                     [value]="selectableOption"
                                                     title="{{ selectableOption.contezzaDisplay.option.tooltip | translate }}"
-                                                    [innerHtml]="selectableOption.contezzaDisplay.option.html | highlight : (isHotDynamicCell ? trigger.value : '') | sanitizeHtml"
+                                                    [innerHtml]="
+                                                        selectableOption.contezzaDisplay.option.html | highlight : (field.settings?.highlight ? trigger.value : '') | sanitizeHtml
+                                                    "
                                                 >
                                                 </mat-option>
                                             </ng-container>

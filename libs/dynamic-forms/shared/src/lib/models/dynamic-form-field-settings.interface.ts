@@ -1,7 +1,11 @@
+import { MatAutocomplete } from '@angular/material/autocomplete';
 import { MatFormField } from '@angular/material/form-field';
 
-export interface DynamicFormFieldSettings {
+import { Settings } from './settings';
+
+export interface DynamicFormFieldSettings extends Partial<Settings> {
     labelPosition?: 'before' | 'after';
+    // MatFormField
     floatLabel?: MatFormField['floatLabel'];
     appearance?: MatFormField['appearance'];
     color?: MatFormField['color'];
@@ -18,6 +22,9 @@ export interface DynamicFormFieldSettings {
     subcontrolId?: string;
     showSelectAllOption?: boolean;
     preSelectAllOption?: boolean;
+    highlight?: boolean;
+    // MatAutocomplete
+    panelWidth?: MatAutocomplete['panelWidth'];
 
     /**
      * a custom selection option for the multi-autocomplete field

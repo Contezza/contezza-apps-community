@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 
 import { MatAutocomplete, MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import { MatInput } from '@angular/material/input';
@@ -17,7 +17,7 @@ import { ContezzaBaseFieldComponent } from '../base-field.component';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
 })
-export class AutocompleteFieldComponent<ValueType> extends ContezzaBaseFieldComponent<ValueType> implements OnInit, AfterViewInit {
+export class AutocompleteFieldComponent<ValueType> extends ContezzaBaseFieldComponent<ValueType> implements OnInit {
     selectableOptions$: Observable<ContezzaDisplayableValue<ValueType>[]>;
 
     private readonly optionsLoadingSource = new BehaviorSubject<boolean>(false);
@@ -33,13 +33,6 @@ export class AutocompleteFieldComponent<ValueType> extends ContezzaBaseFieldComp
     enter = new EventEmitter<string>();
 
     editing = false;
-
-    isHotDynamicCell = false;
-
-    ngAfterViewInit() {
-        // TODO: rework with an injection token
-        this.initializeIsHotDynamicCell();
-    }
 
     ngOnInit() {
         super.ngOnInit();
@@ -58,7 +51,7 @@ export class AutocompleteFieldComponent<ValueType> extends ContezzaBaseFieldComp
                 this.control.valueChanges.pipe(
                     startWith(this.control.value),
                     // apply debounceTime only on typing
-                    debounce((value) => (value && typeof value === 'string' && !this.isHotDynamicCell ? timer(this.TYPING_DEBOUNCE_TIME) : of({}))),
+                    debounce((value) => (value && typeof value === 'string' ? timer(this.formSettings.typingDebounceTime) : of({}))),
                     // prevent a self-loop
                     distinctUntilChanged(),
                     distinctUntilChanged((oldValue, newValue) => {
@@ -181,21 +174,6 @@ export class AutocompleteFieldComponent<ValueType> extends ContezzaBaseFieldComp
         const panel = document.getElementById(auto.id);
         if (panel) {
             panel.style['font-size'] = size;
-        }
-
-        // apply special styling for hot-autocomplete
-        if (this.isHotDynamicCell) {
-            panel.parentElement.classList.add('contezza-hot-autocomplete-overlay');
-        }
-    }
-
-    private initializeIsHotDynamicCell() {
-        let hotParent: HTMLElement = (this.input as any)._elementRef.nativeElement;
-        while (hotParent && !this.isHotDynamicCell) {
-            hotParent = hotParent.parentElement;
-            if (hotParent?.tagName.toLowerCase() === 'contezza-hot-dynamic-cell') {
-                this.isHotDynamicCell = true;
-            }
         }
     }
 

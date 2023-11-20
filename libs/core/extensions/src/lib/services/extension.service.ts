@@ -39,11 +39,12 @@ export class ContezzaExtensionService extends ExtensionService {
         debounce(() => (!this.config ? timer(500) : of({}))),
         switchMap(() =>
             forkJoin([
-                !this.configFromAssets
+                (!this.configFromAssets
                     ? from(this.loader.load(this.configPath, this.pluginsPath, this.extensionJsons.flat())).pipe(
                           tap((configFromAssets) => (this.configFromAssets = configFromAssets))
                       )
-                    : of(this.configFromAssets),
+                    : of(this.configFromAssets)
+                ).pipe(map((configFromAssets) => JSON.parse(JSON.stringify(configFromAssets)))),
                 !this.configFromRepository
                     ? this.dynamicExtensionService.load(this.extensionQueries.flat()).pipe(tap((configFromRepository) => (this.configFromRepository = configFromRepository)))
                     : of(this.configFromRepository),

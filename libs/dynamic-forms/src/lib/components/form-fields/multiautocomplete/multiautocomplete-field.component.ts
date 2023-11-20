@@ -58,7 +58,7 @@ export class MultiautocompleteFieldComponent<BaseValueType> extends ContezzaBase
             this.showSelectAllOption = this.field.settings?.showSelectAllOption ?? true;
             this.selectableOptions$ = combineLatest([
                 // startWith to trigger the flow, otherwise no option is shown
-                this.subcontrol.valueChanges.pipe(startWith(this.subcontrol.value), debounceTime(this.TYPING_DEBOUNCE_TIME), distinctUntilChanged()),
+                this.subcontrol.valueChanges.pipe(startWith(this.subcontrol.value), debounceTime(this.formSettings.typingDebounceTime), distinctUntilChanged()),
                 combineLatest([
                     this.control.valueChanges.pipe(
                         startWith(this.control.value),

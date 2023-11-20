@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnI
 import { CommonModule } from '@angular/common';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { ContezzaDynamicForm, ContezzaDynamicFormLayout, DynamicFormDefinition, ExtendedDynamicFormDefinition } from '@contezza/dynamic-forms/shared';
+import { ContezzaDynamicForm, ContezzaDynamicFormLayout, DynamicFormDefinition, ExtendedDynamicFormDefinition, SettingsService } from '@contezza/dynamic-forms/shared';
 
 import { ContezzaDynamicFormService } from '../../services';
 import { ContezzaDynamicSubformComponent } from './dynamic-subform.component';
@@ -23,6 +23,7 @@ import { ContezzaDynamicSubformComponent } from './dynamic-subform.component';
         </form>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [SettingsService],
 })
 export class ContezzaDynamicFormComponent implements OnInit, OnDestroy {
     @Input()
@@ -37,7 +38,7 @@ export class ContezzaDynamicFormComponent implements OnInit, OnDestroy {
     @Output()
     enterPressed = new EventEmitter();
 
-    constructor(private readonly dynamicFormService: ContezzaDynamicFormService) {}
+    constructor(private readonly settings: SettingsService, private readonly dynamicFormService: ContezzaDynamicFormService) {}
 
     ngOnInit() {
         // require dynamicForm or dynamicFormId to initialise
@@ -60,6 +61,9 @@ export class ContezzaDynamicFormComponent implements OnInit, OnDestroy {
         this.dynamicForm.build();
         this.form = this.dynamicForm.form;
         this.layout = this.dynamicForm.layout;
+
+        // set settings defined via df configuration
+        this.settings.patch(this.dynamicForm.rootField.settings);
     }
 
     ngOnDestroy() {

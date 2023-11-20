@@ -19,6 +19,7 @@ export * from './date-range-single/date-range-single-field.module';
 export * from './date-time/date-time-field.component';
 export * from './date-time/date-time-field.module';
 
+export * from './dialog';
 export * from './dynamic';
 
 export * from './help/help.field.module';

@@ -130,7 +130,9 @@
             "LABEL": "Search results"
         },
         "PAGINATION": {
-            "OF": "{{count}} of {{total}}"
+            "OF": "{{count}} of {{total}}",
+            "MORE_RESULTS": "{{totalItems}} results found, showing first {{maxItems}} only",
+            "TOTAL_RESULTS": "{{totalItems}} results found"
         },
         "LOCATION": {
             "LABEL": "Location",

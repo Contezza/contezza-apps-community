@@ -10,7 +10,13 @@ import { ContezzaDynamicFormField, ContezzaDynamicFormLayout, ContezzaDynamicFor
 
 export class ContezzaDynamicForm {
     form?: FormGroup;
+    /**
+     * @deprecated use `valid$` instead
+     */
     valid?: Observable<boolean>;
+
+    private readonly validSource = new BehaviorSubject<boolean>(false);
+    readonly valid$ = this.validSource.asObservable();
 
     protected?: boolean;
 
@@ -114,6 +120,13 @@ export class ContezzaDynamicForm {
                 map((status) => status === 'VALID'),
                 takeUntil(this.destroy$)
             );
+            form.statusChanges
+                .pipe(
+                    debounceTime(100),
+                    map((status) => status === 'VALID'),
+                    takeUntil(this.destroy$)
+                )
+                .subscribe((valid) => this.validSource.next(valid));
             this.bindValues();
             this.bindDependencies();
             this.buildExtras();
