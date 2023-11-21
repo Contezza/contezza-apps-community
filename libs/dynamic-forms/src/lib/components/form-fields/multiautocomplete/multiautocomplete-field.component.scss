@@ -64,7 +64,7 @@
                     &:hover,
                     &.mat-active {
                         // same color as default mat-option, but with no transparency
-                        background-color: rgba(240, 240, 240, 1) !important;
+                        background-color: var(--theme-dialog-background-color) !important;
                     }
                     //flex: 1 0 auto;
                     .mat-pseudo-checkbox {
