@@ -15,7 +15,7 @@ import { ToolbarComponent } from '../toolbar/toolbar.component';
     template: `
         <ng-container *ngIf="!column.template" [ngSwitch]="column.type">
             <ng-container *ngSwitchCase="'actions'"><contezza-toolbar [target]="$any(item)"></contezza-toolbar></ng-container>
-            <ng-container *ngSwitchCase="'date'">{{ value | date: 'dd-MM-yyyy' }}</ng-container>
+            <ng-container *ngSwitchCase="'date'">{{ value | date : 'dd-MM-yyyy' }}</ng-container>
             <ng-container *ngSwitchCase="'fileSize'">{{ value | adfFileSize }}</ng-container>
             <ng-container *ngSwitchCase="'thumbnail'"><img [src]="value | adfMimeTypeIcon" alt="" style="vertical-align: middle" /></ng-container>
             <ng-container *ngSwitchCase="'timeAgo'">{{ value | adfTimeAgo }}</ng-container>
@@ -29,7 +29,7 @@ export class TableCellComponent<ItemType> implements OnInit {
     item: ItemType;
 
     @Input()
-    column: DocumentListPresetRef;
+    column: Omit<DocumentListPresetRef, 'type'> & { type: string };
 
     @HostBinding('class')
     hostClass: string;
