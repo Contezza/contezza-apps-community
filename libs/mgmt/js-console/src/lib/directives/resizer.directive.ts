@@ -4,11 +4,9 @@ type Direction = 'ns' | 'ew';
 
 @Directive({
     standalone: true,
-    selector: '[jsConsoleResize]',
+    selector: '[contezzaResizer]',
 })
-export class JsConsoleResizeDirective implements AfterViewInit {
-    private resizing = false;
-
+export class ResizerDirective implements AfterViewInit {
     private readonly config: Record<Direction, { cursor: string }> = {
         ns: {
             cursor: 'ns-resize',
@@ -21,6 +19,9 @@ export class JsConsoleResizeDirective implements AfterViewInit {
     direction: Direction;
     firstElement: HTMLElement;
     secondElement: HTMLElement;
+
+    @HostBinding('class.resizing')
+    resizing = false;
 
     @HostBinding('style.cursor')
     cursor: string;
@@ -49,13 +50,11 @@ export class JsConsoleResizeDirective implements AfterViewInit {
 
     @HostListener('mousedown') onMouseDown() {
         this.resizing = true;
-        this.el.nativeElement.classList.add('resizing');
         document.body.style.cursor = this.cursor;
     }
 
     @HostListener('window:mouseup') onMouseUp() {
         this.resizing = false;
-        this.el.nativeElement.classList.remove('resizing');
         document.body.style.cursor = 'default';
     }
 
