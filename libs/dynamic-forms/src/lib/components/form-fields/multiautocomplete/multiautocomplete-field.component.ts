@@ -5,7 +5,7 @@ import { MatInput } from '@angular/material/input';
 import { MatSelect, MatSelectChange } from '@angular/material/select';
 
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, pairwise, pluck, startWith, take, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, pairwise, pluck, startWith, tap } from 'rxjs/operators';
 
 import { ContezzaDisplayableValue, ContezzaDynamicForm, ContezzaFormField } from '@contezza/dynamic-forms/shared';
 
@@ -41,14 +41,6 @@ export class MultiautocompleteFieldComponent<BaseValueType> extends ContezzaBase
         const subcontrolId: string = this.field.settings?.subcontrolId;
         this.subcontrol = subcontrolId ? (this.control.parent.get(subcontrolId) as FormControl<string>) : new FormControl('');
         this.initializeOptions();
-
-        // on first option load, select all when settings are preSelectAllOption
-        this.selectableOptions$.pipe(take(1)).subscribe((options) => {
-            this.preSelectAllOption = this.field.settings?.preSelectAllOption ?? false;
-            if (this.preSelectAllOption) {
-                this.control.setValue(options);
-            }
-        });
     }
 
     protected initializeOptions() {
@@ -110,7 +102,9 @@ export class MultiautocompleteFieldComponent<BaseValueType> extends ContezzaBase
                 ),
             ]).pipe(
                 debounceTime(0),
-                map(([searchTerm, options]) => (searchTerm && searchTerm !== '*' ? this.filterOptions(searchTerm, options) : options))
+                map(([searchTerm, options]) => (searchTerm && searchTerm !== '*' ? this.filterOptions(searchTerm, options) : options)),
+                // on first option load, select all when settings are preSelectAllOption
+                tap((options) => this.initializePreSelectAllOption(options))
             );
         } else {
             this.customOption = this.field.settings?.customOption;
@@ -131,6 +125,16 @@ export class MultiautocompleteFieldComponent<BaseValueType> extends ContezzaBase
                 }),
                 pluck(1)
             );
+        }
+    }
+
+    private initializePreSelectAllOption(options: ContezzaDisplayableValue<BaseValueType>[]) {
+        // only apply the first time
+        if (this.preSelectAllOption == null) {
+            this.preSelectAllOption = this.field.settings?.preSelectAllOption ?? false;
+            if (this.preSelectAllOption) {
+                this.control.setValue(options);
+            }
         }
     }
 
