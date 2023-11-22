@@ -54,8 +54,10 @@ export class ResizerDirective implements AfterViewInit {
     }
 
     @HostListener('window:mouseup') onMouseUp() {
-        this.resizing = false;
-        document.body.style.cursor = 'default';
+        if (this.resizing) {
+            this.resizing = false;
+            document.body.style.cursor = 'default';
+        }
     }
 
     @HostListener('window:mousemove', ['$event']) onMouseMove(event: MouseEvent) {
