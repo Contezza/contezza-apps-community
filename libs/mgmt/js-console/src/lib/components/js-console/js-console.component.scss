@@ -33,11 +33,8 @@
         rgb(185, 205, 227) 81.1%,
         rgb(154, 180, 212) 102.4%
     );
-    &:hover {
-        cursor: ns-resize;
-    }
 }
 
-.side-panel {
+.resizing {
     background: var(--theme-primary-color) !important;
 }
