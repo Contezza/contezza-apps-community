@@ -140,7 +140,7 @@
                         "glob": "**/*"
                     },
                     {
-                        "input": "libs/mgmt/js-console/extensions",
+                        "input": "libs/mgmt/js-console/assets/extensions",
                         "output": "./assets/plugins",
                         "glob": "*.json"
                     },

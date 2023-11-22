@@ -4,6 +4,7 @@ import { BlankPageComponent } from '@alfresco/adf-core';
 import { CONTENT_LAYOUT_ROUTES } from '@alfresco/aca-content';
 
 import { LoginComponent } from './components/login/login.component';
+import { Config } from './config';
 
 export const APP_ROUTES: Routes = [
     { path: 'blank', component: BlankPageComponent },
@@ -12,7 +13,7 @@ export const APP_ROUTES: Routes = [
 
 const APP_LAYOUT_ROUTES: Routes = [
     { path: 'dynamic-forms-demo-shell', loadComponent: () => import('./components/dynamic-forms-demo-shell/demo-shell.component').then((m) => m.DemoShellComponent) },
-    { path: 'javascript-console', loadChildren: () => import('@contezza/js-console').then((m) => m.ContezzaJsConsoleModule) },
+    { path: Config.Urls.JsConsole, loadChildren: () => import('@contezza/js-console').then((m) => m.ContezzaJsConsoleModule) },
     { path: 'node-browser', loadChildren: () => import('@contezza/node-browser').then((m) => m.ContezzaNodeBrowserModule) },
 ];
 

@@ -34,8 +34,8 @@
                                 "id": "app.console.js-console.component",
                                 "order": 100,
                                 "icon": "svg:console",
-                                "title": "APP.JS_CONSOLE.NAVBAR.TITLE",
-                                "description": "APP.JS_CONSOLE.NAVBAR.DESCRIPTION",
+                                "title": "CONTEZZA.JS_CONSOLE.NAVBAR.TITLE",
+                                "description": "CONTEZZA.JS_CONSOLE.NAVBAR.DESCRIPTION",
                                 "route": "javascript-console"
                             },
                             {
