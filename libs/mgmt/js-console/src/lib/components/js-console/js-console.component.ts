@@ -8,9 +8,10 @@ import { Observable } from 'rxjs';
 
 import { PageLayoutModule } from '@alfresco/aca-shared';
 
+import { ResizerDirective } from '@contezza/core/directives';
+
 import { getExecuteScriptLoading } from '../../store/selectors';
 import { loadScriptsList } from '../../store/actions';
-import { ResizerDirective } from '../../directives/resizer.directive';
 import { JsConsoleHeaderComponent } from '../js-console-header/js-console-header.component';
 import { JsConsoleContentComponent } from '../js-console-content/js-console-content.component';
 import { JsConsoleOutputComponent } from '../js-console-output/js-console-output.component';
@@ -22,9 +23,9 @@ import { JsConsoleScriptsListComponent } from '../js-console-scripts-list/js-con
         CommonModule,
         MatProgressBarModule,
         PageLayoutModule,
+        ResizerDirective,
         JsConsoleHeaderComponent,
         JsConsoleContentComponent,
-        ResizerDirective,
         JsConsoleOutputComponent,
         JsConsoleScriptsListComponent,
     ],
