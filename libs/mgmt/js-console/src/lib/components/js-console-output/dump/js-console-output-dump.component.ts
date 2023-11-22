@@ -1,15 +1,20 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { CommonModule } from '@angular/common';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
 import { Store } from '@ngrx/store';
 
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { filter, map, startWith } from 'rxjs/operators';
 
+import { ContezzaSearchFormComponent } from '@contezza/search/form';
+
 import { JsConsoleDumpOutputService } from '../../../services/dump-output.service';
 import { getExecuteConsoleOutput } from '../../../store/selectors';
 
 @Component({
+    standalone: true,
+    imports: [CommonModule, MatTableModule, ContezzaSearchFormComponent],
     selector: 'js-console-output-dump',
     templateUrl: './js-console-output-dump.component.html',
     styleUrls: ['./js-console-output-dump.component.scss'],

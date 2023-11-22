@@ -1,6 +1,12 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
-import { ThemePalette } from '@angular/material/core';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { ThemePalette } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
+import { TranslateModule } from '@ngx-translate/core';
 
 import { Store } from '@ngrx/store';
 
@@ -10,8 +16,11 @@ import { map } from 'rxjs/operators';
 import { ConsoleScript, SelectedNode } from '../../interfaces/js-console';
 import { getEditorOptions, getSelectedNode, getSelectedScript, getSelectedSpaceNode } from '../../store/selectors';
 import { executeScript, saveScript, selectScriptPayloadNode, setSelectedScript, toggleEditorTheme } from '../../store/actions';
+import { JsConsoleNoderefComponent } from './noderef/js-console-noderef.component';
 
 @Component({
+    standalone: true,
+    imports: [CommonModule, MatButtonModule, MatIconModule, MatTooltipModule, TranslateModule, JsConsoleNoderefComponent],
     selector: 'contezza-js-console-header',
     templateUrl: './js-console-header.component.html',
     styleUrls: ['./js-console-header.component.scss'],

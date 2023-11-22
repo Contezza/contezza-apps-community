@@ -1,21 +1,33 @@
 import { ChangeDetectionStrategy, Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ThemePalette } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+
+import { TranslateModule } from '@ngx-translate/core';
 
 import { Store } from '@ngrx/store';
 
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { map, startWith, take, takeUntil } from 'rxjs/operators';
 
+import { IconModule } from '@alfresco/adf-core';
 import { NodesApiService } from '@alfresco/adf-content-services';
 import { AppHookService } from '@alfresco/aca-shared';
 
+import { ContezzaLetDirective } from '@contezza/core/directives';
 import { DestroyService } from '@contezza/core/services';
+import { ContezzaSearchFormComponent } from '@contezza/search/form';
 
 import { ConsoleScript } from '../../interfaces/js-console';
 import { getScriptsList, getSelectedScript } from '../../store/selectors';
 import { deleteScript, duplicateScript, loadScriptsList, loadSelectedNodeContent } from '../../store/actions';
 
 @Component({
+    standalone: true,
+    imports: [CommonModule, MatButtonModule, MatIconModule, MatListModule, MatMenuModule, TranslateModule, IconModule, ContezzaLetDirective, ContezzaSearchFormComponent],
     selector: 'contezza-js-console-scripts-list',
     templateUrl: './js-console-scripts-list.component.html',
     styleUrls: ['./js-console-scripts-list.component.scss'],

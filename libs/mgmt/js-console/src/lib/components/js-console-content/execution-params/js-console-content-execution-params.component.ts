@@ -1,10 +1,15 @@
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+
+import { TranslateModule } from '@ngx-translate/core';
 
 import { Store } from '@ngrx/store';
 
-import { takeUntil } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { DestroyService } from '@contezza/core/services';
 
@@ -12,6 +17,8 @@ import { getRunas, getTransaction, getUrlargs } from '../../../store/selectors';
 import { setRunas, setTransaction, setUrlargs } from '../../../store/actions';
 
 @Component({
+    standalone: true,
+    imports: [CommonModule, ReactiveFormsModule, MatInputModule, MatSelectModule, TranslateModule],
     selector: 'contezza-js-console-content-execution-params',
     templateUrl: './js-console-content-execution-params.component.html',
     styleUrls: ['./js-console-content-execution-params.component.scss'],

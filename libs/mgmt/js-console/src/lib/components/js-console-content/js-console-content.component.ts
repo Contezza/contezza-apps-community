@@ -1,17 +1,28 @@
 import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatTabsModule } from '@angular/material/tabs';
+
+import { TranslateModule } from '@ngx-translate/core';
 
 import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { PipeModule } from '@alfresco/adf-core';
+
 import { DestroyService } from '@contezza/core/services';
+import { MonacoEditorModule } from '@contezza/third-party/monaco';
 
 import { ConsoleEditorOptions, ScriptExecutionTime } from '../../interfaces/js-console';
 import { getEditorOptions, getFmConsoleContent, getJsConsoleContent, getScriptExecutionTime } from '../../store/selectors';
 import { executeScript, saveScript, setFmConsoleContent, setJsConsoleContent, setJsConsoleSelectedContent } from '../../store/actions';
+import { JsConsoleContentExecutionParamsComponent } from './execution-params/js-console-content-execution-params.component';
 
 @Component({
+    standalone: true,
+    imports: [CommonModule, FormsModule, MatTabsModule, TranslateModule, PipeModule, MonacoEditorModule, JsConsoleContentExecutionParamsComponent],
     selector: 'contezza-js-console-content',
     templateUrl: './js-console-content.component.html',
     styleUrls: ['./js-console-content.component.scss'],
