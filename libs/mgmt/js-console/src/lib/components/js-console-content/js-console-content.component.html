@@ -2,7 +2,7 @@
     <mat-tab-group [@.disabled]="true" class="js-console-content-tabs console-tab-group">
         <mat-tab>
             <ng-template mat-tab-label>
-                <span>{{ 'APP.JS_CONSOLE.CONTENT.TABS.JS' | translate }}</span>
+                <span>{{ 'CONTEZZA.JS_CONSOLE.CONTENT.TABS.JS' | translate }}</span>
             </ng-template>
             <ngx-monaco-editor
                 class="js-console-editor"
@@ -15,7 +15,7 @@
         </mat-tab>
         <mat-tab>
             <ng-template mat-tab-label>
-                <span>{{ 'APP.JS_CONSOLE.CONTENT.TABS.FM' | translate }}</span>
+                <span>{{ 'CONTEZZA.JS_CONSOLE.CONTENT.TABS.FM' | translate }}</span>
             </ng-template>
             <ngx-monaco-editor
                 class="js-console-editor"
@@ -25,7 +25,7 @@
                 (keydown)="onKeyDown($event)"
             ></ngx-monaco-editor>
         </mat-tab>
-        <mat-tab label="{{ 'APP.JS_CONSOLE.CONTENT.TABS.SETTINGS' | translate }}">
+        <mat-tab label="{{ 'CONTEZZA.JS_CONSOLE.CONTENT.TABS.SETTINGS' | translate }}">
             <contezza-js-console-content-execution-params></contezza-js-console-content-execution-params
         ></mat-tab>
 

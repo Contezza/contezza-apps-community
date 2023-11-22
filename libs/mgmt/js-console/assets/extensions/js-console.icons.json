@@ -1,15 +1,11 @@
 {
-    "$id": "lib.mgmt.js-console.icons",
+    "$id": "contezza.js-console.icons",
     "$version": "@@project.version@@",
-    "$name": "Contezza JS Console Navbar",
+    "$name": "Contezza JS Console Icons",
     "$vendor": "Contezza BV",
 
     "features": {
         "icons": [
-            {
-                "id": "svg:language-javascript",
-                "value": "./assets/contezza-core/images/language-javascript.svg"
-            },
             {
                 "id": "svg:console",
                 "value": "./assets/js-console/images/console.svg"

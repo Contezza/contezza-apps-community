@@ -1,17 +1,17 @@
 <div class="js-console-execution-params">
     <form [formGroup]="form">
         <mat-form-field class="contezza-form-field">
-            <mat-label>{{ 'APP.JS_CONSOLE.CONTENT.EXECUTION_PARAMS.ARGS' | translate }}</mat-label>
+            <mat-label>{{ 'CONTEZZA.JS_CONSOLE.CONTENT.EXECUTION_PARAMS.ARGS' | translate }}</mat-label>
             <input matInput spellcheck="false" formControlName="args" />
         </mat-form-field>
 
         <mat-form-field class="contezza-form-field">
-            <mat-label>{{ 'APP.JS_CONSOLE.CONTENT.EXECUTION_PARAMS.RUNAS' | translate }}</mat-label>
+            <mat-label>{{ 'CONTEZZA.JS_CONSOLE.CONTENT.EXECUTION_PARAMS.RUNAS' | translate }}</mat-label>
             <input matInput spellcheck="false" formControlName="runas" />
         </mat-form-field>
 
         <mat-form-field class="contezza-form-field">
-            <mat-label>{{ 'APP.JS_CONSOLE.CONTENT.EXECUTION_PARAMS.TRANSACRION_ISOLATION' | translate }}:</mat-label>
+            <mat-label>{{ 'CONTEZZA.JS_CONSOLE.CONTENT.EXECUTION_PARAMS.TRANSACRION_ISOLATION' | translate }}:</mat-label>
             <mat-select formControlName="transaction" required>
                 <mat-option *ngFor="let type of ['readwrite', 'readonly', 'none']" [value]="type">
                     {{ type }}

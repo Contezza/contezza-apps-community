@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
@@ -13,6 +12,7 @@ import { MinimalNodeEntryEntity } from '@alfresco/js-api';
 
 import { setSelectedSpaceNode } from '../store/actions';
 import { SelectedNode, SelectScriptPayloadNode } from '../interfaces/js-console';
+import { openNode } from '../../../shared/src/lib/store/actions';
 
 @Injectable({
     providedIn: 'root',
@@ -21,7 +21,6 @@ export class JsConsoleNodeActionsService {
     showFilesInResult = false;
 
     constructor(
-        private readonly router: Router,
         private readonly dialog: MatDialog,
         private readonly store: Store<unknown>,
         private readonly config: AppConfigService,
@@ -39,7 +38,7 @@ export class JsConsoleNodeActionsService {
                     if (payload.type === 'spaceNoderef') {
                         this.store.dispatch(setSelectedSpaceNode({ selectedSpaceNode: this.transformSelectedNode(node) }));
                     } else {
-                        this.router.navigate(['javascript-console'], { queryParams: { nodeRef: this.constructNodeRef(node.id), name: `${node.name}` } });
+                        this.store.dispatch(openNode({ payload: { entry: node } }));
                     }
                 }
             });

@@ -1,6 +1,6 @@
 <div class="js-console-header">
     <div class="js-console-header-title">
-        <span style="">{{ 'APP.JS_CONSOLE.NAVBAR.TITLE' | translate }}</span>
+        <span style="">{{ 'CONTEZZA.JS_CONSOLE.NAVBAR.TITLE' | translate }}</span>
     </div>
 
     <div class="js-console-header-content">
@@ -8,16 +8,16 @@
         <div class="js-console-header-content-noderefs">
             <ng-container *ngIf="selectedSpaceNode$ | async as selectedSpaceNode">
                 <js-console-noderef
-                    [title]="'APP.JS_CONSOLE.HEADER.NODE_REFS.SPACE.VIEW_TITLE'"
-                    [value]="selectedSpaceNode?.nodeRef === '' ? 'APP.JS_CONSOLE.HEADER.NODE_REFS.SPACE.DEFAULT' : selectedSpaceNode?.name"
+                    [title]="'CONTEZZA.JS_CONSOLE.HEADER.NODE_REFS.SPACE.VIEW_TITLE'"
+                    [value]="selectedSpaceNode?.nodeRef === '' ? 'CONTEZZA.JS_CONSOLE.HEADER.NODE_REFS.SPACE.DEFAULT' : selectedSpaceNode?.name"
                     [actionIcon]="'edit'"
                     (actionClick)="selectSpaceNode()"
                 ></js-console-noderef>
             </ng-container>
             <ng-container *ngIf="selectedNode$ | async as selectedNode">
                 <js-console-noderef
-                    [title]="'APP.JS_CONSOLE.HEADER.NODE_REFS.DOCUMENT.VIEW_TITLE'"
-                    [value]="selectedNode.nodeRef !== '' ? selectedNode.name : 'APP.JS_CONSOLE.HEADER.NODE_REFS.DOCUMENT.EMPTY'"
+                    [title]="'CONTEZZA.JS_CONSOLE.HEADER.NODE_REFS.DOCUMENT.VIEW_TITLE'"
+                    [value]="selectedNode.nodeRef !== '' ? selectedNode.name : 'CONTEZZA.JS_CONSOLE.HEADER.NODE_REFS.DOCUMENT.EMPTY'"
                     [actionIcon]="selectedNode.nodeRef !== '' ? 'edit' : 'add'"
                     [secondActionIcon]="selectedNode.nodeRef !== '' ? 'close' : undefined"
                     (actionClick)="selectDocumentNode()"
@@ -28,7 +28,7 @@
             <!--  Selected script   -->
             <ng-container *ngIf="selectedScript$ | async as script">
                 <js-console-noderef
-                    [title]="'APP.JS_CONSOLE.HEADER.NODE_REFS.SCRIPT.VIEW_TITLE'"
+                    [title]="'CONTEZZA.JS_CONSOLE.HEADER.NODE_REFS.SCRIPT.VIEW_TITLE'"
                     [value]="script.text"
                     [actionIcon]="'close'"
                     (actionClick)="clearSelectedScript()"
@@ -39,7 +39,7 @@
         <!--    Actions     -->
         <div class="js-console-header-content-actions">
             <button mat-icon-button aria-label="Execute script" (click)="executeScript()">
-                <mat-icon style="color: #52ba31" matTooltip="{{ 'APP.JS_CONSOLE.HEADER.ACTIONS.EXECUTE' | translate }}">play_arrow</mat-icon>
+                <mat-icon style="color: #52ba31" matTooltip="{{ 'CONTEZZA.JS_CONSOLE.HEADER.ACTIONS.EXECUTE' | translate }}">play_arrow</mat-icon>
             </button>
 
             <!--            <button class="app-toolbar-button" mat-icon-button aria-label="Add new script">-->
@@ -47,12 +47,12 @@
             <!--            </button>-->
 
             <button class="app-toolbar-button" mat-icon-button aria-label="Save script" (click)="saveScript()">
-                <mat-icon svgIcon="svg:content-save-edit-outline" matTooltip="{{ 'APP.JS_CONSOLE.HEADER.ACTIONS.SAVE' | translate }} "></mat-icon>
+                <mat-icon svgIcon="svg:content-save-edit-outline" matTooltip="{{ 'CONTEZZA.JS_CONSOLE.HEADER.ACTIONS.SAVE' | translate }} "></mat-icon>
             </button>
 
             <ng-container *ngIf="editorTheme$ | async as theme">
                 <button class="app-toolbar-button" mat-icon-button aria-label="Theme" (click)="toggleEditorTheme()">
-                    <mat-icon [svgIcon]="theme === 'vs' ? 'svg:dark_mode' : 'svg:light_mode'" matTooltip="{{ 'APP.JS_CONSOLE.HEADER.ACTIONS.THEME' | translate }}"> </mat-icon>
+                    <mat-icon [svgIcon]="theme === 'vs' ? 'svg:dark_mode' : 'svg:light_mode'" matTooltip="{{ 'CONTEZZA.JS_CONSOLE.HEADER.ACTIONS.THEME' | translate }}"> </mat-icon>
                 </button>
             </ng-container>
 
@@ -61,7 +61,7 @@
                     [color]="toggleIconColor"
                     [svgIcon]="scriptListOpen ? 'svg:forwardburger' : 'svg:backburger'"
                     class="action-icon"
-                    matTooltip="{{ 'APP.JS_CONSOLE.HEADER.ACTIONS.SCRIPTS' | translate }}"
+                    matTooltip="{{ 'CONTEZZA.JS_CONSOLE.HEADER.ACTIONS.SCRIPTS' | translate }}"
                 >
                 </mat-icon>
             </button>

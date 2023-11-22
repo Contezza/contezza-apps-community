@@ -46,7 +46,7 @@ export class JsConsoleHeaderComponent {
             selectScriptPayloadNode({
                 payload: {
                     type: 'spaceNoderef',
-                    selectNodeTitle: 'APP.JS_CONSOLE.HEADER.NODE_REFS.SPACE.SELECT_TITLE',
+                    selectNodeTitle: 'CONTEZZA.JS_CONSOLE.HEADER.NODE_REFS.SPACE.SELECT_TITLE',
                     showFilesInSelect: false,
                 },
             })
@@ -58,7 +58,7 @@ export class JsConsoleHeaderComponent {
             selectScriptPayloadNode({
                 payload: {
                     type: 'document',
-                    selectNodeTitle: 'APP.JS_CONSOLE.HEADER.NODE_REFS.DOCUMENT.SELECT_TITLE',
+                    selectNodeTitle: 'CONTEZZA.JS_CONSOLE.HEADER.NODE_REFS.DOCUMENT.SELECT_TITLE',
                     showFilesInSelect: true,
                 },
             })
