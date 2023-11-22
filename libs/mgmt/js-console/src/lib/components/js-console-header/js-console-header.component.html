@@ -21,7 +21,7 @@
                     [actionIcon]="selectedNode.nodeRef !== '' ? 'edit' : 'add'"
                     [secondActionIcon]="selectedNode.nodeRef !== '' ? 'close' : undefined"
                     (actionClick)="selectDocumentNode()"
-                    (secondActionClick)="router.navigate(['javascript-console'])"
+                    (secondActionClick)="removeDocumentNode()"
                 ></js-console-noderef>
             </ng-container>
 

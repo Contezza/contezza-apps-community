@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Optional, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import { ThemePalette } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,6 +11,9 @@ import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+import { navigate } from '@contezza/common';
+import { ConfigService } from '@contezza/js-console/shared';
 
 import { ConsoleScript, SelectedNode } from '../../interfaces/js-console';
 import { getEditorOptions, getSelectedNode, getSelectedScript, getSelectedSpaceNode } from '../../store/selectors';
@@ -36,7 +38,7 @@ export class JsConsoleHeaderComponent {
     @Output()
     toggleScriptListOpenState = new EventEmitter();
 
-    constructor(readonly store: Store<unknown>, readonly router: Router) {}
+    constructor(readonly store: Store<unknown>, @Optional() private readonly config?: ConfigService) {}
 
     get toggleIconColor(): ThemePalette {
         return this.scriptListOpen ? 'primary' : undefined;
@@ -72,6 +74,12 @@ export class JsConsoleHeaderComponent {
                 },
             })
         );
+    }
+
+    removeDocumentNode() {
+        if (this.config?.path) {
+            this.store.dispatch(navigate({ payload: [[this.config.path]] }));
+        }
     }
 
     toggleEditorTheme() {
