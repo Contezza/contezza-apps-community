@@ -37,12 +37,15 @@ export class JsConsoleResizeDirective {
         if (this.grabber) {
             event.preventDefault();
 
+            const containerSize = this.el.nativeElement.parentElement.scrollHeight;
+            const offset = window.scrollY + this.el.nativeElement.parentElement.getBoundingClientRect().top;
+
             if (event.movementY > 0) {
-                this.bottomElement.style.flex = `0 5 ${(this.heigth || window.screen.availHeight) - event.clientY + 100}px`;
-                this.topElement.style.flex = `1 5 ${event.clientY + 30}px`;
+                this.bottomElement.style.flex = `0 5 ${offset + containerSize - event.clientY}px`;
+                this.topElement.style.flex = `1 5 ${event.clientY - offset}px`;
             } else {
-                this.topElement.style.flex = `0 5 ${event.clientY + 30}px`;
-                this.bottomElement.style.flex = `1 5 ${(this.heigth || window.screen.availHeight) - event.clientY + 100}px`;
+                this.topElement.style.flex = `0 5 ${event.clientY - offset}px`;
+                this.bottomElement.style.flex = `1 5 ${offset + containerSize - event.clientY}px`;
             }
         }
     }
