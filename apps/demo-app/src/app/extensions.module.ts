@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 
-import { AosExtensionModule } from '@alfresco/adf-office-services-ext';
-
 import { ExtensionService, provideExtensionConfig } from '@alfresco/adf-extensions';
 import { TranslationService } from '@alfresco/adf-core';
 
@@ -15,8 +13,6 @@ import { Config } from './config';
 
 @NgModule({
     imports: [
-        AosExtensionModule,
-        // ...(environment.devTools ? [AcaAboutModule.forRoot(environment.production), AcaSettingsModule] : []),
         ContezzaCommonModule,
         JsConsoleExtensionModule.withConfig({ path: Config.Urls.JsConsole }),
         ContezzaNodeBrowserSharedModule,

@@ -8,7 +8,7 @@ import { take } from 'rxjs/operators';
 
 import { ContentNodeDialogService, ContentNodeSelectorComponent, ContentNodeSelectorComponentData, ContentService, ShareDataRow } from '@alfresco/adf-content-services';
 import { AppConfigService, DataColumn, ThumbnailService, TranslationService } from '@alfresco/adf-core';
-import { MinimalNodeEntryEntity } from '@alfresco/js-api';
+import { Node } from '@alfresco/js-api';
 
 import { setSelectedSpaceNode } from '../store/actions';
 import { SelectedNode, SelectScriptPayloadNode } from '../interfaces/js-console';
@@ -44,7 +44,7 @@ export class JsConsoleNodeActionsService {
             });
     }
 
-    private transformSelectedNode(node: MinimalNodeEntryEntity): SelectedNode {
+    private transformSelectedNode(node: Node): SelectedNode {
         return {
             nodeRef: this.constructNodeRef(node.id),
             name: node.name,
@@ -55,7 +55,7 @@ export class JsConsoleNodeActionsService {
         return `workspace://SpacesStore/${id}`;
     }
 
-    private getContentNodeSelection(title: string, showFilesInResult = false): Subject<MinimalNodeEntryEntity[]> {
+    private getContentNodeSelection(title: string, showFilesInResult = false): Subject<Node[]> {
         this.showFilesInResult = showFilesInResult;
         const data: ContentNodeSelectorComponentData = {
             selectionMode: 'single',
@@ -64,7 +64,7 @@ export class JsConsoleNodeActionsService {
             dropdownHideMyFiles: true,
             rowFilter: this.rowFilter.bind(this),
             imageResolver: this.imageResolverOverride.bind(this),
-            select: new Subject<MinimalNodeEntryEntity[]>(),
+            select: new Subject<Node[]>(),
             showFilesInResult,
             excludeSiteContent: ContentNodeDialogService.nonDocumentSiteContent,
         };
@@ -83,13 +83,13 @@ export class JsConsoleNodeActionsService {
     }
 
     private rowFilter(row: ShareDataRow): boolean {
-        const node: MinimalNodeEntryEntity = row.node.entry;
+        const node: Node = row.node.entry;
 
         return node.nodeType !== 'app:folderlink' && !this.showFilesInResult ? !node.isFile : true;
     }
 
     private imageResolverOverride(row: ShareDataRow, _: DataColumn): string | null {
-        const entry: MinimalNodeEntryEntity = row.node.entry;
+        const entry: Node = row.node.entry;
         const customIcons = (this.config.get('customIcons') as any) || undefined;
 
         if (!this.contentCoreService.hasAllowableOperations(entry, 'update')) {
