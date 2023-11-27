@@ -1,8 +1,8 @@
-import { MinimalNodeEntity } from '@alfresco/js-api';
+import { NodeEntry } from '@alfresco/js-api';
 import { SelectionState } from '@alfresco/adf-extensions';
 
 export class ContezzaAcaUtils {
-    static makeSelectionState(nodes: MinimalNodeEntity[]): SelectionState {
+    static makeSelectionState(nodes: NodeEntry[]): SelectionState {
         const count = nodes.length;
         const isEmpty = nodes.length === 0;
 

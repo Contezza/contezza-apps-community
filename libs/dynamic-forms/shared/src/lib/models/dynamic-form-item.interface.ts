@@ -2,10 +2,10 @@ import { Observable } from 'rxjs';
 
 import { DocumentListPresetRef } from '@alfresco/adf-extensions';
 
-export interface Column extends DocumentListPresetRef {
+export type Column = Omit<DocumentListPresetRef, 'type'> & { type: string } & {
     expandedOnly?: boolean;
     collapsedOnly?: boolean;
-}
+};
 
 export interface DynamicFormItem {
     id: string;

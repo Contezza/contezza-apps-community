@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppConfigService, AuthGuard, CoreModule, DebugAppConfigService, TRANSLATION_PROVIDER } from '@alfresco/adf-core';
-import { AppService, SharedModule } from '@alfresco/aca-shared';
+import { AppService } from '@alfresco/aca-shared';
 
 import { AppExtensionsModule } from './extensions.module';
 import { environment } from '../environments/environment';
@@ -58,7 +58,6 @@ registerLocaleData(localeSv);
         BrowserModule,
         TranslateModule.forRoot(),
         CoreModule.forRoot(),
-        SharedModule.forRoot(),
         CoreExtensionsModule.forRoot(),
         AppLoginModule,
         environment.e2e ? NoopAnimationsModule : BrowserAnimationsModule,

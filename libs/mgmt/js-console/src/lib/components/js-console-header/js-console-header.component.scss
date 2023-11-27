@@ -34,6 +34,12 @@
         }
         &-actions {
             display: flex;
+            .mat-icon-button {
+                color: var(--theme-text-color) !important;
+                &:hover {
+                    color: var(--theme-primary-color) !important;
+                }
+            }
         }
     }
 }
