@@ -1,12 +1,12 @@
-## Contezza Javascript Console
+# Contezza Javascript Console
 
-**Include library**
+## Contezza Javascript Console Shared
 
-```ts 
-import { JsConsoleExtensionModule } from '@contezza/js-console/shared';
-```
+See [readme](./shared/README.md).
 
-**Add route**
+## Contezza Javascript Console Module
+
+Define route:
 ```ts
 {
     path: 'javascript-console',
@@ -14,63 +14,40 @@ import { JsConsoleExtensionModule } from '@contezza/js-console/shared';
 }
 ```
 
-**Add assets in angular.json:**
-
+Assets:
 ```json
 [
     {
-        "input": "libs/mgmt/js-console/assets/extensions",
+        "input": "node_modules/@contezza/js-console/assets/extensions",
         "output": "./assets/plugins",
         "glob": "*.json"
     },
     {
-        "input": "libs/mgmt/js-console/assets",
+        "input": "node_modules/@contezza/js-console/assets",
         "output": "./assets/js-console",
         "glob": "**/*"
     },
     {
-        "glob": "**/*",
-        "input": "node_modules/ngx-monaco-editor/assets/monaco",
-        "output": "./assets/monaco/"
+        "input": "node_modules/monaco-editor/min",
+        "output": "./assets/monaco/min",
+        "glob": "**/*"
+    },
+    {
+        "input": "node_modules/monaco-editor/min-maps",
+        "output": "./assets/monaco/min-maps",
+        "glob": "**/*"
     }
 ]
 ```
 
-**Include javascript console in navbar**
+Navbar extension element:
 ```json
 {
-    "id": "app.console.js-console.component",
-    "order": 100,
+    "id": "contezza.js-console",
     "icon": "svg:console",
     "title": "CONTEZZA.JS_CONSOLE.NAVBAR.TITLE",
     "description": "CONTEZZA.JS_CONSOLE.NAVBAR.DESCRIPTION",
     "route": "javascript-console"
 }
 ```
-
-**Open in javascript console action:**
-```json
-{
-    "id": "app.context.menu.openInJavascriptConsole",
-    "title": "CONTEZZA.JS_CONSOLE.ACTIONS.OPEN_IN_CONSOLE",
-    "order": 900,
-    "icon": "svg:console",
-    "actions": {
-        "click": "[JS CONSOLE] OPEN_IN_JAVASCRIPT_CONSOLE"
-    },
-    "rules": {
-        "visible": "jsconsole.selection.canOpenInJavascriptConsole"
-    }
-}
-```
-
-**Available icons:**
-> - svg:console
-> - svg:backburger
-> - svg:forwardburger
-> - svg:content-save-edit-outline
-> - svg:dark_mode
-> - svg:light_mode
-
-
 

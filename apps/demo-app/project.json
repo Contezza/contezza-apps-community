@@ -160,16 +160,6 @@
                         "glob": "**/*"
                     },
                     {
-                        "input": "node_modules/monaco-editor/min",
-                        "output": "./assets/monaco/min",
-                        "glob": "**/*"
-                    },
-                    {
-                        "input": "node_modules/monaco-editor/min-maps",
-                        "output": "./assets/monaco/min-maps",
-                        "glob": "**/*"
-                    },
-                    {
                         "input": "libs/mgmt/node-browser/extensions",
                         "output": "./assets/plugins",
                         "glob": "*.json"
