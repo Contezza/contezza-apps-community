@@ -18,6 +18,7 @@ import { AlfrescoApiService, FormBaseModule, FormFieldModel, FormModel, FormServ
 import { Group, GroupsApi, PeopleApi } from '@alfresco/js-api';
 
 import { WebscriptService } from '@contezza/core/services';
+import { IncludesPipe } from '@contezza/core/pipes';
 
 import { AvatarImagePipe, DisplayNamePipe, UserFullNamePipe } from '../pipes';
 
@@ -46,6 +47,7 @@ interface PeoplePickerEntry {
         MatSelectModule,
         FormBaseModule,
         PipeModule,
+        IncludesPipe,
     ],
     templateUrl: './people-group-picker.component.html',
     styleUrls: ['./people-group-picker.component.scss'],

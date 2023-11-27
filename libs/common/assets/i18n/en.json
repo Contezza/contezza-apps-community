@@ -143,10 +143,19 @@
             "MIN_CHARS": "Search requires at least {{minChars}} characters"
         },
         "CATEGORIES": {
+            "MODIFIED_DATE": "Modified date",
             "SIZE": "File size",
             "CREATED_DATE": "Creation date"
         },
+        "FACET_FIELDS": {
+            "FILE_TYPE": "File type"
+        },
         "FACET_QUERIES": {
+            "TODAY": "Today",
+            "THIS_WEEK": "This week",
+            "THIS_MONTH": "This month",
+            "LAST_6_MONTHS": "In the last 6 months",
+            "THIS_YEAR": "This year",
             "SIZE": {
                 "SMALL": "Small",
                 "MEDIUM": "Medium",
