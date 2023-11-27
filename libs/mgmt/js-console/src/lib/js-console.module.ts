@@ -27,4 +27,4 @@ export const monacoEditorConfigFactory = (monacoEditorService: JsConsoleMonacoEd
         },
     ],
 })
-export class ContezzaJsConsoleModule {}
+export class JsConsoleModule {}

@@ -10,7 +10,7 @@ import { JsConsoleExtensionModule } from '@contezza/js-console/shared';
 ```ts
 {
     path: 'javascript-console',
-    loadChildren: () => import('@contezza/js-console').then((m) => m.ContezzaJsConsoleModule)
+    loadChildren: () => import('@contezza/js-console').then((m) => m.JsConsoleModule)
 }
 ```
 
