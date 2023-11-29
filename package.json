@@ -4,7 +4,7 @@
     "scripts": {
         "ng": "nx",
         "postinstall": "node ./decorate-angular-cli.js",
-        "build:common": "ng build core",
+        "build:common": "ng build common",
         "build:core": "ng build core",
         "build:dynamic-forms": "ng build dynamic-forms",
         "build:js-console": "ng build js-console",
