@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 
 import { createAction, props } from '@ngrx/store';
 
-enum Type {
+export enum Type {
     Navigate = '[CORE] NAVIGATE',
 }
 
