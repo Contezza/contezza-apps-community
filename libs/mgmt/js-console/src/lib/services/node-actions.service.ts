@@ -10,9 +10,10 @@ import { ContentNodeDialogService, ContentNodeSelectorComponent, ContentNodeSele
 import { AppConfigService, DataColumn, ThumbnailService, TranslationService } from '@alfresco/adf-core';
 import { Node } from '@alfresco/js-api';
 
+import { openNode } from '@contezza/js-console/shared';
+
 import { setSelectedSpaceNode } from '../store/actions';
 import { SelectedNode, SelectScriptPayloadNode } from '../interfaces/js-console';
-import { openNode } from '../../../shared/src/lib/store/actions';
 
 @Injectable({
     providedIn: 'root',
