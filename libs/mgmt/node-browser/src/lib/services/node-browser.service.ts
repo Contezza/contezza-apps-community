@@ -45,7 +45,7 @@ export class NodeBrowserService {
         const url = `${this.BROWSE_URL}/${nodeRef}`;
         this.store.dispatch(setBrowseLoading({ browseLoading: true }));
 
-        return this.webscript.get(url).pipe(
+        return this.webscript.get<NodeBrowserViewResponse>(url).pipe(
             catchError(() => {
                 this.store.dispatch(setBrowseLoading({ browseLoading: false }));
                 return of(undefined);
