@@ -35,7 +35,7 @@ export class ContezzaIdResolverService {
         }
         if (resolved) {
             // try to use parameters as callback
-            return parameters ? resolved((typeof parameters === 'string' && ContezzaUtils.stringToFunction(parameters)) || parameters) : resolved;
+            return parameters !== undefined ? resolved((typeof parameters === 'string' && ContezzaUtils.stringToFunction(parameters)) || parameters) : resolved;
         } else {
             console.warn('Cannot resolve source ' + id + (type && ' of type ' + type));
             return defaultValue;
