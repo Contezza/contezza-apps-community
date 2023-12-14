@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 
 import { EffectsModule } from '@ngrx/effects';
 
-import { TRANSLATION_PROVIDER } from '@alfresco/adf-core';
+import { provideTranslations } from '@alfresco/adf-core';
 import { ExtensionService } from '@alfresco/adf-extensions';
 
+import { RouterExtensionService } from '@contezza/core/extensions';
 import { RouterStoreModule } from '@contezza/core/stores';
 import { DATE_FORMATS } from '@contezza/core/utils';
 
@@ -27,7 +28,8 @@ import { Effects } from './store/effects';
                 },
             },
         },
-        { provide: TRANSLATION_PROVIDER, multi: true, useValue: { name: 'contezza-common', source: 'assets/contezza-common' } },
+        provideTranslations('contezza-common', 'assets/contezza-common'),
+        RouterExtensionService.provider,
     ],
 })
 export class ContezzaCommonModule {
