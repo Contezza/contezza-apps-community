@@ -4,6 +4,14 @@
     "$name": "Demo App App Navbar",
     "$vendor": "Contezza BV",
 
+    "routes": [
+        {
+            "id": "js-console",
+            "path": "javascript-console",
+            "loadChildren": "js-console"
+        }
+    ],
+
     "features": {
         "navbar": [
             {
