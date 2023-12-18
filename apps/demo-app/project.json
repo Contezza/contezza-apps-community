@@ -120,7 +120,7 @@
                         "glob": "**/*"
                     },
                     {
-                        "input": "libs/mgmt/js-console/extensions",
+                        "input": "libs/mgmt/js-console/assets/extensions",
                         "output": "./assets/plugins",
                         "glob": "*.json"
                     },
@@ -157,16 +157,6 @@
                     {
                         "input": "libs/mgmt/js-console/assets",
                         "output": "./assets/mgmt/js-console",
-                        "glob": "**/*"
-                    },
-                    {
-                        "input": "node_modules/monaco-editor/min",
-                        "output": "./assets/monaco/min",
-                        "glob": "**/*"
-                    },
-                    {
-                        "input": "node_modules/monaco-editor/min-maps",
-                        "output": "./assets/monaco/min-maps",
                         "glob": "**/*"
                     },
                     {

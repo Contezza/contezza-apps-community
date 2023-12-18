@@ -1,10 +1,10 @@
 {
     "name": "contezza-apps-community",
-    "version": "2.5.0",
+    "version": "2.5.3",
     "scripts": {
         "ng": "nx",
         "postinstall": "node ./decorate-angular-cli.js",
-        "build:common": "ng build core",
+        "build:common": "ng build common",
         "build:core": "ng build core",
         "build:dynamic-forms": "ng build dynamic-forms",
         "build:js-console": "ng build js-console",
@@ -62,7 +62,7 @@
         "moment-es6": "1.0.0",
         "monaco-editor": "^0.36.1",
         "pdfjs-dist": "3.4.120",
-        "rxjs": "^6.6.7",
+        "rxjs": "7.8.1",
         "tslib": "^2.5.3",
         "zone.js": "^0.13.0"
     },
@@ -108,7 +108,7 @@
         "eslint-plugin-jsdoc": "^40.1.0",
         "eslint-plugin-prefer-arrow": "1.2.3",
         "eslint-plugin-prettier": "^4.2.1",
-        "eslint-plugin-rxjs": "^5.0.2",
+        "eslint-plugin-rxjs": "^5.0.3",
         "eslint-plugin-unicorn": "^46.0.0",
         "http-server": "^14.1.1",
         "husky": "^8.0.3",

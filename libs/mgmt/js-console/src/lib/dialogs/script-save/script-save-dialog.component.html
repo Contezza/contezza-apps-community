@@ -1,10 +1,10 @@
 <h2 mat-dialog-title>
-    {{ 'APP.JS_CONSOLE.DIALOGS.SAVE_SCRIPT.TITLE' | translate }}
+    {{ 'CONTEZZA.JS_CONSOLE.DIALOGS.SAVE_SCRIPT.TITLE' | translate }}
 </h2>
 <mat-dialog-content style="height: calc(100% - 96px)" (keydown.enter)="onEnterPressed($event)">
     <div class="js-console-save">
         <mat-form-field floatLabel="auto" class="js-console-save-name-field">
-            <mat-label>{{ 'APP.JS_CONSOLE.DIALOGS.SAVE_SCRIPT.NAME_INPUT' | translate }}</mat-label>
+            <mat-label>{{ 'CONTEZZA.JS_CONSOLE.DIALOGS.SAVE_SCRIPT.NAME_INPUT' | translate }}</mat-label>
             <input matInput spellcheck="false" [formControl]="scriptNameInput" />
             <mat-error *ngIf="scriptNameInput.hasError('required')">{{ 'APP.VALIDATIONS.REQUIRED' | translate }}</mat-error>
         </mat-form-field>
@@ -14,9 +14,9 @@
 <mat-dialog-actions class="adf-dialog-buttons">
     <span class="adf-fill-remaining-space"></span>
     <button mat-button mat-dialog-close="">
-        {{ 'APP.JS_CONSOLE.DIALOGS.SAVE_SCRIPT.CLOSE_BUTTON' | translate }}
+        {{ 'CONTEZZA.JS_CONSOLE.DIALOGS.SAVE_SCRIPT.CLOSE_BUTTON' | translate }}
     </button>
     <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!scriptNameInput?.valid">
-        {{ 'APP.JS_CONSOLE.DIALOGS.SAVE_SCRIPT.SAVE_BUTTON' | translate }}
+        {{ 'CONTEZZA.JS_CONSOLE.DIALOGS.SAVE_SCRIPT.SAVE_BUTTON' | translate }}
     </button>
 </mat-dialog-actions>

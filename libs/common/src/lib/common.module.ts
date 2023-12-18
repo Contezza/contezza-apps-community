@@ -1,12 +1,18 @@
 import { NgModule } from '@angular/core';
 
-import { TranslationService } from '@alfresco/adf-core';
+import { EffectsModule } from '@ngrx/effects';
 
+import { provideTranslations } from '@alfresco/adf-core';
+import { ExtensionService } from '@alfresco/adf-extensions';
+
+import { RouterExtensionService } from '@contezza/core/extensions';
 import { RouterStoreModule } from '@contezza/core/stores';
 import { DATE_FORMATS } from '@contezza/core/utils';
 
+import { Effects } from './store/effects';
+
 @NgModule({
-    imports: [RouterStoreModule],
+    imports: [RouterStoreModule, EffectsModule.forFeature([Effects])],
     providers: [
         {
             provide: DATE_FORMATS,
@@ -22,10 +28,14 @@ import { DATE_FORMATS } from '@contezza/core/utils';
                 },
             },
         },
+        provideTranslations('contezza-common', 'assets/contezza-common'),
+        RouterExtensionService.provider,
     ],
 })
 export class ContezzaCommonModule {
-    constructor(translation: TranslationService) {
-        translation.addTranslationFolder('contezza-common', 'assets/contezza-common');
+    constructor(extensions: ExtensionService) {
+        extensions.setEvaluators({
+            'app.selection.single': ({ selection }) => selection?.count === 1,
+        });
     }
 }

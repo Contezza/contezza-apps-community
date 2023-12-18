@@ -1,77 +1,53 @@
-## Contezza Javascript Console
+# Contezza Javascript Console
 
-**Include library**
+## Contezza Javascript Console Shared
 
-```ts 
-import { ContezzaJsConsoleExtensionModule } from '@contezza/mgmt/js-console-extensions';
-```
+See [readme](./shared/README.md).
 
-**Add route**
+## Contezza Javascript Console Module
+
+Define route:
 ```ts
 {
-   path: 'javascript-console',
-   loadChildren: () => import('../../../../../libs/mgmt/js-console/src/lib/js-console.module').then((m) => m.ContezzaJsConsoleModule)
+    path: 'javascript-console',
+    loadChildren: () => import('@contezza/js-console').then((m) => m.JsConsoleModule)
 }
 ```
 
-**Add assets in angular.json:**
-
+Assets:
 ```json
-{
-    "glob": "*.json",
-    "input": "libs/mgmt/js-console/extensions",
-    "output": "./assets/plugins"
-},
-{
-   "glob": "**/*",
-   "input": "libs/mgmt/js-console/assets",
-   "output": "./assets/mgmt/js-console"
-},
-{
-   "glob": "**/*",
-   "input": "node_modules/ngx-monaco-editor/assets/monaco",
-   "output": "./assets/monaco/"
-}
+[
+    {
+        "input": "node_modules/@contezza/js-console/assets/extensions",
+        "output": "./assets/plugins",
+        "glob": "*.json"
+    },
+    {
+        "input": "node_modules/@contezza/js-console/assets",
+        "output": "./assets/js-console",
+        "glob": "**/*"
+    },
+    {
+        "input": "node_modules/monaco-editor/min",
+        "output": "./assets/monaco/min",
+        "glob": "**/*"
+    },
+    {
+        "input": "node_modules/monaco-editor/min-maps",
+        "output": "./assets/monaco/min-maps",
+        "glob": "**/*"
+    }
+]
 ```
 
-**Include javascript console in navbar**
+Navbar extension element:
 ```json
 {
-    "id": "app.console.js-console.component",
-    "order": 100,
+    "id": "contezza.js-console",
     "icon": "svg:console",
-    "title": "APP.JS_CONSOLE.NAVBAR.TITLE",
-    "description": "APP.JS_CONSOLE.NAVBAR.DESCRIPTION",
+    "title": "CONTEZZA.JS_CONSOLE.NAVBAR.TITLE",
+    "description": "CONTEZZA.JS_CONSOLE.NAVBAR.DESCRIPTION",
     "route": "javascript-console"
 }
 ```
-
-**Open in javascript console action:**
-```json
-{
-    "id": "app.context.menu.openInJavascriptConsole",
-    "title": "APP.JS_CONSOLE.ACTIONS.OPEN_IN_CONSOLE",
-    "order": 900,
-    "icon": "svg:console",
-    "actions": {
-        "click": "[JS CONSOLE] OPEN_IN_JAVASCRIPT_CONSOLE"
-    },
-    "rules": {
-        "visible": "jsconsole.selection.canOpenInJavascriptConsole"
-    }
-}
-```
-
-**Available icons:**
-> - svg:console
-> - svg:language-javascript
-> - svg:backburger
-> - svg:forwardburger
-> - svg:content-save-edit-outline
-> - svg:dark_mode
-> - svg:light_mode
-
-
-**Available evaluators:**
-> - jsconsole.selection.canOpenInJavascriptConsole
 

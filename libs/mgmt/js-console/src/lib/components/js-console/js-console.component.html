@@ -7,13 +7,13 @@
         <aca-page-layout-content>
             <div class="main-content">
                 <div class="flex-container">
-                    <div class="flex-item" #topElement>
+                    <div class="flex-item">
                         <contezza-js-console-content></contezza-js-console-content>
                     </div>
-                    <div class="grabber" jsConsoleResize [topResize]="topElement" [bottomResize]="bottomElement">
+                    <div class="grabber" contezzaResizer>
                         <mat-progress-bar *ngIf="executeScriptLoading$ | async" mode="indeterminate"></mat-progress-bar>
                     </div>
-                    <div class="flex-item" #bottomElement>
+                    <div class="flex-item">
                         <contezza-js-console-output class="js-console-output"></contezza-js-console-output>
                     </div>
                 </div>

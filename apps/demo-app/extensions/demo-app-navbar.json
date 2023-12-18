@@ -4,6 +4,14 @@
     "$name": "Demo App App Navbar",
     "$vendor": "Contezza BV",
 
+    "routes": [
+        {
+            "id": "js-console",
+            "path": "javascript-console",
+            "loadChildren": "js-console"
+        }
+    ],
+
     "features": {
         "navbar": [
             {
@@ -34,8 +42,8 @@
                                 "id": "app.console.js-console.component",
                                 "order": 100,
                                 "icon": "svg:console",
-                                "title": "APP.JS_CONSOLE.NAVBAR.TITLE",
-                                "description": "APP.JS_CONSOLE.NAVBAR.DESCRIPTION",
+                                "title": "CONTEZZA.JS_CONSOLE.NAVBAR.TITLE",
+                                "description": "CONTEZZA.JS_CONSOLE.NAVBAR.DESCRIPTION",
                                 "route": "javascript-console"
                             },
                             {

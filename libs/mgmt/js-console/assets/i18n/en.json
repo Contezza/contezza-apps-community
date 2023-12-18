@@ -1,5 +1,5 @@
 {
-    "APP": {
+    "CONTEZZA": {
         "JS_CONSOLE": {
             "NAVBAR": {
                 "TITLE": "Javascript console",
@@ -89,7 +89,7 @@
                 "SCRIPT_CREATED_SUCCESSFULLY": "Script created successfully."
             },
             "ACTIONS": {
-                "OPEN_IN_CONSOLE": "Open in Javascript console"
+                "OPEN_NODE": "Open in Javascript console"
             }
         }
     }

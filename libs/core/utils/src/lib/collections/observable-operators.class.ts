@@ -1,4 +1,4 @@
-import { EMPTY, OperatorFunction, pipe, timer } from 'rxjs';
+import { of, OperatorFunction, pipe, timer } from 'rxjs';
 import { debounce, filter, map, pluck, scan, startWith, tap } from 'rxjs/operators';
 
 import { GenericBucket } from '@alfresco/js-api';
@@ -20,7 +20,7 @@ export class ContezzaObservableOperators {
     static debounceDiff = <T>(evaluator: (oldValue: T | undefined, newValue: T | undefined) => number | null): OperatorFunction<T, T> =>
         pipe(
             scan<T, [T, number | null]>(([oldValue], newValue) => [newValue, evaluator(oldValue, newValue)], [undefined, evaluator(undefined, undefined)]),
-            debounce(([, time]) => (time !== null ? timer(time) : EMPTY)),
+            debounce(([, time]) => (time !== null ? timer(time) : of(void 0))),
             pluck(0)
         );
 

@@ -1,13 +1,13 @@
 <ng-container *contezzaLet="consoleOutput$ | async as consoleOutput">
     <div class="js-console-output">
         <mat-tab-group [@.disabled]="true" mat-stretch-tabs class="console-tab-group">
-            <mat-tab label="{{ 'APP.JS_CONSOLE.OUTPUT.TABS.CONSOLE.TITLE' | translate }}">
+            <mat-tab label="{{ 'CONTEZZA.JS_CONSOLE.OUTPUT.TABS.CONSOLE.TITLE' | translate }}">
                 <contezza-js-console-output-js class="js-console-output-group-console" [output]="consoleOutput"></contezza-js-console-output-js>
             </mat-tab>
-            <mat-tab label="{{ 'APP.JS_CONSOLE.OUTPUT.TABS.FM_HTML.TITLE' | translate }}">
+            <mat-tab label="{{ 'CONTEZZA.JS_CONSOLE.OUTPUT.TABS.FM_HTML.TITLE' | translate }}">
                 <div [innerHTML]="consoleOutput?.renderedTemplate | sanitizeHtml"></div>
             </mat-tab>
-            <mat-tab label="{{ 'APP.JS_CONSOLE.OUTPUT.TABS.FM_TEXT.TITLE' | translate }}">
+            <mat-tab label="{{ 'CONTEZZA.JS_CONSOLE.OUTPUT.TABS.FM_TEXT.TITLE' | translate }}">
                 <ng-template matTabContent>
                     <ngx-monaco-editor
                         *ngIf="consoleOutput?.renderedTemplate"
@@ -26,7 +26,7 @@
                     ></ngx-monaco-editor>
                 </ng-template>
             </mat-tab>
-            <mat-tab label="{{ 'APP.JS_CONSOLE.OUTPUT.TABS.JSON.TITLE' | translate }}">
+            <mat-tab label="{{ 'CONTEZZA.JS_CONSOLE.OUTPUT.TABS.JSON.TITLE' | translate }}">
                 <ng-template matTabContent>
                     <ngx-monaco-editor
                         *ngIf="consoleOutput?.renderedTemplate"
@@ -36,7 +36,7 @@
                     ></ngx-monaco-editor>
                 </ng-template>
             </mat-tab>
-            <mat-tab label="{{ 'APP.JS_CONSOLE.OUTPUT.TABS.DUMP.TITLE' | translate }}"> <js-console-output-dump></js-console-output-dump></mat-tab>
+            <mat-tab label="{{ 'CONTEZZA.JS_CONSOLE.OUTPUT.TABS.DUMP.TITLE' | translate }}"> <js-console-output-dump></js-console-output-dump></mat-tab>
         </mat-tab-group>
     </div>
 </ng-container>

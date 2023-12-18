@@ -1,0 +1,74 @@
+{
+    "$id": "contezza.js-console.actions",
+    "$version": "@@project.version@@",
+    "$name": "Contezza JS Console Actions",
+    "$vendor": "Contezza BV",
+
+    "templates": {
+        "actions": [
+            {
+                "id": "contezza.js-console.separator",
+                "type": "separator",
+                "order": 9999,
+                "rules": {
+                    "visible": "contezza.js-console.canOpenNode"
+                }
+            },
+            {
+                "id": "contezza.js-console.open-node",
+                "title": "CONTEZZA.JS_CONSOLE.ACTIONS.OPEN_NODE",
+                "icon": "svg:console",
+                "order": 10000,
+                "actions": {
+                    "click": "[JS_CONSOLE] OPEN_NODE"
+                },
+                "rules": {
+                    "visible": "contezza.js-console.canOpenNode"
+                }
+            }
+        ]
+    },
+
+    "rules": [
+        {
+            "id": "contezza.js-console.canOpenNode",
+            "type": "core.every",
+            "parameters": [
+                {
+                    "value": "user.isAdmin"
+                },
+                {
+                    "value": "app.selection.single"
+                }
+            ]
+        }
+    ],
+
+    "features": {
+        "contextMenu": [
+            {
+                "id": "contezza.js-console.separator",
+                "imports": "templates.actions[contezza.js-console.separator]"
+            },
+            {
+                "id": "contezza.js-console.open-node",
+                "imports": "templates.actions[contezza.js-console.open-node]"
+            }
+        ],
+        "toolbar": [
+            {
+                "id": "app.toolbar.more",
+                "children": [
+                    {
+                        "id": "contezza.js-console.separator",
+                        "imports": "templates.actions[contezza.js-console.separator]"
+                    },
+                    {
+                        "id": "contezza.js-console.open-node",
+                        "imports": "templates.actions[contezza.js-console.open-node]"
+                    }
+                ]
+            }
+        ]
+    }
+}

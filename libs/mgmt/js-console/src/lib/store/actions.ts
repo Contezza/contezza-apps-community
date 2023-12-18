@@ -23,7 +23,6 @@ export enum JsConsoleActionTypes {
     SetTransaction = '[JS CONSOLE] SET_TRANSACTION',
     SetUrlargs = '[JS CONSOLE] SET_URLARGS',
     ToggleEditorTheme = '[JS CONSOLE] TOGGLE_EDITOR_THEME',
-    OpenInJavascriptConsole = '[JS CONSOLE] OPEN_IN_JAVASCRIPT_CONSOLE',
 }
 
 export const executeScript = createAction(JsConsoleActionTypes.ExecuteScript);
@@ -46,4 +45,3 @@ export const setRunas = createAction(JsConsoleActionTypes.SetRunas, props<{ runa
 export const setTransaction = createAction(JsConsoleActionTypes.SetTransaction, props<{ transaction: string }>());
 export const setUrlargs = createAction(JsConsoleActionTypes.SetUrlargs, props<{ urlargs: string }>());
 export const toggleEditorTheme = createAction(JsConsoleActionTypes.ToggleEditorTheme);
-export const openInJavascriptConsole = createAction(JsConsoleActionTypes.OpenInJavascriptConsole);

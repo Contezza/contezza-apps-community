@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -8,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
 
-import { getAppSelection, SnackbarErrorAction, SnackbarInfoAction } from '@alfresco/aca-shared/store';
+import { SnackbarErrorAction, SnackbarInfoAction } from '@alfresco/aca-shared/store';
 import { ConfirmDialogComponent } from '@alfresco/adf-content-services';
 
 import { JsConsoleActions } from './index';
@@ -21,12 +20,9 @@ import { JsConsoleSaveScriptService } from '../services/save-script.service';
 
 @Injectable()
 export class JsConsoleEffects {
-    private readonly NODEREF_PREFIX = 'workspace://SpacesStore';
-
     constructor(
         private readonly actions$: Actions,
         private readonly store: Store<unknown>,
-        private readonly router: Router,
         private readonly dialog: MatDialog,
         private readonly consoleService: JsConsoleService,
         private readonly saveScriptService: JsConsoleSaveScriptService,
@@ -142,7 +138,7 @@ export class JsConsoleEffects {
                                 ? [
                                       JsConsoleActions.loadScriptsList({ selectScript: response.created }),
                                       !('errorMessage' in response)
-                                          ? new SnackbarInfoAction('APP.JS_CONSOLE.MESSAGES.SCRIPT_UPDATED_SUCCESSFULLY')
+                                          ? new SnackbarInfoAction('CONTEZZA.JS_CONSOLE.MESSAGES.SCRIPT_UPDATED_SUCCESSFULLY')
                                           : new SnackbarErrorAction(response.errorMessage),
                                   ]
                                 : []
@@ -183,7 +179,7 @@ export class JsConsoleEffects {
                                     ? [
                                           JsConsoleActions.loadScriptsList({ selectScript: undefined }),
                                           !('errorMessage' in response)
-                                              ? new SnackbarInfoAction('APP.JS_CONSOLE.MESSAGES.SCRIPT_CREATED_SUCCESSFULLY')
+                                              ? new SnackbarInfoAction('CONTEZZA.JS_CONSOLE.MESSAGES.SCRIPT_CREATED_SUCCESSFULLY')
                                               : new SnackbarErrorAction(response.errorMessage),
                                       ]
                                     : []
@@ -202,10 +198,10 @@ export class JsConsoleEffects {
                     this.dialog
                         .open(ConfirmDialogComponent, {
                             data: {
-                                title: 'APP.JS_CONSOLE.DIALOGS.DELETE_SCRIPT.TITLE',
-                                message: 'APP.JS_CONSOLE.DIALOGS.DELETE_SCRIPT.MESSAGE',
-                                yesLabel: 'APP.JS_CONSOLE.DIALOGS.DELETE_SCRIPT.YES_LABEL',
-                                noLabel: 'APP.JS_CONSOLE.DIALOGS.DELETE_SCRIPT.NO_LABEL',
+                                title: 'CONTEZZA.JS_CONSOLE.DIALOGS.DELETE_SCRIPT.TITLE',
+                                message: 'CONTEZZA.JS_CONSOLE.DIALOGS.DELETE_SCRIPT.MESSAGE',
+                                yesLabel: 'CONTEZZA.JS_CONSOLE.DIALOGS.DELETE_SCRIPT.YES_LABEL',
+                                noLabel: 'CONTEZZA.JS_CONSOLE.DIALOGS.DELETE_SCRIPT.NO_LABEL',
                             },
                             minWidth: '250px',
                         })
@@ -213,26 +209,6 @@ export class JsConsoleEffects {
                         .subscribe((result) => {
                             if (result === true) {
                                 this.store.dispatch({ type: 'DELETE_NODES', payload: action.payload });
-                            }
-                        });
-                })
-            ),
-        { dispatch: false }
-    );
-
-    openInJavascriptConsole = createEffect(
-        () =>
-            this.actions$.pipe(
-                ofType(JsConsoleActions.openInJavascriptConsole),
-                map(() => {
-                    this.store
-                        .select(getAppSelection)
-                        .pipe(take(1))
-                        .subscribe((selection) => {
-                            if (!selection?.isEmpty) {
-                                const node = selection.last.entry;
-
-                                this.router.navigate(['javascript-console'], { queryParams: { nodeRef: `${this.NODEREF_PREFIX}/${node.id}`, name: `${node.name}` } });
                             }
                         });
                 })

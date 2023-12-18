@@ -57,8 +57,8 @@ export class ActionsService {
         this.allActionsSource.next(actions);
     }
 
-    runActionById(id: string) {
-        this.store.dispatch({ type: id });
+    runActionById(id: string, additionalPayload?: object) {
+        this.store.dispatch({ type: id, ...additionalPayload });
     }
 
     private getAllowedActions(actions: ContentActionRef[], context: RuleContext): ContentActionRef[] {

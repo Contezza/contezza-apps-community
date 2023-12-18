@@ -274,6 +274,34 @@
                         }
                     ]
                 }
+            },
+            {
+                "id": "test-multiautocomplete",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "test-multiautocomplete",
+                            "type": "multiautocomplete",
+                            "label": "test-multiautocomplete",
+                            "options": {
+                                "dynamic-source": "PATH:\"/app:company_home/st:sites/*\"",
+                                "filters": [
+                                    "tapLog",
+                                    "search",
+                                    {
+                                        "id": "map",
+                                        "parameters": "list=>return list.map(({entry})=>entry)"
+                                    }
+                                ],
+                                "labelKey": "name"
+                            },
+                            "settings": {
+                                "appearance": "outline",
+                                "preSelectAllOption": true
+                            }
+                        }
+                    ]
+                }
             }
         ],
         "columns": [
