@@ -1,6 +1,6 @@
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
-import { BehaviorSubject, merge, Observable, of, Subject } from 'rxjs';
+import { BehaviorSubject, combineLatest, defer, merge, Observable, of, startWith, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, switchMap, take, takeUntil } from 'rxjs/operators';
 
 import { ContezzaDependency } from '@contezza/core/extensions';
@@ -17,6 +17,24 @@ export class ContezzaDynamicForm {
 
     private readonly validSource = new BehaviorSubject<boolean>(false);
     readonly valid$ = this.validSource.asObservable();
+
+    private readonly formatted$: Record<string, Observable<any>> = {};
+
+    /**
+     * Returns an observable which emits the form value formatted using the formatter having the given key.
+     *
+     * @param key
+     */
+    format(key: string = 'value'): Observable<any> {
+        return (this.formatted$[key] ??= this.getFormatted(key));
+    }
+
+    /**
+     * Returns an observable which emits the form value formatted using the default formatter.
+     */
+    get value$(): Observable<any> {
+        return this.format('value');
+    }
 
     protected?: boolean;
 
@@ -293,6 +311,40 @@ export class ContezzaDynamicForm {
                 this.providedDependencies[fieldName]?.pipe(distinctUntilChanged(), takeUntil(this.destroy$)).subscribe((value) => dependency.next(value));
             }
         });
+    }
+
+    private getFormatted(key: string = 'value'): Observable<any> {
+        const recursion = ({ field, form }: { field: ContezzaDynamicFormField; form: AbstractControl }): Observable<{ id: string; value: any }> => {
+            const matchingControl = field.id && form.get(field.id);
+            const formatter = field.format?.[key];
+            return defer(() =>
+                matchingControl && !('controls' in matchingControl)
+                    ? // base case: form control -> value
+                      combineLatest([
+                          matchingControl.valueChanges.pipe(startWith(matchingControl.value)),
+                          matchingControl.statusChanges.pipe(startWith(matchingControl.status)),
+                      ]).pipe(
+                          debounceTime(0),
+                          // if the control is not valid then return undefined
+                          // N.B. this is important in particular with DISABLED controls
+                          // apply value extractor if defined
+                          switchMap(([value, status]) => (status === 'VALID' ? (formatter ? formatter(value) : of(value)) : of(undefined)))
+                      )
+                    : // induction step: collect values from subfields
+                      combineLatest((field.subfields || []).map((subfield) => recursion({ field: subfield, form: matchingControl || form }))).pipe(
+                          // let values wait for each other
+                          debounceTime(0),
+                          // convert {id, value}[] into {id: value}
+                          map((values) => ContezzaObjectUtils.fromEntries<any>(values.map(({ id, value }) => [id, value]))),
+                          // apply value extractor if defined
+                          switchMap((value) => (formatter && (matchingControl ? matchingControl.valid : this.form.valid) ? formatter(value) : of(value)))
+                      )
+            ).pipe(
+                // wrap value to make field id available
+                map((value) => ({ id: field.id, value }))
+            );
+        };
+        return recursion({ field: this.rootField, form: this.form }).pipe(map((_) => (this.form.valid ? _.value : null)));
     }
 
     protected buildExtras() {}
