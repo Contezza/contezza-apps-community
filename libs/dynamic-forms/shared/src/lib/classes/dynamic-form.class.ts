@@ -159,6 +159,7 @@ export class ContezzaDynamicForm {
             this.destroy$.next();
             this.form = undefined;
             this.dependencies?.forEach((dependency) => dependency.destroy());
+            Object.keys(this.formatted$).forEach((key) => delete this.formatted$[key]);
             this.destroyExtras();
             this._built.next(false);
         }
