@@ -81,6 +81,13 @@ export class DemoShellComponent implements AfterViewInit {
         this.style = value.style;
         this.cd.detectChanges();
         this.showFormSource.next(true);
+        this.cd.detectChanges();
+        this.form.value$.subscribe((val) => {
+            console.warn(val);
+        });
+        this.form.format('query').subscribe((val) => {
+            console.warn(val);
+        });
     }
 
     showDialog(value: FormValue) {
