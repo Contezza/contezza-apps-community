@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { ContezzaDependenciesService, ContezzaDynamicSourceProcessorService, ContezzaIdResolverService } from '@contezza/core/extensions';
+import { ContezzaDependenciesService, ContezzaDynamicSourceProcessorService, ContezzaIdResolverService, FormatterResolverService } from '@contezza/core/extensions';
 import {
     ContezzaDynamicFormDisplayService,
     ContezzaDynamicFormExtensionService,
@@ -22,7 +22,7 @@ export class ContezzaDynamicSearchFormAdapterService<
     ExtendedDynamicFormFieldType extends ContezzaExtendedDynamicFormField & ContezzaExtendedDynamicSearchField = ContezzaExtendedDynamicFormField &
         ContezzaExtendedDynamicSearchField
 > extends ContezzaDynamicFormAdapterService<ExtendedDynamicFormFieldType> {
-    protected readonly EXTENSION_FIELD_PROPERTIES = ['defaultValue', 'initialValue', 'options', 'validations', 'dialog', 'extras', 'rules', 'query'];
+    protected readonly EXTENSION_FIELD_PROPERTIES = ['defaultValue', 'initialValue', 'format', 'options', 'validations', 'dialog', 'extras', 'rules', 'query'];
 
     constructor(
         extension: ContezzaDynamicFormExtensionService,
@@ -31,9 +31,10 @@ export class ContezzaDynamicSearchFormAdapterService<
         dependencies: ContezzaDependenciesService,
         sourceProcessor: ContezzaDynamicSourceProcessorService,
         idResolver: ContezzaIdResolverService,
+        formatterResolver: FormatterResolverService,
         protected readonly query: ContezzaDynamicSearchFormQueryService
     ) {
-        super(extension, display, validation, dependencies, sourceProcessor, idResolver);
+        super(extension, display, validation, dependencies, sourceProcessor, idResolver, formatterResolver);
     }
 
     adaptDynamicForm(rootField: Partial<ExtendedDynamicFormFieldType>, layout?: Partial<ContezzaExtendedDynamicFormLayout>): ContezzaDynamicSearchForm {

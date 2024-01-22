@@ -1,10 +1,14 @@
-import { ContezzaBaseSource, ContezzaDynamicSource, ContezzaIdResolverSource } from '@contezza/core/extensions';
+import { ContezzaBaseSource, ContezzaDynamicSource, ContezzaIdResolverSource, FormatterSource } from '@contezza/core/extensions';
 
 import { ContezzaFormField } from './dynamic-form-field.interface';
 
 export interface ContezzaExtendedDynamicFormField extends ContezzaFormField {
     readonly defaultValue?: any | ContezzaDynamicSource;
     readonly initialValue?: any | ContezzaDynamicSource;
+    readonly format?: {
+        [key: string]: FormatterSource;
+        value?: FormatterSource;
+    };
     readonly options?: (ContezzaDynamicSource | { readonly source: any[] }) & ContezzaDisplaySource;
     readonly dialog?: ContezzaDynamicSource & ContezzaDisplaySource;
     readonly validations?: ContezzaIdResolverSource<ValidationSource>[];

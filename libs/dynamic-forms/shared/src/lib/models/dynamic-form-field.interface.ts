@@ -1,6 +1,6 @@
 import { Observable, Subject } from 'rxjs';
 
-import { ContezzaProcessedSource } from '@contezza/core/extensions';
+import { ContezzaProcessedSource, Formatter } from '@contezza/core/extensions';
 import { ContezzaRepeatingObservable } from '@contezza/core/utils';
 
 import { DynamicFormFieldSettings } from './dynamic-form-field-settings.interface';
@@ -22,6 +22,10 @@ export interface ContezzaFormField<ValueType = any> extends ContezzaSimpleDispla
 export interface ContezzaDynamicFormField<BaseValueType = any, ValueType extends BaseValueType | BaseValueType[] = BaseValueType> extends ContezzaFormField<ValueType> {
     readonly defaultValue?: ContezzaRepeatingObservable<ValueType>;
     readonly initialValue?: ContezzaRepeatingObservable<ValueType>;
+    readonly format?: {
+        [key: string]: Formatter<ValueType>;
+        value?: Formatter<ValueType>;
+    };
 
     readonly options?: ContezzaProcessedSource<ContezzaDisplayableValue<BaseValueType>[]>;
     readonly dialog?: ContezzaDynamicFormDialog<ValueType>;
