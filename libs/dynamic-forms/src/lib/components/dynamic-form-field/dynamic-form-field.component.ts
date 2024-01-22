@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, Type } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl } from '@angular/forms';
 
-import { BehaviorSubject } from 'rxjs';
+import { defer, of, switchMap } from 'rxjs';
 
 import { DestroyService } from '@contezza/core/services';
-import { ContezzaBaseFieldComponentInterface, ContezzaDynamicFormExtensionService, ContezzaDynamicFormField } from '@contezza/dynamic-forms/shared';
+import { ContezzaDynamicFormExtensionService, ContezzaDynamicFormField } from '@contezza/dynamic-forms/shared';
 
 import { DynamicFormFieldCreatorComponent } from './dynamic-form-field-creator.component';
 
@@ -23,19 +23,14 @@ import { DynamicFormFieldCreatorComponent } from './dynamic-form-field-creator.c
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [DestroyService],
 })
-export class DynamicFormFieldComponent implements OnInit {
+export class DynamicFormFieldComponent {
     @Input()
     readonly field: ContezzaDynamicFormField;
 
     @Input()
     readonly control: FormControl;
 
-    private readonly componentSource = new BehaviorSubject<Type<ContezzaBaseFieldComponentInterface>>(undefined);
-    readonly component$ = this.componentSource.asObservable();
+    readonly component$ = defer(() => of(this.field.type)).pipe(switchMap((id) => this.extensions.getFieldComponentById(id)));
 
     constructor(private readonly extensions: ContezzaDynamicFormExtensionService) {}
-
-    ngOnInit() {
-        this.extensions.getFieldComponentById(this.field.type).subscribe((component) => this.componentSource.next(component));
-    }
 }
