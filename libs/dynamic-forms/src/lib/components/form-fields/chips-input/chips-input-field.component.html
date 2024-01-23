@@ -4,7 +4,14 @@
     floatLabel="auto"
     [appearance]="field.settings?.appearance"
 >
-    <mat-label>{{ field.label | translate }}</mat-label>
+    <mat-label *ngIf="field.label">
+        <ng-container *ngIf="field.label | translatePropertyTitle as label$; else translatedLabel">
+            {{ label$ | async }}
+        </ng-container>
+        <ng-template #translatedLabel>
+            {{ field.label | translate }}
+        </ng-template>
+    </mat-label>
     <mat-chip-list #chipList [formControl]="control">
         <mat-chip *ngFor="let chip of control.value || []" [selectable]="selectable" [removable]="removable" (removed)="remove(chip)">
             {{ chip }}

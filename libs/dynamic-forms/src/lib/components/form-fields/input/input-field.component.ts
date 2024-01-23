@@ -10,6 +10,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { InputMaskModule } from '@ngneat/input-mask';
 
+import { TranslatePropertyTitlePipe } from '@contezza/core/property-titles';
 import { DestroyService } from '@contezza/core/services';
 
 import { ContezzaBaseFieldComponent } from '../base-field.component';
@@ -17,7 +18,17 @@ import { ContezzaDynamicFormsCommonModule } from '../../../dynamic-forms.common.
 
 @Component({
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, MatButtonModule, MatIconModule, MatInputModule, TranslateModule, InputMaskModule, ContezzaDynamicFormsCommonModule],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatIconModule,
+        MatInputModule,
+        TranslateModule,
+        InputMaskModule,
+        TranslatePropertyTitlePipe,
+        ContezzaDynamicFormsCommonModule,
+    ],
     selector: 'contezza-input-field',
     templateUrl: './input-field.component.html',
     styleUrls: ['./input-field.component.scss'],

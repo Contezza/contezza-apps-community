@@ -53,7 +53,9 @@
                     "libs/core/pipes/**/*.ts",
                     "libs/core/pipes/**/*.html",
                     "libs/core/popover/**/*.ts",
-                    "libs/core/popover/**/*.html"
+                    "libs/core/popover/**/*.html",
+                    "libs/core/property-titles/**/*.ts",
+                    "libs/core/property-titles/**/*.html"
                 ]
             }
         }
