@@ -12,6 +12,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { ContezzaLetModule } from '@contezza/core/directives';
 import { SanitizeHtmlPipe } from '@contezza/core/pipes';
+import { TranslatePropertyTitlePipe } from '@contezza/core/property-titles';
 import { ContezzaDynamicFormExtensionService } from '@contezza/dynamic-forms/shared';
 
 import { MultiautocompleteFieldComponent } from './multiautocomplete-field.component';
@@ -33,6 +34,7 @@ import { ContezzaDynamicFormOptionModule } from '../../dynamic-form-option';
         TranslateModule,
         SanitizeHtmlPipe,
         MatCheckboxModule,
+        TranslatePropertyTitlePipe,
     ],
     declarations: [MultiautocompleteFieldComponent],
     exports: [MultiautocompleteFieldComponent],

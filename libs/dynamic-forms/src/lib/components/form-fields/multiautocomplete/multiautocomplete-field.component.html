@@ -25,7 +25,14 @@
                     floatLabel="auto"
                     [appearance]="field.settings?.appearance"
                 >
-                    <mat-label *ngIf="field.label">{{ field.label | translate }}</mat-label>
+                    <mat-label *ngIf="field.label">
+                        <ng-container *ngIf="field.label | translatePropertyTitle as label$; else translatedLabel">
+                            {{ label$ | async }}
+                        </ng-container>
+                        <ng-template #translatedLabel>
+                            {{ field.label | translate }}
+                        </ng-template>
+                    </mat-label>
                     <mat-select
                         spellcheck="false"
                         data-lpignore="true"
@@ -34,7 +41,11 @@
                         [placeholder]="field.placeholder | translate"
                         [required]="required"
                         [multiple]="true"
-                        [panelClass]="field.settings?.appearance === 'outline' ? 'contezza-multiautocomplete-form-field-panel contezza-multiautocomplete-form-field-panel-outline' : 'contezza-multiautocomplete-form-field-panel'"
+                        [panelClass]="
+                            field.settings?.appearance === 'outline'
+                                ? 'contezza-multiautocomplete-form-field-panel contezza-multiautocomplete-form-field-panel-outline'
+                                : 'contezza-multiautocomplete-form-field-panel'
+                        "
                         (selectionChange)="onSelectionChange($event)"
                         (focus)="!readonly && beginEditing()"
                         (click)="!readonly && beginEditing()"

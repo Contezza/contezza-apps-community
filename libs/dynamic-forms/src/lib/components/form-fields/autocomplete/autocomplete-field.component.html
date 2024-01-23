@@ -26,7 +26,14 @@
                     [appearance]="field.settings?.appearance"
                     (click)="!readonly && beginEditing()"
                 >
-                    <mat-label *ngIf="field.label">{{ field.label | translate }}</mat-label>
+                    <mat-label *ngIf="field.label">
+                        <ng-container *ngIf="field.label | translatePropertyTitle as label$; else translatedLabel">
+                            {{ label$ | async }}
+                        </ng-container>
+                        <ng-template #translatedLabel>
+                            {{ field.label | translate }}
+                        </ng-template>
+                    </mat-label>
                     <input
                         #trigger
                         matInput

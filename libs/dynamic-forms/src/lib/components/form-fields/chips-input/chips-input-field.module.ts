@@ -9,13 +9,24 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 
+import { TranslatePropertyTitlePipe } from '@contezza/core/property-titles';
 import { ContezzaDynamicFormExtensionService } from '@contezza/dynamic-forms/shared';
 
 import { ChipsInputFieldComponent } from './chips-input-field.component';
 import { ContezzaDynamicFormsCommonModule } from '../../../dynamic-forms.common.module';
 
 @NgModule({
-    imports: [CommonModule, ContezzaDynamicFormsCommonModule, MatButtonModule, MatChipsModule, MatIconModule, MatInputModule, ReactiveFormsModule, TranslateModule],
+    imports: [
+        CommonModule,
+        ContezzaDynamicFormsCommonModule,
+        MatButtonModule,
+        MatChipsModule,
+        MatIconModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        TranslateModule,
+        TranslatePropertyTitlePipe,
+    ],
     declarations: [ChipsInputFieldComponent],
     exports: [ChipsInputFieldComponent],
 })

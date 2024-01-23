@@ -1,7 +1,12 @@
 <ng-container *contezzaLet="readonly$ | async as readonly">
     <div class="contezza-input-wrapper">
         <label class="contezza-input-form-field-label" *ngIf="field.settings?.labelPosition">
-            {{ field.label | translate }}
+            <ng-container *ngIf="field.label && field.label | translatePropertyTitle as label$; else translatedLabel">
+                {{ label$ | async }}
+            </ng-container>
+            <ng-template #translatedLabel>
+                {{ field.label | translate }}
+            </ng-template>
         </label>
         <mat-form-field
             class="contezza-form-field contezza-input-form-field adf-property-field adf-card-textitem-field"
@@ -10,7 +15,14 @@
             [appearance]="field.settings?.appearance"
             [hideRequiredMarker]="field.settings?.hideRequiredMarker"
         >
-            <mat-label *ngIf="field.label">{{ field.label | translate }}</mat-label>
+            <mat-label *ngIf="field.label">
+                <ng-container *ngIf="field.label | translatePropertyTitle as label$; else translatedLabel">
+                    {{ label$ | async }}
+                </ng-container>
+                <ng-template #translatedLabel>
+                    {{ field.label | translate }}
+                </ng-template>
+            </mat-label>
             <ng-container [ngSwitch]="inputType">
                 <ng-container *ngSwitchCase="'number'">
                     <input
