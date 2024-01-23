@@ -10,7 +10,7 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
-|2024-01-22
+|2024-01-25
 |2.6.0
 |View <<Release 2.6.0,release details>>.
 
@@ -138,6 +138,7 @@ In onderstaande paragrafen worden de release details beschreven.
 
 New features:
 
+- @contezza/core/property-titles - Nieuwe library aangemaakt.
 - @contezza/dynamic-forms - Parameter `format` is supported https://support.contezza.nl/issues/26794[[#26794]]. Dynamic-form dialog returns the formatted value.
 
 Bugfixes/minor changes:
