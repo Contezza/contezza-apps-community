@@ -302,6 +302,50 @@
                         }
                     ]
                 }
+            },
+            {
+                "id": "test-labels",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "test-input",
+                            "type": "input",
+                            "label": "ALFRESCO.cm:name"
+                        },
+                        {
+                            "id": "test-autocomplete",
+                            "type": "autocomplete",
+                            "label": "ALFRESCO.tza:zaakstatus",
+                            "options": {
+                                "dynamic-source": "PATH:\"/app:company_home/st:sites/*\"",
+                                "filters": [
+                                    "search",
+                                    {
+                                        "id": "map",
+                                        "parameters": "list=>return list.map(({entry})=>entry)"
+                                    }
+                                ],
+                                "labelKey": "name"
+                            }
+                        },
+                        {
+                            "id": "test-multiautocomplete",
+                            "type": "multiautocomplete",
+                            "label": "ALFRESCO.tza:zaaktypeUrl",
+                            "options": {
+                                "dynamic-source": "PATH:\"/app:company_home/st:sites/*\"",
+                                "filters": [
+                                    "search",
+                                    {
+                                        "id": "map",
+                                        "parameters": "list=>return list.map(({entry})=>entry)"
+                                    }
+                                ],
+                                "labelKey": "name"
+                            }
+                        }
+                    ]
+                }
             }
         ],
         "columns": [

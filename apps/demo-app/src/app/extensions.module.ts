@@ -8,6 +8,7 @@ import { JsConsoleExtensionModule } from '@contezza/js-console/shared';
 import { ContezzaNodeBrowserSharedModule } from '@contezza/node-browser/shared';
 import { MatDialogService } from '@contezza/core/dialogs';
 import { ContezzaExtensionService, RouterExtensionService } from '@contezza/core/extensions';
+import { PropertyTitleService } from '@contezza/core/property-titles';
 
 import { Config } from './config';
 
@@ -18,6 +19,7 @@ import { Config } from './config';
         MatDialogService.provider,
         provideTranslations('demo-app', 'assets/demo-app'),
         provideExtensionConfig(['demo-app-navbar.json', 'dynamicforms.json']),
+        PropertyTitleService.provideKeyPropertyMapping((key) => (key.startsWith('ALFRESCO.') ? key.slice('ALFRESCO.'.length) : undefined)),
     ],
 })
 export class AppExtensionsModule {
