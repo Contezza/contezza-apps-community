@@ -138,7 +138,7 @@ In onderstaande paragrafen worden de release details beschreven.
 
 New features:
 
-- @contezza/core/property-titles - Nieuwe library aangemaakt.
+- @contezza/core/property-titles - Nieuwe library aangemaakt https://support.contezza.nl/issues/26764[[#26764]].
 - @contezza/dynamic-forms - Parameter `format` is supported https://support.contezza.nl/issues/26794[[#26794]]. Dynamic-form dialog returns the formatted value.
 
 Bugfixes/minor changes:
