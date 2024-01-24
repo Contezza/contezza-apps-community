@@ -1,4 +1,6 @@
 {
+    "$schema": "https://dev-tezza.contezza.cloud/tezza/assets/json-schemas/dynamic-forms/dynamic-forms.schema.json",
+
     "$id": "app.demo-app.dynamicforms",
     "$version": "@@project.version@@",
     "$name": "Demo App Dynamic Forms",
@@ -72,6 +74,11 @@
                 "form": {
                     "subfields": [
                         {
+                            "id": "input",
+                            "type": "input",
+                            "label": "test input"
+                        },
+                        {
                             "id": "dialog",
                             "type": "dialog",
                             "label": "dialog",
@@ -98,9 +105,39 @@
                                     "panelClass": "dynamicforms-array-dialog"
                                 }
                             }
+                        },
+                        {
+                            "id": "chips",
+                            "type": "chipsInput",
+                            "label": "chips",
+                            "validations": ["required"]
                         }
                     ]
-                }
+                },
+                "layouts": [
+                    {
+                        "id": "default",
+                        "layout": {
+                            "subfields": [
+                                {
+                                    "class": "dynamicforms-row",
+                                    "style": "align-items: flex-end",
+                                    "subfields": [
+                                        {
+                                            "id": "input"
+                                        },
+                                        {
+                                            "id": "dialog"
+                                        },
+                                        {
+                                            "id": "chips"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ]
             },
             {
                 "id": "test-search-form-field",
