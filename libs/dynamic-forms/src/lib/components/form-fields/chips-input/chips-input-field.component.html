@@ -5,7 +5,7 @@
     [appearance]="field.settings?.appearance"
 >
     <mat-label>{{ field.label | translate }}</mat-label>
-    <mat-chip-list #chipList [formControl]="control">
+    <mat-chip-list #chipList [formControl]="control" [required]="required">
         <mat-chip *ngFor="let chip of control.value || []" [selectable]="selectable" [removable]="removable" (removed)="remove(chip)">
             {{ chip }}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
@@ -13,13 +13,13 @@
         <input
             spellcheck="false"
             [placeholder]="field.placeholder | translate"
-            [required]="required"
             [readonly]="readonly"
             class="adf-property-value"
             data-lpignore="true"
             [matChipInputFor]="chipList"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
             [matChipInputAddOnBlur]="addOnBlur"
+            style="margin: 0"
             (matChipInputTokenEnd)="add($event)"
         />
     </mat-chip-list>
@@ -27,9 +27,9 @@
         type="button"
         mat-icon-button
         matSuffix
-        class="adf-property-clear-value"
+        class="adf-property-clear-value contezza-form-field-clear"
         aria-label="Clear"
-        *ngIf="!readonly && !control.disabled"
+        *ngIf="!readonly && !control.disabled && control.value"
         tabindex="-1"
         (click)="clear($event)"
     >
