@@ -1,6 +1,6 @@
 import { Inject, Injectable, InjectionToken, Optional, Provider } from '@angular/core';
 
-import { catchError, filter, map, Observable, of, switchMap, tap } from 'rxjs';
+import { catchError, filter, map, Observable, of, ReplaySubject, Subject, switchMap, tap } from 'rxjs';
 
 import { MlWebscriptService } from './ml-webscript.service';
 import { PropertyApi } from './property.api';
@@ -51,47 +51,80 @@ export class PropertyTitleService {
     }
 
     private getTitle(propertyKey: string, language?: string): Observable<string> {
-        // read property from registry
-        const registryProperty = this.registry.get(propertyKey);
-        let title: string | undefined;
+        let registryProperty = this.registry.get(propertyKey);
+        const title$: Subject<string> = new ReplaySubject<string>(1);
+        let toBeGet = false;
         if (registryProperty) {
             // if the property is already in the registry
-            // if no language is defined or property already has the necessary language, then the title is defined
-            title = language ? registryProperty.mlTitle?.[language] : registryProperty.title ?? propertyKey;
-        }
-        if (typeof title === 'string') {
-            // if the title is defined then return it
-            return of(title);
+            if (!('loading' in registryProperty) || registryProperty.loading === false) {
+                // if the property is not loading
+                if (!language || registryProperty.mlTitle?.[language]) {
+                    // if no language is specified or property already has the necessary language, then the title is defined
+                    title$.next(language ? registryProperty.mlTitle?.[language] : registryProperty.title ?? propertyKey);
+                    title$.complete();
+                } else {
+                    // mark property as to be get
+                    registryProperty.loading = true;
+                    toBeGet = true;
+                    // add as observer of the next new title
+                    registryProperty.batch.push(title$);
+                }
+            } else {
+                // property is already loading
+                // add as observer of the next new title
+                registryProperty.batch.push(title$);
+            }
         } else {
-            // else get the property
+            // if the property is not in the registry yet, create a placeholder
+            registryProperty = { loading: true, batch: [title$] };
+            this.registry.set(propertyKey, registryProperty);
+            // mark property as to be get
+            toBeGet = true;
+        }
+
+        // actually get the property if needed
+        if (toBeGet) {
             if (language) {
                 this.webscript.language = language;
             }
-            return this.properties.get({ name: propertyKey }).pipe(
-                catchError((e) => {
-                    console.warn('Cannot get property ' + propertyKey);
-                    console.warn(e);
-                    return of([]);
-                }),
-                map((properties) => properties[0]),
-                filter(Boolean),
-                tap((property) => {
-                    // save new data in the registry
-                    // if the property was already in the registry, then its mlTitle must be updated
-                    if (!registryProperty) {
-                        this.registry.set(propertyKey, property);
-                    }
-                    if (language) {
+            this.properties
+                .get({ name: propertyKey })
+                .pipe(
+                    catchError((e) => {
+                        console.warn('Cannot get property ' + propertyKey);
+                        console.warn(e);
+                        return of([]);
+                    }),
+                    map((properties) => properties[0]),
+                    filter(Boolean),
+                    tap((property) => {
                         // if a language is defined then update the corresponding mlTitle
-                        const toUpdate: typeof registryProperty = registryProperty ?? property;
-                        if (!toUpdate.mlTitle) {
-                            toUpdate.mlTitle = {};
+                        if (language) {
+                            if (!property.mlTitle) {
+                                property.mlTitle = {};
+                            }
+                            property.mlTitle[language] = property.title ?? propertyKey;
                         }
-                        toUpdate.mlTitle[language] = property.title ?? propertyKey;
-                    }
-                }),
-                map((_) => _.title ?? propertyKey)
-            );
+                        // save new data in the registry
+                        Object.assign(registryProperty, property);
+                    }),
+                    map((_) => _.title ?? propertyKey),
+                    tap((title) => {
+                        if (registryProperty.batch) {
+                            // send the new title to all observers
+                            registryProperty.batch.forEach(($) => {
+                                $.next(title);
+                                $.complete();
+                            });
+                            // clean observer list
+                            registryProperty.batch = [];
+                        }
+                        registryProperty.loading = false;
+                    })
+                )
+                .subscribe();
         }
+
+        return title$;
     }
 }
