@@ -144,6 +144,7 @@ New features:
 Bugfixes/minor changes:
 
 - @contezza/core/services - Overlay created by `SpinnerOverlayService` has class `contezza-spinner-overlay`.
+- @contezza/dynamic-forms - Field's `id` is also set as HTML attribute.
 - @contezza/dynamic-forms - Field `variable` is added https://support.contezza.nl/issues/26794[[#26794]].
 - @contezza/dynamic-forms - Style fixes for fields `chipsInput` and `dialog`.
 
