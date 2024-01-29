@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { AlfrescoApi } from '@alfresco/js-api';
 
@@ -33,10 +33,6 @@ export class MlWebscriptService extends WebscriptService {
                 null,
                 'alfresco'
             )
-        ).pipe(
-            tap((val) => {
-                console.log(val);
-            })
         );
     }
 }
