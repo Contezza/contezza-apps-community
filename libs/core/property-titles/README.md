@@ -6,6 +6,8 @@ This is based on how the model is defined, therefore:
 * it requires multiple-language models to fully work, 
 * it does not always match what is desirable in the app.
 
+Properties are retrieved via webscript `api/properties?name={name}`.
+
 Example:
 ```html
 <ng-container *ngIf="title && (title | translatePropertyTitle) as title$; else translatedTitle">
