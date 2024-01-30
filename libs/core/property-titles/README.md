@@ -20,7 +20,7 @@ Notes:
 * it returns `undefined` if no matching property is found, allowing the construction 'apply either `translatePropertyTitle` or `translate`' as in the example above;
 * it returns an `Observable`, therefore it must always be followed by `async`.
 
-The mapping between keys and properties is defined via injection token `KEY_PROPERTY_MAPPING` of type `(key: string) => string | undefined`. This function defines how to extract a property key from a generic key. The static method `PropertyTitleService.provideKeyPropertyMapping` facilitates this definition.
+The mapping between keys and properties is defined via injection token `KEY_PROPERTY_MAPPING` of type `(key: string) => string | undefined`. This function defines how to extract a property key from a generic key. This token is injected into the root service `PropertyTitleService` at initialization, therefore it should also be provided at root level. The static method `PropertyTitleService.provideKeyPropertyMapping` facilitates this definition.
 
 In the following example, all keys of the form `ALFRESCO.PROPERTIES.key` are mapped into `key`:
 ```ts
