@@ -33,6 +33,7 @@
             "@contezza/core/dialogs": ["libs/core/dialogs/src/index.ts"],
             "@contezza/core/directives": ["libs/core/directives/src/index.ts"],
             "@contezza/core/extensions": ["libs/core/extensions/src/index.ts"],
+            "@contezza/core/guards": ["libs/core/guards/src"],
             "@contezza/core/pipes": ["libs/core/pipes/src/index.ts"],
             "@contezza/core/popover": ["libs/core/popover/src/index.ts"],
             "@contezza/core/property-titles": ["libs/core/property-titles/src"],
