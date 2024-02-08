@@ -1,5 +1,5 @@
 import { Node } from '@alfresco/js-api';
-import { ExtensionElement, filterEnabled, RuleContext, RuleEvaluator, sortByOrder } from '@alfresco/adf-extensions';
+import { ContentActionRef, ContentActionType, ExtensionElement, filterEnabled, RuleContext, RuleEvaluator, sortByOrder } from '@alfresco/adf-extensions';
 
 export class ContezzaAdfUtils {
     static filterAndSortFeature<T extends ExtensionElement & { children?: T[] }>(feature: T[]): T[] {
@@ -43,5 +43,19 @@ export class ContezzaAdfUtils {
             [[prefix, 'current-folder', id].join(separator)]: (context, ...args) =>
                 !!context.navigation.currentFolder && evaluator(context.navigation.currentFolder, context, args),
         };
+    }
+
+    /**
+     * Fills a `ContentActionRef` object with default properties (type and icon).
+     * Analogous to `@alfresco/adf-extensions/ExtensionLoaderService.setActionDefaults`.
+     *
+     * @param action
+     */
+    static setActionDefaults(action: ContentActionRef) {
+        action.type ??= ContentActionType.default;
+        action.icon ??= 'extension';
+        if (action.children?.length) {
+            action.children.forEach((child) => ContezzaAdfUtils.setActionDefaults(child));
+        }
     }
 }
