@@ -45,3 +45,10 @@ N.B.:
 ### Id prefix
 
 If an object is imported and an id prefix is defined, then this prefix is applied to each `id` (sub)property.
+
+## Route Extensions
+
+Service `RouterExtensionService` extends the homonymous service from `@alfresco/aca-shared` improving support for extension routes with the following features:
+* Parameter `disabled` can be used to disable extension routes.
+* Besides `component`, parameters `loadChildren` and `loadComponent` can also be used to define an extension route; the corresponding resolver must be defined using method `setLoadChildren` or `setLoadComponent` respectively; this resolver must implement the same interface as the corresponding property of `@angular/router/Route`.
+* Besides `auth`, parameters `canActivate` and `canActivateChild` can also be used to apply guards to an extension route; the corresponding resolver must be defined using method `setAuthGuards` from `@alfresco/adf-extensions/ExtensionService`.
