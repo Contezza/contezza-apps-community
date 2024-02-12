@@ -11,8 +11,7 @@ export type DialogResponseType<TComponent> =
     | (TComponent extends { response: infer TResponse } ? TResponse : TComponent extends { response$: Observable<infer TResponse$> } ? TResponse$ : never)
     | undefined;
 
-type NoInfer<A> = [A][A extends any ? 0 : never];
-type CustomMatDialogConfig<D> = D extends undefined ? MatDialogConfig<D> : MatDialogConfig<NoInfer<D>> & { data: NoInfer<D> };
+type MatDialogConfigWithRequiredData<D> = MatDialogConfig<D> & { data: D };
 
 @Injectable({ providedIn: 'root' })
 export class DialogLoaderService {
@@ -20,7 +19,7 @@ export class DialogLoaderService {
 
     open<TComponent, TData = DialogDataType<TComponent>, TResponse = DialogResponseType<TComponent>>(
         component$: () => Promise<ComponentType<TComponent>>,
-        data: CustomMatDialogConfig<TData>
+        data: DialogDataType<TComponent> extends undefined ? MatDialogConfig<TData> : MatDialogConfigWithRequiredData<DialogDataType<TComponent>>
     ): Observable<TResponse> {
         return from(component$()).pipe(switchMap((component) => this.dialog.open({ getComponent: () => component }, data) as Observable<any>));
     }
