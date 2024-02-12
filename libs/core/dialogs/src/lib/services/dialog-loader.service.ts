@@ -12,7 +12,7 @@ export type DialogResponseType<TComponent> =
     | undefined;
 
 type NoInfer<A> = [A][A extends any ? 0 : never];
-type CustomMatDialogConfig<D> = D extends undefined ? MatDialogConfig<never> : MatDialogConfig<NoInfer<D>> & { data: NoInfer<D> };
+type CustomMatDialogConfig<D> = D extends undefined ? MatDialogConfig<D> : MatDialogConfig<NoInfer<D>> & { data: NoInfer<D> };
 
 @Injectable({ providedIn: 'root' })
 export class DialogLoaderService {
