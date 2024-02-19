@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
-import { Action, ActionsSubject, ReducerManager, StateObservable, Store } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import { FunctionIsNotAllowed } from '@ngrx/store/src/models';
 
-import { Observable } from 'rxjs';
-import { map, take, tap } from 'rxjs/operators';
+import { map, Observable, take, tap } from 'rxjs';
 
 import { getAppSelection, getCurrentFolder, getRuleContext, SetCurrentFolderAction, SetSelectedNodesAction } from '@alfresco/aca-shared/store';
 
 import { RuleContextService } from './rule-context.service';
+import { ActionPayload } from './action-payload.service';
 
 /**
  * Overrides `@ngrx/store` `dispatch` and `select` to integrate Alfresco's app state with component state.
@@ -18,9 +18,8 @@ export class ContezzaComponentStoreService extends Store {
     // TODO: add component type
     readonly components: any[] = [];
 
-    constructor(state$: StateObservable, actionsObserver: ActionsSubject, reducerManager: ReducerManager, private readonly ruleContext$: RuleContextService) {
-        super(state$, actionsObserver, reducerManager);
-    }
+    private readonly ruleContext$ = inject(RuleContextService);
+    private readonly payload$ = inject(ActionPayload);
 
     /**
      * Intercepts calls to `super.dispatch(action)`:
@@ -59,6 +58,10 @@ export class ContezzaComponentStoreService extends Store {
         if (component) {
             component[type](payload);
         } else {
+            if (components.length) {
+                // emit current component(s) as action payload
+                this.payload$.next(components.length === 1 ? components[0] : components);
+            }
             super.dispatch<ActionType>(action);
         }
     }
