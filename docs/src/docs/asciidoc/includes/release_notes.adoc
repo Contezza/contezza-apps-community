@@ -10,6 +10,14 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2024-02-19
+|2.7.0
+|View <<Release 2.7.0,release details>>.
+
+|2024-01-30
+|2.6.0
+|View <<Release 2.6.0,release details>>.
+
 |2023-12-18
 |2.5.3
 |View <<Release 2.5.3,release details>>.
@@ -129,6 +137,34 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 2.7.0
+
+New features:
+
+- @contezza/core/guards - New library created https://support.contezza.nl/issues/26981[[#26981]].
+- @contezza/core/extensions - Parameters `canActivate` and `canActivateChild` are supported by `routes` extension https://support.contezza.nl/issues/26981[[#26981]].
+
+Bugfixes/minor changes:
+
+- @contezza/core/context - `ActionsService.runActionById` also works based on action id.
+- @contezza/core/dialogs - General type-inference improvements.
+- @contezza/core/utils - Renamed `ContezzaAdfUtils` to `AdfUtils`. Added static property `prefixSpacesStore`.
+- @contezza/dynamic-forms - Fix field `subform` not updating the form's value.
+
+==== Release 2.6.0
+
+New features:
+
+- @contezza/core/property-titles - Nieuwe library aangemaakt https://support.contezza.nl/issues/26764[[#26764]].
+- @contezza/dynamic-forms - Parameter `format` is supported https://support.contezza.nl/issues/26794[[#26794]]. Dynamic-form dialog returns the formatted value.
+
+Bugfixes/minor changes:
+
+- @contezza/core/services - Overlay created by `SpinnerOverlayService` has class `contezza-spinner-overlay`.
+- @contezza/dynamic-forms - Field's `id` is also set as HTML attribute.
+- @contezza/dynamic-forms - Field `variable` is added https://support.contezza.nl/issues/26794[[#26794]].
+- @contezza/dynamic-forms - Style fixes for fields `chipsInput` and `dialog`.
 
 ==== Release 2.5.3
 

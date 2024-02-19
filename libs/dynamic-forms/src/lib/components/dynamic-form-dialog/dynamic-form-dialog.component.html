@@ -18,7 +18,7 @@
     <button mat-button mat-dialog-close="">
         {{ data.buttons.cancel | translate }}
     </button>
-    <button #submitButton="matButton" mat-raised-button color="primary" [mat-dialog-close]="dynamicForm?.form?.value" [disabled]="dynamicForm?.form?.invalid">
+    <button #submitButton="matButton" mat-raised-button color="primary" [mat-dialog-close]="dynamicForm?.dynamicForm.value$ | async" [disabled]="dynamicForm?.form?.invalid">
         {{ data.buttons.submit | translate }}
     </button>
 </mat-dialog-actions>

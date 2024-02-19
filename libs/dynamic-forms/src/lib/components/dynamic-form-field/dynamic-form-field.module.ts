@@ -20,13 +20,14 @@ import {
     ContezzaPeopleGroupPickerFieldModule,
     ContezzaRadioButtonFieldModule,
     ContezzaSelectFieldModule,
-    ContezzaSubformFieldModule,
     ContezzaTextareaFieldModule,
     ContezzaToggleFieldModule,
     HelpFieldModule,
 } from '../form-fields';
 import { DialogFieldModule } from '../form-fields/dialog/dialog.field.module';
 import { SearchFieldModule } from '../form-fields/search/search.field.module';
+import { SubformFieldModule } from '../form-fields/subform/subform.field.module';
+import { VariableFieldModule } from '../form-fields/variable/variable.field.module';
 
 @NgModule({
     imports: [
@@ -47,7 +48,6 @@ import { SearchFieldModule } from '../form-fields/search/search.field.module';
         ContezzaMultiautocompleteFieldModule,
         ContezzaRadioButtonFieldModule,
         ContezzaSelectFieldModule,
-        ContezzaSubformFieldModule,
         ContezzaTextareaFieldModule,
         ContezzaToggleFieldModule,
         ContezzaPeopleGroupPickerFieldModule,
@@ -55,6 +55,8 @@ import { SearchFieldModule } from '../form-fields/search/search.field.module';
         DialogFieldModule,
         HelpFieldModule,
         SearchFieldModule,
+        SubformFieldModule,
+        VariableFieldModule,
     ],
     exports: [DynamicFormFieldComponent],
 })

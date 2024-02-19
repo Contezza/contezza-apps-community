@@ -1,4 +1,4 @@
-import { Directive, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { Directive, HostBinding, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, ValidatorFn, Validators } from '@angular/forms';
 
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
@@ -38,9 +38,13 @@ export abstract class ContezzaBaseFieldComponent<BaseValueType = any, ValueType 
     // implementing a workaround for an issue similar to https://github.com/ngneat/input-mask/issues/43
     validatorBackup: ValidatorFn;
 
+    @HostBinding('id')
+    id: string;
+
     constructor(protected readonly destroy$: DestroyService) {}
 
     ngOnInit(): void {
+        this.id = this.field.id;
         this.initializeRequired();
         this.initializeReadonly();
         this.initializeProtected();

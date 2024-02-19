@@ -13,6 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { ContezzaLetModule } from '@contezza/core/directives';
 import { SanitizeHtmlPipe } from '@contezza/core/pipes';
+import { TranslatePropertyTitlePipe } from '@contezza/core/property-titles';
 import { ContezzaDynamicFormExtensionService } from '@contezza/dynamic-forms/shared';
 
 import { AutocompleteFieldComponent } from './autocomplete-field.component';
@@ -34,6 +35,7 @@ import { HighlightPipe } from './highlight.pipe';
         MatSelectModule,
         ReactiveFormsModule,
         TranslateModule,
+        TranslatePropertyTitlePipe,
         SanitizeHtmlPipe,
     ],
     declarations: [AutocompleteFieldComponent, HighlightPipe],

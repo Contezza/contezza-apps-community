@@ -26,6 +26,7 @@ export class SpinnerOverlayService {
             this.overlayRef = this.overlay.create({
                 hasBackdrop: true,
                 backdropClass: 'dark-backdrop',
+                panelClass: 'contezza-spinner-overlay',
                 positionStrategy: this.overlay.position().global().centerHorizontally(offset).centerVertically(),
             });
         }

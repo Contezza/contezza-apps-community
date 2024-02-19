@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { map, startWith, switchMap, take, tap } from 'rxjs/operators';
 
-import { ContezzaDependenciesService, ContezzaDynamicSourceProcessorService, ContezzaIdResolverService } from '@contezza/core/extensions';
-import { ContezzaRepeatingObservable, ContezzaRule } from '@contezza/core/utils';
+import { ContezzaDependenciesService, ContezzaDynamicSourceProcessorService, ContezzaIdResolverService, FormatterResolverService } from '@contezza/core/extensions';
+import { ContezzaObjectUtils, ContezzaRepeatingObservable, ContezzaRule } from '@contezza/core/utils';
 import {
     ContezzaDynamicForm,
     ContezzaDynamicFormDisplayService,
@@ -19,7 +19,7 @@ import {
     providedIn: 'root',
 })
 export class ContezzaDynamicFormAdapterService<ExtendedDynamicFormFieldType extends ContezzaExtendedDynamicFormField = ContezzaExtendedDynamicFormField> {
-    protected readonly EXTENSION_FIELD_PROPERTIES = ['defaultValue', 'initialValue', 'options', 'validations', 'dialog', 'extras', 'rules'];
+    protected readonly EXTENSION_FIELD_PROPERTIES = ['defaultValue', 'initialValue', 'format', 'options', 'validations', 'dialog', 'extras', 'rules'];
     protected readonly EXTENSION_LAYOUT_PROPERTIES = ['disabled'];
 
     constructor(
@@ -28,7 +28,8 @@ export class ContezzaDynamicFormAdapterService<ExtendedDynamicFormFieldType exte
         protected readonly validation: ContezzaDynamicFormValidationService,
         protected readonly dependencies: ContezzaDependenciesService,
         protected readonly sourceProcessor: ContezzaDynamicSourceProcessorService,
-        protected readonly idResolver: ContezzaIdResolverService
+        protected readonly idResolver: ContezzaIdResolverService,
+        protected readonly formatterResolver: FormatterResolverService
     ) {}
 
     adaptDynamicForm(rootField: Partial<ExtendedDynamicFormFieldType>, layout?: Partial<ContezzaExtendedDynamicFormLayout>): ContezzaDynamicForm {
@@ -68,6 +69,10 @@ export class ContezzaDynamicFormAdapterService<ExtendedDynamicFormFieldType exte
 
     protected initialValueAdapter<ValueType>(initialValue: ExtendedDynamicFormFieldType['initialValue']): ContezzaDynamicFormField<ValueType>['initialValue'] {
         return new ContezzaRepeatingObservable(this.sourceProcessor.processSource(initialValue));
+    }
+
+    protected formatAdapter<ValueType>(formatters: ExtendedDynamicFormFieldType['format']): ContezzaDynamicFormField<ValueType>['format'] {
+        return ContezzaObjectUtils.fromEntries(Object.entries(formatters).map(([key, formatter]) => [key, this.formatterResolver.resolve(formatter)]));
     }
 
     protected optionsAdapter<ValueType>(options: ExtendedDynamicFormFieldType['options']): ContezzaDynamicFormField<ValueType>['options'] {

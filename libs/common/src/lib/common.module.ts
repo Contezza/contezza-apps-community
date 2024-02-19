@@ -6,6 +6,7 @@ import { provideTranslations } from '@alfresco/adf-core';
 import { ExtensionService } from '@alfresco/adf-extensions';
 
 import { RouterExtensionService } from '@contezza/core/extensions';
+import { RouteRuleGuard } from '@contezza/core/guards';
 import { RouterStoreModule } from '@contezza/core/stores';
 import { DATE_FORMATS } from '@contezza/core/utils';
 
@@ -36,6 +37,9 @@ export class ContezzaCommonModule {
     constructor(extensions: ExtensionService) {
         extensions.setEvaluators({
             'app.selection.single': ({ selection }) => selection?.count === 1,
+        });
+        extensions.setAuthGuards({
+            'route-rule': RouteRuleGuard,
         });
     }
 }

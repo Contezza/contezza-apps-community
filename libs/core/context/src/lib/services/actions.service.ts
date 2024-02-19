@@ -2,8 +2,7 @@ import { Inject, Injectable, InjectionToken, Optional, Provider } from '@angular
 
 import { Store } from '@ngrx/store';
 
-import { BehaviorSubject, merge, Observable } from 'rxjs';
-import { filter, map, switchMap } from 'rxjs/operators';
+import { BehaviorSubject, filter, map, merge, Observable, switchMap, tap } from 'rxjs';
 
 import { ContentActionRef, ContentActionType, ExtensionService, reduceEmptyMenus, reduceSeparators, RuleContext } from '@alfresco/adf-extensions';
 import { AppExtensionService } from '@alfresco/aca-shared';
@@ -35,6 +34,7 @@ export class ActionsService {
 
     readonly actions$: Observable<ContentActionRef[]> = this.allActions$.pipe(
         map((allActions) => ContezzaAdfUtils.filterAndSortFeature(allActions)),
+        tap((allActions) => allActions.forEach(ContezzaAdfUtils.setActionDefaults)),
         switchMap((allActions) => this.ruleContext$.pipe(map((context) => this.getAllowedActions(allActions, context))))
     );
 
@@ -58,7 +58,18 @@ export class ActionsService {
     }
 
     runActionById(id: string, additionalPayload?: object) {
-        this.store.dispatch({ type: id, ...additionalPayload });
+        const action = this.extensions.getActionById(id);
+        if (action) {
+            this.store.dispatch({
+                ...action,
+                ...additionalPayload,
+            });
+        } else {
+            this.store.dispatch({
+                type: id,
+                ...additionalPayload,
+            });
+        }
     }
 
     private getAllowedActions(actions: ContentActionRef[], context: RuleContext): ContentActionRef[] {

@@ -38,7 +38,7 @@ export * from './radio-button/radio-button.field.module';
 export * from './select/select-field.component';
 export * from './select/select-field.module';
 
-export * from './subform';
+export * from './subform/subform.field.module';
 
 export * from './textarea/textarea-field.component';
 export * from './textarea/textarea-field.module';
