@@ -140,7 +140,6 @@ In onderstaande paragrafen worden de release details beschreven.
 
 ==== Release 2.7.0
 
-
 New features:
 
 - @contezza/core/guards - New library created https://support.contezza.nl/issues/26981[[#26981]].
@@ -150,6 +149,7 @@ Bugfixes/minor changes:
 
 - @contezza/core/context - `ActionsService.runActionById` also works based on action id.
 - @contezza/core/dialogs - General type-inference improvements.
+- @contezza/core/utils - Renamed `ContezzaAdfUtils` to `AdfUtils`. Added static property `prefixSpacesStore`.
 - @contezza/dynamic-forms - Fix field `subform` not updating the form's value.
 
 ==== Release 2.6.0
