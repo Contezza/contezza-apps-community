@@ -1,7 +1,9 @@
 import { Node } from '@alfresco/js-api';
 import { ExtensionElement, filterEnabled, RuleContext, RuleEvaluator, sortByOrder } from '@alfresco/adf-extensions';
 
-export class ContezzaAdfUtils {
+export class AdfUtils {
+    static readonly prefixSpacesStore = 'workspace://SpacesStore/';
+
     static filterAndSortFeature<T extends ExtensionElement & { children?: T[] }>(feature: T[]): T[] {
         const filterAndSort = (list: T[]): T[] => list.filter(filterEnabled).sort(sortByOrder);
         const recursion = (list: T[]): T[] => {
@@ -45,3 +47,8 @@ export class ContezzaAdfUtils {
         };
     }
 }
+
+/**
+ * @deprecated
+ */
+export class ContezzaAdfUtils extends AdfUtils {}
