@@ -43,23 +43,30 @@ export class StringUtils {
         // used for type inference!
         options?: { placeholder?: TPlaceholder; requireAllParams?: TRequireAllParams; acceptOnlyString?: TAcceptOnlyString }
     ): StringTemplate<T, TPlaceholder, TRequireAllParams, TAcceptOnlyString> => {
-        // prepare placeholder settings
-        const defaultPrefix = '${';
-        const defaultSuffix = '}';
-        const defaultPlaceholder = StringUtils.concat(defaultPrefix, '...', defaultSuffix);
-        const [prefix, suffix] = options?.placeholder?.split('...') || [defaultPrefix, defaultSuffix];
-        const escapedPrefix = StringUtils.escapeRegExp(prefix);
-        const escapedSuffix = StringUtils.escapeRegExp(suffix);
-        const placeholderRegex = new RegExp(`${escapedPrefix}[^${escapedSuffix}]*${escapedSuffix}`, 'g');
-        // extracts template parameters from the given string
-        const keys = string.match(placeholderRegex)?.map((placeholder) => placeholder.slice(prefix.length, -suffix.length)) || [];
-        // if the string uses a non-default placeholder then this must be replaced with the default
-        const stringWithDefaultPlaceholder =
-            options?.placeholder !== defaultPlaceholder
-                ? string.replace(placeholderRegex, (placeholder) => defaultPrefix + placeholder.slice(prefix.length, -suffix.length) + defaultSuffix)
-                : string;
-        // prepare template-evaluation function body
-        const body = `const {${keys.join(',')}}=params;return \`${stringWithDefaultPlaceholder}\``;
-        return new Function('params', body) as StringTemplate<T, TPlaceholder, TRequireAllParams, TAcceptOnlyString>;
+        // only triggered when/if the template is evaluated
+        const makeBody = () => {
+            // prepare placeholder settings
+            const defaultPrefix = '${';
+            const defaultSuffix = '}';
+            const defaultPlaceholder = StringUtils.concat(defaultPrefix, '...', defaultSuffix);
+            const [prefix, suffix] = options?.placeholder?.split('...') || [defaultPrefix, defaultSuffix];
+            const escapedPrefix = StringUtils.escapeRegExp(prefix);
+            const escapedSuffix = StringUtils.escapeRegExp(suffix);
+            const placeholderRegex = new RegExp(`${escapedPrefix}[^${escapedSuffix}]*${escapedSuffix}`, 'g');
+            // extracts template parameters from the given string
+            const keys = string.match(placeholderRegex)?.map((placeholder) => placeholder.slice(prefix.length, -suffix.length)) || [];
+            // if the string uses a non-default placeholder then this must be replaced with the default
+            const stringWithDefaultPlaceholder =
+                options?.placeholder !== defaultPlaceholder
+                    ? string.replace(placeholderRegex, (placeholder) => defaultPrefix + placeholder.slice(prefix.length, -suffix.length) + defaultSuffix)
+                    : string;
+            // prepare template-evaluation function body
+            return `const {${keys.join(',')}}=params;return \`${stringWithDefaultPlaceholder}\``;
+        };
+        let body: string;
+        return ((params) => {
+            body ??= makeBody();
+            return new Function('params', body)(params);
+        }) as StringTemplate<T, TPlaceholder, TRequireAllParams, TAcceptOnlyString>;
     };
 }
