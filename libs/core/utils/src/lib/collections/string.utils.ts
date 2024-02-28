@@ -38,7 +38,7 @@ export class StringUtils {
      * @param string
      * @param options
      */
-    static readonly asTemplate = <T extends string, TPlaceholder extends string = '${...}', TRequireAllParams extends boolean = false, TAcceptOnlyString extends boolean = false>(
+    static readonly toTemplate = <T extends string, TPlaceholder extends string = '${...}', TRequireAllParams extends boolean = false, TAcceptOnlyString extends boolean = false>(
         string: T,
         // used for type inference!
         options?: { placeholder?: TPlaceholder; requireAllParams?: TRequireAllParams; acceptOnlyString?: TAcceptOnlyString }
@@ -71,9 +71,9 @@ export class StringUtils {
     };
 
     /**
-     * Variant of `StringUtils.asTemplate` with specific settings for endpoint templates: placeholders use curly brackets as delimiter, all parameters are required and `string` valued.
+     * Variant of `StringUtils.toTemplate` with specific settings for endpoint templates: placeholders use curly brackets as delimiter, all parameters are required and `string` valued.
      *
      * @param string
      */
-    static readonly asEndpointTemplate = <T extends string>(string: T) => StringUtils.asTemplate(string, { placeholder: '{...}', requireAllParams: true, acceptOnlyString: true });
+    static readonly toEndpointTemplate = <T extends string>(string: T) => StringUtils.toTemplate(string, { placeholder: '{...}', requireAllParams: true, acceptOnlyString: true });
 }
