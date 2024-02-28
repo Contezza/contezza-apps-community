@@ -69,4 +69,11 @@ export class StringUtils {
             return new Function('params', body)(params);
         }) as StringTemplate<T, TPlaceholder, TRequireAllParams, TAcceptOnlyString>;
     };
+
+    /**
+     * Variant of `StringUtils.asTemplate` with specific settings for endpoint templates: placeholders use curly brackets as delimiter, all parameters are required and `string` valued.
+     *
+     * @param string
+     */
+    static readonly asEndpointTemplate = <T extends string>(string: T) => StringUtils.asTemplate(string, { placeholder: '{...}', requireAllParams: true, acceptOnlyString: true });
 }
