@@ -17,6 +17,9 @@ interface ParsedMatch {
     property: string;
 }
 
+/**
+ * @deprecated use StringUtils.asTemplate
+ */
 export class ContezzaStringTemplate<ValueType> {
     readonly evaluate: (value: ValueType) => string;
 
