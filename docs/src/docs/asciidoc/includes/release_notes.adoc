@@ -146,7 +146,7 @@ In onderstaande paragrafen worden de release details beschreven.
 
 Bugfixes/minor changes:
 
-- @contezza/core/utils - Collection `StringUtils` created, with methods `concat`, `asTemplate` and `asEndpointTemplate`.
+- @contezza/core/utils - Collection `StringUtils` created, with methods `concat`, `toTemplate` and `toEndpointTemplate`.
 
 ==== Release 2.7.0
 
