@@ -14,6 +14,10 @@
     white-space: pre-wrap;
     background-color: var(--theme-card-background-color);
 
+    &-running {
+        @include console-output-style;
+        background-color: inherit;
+    }
     &-success {
         @include console-output-style;
         background-color: #e2fdd2;
