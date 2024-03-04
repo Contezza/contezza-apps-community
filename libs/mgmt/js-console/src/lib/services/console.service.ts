@@ -2,46 +2,51 @@ import { Injectable } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-import { BehaviorSubject, delay, Observable, of, Subject } from 'rxjs';
-import { catchError, map, switchMap, take, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, catchError, delay, map, Observable, of, Subject, switchMap, take, takeUntil } from 'rxjs';
 
 import { NodesApiService } from '@alfresco/adf-content-services';
 
 import { WebscriptService } from '@contezza/core/services';
+import { ContezzaObservables, StringUtils } from '@contezza/core/utils';
 
 import { setScriptExecutionTime } from '../store/actions';
 import { ConsoleScript, ExecuteConsolePayload, ExecuteConsoleResponse } from '../interfaces/js-console';
-import { ContezzaObservables } from '@contezza/core/utils';
+
+const { concat, toEndpointTemplate } = StringUtils;
 
 @Injectable({
     providedIn: 'root',
 })
 export class JsConsoleService {
-    private readonly EXECUTE_URL = 'de/fme/jsconsole/execute';
-    private readonly LIST_SCRIPTS_URL = 'de/fme/jsconsole/listscripts';
-    private readonly EXECUTION_RESULT_URL = 'de/fme/jsconsole/${resultChannel}/executionResult';
+    static readonly ENDPOINT = 'de/fme/jsconsole';
+    static readonly ENDPOINT_EXECUTE = concat(JsConsoleService.ENDPOINT, '/execute');
+    static readonly ENDPOINT_LISTSCRIPTS = concat(JsConsoleService.ENDPOINT, '/listscripts');
+    static readonly ENDPOINT_EXECUTION_RESULT = concat(JsConsoleService.ENDPOINT, '/{resultChannel}/executionResult');
+    static readonly TEMPLATE_ENDPOINT_EXECUTION_RESULT = toEndpointTemplate(JsConsoleService.ENDPOINT_EXECUTION_RESULT);
 
     constructor(private readonly webscript: WebscriptService, private readonly nodesApiService: NodesApiService, private readonly store: Store<unknown>) {}
     executeScript(payload: ExecuteConsolePayload): Observable<ExecuteConsoleResponse> {
         const startTime = new Date();
+        // set parameter resultChannel in the request, use it get partial results
         payload.resultChannel = '' + startTime.getTime();
         const stop$ = new Subject<void>();
+        // output is emitted using this observable
         const results$ = new Subject<ExecuteConsoleResponse>();
-
-        // er wordt 1 observable gebruikt die door de while gehaald wordt, tot de execute complete is.
+        // partial outputs: request and emit every 1s, stop when final output is ready
         ContezzaObservables.while(
             () => true,
             () =>
                 of(void 0).pipe(
                     delay(1000),
-                    switchMap(() => this.webscript.get(this.EXECUTION_RESULT_URL.replace('${resultChannel}', payload.resultChannel)))
+                    switchMap(() => this.webscript.get(JsConsoleService.TEMPLATE_ENDPOINT_EXECUTION_RESULT({ resultChannel: payload.resultChannel })))
                 ),
             (val: ExecuteConsoleResponse) => results$.next(val)
         )
             .pipe(takeUntil(stop$))
             .subscribe();
+        // final output: when ready emit, complete, and stop requests for partial output
         this.webscript
-            .post(this.EXECUTE_URL, payload)
+            .post(JsConsoleService.ENDPOINT_EXECUTE, payload)
             .pipe(
                 map((response: ExecuteConsoleResponse) => {
                     stop$.next();
@@ -79,7 +84,7 @@ export class JsConsoleService {
     }
 
     getScriptsList(): Observable<Array<ConsoleScript>> {
-        return this.webscript.get(this.LIST_SCRIPTS_URL).pipe(map((list: { scripts }) => list.scripts));
+        return this.webscript.get(JsConsoleService.ENDPOINT_LISTSCRIPTS).pipe(map((list: { scripts }) => list.scripts));
     }
 
     getNodeContent(nodeId: string): Observable<string | ArrayBuffer> {
