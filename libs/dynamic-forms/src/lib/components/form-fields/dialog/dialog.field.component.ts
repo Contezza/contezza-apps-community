@@ -16,6 +16,7 @@ import { Subject } from 'rxjs';
 import { filter, shareReplay, takeUntil, throttleTime } from 'rxjs/operators';
 
 import { DialogLoaderService } from '@contezza/core/dialogs';
+import { ContezzaLetDirective } from '@contezza/core/directives';
 import { DisplayWithPipe } from '@contezza/core/pipes';
 import { ContezzaStringTemplate } from '@contezza/core/utils';
 import { DynamicFormDialogData, ExtendedDynamicFormDefinition } from '@contezza/dynamic-forms/shared';
@@ -48,6 +49,7 @@ type Settings = {
         MatIconModule,
         MatInputModule,
         TranslateModule,
+        ContezzaLetDirective,
         ContezzaDynamicFormFieldErrorModule,
         DisplayWithPipe,
     ],
