@@ -10,7 +10,14 @@
             [attr.title]="displayValue"
             #menuTrigger="matMenuTrigger"
         >
-            <span class="adf-search-filter-ellipsis" *ngIf="field.label"> &nbsp; {{ field.label | translate }} </span>
+            <mat-label *ngIf="field.label">
+                <ng-container *ngIf="field.label | translatePropertyTitle as label$; else translatedLabel">
+                    {{ label$ | async }}
+                </ng-container>
+                <ng-template #translatedLabel>
+                    {{ field.label | translate }}
+                </ng-template>
+            </mat-label>
 
             <span class="adf-search-filter-ellipsis" *ngIf="displayValue"> &nbsp; {{ displayValue | translate }} </span>
             <mat-icon>keyboard_arrow_down</mat-icon>
