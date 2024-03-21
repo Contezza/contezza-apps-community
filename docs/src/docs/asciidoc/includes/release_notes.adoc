@@ -154,7 +154,7 @@ In onderstaande paragrafen worden de release details beschreven.
 
 Bugfixes/minor changes:
 
-- @contezza/core/utils - Collection `ApiUtils` created, with method `provideApiService`.
+- @contezza/core/services - Utility function `provideApiService` created.
 - @contezza/core/utils - Class `OneTimeSubject` created.
 - @contezza/dynamic-forms - Improve labeling in field `date-range-chip`.
 - @contezza/dynamic-forms - Field `dialog` supports `readonly` property.
