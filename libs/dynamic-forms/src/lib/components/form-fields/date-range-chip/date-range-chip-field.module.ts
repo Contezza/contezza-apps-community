@@ -16,6 +16,7 @@ import { ContezzaLetModule } from '@contezza/core/directives';
 
 import { ContezzaDateFieldModule } from '../date/date-field.module';
 import { DateRangeChipFieldComponent } from './date-range-chip-field.component';
+import { TranslatePropertyTitlePipe } from '@contezza/core/property-titles';
 
 @NgModule({
     imports: [
@@ -30,6 +31,7 @@ import { DateRangeChipFieldComponent } from './date-range-chip-field.component';
         MatButtonModule,
         MatDividerModule,
         ContezzaLetModule,
+        TranslatePropertyTitlePipe,
     ],
     declarations: [DateRangeChipFieldComponent],
     exports: [DateRangeChipFieldComponent],
