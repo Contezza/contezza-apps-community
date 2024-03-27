@@ -57,7 +57,7 @@ export class AdfUtils {
         action.type ??= ContentActionType.default;
         action.icon ??= 'extension';
         if (action.children?.length) {
-            action.children.forEach((child) => ContezzaAdfUtils.setActionDefaults(child));
+            action.children.forEach((child) => AdfUtils.setActionDefaults(child));
         }
     }
 }
