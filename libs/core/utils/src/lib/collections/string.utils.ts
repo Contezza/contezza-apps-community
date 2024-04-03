@@ -17,6 +17,13 @@ export class StringUtils {
     static readonly concat = <T extends string[]>(...strings: T): Join<T, ''> => strings.join('') as Join<T, ''>;
 
     /**
+     * Similar to `StringUtils.concat` but specific for url path concatenation.
+     *
+     * @param strings
+     */
+    static readonly concatPath = <T extends string[]>(...strings: T): Join<T, '/'> => strings.join('/') as Join<T, '/'>;
+
+    /**
      * Returns a copy of the given string with all special characters escaped, so that the new string can be used as part of a RegExp.
      *
      * @param string
@@ -77,3 +84,6 @@ export class StringUtils {
      */
     static readonly toEndpointTemplate = <T extends string>(string: T) => StringUtils.toTemplate(string, { placeholder: '{...}', requireAllParams: true, acceptOnlyString: true });
 }
+
+const y = StringUtils.concat('test', 'asd');
+const y2 = StringUtils.concatPath('test', 'asd');
