@@ -5,6 +5,7 @@ export * from './api.utils';
 export * from './array-utils.class';
 export * from './dependency-syntax.class';
 export * from './jwt-utils';
+export * from './ng.utils';
 export * from './object-utils.class';
 export * from './observable-operators.class';
 export * from './observables.class';
