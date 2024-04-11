@@ -84,6 +84,3 @@ export class StringUtils {
      */
     static readonly toEndpointTemplate = <T extends string>(string: T) => StringUtils.toTemplate(string, { placeholder: '{...}', requireAllParams: true, acceptOnlyString: true });
 }
-
-const y = StringUtils.concat('test', 'asd');
-const y2 = StringUtils.concatPath('test', 'asd');
