@@ -43,7 +43,7 @@ export class RouterExtensionService extends AcaRouterExtensionService {
 
     setLoadComponent(values: RouterExtensionService['loadComponentRegistry']) {
         if (values) {
-            Object.assign(this.loadChildrenRegistry, values);
+            Object.assign(this.loadComponentRegistry, values);
         }
     }
 
