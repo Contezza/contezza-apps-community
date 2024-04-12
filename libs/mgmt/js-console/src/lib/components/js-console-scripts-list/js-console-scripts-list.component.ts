@@ -11,7 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { Store } from '@ngrx/store';
 
 import { combineLatest, Observable, Subject } from 'rxjs';
-import { map, startWith, take, takeUntil } from 'rxjs/operators';
+import { map, startWith, take, takeUntil, tap } from 'rxjs/operators';
 
 import { IconModule } from '@alfresco/adf-core';
 import { NodesApiService } from '@alfresco/adf-content-services';
@@ -41,7 +41,15 @@ export class JsConsoleScriptsListComponent implements OnInit {
 
     readonly selectedScript$: Observable<ConsoleScript> = this.store.select(getSelectedScript);
     readonly scripts$: Observable<Array<ConsoleScript>> = combineLatest([this.store.select(getScriptsList), this.searchValueSource.asObservable().pipe(startWith(''))]).pipe(
-        map(([scripts, searchValue]) => scripts.filter((script) => script.text.includes(searchValue)))
+        // hier staan de subbestanden van de map al in
+        map(([scripts, searchValue]) => scripts.filter((script) => script.text.includes(searchValue))),
+        tap((val) =>
+            val.map((script) => {
+                if (script.submenu) {
+                    console.log(script.submenu);
+                }
+            })
+        )
     );
 
     constructor(

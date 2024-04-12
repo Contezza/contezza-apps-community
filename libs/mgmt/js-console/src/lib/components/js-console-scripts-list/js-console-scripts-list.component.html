@@ -6,6 +6,7 @@
             <ng-container *contezzaLet="selectedScript$ | async as selected">
                 <ng-container *contezzaLet="scripts$ | async as scripts">
                     <mat-list-item *ngFor="let script of scripts; trackBy: trackByScript">
+                        <!-- hoe ga ik hier verschil maken tussen een map en een bestand? -->
                         <div class="scripts-list-sidenav-section-item">
                             <button
                                 [color]="getButtonColor(selected?.value, script.value)"
