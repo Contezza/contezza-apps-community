@@ -43,13 +43,20 @@ export class JsConsoleScriptsListComponent implements OnInit {
     readonly scripts$: Observable<Array<ConsoleScript>> = combineLatest([this.store.select(getScriptsList), this.searchValueSource.asObservable().pipe(startWith(''))]).pipe(
         // hier staan de subbestanden van de map al in
         map(([scripts, searchValue]) => scripts.filter((script) => script.text.includes(searchValue))),
-        tap((val) =>
+        // map((scripts) => scripts[0].submenu.itemdata),
+        tap((val) => console.log(val)),
+        map((val) =>
             val.map((script) => {
                 if (script.submenu) {
-                    console.log(script.submenu);
+                    console.log(script.submenu.itemdata);
+                    return script;
+                } else {
+                    console.log(script);
+                    return script;
                 }
             })
-        )
+        ),
+        tap((val) => console.log(val))
     );
 
     constructor(

@@ -6,8 +6,8 @@
             <ng-container *contezzaLet="selectedScript$ | async as selected">
                 <ng-container *contezzaLet="scripts$ | async as scripts">
                     <mat-list-item *ngFor="let script of scripts; trackBy: trackByScript">
-                        <!-- hoe ga ik hier verschil maken tussen een map en een bestand? -->
-                        <div class="scripts-list-sidenav-section-item">
+                        <!-- hoe ga ik hier verschil maken tussen een map en een bestand?  specifieke class voor gekke aanpassingen-->
+                        <div class="scripts-list-sidenav-section-item" [ngClass]="script.submenu ? 'scripts-folder' : ''">
                             <button
                                 [color]="getButtonColor(selected?.value, script.value)"
                                 mat-button
@@ -17,15 +17,16 @@
                                         ? 'scripts-list-sidenav-section-item-action-button--active'
                                         : 'scripts-list-sidenav-section-item-action-button'
                                 "
-                                (click)="loadSelectedNodeContent(script)"
+                                (click)="loadSelectedNodeContent(!script.submenu ? script : script.submenu.itemdata[0])"
                             >
+                                <!--  voor nu: eerste script laden, later map openen en sluiten?-->
                                 <span [title]="script.text" class="action-button__label">{{ script.text }}</span>
                             </button>
 
-                            <button mat-icon-button class="menu-icon" [matMenuTriggerFor]="menu">
+                            <button *ngIf="!script.submenu" mat-icon-button class="menu-icon" [matMenuTriggerFor]="menu">
                                 <mat-icon>more_vert</mat-icon>
                             </button>
-
+                            <!-- menu functies aanpassen zodat deze ook werken met subscript-->
                             <mat-menu #menu="matMenu" [overlapTrigger]="false">
                                 <button mat-menu-item class="action-button" (click)="duplicateScript(script, scripts)">
                                     <adf-icon value="content_copy"></adf-icon>
@@ -36,6 +37,19 @@
                                     <span class="action-button__label">{{ 'CONTEZZA.JS_CONSOLE.SCRIPTS.ACTIONS.REMOVE' | translate }}</span>
                                 </button>
                             </mat-menu>
+                        </div>
+                        <div *ngIf="script.submenu" style="margin-left: 15px" #subMenu>
+                            <mat-list-item *ngFor="let sub of script.submenu.itemdata">
+                                <div class="scripts-list-sidenav-section-item">
+                                    <button [color]="getButtonColor(selected?.value, sub.value)" mat-button class="script-item" (click)="loadSelectedNodeContent(sub)">
+                                        <span [title]="sub.text" class="action-button__label">{{ sub.text }}</span>
+                                    </button>
+                                    <!--   het menu moet blijven werken met een subscript-->
+                                    <button mat-icon-button class="menu-icon" [matMenuTriggerFor]="menu">
+                                        <mat-icon>more_vert</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-list-item>
                         </div>
                     </mat-list-item>
                 </ng-container>
