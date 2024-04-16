@@ -208,6 +208,7 @@ export class JsConsoleEffects {
                         .afterClosed()
                         .subscribe((result) => {
                             if (result === true) {
+                                console.log(action.payload);
                                 this.store.dispatch({ type: 'DELETE_NODES', payload: action.payload });
                             }
                         });

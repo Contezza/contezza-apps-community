@@ -38,24 +38,10 @@ import { deleteScript, duplicateScript, loadScriptsList, loadSelectedNodeContent
 export class JsConsoleScriptsListComponent implements OnInit {
     searchValue = '';
     searchValueSource = new Subject<string>();
-
+    folderOpened = false;
     readonly selectedScript$: Observable<ConsoleScript> = this.store.select(getSelectedScript);
     readonly scripts$: Observable<Array<ConsoleScript>> = combineLatest([this.store.select(getScriptsList), this.searchValueSource.asObservable().pipe(startWith(''))]).pipe(
-        // hier staan de subbestanden van de map al in
         map(([scripts, searchValue]) => scripts.filter((script) => script.text.includes(searchValue))),
-        // map((scripts) => scripts[0].submenu.itemdata),
-        tap((val) => console.log(val)),
-        map((val) =>
-            val.map((script) => {
-                if (script.submenu) {
-                    console.log(script.submenu.itemdata);
-                    return script;
-                } else {
-                    console.log(script);
-                    return script;
-                }
-            })
-        ),
         tap((val) => console.log(val))
     );
 
@@ -88,6 +74,8 @@ export class JsConsoleScriptsListComponent implements OnInit {
     }
 
     duplicateScript(script: ConsoleScript, scripts: Array<ConsoleScript>) {
+        console.log(script);
+        console.log(scripts);
         this.store.dispatch(duplicateScript({ script, scripts }));
     }
 
@@ -96,7 +84,15 @@ export class JsConsoleScriptsListComponent implements OnInit {
 
         this.nodesApiService
             .getNode(nodeId)
-            .pipe(take(1))
+            .pipe(
+                take(1),
+                tap((val) => console.log(val))
+            )
             .subscribe((node) => this.store.dispatch(deleteScript({ payload: [node] })));
     }
+    openFolder() {
+        this.folderOpened = !this.folderOpened;
+    }
+
+    protected readonly open = open;
 }
