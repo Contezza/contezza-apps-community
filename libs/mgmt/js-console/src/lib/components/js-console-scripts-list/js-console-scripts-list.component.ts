@@ -11,7 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { Store } from '@ngrx/store';
 
 import { combineLatest, Observable, Subject } from 'rxjs';
-import { map, startWith, take, takeUntil, tap } from 'rxjs/operators';
+import { map, startWith, take, takeUntil } from 'rxjs/operators';
 
 import { IconModule } from '@alfresco/adf-core';
 import { NodesApiService } from '@alfresco/adf-content-services';
@@ -41,8 +41,7 @@ export class JsConsoleScriptsListComponent implements OnInit {
     folderOpened = false;
     readonly selectedScript$: Observable<ConsoleScript> = this.store.select(getSelectedScript);
     readonly scripts$: Observable<Array<ConsoleScript>> = combineLatest([this.store.select(getScriptsList), this.searchValueSource.asObservable().pipe(startWith(''))]).pipe(
-        map(([scripts, searchValue]) => scripts.filter((script) => script.text.includes(searchValue))),
-        tap((val) => console.log(val))
+        map(([scripts, searchValue]) => scripts.filter((script) => script.text.includes(searchValue)))
     );
 
     constructor(
@@ -74,8 +73,6 @@ export class JsConsoleScriptsListComponent implements OnInit {
     }
 
     duplicateScript(script: ConsoleScript, scripts: Array<ConsoleScript>) {
-        console.log(script);
-        console.log(scripts);
         this.store.dispatch(duplicateScript({ script, scripts }));
     }
 
@@ -84,11 +81,8 @@ export class JsConsoleScriptsListComponent implements OnInit {
 
         this.nodesApiService
             .getNode(nodeId)
-            .pipe(
-                take(1),
-                tap((val) => console.log(val))
-            )
-            .subscribe((node) => this.store.dispatch(deleteScript({ payload: [node] })));
+            .pipe(take(1))
+            .subscribe((node) => this.store.dispatch(deleteScript({ payload: [{ entry: node }] })));
     }
     openFolder() {
         this.folderOpened = !this.folderOpened;

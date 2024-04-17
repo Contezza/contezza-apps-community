@@ -21,19 +21,20 @@
                                 <span [title]="script.text" class="action-button__label">{{ script.text }}</span>
                             </button>
 
-                            <button *ngIf="!script.submenu" mat-icon-button class="menu-icon" [matMenuTriggerFor]="menu">
+                            <button *ngIf="!script.submenu" mat-icon-button class="menu-icon" [matMenuTriggerFor]="menu" [matMenuTriggerData]="{ selectedScript: script }">
                                 <mat-icon>more_vert</mat-icon>
                             </button>
-                            <!-- menu functies aanpassen zodat deze ook werken met subscript-->
                             <mat-menu #menu="matMenu" [overlapTrigger]="false">
-                                <button mat-menu-item class="action-button" (click)="duplicateScript(script, scripts)">
-                                    <adf-icon value="content_copy"></adf-icon>
-                                    <span class="action-button__label">{{ 'CONTEZZA.JS_CONSOLE.SCRIPTS.ACTIONS.DUPLICATE' | translate }}</span>
-                                </button>
-                                <button mat-menu-item class="action-button" (click)="deleteScript(script)">
-                                    <adf-icon value="delete"></adf-icon>
-                                    <span class="action-button__label">{{ 'CONTEZZA.JS_CONSOLE.SCRIPTS.ACTIONS.REMOVE' | translate }}</span>
-                                </button>
+                                <ng-template matMenuContent let-selectedScript="selectedScript">
+                                    <button mat-menu-item class="action-button" (click)="duplicateScript(selectedScript, scripts)">
+                                        <adf-icon value="content_copy"></adf-icon>
+                                        <span class="action-button__label">{{ 'CONTEZZA.JS_CONSOLE.SCRIPTS.ACTIONS.DUPLICATE' | translate }}</span>
+                                    </button>
+                                    <button mat-menu-item class="action-button" (click)="deleteScript(selectedScript)">
+                                        <adf-icon value="delete"></adf-icon>
+                                        <span class="action-button__label">{{ 'CONTEZZA.JS_CONSOLE.SCRIPTS.ACTIONS.REMOVE' | translate }}</span>
+                                    </button>
+                                </ng-template>
                             </mat-menu>
                         </div>
                         <div *ngIf="folderOpened && script.submenu" style="margin-left: 15px">
@@ -42,21 +43,10 @@
                                     <button [color]="getButtonColor(selected?.value, sub.value)" mat-button class="script-item" (click)="loadSelectedNodeContent(sub)">
                                         <span [title]="sub.text" class="action-button__label">{{ sub.text }}</span>
                                     </button>
-                                    <button mat-icon-button class="menu-icon" [matMenuTriggerFor]="Submenu">
+                                    <button mat-icon-button class="menu-icon" [matMenuTriggerFor]="menu" [matMenuTriggerData]="{ selectedScript: sub }">
                                         <mat-icon>more_vert</mat-icon>
                                     </button>
                                 </div>
-                                <!-- is hier geen betere manier voor ipv 2 keer een menu? -->
-                                <mat-menu #Submenu="matMenu" [overlapTrigger]="false">
-                                    <button mat-menu-item class="action-button" (click)="duplicateScript(sub, scripts)">
-                                        <adf-icon value="content_copy"></adf-icon>
-                                        <span class="action-button__label">{{ 'CONTEZZA.JS_CONSOLE.SCRIPTS.ACTIONS.DUPLICATE' | translate }}</span>
-                                    </button>
-                                    <button mat-menu-item class="action-button" (click)="deleteScript(sub)">
-                                        <adf-icon value="delete"></adf-icon>
-                                        <span class="action-button__label">{{ 'CONTEZZA.JS_CONSOLE.SCRIPTS.ACTIONS.REMOVE' | translate }}</span>
-                                    </button>
-                                </mat-menu>
                             </mat-list-item>
                         </div>
                     </mat-list-item>

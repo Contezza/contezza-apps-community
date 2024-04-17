@@ -47,7 +47,7 @@ export interface ConsoleScript {
     value: string;
     submenu?: {
         id: string;
-        itemdata: any;
+        itemdata: Array<ConsoleScript>;
     };
 }
 
