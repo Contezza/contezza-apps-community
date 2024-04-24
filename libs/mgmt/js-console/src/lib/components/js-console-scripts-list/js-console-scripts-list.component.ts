@@ -87,6 +87,4 @@ export class JsConsoleScriptsListComponent implements OnInit {
     openFolder() {
         this.folderOpened = !this.folderOpened;
     }
-
-    protected readonly open = open;
 }
