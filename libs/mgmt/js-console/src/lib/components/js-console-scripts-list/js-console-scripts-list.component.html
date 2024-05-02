@@ -18,7 +18,7 @@
                                 "
                                 (click)="!script.submenu ? loadSelectedNodeContent(script) : openFolder(script)"
                             >
-                                <mat-icon *ngIf="script.submenu" color="accent" class="folder-icon">folder</mat-icon>
+                                <mat-icon *ngIf="script.submenu" class="folder-icon">folder</mat-icon>
                                 <span [title]="script.text" class="action-button__label">{{ script.text }}</span>
                             </button>
 

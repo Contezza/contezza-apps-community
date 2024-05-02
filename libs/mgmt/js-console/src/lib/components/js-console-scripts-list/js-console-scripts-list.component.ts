@@ -42,8 +42,25 @@ export class JsConsoleScriptsListComponent implements OnInit {
     scriptFolder: ConsoleScript;
     readonly selectedScript$: Observable<ConsoleScript> = this.store.select(getSelectedScript);
     readonly scripts$: Observable<Array<ConsoleScript>> = combineLatest([this.store.select(getScriptsList), this.searchValueSource.asObservable().pipe(startWith(''))]).pipe(
-        map(([scripts, searchValue]) =>
-            scripts.filter((script) => script.text.includes(searchValue) || script?.submenu?.itemdata?.map((subscript) => subscript.text.includes(searchValue)))
+        map(
+            ([scripts, searchValue]) =>
+                scripts
+                    .map((script) => {
+                        if (script.text.toLowerCase().includes(searchValue)) {
+                            return script;
+                        } else if (script.submenu) {
+                            const filteredItems = script?.submenu?.itemdata?.filter((subscript) => subscript.text.toLowerCase().includes(searchValue));
+                            if (filteredItems?.length) {
+                                //  nieuw object aanmaken om niet het originele object te overschrijven
+                                return { ...script, submenu: { ...script.submenu, itemdata: filteredItems } };
+                            } else {
+                                return false;
+                            }
+                        } else {
+                            return false;
+                        }
+                    })
+                    .filter(Boolean) as any
         )
     );
 
@@ -90,7 +107,6 @@ export class JsConsoleScriptsListComponent implements OnInit {
             .subscribe((node) => this.store.dispatch(deleteScript({ payload: [{ entry: node }] })));
     }
     openFolder(folder) {
-        console.log(folder);
         if (this.scriptFolder === folder) {
             this.folderOpened = !this.folderOpened;
         } else {
