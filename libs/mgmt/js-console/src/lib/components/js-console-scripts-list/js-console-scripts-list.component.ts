@@ -42,7 +42,9 @@ export class JsConsoleScriptsListComponent implements OnInit {
     scriptFolder: ConsoleScript;
     readonly selectedScript$: Observable<ConsoleScript> = this.store.select(getSelectedScript);
     readonly scripts$: Observable<Array<ConsoleScript>> = combineLatest([this.store.select(getScriptsList), this.searchValueSource.asObservable().pipe(startWith(''))]).pipe(
-        map(([scripts, searchValue]) => scripts.filter((script) => script.text.includes(searchValue)))
+        map(([scripts, searchValue]) =>
+            scripts.filter((script) => script.text.includes(searchValue) || script?.submenu?.itemdata?.map((subscript) => subscript.text.includes(searchValue)))
+        )
     );
 
     constructor(
