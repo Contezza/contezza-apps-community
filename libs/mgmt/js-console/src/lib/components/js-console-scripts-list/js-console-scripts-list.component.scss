@@ -27,6 +27,7 @@
             overflow: auto;
             height: 100%;
             padding: 20px;
+            max-width: 20vw;
 
             &-item {
                 display: flex;
@@ -39,6 +40,11 @@
                 -moz-user-select: none;
                 user-select: none;
 
+                .mat-button-wrapper {
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
                 &-action-button {
                     border-left: 3px solid var(--theme-border-color);
                 }
@@ -49,9 +55,6 @@
                     font-weight: 600;
                     display: flex;
                     width: 100%;
-                    overflow: hidden !important;
-                    text-overflow: ellipsis !important;
-                    white-space: nowrap !important;
                 }
                 .action-button .action-button__label {
                     display: flex;
@@ -69,9 +72,14 @@
     .script-item {
         display: flex;
         width: 100%;
+
+        .folder-icon {
+            margin-right: 10px;
+        }
     }
 
-    .menu-icon {
+    .menu-icon,
+    .sub-menu-icon {
         visibility: hidden;
         width: 32px !important;
         height: 32px !important;
@@ -81,7 +89,6 @@
             width: 18px !important;
             height: 18px !important;
             line-height: 18px !important;
-
             color: var(--theme-text-color);
 
             &:hover {
@@ -101,9 +108,21 @@
                 color: var(--theme-title-color) !important;
             }
         }
-
         .menu-icon {
             visibility: visible;
+        }
+        mat-list-item {
+            .scripts-list-sidenav-section-item-action-button {
+                border-left: 3px solid var(--theme-border-color);
+            }
+            &:hover {
+                .scripts-list-sidenav-section-item-action-button {
+                    border-left: 6px solid var(--theme-border-color);
+                }
+                .sub-menu-icon {
+                    visibility: visible;
+                }
+            }
         }
     }
 }

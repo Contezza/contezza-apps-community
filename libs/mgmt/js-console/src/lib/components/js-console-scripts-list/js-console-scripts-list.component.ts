@@ -39,6 +39,7 @@ export class JsConsoleScriptsListComponent implements OnInit {
     searchValue = '';
     searchValueSource = new Subject<string>();
     folderOpened = false;
+    scriptFolder: ConsoleScript;
     readonly selectedScript$: Observable<ConsoleScript> = this.store.select(getSelectedScript);
     readonly scripts$: Observable<Array<ConsoleScript>> = combineLatest([this.store.select(getScriptsList), this.searchValueSource.asObservable().pipe(startWith(''))]).pipe(
         map(([scripts, searchValue]) => scripts.filter((script) => script.text.includes(searchValue)))
@@ -59,8 +60,10 @@ export class JsConsoleScriptsListComponent implements OnInit {
         return script.text;
     }
 
-    getButtonColor(selected: string, current: string): ThemePalette {
-        return selected === current ? 'primary' : undefined;
+    // hoe zorg ik ervoor dat als het de script(folder) is met de selectedscript erin blauw wordt?
+    getButtonColor(selected: string, current: string, folder?: ConsoleScript): ThemePalette {
+        const inFolder = folder?.submenu?.itemdata?.find((item: ConsoleScript) => item.value === selected);
+        return inFolder || selected === current ? 'primary' : undefined;
     }
 
     searchValueChange(event: string) {
@@ -84,7 +87,13 @@ export class JsConsoleScriptsListComponent implements OnInit {
             .pipe(take(1))
             .subscribe((node) => this.store.dispatch(deleteScript({ payload: [{ entry: node }] })));
     }
-    openFolder() {
-        this.folderOpened = !this.folderOpened;
+    openFolder(folder) {
+        console.log(folder);
+        if (this.scriptFolder === folder) {
+            this.folderOpened = !this.folderOpened;
+        } else {
+            this.folderOpened = true;
+        }
+        this.scriptFolder = folder;
     }
 }
