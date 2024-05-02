@@ -10,6 +10,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2024-05-02
+|2.10.0
+|View <<Release 2.10.0,release details>>.
+
 |2024-04-11
 |2.9.0
 |View <<Release 2.9.0,release details>>.
@@ -153,6 +157,12 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 2.10.0
+
+Bugfixes/minor changes:
+
+- @contezza/js-console - Scripts within folders are also shown https://support.contezza.nl/issues/27708[[#27708]].
 
 ==== Release 2.9.0
 
