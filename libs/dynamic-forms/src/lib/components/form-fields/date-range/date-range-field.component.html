@@ -1,5 +1,9 @@
 <div class="contezza-form-field contezza-date-range-form-field">
-    <label class="contezza-date-range-form-field-label">{{ field.label | translate }}</label>
+    <label class="contezza-date-range-form-field-label">
+        <ng-container *contezzaLet="field.label && (field.label | translatePropertyTitle) as label$">
+            <ng-container *contezzaLet="label$ ? (label$ | async) : (field.label | translate) as label">{{ label }}</ng-container>
+        </ng-container>
+    </label>
     <div class="contezza-date-range-form-field-dates">
         <contezza-date-field [field]="fromSubfield" [control]="fromSubcontrol"></contezza-date-field>
         <contezza-date-field [field]="toSubfield" [control]="toSubcontrol"></contezza-date-field>

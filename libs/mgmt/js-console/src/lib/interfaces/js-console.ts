@@ -45,6 +45,10 @@ export interface SelectedNode {
 export interface ConsoleScript {
     text: string;
     value: string;
+    submenu?: {
+        id: string;
+        itemdata: Array<ConsoleScript>;
+    };
 }
 
 export interface OpenSaveScriptDialogPayload {

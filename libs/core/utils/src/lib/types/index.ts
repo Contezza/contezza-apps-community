@@ -8,5 +8,6 @@ export * from './key-of.type';
 export * from './object-entry.type';
 export * from './pick-by-type.type';
 export * from './split.type';
+export * from './string-template';
 export * from './tree.type';
 export * from './type-of';

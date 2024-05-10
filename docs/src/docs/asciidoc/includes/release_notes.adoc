@@ -10,6 +10,30 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2024-05-07
+|2.10.1
+|View <<Release 2.10.1,release details>>.
+
+|2024-05-02
+|2.10.0
+|View <<Release 2.10.0,release details>>.
+
+|2024-04-11
+|2.9.0
+|View <<Release 2.9.0,release details>>.
+
+|2024-03-21
+|2.8.1
+|View <<Release 2.8.1,release details>>.
+
+|2024-03-12
+|2.8.0
+|View <<Release 2.8.0,release details>>.
+
+|2024-02-28
+|2.7.1
+|View <<Release 2.7.1,release details>>.
+
 |2024-02-19
 |2.7.0
 |View <<Release 2.7.0,release details>>.
@@ -137,6 +161,51 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 2.10.1
+
+Bugfixes/minor changes:
+
+- @contezza/dynamic-forms - Field `dateRange` applies `translatePropertyTitle`.
+
+==== Release 2.10.0
+
+Bugfixes/minor changes:
+
+- @contezza/js-console - Scripts within folders are also shown https://support.contezza.nl/issues/27708[[#27708]].
+
+==== Release 2.9.0
+
+Bugfixes/minor changes:
+
+- @contezza/core/extensions - Fix `RouterExtensionService.setLoadComponent`.
+- @contezza/core/services - Utility function `provideApiService` was not correctly exported. Fixed and renamed to `provideWebscriptApiService`.
+- @contezza/core/utils - Collection `AlfrescoUtils` created, with method `toNoderef`.
+- @contezza/core/utils - Collection `ApiUtils` created, with method `provideApiService`.
+- @contezza/core/utils - Collection `NgUtils` created, with method `getModuleWithConfig`.
+- @contezza/core/utils - Method `concatPath` added to collection `StringUtils`.
+- @contezza/core/utils - Interface `Stylable` created.
+
+==== Release 2.8.1
+
+Bugfixes/minor changes:
+
+- @contezza/core/services - Utility function `provideApiService` created.
+- @contezza/core/utils - Class `OneTimeSubject` created.
+- @contezza/dynamic-forms - Improve labeling in field `date-range-chip`.
+- @contezza/dynamic-forms - Field `dialog` supports `readonly` property.
+
+==== Release 2.8.0
+
+Bugfixes/minor changes:
+
+- @contezza/js-console - Partial execution results are shown https://support.contezza.nl/issues/27113[[#27113]].
+
+==== Release 2.7.1
+
+Bugfixes/minor changes:
+
+- @contezza/core/utils - Collection `StringUtils` created, with methods `concat`, `toTemplate` and `toEndpointTemplate`.
 
 ==== Release 2.7.0
 

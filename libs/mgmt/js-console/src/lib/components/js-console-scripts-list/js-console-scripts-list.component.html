@@ -8,33 +8,57 @@
                     <mat-list-item *ngFor="let script of scripts; trackBy: trackByScript">
                         <div class="scripts-list-sidenav-section-item">
                             <button
-                                [color]="getButtonColor(selected?.value, script.value)"
+                                [color]="getButtonColor(selected?.value, script.value, script)"
                                 mat-button
                                 class="script-item"
                                 [ngClass]="
-                                    getButtonColor(selected?.value, script.value)
+                                    getButtonColor(selected?.value, script.value, script)
                                         ? 'scripts-list-sidenav-section-item-action-button--active'
                                         : 'scripts-list-sidenav-section-item-action-button'
                                 "
-                                (click)="loadSelectedNodeContent(script)"
+                                (click)="!script.submenu ? loadSelectedNodeContent(script) : openFolder(script)"
                             >
+                                <mat-icon *ngIf="script.submenu" class="folder-icon">folder</mat-icon>
                                 <span [title]="script.text" class="action-button__label">{{ script.text }}</span>
                             </button>
 
-                            <button mat-icon-button class="menu-icon" [matMenuTriggerFor]="menu">
+                            <button *ngIf="!script.submenu" mat-icon-button class="menu-icon" [matMenuTriggerFor]="menu" [matMenuTriggerData]="{ selectedScript: script }">
                                 <mat-icon>more_vert</mat-icon>
                             </button>
-
                             <mat-menu #menu="matMenu" [overlapTrigger]="false">
-                                <button mat-menu-item class="action-button" (click)="duplicateScript(script, scripts)">
-                                    <adf-icon value="content_copy"></adf-icon>
-                                    <span class="action-button__label">{{ 'CONTEZZA.JS_CONSOLE.SCRIPTS.ACTIONS.DUPLICATE' | translate }}</span>
-                                </button>
-                                <button mat-menu-item class="action-button" (click)="deleteScript(script)">
-                                    <adf-icon value="delete"></adf-icon>
-                                    <span class="action-button__label">{{ 'CONTEZZA.JS_CONSOLE.SCRIPTS.ACTIONS.REMOVE' | translate }}</span>
-                                </button>
+                                <ng-template matMenuContent let-selectedScript="selectedScript">
+                                    <button mat-menu-item class="action-button" (click)="duplicateScript(selectedScript, scripts)">
+                                        <adf-icon value="content_copy"></adf-icon>
+                                        <span class="action-button__label">{{ 'CONTEZZA.JS_CONSOLE.SCRIPTS.ACTIONS.DUPLICATE' | translate }}</span>
+                                    </button>
+                                    <button mat-menu-item class="action-button" (click)="deleteScript(selectedScript)">
+                                        <adf-icon value="delete"></adf-icon>
+                                        <span class="action-button__label">{{ 'CONTEZZA.JS_CONSOLE.SCRIPTS.ACTIONS.REMOVE' | translate }}</span>
+                                    </button>
+                                </ng-template>
                             </mat-menu>
+                        </div>
+                        <div *ngIf="folderOpened && script === this.scriptFolder" style="margin-left: 15px">
+                            <mat-list-item *ngFor="let sub of script.submenu.itemdata">
+                                <div class="scripts-list-sidenav-section-item">
+                                    <button
+                                        [color]="getButtonColor(selected?.value, sub.value)"
+                                        mat-button
+                                        class="script-item"
+                                        [ngClass]="
+                                            getButtonColor(selected?.value, sub.value)
+                                                ? 'scripts-list-sidenav-section-item-action-button--active'
+                                                : 'scripts-list-sidenav-section-item-action-button'
+                                        "
+                                        (click)="loadSelectedNodeContent(sub)"
+                                    >
+                                        <span [title]="sub.text" class="action-button__label">{{ sub.text }}</span>
+                                    </button>
+                                    <button mat-icon-button class="sub-menu-icon" [matMenuTriggerFor]="menu" [matMenuTriggerData]="{ selectedScript: sub }">
+                                        <mat-icon>more_vert</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-list-item>
                         </div>
                     </mat-list-item>
                 </ng-container>
