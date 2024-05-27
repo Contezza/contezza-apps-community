@@ -6,12 +6,13 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { ContezzaLetModule } from '@contezza/core/directives';
+import { TranslatePropertyTitlePipe } from '@contezza/core/property-titles';
 import { ContezzaDynamicFormExtensionService } from '@contezza/dynamic-forms/shared';
 
 import { ToggleFieldComponent } from './toggle-field.component';
 
 @NgModule({
-    imports: [CommonModule, ContezzaLetModule, MatSlideToggleModule, ReactiveFormsModule, TranslateModule],
+    imports: [CommonModule, ContezzaLetModule, MatSlideToggleModule, ReactiveFormsModule, TranslateModule, TranslatePropertyTitlePipe],
     declarations: [ToggleFieldComponent],
     exports: [ToggleFieldComponent],
 })

@@ -170,7 +170,7 @@
                         matSuffix
                         class="adf-property-clear-value"
                         aria-label="Clear"
-                        *ngIf="!readonly && !formLoading && !control.disabled && control.value"
+                        *ngIf="!readonly && !formLoading && !control.disabled && control.value?.length"
                         tabindex="-1"
                         (click)="clear($event)"
                     >

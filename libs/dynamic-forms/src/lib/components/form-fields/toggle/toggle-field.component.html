@@ -1,5 +1,7 @@
 <ng-container *contezzaLet="field.rules?.readonly | async as readonly">
-    <mat-slide-toggle [color]="field.settings?.color || 'primary'" class="mat-form-field contezza-toggle-form-field" [formControl]="control" [disabled]="readonly">{{
-        field.label | translate
-    }}</mat-slide-toggle>
+    <mat-slide-toggle [color]="field.settings?.color || 'primary'" class="mat-form-field contezza-toggle-form-field" [formControl]="control" [disabled]="readonly">
+        <ng-container *contezzaLet="field.label && (field.label | translatePropertyTitle) as label$">
+            <ng-container *contezzaLet="label$ ? (label$ | async) : (field.label | translate) as label">{{ label }}</ng-container>
+        </ng-container>
+    </mat-slide-toggle>
 </ng-container>
