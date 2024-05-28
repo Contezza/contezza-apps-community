@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 
 import { EffectsModule } from '@ngrx/effects';
 
@@ -28,6 +29,10 @@ import { Effects } from './store/effects';
                     monthYearA11yLabel: 'MMMM YYYY',
                 },
             },
+        },
+        {
+            provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+            useValue: { strict: true },
         },
         provideTranslations('contezza-common', 'assets/contezza-common'),
         RouterExtensionService.provider,
