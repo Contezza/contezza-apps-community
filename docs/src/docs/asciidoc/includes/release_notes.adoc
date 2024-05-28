@@ -10,6 +10,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2024-05-28
+|2.10.2
+|View <<Release 2.10.2,release details>>.
+
 |2024-05-07
 |2.10.1
 |View <<Release 2.10.1,release details>>.
@@ -161,6 +165,13 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 2.10.2
+
+Bugfixes/minor changes:
+
+- @contezza/dynamic-forms - Fields `checkbox`, `date` and `toggle` apply `translatePropertyTitle`.
+- @contezza/common - Strict mode is activated for moment date parser in `ContezzaCommonModule`. This fixes a bug which did not allow the user to type in dynamic-form fields of type `dateRange` and `dateRangeChip`.
 
 ==== Release 2.10.1
 
