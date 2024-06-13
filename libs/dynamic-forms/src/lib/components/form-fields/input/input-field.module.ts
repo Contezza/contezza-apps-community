@@ -12,6 +12,7 @@ export class ContezzaInputFieldModule {
             text: InputFieldComponent,
             long: InputFieldComponent,
             int: InputFieldComponent,
+            number: InputFieldComponent,
             integer: InputFieldComponent,
         });
     }

@@ -45,7 +45,7 @@ export class InputFieldComponent<ValueType extends string | number> extends Cont
 
     ngOnInit(): void {
         super.ngOnInit();
-        this.inputType = this.field.type === 'int' || this.field.type === 'integer' || this.field.type === 'long' ? 'number' : 'text';
+        this.inputType = this.field.type === 'number' || this.field.type === 'int' || this.field.type === 'integer' || this.field.type === 'long' ? 'number' : 'text';
 
         if (this.inputType === 'number') {
             this.initializeNumberFieldConfig();
