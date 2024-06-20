@@ -9,6 +9,6 @@ export class AlfrescoUtils {
      * @param id
      */
     static toNoderef(id: string): string {
-        return id.includes('/') ? AlfrescoUtils.prefixSpacesStore + id : id;
+        return id.includes('/') ? id : AlfrescoUtils.prefixSpacesStore + id;
     }
 }
