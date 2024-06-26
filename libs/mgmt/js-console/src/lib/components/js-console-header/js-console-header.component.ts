@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Optional, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Optional, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThemePalette } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { navigate } from '@contezza/common';
-import { ConfigService } from '@contezza/js-console/shared';
+import { EXTENSION_CONFIG, ExtensionConfig } from '@contezza/js-console/shared';
 
 import { ConsoleScript, SelectedNode } from '../../interfaces/js-console';
 import { getEditorOptions, getSelectedNode, getSelectedScript, getSelectedSpaceNode } from '../../store/selectors';
@@ -38,7 +38,7 @@ export class JsConsoleHeaderComponent {
     @Output()
     toggleScriptListOpenState = new EventEmitter();
 
-    constructor(readonly store: Store<unknown>, @Optional() private readonly config?: ConfigService) {}
+    constructor(readonly store: Store<unknown>, @Inject(EXTENSION_CONFIG) @Optional() private readonly config?: ExtensionConfig) {}
 
     get toggleIconColor(): ThemePalette {
         return this.scriptListOpen ? 'primary' : undefined;

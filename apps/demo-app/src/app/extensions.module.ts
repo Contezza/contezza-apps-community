@@ -4,7 +4,7 @@ import { ExtensionService, provideExtensionConfig } from '@alfresco/adf-extensio
 import { provideTranslations } from '@alfresco/adf-core';
 
 import { ContezzaCommonModule } from '@contezza/common';
-import { JsConsoleExtensionModule } from '@contezza/js-console/shared';
+import { JsConsoleExtensionModule, ServiceKey } from '@contezza/js-console/shared';
 import { ContezzaNodeBrowserSharedModule } from '@contezza/node-browser/shared';
 import { MatDialogService } from '@contezza/core/dialogs';
 import { ContezzaExtensionService, RouterExtensionService } from '@contezza/core/extensions';
@@ -13,7 +13,7 @@ import { PropertyTitleService } from '@contezza/core/property-titles';
 import { Config } from './config';
 
 @NgModule({
-    imports: [ContezzaCommonModule, JsConsoleExtensionModule.withConfig({ path: Config.Urls.JsConsole }), ContezzaNodeBrowserSharedModule],
+    imports: [ContezzaCommonModule, JsConsoleExtensionModule.withConfig({ path: Config.Urls.JsConsole, service: ServiceKey.LEGACY }), ContezzaNodeBrowserSharedModule],
     providers: [
         { provide: ExtensionService, useClass: ContezzaExtensionService },
         MatDialogService.provider,
