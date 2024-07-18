@@ -133,8 +133,8 @@ export class JsConsoleEffects {
                 ),
                 switchMap((result: { payload: OpenSaveScriptDialogPayload; data: any }) => {
                     const saveResponse = !result.payload?.selectedScript
-                        ? this.saveScriptService.saveNew(result.payload, false, result.data)
-                        : this.saveScriptService.saveExisted(result.payload);
+                        ? this.jsConsoleService.saveNew(result.payload, result.data)
+                        : this.jsConsoleService.saveExisted(result.payload);
 
                     return saveResponse.pipe(
                         switchMap((response: any) =>
@@ -172,8 +172,8 @@ export class JsConsoleEffects {
                     )
                 ),
                 switchMap((result) =>
-                    this.saveScriptService
-                        .saveNew(result.payload, false, {
+                    this.jsConsoleService
+                        .saveNew(result.payload, {
                             title: result.name,
                             scripts: result.scripts,
                         })

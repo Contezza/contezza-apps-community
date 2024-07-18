@@ -11,6 +11,7 @@ import { ContezzaObservables, StringUtils } from '@contezza/core/utils';
 
 import { setScriptExecutionTime } from '../store/actions';
 import { ConsoleScript, ExecuteConsolePayload, ExecuteConsoleResponse } from '../interfaces/js-console';
+import { NewJsConsoleService } from './js-console.service';
 
 const { concat, toEndpointTemplate } = StringUtils;
 
@@ -18,13 +19,16 @@ const { concat, toEndpointTemplate } = StringUtils;
     providedIn: 'root',
 })
 export class JsConsoleService {
-    static readonly ENDPOINT = 'de/fme/jsconsole';
-    static readonly ENDPOINT_EXECUTE = concat(JsConsoleService.ENDPOINT, '/execute');
-    static readonly ENDPOINT_LISTSCRIPTS = concat(JsConsoleService.ENDPOINT, '/listscripts');
-    static readonly ENDPOINT_EXECUTION_RESULT = concat(JsConsoleService.ENDPOINT, '/{resultChannel}/executionResult');
-    static readonly TEMPLATE_ENDPOINT_EXECUTION_RESULT = toEndpointTemplate(JsConsoleService.ENDPOINT_EXECUTION_RESULT);
+    ENDPOINT = '';
+    ENDPOINT_EXECUTE = concat(this.ENDPOINT, '/execute');
+    ENDPOINT_LISTSCRIPTS = concat(this.ENDPOINT, '/listscripts');
+    ENDPOINT_EXECUTION_RESULT = concat(this.ENDPOINT, '/{resultChannel}/executionResult');
+    TEMPLATE_ENDPOINT_EXECUTION_RESULT = toEndpointTemplate(this.ENDPOINT_EXECUTION_RESULT);
 
-    constructor(private readonly webscript: WebscriptService, private readonly nodesApiService: NodesApiService, private readonly store: Store<unknown>) {}
+    constructor(private readonly webscript: WebscriptService, private readonly nodesApiService: NodesApiService, private readonly store: Store<unknown>, private readonly jsService: NewJsConsoleService) {
+        this.ENDPOINT = this.jsService.endpoint();
+    }
+    
     executeScript(payload: ExecuteConsolePayload): Observable<ExecuteConsoleResponse> {
         const startTime = new Date();
         // set parameter resultChannel in the request, use it get partial results

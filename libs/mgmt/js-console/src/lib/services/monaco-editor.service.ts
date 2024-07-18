@@ -6,64 +6,29 @@ import { map } from 'rxjs/operators';
 
 import { WebscriptService } from '@contezza/core/services';
 
-import { alfrescoAutocomplete, alfrescoSnippets } from '../utils/alfresco.autocomplete';
 import { TernModel, TernToTs } from '../utils/tern-to-ts';
+import { NewJsConsoleService } from './js-console.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class JsConsoleMonacoEditorService {
     static readonly URL_TYPING = './assets/js-console/defs/alfresco.json';
-    private readonly API_COMMANDS_URL = 'de/fme/jsconsole/apicommands';
+    API_COMMANDS_URL = '';
 
-    constructor(private readonly http: HttpClient, private readonly webscript: WebscriptService) {}
+    constructor(private readonly http: HttpClient, private readonly webscript: WebscriptService, private readonly jsConsoleService: NewJsConsoleService) {
+        this.API_COMMANDS_URL = this.jsConsoleService.apiCommandsUrl();
+    }
 
     getConfig() {
         return {
             baseUrl: './assets',
             defaultOptions: { scrollBeyondLastLine: false, minimap: { enabled: false }, contextmenu: false },
-            onMonacoLoad: this.onMonacoLoad.bind(this),
+            onMonacoLoad: this.jsConsoleService.onMonacoLoad.bind(this),
         };
     }
 
-    private onMonacoLoad() {
-        forkJoin([this.webscript.get<any>(this.API_COMMANDS_URL), this.alfrescoNamespace]).subscribe(([commands, typing]) => {
-            (window as any).monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-                validate: true,
-                enableSchemaRequest: true,
-                schemas: [],
-            });
-
-            (window as any).monaco.languages.registerCompletionItemProvider('javascript', {
-                triggerCharacters: ['.'],
-                provideCompletionItems: function (model, position) {
-                    const textUntilPosition = model.getValueInRange({
-                        startLineNumber: position.lineNumber,
-                        startColumn: 1,
-                        endLineNumber: position.lineNumber,
-                        endColumn: position.column,
-                    });
-
-                    // @ts-ignore
-                    return {
-                        suggestions: alfrescoAutocomplete((<any>window).monaco, textUntilPosition, commands.methods) ?? [],
-                    };
-                },
-            });
-
-            (window as any).monaco.languages.registerCompletionItemProvider('javascript', {
-                triggerCharacters: ['(', ',', ' '],
-                provideCompletionItems: () => ({
-                    suggestions: alfrescoSnippets((<any>window).monaco, commands),
-                }),
-            });
-
-            (window as any).monaco.languages.typescript.javascriptDefaults.setCompilerOptions({ lib: ['es5'], allowNonTsExtensions: true });
-            (window as any).monaco.languages.typescript.javascriptDefaults.addExtraLib(typing, '*');
-        });
-    }
-
-    private get alfrescoNamespace(): Observable<string> {
+    get alfrescoNamespace(): Observable<string> {
         return this.http.get<TernModel>(JsConsoleMonacoEditorService.URL_TYPING).pipe(map((json) => TernToTs.adapt(json)));
     }
 }
