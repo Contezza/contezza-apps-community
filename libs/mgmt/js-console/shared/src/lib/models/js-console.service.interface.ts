@@ -1,4 +1,5 @@
 import { ConsoleScript } from '../../../../src/lib/interfaces/js-console';
+import { Observable } from 'rxjs';
 
 /**
  * Public interface shared by all js-console services.
@@ -9,7 +10,7 @@ export interface IJsConsoleService {
     endpoint: () => string;
     apiCommandsUrl: () => string;
     saveScriptUrl: () => string;
-    saveNew: () => { scripts: Array<ConsoleScript>; created?: ConsoleScript };
-    saveExisted: () => any;
-    onMonacoLoad: () => any;
+    saveNew: (payload, data) => Observable<{ scripts: Array<ConsoleScript>; created?: ConsoleScript }>;
+    saveExisted: (payload) => Observable<any>;
+    onMonacoLoad;
 }

@@ -11,7 +11,6 @@ import { ContezzaObservables, StringUtils } from '@contezza/core/utils';
 
 import { setScriptExecutionTime } from '../store/actions';
 import { ConsoleScript, ExecuteConsolePayload, ExecuteConsoleResponse } from '../interfaces/js-console';
-import { NewJsConsoleService } from './js-console.service';
 
 const { concat, toEndpointTemplate } = StringUtils;
 
@@ -19,16 +18,21 @@ const { concat, toEndpointTemplate } = StringUtils;
     providedIn: 'root',
 })
 export class JsConsoleService {
-    ENDPOINT = '';
-    ENDPOINT_EXECUTE = concat(this.ENDPOINT, '/execute');
-    ENDPOINT_LISTSCRIPTS = concat(this.ENDPOINT, '/listscripts');
-    ENDPOINT_EXECUTION_RESULT = concat(this.ENDPOINT, '/{resultChannel}/executionResult');
-    TEMPLATE_ENDPOINT_EXECUTION_RESULT = toEndpointTemplate(this.ENDPOINT_EXECUTION_RESULT);
+    endpoint = '';
+    endpointExecute = '';
+    endpointListscripts = '';
+    endpointExecutionResult = '';
+    templateEndpointExecutionResult = toEndpointTemplate(this.endpointExecutionResult);
 
-    constructor(private readonly webscript: WebscriptService, private readonly nodesApiService: NodesApiService, private readonly store: Store<unknown>, private readonly jsService: NewJsConsoleService) {
-        this.ENDPOINT = this.jsService.endpoint();
+    constructor(private readonly webscript: WebscriptService, private readonly nodesApiService: NodesApiService, private readonly store: Store<unknown>) {
+        //this.endpoint = this.jsService.endpoint(); -> Deze zou het moeten zijn, maar die heb ik eruit gehaald voor die foutmelding
+        this.endpoint = 'ootbee/jsconsole'; // -> Deze is dus nu alleen voor het testen
+        this.endpointExecute = concat(this.endpoint, '/execute');
+        this.endpointListscripts = concat(this.endpoint, '/listscripts');
+        this.endpointExecutionResult = concat(this.endpoint, '/{resultChannel}/executionResult');
+        // this.templateEndpointExecutionResult = toEndpointTemplate(this.endpointExecutionResult);
     }
-    
+
     executeScript(payload: ExecuteConsolePayload): Observable<ExecuteConsoleResponse> {
         const startTime = new Date();
         // set parameter resultChannel in the request, use it get partial results
@@ -42,7 +46,7 @@ export class JsConsoleService {
             () =>
                 of(void 0).pipe(
                     delay(1000),
-                    switchMap(() => this.webscript.get(JsConsoleService.TEMPLATE_ENDPOINT_EXECUTION_RESULT({ resultChannel: payload.resultChannel })))
+                    switchMap(() => this.webscript.get(this.templateEndpointExecutionResult({ resultChannel: payload.resultChannel })))
                 ),
             (val: ExecuteConsoleResponse) => results$.next(val)
         )
@@ -50,7 +54,7 @@ export class JsConsoleService {
             .subscribe();
         // final output: when ready emit, complete, and stop requests for partial output
         this.webscript
-            .post(JsConsoleService.ENDPOINT_EXECUTE, payload)
+            .post(this.endpointExecute, payload)
             .pipe(
                 map((response: ExecuteConsoleResponse) => {
                     stop$.next();
@@ -88,7 +92,7 @@ export class JsConsoleService {
     }
 
     getScriptsList(): Observable<Array<ConsoleScript>> {
-        return this.webscript.get(JsConsoleService.ENDPOINT_LISTSCRIPTS).pipe(map((list: { scripts }) => list.scripts));
+        return this.webscript.get(this.endpointListscripts).pipe(map((list: { scripts }) => list.scripts));
     }
 
     getNodeContent(nodeId: string): Observable<string | ArrayBuffer> {

@@ -1,9 +1,11 @@
 import { Inject, Injectable, Optional } from '@angular/core';
 
-import { EXTENSION_CONFIG, ExtensionConfig, IJsConsoleService, ServiceKey } from '@contezza/js-console/shared';
+import { EXTENSION_CONFIG, ExtensionConfig, ServiceKey } from '../../../shared/src/lib/models/extension-config';
+import { IJsConsoleService } from '../../../shared/src/lib/models/js-console.service.interface';
 
 import { Registry } from './registry';
 import { ConsoleScript } from '../interfaces/js-console';
+import { Observable } from 'rxjs';
 
 // TODO: remove JsConsoleService from console.service.ts, rename this
 @Injectable({ providedIn: 'root' })
@@ -32,15 +34,15 @@ export class NewJsConsoleService implements IJsConsoleService {
         return this.service.saveScriptUrl();
     }
 
-    saveNew(): { scripts: Array<ConsoleScript>; created?: ConsoleScript } {
-        return this.service.saveNew();
+    saveNew(payload, data): Observable<{ scripts: Array<ConsoleScript>; created?: ConsoleScript }> {
+        return this.service.saveNew(payload, data);
     }
 
-    saveExisted(): any {
-        return this.service.saveExisted();
+    saveExisted(payload): Observable<any> {
+        return this.service.saveExisted(payload);
     }
 
-    onMonacoLoad(): any {
-        return this.service.onMonacoLoad();
+    onMonacoLoad(): void {
+        this.service.onMonacoLoad();
     }
 }

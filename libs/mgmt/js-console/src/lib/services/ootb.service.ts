@@ -4,7 +4,6 @@ import { ConsoleScript, OpenSaveScriptDialogPayload, SaveScriptPayload } from '.
 import { IJsConsoleService } from '@contezza/js-console/shared';
 import { catchError, Observable, of } from 'rxjs';
 import { JsConsoleScriptSaveDialogService } from '../dialogs/script-save/script-save-dialog.service';
-import { JsConsoleSaveScriptService } from './save-script.service';
 import { JsConsoleMonacoEditorService } from './monaco-editor.service';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { WebscriptService } from '@contezza/core/services';
@@ -15,7 +14,6 @@ export class OotbService implements IJsConsoleService {
     constructor(
         private readonly saveDialogService: JsConsoleScriptSaveDialogService,
         private readonly webscript: WebscriptService,
-        private readonly saveScriptService: JsConsoleSaveScriptService,
         private readonly monacoEditor: JsConsoleMonacoEditorService
     ) {}
     check() {

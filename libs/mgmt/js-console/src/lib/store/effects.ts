@@ -16,7 +16,6 @@ import { OpenSaveScriptDialogPayload } from '../interfaces/js-console';
 
 import { JsConsoleService } from '../services/console.service';
 import { JsConsoleNodeActionsService } from '../services/node-actions.service';
-import { JsConsoleSaveScriptService } from '../services/save-script.service';
 import { NewJsConsoleService } from '../services/js-console.service';
 
 @Injectable()
@@ -27,7 +26,6 @@ export class JsConsoleEffects {
         private readonly dialog: MatDialog,
         private readonly consoleService: JsConsoleService,
         private readonly jsConsoleService: NewJsConsoleService,
-        private readonly saveScriptService: JsConsoleSaveScriptService,
         private readonly nodeActionsService: JsConsoleNodeActionsService
     ) {}
 
@@ -35,8 +33,6 @@ export class JsConsoleEffects {
         () =>
             this.actions$.pipe(
                 ofType(JsConsoleActions.executeScript),
-                // TODO: remove log
-                tap(() => console.log(this.jsConsoleService.check())),
                 tap(() => this.store.dispatch(JsConsoleActions.setExecuteScriptLoading({ executeScriptLoading: true }))),
                 switchMap(() =>
                     this.store.select(getConsolePayloadInfo).pipe(

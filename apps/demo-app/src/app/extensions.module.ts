@@ -12,6 +12,8 @@ import { PropertyTitleService } from '@contezza/core/property-titles';
 
 import { Config } from './config';
 
+const mapper = {};
+
 const config = window['config'];
 
 // this does not work:
@@ -21,8 +23,6 @@ const extraImports = [];
 config?.modules?.forEach((key) => extraImports.push(mapper[key]));
 
 const extraExtensionJsons = config?.extensionJsons || [];
-
-
 
 @NgModule({
     imports: [ContezzaCommonModule, JsConsoleExtensionModule.withConfig({ path: Config.Urls.JsConsole, service: ServiceKey.LEGACY }), ContezzaNodeBrowserSharedModule],

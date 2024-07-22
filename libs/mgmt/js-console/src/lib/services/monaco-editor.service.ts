@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { forkJoin, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-import { WebscriptService } from '@contezza/core/services';
 
 import { TernModel, TernToTs } from '../utils/tern-to-ts';
 import { NewJsConsoleService } from './js-console.service';
@@ -16,7 +14,7 @@ export class JsConsoleMonacoEditorService {
     static readonly URL_TYPING = './assets/js-console/defs/alfresco.json';
     API_COMMANDS_URL = '';
 
-    constructor(private readonly http: HttpClient, private readonly webscript: WebscriptService, private readonly jsConsoleService: NewJsConsoleService) {
+    constructor(private readonly http: HttpClient, private readonly jsConsoleService: NewJsConsoleService) {
         this.API_COMMANDS_URL = this.jsConsoleService.apiCommandsUrl();
     }
 

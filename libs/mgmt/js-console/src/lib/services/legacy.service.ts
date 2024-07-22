@@ -6,7 +6,6 @@ import { IJsConsoleService } from '@contezza/js-console/shared';
 import { alfrescoAutocomplete, alfrescoSnippets } from '../utils/alfresco.autocomplete';
 
 import { ConsoleScript, OpenSaveScriptDialogPayload, SaveScriptPayload } from '../interfaces/js-console';
-import { JsConsoleSaveScriptService } from './save-script.service';
 import { JsConsoleScriptSaveDialogService } from '../dialogs/script-save/script-save-dialog.service';
 import { catchError, filter, map, switchMap } from 'rxjs/operators';
 import { WebscriptService } from '@contezza/core/services';
@@ -17,7 +16,6 @@ export class LegacyService implements IJsConsoleService {
     private readonly SAVE_SCRIPT_URL = 'de/fme/jsconsole/savescript.json';
     constructor(
         private readonly saveDialogService: JsConsoleScriptSaveDialogService,
-        private readonly saveScriptService: JsConsoleSaveScriptService,
         private readonly webscript: WebscriptService,
         private readonly monacoEditor: JsConsoleMonacoEditorService
     ) {}
@@ -49,10 +47,9 @@ export class LegacyService implements IJsConsoleService {
                 filter((result) => !!result),
                 switchMap((dialogResult) =>
                     this.saveScript({
-                        name: dialogResult.name,
-                        isUpdate: false,
                         fmScript: payload.fmContent,
                         jsScript: payload.jsContent,
+                        putRequest: `${this.SAVE_SCRIPT_URL}?name=${dialogResult.name}&isUpdate=false`,
                     }).pipe(
                         map((response) => {
                             if (response?.scripts) {
@@ -72,18 +69,17 @@ export class LegacyService implements IJsConsoleService {
 
     saveExisted(payload: OpenSaveScriptDialogPayload): Observable<any> {
         return this.saveScript({
-            name: payload.selectedScript.text,
-            isUpdate: true,
             fmScript: payload.fmContent,
             jsScript: payload.jsContent,
+            putRequest: `${this.SAVE_SCRIPT_URL}?name=${payload.selectedScript.text}&isUpdate=true`,
         });
     }
 
     saveScript(payload: SaveScriptPayload): Observable<{ scripts: Array<ConsoleScript> }> {
-        const { name, isUpdate, fmScript, jsScript } = payload;
+        const { fmScript, jsScript, putRequest } = payload;
 
         return this.webscript
-            .put(`${this.SAVE_SCRIPT_URL}?name=${name}&isUpdate=${isUpdate}`, {
+            .put(putRequest, {
                 fmScript,
                 jsScript,
             })
@@ -108,7 +104,7 @@ export class LegacyService implements IJsConsoleService {
 
             (window as any).monaco.languages.registerCompletionItemProvider('javascript', {
                 triggerCharacters: ['.'],
-                provideCompletionItems: function (model, position) {
+                provideCompletionItems(model, position) {
                     const textUntilPosition = model.getValueInRange({
                         startLineNumber: position.lineNumber,
                         startColumn: 1,
@@ -118,7 +114,7 @@ export class LegacyService implements IJsConsoleService {
 
                     // @ts-ignore
                     return {
-                        suggestions: alfrescoAutocomplete((<any>window).monaco, textUntilPosition, commands.methods) ?? [],
+                        suggestions: alfrescoAutocomplete((window as any).monaco, textUntilPosition, commands.methods) ?? [],
                     };
                 },
             });
@@ -126,7 +122,7 @@ export class LegacyService implements IJsConsoleService {
             (window as any).monaco.languages.registerCompletionItemProvider('javascript', {
                 triggerCharacters: ['(', ',', ' '],
                 provideCompletionItems: () => ({
-                    suggestions: alfrescoSnippets((<any>window).monaco, commands),
+                    suggestions: alfrescoSnippets((window as any).monaco, commands),
                 }),
             });
 
