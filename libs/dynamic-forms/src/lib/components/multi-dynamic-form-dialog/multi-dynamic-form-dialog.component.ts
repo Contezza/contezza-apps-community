@@ -8,9 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DialogTitleComponent } from '@contezza/core/dialogs';
 
 import { ContezzaDynamicFormModule } from '../dynamic-form';
-import { MultiDynamicFormShellModule } from '../multi-dynamic-form-shell';
-
-import { Settings, Step } from '@contezza/dynamic-forms';
+import { MultiDynamicFormShellModule, Settings, Step } from '../multi-dynamic-form-shell';
 
 import { DynamicFormItemGroup, MultiDynamicFormDialogData } from '@contezza/dynamic-forms/shared';
 
