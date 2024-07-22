@@ -6,5 +6,6 @@ export * from './dynamic-form-field';
 export * from './dynamic-form-option';
 export * from './form-fields';
 export * from './multi-dynamic-form';
+export * from './multi-dynamic-form-dialog';
 export * from './multi-dynamic-form-shell';
 export * from './options';
