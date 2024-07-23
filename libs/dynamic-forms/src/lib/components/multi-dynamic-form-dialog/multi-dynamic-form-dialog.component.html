@@ -1,0 +1,19 @@
+<div mat-dialog-title>
+    <contezza-dialog-title [title]="data.title"></contezza-dialog-title>
+</div>
+
+<mat-dialog-content class="dialog-content-container">
+    <div class="form">
+        <contezza-multi-dynamic-form-shell #forms [groups]="groups" [settings]="settings"></contezza-multi-dynamic-form-shell>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="adf-dialog-buttons">
+    <span class="adf-fill-remaining-space"></span>
+    <button id="cancel" mat-button mat-dialog-close="">
+        {{ data.buttons.cancel | translate }}
+    </button>
+    <button id="submit" #submitButton="matButton" mat-raised-button color="primary" [mat-dialog-close]="forms.value$ | async" [disabled]="!(forms.valid$ | async)">
+        {{ data.buttons.submit | translate }}
+    </button>
+</mat-dialog-actions>
