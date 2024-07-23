@@ -5,7 +5,7 @@
         floatLabel="auto"
         [appearance]="field.settings?.appearance"
     >
-        <mat-label>{{ field.label | translate }}</mat-label>
+        <mat-label *ngIf="field.label">{{ field.label | translate }}</mat-label>
         <textarea
             matInput
             [formControl]="control"

@@ -43,7 +43,7 @@ type Defs = {
     providedIn: 'root',
 })
 export class FormatterResolverService {
-    private readonly keys: DistributiveKeyof<FormatterSource>[] = ['key', 'template', 'function', 'map'];
+    private readonly keys: DistributiveKeyof<FormatterSource>[] = ['key', 'function', 'map', 'template'];
     private readonly defs: Defs = {
         key: (key) => (value) => of(ContezzaObjectUtils.getValue(value, key)),
         template: (template) => {
