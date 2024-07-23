@@ -10,6 +10,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2024-07-23
+|2.11.1
+|View <<Release 2.11.1,release details>>.
+
 |2024-07-04
 |2.11.0
 |View <<Release 2.11.0,release details>>.
@@ -169,6 +173,12 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 2.11.1
+
+New features:
+
+- @contezza/dynamic-forms - `MultiDynamicFormDialogComponent` added.
 
 ==== Release 2.11.0
 
