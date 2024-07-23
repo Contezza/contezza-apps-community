@@ -11,6 +11,7 @@ import { ContezzaObservables, StringUtils } from '@contezza/core/utils';
 
 import { setScriptExecutionTime } from '../store/actions';
 import { ConsoleScript, ExecuteConsolePayload, ExecuteConsoleResponse } from '../interfaces/js-console';
+import { NewJsConsoleService } from './js-console.service';
 
 const { concat, toEndpointTemplate } = StringUtils;
 
@@ -24,9 +25,14 @@ export class JsConsoleService {
     endpointExecutionResult = '';
     templateEndpointExecutionResult = toEndpointTemplate(this.endpointExecutionResult);
 
-    constructor(private readonly webscript: WebscriptService, private readonly nodesApiService: NodesApiService, private readonly store: Store<unknown>) {
-        //this.endpoint = this.jsService.endpoint(); -> Deze zou het moeten zijn, maar die heb ik eruit gehaald voor die foutmelding
-        this.endpoint = 'ootbee/jsconsole'; // -> Deze is dus nu alleen voor het testen
+    constructor(
+        private readonly webscript: WebscriptService,
+        private readonly nodesApiService: NodesApiService,
+        private readonly store: Store<unknown>,
+        private readonly jsService: NewJsConsoleService
+    ) {
+        this.endpoint = this.jsService.endpoint(); // Deze zou het moeten zijn, maar die heb ik eruit gehaald voor die foutmelding
+        //this.endpoint = 'ootbee/jsconsole'; // -> Deze is dus nu alleen voor het testen
         this.endpointExecute = concat(this.endpoint, '/execute');
         this.endpointListscripts = concat(this.endpoint, '/listscripts');
         this.endpointExecutionResult = concat(this.endpoint, '/{resultChannel}/executionResult');

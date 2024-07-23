@@ -25,7 +25,7 @@ config?.modules?.forEach((key) => extraImports.push(mapper[key]));
 const extraExtensionJsons = config?.extensionJsons || [];
 
 @NgModule({
-    imports: [ContezzaCommonModule, JsConsoleExtensionModule.withConfig({ path: Config.Urls.JsConsole, service: ServiceKey.LEGACY }), ContezzaNodeBrowserSharedModule],
+    imports: [ContezzaCommonModule, JsConsoleExtensionModule.withConfig({ path: Config.Urls.JsConsole, service: ServiceKey.OOTB }), ContezzaNodeBrowserSharedModule],
     providers: [
         { provide: ExtensionService, useClass: ContezzaExtensionService },
         MatDialogService.provider,

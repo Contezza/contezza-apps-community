@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 export class NewJsConsoleService implements IJsConsoleService {
     private _service?: IJsConsoleService;
     private get service() {
-        return (this._service ??= this.registry.get(this.config.service || ServiceKey.LEGACY));
+        return (this._service ??= this.registry.get(this.config.service || ServiceKey.OOTB));
     }
 
     constructor(private readonly registry: Registry, @Inject(EXTENSION_CONFIG) @Optional() private readonly config?: ExtensionConfig) {}
