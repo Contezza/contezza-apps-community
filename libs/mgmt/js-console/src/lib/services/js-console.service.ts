@@ -1,7 +1,6 @@
 import { Inject, Injectable, Optional } from '@angular/core';
 
-import { EXTENSION_CONFIG, ExtensionConfig, ServiceKey } from '../../../shared/src/lib/models/extension-config';
-import { IJsConsoleService } from '../../../shared/src/lib/models/js-console.service.interface';
+import { EXTENSION_CONFIG, ExtensionConfig, IJsConsoleService, ServiceKey } from '@contezza/js-console/shared';
 
 import { Registry } from './registry';
 import { ConsoleScript } from '../interfaces/js-console';

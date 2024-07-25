@@ -1,4 +1,3 @@
-import { ConsoleScript } from '../../../../src/lib/interfaces/js-console';
 import { Observable } from 'rxjs';
 
 /**
@@ -9,7 +8,7 @@ export interface IJsConsoleService {
     endpoint: () => string;
     apiCommandsUrl: () => string;
     saveScriptUrl: () => string;
-    saveNew: (payload, data) => Observable<{ scripts: Array<ConsoleScript>; created?: ConsoleScript }>;
+    saveNew: (payload, data) => Observable<{ scripts: Array<any>; created?: any }>;
     saveExisted: (payload) => Observable<any>;
     getConfig: () => object;
     onMonacoLoad;
