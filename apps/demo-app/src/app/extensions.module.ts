@@ -12,39 +12,13 @@ import { PropertyTitleService } from '@contezza/core/property-titles';
 
 import { Config } from './config';
 
-let serviceKey;
-const mapper = {};
-
-const config = window['config'];
-
-// this does not work:
-// const extras = config?.modules?.map((key) => mapper[key]) || [];
-// this is literally the same, but it works:
-const extraImports = [];
-config?.modules?.forEach((key) => extraImports.push(mapper[key]));
-
-const extraExtensionJsons = config?.extensionJsons || [];
-
-const jsConsole = config?.jsConsole;
-
-console.log('Hallo');
-console.log(config);
-console.log(extraExtensionJsons);
-console.log(jsConsole);
-console.log(jsConsole.service);
-if (jsConsole === 'legacy') {
-    serviceKey = ServiceKey.LEGACY;
-} else if (jsConsole === 'ootb') {
-    serviceKey = ServiceKey.OOTB;
-}
-
 @NgModule({
-    imports: [ContezzaCommonModule, JsConsoleExtensionModule.withConfig({ path: Config.Urls.JsConsole, service: serviceKey }), ContezzaNodeBrowserSharedModule],
+    imports: [ContezzaCommonModule, JsConsoleExtensionModule.withConfig({ path: Config.Urls.JsConsole, service: ServiceKey.OOTB }), ContezzaNodeBrowserSharedModule],
     providers: [
         { provide: ExtensionService, useClass: ContezzaExtensionService },
         MatDialogService.provider,
         provideTranslations('demo-app', 'assets/demo-app'),
-        provideExtensionConfig(['demo-app-navbar.json', 'dynamicforms.json', ...extraExtensionJsons]),
+        provideExtensionConfig(['demo-app-navbar.json', 'dynamicforms.json']),
         PropertyTitleService.provideKeyPropertyMapping((key) => (key.startsWith('ALFRESCO.') ? key.slice('ALFRESCO.'.length) : undefined)),
     ],
 })
