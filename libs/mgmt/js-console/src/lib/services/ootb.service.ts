@@ -4,18 +4,17 @@ import { ConsoleScript, OpenSaveScriptDialogPayload, SaveScriptPayload } from '.
 import { IJsConsoleService } from '@contezza/js-console/shared';
 import { catchError, Observable, of } from 'rxjs';
 import { JsConsoleScriptSaveDialogService } from '../dialogs/script-save/script-save-dialog.service';
-import { JsConsoleMonacoEditorService } from './monaco-editor.service';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { WebscriptService } from '@contezza/core/services';
+import { TernModel, TernToTs } from '../utils/tern-to-ts';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class OotbService implements IJsConsoleService {
     private readonly SAVE_SCRIPT_URL = 'ootbee/jsconsole/savescript.json';
-    constructor(
-        private readonly saveDialogService: JsConsoleScriptSaveDialogService,
-        private readonly webscript: WebscriptService,
-        private readonly monacoEditor: JsConsoleMonacoEditorService
-    ) {}
+    static readonly URL_TYPING = './assets/js-console/defs/alfresco.json';
+
+    constructor(private readonly saveDialogService: JsConsoleScriptSaveDialogService, private readonly webscript: WebscriptService, private readonly http: HttpClient) {}
     check() {
         return 'ootb';
     }
@@ -93,8 +92,20 @@ export class OotbService implements IJsConsoleService {
             ) as Observable<{ scripts: Array<ConsoleScript> }>;
     }
 
+    getConfig() {
+        return {
+            baseUrl: './assets',
+            defaultOptions: { scrollBeyondLastLine: false, minimap: { enabled: false }, contextmenu: false },
+            onMonacoLoad: this.onMonacoLoad.bind(this),
+        };
+    }
+
+    private get alfrescoNamespace(): Observable<string> {
+        return this.http.get<TernModel>(OotbService.URL_TYPING).pipe(map((json) => TernToTs.adapt(json)));
+    }
+
     onMonacoLoad() {
-        this.monacoEditor.alfrescoNamespace.subscribe((typing) => {
+        this.alfrescoNamespace.subscribe((typing) => {
             (window as any).monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
                 validate: true,
                 enableSchemaRequest: true,
@@ -105,6 +116,4 @@ export class OotbService implements IJsConsoleService {
             (window as any).monaco.languages.typescript.javascriptDefaults.addExtraLib(typing, '*');
         });
     }
-
-    // TODO: implement interface methods
 }

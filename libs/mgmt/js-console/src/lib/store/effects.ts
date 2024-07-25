@@ -33,6 +33,8 @@ export class JsConsoleEffects {
         () =>
             this.actions$.pipe(
                 ofType(JsConsoleActions.executeScript),
+                // TODO: remove log
+                tap(() => console.log(this.jsConsoleService.check())),
                 tap(() => this.store.dispatch(JsConsoleActions.setExecuteScriptLoading({ executeScriptLoading: true }))),
                 switchMap(() =>
                     this.store.select(getConsolePayloadInfo).pipe(

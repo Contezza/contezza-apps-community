@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 /**
  * Public interface shared by all js-console services.
  */
-// TODO: fill this in with all methods which differ between legacy and ootb.
 export interface IJsConsoleService {
     check: () => string;
     endpoint: () => string;
@@ -12,5 +11,6 @@ export interface IJsConsoleService {
     saveScriptUrl: () => string;
     saveNew: (payload, data) => Observable<{ scripts: Array<ConsoleScript>; created?: ConsoleScript }>;
     saveExisted: (payload) => Observable<any>;
+    getConfig: () => object;
     onMonacoLoad;
 }

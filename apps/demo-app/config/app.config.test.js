@@ -1,5 +1,5 @@
 var config = {
     modules: [],
-    extensionJsons: ['gemams/contezza-search.gemams.navbar.json'],
+    extensionJsons: [],
     jsConsole: { service: 'ootb' },
 };

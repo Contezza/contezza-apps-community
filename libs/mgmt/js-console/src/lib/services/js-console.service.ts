@@ -12,12 +12,11 @@ import { Observable } from 'rxjs';
 export class NewJsConsoleService implements IJsConsoleService {
     private _service?: IJsConsoleService;
     private get service() {
-        return (this._service ??= this.registry.get(this.config.service || ServiceKey.OOTB));
+        return (this._service ??= this.registry.get(this.config.service || ServiceKey.LEGACY));
     }
 
     constructor(private readonly registry: Registry, @Inject(EXTENSION_CONFIG) @Optional() private readonly config?: ExtensionConfig) {}
 
-    // TODO: literally copy paste this for each method in the interface
     check(): string {
         return this.service.check();
     }
@@ -40,6 +39,10 @@ export class NewJsConsoleService implements IJsConsoleService {
 
     saveExisted(payload): Observable<any> {
         return this.service.saveExisted(payload);
+    }
+
+    getConfig(): object {
+        return this.service.getConfig();
     }
 
     onMonacoLoad(): void {

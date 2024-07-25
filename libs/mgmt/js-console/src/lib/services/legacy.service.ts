@@ -9,16 +9,16 @@ import { ConsoleScript, OpenSaveScriptDialogPayload, SaveScriptPayload } from '.
 import { JsConsoleScriptSaveDialogService } from '../dialogs/script-save/script-save-dialog.service';
 import { catchError, filter, map, switchMap } from 'rxjs/operators';
 import { WebscriptService } from '@contezza/core/services';
-import { JsConsoleMonacoEditorService } from './monaco-editor.service';
+import { TernModel, TernToTs } from '../utils/tern-to-ts';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class LegacyService implements IJsConsoleService {
     private readonly SAVE_SCRIPT_URL = 'de/fme/jsconsole/savescript.json';
-    constructor(
-        private readonly saveDialogService: JsConsoleScriptSaveDialogService,
-        private readonly webscript: WebscriptService,
-        private readonly monacoEditor: JsConsoleMonacoEditorService
-    ) {}
+    private readonly API_COMMANDS_URL = 'de/fme/jsconsole/apicommands';
+    static readonly URL_TYPING = './assets/js-console/defs/alfresco.json';
+
+    constructor(private readonly saveDialogService: JsConsoleScriptSaveDialogService, private readonly webscript: WebscriptService, private readonly http: HttpClient) {}
     check() {
         return 'legacy';
     }
@@ -94,8 +94,20 @@ export class LegacyService implements IJsConsoleService {
             ) as Observable<{ scripts: Array<ConsoleScript> }>;
     }
 
+    getConfig() {
+        return {
+            baseUrl: './assets',
+            defaultOptions: { scrollBeyondLastLine: false, minimap: { enabled: false }, contextmenu: false },
+            onMonacoLoad: this.onMonacoLoad.bind(this),
+        };
+    }
+
+    private get alfrescoNamespace(): Observable<string> {
+        return this.http.get<TernModel>(LegacyService.URL_TYPING).pipe(map((json) => TernToTs.adapt(json)));
+    }
+
     onMonacoLoad() {
-        forkJoin([this.webscript.get<any>(this.monacoEditor.API_COMMANDS_URL), this.monacoEditor.alfrescoNamespace]).subscribe(([commands, typing]) => {
+        forkJoin([this.webscript.get<any>(this.API_COMMANDS_URL), this.alfrescoNamespace]).subscribe(([commands, typing]) => {
             (window as any).monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
                 validate: true,
                 enableSchemaRequest: true,
@@ -130,6 +142,4 @@ export class LegacyService implements IJsConsoleService {
             (window as any).monaco.languages.typescript.javascriptDefaults.addExtraLib(typing, '*');
         });
     }
-
-    // TODO: implement interface methods
 }
