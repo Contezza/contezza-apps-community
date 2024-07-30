@@ -16,7 +16,7 @@ import { OpenSaveScriptDialogPayload } from '../interfaces/js-console';
 
 import { JsConsoleService } from '../services/console.service';
 import { JsConsoleNodeActionsService } from '../services/node-actions.service';
-import { JsConsoleSaveScriptService } from '../services/save-script.service';
+import { NewJsConsoleService } from '../services/js-console.service';
 
 @Injectable()
 export class JsConsoleEffects {
@@ -25,7 +25,7 @@ export class JsConsoleEffects {
         private readonly store: Store<unknown>,
         private readonly dialog: MatDialog,
         private readonly consoleService: JsConsoleService,
-        private readonly saveScriptService: JsConsoleSaveScriptService,
+        private readonly jsConsoleService: NewJsConsoleService,
         private readonly nodeActionsService: JsConsoleNodeActionsService
     ) {}
 
@@ -129,8 +129,8 @@ export class JsConsoleEffects {
                 ),
                 switchMap((result: { payload: OpenSaveScriptDialogPayload; data: any }) => {
                     const saveResponse = !result.payload?.selectedScript
-                        ? this.saveScriptService.saveNew(result.payload, false, result.data)
-                        : this.saveScriptService.saveExisted(result.payload);
+                        ? this.jsConsoleService.saveNew(result.payload, result.data)
+                        : this.jsConsoleService.saveExisted(result.payload);
 
                     return saveResponse.pipe(
                         switchMap((response: any) =>
@@ -168,8 +168,8 @@ export class JsConsoleEffects {
                     )
                 ),
                 switchMap((result) =>
-                    this.saveScriptService
-                        .saveNew(result.payload, false, {
+                    this.jsConsoleService
+                        .saveNew(result.payload, {
                             title: result.name,
                             scripts: result.scripts,
                         })
