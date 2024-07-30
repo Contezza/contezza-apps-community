@@ -58,8 +58,7 @@ export interface OpenSaveScriptDialogPayload {
 }
 
 export interface SaveScriptPayload {
-    name: string;
-    isUpdate: boolean;
+    putRequest: string;
     fmScript: string | ArrayBuffer;
     jsScript: string | ArrayBuffer;
 }

@@ -1,4 +1,4 @@
-import { Injectable, Optional } from '@angular/core';
+import { Inject, Injectable, Optional } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -12,14 +12,14 @@ import { AppStore, getAppSelection } from '@alfresco/aca-shared/store';
 
 import { navigate } from '@contezza/common';
 
+import { EXTENSION_CONFIG, ExtensionConfig } from '../models';
 import { openNode } from './actions';
-import { ConfigService } from '../config.service';
 
 @Injectable()
 export class Effects {
     static readonly NODEREF_PREFIX = 'workspace://SpacesStore';
 
-    constructor(private readonly actions$: Actions, private readonly store: Store<AppStore>, @Optional() private readonly config?: ConfigService) {}
+    constructor(private readonly actions$: Actions, private readonly store: Store<AppStore>, @Inject(EXTENSION_CONFIG) @Optional() private readonly config?: ExtensionConfig) {}
 
     readonly openNode$ = createEffect(() =>
         this.actions$.pipe(
