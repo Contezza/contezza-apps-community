@@ -533,9 +533,61 @@
                         }
                     ]
                 }
+            },
+            {
+                "id": "tezza.document-upload.dynamic-forms.object",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "cm:title",
+                            "label": "Titel",
+                            "type": "input"
+                        },
+                        {
+                            "id": "cm:author",
+                            "label": "Auteur",
+                            "type": "input"
+                        }
+                    ]
+                }
             }
         ],
         "columns": [
+            {
+                "id": "tezza.document-upload.columns.document",
+                "columns": [
+                    {
+                        "id": "app.doc.select",
+                        "key": "select",
+                        "type": "select",
+                        "expandedOnly": true,
+                        "order": 10
+                    },
+                    {
+                        "id": "app.doc.thumbnail",
+                        "key": "thumbnail",
+                        "type": "thumbnail",
+                        "sortable": true,
+                        "order": 20
+                    },
+                    {
+                        "id": "app.doc.name",
+                        "key": "name",
+                        "title": "Name",
+                        "type": "text",
+                        "class": "contezza-expand-cell",
+                        "sortable": true,
+                        "order": 30
+                    },
+                    {
+                        "id": "app.doc.actions",
+                        "key": "actions",
+                        "type": "actions",
+                        "collapsedOnly": true,
+                        "order": 40
+                    }
+                ]
+            },
             {
                 "id": "test-search-subform-columns",
                 "columns": [
