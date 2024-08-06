@@ -73,7 +73,7 @@ Needs `"@contezza/js-console": "2.11.2"` or higher.
 It is possible to use different modules of the javascript console with an app. We have implemented the Order of the Bee Javascript Console and the Legacy JS console. The Contezza Apps Community library uses the legacy console as the standard. If you want to use the OOTB JS console you need to implement the following code in your app. 
 
 extensions.module.ts
-```
+```ts
 import { JsConsoleExtensionModule, ServiceKey } from '@contezza/js-console/shared';
 
 const jsConsole = config?.jsConsole;
@@ -88,7 +88,7 @@ const getServiceKey = () => (jsConsole.service === 'legacy' ? ServiceKey.LEGACY 
 ```
 
 app.config.js
-```
+```js
 var config = {
     jsConsole: { service: 'ootb' },
 };
