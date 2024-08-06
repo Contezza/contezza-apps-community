@@ -29,6 +29,7 @@ export class MultiDynamicFormStore<ItemType extends DynamicFormItem = DynamicFor
     readonly form$: Observable<FormGroup> = this.select(({ form }) => form);
     readonly valid$: Observable<boolean> = this.select(this.form$, (form) =>
         form.statusChanges.pipe(
+            startWith(form.status), // Emit the initial status
             debounceTime(0),
             map((status) => status === 'VALID')
         )
