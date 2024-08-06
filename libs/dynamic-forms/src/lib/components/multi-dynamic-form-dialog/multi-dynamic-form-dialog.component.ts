@@ -24,6 +24,6 @@ export class MultiDynamicFormDialogComponent {
     groups: DynamicFormItemGroup[] = [];
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: MultiDynamicFormDialogData) {
-        this.groups = [{ id: 'test-document', title: typeof data.title === 'string' ? data.title : data.title.label, columns: data.columns, items: data.items }];
+        this.groups = [{ id: 'multi-dynamic-form', title: typeof data.title === 'string' ? data.title : data.title.label, columns: data.columns, items: data.items }];
     }
 }
