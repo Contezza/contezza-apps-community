@@ -178,6 +178,12 @@ In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
 
+==== Release 2.12.0
+
+Bugfixes/minor changes:
+
+- @contezza/dynamic-forms - Fix initial validation `MultiDynamicFormDialogComponent`.
+
 ==== Release 2.11.2
 
 Bugfixes/minor changes:
