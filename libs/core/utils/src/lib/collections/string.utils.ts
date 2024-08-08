@@ -2,6 +2,13 @@ import { Join, StringTemplate } from '../types';
 
 export class StringUtils {
     /**
+     * Given a string in kebab-case, returns a copy in camelCase.
+     *
+     * @param s
+     */
+    static readonly kebabCaseToCamelCase = (s: string): string => s.replace(/-./g, (x) => x[1].toUpperCase());
+
+    /**
      * Concatenates the given strings. Returns the same output as the `+` operators, but the output respects any string-literal type among the inputs.
      * E.g.:
      * ```

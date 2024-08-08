@@ -6,13 +6,15 @@ import { catchError, Observable, of } from 'rxjs';
 import { JsConsoleScriptSaveDialogService } from '../dialogs/script-save/script-save-dialog.service';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { WebscriptService } from '@contezza/core/services';
-import { TernModel, TernToTs } from '../utils/tern-to-ts';
 import { HttpClient } from '@angular/common/http';
+
+import { ternToTs } from '../tern/utils';
+import { TernJson } from '../tern/models';
 
 @Injectable({ providedIn: 'root' })
 export class OotbService implements IJsConsoleService {
     private readonly SAVE_SCRIPT_URL = 'ootbee/jsconsole/savescript.json';
-    static readonly URL_TYPING = './assets/js-console/defs/alfresco.json';
+    static readonly URL_TYPING = './assets/js-console/defs/alfrescoV2.json';
 
     constructor(private readonly saveDialogService: JsConsoleScriptSaveDialogService, private readonly webscript: WebscriptService, private readonly http: HttpClient) {}
     check() {
@@ -101,7 +103,7 @@ export class OotbService implements IJsConsoleService {
     }
 
     private get alfrescoNamespace(): Observable<string> {
-        return this.http.get<TernModel>(OotbService.URL_TYPING).pipe(map((json) => TernToTs.adapt(json)));
+        return this.http.get<TernJson>(OotbService.URL_TYPING).pipe(map((json) => ternToTs(json)));
     }
 
     onMonacoLoad() {
