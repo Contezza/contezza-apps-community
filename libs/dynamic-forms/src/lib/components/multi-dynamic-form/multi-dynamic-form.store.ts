@@ -162,21 +162,21 @@ export class MultiDynamicFormStore<ItemType extends DynamicFormItem = DynamicFor
     private getFormatted(forms: ContezzaDynamicForm[], formValues: Record<string, Record<string, any>>): Observable<Record<string, Record<string, any>>> {
         const formatterKey = 'value';
 
-        const keysArray = Object.keys(formValues);
-
         return of(formValues).pipe(
             switchMap((formValues) => {
                 // Iterate over the main keys
                 const formattedEntries$ = Object.keys(formValues).map((key) => {
                     const subRecord = formValues[key];
-                    const index = keysArray.indexOf(key);
 
                     // Iterate over the sub-keys
                     const formattedSubRecord$ = forkJoin(
                         Object.keys(subRecord).map((subKey) => {
-                            const fieldRootField = forms[index].rootField.subfields.find((field) => field.id === subKey) as ContezzaDynamicFormField;
+                            // Get the rootField from the Dynamic Form that matches the record key
+                            const keysArray = Object.keys(formValues);
+                            const index = keysArray.indexOf(key);
+                            const rootFieldConfig = forms[index].rootField.subfields.find((field) => field.id === subKey) as ContezzaDynamicFormField;
 
-                            const formatter = fieldRootField.format?.[formatterKey];
+                            const formatter = rootFieldConfig.format?.[formatterKey];
 
                             if (formatter) {
                                 const newValue$ = formatter(subRecord[subKey]) as Observable<any>;
