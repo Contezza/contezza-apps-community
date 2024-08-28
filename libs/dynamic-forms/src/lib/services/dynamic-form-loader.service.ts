@@ -74,6 +74,9 @@ export class ContezzaDynamicFormLoaderService {
         }
         this.addInitialAndDefaultValues(loadedDynamicForm.form, formId);
         this.reset();
+        if (!loadedDynamicForm.form.id) {
+            loadedDynamicForm.form.id = formId;
+        }
         return { form: loadedDynamicForm.form, layout: loadedLayout?.layout };
     }
 

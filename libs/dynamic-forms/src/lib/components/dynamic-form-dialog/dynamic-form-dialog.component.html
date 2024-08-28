@@ -15,10 +15,17 @@
 
 <mat-dialog-actions class="adf-dialog-buttons">
     <span class="adf-fill-remaining-space"></span>
-    <button mat-button mat-dialog-close="">
+    <button id="cancel" mat-button mat-dialog-close="">
         {{ data.buttons.cancel | translate }}
     </button>
-    <button #submitButton="matButton" mat-raised-button color="primary" [mat-dialog-close]="dynamicForm?.dynamicForm.value$ | async" [disabled]="dynamicForm?.form?.invalid">
+    <button
+        id="submit"
+        #submitButton="matButton"
+        mat-raised-button
+        color="primary"
+        [mat-dialog-close]="dynamicForm?.dynamicForm.value$ | async"
+        [disabled]="dynamicForm?.form?.invalid"
+    >
         {{ data.buttons.submit | translate }}
     </button>
 </mat-dialog-actions>
