@@ -547,10 +547,116 @@
                             "id": "cm:author",
                             "label": "Auteur",
                             "type": "input"
+                        },
+                        {
+                            "id": "tza:documenttype",
+                            "label": "Documenttype",
+                            "type": "autocomplete",
+                            "initialValue": {
+                                "id": "${node->properties.tza:documenttype}"
+                            },
+                            "options": {
+                                "dynamic-source": [
+                                    {
+                                        "id": "Beschrijving",
+                                        "label": "Beschrijving"
+                                    },
+                                    {
+                                        "id": "Rapport",
+                                        "label": "Rapport"
+                                    },
+                                    {
+                                        "id": "Tekening",
+                                        "label": "Tekening"
+                                    },
+                                    {
+                                        "id": "Certificaat",
+                                        "label": "Certificaat"
+                                    },
+                                    {
+                                        "id": "Verklaring",
+                                        "label": "Verklaring"
+                                    },
+                                    {
+                                        "id": "Software",
+                                        "label": "Software"
+                                    }
+                                ],
+                                "labelKey": "label"
+                            },
+                            "validations": [
+                                "required",
+                                {
+                                    "id": "hasProperties",
+                                    "parameters": [
+                                        "id",
+                                        "label"
+                                    ]
+                                }
+                            ],
+                            "format": {
+                                "value": {
+                                    "key": "id"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "id": "tezza.document-upload.dynamic-forms.object2",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "cm:title",
+                            "label": "Titel",
+                            "type": "input"
+                        },
+                        {
+                            "id": "cm:author",
+                            "label": "Auteur",
+                            "type": "input"
+                        },
+                        {
+                            "id": "tza:taal",
+                            "type": "autocomplete",
+                            "label": "Taal",
+                            "defaultValue":  { "id": "nld" },
+                            "initialValue": {
+                                "dynamic-source": "${node->properties.tza:taal}",
+                                "filters": [
+                                    {
+                                        "id": "stringToObject",
+                                        "parameters": "id"
+                                    }
+                                ]
+                            },
+                            "options": {
+                                "type": "webscript",
+                                "dynamic-source": "api/zrc/zaken/waardelijsten?type=taal",
+                                "filters": ["tapLog"],
+                                "labelKey": "label"
+                            },
+                            "validations": [
+                                "required",
+                                {
+                                    "id": "hasProperties",
+                                    "parameters": [
+                                        "id",
+                                        "label"
+                                    ]
+                                }
+                            ],
+                            "format": {
+                                "value": {
+                                    "key": "id"
+                                }
+                            }
                         }
                     ]
                 }
             }
+
         ],
         "columns": [
             {

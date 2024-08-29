@@ -116,23 +116,24 @@ export class DemoShellComponent implements AfterViewInit {
                 file: {
                     type: 'pdf',
                 },
+                formId: 'tezza.document-upload.dynamic-forms.object',
             },
             {
                 name: 'Testnaam2',
                 file: {
                     type: 'pdf',
                 },
+                formId: 'tezza.document-upload.dynamic-forms.object2',
             },
         ];
         const items = [];
-        const formId = 'tezza.document-upload.dynamic-forms.object';
         const columns = this.extensions.getFeature('columns')?.find(({ id }) => id === 'tezza.document-upload.columns.document')?.columns;
         nodes.forEach((node) => {
             items.push({
                 ...node,
                 id: node.name,
                 thumbnail: node.file.type,
-                formId,
+                formId: node.formId,
             });
         });
 
