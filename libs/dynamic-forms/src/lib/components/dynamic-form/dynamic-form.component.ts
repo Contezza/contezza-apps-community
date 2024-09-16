@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -38,6 +38,9 @@ export class ContezzaDynamicFormComponent implements OnInit, OnDestroy {
     @Output()
     enterPressed = new EventEmitter();
 
+    @HostBinding('id')
+    id!: string;
+
     constructor(private readonly settings: SettingsService, private readonly dynamicFormService: ContezzaDynamicFormService) {}
 
     ngOnInit() {
@@ -59,6 +62,7 @@ export class ContezzaDynamicFormComponent implements OnInit, OnDestroy {
         }
 
         this.dynamicForm.build();
+        this.id = this.dynamicForm.rootField.id;
         this.form = this.dynamicForm.form;
         this.layout = this.dynamicForm.layout;
 

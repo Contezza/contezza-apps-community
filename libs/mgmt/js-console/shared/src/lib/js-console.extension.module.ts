@@ -18,7 +18,7 @@ import { EXTENSION_CONFIG, ExtensionConfig } from './models';
     ],
 })
 export class JsConsoleExtensionModule {
-    static withConfig(config: ExtensionConfig): ModuleWithProviders<JsConsoleExtensionModule> {
+    static withConfig(config: ExtensionConfig = {}): ModuleWithProviders<JsConsoleExtensionModule> {
         return NgUtils.getModuleWithConfig(JsConsoleExtensionModule, EXTENSION_CONFIG, config);
     }
 }

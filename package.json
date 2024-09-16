@@ -1,6 +1,6 @@
 {
     "name": "contezza-apps-community",
-    "version": "2.12.0",
+    "version": "2.12.1",
     "scripts": {
         "ng": "nx",
         "postinstall": "node ./decorate-angular-cli.js",
@@ -59,7 +59,6 @@
         "minimatch": "^7.4.2",
         "minimatch-browser": "^1.0.0",
         "moment": "^2.29.4",
-        "moment-es6": "1.0.0",
         "monaco-editor": "^0.36.1",
         "pdfjs-dist": "3.4.120",
         "rxjs": "7.8.1",
