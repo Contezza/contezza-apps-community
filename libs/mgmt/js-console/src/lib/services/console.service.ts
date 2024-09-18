@@ -19,25 +19,18 @@ const { concat, toEndpointTemplate } = StringUtils;
     providedIn: 'root',
 })
 export class JsConsoleService {
-    endpoint = '';
-    endpointExecute = '';
-    endpointListscripts = '';
-    endpointExecutionResult = '';
-    templateEndpointExecutionResult = toEndpointTemplate(this.endpointExecutionResult);
+    private readonly endpoint = this.jsService.endpoint();
+    private readonly endpointExecute = concat(this.endpoint, '/execute');
+    private readonly endpointListscripts = concat(this.endpoint, '/listscripts');
+    private readonly endpointExecutionResult = concat(this.endpoint, '/{resultChannel}/executionResult');
+    private readonly templateEndpointExecutionResult = toEndpointTemplate(this.endpointExecutionResult);
 
     constructor(
         private readonly webscript: WebscriptService,
         private readonly nodesApiService: NodesApiService,
         private readonly store: Store<unknown>,
         private readonly jsService: NewJsConsoleService
-    ) {
-        this.endpoint = this.jsService.endpoint(); // Deze zou het moeten zijn, maar die heb ik eruit gehaald voor die foutmelding
-        //this.endpoint = 'ootbee/jsconsole'; // -> Deze is dus nu alleen voor het testen
-        this.endpointExecute = concat(this.endpoint, '/execute');
-        this.endpointListscripts = concat(this.endpoint, '/listscripts');
-        this.endpointExecutionResult = concat(this.endpoint, '/{resultChannel}/executionResult');
-        // this.templateEndpointExecutionResult = toEndpointTemplate(this.endpointExecutionResult);
-    }
+    ) {}
 
     executeScript(payload: ExecuteConsolePayload): Observable<ExecuteConsoleResponse> {
         const startTime = new Date();

@@ -5,6 +5,7 @@ export * from './distributive-keyof.type';
 export * from './distributive-omit.type';
 export * from './join.type';
 export * from './key-of.type';
+export * from './non-empty-array';
 export * from './object-entry.type';
 export * from './pick-by-type.type';
 export * from './split.type';

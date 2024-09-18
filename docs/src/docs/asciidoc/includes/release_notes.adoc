@@ -10,6 +10,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2024-09-18
+|2.13.0
+|View <<Release 2.13.0,release details>>.
+
 |2024-08-29
 |2.12.1
 |View <<Release 2.12.1,release details>>.
@@ -186,6 +190,17 @@ In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
 
+==== Release 2.13.0
+
+Bugfixes/minor changes:
+
+- @contezza/core/utils - Add utility type `NonEmptyArray`.
+- @contezza/core/utils - Renamed `ContezzaArrayUtils` to `ArrayUtils`. Added static method `isNonEmpty`.
+- @contezza/js-console - OOTB is used by default https://support.contezza.nl/issues/29378[[#29378]].
+- @contezza/js-console - Fix partial execution results not being shown https://support.contezza.nl/issues/29379[[#29379]].
+
+Intern changes: Readme is expanded with documentation for the developers.
+
 ==== Release 2.12.1
 
 Bugfixes/minor changes:
@@ -203,7 +218,7 @@ Bugfixes/minor changes:
 
 Bugfixes/minor changes:
 
-- @contezza/js-console - compatability with both 'legacy' and order of the bee javascript console added.
+- @contezza/js-console - compatibility with both 'legacy' and order of the bee javascript console added.
 
 ==== Release 2.11.1
 

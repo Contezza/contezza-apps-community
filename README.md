@@ -77,7 +77,13 @@ Waar:
 * `email@contezza.nl` is de email van de gebruiker
 * `encoded_password` is het wachtwoord van de gebruiker encoded via de commando `echo -n "password" | base64`
 
-### Importeren zonder releasen
+### Koppeling met de contezza-apps repository
+
+#### Direct koppeling voor ontwikkeling
+
+Het is mogelijk om een app in de contezza-apps repository te starten en direct te koppelen met deze repository, zodat wijzigingen in deze repository direct worden toegepast in de gekozen app. Verder instructies hierover zijn [hier](https://git.contezza.nl/develop/products/contezza-apps/-/blob/main/README.md?ref_type=heads#ontwikkeling-in-contezza-apps-community) te vinden.
+
+#### Exporteren als `.tgz` bestanden
 
 De handigste manier om wijzigingen in deze repository te kunnen testen binnen de contezza-apps repository, bijvoorbeeld ter voorbereiding voor een release, is om alle libraries van deze repository te exporteren als `.tgz` bestanden. Hieronder wordt er beschreven hoe dit gedaan wordt.
 
