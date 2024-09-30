@@ -27,10 +27,7 @@
             "@contezza/people-group-picker": ["./dist/@contezza/people-group-picker/index"],
 
             "@contezza/search/*": ["./dist/@contezza/search/*"],
-            "@contezza/search": ["./dist/@contezza/search/index"],
-
-            "@contezza/third-party/*": ["./dist/@contezza/third-party/*"],
-            "@contezza/third-party": ["./dist/@contezza/third-party/index"]
+            "@contezza/search": ["./dist/@contezza/search/index"]
         }
     },
     "angularCompilerOptions": {
