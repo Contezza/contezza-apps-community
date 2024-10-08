@@ -1,6 +1,6 @@
 import { mergeObjects } from '@alfresco/adf-extensions';
 
-import { ContezzaArrayUtils, ContezzaObjectUtils, OrArray, Tree } from '@contezza/core/utils';
+import { ContezzaArrayUtils, ContezzaObjectUtils, ContezzaUtils, OrArray, Tree } from '@contezza/core/utils';
 
 interface Replacer {
     replaced: string;
@@ -24,6 +24,7 @@ export class Utils {
             id: string;
             prefixIds?: string;
             replace?: Replacer[];
+            script?: string;
         }
 
         if (keysWithImport.length) {
@@ -104,7 +105,7 @@ export class Utils {
                     const { id, ...imported } = getValue(object, importObject.id.endsWith(tagImportant) ? importObject.id.slice(0, -tagImportant.length) : importObject.id);
                     // deep copy to allow the imported object to be imported multiple times with different replacers
                     const copy = JSON.parse(JSON.stringify(imported));
-                    const { replace, prefixIds } = importObject;
+                    const { replace, prefixIds, script } = importObject;
 
                     // replace
                     Utils.replace(copy, replace);
@@ -115,6 +116,11 @@ export class Utils {
                             parser: (subtarget) => Object.entries(subtarget).filter(([key, val]) => val && (key === 'id' || typeof val === 'object')),
                         });
                         idKeys.forEach((idKey) => ContezzaObjectUtils.setValue(copy, idKey, prefixIds + ContezzaObjectUtils.getValue(copy, idKey)));
+                    }
+
+                    // apply custom js
+                    if (script) {
+                        ContezzaUtils.stringToFunction(script)(copy);
                     }
 
                     return copy;
