@@ -17,7 +17,7 @@ provideExtensionQueries(['PATH:"app:company_home/app:dictionary//*" AND TYPE:"cm
 
 ### Extension processors
 
-Using `provideExtensionProcessors` (token `EXTENSION_PROCESSORS`) it is possible to define functions to be applied to the extension configuration. These functions are applied after all extension files are merged. It takes as parameter an array of `void`-valued functions, e.g.
+Using `provideExtensionProcessors` (token `EXTENSION_PROCESSORS`) it is possible to define functions to be applied to the extension configuration. These functions are applied after all extension files are merged but before imports (see paragraph below) are resolved. It takes as parameter an array of `void`-valued functions, e.g.
 ```ts
 provideExtensionProcessors([(config) => console.log(config)])
 ```
