@@ -4,11 +4,10 @@ import { AbstractControl, FormGroup } from '@angular/forms';
 
 import { ComponentStore } from '@ngrx/component-store';
 
-import { combineLatestWith, forkJoin, Observable, of } from 'rxjs';
-import { debounceTime, map, startWith, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { combineLatest, combineLatestWith, debounceTime, map, Observable, of, startWith, switchMap, take, tap, withLatestFrom } from 'rxjs';
 
 import { ContezzaObjectUtils } from '@contezza/core/utils';
-import { ContezzaDynamicForm, ContezzaDynamicFormField, DynamicFormItem } from '@contezza/dynamic-forms/shared';
+import { ContezzaDynamicForm, DynamicFormItem } from '@contezza/dynamic-forms/shared';
 
 import { ContezzaDynamicFormService } from '../../services';
 
@@ -38,8 +37,8 @@ export class MultiDynamicFormStore<ItemType extends DynamicFormItem = DynamicFor
     readonly value$: Observable<any> = this.select(this.form$, (form) => form.valueChanges.pipe(debounceTime(0)))
         .pipe(switchMap((value) => value))
         .pipe(
-            combineLatestWith(this.dynamicForms$),
-            switchMap(([values, form]) => this.getFormatted(form, values))
+            combineLatestWith(this.forms$),
+            switchMap(([values, forms]) => this.getFormatted(forms))
         );
 
     readonly activeItem$: Observable<ItemType | undefined> = this.select(({ activeItem }) => activeItem);
@@ -159,59 +158,18 @@ export class MultiDynamicFormStore<ItemType extends DynamicFormItem = DynamicFor
         this.destroy();
     }
 
-    private getFormatted(forms: ContezzaDynamicForm[], formValues: Record<string, Record<string, any>>): Observable<Record<string, Record<string, any>>> {
-        const formatterKey = 'value';
-
-        return of(formValues).pipe(
-            switchMap((formValues) => {
-                // Iterate over the main keys
-                const formattedEntries$ = Object.keys(formValues).map((key) => {
-                    const subRecord = formValues[key];
-
-                    // Iterate over the sub-keys
-                    const formattedSubRecord$ = forkJoin(
-                        Object.keys(subRecord).map((subKey) => {
-                            // Get the rootField from the Dynamic Form that matches the record key
-                            const keysArray = Object.keys(formValues);
-                            const index = keysArray.indexOf(key);
-                            const rootFieldConfig = forms[index].rootField.subfields.find((field) => field.id === subKey) as ContezzaDynamicFormField;
-
-                            const formatter = rootFieldConfig.format?.[formatterKey];
-
-                            if (formatter) {
-                                const newValue$ = formatter(subRecord[subKey]) as Observable<any>;
-
-                                // Apply formatting and return the result as a tuple of [subKey, formattedValue]
-                                return newValue$.pipe(map((newValue) => [subKey, newValue]));
-                            } else {
-                                // Return the original value as a tuple of [subKey, originalValue]
-                                return of([subKey, subRecord[subKey]]);
-                            }
-                        })
-                    ).pipe(
-                        // Convert the array of tuples back into a Record<string, any>
-                        map((formattedEntries) => {
-                            return formattedEntries.reduce((subAcc, [subKey, formattedValue]) => {
-                                subAcc[subKey as string] = formattedValue;
-                                return subAcc;
-                            }, {} as Record<string, any>);
-                        })
-                    );
-
-                    // Return the formatted sub-record along with its key as a tuple of [key, formattedSubRecord]
-                    return formattedSubRecord$.pipe(map((formattedSubRecord) => [key, formattedSubRecord]));
-                });
-
-                // Combine all the formatted sub-records into the final structure
-                return forkJoin(formattedEntries$).pipe(
-                    map((formattedPairs) => {
-                        return formattedPairs.reduce((acc, [key, formattedSubRecord]) => {
-                            acc[key as string] = formattedSubRecord as Record<string, any>;
-                            return acc;
-                        }, {} as Record<string, Record<string, any>>);
-                    })
-                );
-            })
-        );
+    private getFormatted(forms: DynamicFormsState<ItemType>['forms']): Observable<Record<string, Record<string, any>>> {
+        const formEntries = Array.from(forms.entries());
+        const valueEntries: Observable<[string, Record<string, any>][]> = formEntries?.length
+            ? combineLatest(
+                  formEntries.map(([key, form]) =>
+                      form.value$.pipe(
+                          take(1),
+                          map((value) => [key, value] as const)
+                      )
+                  )
+              )
+            : of([]);
+        return valueEntries.pipe(map((entries) => ContezzaObjectUtils.fromEntries(entries)));
     }
 }
