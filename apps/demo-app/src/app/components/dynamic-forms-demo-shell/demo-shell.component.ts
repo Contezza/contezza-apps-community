@@ -26,6 +26,11 @@ interface FormValue {
     template: `<ng-container *contezzaLet="headerForm.valid | async as valid">
         <div class="header">
             <contezza-dynamic-form [dynamicForm]="headerForm" (keydown.enter)="$event.preventDefault(); button._getHostElement().click()"></contezza-dynamic-form>
+            <ng-container>
+                <div>
+                    <span> {{ formExists ? 'The form exists!' : "This form doesn't exist" }}</span>
+                </div>
+            </ng-container>
             <div>
                 <button #button mat-icon-button [disabled]="!valid" (click)="refresh(headerForm.form.value)"><mat-icon>refresh</mat-icon></button>
                 <button #button mat-icon-button [disabled]="!valid" (click)="showDialog(headerForm.form.value)"><mat-icon>expand_more</mat-icon></button>
@@ -54,6 +59,7 @@ export class DemoShellComponent implements AfterViewInit {
     readonly showForm$ = this.showFormSource.asObservable();
 
     form: ContezzaDynamicForm;
+    formExists: boolean = false;
 
     constructor(
         private readonly cd: ChangeDetectorRef,
@@ -79,7 +85,10 @@ export class DemoShellComponent implements AfterViewInit {
 
     refresh(value: FormValue) {
         this.showFormSource.next(false);
+
+        this.formExists = this.service.has(value.formId, value.layoutId);
         this.form = this.service.get(value.formId, value.layoutId || undefined);
+
         const providedDependencies: Record<string, Observable<any>> = {};
         this.form.provideDependencies(providedDependencies);
         this.style = value.style;
