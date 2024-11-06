@@ -10,6 +10,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2024-11-06
+|2.16.0
+|View <<Release 2.16.0,release details>>.
+
 |2024-10-10
 |2.15.0
 |View <<Release 2.15.0,release details>>.
@@ -197,6 +201,12 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 2.16.0
+
+Bugfixes/minor changes:
+
+- @contezza/core/extensions - Fix bug with resolution of import dependencies.
 
 ==== Release 2.15.0
 
