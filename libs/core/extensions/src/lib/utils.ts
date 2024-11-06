@@ -84,10 +84,12 @@ export class Utils {
             }));
 
             // chain dependencies in import trees
-            importTrees.forEach((tree) => tree.dependsOn.forEach((dep) => (dep.dependsOn = importTrees.filter(({ id }) => id.startsWith(dep.id)))));
+            importTrees.forEach((tree) => tree.dependsOn.forEach((dep) => (dep.dependsOn = importTrees.filter(({ id }) => id === dep.id || id.startsWith(dep.id + '.')))));
 
             // add dependencies for nested keys
-            importTrees.forEach((tree, i, trees) => tree.dependsOn.push(...trees.filter((tree2) => tree2 !== tree).filter((tree2) => tree.id.startsWith(tree2.id))));
+            importTrees.forEach((tree, i, trees) =>
+                tree.dependsOn.push(...trees.filter((tree2) => tree2 !== tree).filter((tree2) => tree.id === tree2.id || tree.id.startsWith(tree2.id + '.')))
+            );
 
             // detect circular dependencies
             try {
