@@ -25,12 +25,12 @@ export class ToolbarComponent implements OnInit {
         {
             id: 'copy-to-all',
             type: ContentActionType.button,
-            title: 'Toepassen op alles',
+            title: 'Toepassen op alle lege velden',
             icon: 'content_copy',
             rules: {
                 visible: 'isActive',
             },
-            actions: { click: 'copyToAll' },
+            actions: { click: 'ifnCopyToAll' },
         },
         {
             id: 'copy-to-active',
