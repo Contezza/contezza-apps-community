@@ -10,6 +10,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2024-11-15
+|2.16.1
+|View <<Release 2.16.1,release details>>.
+
 |2024-11-06
 |2.16.0
 |View <<Release 2.16.0,release details>>.
@@ -201,6 +205,13 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 2.16.1
+
+Bugfixes/minor changes:
+
+- @contezza/dynamic-forms - Fix readonly `multiautocomplete` field.
+- @contezza/dynamic-forms - Change behaviour of `copyToAll` action in `MultiDynamicFormShellComponent` https://support.contezza.nl/issues/29910[[#29910]].
 
 ==== Release 2.16.0
 
