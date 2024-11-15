@@ -46,6 +46,7 @@
                                 ? 'contezza-multiautocomplete-form-field-panel contezza-multiautocomplete-form-field-panel-outline'
                                 : 'contezza-multiautocomplete-form-field-panel'
                         "
+                        [disabled]="readonly"
                         (selectionChange)="onSelectionChange($event)"
                         (focus)="!readonly && beginEditing()"
                         (click)="!readonly && beginEditing()"
