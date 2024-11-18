@@ -1,4 +1,5 @@
 export * from './construct-tuple.type';
+export * from './deep-partial';
 export * from './difference.type';
 export * from './disjoint.type';
 export * from './distributive-keyof.type';

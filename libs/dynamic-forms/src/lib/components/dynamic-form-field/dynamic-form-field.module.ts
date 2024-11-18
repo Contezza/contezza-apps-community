@@ -27,6 +27,7 @@ import {
 import { DialogFieldModule } from '../form-fields/dialog/dialog.field.module';
 import { SearchFieldModule } from '../form-fields/search/search.field.module';
 import { SubformFieldModule } from '../form-fields/subform/subform.field.module';
+import { UploadFieldModule } from '../form-fields/upload/upload.field.module';
 import { VariableFieldModule } from '../form-fields/variable/variable.field.module';
 
 @NgModule({
@@ -56,6 +57,7 @@ import { VariableFieldModule } from '../form-fields/variable/variable.field.modu
         HelpFieldModule,
         SearchFieldModule,
         SubformFieldModule,
+        UploadFieldModule,
         VariableFieldModule,
     ],
     exports: [DynamicFormFieldComponent],
