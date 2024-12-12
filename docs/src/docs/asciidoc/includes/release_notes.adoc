@@ -10,6 +10,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2024-12-12
+|2.17.1
+|View <<Release 2.17.1,release details>>.
+
 |2024-12-03
 |2.17.0
 |View <<Release 2.17.0,release details>>.
@@ -213,6 +217,12 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 2.17.1
+
+Bugfixes/minor changes:
+
+- @contezza/dynamic-forms - Fix behaviour of `multiautocomplete` field with dynamic list of options https://support.contezza.nl/issues/30130[[#30130]].
 
 ==== Release 2.17.0
 

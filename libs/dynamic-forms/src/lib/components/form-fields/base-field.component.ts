@@ -96,14 +96,16 @@ export abstract class ContezzaBaseFieldComponent<BaseValueType = any, ValueType 
     protected findMatchingValue(value: Partial<BaseValueType> | Partial<BaseValueType>[], options: BaseValueType[]): ValueType {
         if (value && options) {
             if (Array.isArray(value)) {
-                return value.map(
-                    (item) =>
-                        options.find((option) =>
-                            Object.entries(item)
-                                .filter(([key, val]) => key !== 'contezzaDisplay' && ['string', 'number', 'boolean'].includes(typeof val))
-                                .every(([key, val]) => option[key] === val)
-                        ) || item
-                ) as ValueType;
+                return value
+                    .map(
+                        (item) =>
+                            options.find((option) =>
+                                Object.entries(item)
+                                    .filter(([key, val]) => key !== 'contezzaDisplay' && ['string', 'number', 'boolean'].includes(typeof val))
+                                    .every(([key, val]) => option[key] === val)
+                            ) || undefined
+                    )
+                    .filter(Boolean) as ValueType;
             } else {
                 return options.find((option) =>
                     Object.entries(value)
