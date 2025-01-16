@@ -17,9 +17,7 @@ export class StringUtils {
     static readonly concat = <T extends string[]>(...strings: T): Join<T, ''> => strings.join('') as Join<T, ''>;
 
     /**
-     * Similar to `StringUtils.concat` but specific for url path concatenation.
-     *
-     * @param strings
+     * @deprecated Use `ApiUtils.concatPath` instead.
      */
     static readonly concatPath = <T extends string[]>(...strings: T): Join<T, '/'> => strings.join('/') as Join<T, '/'>;
 
@@ -78,9 +76,7 @@ export class StringUtils {
     };
 
     /**
-     * Variant of `StringUtils.toTemplate` with specific settings for endpoint templates: placeholders use curly brackets as delimiter, all parameters are required and `string` valued.
-     *
-     * @param string
+     * @deprecated Use `ApiUtils.toEndpointTemplate` instead.
      */
     static readonly toEndpointTemplate = <T extends string>(string: T) => StringUtils.toTemplate(string, { placeholder: '{...}', requireAllParams: true, acceptOnlyString: true });
 }

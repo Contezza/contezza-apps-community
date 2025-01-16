@@ -1,3 +1,8 @@
+/**
+ * @deprecated
+ * Use `ApiUtils.queryParametersToString(...)` instead of `new ContezzaQueryParameters(...).toString()`.
+ * Use `ApiUtils.stringToQueryParameters(...)` instead of `ContezzaQueryParameters.fromString(...)`.
+ */
 export class ContezzaQueryParameters<T> {
     constructor(private readonly queryParameters: T & Partial<Record<keyof T, string | number | boolean>>) {}
 
