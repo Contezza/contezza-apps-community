@@ -1,6 +1,14 @@
-import { Join, StringTemplate } from '../types';
+import { Join, StringFormatConversion, StringTemplate } from '../types';
 
 export class StringUtils {
+    static camelToKebab<T extends string>(string: T): StringFormatConversion.CamelToKebab<T> {
+        return string.replace(/[A-Z]+(?![a-z])|[A-Z]/g, ($, ofs) => (ofs ? '-' : '') + $.toLowerCase()) as StringFormatConversion.CamelToKebab<T>;
+    }
+
+    static kebabToCamel<T extends string>(string: T): StringFormatConversion.KebabToCamel<T> {
+        return string.replace(/-./g, (x) => x[1]!.toUpperCase()) as StringFormatConversion.KebabToCamel<T>;
+    }
+
     /**
      * Concatenates the given strings. Returns the same output as the `+` operators, but the output respects any string-literal type among the inputs.
      * E.g.:

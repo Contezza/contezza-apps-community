@@ -10,6 +10,7 @@ export * from './non-empty-array';
 export * from './object-entry.type';
 export * from './pick-by-type.type';
 export * from './split.type';
+export * from './string-format-conversion';
 export * from './string-template';
 export * from './tree.type';
 export * from './type-of';
