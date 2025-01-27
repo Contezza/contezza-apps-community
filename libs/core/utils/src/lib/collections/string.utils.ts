@@ -1,10 +1,20 @@
 import { Join, StringFormatConversion, StringTemplate } from '../types';
 
 export class StringUtils {
+    /**
+     * Transforms the given string from camel case to kebab case.
+     *
+     * @param string
+     */
     static camelToKebab<T extends string>(string: T): StringFormatConversion.CamelToKebab<T> {
         return string.replace(/[A-Z]+(?![a-z])|[A-Z]/g, ($, ofs) => (ofs ? '-' : '') + $.toLowerCase()) as StringFormatConversion.CamelToKebab<T>;
     }
 
+    /**
+     * Transforms the given string from kebab case to camel case.
+     *
+     * @param string
+     */
     static kebabToCamel<T extends string>(string: T): StringFormatConversion.KebabToCamel<T> {
         return string.replace(/-./g, (x) => x[1]!.toUpperCase()) as StringFormatConversion.KebabToCamel<T>;
     }
