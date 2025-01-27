@@ -2,7 +2,7 @@ import { Provider, Type } from '@angular/core';
 
 import { BaseApi } from '../classes';
 import { HttpClient } from '../interfaces';
-import { Join } from '../types';
+import { Join, QueryParameters } from '../types';
 import { OrArray } from './array-utils.class';
 import { StringUtils } from './string.utils';
 
@@ -46,16 +46,23 @@ export class ApiUtils {
      *
      * @param string
      */
-    static stringToQueryParameters(string: string): Record<string, OrArray<string>> {
-        const queryParameters: Record<string, OrArray<string>> = {};
+    static stringToQueryParameters<T extends string>(string: T): QueryParameters<T> {
+        const formatQueryParameter = (qp: string) => {
+            const formatElementary = (x: string): string | number => {
+                const n = Number(x);
+                return Number.isNaN(n) ? x : n;
+            };
+            return qp.includes(',') ? qp.split(',').map(formatElementary) : formatElementary(qp);
+        };
+        const queryParameters: Record<string, OrArray<string | number>> = {};
         (string.startsWith('?') ? string.slice(1) : string)
             .split('&')
             .filter((value) => value.includes('='))
             .forEach((queryParam) => {
                 const [key, value] = queryParam.split('=');
-                queryParameters[key] = value.includes(',') ? value.split(',') : value;
+                queryParameters[key] = formatQueryParameter(value);
             });
-        return queryParameters;
+        return queryParameters as QueryParameters<T>;
     }
 
     /**
