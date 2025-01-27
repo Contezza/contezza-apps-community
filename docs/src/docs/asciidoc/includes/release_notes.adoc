@@ -10,6 +10,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2025-01-27
+|2.18.0
+|View <<Release 2.18.0,release details>>.
+
 |2024-12-12
 |2.17.1
 |View <<Release 2.17.1,release details>>.
@@ -217,6 +221,15 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 2.18.0
+
+Bugfixes/minor changes:
+
+- @contezza/core/utils - Methods `concatPath` and `toEndpointTemplate` moved from collection `StringUtils` to `ApiUtils`. Existing methods in `StringUtils` are marked as deprecated.
+- @contezza/core/utils - Methods `queryParametersToString` and `stringToQueryParameters` added to collection `ApiUtils`. These functionalities are already present in class `ContezzaQueryParameters` which is now marked as deprecated. Utility type `QueryParameters` added.
+- @contezza/core/utils - Collection `EnumUtils` created, with method `safelyConvert`.
+- @contezza/core/utils - Methods `camelToKebab` and `kebabToCamel` added to collection `StringUtils`. Utility types `StringFormatConversion.CamelToKebab` and `StringFormatConversion.KebabToCamel` added.
 
 ==== Release 2.17.1
 
