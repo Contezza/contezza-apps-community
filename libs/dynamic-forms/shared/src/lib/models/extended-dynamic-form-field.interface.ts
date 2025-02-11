@@ -14,8 +14,8 @@ export interface ContezzaExtendedDynamicFormField extends ContezzaFormField {
     readonly validations?: ContezzaIdResolverSource<ValidationSource>[];
     readonly extras?: Record<string, string | ContezzaDynamicSource>;
     readonly rules?: {
-        readonly [key: string]: string;
-        readonly readonly?: string;
+        readonly [key: string]: string | boolean;
+        readonly readonly?: string | boolean;
     };
 }
 

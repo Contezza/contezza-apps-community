@@ -16,7 +16,9 @@ export class ContezzaDragAndDropDirective {
 
     @HostListener('dragover', ['$event'])
     onDragOver(event: DragEvent) {
-        event.preventDefault();
+        if (this.droppable) {
+            event.preventDefault();
+        }
         this.dragHoveredSource.next(true);
     }
 

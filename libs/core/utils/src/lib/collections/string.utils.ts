@@ -1,12 +1,23 @@
-import { Join, StringTemplate } from '../types';
+import { Join, StringFormatConversion, StringTemplate } from '../types';
 
 export class StringUtils {
     /**
-     * Given a string in kebab-case, returns a copy in camelCase.
+     * Transforms the given string from camel case to kebab case.
      *
-     * @param s
+     * @param string
      */
-    static readonly kebabCaseToCamelCase = (s: string): string => s.replace(/-./g, (x) => x[1].toUpperCase());
+    static camelToKebab<T extends string>(string: T): StringFormatConversion.CamelToKebab<T> {
+        return string.replace(/[A-Z]+(?![a-z])|[A-Z]/g, ($, ofs) => (ofs ? '-' : '') + $.toLowerCase()) as StringFormatConversion.CamelToKebab<T>;
+    }
+
+    /**
+     * Transforms the given string from kebab case to camel case.
+     *
+     * @param string
+     */
+    static kebabToCamel<T extends string>(string: T): StringFormatConversion.KebabToCamel<T> {
+        return string.replace(/-./g, (x) => x[1]!.toUpperCase()) as StringFormatConversion.KebabToCamel<T>;
+    }
 
     /**
      * Concatenates the given strings. Returns the same output as the `+` operators, but the output respects any string-literal type among the inputs.
@@ -24,9 +35,7 @@ export class StringUtils {
     static readonly concat = <T extends string[]>(...strings: T): Join<T, ''> => strings.join('') as Join<T, ''>;
 
     /**
-     * Similar to `StringUtils.concat` but specific for url path concatenation.
-     *
-     * @param strings
+     * @deprecated Use `ApiUtils.concatPath` instead.
      */
     static readonly concatPath = <T extends string[]>(...strings: T): Join<T, '/'> => strings.join('/') as Join<T, '/'>;
 
@@ -85,9 +94,7 @@ export class StringUtils {
     };
 
     /**
-     * Variant of `StringUtils.toTemplate` with specific settings for endpoint templates: placeholders use curly brackets as delimiter, all parameters are required and `string` valued.
-     *
-     * @param string
+     * @deprecated Use `ApiUtils.toEndpointTemplate` instead.
      */
     static readonly toEndpointTemplate = <T extends string>(string: T) => StringUtils.toTemplate(string, { placeholder: '{...}', requireAllParams: true, acceptOnlyString: true });
 }

@@ -1,4 +1,11 @@
 {
+    "CONTEZZA": {
+        "MESSAGES": {
+            "ERRORS": {
+                "FILE_MIMETYPE_INVALID": "Bestandstype is niet toegestaan."
+            }
+        }
+    },
     "APP": {
         "PROFILE": {
             "TITLE": "Mijn profiel"

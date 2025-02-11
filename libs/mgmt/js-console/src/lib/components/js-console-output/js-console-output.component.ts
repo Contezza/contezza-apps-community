@@ -10,7 +10,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { ContezzaLetDirective } from '@contezza/core/directives';
-import { MonacoEditorModule } from '@contezza/third-party/monaco';
+import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 
 import { ExecuteConsoleResponse } from '../../interfaces/js-console';
 import { getExecuteConsoleOutput } from '../../store/selectors';

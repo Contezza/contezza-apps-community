@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { NGX_MONACO_EDITOR_CONFIG } from '@contezza/third-party/monaco';
+import { NGX_MONACO_EDITOR_CONFIG } from 'ngx-monaco-editor-v2';
 
 import { JsConsoleStoreModule } from './store/store.module';
 

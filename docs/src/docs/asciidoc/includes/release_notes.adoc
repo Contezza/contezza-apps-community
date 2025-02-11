@@ -10,6 +10,42 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2025-01-27
+|2.18.0
+|View <<Release 2.18.0,release details>>.
+
+|2024-12-12
+|2.17.1
+|View <<Release 2.17.1,release details>>.
+
+|2024-12-03
+|2.17.0
+|View <<Release 2.17.0,release details>>.
+
+|2024-11-18
+|2.16.2
+|View <<Release 2.16.2,release details>>.
+
+|2024-11-15
+|2.16.1
+|View <<Release 2.16.1,release details>>.
+
+|2024-11-06
+|2.16.0
+|View <<Release 2.16.0,release details>>.
+
+|2024-10-10
+|2.15.0
+|View <<Release 2.15.0,release details>>.
+
+|2024-10-03
+|2.14.0
+|View <<Release 2.14.0,release details>>.
+
+|2024-09-18
+|2.13.0
+|View <<Release 2.13.0,release details>>.
+
 |2024-08-29
 |2.12.1
 |View <<Release 2.12.1,release details>>.
@@ -186,6 +222,90 @@ In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
 
+==== Release 2.18.0
+
+Bugfixes/minor changes:
+
+- @contezza/core/utils - Methods `concatPath` and `toEndpointTemplate` moved from collection `StringUtils` to `ApiUtils`. Existing methods in `StringUtils` are marked as deprecated.
+- @contezza/core/utils - Methods `queryParametersToString` and `stringToQueryParameters` added to collection `ApiUtils`. These functionalities are already present in class `ContezzaQueryParameters` which is now marked as deprecated. Utility type `QueryParameters` added.
+- @contezza/core/utils - Collection `EnumUtils` created, with method `safelyConvert`.
+- @contezza/core/utils - Methods `camelToKebab` and `kebabToCamel` added to collection `StringUtils`. Utility types `StringFormatConversion.CamelToKebab` and `StringFormatConversion.KebabToCamel` added.
+
+==== Release 2.17.1
+
+Bugfixes/minor changes:
+
+- @contezza/dynamic-forms - Fix behaviour of `multiautocomplete` field with dynamic list of options https://support.contezza.nl/issues/30130[[#30130]].
+
+==== Release 2.17.0
+
+Bugfixes/minor changes:
+
+- @contezza/core/directives - Improve `contezzaDragAndDrop` directive UI.
+- @contezza/dynamic-forms - Improve `upload` field UI.
+
+==== Release 2.16.2
+
+New features:
+
+- @contezza/dynamic-forms - Field `upload` added.
+
+Bugfixes/minor changes:
+
+- @contezza/core/utils - Add utility type `DeepPartial`.
+
+
+==== Release 2.16.1
+
+Bugfixes/minor changes:
+
+- @contezza/dynamic-forms - Fix readonly `multiautocomplete` field.
+- @contezza/dynamic-forms - Change behaviour of `copyToAll` action in `MultiDynamicFormShellComponent` https://support.contezza.nl/issues/29910[[#29910]].
+
+==== Release 2.16.0
+
+Bugfixes/minor changes:
+
+- @contezza/core/extensions - Fix bug with resolution of import dependencies.
+
+==== Release 2.15.0
+
+New features:
+
+- @contezza/core/extensions - Implement extension processors and added `provideExtensionProcessors` to help define them.
+
+Bugfixes/minor changes:
+
+- @contezza/core/extensions - Import mechanism supports `script`.
+- @contezza/dynamic-forms - `MultiDynamicForm` applies value formatting at any level in nested dynamic forms.
+- @contezza/dynamic-forms - Method `has` added to `ContezzaDynamicFormService` https://support.contezza.nl/issues/29379[[#29379]].
+
+==== Release 2.14.0
+
+The following libraries have been removed:
+
+- @contezza/third-party/gridster
+- @contezza/third-party/monaco
+
+Add the following dependencies instead:
+
+[source]
+----
+"angular-gridster2": "^14.1.5"
+"ngx-monaco-editor-v2": "14.0.4"
+----
+
+==== Release 2.13.0
+
+Bugfixes/minor changes:
+
+- @contezza/core/utils - Add utility type `NonEmptyArray`.
+- @contezza/core/utils - Renamed `ContezzaArrayUtils` to `ArrayUtils`. Added static method `isNonEmpty`.
+- @contezza/js-console - OOTB is used by default https://support.contezza.nl/issues/29378[[#29378]].
+- @contezza/js-console - Fix partial execution results not being shown https://support.contezza.nl/issues/29379[[#29379]].
+
+Intern changes: Readme is expanded with documentation for the developers.
+
 ==== Release 2.12.1
 
 Bugfixes/minor changes:
@@ -203,7 +323,7 @@ Bugfixes/minor changes:
 
 Bugfixes/minor changes:
 
-- @contezza/js-console - compatability with both 'legacy' and order of the bee javascript console added.
+- @contezza/js-console - compatibility with both 'legacy' and order of the bee javascript console added.
 
 ==== Release 2.11.1
 

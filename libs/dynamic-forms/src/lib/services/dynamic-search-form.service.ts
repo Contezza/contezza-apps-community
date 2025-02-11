@@ -5,13 +5,14 @@ import { ContezzaDynamicSearchForm, ExtendedDynamicFormId } from '@contezza/dyna
 import { ContezzaDynamicFormService } from './dynamic-form.service';
 import { ContezzaDynamicFormLoaderService } from './dynamic-form-loader.service';
 import { ContezzaDynamicSearchFormAdapterService } from './dynamic-search-form-adapter.service';
+import { ExtensionService } from '@alfresco/adf-extensions';
 
 @Injectable({
     providedIn: 'root',
 })
 export class ContezzaDynamicSearchFormService extends ContezzaDynamicFormService {
-    constructor(loader: ContezzaDynamicFormLoaderService, adapter: ContezzaDynamicSearchFormAdapterService) {
-        super(loader, adapter);
+    constructor(loader: ContezzaDynamicFormLoaderService, adapter: ContezzaDynamicSearchFormAdapterService, extensions: ExtensionService) {
+        super(loader, adapter, extensions);
     }
 
     get(formId: ExtendedDynamicFormId, forceNew?: boolean): ContezzaDynamicSearchForm;

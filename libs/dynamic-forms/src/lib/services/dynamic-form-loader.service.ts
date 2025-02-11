@@ -11,13 +11,13 @@ export interface ContezzaLoadedDynamicForm {
     layout: ContezzaFormLayout;
 }
 
-interface JsonDynamicForm extends Importable {
+export interface JsonDynamicForm extends Importable {
     id: string;
     form: JsonDynamicFormField;
     layouts: JsonLayout[];
 }
 
-interface JsonLayout {
+export interface JsonLayout {
     id: string;
     layout: JsonDynamicFormLayout;
 }
@@ -241,9 +241,8 @@ export class ContezzaDynamicFormLoaderService {
                         '${' + ContezzaDynamicFormLoaderService.PLACEHOLDER_INITIAL_VALUE + '$raw->' + path.slice(1).concat([field.id]).join('.') + '}';
                 }
                 if (!field.defaultValue) {
-                    field.defaultValue = { type: 'value', [ContezzaDynamicSourceProcessorService.PARAM_SOURCE] : field.defaultValue === undefined ? null : field.defaultValue };
+                    field.defaultValue = { type: 'value', [ContezzaDynamicSourceProcessorService.PARAM_SOURCE]: field.defaultValue === undefined ? null : field.defaultValue };
                 }
-
             }
 
             field.subfields?.forEach((subfield) => recursiveMap(subfield, path.concat(field.id)));

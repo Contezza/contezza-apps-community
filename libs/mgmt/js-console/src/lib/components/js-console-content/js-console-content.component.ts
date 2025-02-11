@@ -13,7 +13,7 @@ import { map } from 'rxjs/operators';
 import { PipeModule } from '@alfresco/adf-core';
 
 import { DestroyService } from '@contezza/core/services';
-import { MonacoEditorModule } from '@contezza/third-party/monaco';
+import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 
 import { ConsoleEditorOptions, ScriptExecutionTime } from '../../interfaces/js-console';
 import { getEditorOptions, getFmConsoleContent, getJsConsoleContent, getScriptExecutionTime } from '../../store/selectors';

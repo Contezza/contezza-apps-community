@@ -1,4 +1,4 @@
-import { Inject, Injectable, InjectionToken, Injector } from '@angular/core';
+import { Inject, Injectable, InjectionToken, Injector, Optional } from '@angular/core';
 
 import { BehaviorSubject, forkJoin, from, Observable, of, timer } from 'rxjs';
 import { debounce, map, share, switchMap, take, tap } from 'rxjs/operators';
@@ -25,6 +25,21 @@ const EXTENSION_QUERIES = new InjectionToken<string[][]>('extension-queries', {
 export const provideExtensionQueries = (queries: string[]) => ({
     provide: EXTENSION_QUERIES,
     useValue: queries,
+    multi: true,
+});
+
+export type Processor<T extends ExtensionConfig = ExtensionConfig> = (_: T) => void;
+export const EXTENSION_PROCESSORS = new InjectionToken<Processor[][]>('extension-processors');
+/**
+ * Defines functions to be applied to the extension configuration.
+ * These functions are applied after all extension files are merged.
+ * It takes as parameter an array of `void`-valued functions, e.g. `provideExtensionProcessors([(config) => console.log(config)])`.
+ *
+ * @param processors
+ */
+export const provideExtensionProcessors = <T extends ExtensionConfig = ExtensionConfig>(processors: Processor<T>[]) => ({
+    provide: EXTENSION_PROCESSORS,
+    useValue: processors,
     multi: true,
 });
 
@@ -64,7 +79,8 @@ export class ContezzaExtensionService extends ExtensionService {
         loader: ExtensionLoaderService,
         componentRegister: ComponentRegisterService,
         ruleService: RuleService,
-        @Inject(EXTENSION_JSONS) extensionJsons: string[]
+        @Inject(EXTENSION_JSONS) extensionJsons: string[],
+        @Optional() @Inject(EXTENSION_PROCESSORS) private readonly extensionProcessors?: Processor[][]
     ) {
         super(loader, componentRegister, ruleService, extensionJsons);
     }
@@ -78,7 +94,12 @@ export class ContezzaExtensionService extends ExtensionService {
     async load(): Promise<ExtensionConfig> {
         this.loadTrigger.next();
         const config = await this.config$.pipe(take(1)).toPromise();
-        Utils.resolveImports(config);
+        this.extensionProcessors?.flat().forEach((processor) => processor(config));
+        try {
+            Utils.resolveImports(config);
+        } catch (e) {
+            console.error(e);
+        }
         this.setup(config);
         return config;
     }
