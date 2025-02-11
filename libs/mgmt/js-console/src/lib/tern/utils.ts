@@ -40,7 +40,7 @@ const adaptTypeDefinition = (typeDefinition: TypeDefinition): string => {
     return output;
 };
 
-const adaptNamespaceName = StringUtils.kebabCaseToCamelCase;
+const adaptNamespaceName = StringUtils.kebabToCamel;
 
 const adaptClass = (key: string, value: ObjectType): string => {
     let output = '';
