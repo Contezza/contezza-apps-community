@@ -29,6 +29,7 @@
         "removeComments": false,
         "paths": {
             "@contezza/common": ["libs/common/src/index.ts"],
+            "@contezza/core/actions": ["libs/core/actions/src"],
             "@contezza/core/context": ["libs/core/context/src/index.ts"],
             "@contezza/core/dialogs": ["libs/core/dialogs/src/index.ts"],
             "@contezza/core/directives": ["libs/core/directives/src/index.ts"],
@@ -48,7 +49,7 @@
             "@contezza/node-browser": ["libs/mgmt/node-browser/src/index.ts"],
             "@contezza/node-browser/shared": ["libs/mgmt/node-browser/shared/src/index.ts"],
             "@contezza/people-group-picker": ["libs/people-group-picker/src/index.ts"],
-            "@contezza/search/form": ["libs/search/form/src/index.ts"],
+            "@contezza/search/form": ["libs/search/form/src/index.ts"]
         }
     },
     "exclude": ["node_modules", "tmp"],

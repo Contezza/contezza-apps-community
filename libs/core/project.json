@@ -36,6 +36,8 @@
                     "libs/core/**/*.html",
                     "libs/core/utils/**/*.ts",
                     "libs/core/utils/**/*.html",
+                    "libs/core/actions/**/*.ts",
+                    "libs/core/actions/**/*.html",
                     "libs/core/context/**/*.ts",
                     "libs/core/context/**/*.html",
                     "libs/core/extensions/**/*.ts",
