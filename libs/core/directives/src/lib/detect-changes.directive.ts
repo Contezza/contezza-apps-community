@@ -14,7 +14,7 @@ export class DetectChangesDirective implements OnInit, OnDestroy {
     @Input()
     contezzaDetectChanges = 1000;
 
-    private interval!: NodeJS.Timer;
+    private interval!: ReturnType<typeof setInterval>;
 
     constructor(private readonly cd: ChangeDetectorRef) {}
 
