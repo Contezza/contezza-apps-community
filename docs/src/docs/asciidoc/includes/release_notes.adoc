@@ -10,6 +10,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2025-02-21
+|2.19.1
+|View <<Release 2.19.1,release details>>.
+
 |2025-02-11
 |2.19.0
 |View <<Release 2.19.0,release details>>.
@@ -225,6 +229,15 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 2.19.1
+
+Bugfixes/minor changes:
+
+- @contezza/core/actions - Nieuwe library aangemaakt
+- @contezza/core/directives - Directives `DetectChangesDirective`, `IconDirective` and `ReloadOnChangeOfDirective` created.
+- @contezza/core/pipes - Pipes `ApplyPipe` and `SanitizePipe` created. Pipes `DisplayWithPipe` and `SanitizeHtmlPipe` deprecated.
+- @contezza/core/utils - Collection `GeometryUtils` created.
 
 ==== Release 2.19.0
 
