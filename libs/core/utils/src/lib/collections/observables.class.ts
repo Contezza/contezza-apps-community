@@ -1,9 +1,31 @@
 import { EventEmitter } from '@angular/core';
 
-import { forkJoin, from, Observable, ObservedValueOf, of, Subject, Subscriber, TeardownLogic } from 'rxjs';
+import { forkJoin, from, isObservable, Observable, ObservedValueOf, of, Subject, Subscriber, TeardownLogic } from 'rxjs';
 import { filter, finalize, map, switchMap, tap } from 'rxjs/operators';
 
 export class ContezzaObservables {
+    /**
+     * Returns an observable which emits the first element in the given array that satisfies the given testing function.
+     * If no value satisfy the testing function, `of(undefined)` is returned.
+     *
+     * This can be seen as an extension of `array.find(fn)` which supports a testing function which returns an `Observable<boolean>`:
+     * if `fn` returns a `boolean`, then this method is equivalent to `of(array.find(fn))`.
+     *
+     * @param array
+     * @param fn
+     */
+    static find<T>(array: T[], fn: (item: T) => boolean | Observable<boolean>): Observable<T | undefined> {
+        return array.length
+            ? ContezzaObservables.while<T | undefined>(
+                  (response, i) => response === undefined && i < array.length,
+                  (_, i) => {
+                      const item = array[i]!;
+                      return ContezzaObservables.of(fn(item)).pipe(map((value) => (value ? item : undefined)));
+                  }
+              )
+            : of(undefined);
+    }
+
     /**
      * Concatenates a list of observables and returns the merged observed values.
      * The observables are generated using the given `observableGenerator` until the given `whileCondition` evaluates to `false`.
@@ -57,6 +79,15 @@ export class ContezzaObservables {
      */
     static forkJoin(source: Observable<any>[]): Observable<any> {
         return Array.isArray(source) ? (source?.length ? forkJoin(source) : of([])) : Object.keys(source).length ? forkJoin(source) : of({});
+    }
+
+    /**
+     * Variant of rxjs `of` which only applies `of` if the given `value` is not already an `Observable`.
+     *
+     * @param value
+     */
+    static of<T>(value: T | Observable<T>): Observable<T> {
+        return isObservable(value) ? value : of(value);
     }
 
     /**
