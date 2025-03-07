@@ -4,13 +4,12 @@ import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapte
 import { EffectsModule } from '@ngrx/effects';
 
 import { provideTranslations } from '@alfresco/adf-core';
-import { ExtensionService } from '@alfresco/adf-extensions';
 
 import { RouterExtensionService } from '@contezza/core/extensions';
-import { RouteRuleGuard } from '@contezza/core/guards';
 import { RouterStoreModule } from '@contezza/core/stores';
 import { DATE_FORMATS } from '@contezza/core/utils';
 
+import { ExtensionLoaderService } from './services/extension-loader.service';
 import { Effects } from './store/effects';
 
 @NgModule({
@@ -39,12 +38,7 @@ import { Effects } from './store/effects';
     ],
 })
 export class ContezzaCommonModule {
-    constructor(extensions: ExtensionService) {
-        extensions.setEvaluators({
-            'app.selection.single': ({ selection }) => selection?.count === 1,
-        });
-        extensions.setAuthGuards({
-            'route-rule': RouteRuleGuard,
-        });
+    constructor(extensions: ExtensionLoaderService) {
+        extensions.loadDefaults();
     }
 }
