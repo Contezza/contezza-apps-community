@@ -5,3 +5,5 @@ export * from './extension.service';
 export * from './id-resolver.service';
 export * from './router.extension.service';
 export * from './formatter-resolver.service';
+export * from './rule.service';
+export * from './upload-filter.service';

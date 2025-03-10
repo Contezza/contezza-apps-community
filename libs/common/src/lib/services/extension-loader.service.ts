@@ -12,17 +12,18 @@ import { NodesApiService, SearchService } from '@alfresco/adf-content-services';
 import { ExtensionService } from '@alfresco/adf-extensions';
 import { getUserProfile } from '@alfresco/aca-shared/store';
 
-import { ContezzaIdResolverService, ContezzaIdResolverSource, DynamicSourceExtensionService } from '@contezza/core/extensions';
+import { ContezzaIdResolverService, ContezzaIdResolverSource, DynamicSourceExtensionService, RuleService } from '@contezza/core/extensions';
 import { RouteRuleGuard } from '@contezza/core/guards';
 import { WebscriptService } from '@contezza/core/services';
 import { ContezzaRouterState, selectRouteParams } from '@contezza/core/stores';
-import { AdfUtils, ContezzaObjectUtils, ContezzaObservableOperators, ContezzaObservables, ContezzaQueries, OrArray } from '@contezza/core/utils';
+import { AdfUtils, ContezzaObjectUtils, ContezzaObservableOperators, ContezzaObservables, ContezzaQueries, ContezzaUtils, OrArray } from '@contezza/core/utils';
 
 @Injectable({ providedIn: 'root' })
 export class ExtensionLoaderService {
     constructor(
         private readonly extensions: ExtensionService,
         private readonly dynamicSourceExtensions: DynamicSourceExtensionService,
+        private readonly ruleService: RuleService,
         private readonly translate: TranslateService,
         private readonly nodes: NodesApiService,
         private readonly localizedDatePipe: LocalizedDatePipe,
@@ -39,6 +40,11 @@ export class ExtensionLoaderService {
         });
         this.extensions.setAuthGuards({
             'route-rule': RouteRuleGuard,
+        });
+
+        this.ruleService.setEvaluatorGroups({
+            // rules starting with `context=>` are evaluated as js
+            '^(context|\\(context\\))\\s{0,1}=>': (ruleId, context) => ContezzaUtils.stringToFunction(ruleId)(context),
         });
 
         this.dynamicSourceExtensions.setOperators({ delay, startWith });
