@@ -52,6 +52,8 @@
                     "libs/core/stores/**/*.html",
                     "libs/core/dialogs/**/*.ts",
                     "libs/core/dialogs/**/*.html",
+                    "libs/core/effects-helper/**/*.ts",
+                    "libs/core/effects-helper/**/*.html",
                     "libs/core/guards/**/*.ts",
                     "libs/core/guards/**/*.html",
                     "libs/core/notifications/**/*.ts",
