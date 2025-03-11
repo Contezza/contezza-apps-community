@@ -33,6 +33,8 @@
             "@contezza/core/context": ["libs/core/context/src/index.ts"],
             "@contezza/core/dialogs": ["libs/core/dialogs/src/index.ts"],
             "@contezza/core/directives": ["libs/core/directives/src/index.ts"],
+            "@contezza/core/dynamic-component": ["libs/core/dynamic-component/src/index.ts"],
+            "@contezza/core/dynamic-component/shared": ["libs/core/dynamic-component/shared/src/index.ts"],
             "@contezza/core/effects-helper": ["libs/core/effects-helper/src/index.ts"],
             "@contezza/core/extensions": ["libs/core/extensions/src/index.ts"],
             "@contezza/core/guards": ["libs/core/guards/src"],
