@@ -43,7 +43,7 @@ export class UploadFilterService {
             .subscribe();
     }
 
-    addFilters(filters: UploadFilterService['filters']) {
+    addFilters(filters: Record<string, UploadFilter>) {
         Object.assign(this.filters, filters);
     }
 }
