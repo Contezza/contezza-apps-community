@@ -9,6 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { provideTranslations } from '@alfresco/adf-core';
 
 import { RouterExtensionService, RuleService } from '@contezza/core/extensions';
+import { NotificationsModule } from '@contezza/core/notifications';
 import { RouterStoreModule } from '@contezza/core/stores';
 import { DATE_FORMATS } from '@contezza/core/utils';
 
@@ -17,7 +18,7 @@ import { Effects } from './store/effects';
 import { getPaginatorIntl } from './utils/get-paginator-intl';
 
 @NgModule({
-    imports: [RouterStoreModule, EffectsModule.forFeature([Effects])],
+    imports: [NotificationsModule, RouterStoreModule, EffectsModule.forFeature([Effects])],
     providers: [
         {
             provide: MatPaginatorIntl,
