@@ -67,7 +67,9 @@
                     "libs/core/property-titles/**/*.ts",
                     "libs/core/property-titles/**/*.html",
                     "libs/core/responsive/**/*.ts",
-                    "libs/core/responsive/**/*.html"
+                    "libs/core/responsive/**/*.html",
+                    "libs/core/translate/**/*.ts",
+                    "libs/core/translate/**/*.html"
                 ]
             }
         }
