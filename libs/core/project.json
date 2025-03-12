@@ -65,7 +65,9 @@
                     "libs/core/popover/**/*.ts",
                     "libs/core/popover/**/*.html",
                     "libs/core/property-titles/**/*.ts",
-                    "libs/core/property-titles/**/*.html"
+                    "libs/core/property-titles/**/*.html",
+                    "libs/core/responsive/**/*.ts",
+                    "libs/core/responsive/**/*.html"
                 ]
             }
         }

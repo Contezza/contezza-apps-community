@@ -42,6 +42,8 @@
             "@contezza/core/pipes": ["libs/core/pipes/src/index.ts"],
             "@contezza/core/popover": ["libs/core/popover/src/index.ts"],
             "@contezza/core/property-titles": ["libs/core/property-titles/src"],
+            "@contezza/core/responsive": ["libs/core/responsive/src"],
+            "@contezza/core/responsive/components/*": ["libs/core/responsive/src/components/*/src"],
             "@contezza/core/services": ["libs/core/services/src/index.ts"],
             "@contezza/core/stores": ["libs/core/stores/src/index.ts"],
             "@contezza/core/utils": ["libs/core/utils/src/index.ts"],

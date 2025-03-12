@@ -1,0 +1,167 @@
+:root.contezza-responsive-mobile {
+    // Fix the mobile browser bottom bar covering website content
+    // https://hello-js.com/articles/fix-mobile-browser-bottom-bar/
+    height: 100vh;
+    body {
+        position: fixed;
+        width: 100%;
+    }
+
+    .contezza-header {
+        display: none;
+    }
+
+    contezza-floating-button {
+        bottom: 20px;
+    }
+
+    .cdk-overlay-connected-position-bounding-box:first-child {
+        top: unset !important;
+        right: unset !important;
+        bottom: unset !important;
+        left: unset !important;
+        width: 100vw !important;
+        height: max-content !important;
+        pointer-events: auto;
+    }
+
+    // context-menu backdrop
+    .cdk-overlay-backdrop {
+        background-color: var(--theme-text-color);
+        opacity: 1;
+    }
+    .cdk-overlay-container {
+        // apply to dialogs
+        .cdk-global-overlay-wrapper,
+        // apply to context menu
+        .cdk-overlay-backdrop.contezza-context-menu-backdrop + .cdk-overlay-connected-position-bounding-box {
+            .cdk-overlay-pane:not(.contezza-spinner-overlay) {
+                position: absolute !important;
+                top: unset !important;
+                right: unset !important;
+                bottom: 0 !important;
+                left: 0 !important;
+                width: 100vw !important;
+                transform: unset !important;
+                .mat-menu-panel,
+                .mat-select-panel {
+                    max-width: unset !important;
+                    min-width: unset !important;
+                    width: 100vw !important;
+                    max-height: 60vh !important;
+                    transform-origin: bottom !important;
+
+                    .contezza-multiautocomplete-form-field-panel-content-input {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .mat-dialog-container {
+        height: unset;
+        max-height: 170vw;
+        position: fixed;
+        bottom: 0;
+
+        > :first-child {
+            max-width: unset;
+            max-height: max-content;
+        }
+    }
+
+    .adf-dropdown-breadcrumb-path-option.mat-option {
+        height: 3rem;
+        font-size: inherit;
+    }
+
+    /*** sidenav ***/
+
+    // let page content correctly fill the space in mobile screen
+    .adf-sidenav-layout {
+        adf-layout-container > * > .mat-sidenav-content > * > .adf-container-full-width {
+            display: flex;
+            flex-direction: column;
+            & > *:last-child {
+                flex: 1;
+            }
+        }
+    }
+
+    .mobile-sidenav-header-logo-button {
+        .mat-button-focus-overlay {
+            display: none;
+            background-color: transparent !important;
+        }
+    }
+
+    /*** profile ***/
+
+    .app-info-page-content {
+        box-sizing: border-box;
+    }
+
+    .contezza-responsive-embedded-activiti-tasks-message {
+        min-width: 30vw !important;
+    }
+
+    /*** view/preview ***/
+
+    .adf-pdf-viewer__toolbar {
+        max-width: 100%;
+        background-color: var(--theme-card-background-color);
+    }
+
+    .adf-pdf-viewer__toolbar-page-selector {
+        > input {
+            max-width: 20px;
+        }
+
+        span,
+        label {
+            display: none;
+        }
+    }
+
+    .app-viewer .adf-viewer-toolbar {
+        .adf-viewer__display-name {
+            max-width: 75vw;
+        }
+
+        .mat-toolbar-single-row {
+            flex-wrap: wrap;
+            height: fit-content !important;
+        }
+
+        &-actions {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
+    article .app-info-main-content-header {
+        flex-direction: column !important;
+        align-items: inherit;
+    }
+
+    .tezza-overview-page-layout-sidenav {
+        gap: 0;
+    }
+
+    .app-info-main-content-row {
+        flex-direction: column;
+    }
+}
+
+:root.contezza-responsive-tablet {
+    .adf-pdf-viewer__toolbar {
+        background-color: var(--theme-card-background-color);
+    }
+}
+
+:root.contezza-responsive-desktop {
+    .adf-pdf-viewer__toolbar {
+        background-color: var(--theme-card-background-color);
+    }
+}
