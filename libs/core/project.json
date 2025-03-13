@@ -52,14 +52,24 @@
                     "libs/core/stores/**/*.html",
                     "libs/core/dialogs/**/*.ts",
                     "libs/core/dialogs/**/*.html",
+                    "libs/core/dynamic-component/**/*.ts",
+                    "libs/core/dynamic-component/**/*.html",
+                    "libs/core/effects-helper/**/*.ts",
+                    "libs/core/effects-helper/**/*.html",
                     "libs/core/guards/**/*.ts",
                     "libs/core/guards/**/*.html",
+                    "libs/core/notifications/**/*.ts",
+                    "libs/core/notifications/**/*.html",
                     "libs/core/pipes/**/*.ts",
                     "libs/core/pipes/**/*.html",
                     "libs/core/popover/**/*.ts",
                     "libs/core/popover/**/*.html",
                     "libs/core/property-titles/**/*.ts",
-                    "libs/core/property-titles/**/*.html"
+                    "libs/core/property-titles/**/*.html",
+                    "libs/core/responsive/**/*.ts",
+                    "libs/core/responsive/**/*.html",
+                    "libs/core/translate/**/*.ts",
+                    "libs/core/translate/**/*.html"
                 ]
             }
         }

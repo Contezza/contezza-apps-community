@@ -24,6 +24,6 @@ export class IconDirective implements OnInit {
     }
 
     private isSvg(): boolean {
-        return this.contezzaIcon.startsWith('svg');
+        return this.contezzaIcon.includes(':');
     }
 }

@@ -3,5 +3,12 @@
     "dest": "../../dist/@contezza/core",
     "lib": {
         "entryFile": "index.ts"
-    }
+    },
+    "assets": [
+        {
+            "glob": "responsive.theme.scss",
+            "input": "./responsive/src/lib/ui",
+            "output": "/responsive/ui/"
+        }
+    ]
 }
