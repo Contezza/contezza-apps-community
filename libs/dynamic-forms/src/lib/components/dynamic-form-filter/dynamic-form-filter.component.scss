@@ -12,10 +12,13 @@
         color: var(--theme-text-color);
         padding: 15px 0 15px 23px;
     }
-    &-clear-button {
+    &-button {
         margin-top: 25px;
     }
     mat-card-content {
         padding-top: 21px !important;
+    }
+    &-actions{
+        display: flex;
     }
 }

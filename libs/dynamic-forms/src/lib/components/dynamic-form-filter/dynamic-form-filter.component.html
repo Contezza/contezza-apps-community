@@ -6,9 +6,15 @@
     <mat-card>
         <mat-card-content>
             <contezza-dynamic-form [dynamicForm]="dynamicForm"></contezza-dynamic-form>
-            <button mat-raised-button class="contezza-dynamic-form-filter-clear-button" color="primary" (click)="clearFilters()">
-                <mat-icon style="margin-right: 10px">clear_all</mat-icon>{{ 'APP.FILTER.OPTIONS.CLEAR_ALL' | translate }}
-            </button>
+            <div class="contezza-dynamic-form-filter-actions">
+                <button mat-raised-button class="contezza-dynamic-form-filter-button" color="primary" (click)="clearFilters()">
+                    <mat-icon style="margin-right: 10px">clear_all</mat-icon>{{ 'APP.FILTER.OPTIONS.CLEAR_ALL' | translate }}
+                </button>
+                <span class="adf-fill-remaining-space"></span>
+                <button *ngIf="dynamicForm?.queryMode === 'on-trigger'" mat-raised-button class="contezza-dynamic-form-filter-button" color="primary" (click)="searchClicked()">
+                    <mat-icon>search</mat-icon>{{ 'APP.FILTER.SEARCH_BUTTON' | translate }}
+                </button>
+            </div>
         </mat-card-content>
     </mat-card>
     <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>

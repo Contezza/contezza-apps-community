@@ -1,16 +1,44 @@
 import { AbstractControl } from '@angular/forms';
 
-import { combineLatest, Observable, of } from 'rxjs';
-import { debounceTime, filter, map, pluck, startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { combineLatest, Observable, of, Subject } from 'rxjs';
+import { debounce, debounceTime, filter, map, pluck, startWith, switchMap, takeUntil } from 'rxjs/operators';
 
 import { ContezzaObjectUtils } from '@contezza/core/utils';
 
 import { ContezzaDynamicForm } from './dynamic-form.class';
 import { ContezzaDynamicFormField, ContezzaDynamicSearchField } from '../models';
 
+export enum QueryMode {
+    STREAM = 'stream',
+    ON_TRIGGER = 'on-trigger',
+}
+
 export class ContezzaDynamicSearchForm extends ContezzaDynamicForm {
     private _query: Observable<string>;
     get query(): Observable<string> {
+        switch (this._queryMode) {
+            case QueryMode.ON_TRIGGER:
+                return this.query$.pipe(debounce(() => this._trigger$));
+            default:
+                return this.query$;
+        }
+    }
+
+    private _queryMode: QueryMode = QueryMode.STREAM;
+    set queryMode(queryMode: QueryMode) {
+        this._queryMode = queryMode;
+    }
+    get queryMode(): QueryMode {
+        return this._queryMode;
+    }
+
+    private _trigger = new Subject<void>();
+    private _trigger$: Observable<any> = this._trigger.asObservable();
+    trigger() {
+        this._trigger.next();
+    }
+
+    private get query$(): Observable<string> {
         return combineLatest([this._built, this._query]).pipe(
             filter(([built]) => built),
             map(([, query]) => query),

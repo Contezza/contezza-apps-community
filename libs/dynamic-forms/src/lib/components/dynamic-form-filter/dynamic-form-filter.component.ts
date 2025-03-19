@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, Inject, Input, OnInit, Optional } f
 import { takeUntil } from 'rxjs/operators';
 
 import { DestroyService } from '@contezza/core/services';
-import { ContezzaDynamicForm } from '@contezza/dynamic-forms/shared';
+import { ContezzaDynamicSearchForm } from '@contezza/dynamic-forms/shared';
 
 import { ContezzaDynamicFormFilterService } from '../../services';
 
@@ -16,7 +16,7 @@ import { ContezzaDynamicFormFilterService } from '../../services';
 })
 export class ContezzaDynamicFormFilterComponent implements OnInit {
     @Input()
-    dynamicForm: ContezzaDynamicForm;
+    dynamicForm: ContezzaDynamicSearchForm;
 
     @Input()
     loading: boolean;
@@ -34,5 +34,9 @@ export class ContezzaDynamicFormFilterComponent implements OnInit {
 
     clearFilters() {
         this.dynamicForm.reset('default');
+    }
+
+    searchClicked() {
+        this.dynamicForm.trigger();
     }
 }
