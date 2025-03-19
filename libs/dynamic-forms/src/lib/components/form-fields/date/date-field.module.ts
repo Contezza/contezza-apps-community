@@ -9,13 +9,24 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { TranslateModule } from '@ngx-translate/core';
 
+import { TranslatePropertyTitlePipe } from '@contezza/core/property-titles';
 import { ContezzaDynamicFormExtensionService } from '@contezza/dynamic-forms/shared';
 
 import { DateFieldComponent } from './date-field.component';
 import { ContezzaDynamicFormsCommonModule } from '../../../dynamic-forms.common.module';
 
 @NgModule({
-    imports: [CommonModule, ContezzaDynamicFormsCommonModule, MatButtonModule, MatDatepickerModule, MatIconModule, MatInputModule, ReactiveFormsModule, TranslateModule],
+    imports: [
+        CommonModule,
+        ContezzaDynamicFormsCommonModule,
+        MatButtonModule,
+        MatDatepickerModule,
+        MatIconModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        TranslateModule,
+        TranslatePropertyTitlePipe,
+    ],
     declarations: [DateFieldComponent],
     exports: [DateFieldComponent],
 })

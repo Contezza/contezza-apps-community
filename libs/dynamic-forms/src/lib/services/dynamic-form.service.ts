@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 import { JsonRegistry } from '@contezza/core/utils';
 import { ContezzaDynamicForm, ExtendedDynamicFormId } from '@contezza/dynamic-forms/shared';
 
-import { ContezzaDynamicFormLoaderService, ContezzaLoadedDynamicForm } from './dynamic-form-loader.service';
+import { ContezzaDynamicFormLoaderService, ContezzaLoadedDynamicForm, JsonDynamicForm, JsonLayout } from './dynamic-form-loader.service';
 import { ContezzaDynamicFormAdapterService } from './dynamic-form-adapter.service';
+import { ExtensionService } from '@alfresco/adf-extensions';
 
 @Injectable({
     providedIn: 'root',
@@ -13,7 +14,11 @@ export class ContezzaDynamicFormService {
     private readonly loadedDynamicForms: JsonRegistry<ContezzaLoadedDynamicForm> = new JsonRegistry<ContezzaLoadedDynamicForm>();
     private readonly initializedDynamicForms: Record<string, Record<string, ContezzaDynamicForm>> = {};
 
-    constructor(private readonly loader: ContezzaDynamicFormLoaderService, private readonly adapter: ContezzaDynamicFormAdapterService) {}
+    constructor(
+        private readonly loader: ContezzaDynamicFormLoaderService,
+        private readonly adapter: ContezzaDynamicFormAdapterService,
+        private readonly extensions: ExtensionService
+    ) {}
 
     get(formId: ExtendedDynamicFormId, forceNew?: boolean): ContezzaDynamicForm;
     get(formId: string, layoutId?: string, forceNew?: boolean): ContezzaDynamicForm;
@@ -59,5 +64,14 @@ export class ContezzaDynamicFormService {
             this.initializedDynamicForms[formId][layoutId] = this.adapter.adaptDynamicForm(loadedDynamicForm.form, loadedDynamicForm.layout);
         }
         return this.initializedDynamicForms[formId][layoutId];
+    }
+
+    has(formId: string, layoutId?: string): boolean {
+        const form: JsonDynamicForm | null = this.extensions.getFeature('dynamicforms').find((dmForm) => dmForm.id === formId) ?? null;
+        if (!!layoutId && layoutId !== 'default') {
+            const layouts: JsonLayout[] = form.layouts ?? [];
+            return layouts.some((layout) => layout.id === layoutId);
+        }
+        return !!form;
     }
 }

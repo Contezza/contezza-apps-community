@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 /**
- * Allows to use any function in a template, with the change-detection behaviour of a pure pipe.
+ * @deprecated use {@link ApplyPipe} instead
  */
 @Pipe({ standalone: true, name: 'displayWith' })
 export class DisplayWithPipe implements PipeTransform {

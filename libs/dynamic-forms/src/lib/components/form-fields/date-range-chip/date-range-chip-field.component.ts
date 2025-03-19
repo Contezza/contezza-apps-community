@@ -2,8 +2,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild, View
 import { MatMenuTrigger } from '@angular/material/menu';
 import { FormControl } from '@angular/forms';
 
-import { Moment } from 'moment/moment';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 
 import { combineLatest, Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';

@@ -6,6 +6,8 @@
         [labelPosition]="field.settings?.labelPosition"
         [disabled]="readonly"
     >
-        {{ field.label | translate }}
+        <ng-container *contezzaLet="field.label && (field.label | translatePropertyTitle) as label$">
+            <ng-container *contezzaLet="label$ ? (label$ | async) : (field.label | translate) as label">{{ label }}</ng-container>
+        </ng-container>
     </mat-checkbox>
 </ng-container>

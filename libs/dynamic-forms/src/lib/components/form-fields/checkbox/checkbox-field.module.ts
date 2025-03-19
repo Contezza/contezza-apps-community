@@ -5,13 +5,14 @@ import { CommonModule } from '@angular/common';
 
 import { TranslateModule } from '@ngx-translate/core';
 
+import { TranslatePropertyTitlePipe } from '@contezza/core/property-titles';
 import { ContezzaDynamicFormExtensionService } from '@contezza/dynamic-forms/shared';
 
 import { CheckboxFieldComponent } from './checkbox-field.component';
 import { ContezzaLetModule } from '@contezza/core/directives';
 
 @NgModule({
-    imports: [CommonModule, ContezzaLetModule, MatCheckboxModule, ReactiveFormsModule, TranslateModule],
+    imports: [CommonModule, ContezzaLetModule, MatCheckboxModule, ReactiveFormsModule, TranslateModule, TranslatePropertyTitlePipe],
     declarations: [CheckboxFieldComponent],
     exports: [CheckboxFieldComponent],
 })

@@ -1,0 +1,21 @@
+<div mat-dialog-title>
+    <mat-icon id="error-details-icon">info</mat-icon>
+</div>
+
+<ng-container *ngIf="data | json as stringified">
+    <mat-dialog-content>
+        <div class="error-details-container">
+            <pre>{{ stringified }}</pre>
+        </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions class="adf-dialog-buttons">
+        <span class="adf-fill-remaining-space"></span>
+        <button mat-button (click)="clipboard.copy(stringified)">
+            <mat-icon>content_copy</mat-icon>
+        </button>
+        <button mat-button mat-dialog-close="">
+            {{ 'APP.BUTTONS.OK' | translate }}
+        </button>
+    </mat-dialog-actions>
+</ng-container>

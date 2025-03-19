@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { NGX_MONACO_EDITOR_CONFIG } from '@contezza/third-party/monaco';
+import { NGX_MONACO_EDITOR_CONFIG } from 'ngx-monaco-editor-v2';
 
 import { JsConsoleStoreModule } from './store/store.module';
-import { JsConsoleMonacoEditorService } from './services/monaco-editor.service';
 
 import { JsConsoleComponent } from './components/js-console/js-console.component';
+import { NewJsConsoleService } from './services/js-console.service';
 
 const routes: Routes = [
     {
@@ -15,7 +15,7 @@ const routes: Routes = [
     },
 ];
 
-export const monacoEditorConfigFactory = (monacoEditorService: JsConsoleMonacoEditorService) => monacoEditorService.getConfig();
+export const monacoEditorConfigFactory = (jsConsoleService: NewJsConsoleService) => jsConsoleService.getConfig();
 
 @NgModule({
     imports: [RouterModule.forChild(routes), JsConsoleStoreModule],
@@ -23,7 +23,7 @@ export const monacoEditorConfigFactory = (monacoEditorService: JsConsoleMonacoEd
         {
             provide: NGX_MONACO_EDITOR_CONFIG,
             useFactory: monacoEditorConfigFactory,
-            deps: [JsConsoleMonacoEditorService],
+            deps: [NewJsConsoleService],
         },
     ],
 })

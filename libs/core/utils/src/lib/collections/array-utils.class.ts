@@ -1,9 +1,18 @@
-import { KeyOf, TypeOf } from '../types';
+import { KeyOf, NonEmptyArray, TypeOf } from '../types';
 import { ObjectUtils } from './object-utils.class';
 
 export type OrArray<T> = T | T[];
 
-export class ContezzaArrayUtils {
+export class ArrayUtils {
+    /**
+     * Checks whether the given array is non empty. If `true` the output type is narrowed to `NonEmptyArray`.
+     *
+     * @param array
+     */
+    static isNonEmpty<T>(array: T[]): array is NonEmptyArray<T> {
+        return array.length > 0;
+    }
+
     static partition<T>(items: T[], condition: (item: T) => boolean): [T[], T[]] {
         return items.reduce(
             ([trues, falses], item) => {
@@ -166,3 +175,8 @@ export class ContezzaArrayUtils {
         return array.map((item) => ObjectUtils.getValue(item, ...keys));
     }
 }
+
+/**
+ * @deprecated use `ArrayUtils` instead
+ */
+export class ContezzaArrayUtils extends ArrayUtils {}

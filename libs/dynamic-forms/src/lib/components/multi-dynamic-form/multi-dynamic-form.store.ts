@@ -4,8 +4,7 @@ import { AbstractControl, FormGroup } from '@angular/forms';
 
 import { ComponentStore } from '@ngrx/component-store';
 
-import { Observable, of } from 'rxjs';
-import { debounceTime, map, startWith, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { combineLatest, combineLatestWith, debounceTime, map, Observable, of, startWith, switchMap, take, tap, withLatestFrom } from 'rxjs';
 
 import { ContezzaObjectUtils } from '@contezza/core/utils';
 import { ContezzaDynamicForm, DynamicFormItem } from '@contezza/dynamic-forms/shared';
@@ -29,11 +28,18 @@ export class MultiDynamicFormStore<ItemType extends DynamicFormItem = DynamicFor
     readonly form$: Observable<FormGroup> = this.select(({ form }) => form);
     readonly valid$: Observable<boolean> = this.select(this.form$, (form) =>
         form.statusChanges.pipe(
+            startWith(form.status), // Emit the initial status
             debounceTime(0),
             map((status) => status === 'VALID')
         )
     ).pipe(switchMap((valid) => valid));
-    readonly value$: Observable<any> = this.select(this.form$, (form) => form.valueChanges.pipe(debounceTime(0))).pipe(switchMap((value) => value));
+
+    readonly value$: Observable<any> = this.select(this.form$, (form) => form.valueChanges.pipe(debounceTime(0)))
+        .pipe(switchMap((value) => value))
+        .pipe(
+            combineLatestWith(this.forms$),
+            switchMap(([values, forms]) => this.getFormatted(forms))
+        );
 
     readonly activeItem$: Observable<ItemType | undefined> = this.select(({ activeItem }) => activeItem);
     readonly activeForm$: Observable<ContezzaDynamicForm> = this.activeItem$.pipe(switchMap((activeItem) => this.formByItem$(activeItem)));
@@ -150,5 +156,20 @@ export class MultiDynamicFormStore<ItemType extends DynamicFormItem = DynamicFor
 
     ngOnDestroy() {
         this.destroy();
+    }
+
+    private getFormatted(forms: DynamicFormsState<ItemType>['forms']): Observable<Record<string, Record<string, any>>> {
+        const formEntries = Array.from(forms.entries());
+        const valueEntries: Observable<[string, Record<string, any>][]> = formEntries?.length
+            ? combineLatest(
+                  formEntries.map(([key, form]) =>
+                      form.value$.pipe(
+                          take(1),
+                          map((value) => [key, value] as const)
+                      )
+                  )
+              )
+            : of([]);
+        return valueEntries.pipe(map((entries) => ContezzaObjectUtils.fromEntries(entries)));
     }
 }

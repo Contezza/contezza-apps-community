@@ -1,6 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
+/**
+ * @deprecated use {@link SanitizePipe} with parameter `html` instead
+ */
 @Pipe({ standalone: true, name: 'sanitizeHtml' })
 export class SanitizeHtmlPipe implements PipeTransform {
     constructor(private sanitizer: DomSanitizer) {}

@@ -5,8 +5,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { TRANSLATION_PROVIDER } from '@alfresco/adf-core';
 import { provideExtensionConfig } from '@alfresco/adf-extensions';
 
+import { NgUtils } from '@contezza/core/utils';
+
 import { Effects } from './store/effects';
-import { Config, ConfigService } from './config.service';
+import { EXTENSION_CONFIG, ExtensionConfig } from './models';
 
 @NgModule({
     imports: [EffectsModule.forFeature([Effects])],
@@ -16,10 +18,7 @@ import { Config, ConfigService } from './config.service';
     ],
 })
 export class JsConsoleExtensionModule {
-    static withConfig(config: Config): ModuleWithProviders<JsConsoleExtensionModule> {
-        return {
-            ngModule: JsConsoleExtensionModule,
-            providers: [ConfigService.provide(config)],
-        };
+    static withConfig(config: ExtensionConfig = {}): ModuleWithProviders<JsConsoleExtensionModule> {
+        return NgUtils.getModuleWithConfig(JsConsoleExtensionModule, EXTENSION_CONFIG, config);
     }
 }

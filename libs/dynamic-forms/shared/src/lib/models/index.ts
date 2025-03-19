@@ -1,4 +1,6 @@
 export * from './dynamic-form-dialog-data.interface';
+export * from './multi-dynamic-form-dialog-data.interface';
+
 export * from './dynamic-form-item.interface';
 export * from './dynamic-form-layout.interface';
 export * from './dynamic-form-field.interface';

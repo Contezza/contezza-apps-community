@@ -1,4 +1,11 @@
 {
+    "CONTEZZA": {
+        "MESSAGES": {
+            "ERRORS": {
+                "FILE_MIMETYPE_INVALID": "File type cannot be accepted."
+            }
+        }
+    },
     "APP": {
         "PROFILE": {
             "TITLE": "My profile"

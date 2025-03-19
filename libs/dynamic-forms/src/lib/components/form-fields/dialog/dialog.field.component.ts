@@ -119,7 +119,7 @@ export class DialogFieldComponent<ValueType> extends ContezzaBaseFieldComponent<
                     const { multiple, embedded } = this.settings;
                     if (multiple) {
                         if (embedded) {
-                            this.control.setValue(response[this.field.id]);
+                            this.control.setValue(this.field.id in response ? response[this.field.id] : response);
                         } else {
                             const value = this.control.value || [];
                             value.push(response);
