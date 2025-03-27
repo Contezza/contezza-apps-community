@@ -8,7 +8,7 @@
             #dynamicForm
             [dynamicFormId]="data.dynamicFormId"
             [dynamicForm]="data.dynamicForm"
-            (keydown.enter)="$event.preventDefault(); submitButton._getHostElement().click()"
+            (keydown.enter)="$event.preventDefault(); submitButton._elementRef.nativeElement.click()"
         ></contezza-dynamic-form>
     </div>
 </mat-dialog-content>

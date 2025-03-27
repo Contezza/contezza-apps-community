@@ -25,7 +25,7 @@ interface FormValue {
     selector: 'app-dynamic-forms-demo-shell',
     template: `<ng-container *contezzaLet="headerForm.valid | async as valid">
         <div class="header">
-            <contezza-dynamic-form [dynamicForm]="headerForm" (keydown.enter)="$event.preventDefault(); button._getHostElement().click()"></contezza-dynamic-form>
+            <contezza-dynamic-form [dynamicForm]="headerForm" (keydown.enter)="$event.preventDefault(); button._elementRef.nativeElement.click()" />
             <ng-container>
                 <div>
                     <span> {{ formExists ? 'The form exists!' : "This form doesn't exist" }}</span>
@@ -40,7 +40,7 @@ interface FormValue {
         </div>
         <ng-container *ngIf="(showForm$ | async) && valid">
             <div class="content">
-                <contezza-dynamic-form [dynamicForm]="form" [style]="style"></contezza-dynamic-form>
+                <contezza-dynamic-form [dynamicForm]="form" [style]="style" />
             </div>
         </ng-container>
     </ng-container>`,

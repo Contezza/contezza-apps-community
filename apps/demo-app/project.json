@@ -14,29 +14,10 @@
                 "main": "apps/demo-app/src/main.ts",
                 "polyfills": "apps/demo-app/src/polyfills.ts",
                 "tsConfig": "apps/demo-app/tsconfig.app.json",
-                "allowedCommonJsDependencies": [
-                    "moment-es6",
-                    "minimatch",
-                    "zen-observable",
-                    "moment",
-                    "@editorjs/code",
-                    "@editorjs/editorjs",
-                    "@editorjs/header",
-                    "@editorjs/inline-code",
-                    "@editorjs/list",
-                    "@editorjs/marker",
-                    "@editorjs/underline",
-                    "@quanzo/change-font-size",
-                    "cropperjs",
-                    "editorjs-html",
-                    "editorjs-text-color-plugin",
-                    "pdfjs-dist",
-                    "pdfjs-dist/web/pdf_viewer",
-                    "inputmask"
-                ],
+                "allowedCommonJsDependencies": ["buffer", "cropperjs", "event-emitter", "inputmask", "moment", "pdfjs-dist"],
                 "inlineStyleLanguage": "scss",
                 "stylePreprocessorOptions": {
-                    "includePaths": ["node_modules"]
+                    "includePaths": ["node_modules", "node_modules/@alfresco/adf-core/lib", "node_modules/@alfresco/aca-content/ui"]
                 },
                 "assets": [
                     {
@@ -172,9 +153,9 @@
                 ],
                 "styles": [
                     "node_modules/cropperjs/dist/cropper.min.css",
-                    "apps/demo-app/src/styles.scss",
-                    "apps/demo-app/src/assets/fonts/material-icons/material-icons.css",
-                    "apps/demo-app/src/assets/fonts/OpenSans/OpenSans.css"
+                    "node_modules/pdfjs-dist/web/pdf_viewer.css",
+                    "node_modules/@alfresco/aca-content/ui/application.scss",
+                    "apps/demo-app/src/styles.scss"
                 ],
                 "scripts": ["node_modules/pdfjs-dist/build/pdf.js", "node_modules/pdfjs-dist/web/pdf_viewer.js", "node_modules/moment/min/moment.min.js"],
                 "buildOptimizer": false,

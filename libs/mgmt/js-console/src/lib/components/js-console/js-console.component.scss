@@ -4,6 +4,10 @@
     height: 100%;
     overflow: hidden;
 
+    .aca-page-layout .aca-content-header {
+        height: unset;
+        padding: unset;
+    }
     .aca-page-layout .aca-page-layout-header {
         display: contents !important;
 

@@ -1,6 +1,6 @@
 <div class="search">
     <div class="search-form">
-        <mat-form-field floatLabel="never" class="search-form-field">
+        <mat-form-field class="search-form-field">
             <input matInput type="text" [value]="searchTerm" [formControl]="searchInput" placeholder="{{ (title ? title : 'NODE_SELECTOR.SEARCH') | translate }}" #input />
 
             <mat-icon matSuffix *ngIf="!loading && searchTerm?.length" (click)="clear($event)" class="search-form-field-icon"> clear </mat-icon>

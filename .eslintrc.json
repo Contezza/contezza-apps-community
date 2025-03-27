@@ -1,18 +1,14 @@
 {
     "root": true,
     "ignorePatterns": ["libs/**/*"],
+    "parserOptions": {
+        "createDefaultProgram": true
+    },
     "overrides": [
         {
             "files": ["*.ts"],
-            "parserOptions": {
-                "createDefaultProgram": true
-            },
-            "extends": [
-                "plugin:@angular-eslint/ng-cli-compat",
-                "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
-                "plugin:@angular-eslint/template/process-inline-templates"
-            ],
-            "plugins": ["eslint-plugin-rxjs", "eslint-plugin-unicorn", "prettier"],
+            "extends": ["plugin:@angular-eslint/recommended", "plugin:@angular-eslint/template/process-inline-templates"],
+            "plugins": ["@typescript-eslint", "eslint-plugin-rxjs", "eslint-plugin-unicorn", "prettier", "prefer-arrow"],
             "rules": {
                 "prettier/prettier": "error",
                 "no-shadow": "off",
@@ -75,6 +71,7 @@
                 ],
                 "@typescript-eslint/type-annotation-spacing": "off",
                 "@typescript-eslint/unified-signatures": "off",
+                "arrow-body-style": ["error", "as-needed"],
                 "arrow-parents": ["off", "always"],
                 "brace-style": ["off", "off"],
                 "eol-last": "off",
@@ -101,19 +98,15 @@
         },
         {
             "files": ["*.html"],
-            "extends": ["plugin:@angular-eslint/template/recommended"],
+            "parser": "@angular-eslint/template-parser",
+            "extends": ["plugin:@angular-eslint/template/recommended", "plugin:@angular-eslint/template/accessibility"],
+            "plugins": ["@angular-eslint/template"],
             "rules": {
                 "@angular-eslint/template/no-autofocus": "error",
                 "@angular-eslint/template/no-negated-async": "off",
                 "@angular-eslint/template/no-positive-tabindex": "error",
-                "@angular-eslint/template/accessibility-alt-text": "error",
-                "@angular-eslint/template/accessibility-elements-content": "error",
-                "@angular-eslint/template/accessibility-label-for": "error",
-                "@angular-eslint/template/accessibility-table-scope": "error",
-                "@angular-eslint/template/accessibility-valid-aria": "error",
-                "@angular-eslint/template/click-events-have-key-events": "error",
-                "@angular-eslint/template/mouse-events-have-key-events": "error",
-                "@angular-eslint/template/no-distracting-elements": "error"
+                "@angular-eslint/template/no-distracting-elements": "error",
+                "@angular-eslint/template/prefer-self-closing-tags": "error"
             }
         }
     ]

@@ -24,7 +24,6 @@
     },
     "locale": "nl",
     "application": {
-        "storagePrefix": "aca",
         "name": "Demo App",
         "version": "@@project.version@@",
         "logo": "assets/demo-app/images/alfresco-logo-flower.svg",

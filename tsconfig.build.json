@@ -1,5 +1,5 @@
 {
-    "extends": "./tsconfig.base.json",
+    "extends": "./tsconfig.json",
     "exclude": ["libs/**/test.ts", "**/*.spec.ts"],
     "compilerOptions": {
         "declaration": true,

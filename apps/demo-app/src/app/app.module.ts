@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppConfigService, AuthGuard, CoreModule, DebugAppConfigService, TRANSLATION_PROVIDER } from '@alfresco/adf-core';
+import { AuthGuard, AuthModule, CoreModule, provideTranslations } from '@alfresco/adf-core';
 import { AppService } from '@alfresco/aca-shared';
 
 import { AppExtensionsModule } from './extensions.module';
@@ -28,11 +28,9 @@ import localeSv from '@angular/common/locales/sv';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.components';
-import { ContentVersionService } from '@alfresco/adf-content-services';
-import { STORE_INITIAL_APP_DATA } from '@alfresco/aca-shared/store';
 import { SHELL_APP_SERVICE, SHELL_AUTH_TOKEN, ShellModule } from '@alfresco/adf-core/shell';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { ContentServiceExtensionModule, ContentUrlService, CoreExtensionsModule, INITIAL_APP_STATE } from '@alfresco/aca-content';
+import { ContentServiceExtensionModule, CoreExtensionsModule } from '@alfresco/aca-content';
 import { APP_ROUTES, shellChildren } from './app.routes';
 import { AppLoginModule } from './components/login/login.module';
 
@@ -65,36 +63,22 @@ registerLocaleData(localeSv);
         RouterModule.forRoot(APP_ROUTES, {
             useHash: true,
             enableTracing: false, // enable for debug only
-            relativeLinkResolution: 'legacy',
         }),
         ShellModule.withRoutes({ shellChildren: [shellChildren()] }),
         ContentServiceExtensionModule,
         AppExtensionsModule,
+        AuthModule.forRoot({ useHash: true }),
     ],
     providers: [
-        { provide: AppService, useClass: AppService },
-        { provide: AppConfigService, useClass: DebugAppConfigService },
-        { provide: ContentVersionService, useClass: ContentUrlService },
         {
             provide: SHELL_APP_SERVICE,
             useClass: AppService,
         },
         {
             provide: SHELL_AUTH_TOKEN,
-            useClass: AuthGuard,
+            useValue: AuthGuard,
         },
-        {
-            provide: STORE_INITIAL_APP_DATA,
-            useValue: INITIAL_APP_STATE,
-        },
-        {
-            provide: TRANSLATION_PROVIDER,
-            multi: true,
-            useValue: {
-                name: 'app',
-                source: 'assets',
-            },
-        },
+        provideTranslations('app', 'assets'),
     ],
     declarations: [AppComponent],
     bootstrap: [AppComponent],

@@ -15,8 +15,7 @@ export class UploadService {
     private _uploadWithoutDialog?: AdfUploadService;
     private get uploadWithoutDialog(): AdfUploadService {
         if (!this._uploadWithoutDialog) {
-            const untypedUpload: any = this.upload;
-            this._uploadWithoutDialog = new AdfUploadService(untypedUpload.apiService, untypedUpload.appConfigService, untypedUpload.discoveryApiService);
+            this._uploadWithoutDialog = new AdfUploadService();
         }
         return this._uploadWithoutDialog;
     }
