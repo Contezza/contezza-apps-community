@@ -1,4 +1,4 @@
-import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import moment from 'moment';
 import { DateRange } from '../interfaces';
 
@@ -35,4 +35,30 @@ export class ContezzaValidators {
             : { requiredDateRange: { value: control.value } };
 
     static isDirty = (control: AbstractControl): ValidationErrors | null => (control.pristine ? { isDirty: { value: control.value } } : null);
+
+    /**
+     * Requires that at least one of the form controls is filled in.
+     *
+     * @param form
+     */
+    static requiredAtLeastOneField = (form: FormGroup) => {
+        const isFilled = (x: any): boolean => {
+            if (x) {
+                if (typeof x === 'object' && 'from' in x && 'to' in x) {
+                    return !!x.from || !!x.to;
+                } else if (Array.isArray(x)) {
+                    return x.length > 0;
+                } else {
+                    return true;
+                }
+            } else {
+                return false;
+            }
+        };
+        return Object.values(form.controls || {})
+            .map((_) => _.value)
+            .some(isFilled)
+            ? null
+            : { requiredAtLeastOneField: '' };
+    };
 }
