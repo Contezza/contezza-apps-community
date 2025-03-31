@@ -1,4 +1,6 @@
 {
+    "$schema": "../../../node_modules/@alfresco/adf-core/app.config.schema.json",
+
     "ecmHost": "{protocol}//{hostname}{:port}",
     "aosHost": "{protocol}//{hostname}{:port}/alfresco/aos",
     "baseShareUrl": "{protocol}//{hostname}{:port}/#/preview/s",
@@ -8,7 +10,8 @@
     "plugins": {
         "aosPlugin": false,
         "contentService": true,
-        "folderRules": true
+        "folderRules": true,
+        "categoriesEnabled": false
     },
     "oauth2": {
         "host": "http://localhost:4200/auth/realms/alfresco",
