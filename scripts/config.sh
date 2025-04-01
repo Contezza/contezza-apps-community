@@ -15,6 +15,7 @@ LIBS=(
     'node-browser'
     'people-group-picker'
     'dynamic-forms'
+    'content-services'
 );
 
 # Library paths in libs folder
@@ -27,4 +28,5 @@ LIBS_PATHS=(
     'mgmt/node-browser'
     'people-group-picker'
     'dynamic-forms'
+    'content-services'
 );

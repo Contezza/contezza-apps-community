@@ -1,0 +1,53 @@
+.adf-info-drawer-layout{
+    &-header {
+        padding: 13px 0 0 23px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+
+        &-title{
+            width: 197px;
+            height: 32px;
+            font-size: var(--theme-title-font-size);
+            line-height: 1.6;
+            letter-spacing: -.5px;
+            text-align: left;
+        }
+        &-title>div{
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        &-buttons{
+            margin-inline-end: 12px;
+
+        }
+    }
+    &-content{
+        padding: 10px;
+        height: calc(100% - 53px);
+    }
+}
+
+.preset-panel-info-drawer-card{
+    height: calc(100% - 53px);
+    overflow: auto;
+    &-content{
+        &-preset{
+            &-icon{
+                color: var(--theme-secondary-text-color) !important;
+            }
+            &-text {
+                text-align: left;
+                font-size: 14px !important;
+                overflow: hidden;
+                white-space: nowrap;
+                display: block;
+                text-overflow: ellipsis;
+            }
+
+        }
+    }
+}

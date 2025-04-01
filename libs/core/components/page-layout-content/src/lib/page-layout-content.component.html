@@ -1,0 +1,21 @@
+<ng-container *ngFor="let item of items">
+    <ng-container *ngIf="item.children">
+        <contezza-page-layout-content [items]="item.children"></contezza-page-layout-content>
+    </ng-container>
+    <ng-container *ngIf="!item.children">
+        <ng-container *ngTemplateOutlet="leaf; context: { item }"></ng-container>
+    </ng-container>
+</ng-container>
+<ng-template #leaf let-item="item">
+    <ng-container [ngSwitch]="item.type">
+        <ng-container *ngSwitchCase="'icon'">
+            <adf-icon class="contezza-page-layout-content-icon" [class]="item.class || ''" [value]="item.value"></adf-icon>
+        </ng-container>
+        <ng-container *ngSwitchCase="'image'">
+            <img class="contezza-page-layout-content-image" [class]="item.class || ''" alt="" [src]="item.value" />
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+            <div [class]="item.class || ''">{{ item.value | translate }}</div>
+        </ng-container>
+    </ng-container>
+</ng-template>

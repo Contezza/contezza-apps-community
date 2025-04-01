@@ -1,0 +1,712 @@
+{
+    "$schema": "../../../../json-schemas/dynamic-forms/dynamic-forms.schema.json",
+
+    "$id": "lib.search-table-page.document-lists",
+    "$version": "@@project.version@@",
+    "$name": "Search Table Page Document Lists",
+    "$vendor": "Contezza BV",
+
+    "rules": [
+        {
+            "id": "search-table-page.target.hasSidebarFilters",
+            "parameters": [
+                {
+                    "type": "rule",
+                    "value": "!search-table-page.target.hasTypeIn",
+                    "parameters": ["libraries", "recent", "favorites", "downloads"]
+                }
+            ]
+        }
+    ],
+
+    "features": {
+        "columns": [
+            {
+                "id": "files.columns",
+                "columns": [
+                    {
+                        "id": "files.columns.select",
+                        "key": "select",
+                        "type": "select",
+                        "sticky": true,
+                        "resizable": false,
+                        "editable": false,
+                        "order": 1
+                    },
+                    {
+                        "id": "files.columns.thumbnail",
+                        "key": "content.mimeType",
+                        "type": "thumbnail",
+                        "resizable": false,
+                        "sortingKey": "content.mimetype",
+                        "sortable": true,
+                        "editable": false,
+                        "order": 10
+                    },
+                    {
+                        "id": "files.columns.name",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.NAME",
+                        "key": "name",
+                        "template": "app.columns.name",
+                        "type": "text",
+                        "class": "name-column adf-expand-cell-10",
+                        "sortable": true,
+                        "order": 20
+                    },
+                    {
+                        "id": "files.columns.size",
+                        "key": "content.sizeInBytes",
+                        "sortingKey": "content.size",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.SIZE",
+                        "type": "fileSize",
+                        "class": "adf-no-grow-cell adf-ellipsis-cell",
+                        "sortable": true,
+                        "desktopOnly": true,
+                        "order": 30
+                    },
+                    {
+                        "id": "app.files.modifiedOn",
+                        "key": "modifiedAt",
+                        "sortingKey": "cm:modified",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.MODIFIED_ON",
+                        "type": "date",
+                        "format": "timeAgo",
+                        "class": "adf-ellipsis-cell",
+                        "sortable": true,
+                        "desktopOnly": true,
+                        "order": 40
+                    },
+                    {
+                        "id": "app.files.modifiedBy",
+                        "key": "modifiedByUser.displayName",
+                        "sortingKey": "modifiedByUser",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.MODIFIED_BY",
+                        "type": "text",
+                        "class": "adf-ellipsis-cell adf-no-grow-cell",
+                        "sortable": true,
+                        "desktopOnly": true,
+                        "order": 50
+                    }
+                ]
+            },
+            {
+                "id": "libraries.columns",
+                "columns": [
+                    {
+                        "id": "libraries.columns.thumbnail",
+                        "key": "content.mimeType",
+                        "type": "thumbnail",
+                        "format": "withSelection",
+                        "class": "contezza-responsive-mobile-table-cell-15",
+                        "resizable": false,
+                        "sortable": false,
+                        "editable": false,
+                        "sticky": true,
+                        "order": 10
+                    },
+                    {
+                        "id": "title",
+                        "key": "title",
+                        "sortingKey": "title",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.NAME",
+                        "type": "text",
+                        "class": "adf-ellipsis-cell adf-expand-cell-3",
+                        "sortable": true,
+                        "template": "app.columns.libraryName",
+                        "desktopOnly": false,
+                        "order": 20,
+                        "hidden": ["mobile"]
+                    },
+                    {
+                        "id": "mobile-title",
+                        "template": "columns.dynamic-form",
+                        "data": {
+                            "formId": "libraries.column"
+                        },
+                        "hidden": ["tablet", "desktop"],
+                        "resizable": false,
+                        "sortable": false,
+                        "editable": false,
+                        "order": 1000
+                    },
+                    {
+                        "id": "description",
+                        "key": "description",
+                        "sortingKey": "description",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.DESCRIPTION",
+                        "type": "text",
+                        "class": "adf-ellipsis-cell adf-expand-cell-4",
+                        "sortable": true,
+                        "order": 30,
+                        "hidden": ["mobile"],
+                        "desktopOnly": false
+                    },
+                    {
+                        "id": "role",
+                        "key": "role",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.ROLE",
+                        "type": "text",
+                        "class": "adf-no-grow-cell",
+                        "sortable": false,
+                        "template": "app.columns.libraryRole",
+                        "desktopOnly": false,
+                        "order": 40,
+                        "hidden": ["mobile"]
+                    },
+                    {
+                        "id": "visibility",
+                        "key": "visibility",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.VISIBILITY",
+                        "type": "text",
+                        "class": "adf-no-grow-cell",
+                        "sortable": false,
+                        "template": "app.columns.libraryStatus",
+                        "desktopOnly": true,
+                        "hidden": ["mobile"],
+                        "order": 50
+                    },
+                    {
+                        "id": "libraries.context-menu",
+                        "template": "columns.context-menu",
+                        "resizable": false,
+                        "class": "contezza-responsive-mobile-table-cell-15",
+                        "hidden": ["tablet", "desktop"],
+                        "sortable": false,
+                        "editable": false,
+                        "order": 1010
+                    }
+                ]
+            },
+            {
+                "id": "recent.columns",
+                "columns": [
+                    {
+                        "id": "recent.columns.thumbnail",
+                        "key": "content.mimeType",
+                        "sortingKey": "content.mimetype",
+                        "type": "thumbnail",
+                        "format": "withSelection",
+                        "resizable": false,
+                        "sortable": true,
+                        "editable": false,
+                        "sticky": true,
+                        "order": 10
+                    },
+                    {
+                        "id": "recent.columns.name",
+                        "key": "name",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.NAME",
+                        "type": "text",
+                        "class": "adf-ellipsis-cell adf-expand-cell-5",
+                        "sortable": true,
+                        "template": "app.columns.name",
+                        "desktopOnly": false,
+                        "order": 20
+                    },
+                    {
+                        "id": "recent.columns.location",
+                        "key": "path.name",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.LOCATION",
+                        "type": "text",
+                        "class": "adf-ellipsis-cell adf-no-grow-cell",
+                        "sortable": false,
+                        "template": "columns.location",
+                        "desktopOnly": true,
+                        "order": 30
+                    },
+                    {
+                        "id": "recent.columns.size",
+                        "key": "content.sizeInBytes",
+                        "sortingKey": "content.size",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.SIZE",
+                        "type": "fileSize",
+                        "class": "adf-no-grow-cell adf-ellipsis-cell",
+                        "sortable": true,
+                        "desktopOnly": true,
+                        "order": 40
+                    },
+                    {
+                        "id": "recent.columns.modifiedOn",
+                        "key": "modifiedAt",
+                        "sortingKey": "cm:modified",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.MODIFIED_ON",
+                        "type": "date",
+                        "format": "timeAgo",
+                        "class": "adf-ellipsis-cell",
+                        "sortable": true,
+                        "desktopOnly": true,
+                        "order": 50
+                    }
+                ]
+            },
+            {
+                "id": "favorites.columns",
+                "columns": [
+                    {
+                        "id": "favorites.columns.thumbnail",
+                        "key": "content.mimeType",
+                        "type": "thumbnail",
+                        "format": "withSelection",
+                        "resizable": false,
+                        "sortable": false,
+                        "editable": false,
+                        "sticky": true,
+                        "order": 10
+                    },
+                    {
+                        "id": "favorites.columns.name",
+                        "key": "name",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.NAME",
+                        "type": "text",
+                        "class": "adf-ellipsis-cell adf-expand-cell-3",
+                        "template": "app.columns.name",
+                        "desktopOnly": false,
+                        "sortable": false,
+                        "order": 20
+                    },
+                    {
+                        "id": "favorites.columns.location",
+                        "key": "path.name",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.LOCATION",
+                        "type": "text",
+                        "class": "adf-ellipsis-cell adf-no-grow-cell",
+                        "template": "columns.location",
+                        "desktopOnly": true,
+                        "order": 30
+                    },
+                    {
+                        "id": "favorites.columns.size",
+                        "key": "sizeInBytes",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.SIZE",
+                        "type": "fileSize",
+                        "class": "adf-no-grow-cell adf-ellipsis-cell",
+                        "desktopOnly": true,
+                        "order": 40
+                    },
+                    {
+                        "id": "favorites.columns.modifiedOn",
+                        "key": "modifiedAt",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.MODIFIED_ON",
+                        "type": "date",
+                        "format": "timeAgo",
+                        "class": "adf-ellipsis-cell",
+                        "desktopOnly": true,
+                        "order": 50
+                    },
+                    {
+                        "id": "favorites.columns.modifiedBy",
+                        "key": "modifiedByUser.displayName",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.MODIFIED_BY",
+                        "type": "text",
+                        "class": "adf-ellipsis-cell adf-no-grow-cell",
+                        "desktopOnly": true,
+                        "order": 60
+                    }
+                ]
+            },
+            {
+                "id": "app.columns.locked",
+                "columns": [
+                    {
+                        "id": "recent.columns.thumbnail",
+                        "key": "content.mimeType",
+                        "sortingKey": "content.mimetype",
+                        "type": "thumbnail",
+                        "format": "withSelection",
+                        "resizable": false,
+                        "sortable": true,
+                        "editable": false,
+                        "sticky": true,
+                        "order": 10
+                    },
+                    {
+                        "id": "locked.columns.name",
+                        "key": "name",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.NAME",
+                        "type": "text",
+                        "sortable": true,
+                        "template": "app.columns.name",
+                        "desktopOnly": false,
+                        "order": 20
+                    },
+                    {
+                        "id": "locked.columns.location",
+                        "key": "path.name",
+                        "type": "text",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.LOCATION",
+                        "class": "adf-ellipsis-cell adf-no-grow-cell",
+                        "sortable": false,
+                        "template": "columns.location",
+                        "desktopOnly": true,
+                        "order": 30
+                    },
+                    {
+                        "id": "locked.columns.title",
+                        "key": "properties.cm:title",
+                        "sortingKey": "cm:title",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.TITLE",
+                        "type": "text",
+                        "class": "adf-ellipsis-cell adf-expand-cell-5",
+                        "sortable": true,
+                        "desktopOnly": false,
+                        "order": 40
+                    },
+                    {
+                        "id": "app.documents.description",
+                        "key": "properties.cm:description",
+                        "sortingKey": "cm:description",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.DESCRIPTION",
+                        "type": "text",
+                        "class": "adf-ellipsis-cell adf-expand-cell-5",
+                        "sortable": true,
+                        "desktopOnly": true,
+                        "order": 50
+                    }
+                ]
+            },
+            {
+                "id": "downloads.columns",
+                "columns": [
+                    {
+                        "id": "downloads.columns.thumbnail",
+                        "key": "content.mimeType",
+                        "type": "thumbnail",
+                        "format": "withSelection",
+                        "resizable": false,
+                        "sortable": false,
+                        "editable": false,
+                        "sticky": true,
+                        "order": 10
+                    },
+                    {
+                        "id": "downloads.columns.name",
+                        "key": "name",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.NAME",
+                        "type": "text",
+                        "class": "adf-ellipsis-cell adf-expand-cell-5",
+                        "sortable": true,
+                        "desktopOnly": false,
+                        "order": 20
+                    },
+                    {
+                        "id": "downloads.columns.status",
+                        "key": "properties.download:status",
+                        "sortingKey": "download:status",
+                        "title": "Status",
+                        "type": "text",
+                        "class": "adf-ellipsis-cell adf-expand-cell-5",
+                        "desktopOnly": false,
+                        "order": 30
+                    },
+                    {
+                        "id": "downloads.columns.size",
+                        "key": "content.sizeInBytes",
+                        "sortingKey": "content.size",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.SIZE",
+                        "type": "fileSize",
+                        "class": "adf-no-grow-cell adf-ellipsis-cell",
+                        "sortable": true,
+                        "desktopOnly": true,
+                        "order": 40
+                    },
+                    {
+                        "id": "downloads.columns.modifiedOn",
+                        "key": "modifiedAt",
+                        "sortingKey": "cm:modified",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.MODIFIED_ON",
+                        "type": "date",
+                        "format": "timeAgo",
+                        "class": "adf-ellipsis-cell",
+                        "sortable": true,
+                        "desktopOnly": true,
+                        "order": 50
+                    },
+                    {
+                        "id": "downloads.columns.modifiedBy",
+                        "key": "modifiedByUser.displayName",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.MODIFIED_BY",
+                        "type": "text",
+                        "class": "adf-ellipsis-cell adf-no-grow-cell",
+                        "desktopOnly": true,
+                        "order": 60
+                    }
+                ]
+            },
+            {
+                "id": "personal-files.columns",
+                "columns": [
+                    {
+                        "id": "personal-files.columns.thumbnail",
+                        "key": "content.mimeType",
+                        "type": "thumbnail",
+                        "format": "withSelection",
+                        "class": "contezza-responsive-mobile-table-cell-15",
+                        "resizable": false,
+                        "sortable": false,
+                        "editable": false,
+                        "sticky": true,
+                        "order": 10
+                    },
+                    {
+                        "id": "name",
+                        "key": "name",
+                        "sortingKey": "name",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.NAME",
+                        "type": "text",
+                        "class": "adf-ellipsis-cell adf-expand-cell-3",
+                        "sortable": true,
+                        "template": "app.columns.name",
+                        "desktopOnly": false,
+                        "order": 20
+                    },
+                    {
+                        "id": "personal-files.columns.size",
+                        "key": "content.sizeInBytes",
+                        "sortingKey": "content.size",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.SIZE",
+                        "type": "fileSize",
+                        "class": "adf-no-grow-cell adf-ellipsis-cell",
+                        "sortable": true,
+                        "desktopOnly": true,
+                        "hidden": ["mobile"],
+                        "order": 30
+                    },
+                    {
+                        "id": "personal-files.columns.modifiedOn",
+                        "key": "modifiedAt",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.MODIFIED_ON",
+                        "sortingKey": "cm:modified",
+                        "type": "date",
+                        "format": "timeAgo",
+                        "class": "adf-ellipsis-cell",
+                        "sortable": true,
+                        "desktopOnly": true,
+                        "hidden": ["mobile"],
+                        "order": 40
+                    },
+                    {
+                        "id": "personal-files.columns.modifiedBy",
+                        "key": "modifiedByUser.displayName",
+                        "title": "APP.DOCUMENT_LIST.COLUMNS.MODIFIED_BY",
+                        "sortingKey": "modifiedByUser",
+                        "type": "text",
+                        "class": "adf-ellipsis-cell adf-no-grow-cell",
+                        "sortable": true,
+                        "desktopOnly": true,
+                        "hidden": ["mobile"],
+                        "order": 50
+                    }
+                ]
+            }
+        ],
+        "searchTablePageConfigs": [
+            {
+                "id": "libraries-config",
+                "title": "APP.BROWSE.LIBRARIES.TITLE",
+                "columnsId": "libraries.columns",
+                "actionContext": { "target": "search-table-page.libraries" },
+                "preferencesId": "libraries",
+                "preferences": ["columns", "sorting", "maxItems"],
+                "queryParams": ["header-filters", "skipCount"],
+                "actions": {
+                    "dblclick": "[CORE] NAVIGATE_TO_LIBRARY",
+                    "contextmenu": "CONTEXT_MENU"
+                },
+                "searchStrategyId": "sites",
+                "default": {
+                    "sorting": {
+                        "field": "title",
+                        "ascending": true
+                    }
+                },
+                "headerFiltersId": "input-form",
+                "emptyContent": {
+                    "icon": "folder",
+                    "title": "APP.BROWSE.LIBRARIES.EMPTY_STATE.FILE_LIBRARIES.TITLE",
+                    "subtitle": "APP.BROWSE.LIBRARIES.EMPTY_STATE.FILE_LIBRARIES.TEXT"
+                }
+            },
+            {
+                "id": "recent-config",
+                "title": "APP.BROWSE.RECENT.TITLE",
+                "columnsId": "recent.columns",
+                "actionContext": { "target": "search-table-page.recent" },
+                "preferencesId": "recent",
+                "preferences": ["columns", "sorting", "maxItems"],
+                "actions": {
+                    "dblclick": "[CORE] NAVIGATE_TO",
+                    "contextmenu": "CONTEXT_MENU"
+                },
+                "queryTemplate": {
+                    "query": { "query": "${query}", "language": "afts" },
+                    "filterQueries": [
+                        { "query": "cm:modified:[NOW/DAY-30DAYS TO NOW/DAY+1DAY]" },
+                        { "query": "cm:modifier:'admin' OR cm:creator:'admin'" },
+                        {
+                            "query": "TYPE:\"content\" AND -PNAME:\"0/wiki\" AND -TYPE:\"app:filelink\" AND -TYPE:\"cm:thumbnail\" AND -TYPE:\"cm:failedThumbnail\" AND -TYPE:\"cm:rating\" AND -TYPE:\"dl:dataList\" AND -TYPE:\"dl:todoList\" AND -TYPE:\"dl:issue\" AND -TYPE:\"dl:contact\" AND -TYPE:\"dl:eventAgenda\" AND -TYPE:\"dl:event\" AND -TYPE:\"dl:task\" AND -TYPE:\"dl:simpletask\" AND -TYPE:\"dl:meetingAgenda\" AND -TYPE:\"dl:location\" AND -TYPE:\"fm:topic\" AND -TYPE:\"fm:post\" AND -TYPE:\"ia:calendarEvent\" AND -TYPE:\"lnk:link\""
+                        }
+                    ],
+                    "include": ["path", "properties", "allowableOperations"]
+                },
+                "emptyContent": {
+                    "icon": "access_time",
+                    "title": "APP.BROWSE.RECENT.EMPTY_STATE.TITLE",
+                    "subtitle": "APP.BROWSE.RECENT.EMPTY_STATE.TEXT"
+                }
+            },
+            {
+                "id": "locked-config",
+                "title": "APP.DASHBOARD.SIDEBAR_ITEMS.LOCKED.TITLE",
+                "columnsId": "app.columns.locked",
+                "actionContext": { "target": "search-table-page.locked" },
+                "preferencesId": "locked",
+                "preferences": ["columns", "sorting", "maxItems"],
+                "queryParams": ["skipCount"],
+                "actions": {
+                    "dblclick": "[CORE] NAVIGATE_TO",
+                    "contextmenu": "CONTEXT_MENU"
+                },
+                "emptyContent": {
+                    "icon": "folder",
+                    "title": "TEZZA.DASHBOARD.WIDGETS.FILES.EMPTY_LIST.TITLE",
+                    "subtitle": "TEZZA.DASHBOARD.WIDGETS.FILES.EMPTY_LIST.SUBTITLE"
+                },
+                "baseQuery": "ASPECT:\"cm:lockable\" AND (cm:lockType:\"READ_ONLY_LOCK\" OR cm:lockType:\"WRITE_LOCK\")",
+                "queryTemplate": {
+                    "query": { "query": "${query}", "language": "afts" },
+                    "filterQueries": [{ "query": "${baseQuery}" }],
+                    "include": ["path", "properties", "allowableOperations", "aspectNames"]
+                },
+                "headerFiltersId": "lock-filter"
+            },
+            {
+                "id": "favorites-config",
+                "title": "APP.BROWSE.FAVORITES.TITLE",
+                "columnsId": "favorites.columns",
+                "actionContext": { "target": "search-table-page.favorites" },
+                "preferencesId": "favorites",
+                "preferences": ["columns", "maxItems"],
+                "actions": {
+                    "dblclick": "[CORE] NAVIGATE_TO",
+                    "contextmenu": "CONTEXT_MENU"
+                },
+                "baseQuery": "(EXISTS(target/file) OR EXISTS(target/folder))",
+                "searchStrategyId": "favorites",
+                "emptyContent": {
+                    "icon": "star_rate",
+                    "title": "APP.BROWSE.FAVORITES.EMPTY_STATE.TITLE",
+                    "subtitle": "APP.BROWSE.FAVORITES.EMPTY_STATE.TEXT"
+                }
+            },
+            {
+                "id": "downloads-config",
+                "title": "CONTENT_SERVICES.SEARCH.BROWSE.DOWNLOADS.TITLE",
+                "columnsId": "downloads.columns",
+                "actionContext": { "target": "search-table-page.downloads" },
+                "preferencesId": "downloads",
+                "preferences": ["columns", "maxItems"],
+                "queryParams": ["skipCount"],
+                "actions": {
+                    "dblclick": "DOWNLOAD_NODES",
+                    "contextmenu": "CONTEXT_MENU"
+                },
+                "featureKeys": {
+                    "floatingButton": ""
+                },
+                "emptyContent": {
+                    "icon": "download",
+                    "title": "CONTENT_SERVICES.SEARCH.BROWSE.DOWNLOADS.EMPTY_STATE.TITLE",
+                    "subtitle": "CONTENT_SERVICES.SEARCH.BROWSE.DOWNLOADS.EMPTY_STATE.TEXT"
+                },
+                "queryTemplate": {
+                    "query": { "query": "TYPE:\"download:download\"", "language": "afts" },
+                    "include": ["path", "properties", "allowableOperations", "aspectNames"]
+                }
+            },
+            {
+                "id": "personal-files-config",
+                "title": "APP.BROWSE.PERSONAL.TITLE",
+                "columnsId": "personal-files.columns",
+                "actionContext": { "target": "search-table-page.personal-files" },
+                "preferencesId": "personal-files",
+                "preferences": ["sidebar-filters", "columns", "sorting", "maxItems"],
+                "actions": {
+                    "dblclick": "[CORE] NAVIGATE_TO",
+                    "contextmenu": "CONTEXT_MENU"
+                },
+                "searchStrategyId": "browse-files",
+                "queryParams": ["skipCount"],
+                "currentFolder": {
+                    "type": "userProfile",
+                    "dynamic-source": "id",
+                    "filters": [
+                        {
+                            "id": "map",
+                            "parameters": "id=> return id !== 'admin' ? 'PATH:\"/app:company_home/app:user_homes/cm:'+id.replace('@','_x0040_')+'\"' : 'PATH:\"/app:company_home\"'"
+                        },
+                        "search",
+                        {
+                            "id": "getValue",
+                            "parameters": "0.entry"
+                        }
+                    ]
+                },
+                "queryTemplate": {
+                    "query": { "query": "${query}", "language": "afts" },
+                    "include": ["path", "properties", "allowableOperations", "aspectNames"]
+                },
+                "sidebarFiltersId": "sidebar-filters"
+            },
+            {
+                "id": "browse-files-config",
+                "title": "APP.BROWSE.PERSONAL.TITLE",
+                "showBreadcrumb": true,
+                "breadcrumbRootFolderRule": "node.aspectNames.includes('cm:ownable')",
+                "columnsId": "files.columns",
+                "actionContext": { "target": "search-table-page.browse" },
+                "preferencesId": "browse-files",
+                "preferences": ["sidebar-filters", "columns", "sorting", "maxItems"],
+                "queryParams": ["header-filters", "skipCount"],
+                "actions": {
+                    "dblclick": "[CORE] NAVIGATE_TO",
+                    "contextmenu": "CONTEXT_MENU",
+                    "breadcrumbNavigate": "[CORE] NAVIGATE_TO",
+                    "fileUploadComplete": "reload"
+                },
+                "searchStrategyId": "browse-files",
+                "queryTemplate": {
+                    "query": { "query": "${query}", "language": "afts" },
+                    "include": ["path", "properties", "allowableOperations", "aspectNames"]
+                },
+                "sidebarFiltersId": "sidebar-filters",
+                "emptyContent": {
+                    "icon": "search",
+                    "title": "No results",
+                    "subtitle": "No results"
+                },
+                "currentFolder": {
+                    "type": "routeParams",
+                    "dynamic-source": "folderId",
+                    "filters": ["getNodeById"]
+                }
+            }
+        ],
+        "dynamicforms": [
+            {
+                "id": "input-form",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "q",
+                            "type": "input",
+                            "label": "NODE_SELECTOR.SEARCH",
+                            "settings": { "floatLabel": "never" },
+                            "query": { "template": "${value}" },
+                            "initialValue": "${routeQueryParams->q}"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

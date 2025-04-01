@@ -11,6 +11,9 @@
             "@contezza/common/*": ["./dist/@contezza/common/*"],
             "@contezza/common": ["./dist/@contezza/common/index"],
 
+            "@contezza/content-services/*": ["./dist/@contezza/content-services/*"],
+            "@contezza/content-services": ["./dist/@contezza/content-services/index"],
+
             "@contezza/core/*": ["./dist/@contezza/core/*"],
             "@contezza/core": ["./dist/@contezza/core/index"],
 

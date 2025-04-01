@@ -1,0 +1,102 @@
+<ng-container *contezzaLet="currentFolder$ | async as currentFolder">
+    <ng-container *contezzaLet="loading$ | async as loading">
+        <ng-container *contezzaLet="ready$ | async as ready">
+            <aca-page-layout>
+                <aca-page-layout-header>
+                    <contezza-search-table-layout-header
+                        [title]="title"
+                        [showBreadcrumb]="showBreadcrumb"
+                        [showMenuAction]="showMenuAction"
+                        [currentFolder]="currentFolder"
+                        [rootFolderRule]="breadcrumbRootFolderRule"
+                        [root]="breadcrumbTitle || title"
+                        [toolbarKey]="featureKeys?.toolbar"
+                        [searchControl]="$any(headerForm?.form.controls.q)"
+                        (breadcrumbNavigate)="onBreadcrumbNavigate($event)"
+                    ></contezza-search-table-layout-header>
+                </aca-page-layout-header>
+
+                <aca-page-layout-content class="search-table-layout-content" [class.loading]="loading" [class.flipped]="sidebarState.position === 'left'">
+                    <ng-container *ngIf="loading">
+                        <div class="search-table-layout-content-spinner"><mat-spinner></mat-spinner></div>
+                    </ng-container>
+                    <ng-container *contezzaLet="selection$ | async as selection">
+                        <div class="main-content search-table-layout-content-main">
+                            <div class="search-table-layout-content-main-header">
+                                <ng-container *ngIf="headerForm && ready">
+                                    <contezza-dynamic-form class="search-table-layout-content-main-header-form" [dynamicForm]="headerForm"></contezza-dynamic-form>
+                                    <contezza-toolbar *ngIf="showWidgetHeader" [key]="featureKeys?.toolbar"></contezza-toolbar>
+                                </ng-container>
+                            </div>
+                            <adf-upload-drag-area [rootFolderId]="currentFolder?.id">
+                                <ng-container *ngIf="ready">
+                                    <contezza-dynamic-component
+                                        contezza-search-results-view
+                                        class="search-table-layout-content-main-results"
+                                        [id]="resultsComponent.id"
+                                        [data]="resultsComponent.data"
+                                        [results]="results$ | async"
+                                        [columns]="columns$ | async"
+                                        [selectionMode]="selectionMode"
+                                        [emptyContentLayoutItems]="emptyContentLayoutItems$ | async"
+                                        (sorting)="onSortingChange($event)"
+                                        (paging)="onPagingChange($event)"
+                                        (selectAll)="onSelectAll()"
+                                        (topOverscroll)="onTopOverscroll()"
+                                        (mouseEvent)="onMouseEvent($event)"
+                                        (columnResized)="onColumnResized($event)"
+                                        (dragover)="$event.preventDefault()"
+                                        (drop)="onDrop()"
+                                    ></contezza-dynamic-component>
+                                </ng-container>
+                                <contezza-floating-button [key]="featureKeys?.floatingButton"></contezza-floating-button>
+                            </adf-upload-drag-area>
+                            <ng-container *ngIf="resultPreviewComponent && (showPreview$ | async) && !!selection.length">
+                                <contezza-dynamic-component
+                                    contezza-search-result-preview
+                                    class="search-table-layout-content-main-preview"
+                                    [id]="resultPreviewComponent.id"
+                                    [data]="resultPreviewComponent.data"
+                                    [result]="selection.at(-1)"
+                                    (close)="closePreview()"
+                                ></contezza-dynamic-component>
+                            </ng-container>
+                        </div>
+
+                        <ng-container *contezzaLet="sidebarContent$ | async as sidebarContent">
+                            <div class="sidebar search-table-layout-content-sidebar" [class.expanded]="sidebarContent && (sidebarContent !== 'info' || selection.length)">
+                                <ng-container *ngIf="sidebarForm && ready">
+                                    <contezza-dynamic-form-filter
+                                        class="search-table-layout-content-sidebar-form"
+                                        [class.expanded]="sidebarContent === 'form'"
+                                        [dynamicForm]="sidebarForm"
+                                        [hideTitle]="sidebarState.hideTitle"
+                                    ></contezza-dynamic-form-filter>
+                                </ng-container>
+                                <ng-container *ngIf="sidebarContent === 'info'">
+                                    <ng-container *ngIf="selection.length">
+                                        <contezza-info-drawer [node]="selection[selection.length - 1]"></contezza-info-drawer>
+                                    </ng-container>
+                                </ng-container>
+                                <ng-container *ngIf="sidebarContent === 'preset'">
+                                    <contezza-preset-panel
+                                        (loadPresets)="loadPresets()"
+                                        (loadPreset)="loadPreset($event)"
+                                        (savePreset)="savePreset()"
+                                        (saveNewVersion)="saveNewVersion($event)"
+                                    ></contezza-preset-panel>
+                                </ng-container>
+                                <!-- if (sidebarContent && typeof sidebarContent !== 'string' && component.id) -->
+                                <ng-container *ngIf="$any(sidebarContent) as component">
+                                    <ng-container *ngIf="component.id">
+                                        <contezza-dynamic-component [id]="component.id" [data]="component.data"></contezza-dynamic-component>
+                                    </ng-container>
+                                </ng-container>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                </aca-page-layout-content>
+            </aca-page-layout>
+        </ng-container>
+    </ng-container>
+</ng-container>

@@ -1,0 +1,35 @@
+<button color="primary" mat-stroked-button [matMenuTriggerFor]="columnMenu" (click)="refreshSelectAllState()">
+    <ng-content></ng-content>
+</button>
+<mat-menu #columnMenu="matMenu" class="columnMenu contezza-column-editor-menu">
+    <div class="contezza-column-editor-menu-select-all" (click)="$event.stopPropagation()">
+        <mat-checkbox color="primary" (change)="selectAllColumns(this.columnsInfo, $event)" [checked]="allSelected" [indeterminate]="someSelected">
+            {{ 'APP.FORM_FIELDS.SELECT.SELECT_ALL' | translate }}
+        </mat-checkbox>
+    </div>
+    <div class="contezza-mat-table-dragable-container" cdkDropList cdkDropListLockAxis="y" cdkDropListOrientation="vertical">
+        <div
+            class="dragable-row"
+            *ngFor="let column of columnsInfo; trackBy: trackByKey; let i = index"
+            cdkDrag
+            [cdkDragData]="{ columnIndex: i, columnTitle: column.id }"
+            (cdkDragDropped)="columnMenuDropped($event)"
+        >
+            <mat-icon cdkDragHandle>view_headline</mat-icon>
+            <ng-container *contezzaLet="column.title && (column.title | translatePropertyTitle) as title$">
+                <ng-container *contezzaLet="title$ ? (title$ | async) : (column.title | translate) as title">
+                    <mat-checkbox [title]="title" [color]="'primary'" [checked]="!column.hidden" (click)="$event.stopPropagation()" (change)="toggleSelectedColumn(column.id)">
+                        {{ title }}
+                    </mat-checkbox>
+
+                    <mat-card class="contezza-mat-table-drag-preview" *cdkDragPreview>
+                        <mat-icon>view_headline</mat-icon>
+                        <mat-checkbox color="primary" [checked]="!column.hidden">
+                            {{ title }}
+                        </mat-checkbox>
+                    </mat-card>
+                </ng-container>
+            </ng-container>
+        </div>
+    </div>
+</mat-menu>

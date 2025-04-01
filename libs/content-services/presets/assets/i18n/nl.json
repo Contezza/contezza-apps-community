@@ -1,0 +1,50 @@
+{
+    "CONTENT_SERVICES": {
+        "PRESETS": {
+            "ACTIONS": {
+                "TOGGLE_PRESET_PANEL": "Presets",
+                "CREATE": "Huidige filters opslaan als preset",
+                "SHOW_DETAILS": "Details",
+                "UPDATE_TITLE": "Titel aanpassen",
+                "SAVE_NEW_VERSION": "Huidige filtering opslaan",
+                "REMOVE": "Verwijderen",
+                "REFRESH": "Vernieuwen"
+            },
+            "BROWSE": {
+                "TITLE": "Presets",
+                "SIDENAV_LINK": {
+                    "LABEL": "",
+                    "TOOLTIP": ""
+                },
+                "EMPTY_STATE": {
+                    "TITLE": "",
+                    "TEXT": ""
+                }
+            },
+            "DIALOGS": {
+                "SAVE_PRESET_DIALOG": {
+                    "TITLE": "Preset titel"
+                },
+                "DETAILS_DIALOG": {
+                    "TITLE": "Details"
+                }
+            },
+            "MESSAGES": {
+                "INFO": {
+                    "CREATE_PRESET_SUCCESS": "Huidige filterinstellingen opgeslagen als preset. Het kan even duren voordat de nieuwe preset zichtbaar is in de lijst.",
+                    "SAVE_NEW_VERSION_SUCCESS": "Huidige filterinstellingen opgeslagen op de preset.",
+                    "REMOVE_PRESET_SUCCESS": "Preset verwijderd.",
+                    "UPDATE_PRESET_SUCCESS": "Preset aangepast."
+                },
+                "ERRORS": {}
+            },
+            "PROPERTIES": {
+                "NAMESPACE_PREFIX": {
+                    "PROPERTY1": {
+                        "LABEL": ""
+                    }
+                }
+            }
+        }
+    }
+}
