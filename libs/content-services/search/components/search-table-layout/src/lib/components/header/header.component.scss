@@ -1,0 +1,35 @@
+:host,
+.contezza-search-table-layout-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    &-title {
+        flex: 1;
+        min-width: 0;
+
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--theme-text-bold-color);
+    }
+
+    &.mobile {
+        contezza-toolbar ::ng-deep {
+            .aca-toolbar-action:not(.contezza-responsive-mobile-visible) {
+                display: none;
+            }
+        }
+        adf-breadcrumb {
+            ::ng-deep {
+                .adf-breadcrumb-item:not(:last-child) {
+                    display: none;
+                }
+            }
+        }
+    }
+    &:not(.mobile) {
+        .contezza-search-table-layout-header-search {
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,71 @@
+{
+    "$id": "content-services.rules",
+    "$version": "@@project.version@@",
+    "$name": "Contezza Content Services Rules",
+    "$vendor": "Contezza BV",
+
+    "rules": [
+        {
+            "id": "search-table-page.canUploadFile",
+            "type": "core.every",
+            "parameters": [
+                {
+                    "type": "rule",
+                    "value": "app.current-folder.canUpload"
+                }
+            ]
+        },
+        {
+            "id": "search-table-page.canUploadFolder",
+            "type": "core.every",
+            "parameters": [
+                {
+                    "type": "rule",
+                    "value": "app.current-folder.canUpload"
+                }
+            ]
+        },
+        {
+            "id": "search-table-page.canCreateFolder",
+            "type": "core.every",
+            "parameters": [
+                {
+                    "type": "rule",
+                    "value": "app.current-folder.canCreate"
+                }
+            ]
+        },
+        {
+            "id": "search-table-page.canCreateFile",
+            "type": "core.every",
+            "parameters": [
+                {
+                    "type": "rule",
+                    "value": "app.current-folder.canCreate"
+                }
+            ]
+        },
+        {
+            "id": "content-services.rules.canManagePermissions",
+            "type": "core.every",
+            "parameters": [
+                {
+                    "value": "core.some",
+                    "parameters": [
+                        {
+                            "value": "app.selection.folder.canUpdate"
+                        },
+                        {
+                            "value": "app.selection.file.canUpdate"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "content-services.rules.canRotateFileInViewer",
+            "type": "content-services.selection.file.mimeTypeIn",
+            "parameters": ["application/pdf"]
+        }
+    ]
+}

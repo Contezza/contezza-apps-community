@@ -1,0 +1,22 @@
+{
+    "CONTENT_SERVICES": {
+        "SEARCH": {
+            "ACTIONS": {
+                "CLEAR_FILTERS": "Filters verwijderen",
+                "CLEAR_PREFERENCES": "Tabelvoorkeursinstellingen verwijderen",
+                "RELOAD": "Pagina verversen",
+                "TOGGLE_SIDEBAR_FILTERS": "Filter"
+            },
+            "BROWSE": {
+                "DOWNLOADS": {
+                    "TITLE": "Downloads",
+                    "DESCRIPTION": "Toon zip-bestanden van gedownloade mappen",
+                    "EMPTY_STATE": {
+                        "TITLE": "Geen resultaten",
+                        "TEXT": "Geen zip-bestanden gevonden"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,30 @@
+.wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.content {
+    flex: 1;
+    width: 100%;
+}
+
+.bar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    margin: 0 -11px 0 16px;
+    justify-self: flex-end;
+    border-left: 2px solid transparent;
+    border-right: 2px solid transparent;
+    background: var(--theme-primary-color);
+    background-clip: content-box;
+    cursor: ew-resize;
+    opacity: 0;
+    transition: opacity 0.3s;
+
+    &:hover,
+    &:active {
+        opacity: 1;
+    }
+}

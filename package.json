@@ -1,10 +1,11 @@
 {
     "name": "contezza-apps-community",
-    "version": "2.20.3",
+    "version": "2.21.0",
     "scripts": {
         "ng": "nx",
         "postinstall": "node ./decorate-angular-cli.js",
         "build:common": "ng build common",
+        "build:content-services": "ng build content-services",
         "build:core": "ng build core",
         "build:dynamic-forms": "ng build dynamic-forms",
         "build:js-console": "ng build js-console",

@@ -1,0 +1,32 @@
+.contezza-page-layout-content {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    color: var(--theme-text-color);
+
+    &-icon {
+        opacity: 0.6;
+        .mat-icon {
+            font-size: var(--theme-display-3-font-size);
+            height: var(--theme-display-3-font-size) !important;
+            width: var(--theme-display-3-font-size) !important;
+        }
+    }
+
+    &-title-small {
+        font-weight: 600;
+    }
+
+    &-title {
+        font-size: 3.5em;
+        letter-spacing: -2px;
+        color: var(--theme-foreground-text-color);
+        margin-top: 15px;
+    }
+}

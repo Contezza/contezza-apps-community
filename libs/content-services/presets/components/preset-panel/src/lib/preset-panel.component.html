@@ -1,0 +1,26 @@
+<div class="adf-info-drawer-layout-header">
+    <div class="adf-info-drawer-layout-header-title">
+        <div>{{ 'CONTENT_SERVICES.PRESETS.BROWSE.TITLE' | translate }}</div>
+    </div>
+    <div class="adf-info-drawer-layout-header-buttons">
+        <button mat-icon-button (click)="onSavePreset()" [matTooltip]="'CONTENT_SERVICES.PRESETS.ACTIONS.CREATE' | translate">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+</div>
+<div class="adf-info-drawer-layout-content">
+    <mat-card class="preset-panel-info-drawer-card">
+        <mat-card-content class="preset-panel-info-drawer-card-content">
+            <div class="preset-panel-info-drawer-card-content-presets">
+                <ng-container *contezzaLet="presetNodes$ | async as presetNodes">
+                    <mat-selection-list #presets [multiple]="false">
+                        <mat-list-option *ngFor="let node of presetNodes" (click)="onLoadPreset(node.id)" (contextmenu)="onRightClick($event, node.id)">
+                            <mat-icon class="preset-panel-info-drawer-card-content-preset-icon" mat-list-icon>article</mat-icon>
+                            <div class="preset-panel-info-drawer-card-content-preset-text" mat-line [matTooltip]="getTitle(node)">{{ getTitle(node) }}</div>
+                        </mat-list-option>
+                    </mat-selection-list>
+                </ng-container>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

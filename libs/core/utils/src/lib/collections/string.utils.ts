@@ -79,12 +79,15 @@ export class StringUtils {
             // extracts template parameters from the given string
             const keys = string.match(placeholderRegex)?.map((placeholder) => placeholder.slice(prefix.length, -suffix.length)) || [];
             // if the string uses a non-default placeholder then this must be replaced with the default
-            const stringWithDefaultPlaceholder =
+            string = (
                 options?.placeholder !== defaultPlaceholder
                     ? string.replace(placeholderRegex, (placeholder) => defaultPrefix + placeholder.slice(prefix.length, -suffix.length) + defaultSuffix)
-                    : string;
+                    : string
+            ) as T;
+            // existing backslashs must be escaped
+            string = string.replace(/\\/g, '\\\\') as T;
             // prepare template-evaluation function body
-            return `const {${keys.join(',')}}=params;return \`${stringWithDefaultPlaceholder}\``;
+            return `const {${keys.join(',')}}=params;return \`${string}\``;
         };
         let body: string;
         return ((params) => {

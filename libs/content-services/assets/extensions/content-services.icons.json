@@ -1,0 +1,35 @@
+{
+    "$id": "content-services.icons",
+    "$version": "@@project.version@@",
+    "$name": "Contezza Content Services Icons",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "icons": [
+            {
+                "id": "svg:file_plus",
+                "value": "./assets/content-services/icons/file_plus.svg"
+            },
+            {
+                "id": "svg:file_upload",
+                "value": "./assets/content-services/icons/file_upload.svg"
+            },
+            {
+                "id": "svg:folder_outline",
+                "value": "./assets/content-services/icons/folder_outline.svg"
+            },
+            {
+                "id": "svg:folder_upload",
+                "value": "./assets/content-services/icons/folder_upload.svg"
+            },
+            {
+                "id": "svg:note_text_outline",
+                "value": "./assets/content-services/icons/note_text_outline.svg"
+            },
+            {
+                "id": "svg:table_edit",
+                "value": "./assets/content-services/icons/table_edit.svg"
+            }
+        ]
+    }
+}

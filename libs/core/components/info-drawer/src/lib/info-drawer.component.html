@@ -1,0 +1,21 @@
+<ng-container *ngIf="model$ | async as model">
+    <adf-info-drawer [title]="'APP.INFO_DRAWER.TITLE'">
+        <aca-toolbar [items]="model.actions" info-drawer-buttons></aca-toolbar>
+        <adf-info-drawer-tab *ngFor="let tab of model.tabs" [label]="tab.title">
+            <!-- contezzaReloadOnChangeOf because the node is only processed OnInit by contezza-dynamic-component and adf-dynamic-tab -->
+            <ng-container *contezzaReloadOnChangeOf="model.node">
+                <ng-container *ngIf="tab.component | isDefined; else adfDc">
+                    <contezza-dynamic-component
+                        [id]="tab.component"
+                        [data]="{ node: model.node, data: tab.data }"
+                        [attr.data-automation-id]="tab.component"
+                    ></contezza-dynamic-component>
+                </ng-container>
+                <ng-template #adfDc>
+                    <!-- contezza-detect-changes necessary to refresh comments -->
+                    <adf-dynamic-tab contezza-detect-changes [node]="$any(model.node)" [id]="tab.component" [attr.data-automation-id]="tab.component"> </adf-dynamic-tab>
+                </ng-template>
+            </ng-container>
+        </adf-info-drawer-tab>
+    </adf-info-drawer>
+</ng-container>
