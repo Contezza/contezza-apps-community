@@ -84,15 +84,14 @@ export class ExtensionService {
         template: (_: SearchTemplateParameters) => string,
         { baseQuery, headerQuery, columnQuery, sidebarQuery, filterQuery, sorting, paging }: SearchParameters
     ): SearchRequest {
-        const patchForJSON = (x: string): string => x.replace(/"/g, `'`).replace(/\\/g, `\\\\`);
-        const makeTemplateParameter = (key: string, x?: string) => (x || x === '' ? { [key]: patchForJSON(x || '*') } : {});
+        const makeTemplateParameter = (key: string, x?: string) => (x || x === '' ? { [key]: ExtensionService.patchForJSON(x || '*') } : {});
         const parsed = JSON.parse(
             template({
-                ...(baseQuery ? { baseQuery: patchForJSON(baseQuery) } : {}),
+                ...(baseQuery ? { baseQuery: ExtensionService.patchForJSON(baseQuery) } : {}),
                 query:
                     [headerQuery, columnQuery, sidebarQuery, filterQuery]
                         .filter((value) => !!value)
-                        .map(patchForJSON)
+                        .map(ExtensionService.patchForJSON)
                         .map((value) => `(${value})`)
                         .join(' AND ') || '*',
                 ...makeTemplateParameter('headerQuery', headerQuery),
@@ -107,6 +106,18 @@ export class ExtensionService {
             delete parsed.sort;
         }
         return parsed;
+    }
+
+    /**
+     * Patches the given string so that it can be used as replacer for a string contained in a JSON.
+     * The following patches are applied:
+     * * double quotes are escaped,
+     * * escape symbols are escaped.
+     *
+     * @param string
+     */
+    private static patchForJSON(string: string): string {
+        return string.replace(/["\\]/g, (match) => (match === '"' ? `\\"` : `\\\\`));
     }
 }
 
