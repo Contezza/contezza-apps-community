@@ -35,7 +35,7 @@ export class InfoDrawerComponent {
                 isEmpty: false,
                 first: { entry: node },
                 last: { entry: node },
-                folder: { entry: node },
+                ...(node.isFile ? { file: { entry: node } } : node.isFolder ? { folder: { entry: node } } : {}),
             };
         }),
         withLatestFrom(this.extensions.getAllowedSidebarActions()),
