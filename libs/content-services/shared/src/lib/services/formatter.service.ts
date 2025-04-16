@@ -80,25 +80,46 @@ export class FormatterService {
      * @private
      */
     private resolveLegacyFormatter<TItem>(def: LegacyFormatterSource): (_: TItem) => string {
-        return (item) => {
-            const value: any = ContezzaObjectUtils.getValue(item, def.key);
-            switch (def.type) {
-                case 'date':
-                    switch (def.format) {
-                        case 'timeAgo':
-                            return this.pipes.adfTimeAgo.transform(value);
-                        default:
-                            return this.pipes.adfLocalizedDate.transform(value, def.format);
-                    }
-                case 'dateTime':
-                    return value ? this.pipes.adfLocalizedDate.transform(value, def.format) + ' ' + this.pipes.date.transform(value, 'HH:mm') : '';
-                case 'fileSize':
-                    return this.pipes.adfFileSize.transform(value);
-                case 'thumbnail':
-                    return this.pipes.adfMimeTypeIcon.transform(value || 'folder');
-                default:
-                    return value ? String(value) : '';
-            }
-        };
+        return (item) => this.legacyFormat(ContezzaObjectUtils.getValue(item, def.key), def);
+    }
+
+    /**
+     * Formats the given value based on legacy column properties `type` and `format`.
+     * If the value is an array then its items are formatted individually and then returned separated by a comma.
+     *
+     * @param value
+     * @param def
+     * @private
+     */
+    private legacyFormat(value: any, def: { type: string; format?: string }): string {
+        return Array.isArray(value) ? value.map((_) => this.legacyFormatElementary(_, def)).join(', ') : this.legacyFormatElementary(value, def);
+    }
+
+    /**
+     * Formats the given value based on legacy column properties `type` and `format`.
+     * The value is assumed not to be an array.
+     *
+     * @param value
+     * @param def
+     * @private
+     */
+    private legacyFormatElementary(value: any, def: { type: string; format?: string }): string {
+        switch (def.type) {
+            case 'date':
+                switch (def.format) {
+                    case 'timeAgo':
+                        return this.pipes.adfTimeAgo.transform(value);
+                    default:
+                        return this.pipes.adfLocalizedDate.transform(value, def.format);
+                }
+            case 'dateTime':
+                return value ? this.pipes.adfLocalizedDate.transform(value, def.format) + ' ' + this.pipes.date.transform(value, 'HH:mm') : '';
+            case 'fileSize':
+                return this.pipes.adfFileSize.transform(value);
+            case 'thumbnail':
+                return this.pipes.adfMimeTypeIcon.transform(value || 'folder');
+            default:
+                return value ? String(value) : '';
+        }
     }
 }
