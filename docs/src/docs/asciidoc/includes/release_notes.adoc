@@ -10,6 +10,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2025-04-18
+|2.21.1
+|View <<Release 2.21.1,release details>>.
+
 |2025-04-01
 |2.21.0
 |View <<Release 2.21.0,release details>>.
@@ -249,6 +253,14 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 2.21.1
+
+Bugfixes/minor changes:
+
+- @contezza/core/components/info-drawer - Fix context file selection https://support.contezza.nl/issues/31704[(#31704)].
+- @contezza/content-services - Improve display of multivalued fields.
+- @contezza/content-services/search - Fix issue with query formatting.
 
 ==== Release 2.21.0
 
