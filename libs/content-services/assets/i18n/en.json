@@ -1,0 +1,18 @@
+{
+    "CONTENT_SERVICES": {
+        "ACTIONS": {
+            "CREATE_FILE": "Create document",
+            "EDIT_COLUMNS": "Edit columns",
+            "MANAGE_PERMISSIONS": "Permissions",
+            "NAVIGATE_TO_PARENT": "Show in folder",
+            "ROTATE_FILE_IN_VIEWER": "Rotate document",
+            "TOGGLE_VIEW": "Toggle view"
+        },
+        "MESSAGES": {
+            "INFO": {
+                "FOLDER_UPLOAD_NOT_ALLOWED": "It is not allowed to drag & drop folders at this location",
+                "FILE_UPLOAD_NOT_ALLOWED": "It is not allowed to drag & drop files at this location"
+            }
+        }
+    }
+}

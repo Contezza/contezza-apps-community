@@ -1,0 +1,44 @@
+:host,
+.contezza-search-table-layout-header-search {
+    position: relative;
+
+    &-input {
+        $border-size: 2px;
+        $padding: 8px;
+        $transition-duration: 0.3s;
+
+        position: absolute;
+        z-index: 1;
+        right: calc(0px - $border-size - $padding);
+        top: -$border-size;
+        // full width - header's right and left padding - navigation icon + header's gap - own padding
+        width: calc(100vw - 48px - 85px + 8px - 2 * $padding);
+        transition: width $transition-duration;
+
+        background: var(--theme-card-background-color);
+        border: $border-size solid var(--theme-border-color);
+        border-radius: 8px;
+        padding: 0 $padding;
+
+        display: flex;
+
+        &-field {
+            flex: 1;
+            // same height as the search icon
+            height: 40px;
+            margin-top: -6px;
+
+            min-width: 0;
+
+            ::ng-deep .contezza-form-field-clear {
+                display: none !important;
+            }
+        }
+
+        &:not(.expanded) {
+            width: 40px;
+            z-index: -1;
+            transition: width $transition-duration, z-index $transition-duration;
+        }
+    }
+}

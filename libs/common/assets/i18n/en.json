@@ -86,7 +86,8 @@
                 "ARCHIVED": "Archived",
                 "TYPE": "Type",
                 "CLEAR_ALL": "Clear all"
-            }
+            },
+            "SEARCH_BUTTON": "Search"
         },
         "PEOPLE_GROUP_PICKER": {
             "PEOPLE": {

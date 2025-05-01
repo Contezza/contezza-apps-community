@@ -1,0 +1,126 @@
+{
+    "$schema": "../../../../json-schemas/dynamic-forms/dynamic-forms.schema.json",
+
+    "$id": "lib.search-table-page.dynamicforms",
+    "$version": "@@project.version@@",
+    "$name": "Contezza Search Table Page DynamicForms",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "dynamicforms": [
+            {
+                "id": "lock-filter",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "cm:lockOwner",
+                            "type": "input",
+                            "initialValue": {
+                                "type": "userProfile",
+                                "dynamic-source": "id"
+                            },
+                            "query": {
+                                "property": "cm:lockOwner"
+                            }
+                        }
+                    ]
+                },
+                "layouts": [
+                    {
+                        "id": "default",
+                        "layout": {
+                            "subfields": [
+                                {
+                                    "id": "cm:lockOwner",
+                                    "class": "dynamicforms-hidden"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "libraries.column",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "title",
+                            "type": "info",
+                            "initialValue": "${item->title}"
+                        },
+                        {
+                            "id": "description",
+                            "type": "info",
+                            "initialValue": "${item->description}"
+                        }
+                    ]
+                },
+                "layouts": [
+                    {
+                        "id": "default",
+                        "layout": {
+                            "subfields": [
+                                {
+                                    "id": "title"
+                                },
+                                {
+                                    "id": "description",
+                                    "style": "color:var(--theme-text-color);font-size:0.85em",
+                                    "disabled": "!${expanded}"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "sidebar-filters",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "type",
+                            "type": "button-toggle",
+                            "label": "APP.FILTER.OPTIONS.TYPE",
+                            "initialValue": "${preferences->type}",
+                            "options": {
+                                "dynamic-source": [
+                                    { "id": "cm:content", "label": "Files", "icon": "svg:note_text_outline" },
+                                    { "id": "cm:folder", "label": "Folders", "icon": "svg:folder_outline" }
+                                ],
+                                "iconKey": "icon",
+                                "tooltipKey": "label"
+                            },
+                            "query": {
+                                "template": "TYPE:'${id}'"
+                            }
+                        },
+                        {
+                            "id": "created",
+                            "type": "dateRange",
+                            "label": "APP.FILTER.OPTIONS.CREATED",
+                            "initialValue": "${preferences->created}",
+                            "query": {
+                                "map": {
+                                    "id": "dateRangeQuery",
+                                    "parameters": "@cm\\:created"
+                                }
+                            }
+                        },
+                        {
+                            "id": "modified",
+                            "type": "dateRange",
+                            "label": "APP.FILTER.OPTIONS.ADJUSTED",
+                            "initialValue": "${preferences->modified}",
+                            "query": {
+                                "map": {
+                                    "id": "dateRangeQuery",
+                                    "parameters": "@cm\\:modified"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

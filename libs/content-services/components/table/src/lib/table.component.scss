@@ -1,0 +1,227 @@
+:host,
+contezza-table {
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+    z-index: 0;
+
+    .table {
+        &-container {
+            flex: 1 0 0;
+            overflow: auto;
+
+            display: flex;
+            flex-direction: column;
+
+            table.mat-table {
+                position: relative;
+
+                th.mat-header-cell,
+                th.mat-header-cell .mat-form-field-label.mat-form-field-empty {
+                    font-weight: 700;
+                    font-size: var(--theme-caption-font-size);
+                    color: var(--theme-text-fg-color) !important;
+                    cursor: pointer;
+                }
+
+                th.mat-header-cell {
+                    .mat-sort-header-container,
+                    .mat-sort-header-content,
+                    contezza-dynamic-form-field {
+                        flex: 1;
+                        text-align: unset;
+                        max-width: 100%;
+                        .mat-form-field-label-wrapper {
+                            overflow: visible;
+                        }
+                    }
+
+                    .mat-sort-header.filterable .mat-sort-header-content {
+                        max-width: calc(100% - 12px);
+                    }
+
+                    .mat-form-field {
+                        font: revert;
+
+                        &-wrapper {
+                            display: contents;
+                        }
+
+                        &-appearance-outline:not(.mat-focused) .mat-form-field-outline {
+                            color: transparent;
+                        }
+                    }
+
+                    // fixes for specific dynamic-form fields
+                    contezza-chips-input-field {
+                        .mat-chip-list-wrapper {
+                            input:first-child {
+                                margin-top: 0.8em !important;
+                            }
+                        }
+                    }
+
+                    &.contezza-resized {
+                        max-width: 96px;
+
+                        .mat-form-field {
+                            &-infix {
+                                width: unset;
+                                min-width: 30px;
+                            }
+                        }
+                    }
+
+                    &:not(.contezza-resized) {
+                        contezza-dynamic-form-field {
+                            width: 140px;
+                        }
+                    }
+                }
+
+                tr.mat-header-row,
+                tr.mat-row {
+                    cursor: pointer;
+
+                    &.selected {
+                        background-color: var(--theme-selected-button-bg-color);
+                    }
+
+                    &:not(.mat-header-row):not(.selected):hover {
+                        background-color: var(--theme-mat-table-hover-color);
+                    }
+
+                    th,
+                    td {
+                        padding: 0 10px;
+
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+
+                        .mat-sort-header:not(.filterable) .mat-sort-header-content {
+                            display: revert;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                    }
+
+                    th,
+                    td {
+                        &:not(.contezza-resizable),
+                        &.contezza-resizable:not(.contezza-resized):not(.resizing) {
+                            min-width: fit-content;
+                            max-width: fit-content;
+                            width: fit-content;
+
+                            &.select {
+                                //min-width: 0;
+                                max-width: 0;
+                                width: 0;
+                            }
+
+                            &.contezza-table-cell {
+                                &-0,
+                                &-5,
+                                &-10,
+                                &-15,
+                                &-20,
+                                &-25,
+                                &-30,
+                                &-35,
+                                &-40,
+                                &-45,
+                                &-50,
+                                &-55,
+                                &-60,
+                                &-65,
+                                &-70,
+                                &-75,
+                                &-80,
+                                &-85,
+                                &-90,
+                                &-95,
+                                &-100 {
+                                    // max-width: % is set via js
+                                    min-width: unset;
+                                    max-width: 0;
+                                    width: unset;
+                                }
+                            }
+                        }
+                    }
+
+                    td {
+                        & * {
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+
+                        .adf-datatable-link .adf-datatable-cell-value:hover {
+                            color: var(--theme-text-fg-color);
+                            text-decoration: underline;
+                        }
+
+                        .adf-datatable-selected > svg {
+                            fill: var(--theme-accent-color);
+                            width: 30px;
+                            height: 30px;
+                        }
+                    }
+
+                    td {
+                        max-width: 0;
+
+                        &.resizing {
+                            border-right: 1px dotted var(--theme-primary-color);
+                        }
+                    }
+                }
+            }
+            .table-empty {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+            }
+        }
+    }
+
+    .mat-paginator-container {
+        background-color: var(--theme-toolbar-background) !important;
+        max-height: 43px;
+        min-height: 43px !important;
+        align-content: center;
+    }
+
+    &.mobile {
+        .table {
+            &-container {
+                overflow-x: hidden;
+                table {
+                    table-layout: fixed;
+
+                    thead {
+                        display: none;
+                    }
+
+                    @for $i from 1 through 20 {
+                        $width: $i * 5;
+                        .contezza-responsive-mobile-table-cell-#{$width} {
+                            &.mat-cell:first-child,
+                            &.mat-cell:last-child {
+                                width: calc(#{$width}vw - 30px) !important;
+                            }
+                            &.mat-cell:not(:first-child):not(:last-child) {
+                                width: calc(#{$width}vw - 20px) !important;
+                                max-width: inherit;
+                                min-width: auto;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

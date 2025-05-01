@@ -1,0 +1,28 @@
+{
+    "$id": "content-services.presets.dynamic-forms",
+    "$version": "@@project.version@@",
+    "$name": "Content Services Presets Dynamic Forms",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "dynamicforms": [
+            {
+                "id": "content-services.presets.dynamic-forms.update-title-form",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "title",
+                            "type": "input",
+                            "label": "Titel",
+                            "validations": ["required"],
+                            "settings": {
+                                "appearance": "outline"
+                            },
+                            "initialValue": "${currentTitle}"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

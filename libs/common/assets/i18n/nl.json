@@ -86,7 +86,8 @@
                 "TYPE": "Type",
                 "ARCHIVED": "Gearchiveerd",
                 "CLEAR_ALL": "Alles wissen"
-            }
+            },
+            "SEARCH_BUTTON": "Zoeken"
         },
         "PEOPLE_GROUP_PICKER": {
             "PEOPLE": {

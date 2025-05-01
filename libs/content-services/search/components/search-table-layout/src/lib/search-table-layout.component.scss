@@ -1,0 +1,108 @@
+.search-table-layout {
+    &-content {
+        position: relative;
+
+        &.loading {
+            opacity: 0.4;
+        }
+
+        &.flipped {
+            flex-direction: row-reverse;
+            .search-table-layout-content-main {
+                border-left: 1px solid var(--theme-border-color, rgba(0, 0, 0, 0.07));
+            }
+        }
+
+        &-spinner {
+            position: absolute;
+            z-index: 1000;
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        &-main {
+            flex: 1;
+            max-width: 100%;
+            min-width: 0;
+
+            display: flex;
+            flex-direction: column;
+
+            position: relative;
+
+            &-header {
+                padding: 0 24px;
+                display: flex;
+
+                &-form {
+                    flex: 1;
+                }
+            }
+
+            &-results {
+                flex: 1 0 0;
+                overflow: hidden;
+            }
+
+            &-preview {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-color: var(--theme-card-bg-color);
+
+                top: 0;
+                z-index: 1000;
+            }
+        }
+
+        &-sidebar {
+            &:not(.expanded) {
+                width: 0;
+            }
+            &-form {
+                &:not(.expanded) {
+                    visibility: hidden;
+                    position: absolute;
+                }
+            }
+        }
+    }
+}
+
+:host.mobile {
+    .search-table-layout-content {
+        flex-direction: column-reverse !important;
+        &-main {
+            &-header-form {
+                display: none;
+            }
+        }
+        &-sidebar {
+            max-width: unset;
+            width: 100%;
+            height: unset;
+            ::ng-deep {
+                .contezza-dynamic-form-filter {
+                    display: none;
+                    &-title,
+                    &-clear-button {
+                        display: none;
+                    }
+                    .mat-card {
+                        overflow: hidden;
+                        &-content {
+                            padding-top: unset !important;
+                            overflow: auto;
+                            .dynamicforms-node:not(.dynamicforms-title) {
+                                flex-direction: row !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

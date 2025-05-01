@@ -1,0 +1,31 @@
+:host,
+.contezza-manage-permissions-dialog {
+    .permissions-dialog-content {
+        padding: 0;
+    }
+
+    .permissions-dialog-actions {
+        display: flex;
+        flex-direction: row;
+
+        .permissions-dialog-close-button {
+            padding: 5px;
+            line-height: 14px;
+            min-width: auto;
+        }
+    }
+
+    .adf-datatable-permission.adf-datatable .adf-delete-permission-column {
+        min-width: 80px !important;
+    }
+}
+
+.adf-permission-pop-over {
+    .adf-pop-over-card {
+        width: 74% !important;
+    }
+
+    .adf-datatable-permission.adf-datatable .adf-authorityId-column {
+        flex: 10 !important;
+    }
+}

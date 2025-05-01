@@ -1,0 +1,112 @@
+.contezza {
+    &-column-editor-menu {
+        max-height: 500px;
+        max-width: 50vw;
+        overflow: hidden;
+        display: flex;
+
+        .contezza-column-editor-menu-select-all {
+            position: fixed;
+            padding: 0.5em 0 0.5em 0.5em;
+            color: var(--theme-text-color);
+            .mat-checkbox {
+                overflow: hidden;
+                margin-right: 8px;
+                &-layout,
+                &-label {
+                    color: var(--theme-text-color);
+                    width: 100%;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            }
+        }
+        .mat-menu-content:not(:empty) {
+            display: flex;
+            width: 100%;
+        }
+    }
+
+    &-mat-button-no-input {
+        border: none;
+        background: transparent;
+        outline: none;
+
+        .mat-stroked-button {
+            .mat-button-wrapper {
+                color: var(--theme-text-color);
+            }
+            &:hover .mat-button-wrapper {
+                color: inherit;
+            }
+        }
+    }
+    &-mat-table {
+        &-dragable-container {
+            width: 100%;
+            min-width: 200px;
+            overflow: auto;
+            margin-top: 3em;
+
+            .dragable-row {
+                width: 100%;
+                line-height: 14px;
+                font-size: 14px;
+                display: flex;
+
+                mat-icon {
+                    opacity: 0.15;
+                    transition: opacity 0.5s;
+                    margin-right: 8px;
+                    padding-left: 4px;
+                    color: var(--theme-text-color);
+                    cursor: ns-resize;
+                    vertical-align: top;
+                    flex: 0 0 auto;
+                }
+                .mat-checkbox {
+                    overflow: hidden;
+                    &-layout,
+                    &-label {
+                        color: var(--theme-text-color);
+                        width: 100%;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    }
+                }
+            }
+            .dragable-row:hover mat-icon {
+                opacity: 1;
+            }
+        }
+
+        &-drag-preview {
+            padding: 4px 8px 4px 4px !important;
+            margin-top: -4px;
+            margin-left: -4px;
+            font-size: 14px;
+
+            mat-icon {
+                vertical-align: top;
+                margin-right: 8px;
+                padding-left: 4px;
+                color: var(--theme-text-color);
+            }
+            mat-checkbox {
+                vertical-align: top;
+            }
+        }
+    }
+}
+
+/* Animate items as they're being sorted. */
+.cdk-drop-list-dragging .cdk-drag {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* Animate an item that has been dropped. */
+.cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}

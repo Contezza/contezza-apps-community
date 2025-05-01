@@ -1,0 +1,50 @@
+{
+    "CONTENT_SERVICES": {
+        "PRESETS": {
+            "ACTIONS": {
+                "TOGGLE_PRESET_PANEL": "Presets",
+                "CREATE": "Save current filter settings",
+                "SHOW_DETAILS": "Details",
+                "UPDATE_TITLE": "Update title",
+                "SAVE_NEW_VERSION": "Save current filtering",
+                "REMOVE": "Delete",
+                "REFRESH": "Refresh"
+            },
+            "BROWSE": {
+                "TITLE": "Presets",
+                "SIDENAV_LINK": {
+                    "LABEL": "",
+                    "TOOLTIP": ""
+                },
+                "EMPTY_STATE": {
+                    "TITLE": "",
+                    "TEXT": ""
+                }
+            },
+            "DIALOGS": {
+                "SAVE_PRESET_DIALOG": {
+                    "TITLE": "Preset title"
+                },
+                "DETAILS_DIALOG": {
+                    "TITLE": "Details"
+                }
+            },
+            "MESSAGES": {
+                "INFO": {
+                    "CREATE_PRESET_SUCCESS": "Current filter settings saved as preset. It may take a while for the new preset to be visible in the list.",
+                    "SAVE_NEW_VERSION_SUCCESS": "Current filter settings saved on the preset.",
+                    "REMOVE_PRESET_SUCCESS": "Preset deleted.",
+                    "UPDATE_PRESET_SUCCESS": "Preset updated."
+                },
+                "ERRORS": {}
+            },
+            "PROPERTIES": {
+                "NAMESPACE_PREFIX": {
+                    "PROPERTY1": {
+                        "LABEL": ""
+                    }
+                }
+            }
+        }
+    }
+}
