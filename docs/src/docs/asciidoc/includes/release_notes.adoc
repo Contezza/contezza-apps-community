@@ -10,6 +10,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2025-05-08
+|2.22.0
+|View <<Release 2.22.0,release details>>.
+
 |2025-04-18
 |2.21.1
 |View <<Release 2.21.1,release details>>.
@@ -253,6 +257,16 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 2.22.0
+
+Bugfixes/minor changes:
+
+- @contezza/core/utils - Method `findLast` added to collection `ContezzaObservables`.
+- @contezza/core/utils - Fixed a bug in the `find` method of the `ContezzaObservables` collection that caused an infinite loop when no match was found.
+- @contezza/content-services - Column component with id `columns.site` created https://support.contezza.nl/issues/31918[(#31918)].
+- @contezza/content-services - Column component with id `columns.parent` shows the site title instead of "documentLibrary" if the node is in a site document library https://support.contezza.nl/issues/31918[(#31918)].
+- @contezza/content-services - Column component with id `columns.location` and service `LocationService` deleted https://support.contezza.nl/issues/31918[(#31918)].
 
 ==== Release 2.21.1
 

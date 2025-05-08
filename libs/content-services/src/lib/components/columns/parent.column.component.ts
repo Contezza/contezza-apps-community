@@ -3,9 +3,12 @@ import { CommonModule } from '@angular/common';
 
 import { Store } from '@ngrx/store';
 
+import { map, Observable, of } from 'rxjs';
+
 import { Node, PathElement } from '@alfresco/js-api';
 
 import { navigateToFolder } from '@contezza/core/actions';
+import { SiteTitlesService } from '@contezza/core/services';
 
 import { ColumnComponent } from '@contezza/content-services/shared';
 
@@ -13,39 +16,53 @@ import { ColumnComponent } from '@contezza/content-services/shared';
     standalone: true,
     imports: [CommonModule],
     selector: 'contezza-parent-column',
-    template: `<span *ngIf="parent" role="link" class="adf-datatable-cell-value" title="{{ parent.name }}" (click)="onClick()">{{ parent.name }}</span>`,
+    template: `<span *ngIf="parent$ | async as parent" role="link" [title]="parent.name" (click)="onClick(parent)">{{ parent.name }}</span>`,
+    styles: [
+        `
+            :host:hover {
+                text-decoration: underline;
+            }
+        `,
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    host: {
-        class: 'adf-datatable-content-cell adf-datatable-link adf-name-column aca-custom-name-column',
-    },
 })
 export class ParentColumnComponent extends ColumnComponent<Node> implements OnInit {
-    parent?: PathElement;
+    parent$!: Observable<PathElement | undefined>;
 
-    constructor(private readonly store: Store) {
+    constructor(private readonly store: Store, private readonly siteTitles: SiteTitlesService) {
         super();
     }
 
     ngOnInit() {
-        this.parent = this.getParent(this.item);
+        this.initParent();
     }
 
-    onClick() {
-        this.store.dispatch(navigateToFolder({ payload: { entry: this.parent as Node } }));
+    onClick(parent: PathElement) {
+        this.store.dispatch(navigateToFolder({ payload: { entry: parent as Node } }));
     }
 
-    private getParent({ path }: Node): PathElement | undefined {
-        if (path) {
-            const { elements } = path;
-            const lastElement = elements[elements.length - 1];
-            if (this.isFolderType(lastElement.nodeType)) {
-                return lastElement;
+    private initParent() {
+        const pathElements = this.item.path?.elements;
+        if (pathElements) {
+            const parent = pathElements.at(-1);
+            if (parent) {
+                // if the parent is a document library, then show the site title instead of 'documentLibrary'
+                if (parent.aspectNames.includes('st:siteContainer') && parent.name === 'documentLibrary') {
+                    const sitePathElement = pathElements.at(-2);
+                    this.parent$ = this.siteTitles.getTitle({ id: sitePathElement.name }).pipe(
+                        map((title) => {
+                            parent.name = title;
+                            return parent;
+                        })
+                    );
+                } else {
+                    this.parent$ = of(parent);
+                }
+            } else {
+                this.parent$ = of(undefined);
             }
+        } else {
+            this.parent$ = of(undefined);
         }
-        return undefined;
-    }
-
-    private isFolderType(type: string): boolean {
-        return ['cm', 'st', 'rma'].some((prefix) => type.startsWith(prefix + ':'));
     }
 }

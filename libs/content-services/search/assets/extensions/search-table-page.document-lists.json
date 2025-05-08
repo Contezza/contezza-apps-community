@@ -210,7 +210,7 @@
                         "type": "text",
                         "class": "adf-ellipsis-cell adf-no-grow-cell",
                         "sortable": false,
-                        "template": "columns.location",
+                        "template": "columns.parent",
                         "desktopOnly": true,
                         "order": 30
                     },
@@ -270,7 +270,7 @@
                         "title": "APP.DOCUMENT_LIST.COLUMNS.LOCATION",
                         "type": "text",
                         "class": "adf-ellipsis-cell adf-no-grow-cell",
-                        "template": "columns.location",
+                        "template": "columns.parent",
                         "desktopOnly": true,
                         "order": 30
                     },
@@ -336,7 +336,7 @@
                         "title": "APP.DOCUMENT_LIST.COLUMNS.LOCATION",
                         "class": "adf-ellipsis-cell adf-no-grow-cell",
                         "sortable": false,
-                        "template": "columns.location",
+                        "template": "columns.parent",
                         "desktopOnly": true,
                         "order": 30
                     },
