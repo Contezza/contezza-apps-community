@@ -14,7 +14,7 @@ import { AdfUtils, ArrayUtils } from '@contezza/core/utils';
 import { UploadFilterService } from '@contezza/core/extensions';
 import { RuleContextService } from '@contezza/core/context';
 
-import { ExtensionService, LocationService } from '@contezza/content-services/shared';
+import { ExtensionService } from '@contezza/content-services/shared';
 
 import { Effects } from './store/effects';
 
@@ -39,7 +39,6 @@ export class ExtensionModule {
         ruleContext$: RuleContextService,
         extensions: ExtensionService
     ) {
-        adfExtensions.setEvaluators({ 'app.element.isLocation': LocationService.isLocation });
         // content-services.selection.mimeTypeIn
         adfExtensions.setEvaluators(
             AdfUtils.makeRules(
@@ -93,8 +92,8 @@ export class ExtensionModule {
             'columns.context-menu': () => import('./components/columns/context-menu.column.component').then((_) => _.ContextMenuColumnComponent),
             'columns.dynamic-form': () => import('./components/columns/dynamic-form.column.component').then((_) => _.DynamicFormColumnComponent),
             'columns.dynamic-source': () => import('./components/columns/dynamic-source.column.component').then((_) => _.DynamicSourceColumnComponent),
-            'columns.location': () => import('./components/columns/location.column.component').then((_) => _.LocationColumnComponent),
             'columns.parent': () => import('./components/columns/parent.column.component').then((_) => _.ParentColumnComponent),
+            'columns.site': () => import('./components/columns/site.column.component').then((_) => _.SiteColumnComponent),
         });
     }
 }
