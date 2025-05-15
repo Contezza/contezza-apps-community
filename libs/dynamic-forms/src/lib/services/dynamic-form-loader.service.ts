@@ -196,7 +196,7 @@ export class ContezzaDynamicFormLoaderService {
             layout.subfields.forEach((subfield) => this.resolveLayoutSyntaxAndImports(subfield, layoutId));
             // subfields sorting
             layout.subfields.sort(sortByOrder);
-        } else if (layout.text) {
+        } else if (layout.text !== undefined && layout.text !== null) {
             // syntax correction
             layout.type = 'text';
         } else {

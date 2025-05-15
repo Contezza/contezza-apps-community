@@ -43,6 +43,9 @@ export class ContezzaDynamicSubformComponent implements OnInit {
         this.hostTabindex = this.isTabbable(this.hostClass) ? 0 : -1;
         if (this.layout.type === 'field') {
             this.field = this.dynamicForm.getFieldById(this.layout.id);
+            if (!this.field) {
+                throw new Error('No dynamic-form field with id ' + this.layout.id);
+            }
             this.control = this.dynamicForm.getControlById(this.layout.id) as FormControl;
         }
     }
