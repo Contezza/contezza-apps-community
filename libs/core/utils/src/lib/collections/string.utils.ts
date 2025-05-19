@@ -77,7 +77,9 @@ export class StringUtils {
             const escapedSuffix = StringUtils.escapeRegExp(suffix);
             const placeholderRegex = new RegExp(`${escapedPrefix}[^${escapedSuffix}]*${escapedSuffix}`, 'g');
             // extracts template parameters from the given string
-            const keys = string.match(placeholderRegex)?.map((placeholder) => placeholder.slice(prefix.length, -suffix.length)) || [];
+            let keys = string.match(placeholderRegex)?.map((placeholder) => placeholder.slice(prefix.length, -suffix.length)) || [];
+            // remove duplicates
+            keys = Array.from(new Set(keys));
             // if the string uses a non-default placeholder then this must be replaced with the default
             string = (
                 options?.placeholder !== defaultPlaceholder
