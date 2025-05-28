@@ -45,7 +45,8 @@ export class ExtensionModule {
             'search-table-page.target.hasTypeIn': rules.hasTypeIn,
         });
 
-        csExtensions.setActions({
+        csExtensions.setActions<any>({
+            'actions.search-bar': () => import('./components/actions/search-bar.action.component').then((_) => _.SearchBarActionComponent),
             'app.components.toggle-filters-button': () => import('./components/actions/toggle-filters-button.component').then((_) => _.ToggleFiltersButtonComponent),
         });
 

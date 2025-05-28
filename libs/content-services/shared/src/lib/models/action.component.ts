@@ -2,12 +2,12 @@ import { Directive, Input } from '@angular/core';
 
 import { ContentActionRef } from '@alfresco/adf-extensions';
 
-export interface IActionComponent {
-    data: ContentActionRef;
+export interface IActionComponent<TData = ContentActionRef> {
+    data: TData;
 }
 
 @Directive()
-export abstract class ActionComponent implements IActionComponent {
+export abstract class ActionComponent<TData = ContentActionRef> implements IActionComponent<TData> {
     @Input()
-    data!: ContentActionRef;
+    data!: TData;
 }
