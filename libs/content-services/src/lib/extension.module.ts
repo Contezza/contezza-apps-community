@@ -5,7 +5,8 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { map, withLatestFrom } from 'rxjs';
 
-import { provideTranslations } from '@alfresco/adf-core';
+import { Node } from '@alfresco/js-api';
+import { provideTranslations, ThumbnailService as AdfThumbnailService } from '@alfresco/adf-core';
 import { FileUploadStatus } from '@alfresco/adf-content-services';
 import { ExtensionService as AdfExtensionService, provideExtensionConfig, RuleService } from '@alfresco/adf-extensions';
 import { SnackbarInfoAction } from '@alfresco/aca-shared/store';
@@ -14,7 +15,7 @@ import { AdfUtils, ArrayUtils } from '@contezza/core/utils';
 import { UploadFilterService } from '@contezza/core/extensions';
 import { RuleContextService } from '@contezza/core/context';
 
-import { ExtensionService } from '@contezza/content-services/shared';
+import { ExtensionService, ThumbnailService } from '@contezza/content-services/shared';
 
 import { Effects } from './store/effects';
 
@@ -33,11 +34,13 @@ import { Effects } from './store/effects';
 export class ExtensionModule {
     constructor(
         store: Store,
+        adfThumbnails: AdfThumbnailService,
         adfExtensions: AdfExtensionService,
         ruleService: RuleService,
         uploadFilter: UploadFilterService,
         ruleContext$: RuleContextService,
-        extensions: ExtensionService
+        extensions: ExtensionService,
+        thumbnails: ThumbnailService
     ) {
         // content-services.selection.mimeTypeIn
         adfExtensions.setEvaluators(
@@ -94,6 +97,14 @@ export class ExtensionModule {
             'columns.dynamic-source': () => import('./components/columns/dynamic-source.column.component').then((_) => _.DynamicSourceColumnComponent),
             'columns.parent': () => import('./components/columns/parent.column.component').then((_) => _.ParentColumnComponent),
             'columns.site': () => import('./components/columns/site.column.component').then((_) => _.SiteColumnComponent),
+            'columns.thumbnail': () => import('./components/columns/thumbnail/thumbnail.column.component').then((_) => _.ThumbnailColumnComponent),
+        });
+
+        thumbnails.setThumbnailIconResolvers<Node>({
+            // generic fallback to default icons
+            canApply: () => true,
+            getIcon: (item) => adfThumbnails.getMimeTypeIcon(item.content?.mimeType || 'folder'),
+            order: Number.MAX_SAFE_INTEGER,
         });
     }
 }
