@@ -1,0 +1,67 @@
+<ng-container *contezzaLet="loading$ | async as loading">
+    <mat-form-field class="search-bar-form" appearance="outline">
+        <mat-icon matPrefix>search</mat-icon>
+
+        <input
+            matInput
+            type="text"
+            [matAutocomplete]="auto"
+            [formControl]="searchInput"
+            [placeholder]="'SEARCH.LABEL' | translate"
+            [errorStateMatcher]="{ isErrorState: alwaysFalse }"
+            (keyup.enter)="onEnterPressed()"
+            #autocompleteInput
+        />
+
+        <mat-autocomplete #auto="matAutocomplete" [class]="['search-bar-form-autocomplete', loading ? 'loading' : '']" [displayWith]="displayFn">
+            <ng-container *ngIf="searchInput.value">
+                <ng-container *ngIf="searchInput.valid; else error">
+                    <ng-container *ngIf="nodeResults$ | async as nodeResults">
+                        <ng-container *ngIf="nodeResults.list.entries?.length && loading">
+                            <div class="search-bar-form-autocomplete-loading">
+                                <mat-spinner color="accent"></mat-spinner>
+                            </div>
+                        </ng-container>
+
+                        <contezza-search-facet-suggestions
+                            *ngIf="nodeResults.list.entries?.length && nodeResults.list.context?.facets.length"
+                            [facetSelection]="facetSelection"
+                            [responseFacets]="nodeResults?.list.context?.facets"
+                            (entryClicked)="onFacetClicked($event)"
+                        ></contezza-search-facet-suggestions>
+
+                        <div class="search-bar-form-results-panel" *ngIf="nodeResults?.list?.entries?.length">
+                            <span class="search-bar-form-results-panel-title">{{ 'SEARCH.RESULTS.LABEL' | translate }}</span>
+                            <span class="search-bar-form-results-panel-totals">
+                                {{ 'SEARCH.PAGINATION.OF' | translate : { count: nodeResults.list.pagination.count, total: nodeResults.list.pagination.totalItems } }}
+                            </span>
+                        </div>
+
+                        <mat-divider></mat-divider>
+
+                        <mat-option class="search-bar-form-autocomplete-option" *ngFor="let item of nodeResults?.list.entries; trackBy: trackById" [value]="item">
+                            <contezza-search-result [item]="item.entry" [settings]="resultSettings"></contezza-search-result>
+                        </mat-option>
+
+                        <mat-option *ngIf="!nodeResults?.list.entries?.length && !loading" disabled>
+                            <span>
+                                {{ 'SEARCH.NO_SUGGESTIONS' | translate }}
+                            </span>
+                        </mat-option>
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+
+            <ng-template #error>
+                <mat-option disabled>
+                    {{ 'SEARCH.ERRORS.MIN_CHARS' | translate : { minChars } }}
+                </mat-option>
+            </ng-template>
+        </mat-autocomplete>
+
+        <mat-icon class="search-bar-form-button" matSuffix *ngIf="searchInput.value && !loading" (click)="clearInput()">clear</mat-icon>
+        <mat-icon class="search-bar-form-spinner" matSuffix *ngIf="searchInput.value && loading">
+            <mat-spinner color="primary" diameter="23"></mat-spinner>
+        </mat-icon>
+    </mat-form-field>
+</ng-container>
