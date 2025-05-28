@@ -10,6 +10,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2025-05-15
+|2.22.1
+|View <<Release 2.22.1,release details>>.
+
 |2025-05-08
 |2.22.0
 |View <<Release 2.22.0,release details>>.
@@ -257,6 +261,13 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 2.22.1
+
+Bugfixes/minor changes:
+
+- @contezza/dynamic-forms - Add validator `invalidDateRange`
+- @contezza/dynamic-forms - Fix error with empty fieldtype text
 
 ==== Release 2.22.0
 

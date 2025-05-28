@@ -11,9 +11,10 @@ import { ContezzaDynamicFormExtensionService } from '@contezza/dynamic-forms/sha
 
 import { DateRangeFieldComponent } from './date-range-field.component';
 import { ContezzaDateFieldModule } from '../date/date-field.module';
+import { ContezzaDynamicFormsCommonModule } from '../../../dynamic-forms.common.module';
 
 @NgModule({
-    imports: [CommonModule, ContezzaDateFieldModule, MatFormFieldModule, TranslateModule, ContezzaLetDirective, TranslatePropertyTitlePipe],
+    imports: [CommonModule, ContezzaDateFieldModule, MatFormFieldModule, TranslateModule, ContezzaLetDirective, TranslatePropertyTitlePipe, ContezzaDynamicFormsCommonModule],
     declarations: [DateRangeFieldComponent],
     exports: [DateRangeFieldComponent],
 })
