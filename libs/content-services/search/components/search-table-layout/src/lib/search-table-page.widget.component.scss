@@ -1,0 +1,19 @@
+:host,
+contezza-search-table-page-widget {
+    &.hide-toolbar {
+        aca-page-layout-header {
+            display: none !important;
+        }
+    }
+    &.hide-paginator {
+        mat-paginator {
+            display: none !important;
+        }
+    }
+    aca-page-layout-content {
+        div.table-container {
+            // allow mouse interaction with scrollbar
+            margin-right: 7px;
+        }
+    }
+}

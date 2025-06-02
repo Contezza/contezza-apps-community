@@ -1,0 +1,128 @@
+<ng-container *contezzaLet="paginationStrategy$ | async as paginationStrategy">
+    <div #container class="table-container" (touchmove)="onTouchmove($event, container)">
+        <ng-container *contezzaLet="resizing$ | async as resizing">
+            <ng-container *contezzaLet="resizedColumns$ | async as resizedColumns">
+                <table
+                    mat-table
+                    [dataSource]="dataSource || []"
+                    (contentChanged)="onContentChanged()"
+                    matSort
+                    matSortDisableClear
+                    [matSortActive]="sortingState?.active"
+                    [matSortDirection]="sortingState?.direction"
+                    (matSortChange)="onSortChange($event)"
+                >
+                    <ng-container *ngFor="let column of columns; trackBy: trackById">
+                        <ng-container [matColumnDef]="column.id" [sticky]="column.sticky" [stickyEnd]="column.stickyEnd">
+                            <ng-container *ngIf="column.type === 'select'">
+                                <th mat-header-cell *matHeaderCellDef class="select" mat-sort-header="" [disabled]="!column.sortable" [class]="column.class">
+                                    <ng-container *contezzaLet="totalSelected$ | async as totalSelected">
+                                        <mat-checkbox
+                                            color="primary"
+                                            [disabled]="!dataSource || !fullSelectionLength"
+                                            [checked]="totalSelected > 0 && totalSelected >= fullSelectionLength"
+                                            [indeterminate]="totalSelected > 0 && totalSelected < fullSelectionLength"
+                                            (change)="onSelectAll($event.checked)"
+                                        >
+                                        </mat-checkbox>
+                                    </ng-container>
+                                </th>
+                                <td mat-cell *matCellDef="let item" [class]="column.class">
+                                    <mat-checkbox
+                                        #selectable="contezzaSelectable"
+                                        color="primary"
+                                        [contezzaSelectable]="item"
+                                        [isToggle]="true"
+                                        [checked]="selectable.selected$ | async"
+                                        (click)="$event.preventDefault(); $event['selectionPrevented'] = true"
+                                    ></mat-checkbox>
+                                </td>
+                            </ng-container>
+                            <ng-container *ngIf="column.type !== 'select'">
+                                <th
+                                    [contezzaResizable]="column.resizable !== false"
+                                    [width]="column.width"
+                                    (resizing)="onResizing(column, $event)"
+                                    (resized)="onResized(column, $event)"
+                                    mat-header-cell
+                                    *matHeaderCellDef
+                                    [class]="column.class"
+                                >
+                                    <span [mat-sort-header]="column.sortingKey || column.key" [disabled]="!column.sortable" [class.filterable]="!!column.filter">
+                                        <ng-container *contezzaLet="column.title && (column.title | translatePropertyTitle) as title$">
+                                            <ng-container *contezzaLet="title$ ? (title$ | async) : (column.title | translate) as title">
+                                                <ng-container *ngIf="column.filter; else columnTitle">
+                                                    <contezza-dynamic-form-field
+                                                        [title]="title"
+                                                        [field]="column.filter.field"
+                                                        [control]="column.filter.control"
+                                                        (click)="$event.stopPropagation()"
+                                                        (keydown.enter)="$event.stopPropagation()"
+                                                        (keydown.space)="$event.stopPropagation()"
+                                                    ></contezza-dynamic-form-field>
+                                                </ng-container>
+                                                <ng-template #columnTitle>{{ title }}</ng-template>
+                                            </ng-container>
+                                        </ng-container>
+                                    </span>
+                                </th>
+                                <td
+                                    mat-cell
+                                    *matCellDef="let item"
+                                    contezza-table-cell
+                                    [class.resizing]="resizing === column"
+                                    [class.contezza-resizable]="column.resizable !== false"
+                                    [class.contezza-resized]="resizedColumns?.includes(column.id)"
+                                    [item]="item"
+                                    [column]="column"
+                                ></td>
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                    <ng-container matColumnDef="spinner">
+                        <td mat-footer-cell *matFooterCellDef [attr.colspan]="displayedColumns.length">
+                            <mat-progress-spinner #paginationSpinner style="margin: auto" mode="indeterminate" diameter="40"></mat-progress-spinner>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                    <tr
+                        mat-row
+                        *matRowDef="let row; columns: displayedColumns"
+                        [contezza-table-row]="row"
+                        #selectable="contezzaSelectable"
+                        [contezzaSelectable]="row"
+                        [class.selected]="selectable.selected$ | async"
+                        (click)="onRowClick($event); $event.preventDefault()"
+                        (dblclick)="onRowDblClick($event); $event.preventDefault()"
+                        (contextmenu)="onRowRightClick($event); $event.preventDefault()"
+                    ></tr>
+                    <tr
+                        mat-footer-row
+                        *matFooterRowDef="['spinner']"
+                        [style.display]="
+                            !(pagingState && paginationStrategy === 'scroll' && dataSource?.data.length && pagingState.length > pagingState.pageSize * (pagingState.pageIndex + 1))
+                                ? 'none'
+                                : 'revert'
+                        "
+                    ></tr>
+                </table>
+                <ng-container *ngIf="dataSource && !dataSource.data.length">
+                    <div class="table-empty">
+                        <ng-content select="[table-empty]"></ng-content>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+    </div>
+    <mat-paginator
+        *ngIf="pagingState && paginationStrategy === 'browse'"
+        color="primary"
+        showFirstLastButtons
+        [length]="pagingState.length"
+        [pageSize]="pagingState.pageSize"
+        [pageIndex]="pagingState.pageIndex"
+        [pageSizeOptions]="[5, 10, 15, 20, 25, 50, 100, 250]"
+        (page)="onPageChange($event)"
+    ></mat-paginator>
+</ng-container>

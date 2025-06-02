@@ -17,12 +17,34 @@ export class ContezzaObservables {
     static find<T>(array: T[], fn: (item: T) => boolean | Observable<boolean>): Observable<T | undefined> {
         return array.length
             ? ContezzaObservables.while<T | undefined>(
-                  (response, i) => response === undefined && i < array.length,
+                  (response, i) => response === null && i < array.length,
                   (_, i) => {
                       const item = array[i]!;
-                      return ContezzaObservables.of(fn(item)).pipe(map((value) => (value ? item : undefined)));
+                      return ContezzaObservables.of(fn(item)).pipe(map((value) => (value ? item : null)));
                   }
-              )
+              ).pipe(map((x) => (x === null ? undefined : x)))
+            : of(undefined);
+    }
+
+    /**
+     * Returns an observable which emits the last element in the given array that satisfies the given testing function.
+     * If no value satisfy the testing function, `of(undefined)` is returned.
+     *
+     * This can be seen as an extension of `ArrayUtils.findLast(array, fn)` which supports a testing function which returns an `Observable<boolean>`:
+     * if `fn` returns a `boolean`, then this method is equivalent to `of(ArrayUtils.findLast(array, fn))`.
+     *
+     * @param array
+     * @param fn
+     */
+    static findLast<T>(array: T[], fn: (item: T) => boolean | Observable<boolean>): Observable<T | undefined> {
+        return array.length
+            ? ContezzaObservables.while<T | null>(
+                  (response, i) => response === null && i < array.length,
+                  (_, i) => {
+                      const item = array[array.length - 1 - i]!;
+                      return ContezzaObservables.of(fn(item)).pipe(map((value) => (value ? item : null)));
+                  }
+              ).pipe(map((x) => (x === null ? undefined : x)))
             : of(undefined);
     }
 

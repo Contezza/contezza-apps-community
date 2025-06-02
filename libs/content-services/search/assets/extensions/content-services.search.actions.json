@@ -1,0 +1,167 @@
+{
+    "$id": "content-services.search.actions",
+    "$version": "@@project.version@@",
+    "$name": "Contezza Content Services Search Actions",
+    "$vendor": "Contezza BV",
+
+    "templates": {
+        "actions": [
+            {
+                "id": "content-services.search.actions.reload",
+                "title": "CONTENT_SERVICES.SEARCH.ACTIONS.RELOAD",
+                "icon": "refresh",
+                "actions": {
+                    "click": "reload"
+                }
+            },
+            {
+                "id": "content-services.search.actions.toggleSidebarFilters",
+                "title": "CONTENT_SERVICES.SEARCH.ACTIONS.TOGGLE_SIDEBAR_FILTERS",
+                "icon": "filter_list|svg:filter_plus",
+                "type": "custom",
+                "component": "app.components.toggle-filters-button",
+                "actions": {
+                    "click": "toggleSidebarFilters"
+                }
+            },
+            {
+                "id": "content-services.search.actions.resetFilters",
+                "title": "CONTENT_SERVICES.SEARCH.ACTIONS.CLEAR_FILTERS",
+                "icon": "svg:filter_remove",
+                "actions": {
+                    "click": "resetFilters"
+                }
+            },
+            {
+                "id": "content-services.search.actions.clearPreferences",
+                "title": "CONTENT_SERVICES.SEARCH.ACTIONS.CLEAR_PREFERENCES",
+                "icon": "svg:cog_off",
+                "type": "default",
+                "actions": {
+                    "click": "clearPreferences"
+                }
+            },
+            {
+                "id": "content-services.search.actions.more.clearPreferences",
+                "imports": "templates.actions[content-services.search.actions.clearPreferences]"
+            }
+        ]
+    },
+
+    "features": {
+        "search-component": {
+            "toolbar": [
+                {
+                    "id": "column-sorter",
+                    "imports": "templates.actions[content-services.actions.editColumns]",
+                    "order": 50,
+                    "rules": {
+                        "visible": "context=>return context.component?.actions?.includes?.('column-sorter')"
+                    }
+                },
+                {
+                    "id": "reload",
+                    "imports": "templates.actions[content-services.search.actions.reload]",
+                    "order": 100,
+                    "rules": {
+                        "visible": "context=>return context.component?.actions?.includes?.('reload')"
+                    }
+                },
+                {
+                    "id": "reset-filters",
+                    "imports": "templates.actions[content-services.search.actions.resetFilters]",
+                    "order": 900,
+                    "rules": {
+                        "visible": "context=>return context.component?.actions?.includes?.('reset-filters')"
+                    }
+                },
+                {
+                    "id": "clear-preferences",
+                    "imports": "templates.actions[content-services.search.actions.clearPreferences]",
+                    "order": 1000,
+                    "rules": {
+                        "visible": "context=>return context.component?.actions?.includes?.('clear-preferences')"
+                    }
+                },
+                {
+                    "id": "toggle-sidebar-filters",
+                    "imports": "templates.actions[content-services.search.actions.toggleSidebarFilters]",
+                    "order": 9000,
+                    "rules": {
+                        "visible": "context=>return context.component?.actions?.includes?.('toggle-sidebar-filters')"
+                    }
+                },
+                {
+                    "id": "app.toolbar.more",
+                    "order": 10000,
+                    "type": "menu",
+                    "children": [
+                        {
+                            "id": "clear-preferences",
+                            "imports": "templates.actions[content-services.search.actions.clearPreferences]",
+                            "order": 10000,
+                            "rules": {
+                                "visible": "context=>return context.component?.actions?.includes?.('more.clear-preferences')"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "toolbar": [
+            {
+                "id": "content-services.search.toolbar.togglePresetPanel",
+                "imports": "templates.actions[content-services.presets.actions.togglePresetPanel]",
+                "order": 30,
+                "rules": {
+                    "visible": "search-table-page.target.hasSidebarFilters"
+                }
+            },
+            {
+                "id": "content-services.search.toolbar.editColumns",
+                "imports": "templates.actions[content-services.actions.editColumns]",
+                "order": 660,
+                "rules": {
+                    "visible": "search-table-page.target.isSearchTablePage"
+                }
+            },
+            {
+                "id": "content-services.search.toolbar.reload",
+                "imports": "templates.actions[content-services.search.actions.reload]",
+                "order": 670,
+                "rules": {
+                    "visible": "search-table-page.target.isSearchTablePage"
+                }
+            },
+            {
+                "id": "content-services.search.toolbar.toggleView",
+                "imports": "templates.actions[content-services.actions.toggleView]",
+                "order": 680,
+                "rules": {
+                    "visible": "responsive.isMobile"
+                }
+            },
+            {
+                "id": "content-services.search.toolbar.toggleSidebarFilters",
+                "imports": "templates.actions[content-services.search.actions.toggleSidebarFilters]",
+                "order": 690,
+                "rules": {
+                    "visible": "search-table-page.target.hasSidebarFilters"
+                }
+            },
+            {
+                "id": "app.toolbar.more",
+                "children": [
+                    {
+                        "id": "content-services.search.toolbar.clear-preferences",
+                        "imports": "templates.actions[content-services.search.actions.clearPreferences]",
+                        "order": 1000,
+                        "rules": {
+                            "visible": "search-table-page.target.isSearchTablePage"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "$id": "content-services.search.rules",
+    "$version": "@@project.version@@",
+    "$name": "Contezza Content Services Search Rules",
+    "$vendor": "Contezza BV",
+
+    "rules": [
+        {
+            "id": "search-table-page.target.hasSidebarFilters",
+            "type": "core.every",
+            "parameters": [
+                {
+                    "type": "rule",
+                    "value": "search-table-page.target.isSearchTablePage"
+                }
+            ]
+        }
+    ]
+}

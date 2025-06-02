@@ -1,0 +1,62 @@
+{
+    "$id": "content-services.presets.actions",
+    "$version": "@@project.version@@",
+    "$name": "Content Services Presets Actions",
+    "$vendor": "Contezza BV",
+
+    "templates": {
+        "actions": [
+            {
+                "id": "content-services.presets.actions.togglePresetPanel",
+                "title": "CONTENT_SERVICES.PRESETS.ACTIONS.TOGGLE_PRESET_PANEL",
+                "icon": "tune",
+                "actions": {
+                    "click": "togglePresetPanel"
+                }
+            }
+        ]
+    },
+
+    "features": {
+        "presets": {
+            "contextMenu": [
+                {
+                    "id": "content-services.presets.show-details",
+                    "title": "CONTENT_SERVICES.PRESETS.ACTIONS.SHOW_DETAILS",
+                    "icon": "info",
+                    "type": "default",
+                    "actions": {
+                        "click": "[CONTENT_SERVICES.PRESETS] SHOW_DETAILS"
+                    }
+                },
+                {
+                    "id": "content-services.presets.update-title",
+                    "title": "CONTENT_SERVICES.PRESETS.ACTIONS.UPDATE_TITLE",
+                    "icon": "edit",
+                    "type": "default",
+                    "actions": {
+                        "click": "[CONTENT_SERVICES.PRESETS] UPDATE_TITLE"
+                    }
+                },
+                {
+                    "id": "content-services.presets.save-new-version",
+                    "title": "CONTENT_SERVICES.PRESETS.ACTIONS.SAVE_NEW_VERSION",
+                    "icon": "save_as",
+                    "type": "default",
+                    "actions": {
+                        "click": "[CONTENT_SERVICES.PRESETS] SAVE_NEW_VERSION"
+                    }
+                },
+                {
+                    "id": "content-services.presets.remove",
+                    "title": "CONTENT_SERVICES.PRESETS.ACTIONS.REMOVE",
+                    "icon": "delete",
+                    "type": "default",
+                    "actions": {
+                        "click": "[CONTENT_SERVICES.PRESETS] REMOVE"
+                    }
+                }
+            ]
+        }
+    }
+}

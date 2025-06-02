@@ -1,0 +1,18 @@
+{
+    "CONTENT_SERVICES": {
+        "ACTIONS": {
+            "CREATE_FILE": "Document creëren",
+            "EDIT_COLUMNS": "Kolommen bewerken",
+            "MANAGE_PERMISSIONS": "Rechten",
+            "NAVIGATE_TO_PARENT": "In map tonen",
+            "ROTATE_FILE_IN_VIEWER": "Document draaien",
+            "TOGGLE_VIEW": "Weergave wisselen"
+        },
+        "MESSAGES": {
+            "INFO": {
+                "FOLDER_UPLOAD_NOT_ALLOWED": "Het is niet toegestaan om mappen toe te voegen op deze locatie",
+                "FILE_UPLOAD_NOT_ALLOWED": "Het is niet toegestaan om documenten toe te voegen op deze locatie"
+            }
+        }
+    }
+}

@@ -1,0 +1,29 @@
+:host,
+.contezza-search-node-selector-dialog {
+    ::ng-deep {
+        contezza-search-table-layout {
+            .aca-page-layout-header {
+                display: none;
+            }
+        }
+    }
+
+    &-actions {
+        flex-wrap: nowrap;
+        &-selection {
+            min-width: 0;
+            ::ng-deep {
+                .mat-chip-list-wrapper {
+                    flex-wrap: nowrap;
+                    overflow: auto;
+                    .mat-chip.mat-standard-chip {
+                        flex-shrink: 0;
+                    }
+                }
+            }
+        }
+        & > button {
+            flex-shrink: 0;
+        }
+    }
+}

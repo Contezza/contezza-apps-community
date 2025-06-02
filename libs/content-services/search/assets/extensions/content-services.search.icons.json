@@ -1,0 +1,23 @@
+{
+    "$id": "content-services.search.icons",
+    "$version": "@@project.version@@",
+    "$name": "Contezza Content Services Search Icons",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "icons": [
+            {
+                "id": "svg:cog_off",
+                "value": "./assets/content-services/search/icons/cog_off.svg"
+            },
+            {
+                "id": "svg:filter_plus",
+                "value": "./assets/content-services/search/icons/filter_plus.svg"
+            },
+            {
+                "id": "svg:filter_remove",
+                "value": "./assets/content-services/search/icons/filter_remove.svg"
+            }
+        ]
+    }
+}

@@ -1,0 +1,166 @@
+{
+    "$id": "content-services.actions",
+    "$version": "@@project.version@@",
+    "$name": "Contezza Content Services Actions",
+    "$vendor": "Contezza BV",
+
+    "templates": {
+        "actions": [
+            {
+                "id": "content-services.actions.editColumns",
+                "title": "CONTENT_SERVICES.ACTIONS.EDIT_COLUMNS",
+                "icon": "svg:table_edit",
+                "type": "custom",
+                "component": "actions.column-editor"
+            },
+            {
+                "id": "content-services.actions.toggleView",
+                "title": "CONTENT_SERVICES.ACTIONS.TOGGLE_VIEW",
+                "icon": "list|view_comfy",
+                "type": "custom",
+                "class": "contezza-responsive-mobile-visible",
+                "component": "buttons.toggle-view",
+                "actions": {
+                    "click": "toggleView"
+                }
+            },
+            {
+                "id": "content-services.actions.managePermissions",
+                "title": "CONTENT_SERVICES.ACTIONS.MANAGE_PERMISSIONS",
+                "icon": "vpn_key",
+                "actions": {
+                    "click": "[CONTENT_SERVICES] MANAGE_PERMISSIONS"
+                },
+                "rules": {
+                    "visible": "content-services.rules.canManagePermissions"
+                }
+            },
+            {
+                "id": "content-services.actions.navigateToParent",
+                "title": "CONTENT_SERVICES.ACTIONS.NAVIGATE_TO_PARENT",
+                "icon": "folder",
+                "actions": {
+                    "click": "[CONTENT_SERVICES] NAVIGATE_TO_PARENT"
+                }
+            },
+            {
+                "id": "content-services.actions.rotateFileInViewer",
+                "title": "CONTENT_SERVICES.ACTIONS.ROTATE_FILE_IN_VIEWER",
+                "icon": "rotate_90_degrees_ccw",
+                "order": 100,
+                "actions": {
+                    "click": "[CONTENT_SERVICES] ROTATE_FILE_IN_VIEWER"
+                },
+                "rules": {
+                    "visible": "content-services.rules.canRotateFileInViewer"
+                }
+            }
+        ]
+    },
+
+    "features": {
+        "contextMenu": [
+            {
+                "id": "app.context.menu.permissions",
+                "imports": "templates.actions[content-services.actions.managePermissions]!important"
+            }
+        ],
+        "floatingButton": [
+            {
+                "id": "search-table-page.floating-button.add",
+                "order": 1,
+                "icon": "add",
+                "type": "menu",
+                "children": [
+                    {
+                        "id": "search-table-page.floating-button.uploadFile",
+                        "order": 10,
+                        "icon": "svg:file_upload",
+                        "title": "APP.NEW_MENU.MENU_ITEMS.UPLOAD_FILE",
+                        "description": "APP.NEW_MENU.TOOLTIPS.UPLOAD_FILES",
+                        "description-disabled": "APP.NEW_MENU.TOOLTIPS.UPLOAD_FILES_NOT_ALLOWED",
+                        "actions": {
+                            "click": "UPLOAD_FILES"
+                        },
+                        "rules": {
+                            "visible": "search-table-page.canUploadFile"
+                        }
+                    },
+                    {
+                        "id": "search-table-page.floating-button.uploadFolder",
+                        "order": 20,
+                        "icon": "svg:folder_upload",
+                        "title": "APP.NEW_MENU.MENU_ITEMS.UPLOAD_FOLDER",
+                        "description": "APP.NEW_MENU.TOOLTIPS.UPLOAD_FOLDERS",
+                        "description-disabled": "APP.NEW_MENU.TOOLTIPS.UPLOAD_FOLDERS_NOT_ALLOWED",
+                        "actions": {
+                            "click": "UPLOAD_FOLDER"
+                        },
+                        "rules": {
+                            "visible": "search-table-page.canUploadFolder"
+                        }
+                    },
+                    {
+                        "id": "search-table-page.floating-button.createFolder",
+                        "order": 30,
+                        "icon": "create_new_folder",
+                        "title": "APP.NEW_MENU.MENU_ITEMS.CREATE_FOLDER",
+                        "description": "APP.NEW_MENU.TOOLTIPS.CREATE_FOLDER",
+                        "description-disabled": "APP.NEW_MENU.TOOLTIPS.CREATE_FOLDER_NOT_ALLOWED",
+                        "actions": {
+                            "click": "CREATE_FOLDER"
+                        },
+                        "rules": {
+                            "visible": "search-table-page.canCreateFolder"
+                        }
+                    },
+                    {
+                        "id": "search-table-page.floating-button.createFile",
+                        "order": 50,
+                        "title": "CONTENT_SERVICES.ACTIONS.CREATE_FILE",
+                        "description": "CONTENT_SERVICES.ACTIONS.CREATE_FILE",
+                        "type": "menu",
+                        "icon": "svg:file_plus",
+                        "children": [],
+                        "rules": {
+                            "visible": "search-table-page.canCreateFile"
+                        }
+                    }
+                ]
+            }
+        ],
+        "toolbar": [
+            {
+                "id": "app.toolbar.more",
+                "children": [
+                    {
+                        "id": "app.toolbar.permissions",
+                        "imports": "templates.actions[content-services.actions.managePermissions]!important"
+                    }
+                ]
+            }
+        ],
+        "viewer": {
+            "toolbarActions": [
+                {
+                    "id": "content-services.viewer.toolbar-actions.rotateFileInViewer",
+                    "imports": "templates.actions[content-services.actions.rotateFileInViewer]"
+                },
+                {
+                    "id": "app.viewer.toolbar.more",
+                    "children": [
+                        {
+                            "id": "app.viewer.permissions",
+                            "imports": "templates.actions[content-services.actions.managePermissions]!important"
+                        },
+                        {
+                            "id": "content-services.viewer.toolbar-actions.navigateToParent",
+                            "imports": "templates.actions[content-services.actions.navigateToParent]",
+                            "order": 1000
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

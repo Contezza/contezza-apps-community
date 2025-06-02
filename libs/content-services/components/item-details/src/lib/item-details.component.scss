@@ -1,0 +1,73 @@
+:host,
+.contezza-item-details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    &-entry {
+        display: flex;
+        min-height: 40px;
+        gap: 20px;
+        align-items: center;
+
+        &-title {
+            flex: 1;
+            color: var(--theme-secondary-text-color);
+            font-size: 0.9em;
+        }
+        &-value {
+            flex: 3;
+            & .clickable {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .contezza-property-display-chips {
+        &.contezza-item-details-entry-value {
+            &.list-item {
+                display: inline-flex;
+                align-items: center;
+                margin: 4px;
+                border-radius: 16px;
+                min-height: 32px;
+                padding: 0 12px;
+                background-color: var(--theme-unselected-chip-bg-color);
+                &.clickable:hover {
+                    background: var(--theme-text-fg-shadow-color);
+                }
+            }
+        }
+    }
+    .contezza-property-display-expansion-panel {
+        display: flex;
+        gap: 4px;
+
+        overflow: hidden;
+
+        max-height: 40px;
+        transition: max-height 0.3s ease-in-out;
+
+        &:after {
+            // arrow
+            content: '';
+            border: solid var(--theme-text-color);
+            border-width: 0 3px 3px 0;
+            width: 10px;
+            min-width: 10px;
+            height: 10px;
+
+            transform: scale(0.6) rotate(45deg);
+
+            margin-top: calc(40px / 2 - 10px * 1.41 / 2 - 2px);
+        }
+
+        &:hover {
+            max-height: 1000px;
+            transition: max-height 0.3s ease-in-out;
+            &:after {
+                display: none;
+            }
+        }
+    }
+}

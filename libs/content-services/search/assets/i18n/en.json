@@ -1,0 +1,22 @@
+{
+    "CONTENT_SERVICES": {
+        "SEARCH": {
+            "ACTIONS": {
+                "CLEAR_FILTERS": "Clear all filters",
+                "CLEAR_PREFERENCES": "Clear table preferences",
+                "RELOAD": "Refresh page",
+                "TOGGLE_SIDEBAR_FILTERS": "Filter"
+            },
+            "BROWSE": {
+                "DOWNLOADS": {
+                    "TITLE": "Downloads",
+                    "DESCRIPTION": "View zip files downloaded folders",
+                    "EMPTY_STATE": {
+                        "TITLE": "No results",
+                        "TEXT": "No download zip files found"
+                    }
+                }
+            }
+        }
+    }
+}
