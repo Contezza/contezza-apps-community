@@ -14,8 +14,8 @@ import { debounceTime, distinctUntilChanged, filter, map, scan, share, switchMap
 
 import { GenericFacetResponse, Node, ResultSetPaging, SearchRequest } from '@alfresco/js-api';
 import { TemplateModule } from '@alfresco/adf-core';
-import { UploadModule, UploadService } from '@alfresco/adf-content-services';
-import { AppHookService, PageLayoutModule } from '@alfresco/aca-shared';
+import { DocumentListService, UploadModule, UploadService } from '@alfresco/adf-content-services';
+import { PageLayoutModule } from '@alfresco/aca-shared';
 
 import { ContezzaLetModule } from '@contezza/core/directives';
 import { DynamicComponent } from '@contezza/core/dynamic-component';
@@ -307,7 +307,7 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
     constructor(
         private readonly router: Router,
         private readonly store: CustomStoreService,
-        private readonly appHook: AppHookService,
+        private readonly appHook: DocumentListService,
         private readonly upload: UploadService,
         private readonly dynamicFormService: ContezzaDynamicSearchFormService,
         private readonly refresh$: RefreshSubject,
@@ -354,7 +354,7 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
             );
         }
 
-        merge(this.refresh$, this.appHook.reload.asObservable())
+        merge(this.refresh$, this.appHook.reload$)
             .pipe(
                 // do not refresh in viewer mode
                 filter(() => !this.router.url.includes('viewer:view')),

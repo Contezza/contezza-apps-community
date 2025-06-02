@@ -3,9 +3,10 @@ import { DatePipe } from '@angular/common';
 
 import { map, Observable, of } from 'rxjs';
 
-import { FileSizePipe, LocalizedDatePipe, MimeTypeIconPipe, TimeAgoPipe } from '@alfresco/adf-core';
+import { FileSizePipe, LocalizedDatePipe, ThumbnailService, TimeAgoPipe } from '@alfresco/adf-core';
 
 import { Formatter, FormatterResolverService, FormatterSource } from '@contezza/core/extensions';
+import { MimeTypeIconPipe } from '@contezza/core/pipes';
 import { ContezzaObjectUtils } from '@contezza/core/utils';
 
 import { ExtendedString } from '../models';
@@ -29,8 +30,14 @@ const stringify = (x: ExtendedStringifiable): ExtendedString => {
 @Injectable({ providedIn: 'root' })
 class PipeService {
     readonly date = new DatePipe('en');
+    readonly adfMimeTypeIcon = new MimeTypeIconPipe(this.thumbnailService);
 
-    constructor(readonly adfTimeAgo: TimeAgoPipe, readonly adfLocalizedDate: LocalizedDatePipe, readonly adfFileSize: FileSizePipe, readonly adfMimeTypeIcon: MimeTypeIconPipe) {}
+    constructor(
+        readonly adfTimeAgo: TimeAgoPipe,
+        readonly adfLocalizedDate: LocalizedDatePipe,
+        readonly adfFileSize: FileSizePipe,
+        private readonly thumbnailService: ThumbnailService
+    ) {}
 }
 
 @Injectable({ providedIn: 'root' })

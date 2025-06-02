@@ -14,18 +14,18 @@ contezza-table {
             display: flex;
             flex-direction: column;
 
-            table.mat-table {
+            table.mat-mdc-table {
                 position: relative;
 
-                th.mat-header-cell,
-                th.mat-header-cell .mat-form-field-label.mat-form-field-empty {
+                th.mat-mdc-header-cell,
+                th.mat-mdc-header-cell .mat-form-field-label.mat-form-field-empty {
                     font-weight: 700;
                     font-size: var(--theme-caption-font-size);
                     color: var(--theme-text-fg-color) !important;
                     cursor: pointer;
                 }
 
-                th.mat-header-cell {
+                th.mat-mdc-header-cell {
                     .mat-sort-header-container,
                     .mat-sort-header-content,
                     contezza-dynamic-form-field {
@@ -41,7 +41,7 @@ contezza-table {
                         max-width: calc(100% - 12px);
                     }
 
-                    .mat-form-field {
+                    .mat-mdc-form-field {
                         font: revert;
 
                         &-wrapper {
@@ -65,7 +65,7 @@ contezza-table {
                     &.contezza-resized {
                         max-width: 96px;
 
-                        .mat-form-field {
+                        .mat-mdc-form-field {
                             &-infix {
                                 width: unset;
                                 min-width: 30px;
@@ -80,15 +80,15 @@ contezza-table {
                     }
                 }
 
-                tr.mat-header-row,
-                tr.mat-row {
+                tr.mat-mdc-header-row,
+                tr.mat-mdc-row {
                     cursor: pointer;
 
                     &.selected {
                         background-color: var(--theme-selected-button-bg-color);
                     }
 
-                    &:not(.mat-header-row):not(.selected):hover {
+                    &:not(.mat-mdc-header-row):not(.selected):hover {
                         background-color: var(--theme-mat-table-hover-color);
                     }
 
@@ -188,7 +188,7 @@ contezza-table {
         }
     }
 
-    .mat-paginator-container {
+    .mat-mdc-paginator-container {
         background-color: var(--theme-toolbar-background) !important;
         max-height: 43px;
         min-height: 43px !important;
