@@ -63,7 +63,6 @@ export class ThumbnailService {
         this.iconResolvers.push(...resolvers);
         // re-sort
         ArrayUtils.sortBy(this.iconResolvers, 'order');
-        console.log(this.iconResolvers);
     }
 
     /**
