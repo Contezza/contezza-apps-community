@@ -33,6 +33,9 @@
         "headerImagePath": "assets/images/mastHead-bg-shapesPattern.svg",
         "copyright": "APP.COPYRIGHT"
     },
+    "contezza": {
+        "storagePrefix": "aca_prod"
+    },
     "viewer.maxRetries": 1,
     "sharedLinkDateTimePickerType": "date",
     "headerColor": "#ffffff",
