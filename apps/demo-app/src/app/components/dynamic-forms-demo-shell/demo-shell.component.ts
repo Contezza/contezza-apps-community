@@ -25,7 +25,7 @@ interface FormValue {
     selector: 'app-dynamic-forms-demo-shell',
     template: `<ng-container *contezzaLet="headerForm.valid | async as valid">
         <div class="header">
-            <contezza-dynamic-form [dynamicForm]="headerForm" (keydown.enter)="$event.preventDefault(); button._elementRef.nativeElement.click()" />
+            <contezza-dynamic-form [dynamicForm]="headerForm" (keydown.enter)="$event.preventDefault()" />
             <ng-container>
                 <div>
                     <span> {{ formExists ? 'The form exists!' : "This form doesn't exist" }}</span>
@@ -136,7 +136,7 @@ export class DemoShellComponent implements AfterViewInit {
             },
         ];
         const items = [];
-        const columns = this.extensions.getFeature('columns')?.find(({ id }) => id === 'tezza.document-upload.columns.document')?.columns;
+        const columns = this.extensions.getFeature('columns')?.find(({ id }) => id === 'demo-app.columns.document-upload')?.columns;
         nodes.forEach((node) => {
             items.push({
                 ...node,

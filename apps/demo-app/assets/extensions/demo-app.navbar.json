@@ -1,16 +1,8 @@
 {
-    "$id": "app.demo-app.navbar",
+    "$id": "demo-app.navbar",
     "$version": "@@project.version@@",
-    "$name": "Demo App App Navbar",
+    "$name": "Demo App Navbar",
     "$vendor": "Contezza BV",
-
-    "routes": [
-        {
-            "id": "js-console",
-            "path": "javascript-console",
-            "loadChildren": "js-console"
-        }
-    ],
 
     "features": {
         "navbar": [
@@ -18,10 +10,21 @@
                 "id": "app.navbar.dynamic-forms-demo-shell",
                 "items": [
                     {
-                        "id": "app.dynamic-forms-demo-shell",
+                        "id": "app.dynamic-forms",
                         "icon": "star",
-                        "title": "Dynamic Forms demo shell",
-                        "route": "dynamic-forms-demo-shell"
+                        "title": "Dynamic Forms",
+                        "route": "dynamic-forms"
+                    }
+                ]
+            },
+            {
+                "id": "app.navbar.search-table-pages",
+                "items": [
+                    {
+                        "id": "app.search-table-pages",
+                        "icon": "star",
+                        "title": "Search",
+                        "route": "search/favorites"
                     }
                 ]
             },

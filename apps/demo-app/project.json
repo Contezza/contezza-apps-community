@@ -1,59 +1,108 @@
 {
     "name": "demo-app",
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "apps/demo-app/src",
     "projectType": "application",
-    "sourceRoot": "apps/demo-app/app/src",
-    "prefix": "contezza",
     "targets": {
         "build": {
             "executor": "@angular-devkit/build-angular:browser",
-            "outputs": ["{options.outputPath}"],
             "options": {
                 "outputPath": "dist/demo-app",
                 "index": "apps/demo-app/src/index.html",
                 "main": "apps/demo-app/src/main.ts",
                 "polyfills": "apps/demo-app/src/polyfills.ts",
                 "tsConfig": "apps/demo-app/tsconfig.app.json",
-                "allowedCommonJsDependencies": ["buffer", "cropperjs", "event-emitter", "inputmask", "moment", "pdfjs-dist"],
-                "inlineStyleLanguage": "scss",
-                "stylePreprocessorOptions": {
-                    "includePaths": ["node_modules", "node_modules/@alfresco/adf-core/lib", "node_modules/@alfresco/aca-content/ui"]
-                },
+                "allowedCommonJsDependencies": [
+                    "minimatch",
+                    "moment",
+                    "@editorjs/code",
+                    "@editorjs/editorjs",
+                    "@editorjs/header",
+                    "@editorjs/inline-code",
+                    "@editorjs/list",
+                    "@editorjs/marker",
+                    "@editorjs/underline",
+                    "@quanzo/change-font-size",
+                    "cropperjs",
+                    "editorjs-html",
+                    "editorjs-text-color-plugin",
+                    "crypto-js",
+                    "inputmask",
+                    "chart.js",
+                    "pdfjs-dist",
+                    "pdfjs-dist/web/pdf_viewer",
+                    "utif"
+                ],
                 "assets": [
                     {
-                        "input": "apps/demo-app/config",
+                        "input": "apps/demo-app/assets/images",
                         "output": "/",
-                        "glob": "app.config.json"
-                    },
-                    {
-                        "input": "apps/demo-app/config",
-                        "output": "/",
-                        "glob": "app.config.prod.json"
-                    },
-                    {
-                        "input": "apps/demo-app/config",
-                        "output": "/",
-                        "glob": "app.config.test.json"
+                        "glob": "favicon.png"
                     },
                     {
                         "input": "apps/demo-app/assets",
-                        "output": "/",
-                        "glob": "favicon-96x96.png"
-                    },
-                    {
-                        "input": "apps/demo-app/src/assets",
-                        "output": "/assets/demo-app",
+                        "output": "/assets",
                         "glob": "**/*"
                     },
                     {
-                        "input": "apps/demo-app/extensions",
-                        "output": "/assets/plugins",
+                        "input": "apps/demo-app/config",
+                        "output": "/",
                         "glob": "*.json"
+                    },
+                    {
+                        "input": "apps/demo-app/config",
+                        "output": "/",
+                        "glob": "*.js"
+                    },
+                    {
+                        "glob": "**/*",
+                        "input": "node_modules/@alfresco/adf-core/bundles/assets",
+                        "output": "/assets"
+                    },
+                    {
+                        "glob": "**/*",
+                        "input": "node_modules/@alfresco/adf-content-services/bundles/assets",
+                        "output": "/assets"
+                    },
+                    {
+                        "glob": "pdf.worker.min.js",
+                        "input": "node_modules/pdfjs-dist/build",
+                        "output": "/"
+                    },
+                    {
+                        "glob": "**/*",
+                        "input": "libs/common/assets",
+                        "output": "./assets/contezza-common"
+                    },
+                    {
+                        "input": "libs/dynamic-forms/assets",
+                        "output": "./assets/dynamic-forms",
+                        "glob": "**/*"
+                    },
+                    {
+                        "glob": "extension.schema.json",
+                        "input": ".",
+                        "output": "./assets"
                     },
                     {
                         "input": "node_modules/@alfresco/aca-content/assets",
                         "output": "/assets",
                         "glob": "**/*"
+                    },
+                    {
+                        "input": "node_modules/@alfresco/aca-content/ms-office/assets",
+                        "output": "/assets/ms-office",
+                        "glob": "**/*"
+                    },
+                    {
+                        "input": "node_modules/@alfresco/aca-content/ms-office/assets",
+                        "output": "/assets/plugins",
+                        "glob": "aos.plugin.json"
+                    },
+                    {
+                        "input": "node_modules/@alfresco/aca-content/about/assets",
+                        "output": "/assets/plugins",
+                        "glob": "about.plugin.json"
                     },
                     {
                         "input": "node_modules/@alfresco/aca-content/folder-rules/assets",
@@ -66,39 +115,14 @@
                         "glob": "**/*"
                     },
                     {
-                        "input": "node_modules/@alfresco/adf-core/lib/prebuilt-themes",
-                        "output": "/assets/prebuilt-themes",
-                        "glob": "**/*"
+                        "input": "apps/demo-app/assets/extensions",
+                        "output": "/assets/plugins",
+                        "glob": "**/*.json"
                     },
                     {
-                        "input": "node_modules/@alfresco/adf-core/bundles/assets",
-                        "output": "/assets",
-                        "glob": "**/*"
-                    },
-                    {
-                        "input": "node_modules/@alfresco/adf-content-services/bundles/assets",
-                        "output": "/assets",
-                        "glob": "**/*"
-                    },
-                    {
-                        "input": "node_modules/pdfjs-dist/build",
-                        "output": "/",
-                        "glob": "pdf.worker.min.js"
-                    },
-                    {
-                        "input": ".",
-                        "output": "./assets",
-                        "glob": "extension.schema.json"
-                    },
-                    {
-                        "input": "libs/common/assets",
-                        "output": "./assets/contezza-common",
-                        "glob": "**/*"
-                    },
-                    {
-                        "input": "libs/dynamic-forms/assets",
-                        "output": "./assets/dynamic-forms",
-                        "glob": "**/*"
+                        "glob": "**/*",
+                        "input": "apps/demo-app/assets",
+                        "output": "./assets/demo-app"
                     },
                     {
                         "input": "libs/mgmt/js-console/assets/extensions",
@@ -111,7 +135,7 @@
                         "glob": "**/*"
                     },
                     {
-                        "input": "libs/mgmt/node-browser/extensions",
+                        "input": "libs/mgmt/node-browser/assets/extensions",
                         "output": "./assets/plugins",
                         "glob": "*.json"
                     },
@@ -121,42 +145,41 @@
                         "glob": "**/*"
                     },
                     {
-                        "input": "node_modules/monaco-editor/min",
-                        "output": "./assets/monaco/min",
+                        "input": "libs/content-services/assets",
+                        "output": "./assets/content-services",
                         "glob": "**/*"
                     },
                     {
-                        "input": "node_modules/monaco-editor/min-maps",
-                        "output": "./assets/monaco/min-maps",
-                        "glob": "**/*"
-                    },
-                    {
-                        "input": "libs/mgmt/js-console/extensions",
+                        "input": "libs/content-services/assets/extensions",
                         "output": "./assets/plugins",
-                        "glob": "*.json"
+                        "glob": "**/*.json"
                     },
                     {
-                        "input": "libs/mgmt/js-console/assets",
-                        "output": "./assets/mgmt/js-console",
+                        "input": "libs/content-services/presets/assets",
+                        "output": "./assets/content-services/presets",
                         "glob": "**/*"
                     },
                     {
-                        "input": "libs/mgmt/node-browser/extensions",
+                        "input": "libs/content-services/presets/assets/extensions",
                         "output": "./assets/plugins",
-                        "glob": "*.json"
+                        "glob": "**/*.json"
                     },
                     {
-                        "input": "libs/mgmt/node-browser/assets",
-                        "output": "./assets/mgmt/node-browser",
+                        "input": "libs/content-services/search/assets",
+                        "output": "./assets/content-services/search",
                         "glob": "**/*"
+                    },
+                    {
+                        "input": "libs/content-services/search/assets/extensions",
+                        "output": "./assets/plugins",
+                        "glob": "**/*.json"
                     }
                 ],
-                "styles": [
-                    "node_modules/cropperjs/dist/cropper.min.css",
-                    "node_modules/pdfjs-dist/web/pdf_viewer.css",
-                    "node_modules/@alfresco/aca-content/ui/application.scss",
-                    "apps/demo-app/src/styles.scss"
-                ],
+                "inlineStyleLanguage": "scss",
+                "stylePreprocessorOptions": {
+                    "includePaths": ["node_modules", "node_modules/@alfresco/adf-core/lib", "node_modules/@alfresco/aca-content/ui"]
+                },
+                "styles": ["node_modules/cropperjs/dist/cropper.min.css", "node_modules/pdfjs-dist/web/pdf_viewer.css", "apps/demo-app/src/styles.scss"],
                 "scripts": ["node_modules/pdfjs-dist/build/pdf.js", "node_modules/pdfjs-dist/web/pdf_viewer.js", "node_modules/moment/min/moment.min.js"],
                 "buildOptimizer": false,
                 "optimization": false,
@@ -208,21 +231,20 @@
                     ]
                 }
             },
+            "outputs": ["{options.outputPath}"],
             "defaultConfiguration": "development"
         },
         "serve": {
             "executor": "@angular-devkit/build-angular:dev-server",
             "options": {
                 "host": "0.0.0.0",
-                "disableHostCheck": true,
                 "port": 4200,
                 "open": true,
                 "proxyConfig": "apps/demo-app/proxy.conf.js"
             },
             "configurations": {
                 "production": {
-                    "browserTarget": "demo-app:build:production",
-                    "disableHostCheck": true
+                    "browserTarget": "demo-app:build:production"
                 },
                 "development": {
                     "browserTarget": "demo-app:build:development"
@@ -232,13 +254,13 @@
         },
         "lint": {
             "executor": "@nrwl/linter:eslint",
-            "outputs": ["{options.outputFile}"],
             "options": {
                 "lintFilePatterns": ["apps/demo-app/**/*.ts", "apps/demo-app/**/*.html"],
                 "cache": true,
                 "cacheLocation": ".eslintcache",
                 "ignorePath": ".eslintignore"
-            }
+            },
+            "outputs": ["{options.outputFile}"]
         }
     },
     "cli": {
@@ -246,5 +268,5 @@
             "enabled": false
         }
     },
-    "tags": ["scope:aca", "type:app", "category:aca"]
+    "tags": ["scope:demo-app", "type:app", "category:demo-app"]
 }

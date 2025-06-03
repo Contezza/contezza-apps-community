@@ -1,0 +1,30 @@
+{
+    "$id": "demo-app.search-table-page-configs",
+    "$version": "@@project.version@@",
+    "$name": "Demo App Search Table Page Configs",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "searchTablePageConfigs": [
+            {
+                "id": "search.search-page-configs.favorites",
+                "title": "APP.BROWSE.FAVORITES.TITLE",
+                "columnsId": "favorites.columns",
+                "actionContext": { "target": "search-table-page.favorites" },
+                "preferencesId": "favorites",
+                "preferences": ["columns", "maxItems"],
+                "actions": {
+                    "dblclick": "[CORE] NAVIGATE_TO",
+                    "contextmenu": "CONTEXT_MENU"
+                },
+                "baseQuery": "(EXISTS(target/file) OR EXISTS(target/folder))",
+                "searchStrategyId": "favorites",
+                "emptyContent": {
+                    "icon": "star_rate",
+                    "title": "APP.BROWSE.FAVORITES.EMPTY_STATE.TITLE",
+                    "subtitle": "APP.BROWSE.FAVORITES.EMPTY_STATE.TEXT"
+                }
+            }
+        ]
+    }
+}

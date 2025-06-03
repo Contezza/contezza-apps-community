@@ -1,9 +1,7 @@
 {
-    "$schema": "https://dev-tezza.contezza.cloud/tezza/assets/json-schemas/dynamic-forms/dynamic-forms.schema.json",
-
-    "$id": "app.demo-app.dynamicforms",
+    "$id": "demo-app.extensions",
     "$version": "@@project.version@@",
-    "$name": "Demo App Dynamic Forms",
+    "$name": "Contezza Akten Extensions",
     "$vendor": "Contezza BV",
 
     "features": {
@@ -197,7 +195,7 @@
                                     "id": "test-search-subform",
                                     "layoutId": "lay0"
                                 },
-                                "columnsId": "test-search-subform-columns",
+                                "columnsId": "demo-app.columns.search-subform",
                                 "styles": {
                                     "item": {
                                         "style": ""
@@ -588,10 +586,7 @@
                                 "required",
                                 {
                                     "id": "hasProperties",
-                                    "parameters": [
-                                        "id",
-                                        "label"
-                                    ]
+                                    "parameters": ["id", "label"]
                                 }
                             ],
                             "format": {
@@ -621,7 +616,7 @@
                             "id": "tza:taal",
                             "type": "autocomplete",
                             "label": "Taal",
-                            "defaultValue":  { "id": "nld" },
+                            "defaultValue": { "id": "nld" },
                             "initialValue": {
                                 "dynamic-source": "${node->properties.tza:taal}",
                                 "filters": [
@@ -641,10 +636,7 @@
                                 "required",
                                 {
                                     "id": "hasProperties",
-                                    "parameters": [
-                                        "id",
-                                        "label"
-                                    ]
+                                    "parameters": ["id", "label"]
                                 }
                             ],
                             "format": {
@@ -655,66 +647,6 @@
                         }
                     ]
                 }
-            }
-
-        ],
-        "columns": [
-            {
-                "id": "tezza.document-upload.columns.document",
-                "columns": [
-                    {
-                        "id": "app.doc.select",
-                        "key": "select",
-                        "type": "select",
-                        "expandedOnly": true,
-                        "order": 10
-                    },
-                    {
-                        "id": "app.doc.thumbnail",
-                        "key": "thumbnail",
-                        "type": "thumbnail",
-                        "sortable": true,
-                        "order": 20
-                    },
-                    {
-                        "id": "app.doc.name",
-                        "key": "name",
-                        "title": "Name",
-                        "type": "text",
-                        "class": "contezza-expand-cell",
-                        "sortable": true,
-                        "order": 30
-                    },
-                    {
-                        "id": "app.doc.actions",
-                        "key": "actions",
-                        "type": "actions",
-                        "collapsedOnly": true,
-                        "order": 40
-                    }
-                ]
-            },
-            {
-                "id": "test-search-subform-columns",
-                "columns": [
-                    {
-                        "id": "name",
-                        "key": "name",
-                        "style": "font-size:1.2em;padding: 0 0 4px 0",
-                        "class": "test-class"
-                    },
-                    {
-                        "id": "zaaktype",
-                        "title": "zaaktype zaaktype zaaktype zaaktype",
-                        "key": "properties.tza:zaaktypeOmschrijving"
-                    },
-                    {
-                        "id": "created",
-                        "title": "created",
-                        "key": "createdAt",
-                        "type": "date"
-                    }
-                ]
             }
         ]
     }

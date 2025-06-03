@@ -1,0 +1,32 @@
+{
+    "DEMO_APP": {
+        "ACTIONS": {},
+        "BROWSE": {
+            "TITLE": "",
+            "SIDENAV_LINK": {
+                "LABEL": "",
+                "TOOLTIP": ""
+            },
+            "EMPTY_STATE": {
+                "TITLE": "",
+                "TEXT": ""
+            }
+        },
+        "DIALOGS": {
+            "DIALOG1": {
+                "TITLE": ""
+            }
+        },
+        "MESSAGES": {
+            "INFO": {},
+            "ERRORS": {}
+        },
+        "PROPERTIES": {
+            "NAMESPACE_PREFIX": {
+                "PROPERTY1": {
+                    "LABEL": ""
+                }
+            }
+        }
+    }
+}

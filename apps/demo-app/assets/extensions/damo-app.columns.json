@@ -1,0 +1,68 @@
+{
+    "$id": "damo-app.columns",
+    "$version": "@@project.version@@",
+    "$name": "Damo App Columns",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "columns": [
+            {
+                "id": "demo-app.columns.document-upload",
+                "columns": [
+                    {
+                        "id": "app.doc.select",
+                        "key": "select",
+                        "type": "select",
+                        "expandedOnly": true,
+                        "order": 10
+                    },
+                    {
+                        "id": "app.doc.thumbnail",
+                        "key": "thumbnail",
+                        "type": "thumbnail",
+                        "sortable": true,
+                        "order": 20
+                    },
+                    {
+                        "id": "app.doc.name",
+                        "key": "name",
+                        "title": "Name",
+                        "type": "text",
+                        "class": "contezza-expand-cell",
+                        "sortable": true,
+                        "order": 30
+                    },
+                    {
+                        "id": "app.doc.actions",
+                        "key": "actions",
+                        "type": "actions",
+                        "collapsedOnly": true,
+                        "order": 40
+                    }
+                ]
+            },
+            {
+                "id": "demo-app.columns.search-subform",
+                "columns": [
+                    {
+                        "id": "name",
+                        "key": "name",
+                        "style": "font-size:1.2em;padding: 0 0 4px 0",
+                        "class": "test-class"
+                    },
+                    {
+                        "id": "zaaktype",
+                        "title": "zaaktype zaaktype zaaktype zaaktype",
+                        "key": "properties.tza:zaaktypeOmschrijving"
+                    },
+                    {
+                        "id": "created",
+                        "title": "created",
+                        "key": "createdAt",
+                        "type": "date"
+                    }
+                ]
+            }
+        ]
+    }
+}

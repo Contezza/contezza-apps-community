@@ -1,29 +1,22 @@
 import { NgModule } from '@angular/core';
 
-import { ExtensionService, provideExtensionConfig } from '@alfresco/adf-extensions';
-import { provideTranslations } from '@alfresco/adf-core';
-
-import { ContezzaCommonModule } from '@contezza/common';
-import { JsConsoleExtensionModule, ServiceKey } from '@contezza/js-console/shared';
+import { provideExtensionConfig } from '@alfresco/adf-extensions';
+import { AosExtensionModule } from '@alfresco/aca-content/ms-office';
+import { ContentServicesSearchExtensionModule } from '@contezza/content-services/search';
+import { CoreModule } from '@alfresco/adf-core';
+import { CommonModule } from '@angular/common';
+import { JsConsoleExtensionModule } from '@contezza/js-console/shared';
 import { ContezzaNodeBrowserSharedModule } from '@contezza/node-browser/shared';
-import { MatDialogService } from '@contezza/core/dialogs';
-import { ContezzaExtensionService, RouterExtensionService } from '@contezza/core/extensions';
-import { PropertyTitleService } from '@contezza/core/property-titles';
-
-import { Config } from './config';
 
 @NgModule({
-    imports: [ContezzaCommonModule, JsConsoleExtensionModule.withConfig({ path: Config.Urls.JsConsole, service: ServiceKey.OOTB }), ContezzaNodeBrowserSharedModule],
-    providers: [
-        { provide: ExtensionService, useClass: ContezzaExtensionService },
-        MatDialogService.provider,
-        provideTranslations('demo-app', 'assets/demo-app'),
-        provideExtensionConfig(['demo-app-navbar.json', 'dynamicforms.json']),
-        PropertyTitleService.provideKeyPropertyMapping((key) => (key.startsWith('ALFRESCO.') ? key.slice('ALFRESCO.'.length) : undefined)),
+    imports: [
+        AosExtensionModule,
+        CommonModule,
+        CoreModule,
+        ContentServicesSearchExtensionModule,
+        JsConsoleExtensionModule.withConfig({ path: 'javascript-console' }),
+        ContezzaNodeBrowserSharedModule,
     ],
+    providers: [provideExtensionConfig(['demo-app.columns.json', 'demo-app.dynamic-forms.json', 'demo-app.navbar.json', 'demo-app.search-table-page-configs.json'])],
 })
-export class AppExtensionsModule {
-    constructor(router: RouterExtensionService) {
-        router.setLoadChildren({ 'js-console': () => import('@contezza/js-console').then((m) => m.JsConsoleModule) });
-    }
-}
+export class AppExtensionsModule {}
