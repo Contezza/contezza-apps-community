@@ -7,10 +7,12 @@ import { ExtensionElement, ExtensionService as AdfExtensionService } from '@alfr
 import { ComponentResolver, DynamicComponentExtensionService } from '@contezza/core/dynamic-component/shared';
 import { ContezzaIdResolverService } from '@contezza/core/extensions';
 
+import { SearchBarSettings } from '@contezza/content-services/search/components/search-bar/shared';
 import { ExtendedSearchTableLayoutSettings, ISearchResultPreview, ISearchResultsView, SearchParameters, SearchStrategy, SearchTemplateParameters } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class ExtensionService {
+    static readonly FEATURE_KEY_SEARCH_BAR_CONFIGS = 'searchBarConfigs';
     static readonly FEATURE_KEY_SEARCH_PAGE_CONFIGS = 'searchTablePageConfigs';
 
     static readonly TYPE_SEARCH_STRATEGY = 'searchStrategy';
@@ -21,6 +23,20 @@ export class ExtensionService {
         private readonly dc: DynamicComponentExtensionService,
         private readonly idResolver: ContezzaIdResolverService
     ) {}
+
+    /**
+     * Retrieves the search-bar configuration having the given key from the extensions.
+     * An error is shown if no configuration exists with this key.
+     *
+     * @param key
+     */
+    getSearchBarConfigurationByKey(key: string): SearchBarSettings {
+        const output = this.extensions.getFeature<SearchBarSettings>([ExtensionService.FEATURE_KEY_SEARCH_BAR_CONFIGS, key], null);
+        if (!output) {
+            throw new Error('No search bar configuration with key ' + key);
+        }
+        return output;
+    }
 
     getSearchPageConfigurationByKey(key: string): ExtendedSearchTableLayoutSettings {
         const output = this.extensions

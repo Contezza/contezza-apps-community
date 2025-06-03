@@ -1,0 +1,99 @@
+.search-bar {
+    &-form {
+        font-size: 12px !important;
+        color: var(--theme-foreground-text-color) !important;
+
+        & > .mat-form-field-wrapper {
+            padding-bottom: 0 !important;
+            margin: 0 !important;
+
+            .mat-form-field-flex {
+                margin-top: 0 !important;
+            }
+
+            .mat-form-field-outline {
+                top: 0 !important;
+            }
+            .mat-form-field-infix {
+                border-top: 0 !important;
+            }
+            .mat-form-field-suffix:has(.search-bar-form-spinner) {
+                align-self: center !important;
+                top: 0 !important;
+
+                mat-spinner {
+                    overflow: visible;
+                }
+            }
+        }
+
+        input {
+            margin-left: 8px;
+        }
+
+        .mat-icon {
+            color: var(--theme-text-color) !important;
+        }
+
+        &-results-panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 16px 16px 30px;
+
+            &-title {
+                font-weight: bold;
+            }
+            &-totals {
+                color: var(--theme-secondary-text-color);
+            }
+        }
+
+        &-autocomplete {
+            max-height: 500px !important;
+            position: relative;
+
+            &.loading > *:not(.global-search-form-autocomplete-loading) {
+                opacity: 0.4;
+            }
+
+            &-option {
+                height: auto;
+                border-bottom: 1px solid var(--theme-border-color);
+                line-height: 38px;
+                min-height: 60px;
+            }
+            &-loading {
+                display: flex !important;
+                width: 100%;
+                height: 100% !important;
+                justify-content: center;
+                align-items: center;
+
+                position: absolute !important;
+                z-index: 100;
+            }
+        }
+
+        &-button {
+            cursor: pointer;
+            &:hover {
+                color: var(--theme-primary-color) !important;
+            }
+        }
+
+        &.mat-form-field-appearance-outline .mat-form-field-outline {
+            background-color: var(--theme-card-background-color);
+            border-radius: 5px;
+        }
+    }
+}
+
+// fix facet search suggestions showing a scrollbar on small screens
+.search-bar-form-autocomplete {
+    contezza-search-facet-suggestions {
+        mat-divider:last-child {
+            margin-top: 0 !important;
+        }
+    }
+}
