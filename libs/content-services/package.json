@@ -1,6 +1,6 @@
 {
     "name": "@contezza/content-services",
-    "version": "2.22.1",
+    "version": "2.23.0",
     "peerDependencies": {
         "@angular/common": "^14.2.0",
         "@angular/core": "^14.2.0"
