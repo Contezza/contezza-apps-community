@@ -1,22 +1,29 @@
 import { NgModule } from '@angular/core';
 
-import { provideExtensionConfig } from '@alfresco/adf-extensions';
+import { ExtensionService, provideExtensionConfig } from '@alfresco/adf-extensions';
 import { AosExtensionModule } from '@alfresco/aca-content/ms-office';
+
+import { ContezzaCommonModule } from '@contezza/common';
+import { MatDialogService } from '@contezza/core/dialogs';
+import { ContezzaExtensionService } from '@contezza/core/extensions';
 import { ContentServicesSearchExtensionModule } from '@contezza/content-services/search';
-import { CoreModule } from '@alfresco/adf-core';
-import { CommonModule } from '@angular/common';
 import { JsConsoleExtensionModule } from '@contezza/js-console/shared';
 import { ContezzaNodeBrowserSharedModule } from '@contezza/node-browser/shared';
 
+import { Config } from './config';
+
 @NgModule({
     imports: [
+        ContezzaCommonModule,
         AosExtensionModule,
-        CommonModule,
-        CoreModule,
         ContentServicesSearchExtensionModule,
-        JsConsoleExtensionModule.withConfig({ path: 'javascript-console' }),
+        JsConsoleExtensionModule.withConfig({ path: Config.Urls.JsConsole }),
         ContezzaNodeBrowserSharedModule,
     ],
-    providers: [provideExtensionConfig(['demo-app.columns.json', 'demo-app.dynamic-forms.json', 'demo-app.navbar.json', 'demo-app.search-table-page-configs.json'])],
+    providers: [
+        { provide: ExtensionService, useClass: ContezzaExtensionService },
+        MatDialogService.provider,
+        provideExtensionConfig(['demo-app.columns.json', 'demo-app.dynamic-forms.json', 'demo-app.navbar.json', 'demo-app.search-table-page-configs.json']),
+    ],
 })
 export class AppExtensionsModule {}

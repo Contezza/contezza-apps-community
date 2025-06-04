@@ -1,8 +1,12 @@
 import { Route, Routes } from '@angular/router';
 
-import { AuthGuard, BlankPageComponent, LoginComponent } from '@alfresco/adf-core';
+import { AuthGuard, BlankPageComponent } from '@alfresco/adf-core';
 import { ExtensionsDataLoaderGuard } from '@alfresco/aca-shared';
 import { CONTENT_LAYOUT_ROUTES } from '@alfresco/aca-content';
+
+import { Config } from './config';
+
+import { LoginComponent } from './components/login/login.component';
 
 export const APP_ROUTES: Routes = [
     { path: 'blank', component: BlankPageComponent },
@@ -19,7 +23,7 @@ export const APP_LAYOUT_ROUTES: Route = {
             pathMatch: 'full',
         },
         { path: 'dynamic-forms', loadComponent: () => import('./components/dynamic-forms-demo-shell/demo-shell.component').then((m) => m.DemoShellComponent) },
-        // { path: Config.Urls.JsConsole, loadChildren: () => import('@contezza/js-console').then((m) => m.JsConsoleModule) },
+        { path: Config.Urls.JsConsole, loadChildren: () => import('@contezza/js-console').then((m) => m.JsConsoleModule) },
         { path: 'node-browser', loadChildren: () => import('@contezza/node-browser').then((m) => m.ContezzaNodeBrowserModule) },
         {
             path: 'search-favorites',

@@ -35,6 +35,8 @@ import localeDa from '@angular/common/locales/da';
 import localeSv from '@angular/common/locales/sv';
 import { AuthGuard, AuthModule, CoreModule, provideTranslations } from '@alfresco/adf-core';
 
+import { AppLoginModule } from './components/login/login.module';
+
 const registerLocales = () => {
     registerLocaleData(localeFr);
     registerLocaleData(localeDe);
@@ -58,6 +60,7 @@ registerLocales();
 
 @NgModule({
     imports: [
+        AppLoginModule,
         AuthModule.forRoot({ useHash: true }),
         BrowserModule,
         TranslateModule.forRoot(),
