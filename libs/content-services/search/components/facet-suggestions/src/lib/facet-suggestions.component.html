@@ -1,0 +1,38 @@
+<div class="facet-search">
+    <ng-container *contezzaLet="loading$ | async as loading">
+        <ng-container *ngIf="loading">
+            <div class="facet-search-loading">
+                <mat-spinner color="accent"></mat-spinner>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="facets$ | async as facets">
+            <div class="facet-search-suggestions" [class.loading]="loading" *ngIf="facets?.length > 0">
+                <div class="facet-search-suggestions-groups">
+                    <ng-container *ngFor="let facet of facets">
+                        <div class="facet-search-suggestions-groups-group">
+                            <div class="facet-search-suggestions-groups-group-title">{{ facet.label | translate }}</div>
+                            <div class="facet-search-suggestions-groups-group-list" *ngIf="facet.buckets?.length > 0">
+                                <div
+                                    class="facet-search-suggestions-groups-group-list-entry"
+                                    *ngFor="let entry of facet.buckets.slice(0, 6)"
+                                    (click)="onEntryClicked(entry, facet)"
+                                >
+                                    <mat-icon *ngIf="!entry.icon.includes('svg')">{{ entry.icon }}</mat-icon>
+                                    <mat-icon *ngIf="entry.icon.includes('svg')" [svgIcon]="entry.icon.replace('svg:', '')"></mat-icon>
+
+                                    <span class="facet-search-suggestions-groups-group-list-entry-name" title="{{ entry.display || entry.label | translate }}"
+                                        >{{ entry.display || entry.label | translate }} ({{ entry.metrics[0].value[entry.metrics[0].type] }})
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <mat-divider></mat-divider>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="facet-search-no-suggestions" *ngIf="facets?.length === 0">
+                <span class="facet-search-no-suggestions-text"> {{ 'APP.SEARCH.NO_FACETS' | translate }} </span>
+            </div>
+        </ng-container>
+    </ng-container>
+</div>

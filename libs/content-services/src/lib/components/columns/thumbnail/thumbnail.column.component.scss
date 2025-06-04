@@ -1,0 +1,25 @@
+:host,
+.contezza-thumbnail-column {
+    overflow: visible !important;
+    text-align: center;
+
+    &-selected ::ng-deep svg {
+        fill: var(--theme-accent-color);
+        width: 30px;
+        height: 30px;
+    }
+
+    & > span {
+        &.contezza-thumbnail-column-badge-with-background .mat-badge-content {
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            color: var(--theme-primary-color-default-contrast);
+            background-color: var(--theme-primary-darker-color);
+        }
+
+        &:not(.contezza-thumbnail-column-badge-with-background) .mat-badge-content {
+            background-color: transparent;
+        }
+    }
+}

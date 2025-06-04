@@ -1,0 +1,45 @@
+:host {
+    display: flex;
+    gap: 25px;
+
+    &:hover .search-result-name {
+        color: var(--theme-accent-color);
+    }
+
+    .search-result-thumbnail {
+        width: 32px;
+    }
+
+    .search-result-row {
+        flex: 1;
+
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+
+        line-height: initial;
+    }
+
+    .search-result-name {
+        flex: 1;
+
+        font-size: 14px;
+        display: block;
+        align-content: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .search-result-location {
+        display: flex;
+        justify-content: space-between;
+
+        color: var(--theme-text-color);
+        font-size: 13px;
+
+        &-label {
+            // this makes the label not visible if the location is empty
+            height: 0;
+        }
+    }
+}

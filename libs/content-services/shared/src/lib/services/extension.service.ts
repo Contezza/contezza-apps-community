@@ -41,7 +41,7 @@ export class ExtensionService {
      *
      * @param actions
      */
-    setActions(actions: Record<string, ComponentResolver<IActionComponent>>) {
+    setActions<TData>(actions: Record<string, ComponentResolver<IActionComponent<TData>>>) {
         Object.entries(actions).forEach(([key, resolver]) => {
             resolver().then((c) =>
                 this.extensions.setComponents({

@@ -103,9 +103,19 @@ export class SearchResultsService {
 
     private _queryTemplate: (_: SearchTemplateParameters) => string;
     set queryTemplate(queryTemplate: string | Partial<SearchRequest>) {
-        this._queryTemplate = StringUtils.toTemplate(
-            typeof queryTemplate === 'string' ? queryTemplate : JSON.stringify(queryTemplate).replace(/}$/, ', "sort": [${sorting}], "paging": ${paging}}')
-        );
+        let stringTemplate: string;
+        if (typeof queryTemplate === 'string') {
+            stringTemplate = queryTemplate;
+        } else {
+            stringTemplate = JSON.stringify(queryTemplate);
+            if (!stringTemplate.includes('sort')) {
+                stringTemplate = stringTemplate.replace(/}$/, ', "sort": [${sorting}]}');
+            }
+            if (!stringTemplate.includes('paging')) {
+                stringTemplate = stringTemplate.replace(/}$/, ', "paging": ${paging}}');
+            }
+        }
+        this._queryTemplate = StringUtils.toTemplate(stringTemplate);
     }
 
     private _queryMode: QueryMode = QueryMode.STREAM;

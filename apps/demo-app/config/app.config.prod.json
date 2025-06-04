@@ -1,5 +1,6 @@
 {
     "$schema": "../../../node_modules/@alfresco/adf-core/app.config.schema.json",
+
     "ecmHost": "{protocol}//{hostname}{:port}",
     "aosHost": "{protocol}//{hostname}{:port}/alfresco/aos",
     "baseShareUrl": "{protocol}//{hostname}{:port}/#/preview/s",
@@ -32,6 +33,7 @@
         "copyright": "APP.COPYRIGHT"
     },
     "contezza": {
+        "storagePrefix": "aca_prod",
         "login": {
             "successRoute": "",
             "logoImageUrl": "./assets/demo-app/images/contezza_logo.png"

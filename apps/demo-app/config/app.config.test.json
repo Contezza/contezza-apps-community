@@ -1,11 +1,13 @@
 {
     "$schema": "../../../node_modules/@alfresco/adf-core/app.config.schema.json",
+
     "ecmHost": "{protocol}//{hostname}{:port}",
     "aosHost": "{protocol}//{hostname}{:port}/alfresco/aos",
     "baseShareUrl": "{protocol}//{hostname}{:port}/#/preview/s",
     "identityHost": "{protocol}//{hostname}{:port}/auth/realms/alfresco",
     "providers": "ECM",
-    "authType": "OAUTH",
+    "authType": "BASIC",
+    "loginRoute": "login",
     "plugins": {
         "aosPlugin": true,
         "contentService": true,
@@ -32,6 +34,7 @@
         "copyright": "APP.COPYRIGHT"
     },
     "contezza": {
+        "storagePrefix": "aca_test",
         "login": {
             "successRoute": "",
             "logoImageUrl": "./assets/demo-app/images/contezza_logo.png"
