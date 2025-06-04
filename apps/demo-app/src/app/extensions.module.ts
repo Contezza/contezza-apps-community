@@ -6,6 +6,7 @@ import { AosExtensionModule } from '@alfresco/aca-content/ms-office';
 import { ContezzaCommonModule } from '@contezza/common';
 import { MatDialogService } from '@contezza/core/dialogs';
 import { ContezzaExtensionService } from '@contezza/core/extensions';
+import { PropertyTitleService } from '@contezza/core/property-titles';
 import { ContentServicesSearchExtensionModule } from '@contezza/content-services/search';
 import { JsConsoleExtensionModule } from '@contezza/js-console/shared';
 import { ContezzaNodeBrowserSharedModule } from '@contezza/node-browser/shared';
@@ -24,6 +25,7 @@ import { Config } from './config';
         { provide: ExtensionService, useClass: ContezzaExtensionService },
         MatDialogService.provider,
         provideExtensionConfig(['demo-app.columns.json', 'demo-app.dynamic-forms.json', 'demo-app.navbar.json', 'demo-app.search-table-page-configs.json']),
+        PropertyTitleService.provideKeyPropertyMapping((key) => (key.startsWith('ALFRESCO.') ? key.slice('ALFRESCO.'.length) : undefined)),
     ],
 })
 export class AppExtensionsModule {}
