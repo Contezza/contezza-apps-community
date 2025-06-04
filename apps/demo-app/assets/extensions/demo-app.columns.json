@@ -1,7 +1,7 @@
 {
-    "$id": "damo-app.columns",
+    "$id": "demo-app.columns",
     "$version": "@@project.version@@",
-    "$name": "Damo App Columns",
+    "$name": "Demo App Columns",
     "$vendor": "Contezza BV",
 
     "features": {

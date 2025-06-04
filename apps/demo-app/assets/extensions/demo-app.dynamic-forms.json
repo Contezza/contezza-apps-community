@@ -1,7 +1,7 @@
 {
-    "$id": "demo-app.extensions",
+    "$id": "demo-app.dynamic-forms",
     "$version": "@@project.version@@",
-    "$name": "Contezza Akten Extensions",
+    "$name": "Demo App Dynamic Forms",
     "$vendor": "Contezza BV",
 
     "features": {
