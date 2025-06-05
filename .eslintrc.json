@@ -13,19 +13,12 @@
                 "prettier/prettier": "error",
                 "no-shadow": "off",
                 "@typescript-eslint/no-shadow": "error",
-                "prefer-arrow/prefer-arrow-functions": [
-                    "warn",
-                    {
-                        "disallowPrototype": true,
-                        "singleReturnOnly": true,
-                        "classPropertiesAllowed": false
-                    }
-                ],
+                "prefer-arrow/prefer-arrow-functions": "off",
                 "@angular-eslint/component-selector": [
                     "error",
                     {
                         "type": "element",
-                        "prefix": ["app", "aca", "adf", "contezza"],
+                        "prefix": ["app", "contezza"],
                         "style": "kebab-case"
                     }
                 ],
@@ -33,7 +26,7 @@
                     "error",
                     {
                         "type": "attribute",
-                        "prefix": ["aca", "contezza"],
+                        "prefix": ["app", "contezza"],
                         "style": "camelCase"
                     }
                 ],
