@@ -18,14 +18,15 @@ import { take } from 'rxjs';
     selector: 'app-demo-dynamic-forms',
     template: `<ng-container>
         <mat-toolbar>
-            <span>Demo Dynamic-forms</span>
+            <span>Demo dynamic-forms</span>
+            <span class="toolbar-spacer"></span>
             <button #button mat-raised-button (click)="openDialog()"><mat-icon>refresh</mat-icon><span>Open form dialog</span></button>
             <button #button mat-raised-button (click)="openMultiDialog()"><mat-icon>refresh</mat-icon><span>Open multiform dialog</span></button>
         </mat-toolbar>
         <ng-container>
             <mat-card>
                 <mat-card-content>
-                    <contezza-dynamic-form [dynamicForm]="dynamicForm" />
+                    <contezza-dynamic-form class="demo-dynamic-form" [dynamicForm]="dynamicForm" />
                 </mat-card-content>
                 <mat-card-actions>
                     <button mat-raised-button [disabled]="!(dynamicForm.valid$ | async)" (click)="logFormValue()">Check</button>
@@ -33,6 +34,17 @@ import { take } from 'rxjs';
             </mat-card>
         </ng-container>
     </ng-container>`,
+    styles: [
+        `
+            .toolbar-spacer {
+                flex: 1;
+            }
+
+            .demo-dynamic-form {
+                width: 200px;
+            }
+        `,
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DemoDynamicFormsComponent {
