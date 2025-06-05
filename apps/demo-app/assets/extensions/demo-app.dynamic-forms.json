@@ -72,13 +72,10 @@
                 "form": {
                     "subfields": [
                         {
-                            "id": "dialog",
-                            "type": "array",
-                            "label": "dialog",
-                            "initialValue": "${initialValue}",
-                            "settings": {
-                                "formId": "demo-shell"
-                            }
+                            "id": "input",
+                            "type": "input",
+                            "label": "test input",
+                            "validations": ["required"]
                         }
                     ]
                 }

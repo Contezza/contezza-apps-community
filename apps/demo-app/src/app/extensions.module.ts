@@ -11,14 +11,12 @@ import { ContentServicesSearchExtensionModule } from '@contezza/content-services
 import { JsConsoleExtensionModule } from '@contezza/js-console/shared';
 import { ContezzaNodeBrowserSharedModule } from '@contezza/node-browser/shared';
 
-import { Config } from './config';
-
 @NgModule({
     imports: [
         ContezzaCommonModule,
         AosExtensionModule,
         ContentServicesSearchExtensionModule,
-        JsConsoleExtensionModule.withConfig({ path: Config.Urls.JsConsole }),
+        JsConsoleExtensionModule.withConfig({ path: 'javascript-console' }),
         ContezzaNodeBrowserSharedModule,
     ],
     providers: [
