@@ -26,13 +26,9 @@ export const APP_LAYOUT_ROUTES: Route = {
         { path: Config.Urls.JsConsole, loadChildren: () => import('@contezza/js-console').then((m) => m.JsConsoleModule) },
         { path: 'node-browser', loadChildren: () => import('@contezza/node-browser').then((m) => m.ContezzaNodeBrowserModule) },
         {
-            path: 'search-favorites',
-            loadChildren: () => import('@contezza/content-services/search/page').then((m) => m.SearchTablePageRouterModule.asChild('favorites-config')),
-        },
-        {
             path: 'search',
             loadChildren: () =>
-                import('@contezza/content-services/search/page').then((m) => m.MultiSearchTablePageRouterModule.withConfigKeyTemplate('search.search-page-configs.${pageId}')),
+                import('@contezza/content-services/search/page').then((m) => m.MultiSearchTablePageRouterModule.withConfigKeyTemplate('demo-app.search-page-configs.${pageId}')),
         },
         ...CONTENT_LAYOUT_ROUTES.children,
     ],

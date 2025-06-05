@@ -53,7 +53,7 @@ export class DemoShellComponent implements AfterViewInit {
     private readonly layoutId?: string;
     style?: string;
 
-    readonly headerForm = this.service.get('demo-shell');
+    readonly headerForm = this.service.get('demo-app.dynamic-forms.demo-shell');
 
     private readonly showFormSource = new BehaviorSubject<boolean>(false);
     readonly showForm$ = this.showFormSource.asObservable();
@@ -125,14 +125,14 @@ export class DemoShellComponent implements AfterViewInit {
                 file: {
                     type: 'pdf',
                 },
-                formId: 'tezza.document-upload.dynamic-forms.object',
+                formId: 'demo-app.dynamic-forms.document-upload-object',
             },
             {
                 name: 'Testnaam2',
                 file: {
                     type: 'pdf',
                 },
-                formId: 'tezza.document-upload.dynamic-forms.object2',
+                formId: 'demo-app.dynamic-forms.document-upload-object2',
             },
         ];
         const items = [];
