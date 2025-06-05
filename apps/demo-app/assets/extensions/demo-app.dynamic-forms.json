@@ -7,7 +7,7 @@
     "features": {
         "dynamicforms": [
             {
-                "id": "demo-shell",
+                "id": "demo-app.dynamic-forms.demo-shell",
                 "form": {
                     "subfields": [
                         {
@@ -52,7 +52,7 @@
                 ]
             },
             {
-                "id": "test-array",
+                "id": "demo-app.dynamic-forms.test-array",
                 "form": {
                     "subfields": [
                         {
@@ -68,7 +68,20 @@
                 }
             },
             {
-                "id": "test-dialog",
+                "id": "demo-app.dynamic-forms.all-field-types",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "input",
+                            "type": "input",
+                            "label": "test input",
+                            "validations": ["required"]
+                        }
+                    ]
+                }
+            },
+            {
+                "id": "demo-app.dynamic-forms.test-dialog",
                 "form": {
                     "subfields": [
                         {
@@ -138,7 +151,7 @@
                 ]
             },
             {
-                "id": "test-search-form-field",
+                "id": "demo-app.dynamic-forms.test-search-form-field",
                 "form": {
                     "subfields": [
                         {
@@ -228,7 +241,7 @@
                 ]
             },
             {
-                "id": "test-formatters",
+                "id": "demo-app.dynamic-forms.test-formatters",
                 "form": {
                     "format": {
                         "query": {
@@ -439,7 +452,7 @@
                 ]
             },
             {
-                "id": "test-dates",
+                "id": "demo-app.dynamic-forms.test-dates",
                 "form": {
                     "subfields": [
                         {
@@ -461,7 +474,7 @@
                 }
             },
             {
-                "id": "test-multiautocomplete",
+                "id": "demo-app.dynamic-forms.test-multiautocomplete",
                 "form": {
                     "subfields": [
                         {
@@ -489,7 +502,7 @@
                 }
             },
             {
-                "id": "test-labels",
+                "id": "demo-app.dynamic-forms.test-labels",
                 "form": {
                     "subfields": [
                         {
@@ -533,7 +546,7 @@
                 }
             },
             {
-                "id": "tezza.document-upload.dynamic-forms.object",
+                "id": "demo-app.dynamic-forms.document-upload-object",
                 "form": {
                     "subfields": [
                         {
@@ -599,7 +612,7 @@
                 }
             },
             {
-                "id": "tezza.document-upload.dynamic-forms.object2",
+                "id": "demo-app.dynamic-forms.document-upload-object2",
                 "form": {
                     "subfields": [
                         {

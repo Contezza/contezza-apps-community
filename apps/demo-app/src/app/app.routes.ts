@@ -4,8 +4,6 @@ import { AuthGuard, BlankPageComponent } from '@alfresco/adf-core';
 import { ExtensionsDataLoaderGuard } from '@alfresco/aca-shared';
 import { CONTENT_LAYOUT_ROUTES } from '@alfresco/aca-content';
 
-import { Config } from './config';
-
 import { LoginComponent } from './components/login/login.component';
 
 export const APP_ROUTES: Routes = [
@@ -22,18 +20,14 @@ export const APP_LAYOUT_ROUTES: Route = {
             redirectTo: `/dynamic-forms`,
             pathMatch: 'full',
         },
-        { path: 'dynamic-forms', loadComponent: () => import('./components/dynamic-forms-demo-shell/demo-shell.component').then((m) => m.DemoShellComponent) },
-        { path: Config.Urls.JsConsole, loadChildren: () => import('@contezza/js-console').then((m) => m.JsConsoleModule) },
-        { path: 'node-browser', loadChildren: () => import('@contezza/node-browser').then((m) => m.ContezzaNodeBrowserModule) },
-        {
-            path: 'search-favorites',
-            loadChildren: () => import('@contezza/content-services/search/page').then((m) => m.SearchTablePageRouterModule.asChild('favorites-config')),
-        },
+        { path: 'dynamic-forms', loadComponent: () => import('./components/demo-dynamic-forms/demo-dynamic-forms.component').then((m) => m.DemoDynamicFormsComponent) },
         {
             path: 'search',
             loadChildren: () =>
-                import('@contezza/content-services/search/page').then((m) => m.MultiSearchTablePageRouterModule.withConfigKeyTemplate('search.search-page-configs.${pageId}')),
+                import('@contezza/content-services/search/page').then((m) => m.MultiSearchTablePageRouterModule.withConfigKeyTemplate('demo-app.search-page-configs.${pageId}')),
         },
+        { path: 'javascript-console', loadChildren: () => import('@contezza/js-console').then((m) => m.JsConsoleModule) },
+        { path: 'node-browser', loadChildren: () => import('@contezza/node-browser').then((m) => m.ContezzaNodeBrowserModule) },
         ...CONTENT_LAYOUT_ROUTES.children,
     ],
     canActivateChild: [AuthGuard],
