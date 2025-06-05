@@ -7,7 +7,7 @@
     "features": {
         "searchTablePageConfigs": [
             {
-                "id": "search.search-page-configs.favorites",
+                "id": "demo-app.search-page-configs.favorites",
                 "title": "APP.BROWSE.FAVORITES.TITLE",
                 "columnsId": "favorites.columns",
                 "actionContext": { "target": "search-table-page.favorites" },
