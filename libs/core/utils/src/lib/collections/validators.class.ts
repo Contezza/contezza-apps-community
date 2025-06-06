@@ -34,6 +34,18 @@ export class ContezzaValidators {
             ? null
             : { requiredDateRange: { value: control.value } };
 
+    static invalidDateRange = (control: AbstractControl<DateRange>): ValidationErrors | null => {
+        const value = control.value;
+        const from = value?.from;
+        const to = value?.to;
+
+        if (moment.isMoment(from) && moment.isMoment(to) && from.isAfter(to)) {
+            return { invalidDateRange: { from: from.toISOString(), to: to.toISOString() } };
+        }
+
+        return null;
+    };
+
     static isDirty = (control: AbstractControl): ValidationErrors | null => (control.pristine ? { isDirty: { value: control.value } } : null);
 
     /**
