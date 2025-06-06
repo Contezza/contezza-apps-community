@@ -176,10 +176,4 @@ export class AutocompleteFieldComponent<ValueType> extends ContezzaBaseFieldComp
             panel.style['font-size'] = size;
         }
     }
-
-    onBlur(event: FocusEvent) {
-        if (!(event.relatedTarget?.['tagName'] === 'MAT-OPTION')) {
-            this.trigger.closePanel();
-        }
-    }
 }

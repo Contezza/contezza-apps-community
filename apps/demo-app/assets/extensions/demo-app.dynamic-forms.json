@@ -72,11 +72,6 @@
                 "form": {
                     "subfields": [
                         {
-                            "id": "input",
-                            "type": "input",
-                            "label": "Input field"
-                        },
-                        {
                             "id": "autocomplete",
                             "type": "autocomplete",
                             "label": "Autocomplete field",
@@ -175,6 +170,11 @@
                             "id": "dateTime",
                             "type": "dateTime",
                             "label": "dateTime field"
+                        },
+                        {
+                            "id": "input",
+                            "type": "input",
+                            "label": "Input field"
                         },
                         {
                             "id": "peoplePicker",
