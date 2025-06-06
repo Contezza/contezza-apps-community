@@ -11,7 +11,7 @@
                     [appearance]="field.settings?.appearance"
                 >
                     <mat-label title="{{ 'DYNAMIC_FORMS.LOADING' | translate }}" class="loading">
-                        <mat-spinner color="primary"></mat-spinner>
+                        <mat-spinner color="primary" />
                     </mat-label>
                     <input matInput type="text" spellcheck="false" data-lpignore="true" class="adf-property-value" [readonly]="true" />
                 </mat-form-field>
@@ -54,7 +54,7 @@
                     >
                         <div class="contezza-multiautocomplete-form-field-panel-content">
                             <div class="contezza-multiautocomplete-form-field-panel-content-input">
-                                <mat-form-field>
+                                <mat-form-field class="contezza-form-field">
                                     <input
                                         matInput
                                         type="text"
@@ -79,11 +79,11 @@
                                     *contezzaLet="!(!field.settings?.minChars || (subcontrol.value && field.settings?.minChars <= subcontrol.value.length)) as showTooltipMinChars"
                                 >
                                     <ng-container *ngIf="showTooltipMinChars">
-                                        <ng-container *ngTemplateOutlet="tooltipMinChars"></ng-container>
+                                        <ng-container *ngTemplateOutlet="tooltipMinChars" />
                                     </ng-container>
                                     <ng-container *ngIf="!optionsLoading; else loading">
                                         <ng-container *ngIf="!selectableOptions?.length && !showTooltipMinChars">
-                                            <ng-container *ngTemplateOutlet="noResults"></ng-container>
+                                            <ng-container *ngTemplateOutlet="noResults" />
                                         </ng-container>
                                         <ng-container *ngIf="selectableOptions?.length">
                                             <ng-container *ngIf="showSelectAllOption">
@@ -112,9 +112,9 @@
                                                                 control.value?.length < selectableOptions.length
                                                             "
                                                             disabled
-                                                        ></mat-checkbox
-                                                        >{{ 'DYNAMIC_FORMS.SELECT_ALL_SUGGESTIONS' | translate : { total: selectableOptions.length } }}</mat-option
-                                                    >
+                                                        />
+                                                        <span>{{ 'DYNAMIC_FORMS.SELECT_ALL_SUGGESTIONS' | translate : { total: selectableOptions.length } }}</span>
+                                                    </mat-option>
                                                 </ng-container>
                                             </ng-container>
                                             <ng-container *ngFor="let selectableOption of selectableOptions">
@@ -137,10 +137,7 @@
                                                 </ng-container>
                                                 <ng-container *ngIf="selectableOption.contezzaDisplay.option.component">
                                                     <mat-option [value]="selectableOption">
-                                                        <contezza-dynamic-form-option
-                                                            [component]="selectableOption.contezzaDisplay.option.component"
-                                                            [value]="selectableOption"
-                                                        ></contezza-dynamic-form-option>
+                                                        <contezza-dynamic-form-option [component]="selectableOption.contezzaDisplay.option.component" [value]="selectableOption" />
                                                     </mat-option>
                                                 </ng-container>
                                             </ng-container>
@@ -156,7 +153,7 @@
                         </ng-template>
                         <ng-template #loading>
                             <mat-option disabled title="{{ 'DYNAMIC_FORMS.LOADING' | translate }}" class="loading">
-                                <mat-spinner color="primary"> </mat-spinner>
+                                <mat-spinner color="primary" />
                             </mat-option>
                         </ng-template>
                         <ng-template #tooltipMinChars>
@@ -166,28 +163,19 @@
                         </ng-template>
                     </mat-select>
                     <button
-                        type="button"
                         mat-icon-button
                         matSuffix
-                        class="adf-property-clear-value"
+                        class="contezza-form-field-clear"
                         aria-label="Clear"
                         *ngIf="!readonly && !formLoading && !control.disabled && control.value?.length"
-                        tabindex="-1"
                         (click)="clear($event)"
                     >
                         <mat-icon>cancel</mat-icon>
                     </button>
-                    <button
-                        type="button"
-                        matSuffix
-                        class="mat-button my-arrow-wrapper"
-                        style="padding: 0; min-width: 0"
-                        *ngIf="!readonly && !formLoading && !control.disabled"
-                        tabindex="-1"
-                    >
-                        <div class="contezza-select-arrow"></div>
+                    <button mat-icon-button matSuffix *ngIf="!readonly && !optionsLoading && !control.disabled">
+                        <mat-icon>arrow_drop_down</mat-icon>
                     </button>
-                    <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control"></mat-error>
+                    <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control" />
                 </mat-form-field>
             </ng-container>
         </ng-container>
