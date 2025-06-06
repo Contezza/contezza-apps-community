@@ -5,7 +5,7 @@
 
             <mat-icon matSuffix *ngIf="!loading && searchTerm?.length" (click)="clear($event)" class="search-form-field-icon"> clear </mat-icon>
             <mat-icon matSuffix *ngIf="!searchTerm.length" class="search-form-field-icon">search </mat-icon>
-            <mat-spinner matSuffix *ngIf="loading && searchTerm?.length" color="primary" diameter="30" class="search-form-field-spinner"> </mat-spinner>
+            <mat-spinner matSuffix *ngIf="loading && searchTerm?.length" color="primary" diameter="30" class="search-form-field-spinner" />
         </mat-form-field>
 
         <mat-form-field floatLabel="auto" class="search-form-type" *ngIf="showContentTypeFilter">

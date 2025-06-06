@@ -39,7 +39,7 @@
                 -moz-user-select: none;
                 user-select: none;
 
-                .mat-button-wrapper {
+                .mdc-button__label {
                     overflow: hidden;
                     white-space: nowrap;
                     text-overflow: ellipsis;
@@ -72,6 +72,8 @@
         display: flex;
         width: 100%;
         color: var(--theme-text-color);
+        justify-content: flex-start;
+        padding: 0 12px;
 
         .folder-icon {
             margin-right: 10px;
@@ -84,12 +86,15 @@
         width: 32px !important;
         height: 32px !important;
         line-height: 32px !important;
+        padding: 0 !important;
+        align-self: baseline;
 
         .mat-icon {
             width: 18px !important;
             height: 18px !important;
             line-height: 18px !important;
             color: var(--theme-text-color);
+            padding: 2px;
 
             &:hover {
                 color: var(--theme-primary-color);

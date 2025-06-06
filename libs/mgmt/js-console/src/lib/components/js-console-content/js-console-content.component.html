@@ -11,7 +11,7 @@
                 (ngModelChange)="setJsConsoleContent($event)"
                 (select)="onSelectionChange($event)"
                 (keydown)="onKeyDown($event)"
-            ></ngx-monaco-editor>
+            />
         </mat-tab>
         <mat-tab>
             <ng-template mat-tab-label>
@@ -23,11 +23,9 @@
                 [ngModel]="fmConsoleContent$ | async"
                 (ngModelChange)="setFmConsoleContent($event)"
                 (keydown)="onKeyDown($event)"
-            ></ngx-monaco-editor>
+            />
         </mat-tab>
-        <mat-tab label="{{ 'CONTEZZA.JS_CONSOLE.CONTENT.TABS.SETTINGS' | translate }}">
-            <contezza-js-console-content-execution-params></contezza-js-console-content-execution-params
-        ></mat-tab>
+        <mat-tab label="{{ 'CONTEZZA.JS_CONSOLE.CONTENT.TABS.SETTINGS' | translate }}"> <contezza-js-console-content-execution-params /></mat-tab>
 
         <mat-tab disabled>
             <ng-template mat-tab-label>
