@@ -41,5 +41,9 @@
             // this makes the label not visible if the location is empty
             height: 0;
         }
+
+        ::ng-deep span {
+            font-size: 13px;
+        }
     }
 }
