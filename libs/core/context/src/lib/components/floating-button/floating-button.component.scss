@@ -1,17 +1,15 @@
-::ng-deep .contezza-floating-button-panel {
-    .mat-mdc-menu-content .mat-mdc-menu-item {
-        .mat-icon {
-            flex-shrink: 0;
-        }
-        .mat-mdc-menu-item-text {
-            white-space: nowrap;
-            overflow: hidden;
+::ng-deep .contezza-floating-button-item.mat-mdc-menu-item {
+    .mat-icon {
+        flex-shrink: 0;
+    }
+    .mat-mdc-menu-item-text {
+        white-space: nowrap;
+        overflow: hidden;
 
-            span {
-                display: block;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
+        span {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     }
 }

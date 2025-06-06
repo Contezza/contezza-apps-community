@@ -11,7 +11,7 @@
                 </ng-container>
                 <ng-container *ngSwitchCase="'menu'">
                     <div>
-                        <button [id]="action.id" mat-menu-item tabindex="0" [disabled]="action.disabled" [matMenuTriggerFor]="childMenu">
+                        <button [id]="action.id" mat-menu-item class="contezza-context-menu-item" tabindex="0" [disabled]="action.disabled" [matMenuTriggerFor]="childMenu">
                             <mat-icon [contezzaIcon]="action.icon" />
                             <span data-automation-id="menu-item-title">{{ action.title | translate }}</span>
                         </button>
@@ -21,6 +21,7 @@
                                     [id]="subchild.id"
                                     role="menuitem"
                                     mat-menu-item
+                                    class="contezza-context-menu-item"
                                     tabindex="0"
                                     [disabled]="subchild.disabled"
                                     [attr.title]="(subchild.disabled ? subchild['description-disabled'] : subchild.description || subchild.title) | translate"
@@ -38,6 +39,7 @@
                         [id]="action.id"
                         role="menuitem"
                         mat-menu-item
+                        class="contezza-context-menu-item"
                         tabindex="0"
                         [disabled]="action.disabled"
                         [attr.title]="(action.disabled ? action['description-disabled'] : action.description || action.title) | translate"

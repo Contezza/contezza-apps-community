@@ -9,13 +9,18 @@
     }
 }
 
-::ng-deep .contezza-context-menu-panel .mat-mdc-menu-content .mat-mdc-menu-item .mat-mdc-menu-item-text {
-    white-space: nowrap;
-    overflow: hidden;
-
-    span {
-        display: block;
+::ng-deep .contezza-context-menu-item.mat-mdc-menu-item {
+    .mat-icon {
+        flex-shrink: 0;
+    }
+    .mat-mdc-menu-item-text {
+        white-space: nowrap;
         overflow: hidden;
-        text-overflow: ellipsis;
+
+        span {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     }
 }
