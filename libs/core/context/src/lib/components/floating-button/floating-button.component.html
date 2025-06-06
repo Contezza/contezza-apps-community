@@ -12,22 +12,22 @@
         [disabled]="action.disabled"
         (click)="!action.children && runAction(action)"
     >
-        <adf-icon [value]="action.icon"></adf-icon>
+        <mat-icon [contezzaIcon]="action.icon" />
     </button>
 
-    <mat-menu #menu="matMenu">
+    <mat-menu #menu="matMenu" class="contezza-floating-button-panel">
         <ng-container *ngFor="let child of action.children; trackBy: trackById">
             <ng-container [ngSwitch]="child.type">
                 <ng-container *ngSwitchCase="'custom'">
-                    <adf-dynamic-component [id]="child.component" [data]="child.data"></adf-dynamic-component>
+                    <adf-dynamic-component [id]="child.component" [data]="child.data" />
                 </ng-container>
                 <ng-container *ngSwitchCase="'separator'">
-                    <mat-divider></mat-divider>
+                    <mat-divider />
                 </ng-container>
                 <ng-container *ngSwitchCase="'menu'">
                     <div>
                         <button [id]="child.id" mat-menu-item tabindex="0" [disabled]="child.disabled" [matMenuTriggerFor]="childMenu">
-                            <adf-icon [value]="child.icon"></adf-icon>
+                            <mat-icon [contezzaIcon]="child.icon" />
                             <span data-automation-id="menu-item-title">{{ child.title | translate }}</span>
                         </button>
                         <mat-menu #childMenu="matMenu">
@@ -41,7 +41,7 @@
                                     [attr.title]="(subchild.disabled ? subchild['description-disabled'] : subchild.description || subchild.title) | translate"
                                     (click)="runAction(subchild)"
                                 >
-                                    <adf-icon [value]="subchild.icon"></adf-icon>
+                                    <mat-icon [contezzaIcon]="subchild.icon" />
                                     <span data-automation-id="menu-item-title">{{ subchild.title | translate }}</span>
                                 </button>
                             </ng-container>
@@ -58,7 +58,7 @@
                         [attr.title]="(child.disabled ? child['description-disabled'] : child.description || child.title) | translate"
                         (click)="runAction(child)"
                     >
-                        <adf-icon [value]="child.icon"></adf-icon>
+                        <mat-icon [contezzaIcon]="child.icon" />
                         <span data-automation-id="menu-item-title">{{ child.title | translate }}</span>
                     </button>
                 </ng-container>

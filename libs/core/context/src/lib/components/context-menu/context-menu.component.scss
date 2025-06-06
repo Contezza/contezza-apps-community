@@ -8,3 +8,14 @@
         visibility: hidden;
     }
 }
+
+::ng-deep .contezza-context-menu-panel .mat-mdc-menu-content .mat-mdc-menu-item .mat-mdc-menu-item-text {
+    white-space: nowrap;
+    overflow: hidden;
+
+    span {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
