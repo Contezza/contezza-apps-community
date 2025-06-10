@@ -1,7 +1,5 @@
 @mixin form-field-style() {
     width: 100%;
-    --mdc-filled-text-field-container-color: transparent;
-    --mdc-filled-text-field-disabled-container-color: transparent;
 
     .material-icons {
         color: var(--theme-text-color);

@@ -1,5 +1,8 @@
 @import './mixins/_form-field-style';
 
 :root {
+    --mdc-filled-text-field-container-color: transparent;
+    --mdc-filled-text-field-disabled-container-color: transparent;
+
     @include form-field-clear-button-style();
 }
