@@ -7,6 +7,15 @@
 
     @include form-field-clear-button-style();
 
+    .material-icons {
+        color: var(--theme-text-color);
+    }
+
+    // full width for form fields
+    .contezza-form-field {
+        width: 100%;
+    }
+
     // fix for class without correct css
     .adf-full-width {
         width: 100%;
@@ -15,5 +24,29 @@
     // fix for standard chip with auto height
     .mat-mdc-chip.mdc-evolution-chip.mat-mdc-standard-chip {
         height: var(--mdc-chip-container-height);
+    }
+
+    // fix form-field font size and height
+    .mat-mdc-form-field {
+        font-size: 14px;
+        line-height: 1.125;
+    }
+
+    // fix form-field height
+    .mat-mdc-form-field-infix {
+        --mat-form-field-container-height: 46px;
+        --mat-form-field-filled-with-label-container-padding-top: 22px;
+        --mat-form-field-filled-with-label-container-padding-bottom: 0;
+    }
+
+    // don't show mat-select arrow because of custom arrow after clear button
+    .mat-mdc-select-arrow {
+        display: none;
+    }
+
+    // fix label and form field font-sizes
+    .mdc-text-field--filled .mdc-text-field__input,
+    .mat-mdc-form-field .mat-mdc-floating-label.mdc-floating-label {
+        font-size: 14px;
     }
 }
