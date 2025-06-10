@@ -1,8 +1,19 @@
 @import './mixins/_form-field-style';
 
 :root {
+    //todo remove - double with contezza-apps variables.scss
     --mdc-filled-text-field-container-color: transparent;
     --mdc-filled-text-field-disabled-container-color: transparent;
 
     @include form-field-clear-button-style();
+
+    // fix for class without correct css
+    .adf-full-width {
+        width: 100%;
+    }
+
+    // fix for standard chip with auto height
+    .mat-mdc-chip.mdc-evolution-chip.mat-mdc-standard-chip {
+        height: var(--mdc-chip-container-height);
+    }
 }
