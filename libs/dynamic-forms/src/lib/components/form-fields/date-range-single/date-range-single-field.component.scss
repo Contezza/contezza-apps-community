@@ -1,3 +1,6 @@
-.contezza-form-field.mat-form-field-disabled {
-    color: var(--theme-text-disabled-color);
+@use '../../../ui/mixins/form-field-style' as *;
+.contezza-date-range-single-form-field {
+    @include form-field-style();
+
+    --mdc-icon-button-icon-size: 18px;
 }
