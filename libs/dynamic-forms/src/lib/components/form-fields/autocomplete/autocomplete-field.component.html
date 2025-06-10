@@ -67,7 +67,7 @@
                         <ng-container *ngIf="!field.settings?.minChars || (control.value && field.settings?.minChars <= control.value.length); else tooltipMinChars">
                             <!--                <ng-container *ngIf="selectableOptions$ | async as selectableOptions; else allResults">-->
                             <ng-container *ngIf="!optionsLoading; else loading">
-                                <div *ngIf="selectableOptions && selectableOptions.length > 0; else noResults">
+                                <div class="contezza-autocomplete-form-field-panel-options" *ngIf="selectableOptions && selectableOptions.length > 0; else noResults">
                                     <mat-option *ngIf="field.settings?.showTotalItems" disabled class="total-items">
                                         {{ 'APP.AUTOCOMPLETE.TOTAL_ITEMS' | translate }}: {{ selectableOptions.length }}
                                     </mat-option>

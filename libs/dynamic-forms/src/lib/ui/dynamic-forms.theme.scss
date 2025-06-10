@@ -1,0 +1,5 @@
+@import './mixins/_form-field-style';
+
+:root {
+    @include form-field-clear-button-style();
+}

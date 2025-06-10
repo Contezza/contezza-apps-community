@@ -1,12 +1,10 @@
 @mixin form-field-style() {
     width: 100%;
+    --mdc-filled-text-field-container-color: transparent;
+    --mdc-filled-text-field-disabled-container-color: transparent;
 
     .material-icons {
         color: var(--theme-text-color);
-    }
-
-    .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-        background-color: unset;
     }
 
     .mat-mdc-form-field {
@@ -26,6 +24,10 @@
 
     .mat-mdc-form-field .mat-mdc-floating-label.mdc-floating-label {
         font-size: 14px;
+    }
+
+    .mat-mdc-select-arrow {
+        display: none;
     }
 }
 

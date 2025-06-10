@@ -1,66 +1,64 @@
-@use '../../../../../styling/mixins/form-field-style' as *;
-@include form-field-clear-button-style();
+@use '../../../ui/mixins/form-field-style' as *;
 
-.contezza-form-field {
+.contezza-multiautocomplete-form-field {
     @include form-field-style();
-}
 
-.contezza-multiautocomplete-form-field-panel-content-input {
-    margin: 0 30px;
-}
+    &-panel-content {
+        &-input {
+            margin: 0 30px;
+        }
+        &-options {
+            mat-option .mdc-list-item__primary-text {
+                display: flex !important;
 
-.contezza-multiautocomplete-form-field-panel-content-options-select-all {
-    position: sticky !important;
-    z-index: 1;
-    top: 0;
-    background-color: var(--theme-card-background-color) !important;
-    &:hover,
-    &.mat-active {
-        // same color as default mat-option, but with no transparency
-        background-color: var(--theme-dialog-background-color) !important;
-    }
+                .mat-option-text-label {
+                    text-overflow: ellipsis;
+                    white-space: nowrap !important;
+                    overflow: hidden;
+                    font-size: 14px !important;
+                    margin-right: 8px !important;
+                }
+            }
 
-    .mdc-list-item__primary-text {
-        font-size: 14px !important;
-        mat-checkbox {
-            width: 18px;
-            height: 18px;
-            margin-right: 16px;
+            &-select-all {
+                position: sticky !important;
+                z-index: 1;
+                top: 0;
+                background-color: var(--theme-card-background-color) !important;
+                &:hover,
+                &.mat-active {
+                    // same color as default mat-option, but with no transparency
+                    background-color: var(--theme-dialog-background-color) !important;
+                }
 
-            .mdc-form-field {
-                vertical-align: text-bottom;
-                .mdc-checkbox .mdc-checkbox__background {
-                    --mdc-checkbox-disabled-unselected-icon-color: rgba(0, 0, 0, 0.54);
-                    --mdc-checkbox-disabled-selected-icon-color: var(--theme-primary-color);
-                    top: 1px;
-                    left: 0;
-                    height: 18px;
-                    width: 18px;
+                .mdc-list-item__primary-text {
+                    font-size: 14px !important;
+                    mat-checkbox {
+                        width: 18px;
+                        height: 18px;
+                        margin-right: 16px;
+
+                        .mdc-form-field {
+                            vertical-align: text-bottom;
+                            .mdc-checkbox .mdc-checkbox__background {
+                                --mdc-checkbox-disabled-unselected-icon-color: rgba(0, 0, 0, 0.54);
+                                --mdc-checkbox-disabled-selected-icon-color: var(--theme-primary-color);
+                                top: 1px;
+                                left: 0;
+                                height: 18px;
+                                width: 18px;
+                            }
+                        }
+                    }
+                }
+
+                .mat-pseudo-checkbox {
+                    display: none;
+                }
+                .mat-checkbox-ripple {
+                    display: none;
                 }
             }
         }
-    }
-
-    .mat-pseudo-checkbox {
-        display: none;
-    }
-    .mat-checkbox-ripple {
-        display: none;
-    }
-}
-
-.mat-mdc-select-arrow {
-    display: none;
-}
-
-.mdc-list-item__primary-text {
-    display: flex !important;
-
-    .mat-option-text-label {
-        text-overflow: ellipsis;
-        white-space: nowrap !important;
-        overflow: hidden;
-        font-size: 14px !important;
-        margin-right: 8px !important;
     }
 }

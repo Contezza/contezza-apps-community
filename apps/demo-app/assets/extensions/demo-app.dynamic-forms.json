@@ -120,6 +120,42 @@
                             ]
                         },
                         {
+                            "id": "select",
+                            "type": "select",
+                            "label": "select field",
+                            "options": {
+                                "dynamic-source": [
+                                    {
+                                        "id": "option1",
+                                        "label": "Optie 1"
+                                    },
+                                    {
+                                        "id": "option2",
+                                        "label": "Optie 2"
+                                    }
+                                ],
+                                "labelKey": "label"
+                            }
+                        },
+                        {
+                            "id": "multiselect",
+                            "type": "multiselect",
+                            "label": "multiselect field",
+                            "options": {
+                                "dynamic-source": [
+                                    {
+                                        "id": "option1",
+                                        "label": "Optie 1"
+                                    },
+                                    {
+                                        "id": "option2",
+                                        "label": "Optie 2"
+                                    }
+                                ],
+                                "labelKey": "label"
+                            }
+                        },
+                        {
                             "id": "button-toggle",
                             "type": "button-toggle",
                             "label": "Button-toggle field",
@@ -198,16 +234,6 @@
                                 ],
                                 "labelKey": "label"
                             }
-                        },
-                        {
-                            "id": "select",
-                            "type": "select",
-                            "label": "select field"
-                        },
-                        {
-                            "id": "multiselect",
-                            "type": "multiselect",
-                            "label": "multiselect field"
                         },
                         {
                             "id": "textarea",

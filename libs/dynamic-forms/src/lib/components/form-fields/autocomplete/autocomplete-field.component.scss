@@ -1,20 +1,18 @@
-@use '../../../../../styling/mixins/form-field-style' as *;
+@use '../../../ui/mixins/form-field-style' as *;
 
-@include form-field-clear-button-style();
-
-.contezza-form-field {
+.contezza-autocomplete-form-field {
     @include form-field-style();
-}
 
-.contezza-autocomplete-form-field-trigger {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
+    &-trigger {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
 
-.mat-mdc-option .mdc-list-item__primary-text {
-    text-overflow: ellipsis;
-    white-space: nowrap !important;
-    overflow: hidden;
-    font-size: 14px !important;
+    &-panel-options .mat-mdc-option .mdc-list-item__primary-text {
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        font-size: 14px !important;
+    }
 }
