@@ -98,6 +98,7 @@ export class AutocompleteFieldComponent<ValueType> extends ContezzaBaseFieldComp
                     // we use the readonly property to check if the selection has been set in the previous tap
                     if (!this.readonly && value && typeof value === 'object') {
                         const matchingValue = this.findMatchingValue(value, options);
+                        //todo fix direct access to value property of BehaviorSubject
                         if (!this.optionsLoadingSource.value) {
                             // only change the value if the options are loaded
                             this.control.setValue(matchingValue);
@@ -174,12 +175,6 @@ export class AutocompleteFieldComponent<ValueType> extends ContezzaBaseFieldComp
         const panel = document.getElementById(auto.id);
         if (panel) {
             panel.style['font-size'] = size;
-        }
-    }
-
-    onBlur(event: FocusEvent) {
-        if (!(event.relatedTarget?.['tagName'] === 'MAT-OPTION')) {
-            this.trigger.closePanel();
         }
     }
 }

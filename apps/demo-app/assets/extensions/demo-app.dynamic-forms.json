@@ -72,10 +72,183 @@
                 "form": {
                     "subfields": [
                         {
+                            "id": "autocomplete",
+                            "type": "autocomplete",
+                            "label": "Autocomplete field",
+                            "options": {
+                                "dynamic-source": [
+                                    {
+                                        "id": "option1",
+                                        "label": "Optie 1"
+                                    },
+                                    {
+                                        "id": "option2",
+                                        "label": "Optie 2"
+                                    }
+                                ],
+                                "labelKey": "label"
+                            },
+                            "validations": [
+                                {
+                                    "id": "hasProperties",
+                                    "parameters": ["id", "label"]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "multiautocomplete",
+                            "type": "multiautocomplete",
+                            "label": "Multiutocomplete field",
+                            "options": {
+                                "dynamic-source": [
+                                    {
+                                        "id": "option1",
+                                        "label": "Optie 1"
+                                    },
+                                    {
+                                        "id": "option2",
+                                        "label": "Optie 2"
+                                    }
+                                ],
+                                "labelKey": "label"
+                            },
+                            "validations": [
+                                {
+                                    "id": "hasProperties",
+                                    "parameters": ["id", "label"]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "select",
+                            "type": "select",
+                            "label": "select field",
+                            "options": {
+                                "dynamic-source": [
+                                    {
+                                        "id": "option1",
+                                        "label": "Optie 1"
+                                    },
+                                    {
+                                        "id": "option2",
+                                        "label": "Optie 2"
+                                    }
+                                ],
+                                "labelKey": "label"
+                            }
+                        },
+                        {
+                            "id": "multiselect",
+                            "type": "multiselect",
+                            "label": "multiselect field",
+                            "options": {
+                                "dynamic-source": [
+                                    {
+                                        "id": "option1",
+                                        "label": "Optie 1"
+                                    },
+                                    {
+                                        "id": "option2",
+                                        "label": "Optie 2"
+                                    }
+                                ],
+                                "labelKey": "label"
+                            }
+                        },
+                        {
+                            "id": "button-toggle",
+                            "type": "button-toggle",
+                            "label": "Button-toggle field",
+                            "options": {
+                                "dynamic-source": [
+                                    { "id": "left", "label": "LINKS" },
+                                    { "id": "right", "label": "RECHTS" }
+                                ],
+                                "labelKey": "label"
+                            }
+                        },
+                        {
+                            "id": "checkbox",
+                            "type": "checkbox",
+                            "label": "Checkbox field"
+                        },
+                        {
+                            "id": "chipsInput",
+                            "type": "chipsInput",
+                            "label": "ChipsInput field"
+                        },
+                        {
+                            "id": "date",
+                            "type": "date",
+                            "label": "Date field"
+                        },
+                        {
+                            "id": "date-range",
+                            "type": "date-range",
+                            "label": "Date-range field"
+                        },
+                        {
+                            "id": "dateRange",
+                            "type": "dateRange",
+                            "label": "DateRange field"
+                        },
+                        {
+                            "id": "dateRangeChip",
+                            "type": "dateRangeChip",
+                            "label": "DateRangeChip field"
+                        },
+                        {
+                            "id": "dateRangeSingle",
+                            "type": "dateRangeSingle",
+                            "label": "DateRangeSingle field"
+                        },
+                        {
+                            "id": "dateTime",
+                            "type": "dateTime",
+                            "label": "dateTime field"
+                        },
+                        {
                             "id": "input",
                             "type": "input",
-                            "label": "test input",
-                            "validations": ["required"]
+                            "label": "Input field"
+                        },
+                        {
+                            "id": "peoplePicker",
+                            "type": "peoplePicker",
+                            "label": "peoplePicker field"
+                        },
+                        {
+                            "id": "radio-button",
+                            "type": "radio-button",
+                            "label": "radio-button field",
+                            "options": {
+                                "dynamic-source": [
+                                    {
+                                        "id": "option1",
+                                        "label": "Optie 1"
+                                    },
+                                    {
+                                        "id": "option2",
+                                        "label": "Optie 2"
+                                    }
+                                ],
+                                "labelKey": "label"
+                            }
+                        },
+                        {
+                            "id": "textarea",
+                            "type": "textarea",
+                            "label": "textarea field"
+                        },
+                        {
+                            "id": "toggle",
+                            "type": "toggle",
+                            "label": "toggle field"
+                        },
+                        {
+                            "id": "upload",
+                            "type": "upload",
+                            "label": "upload field"
                         }
                     ]
                 }

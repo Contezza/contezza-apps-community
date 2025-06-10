@@ -1,4 +1,4 @@
-<mat-form-field class="adf-full-width adf-property-field adf-card-textitem-field" floatLabel="auto" [appearance]="field.settings?.appearance">
+<mat-form-field class="ontezza-form-field contezza-date-time-form-field" floatLabel="auto" [appearance]="field.settings?.appearance">
     <mat-label>{{ field.label | translate }}</mat-label>
     <input
         #input
@@ -16,19 +16,18 @@
         [max]="max$ | async"
     />
     <button
-        type="button"
         mat-icon-button
         matSuffix
-        class="adf-property-clear-value"
+        class="contezza-form-field-clear"
         aria-label="Clear"
-        *ngIf="!readonly && !control.disabled"
+        *ngIf="!readonly && !control.disabled && control.value"
         tabindex="-1"
         (click)="clear($event)"
     >
         <mat-icon>cancel</mat-icon>
     </button>
 
-    <mat-datetimepicker-toggle class="mat-datepicker-toggle" matSuffix [for]="picker"></mat-datetimepicker-toggle>
-    <mat-datetimepicker #picker type="datetime" [timeInterval]="5"></mat-datetimepicker>
-    <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control"></mat-error>
+    <mat-datetimepicker-toggle class="mat-datepicker-toggle" matSuffix [for]="picker" />
+    <mat-datetimepicker #picker type="datetime" [timeInterval]="5" />
+    <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control" />
 </mat-form-field>

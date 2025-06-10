@@ -1,5 +1,6 @@
 @use '../../../ui/mixins/form-field-style' as *;
-
-.contezza-select-form-field {
+.contezza-date-time-form-field {
     @include form-field-style();
+
+    --mdc-icon-button-icon-size: 18px;
 }

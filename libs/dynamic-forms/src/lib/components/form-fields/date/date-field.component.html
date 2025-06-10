@@ -27,20 +27,19 @@
             [max]="max$ | async"
         />
         <button
-            type="button"
             mat-icon-button
             matSuffix
-            class="adf-property-clear-value"
+            class="contezza-form-field-clear"
             aria-label="Clear"
-            *ngIf="!readonly && !control.disabled"
+            *ngIf="!readonly && !control.disabled && control.value"
             tabindex="-1"
             (click)="clear($event)"
         >
             <mat-icon>cancel</mat-icon>
         </button>
 
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker [disabled]="readonly"> </mat-datepicker>
-        <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control"></mat-error>
+        <mat-datepicker-toggle class="contezza-date-form-field-datepicker-toggle" matSuffix [for]="picker" />
+        <mat-datepicker #picker [disabled]="readonly" />
+        <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control" />
     </mat-form-field>
 </ng-container>

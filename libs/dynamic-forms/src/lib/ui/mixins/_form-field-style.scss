@@ -1,0 +1,51 @@
+@mixin form-field-style() {
+    width: 100%;
+
+    .material-icons {
+        color: var(--theme-text-color);
+    }
+
+    .mat-mdc-form-field {
+        font-size: 14px;
+        line-height: 1.125;
+    }
+
+    .mat-mdc-form-field-infix {
+        --mat-form-field-container-height: 46px;
+        --mat-form-field-filled-with-label-container-padding-top: 22px;
+        --mat-form-field-filled-with-label-container-padding-bottom: 0;
+    }
+
+    .mdc-text-field--filled .mdc-text-field__input {
+        font-size: 14px;
+    }
+
+    .mat-mdc-form-field .mat-mdc-floating-label.mdc-floating-label {
+        font-size: 14px;
+    }
+
+    .mat-mdc-select-arrow {
+        display: none;
+    }
+}
+
+@mixin form-field-clear-button-style() {
+    .contezza-form-field-clear {
+        .material-icons {
+            font-size: 18px;
+            line-height: 24px;
+        }
+    }
+    .contezza-form-field .contezza-form-field-clear {
+        --mdc-icon-button-state-layer-size: 26px !important;
+        visibility: hidden;
+        transition: opacity 0.15s ease-in-out;
+        pointer-events: none;
+    }
+
+    .contezza-form-field:hover .contezza-form-field-clear {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto; /* re-enable clicks */
+    }
+}

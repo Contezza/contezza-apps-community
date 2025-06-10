@@ -1,134 +1,64 @@
+@use '../../../ui/mixins/form-field-style' as *;
+
 .contezza-multiautocomplete-form-field {
-    width: 100%;
+    @include form-field-style();
 
-    .mat-select {
-        .mat-select-trigger {
-            width: 100%;
+    &-panel-content {
+        &-input {
+            margin: 0 30px;
         }
-        .mat-select-arrow-wrapper {
-            display: none;
-        }
-    }
+        &-options {
+            mat-option .mdc-list-item__primary-text {
+                display: flex !important;
 
-    &.contezza-form-field-loading {
-        label {
-            height: 100%;
-            position: unset;
-            mat-label.loading {
-                height: 100%;
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                .mat-spinner {
-                    height: 100% !important;
-                    width: 100% !important;
-                    svg {
-                        height: 100% !important;
-                        width: 100% !important;
-                    }
+                .mat-option-text-label {
+                    text-overflow: ellipsis;
+                    white-space: nowrap !important;
+                    overflow: hidden;
+                    font-size: 14px !important;
+                    margin-right: 8px !important;
                 }
             }
-        }
-    }
-    &.mat-form-field-appearance-outline .mat-form-field-flex {
-        display: flex;
-        align-items: center;
-        .mat-form-field-suffix {
-            display: flex;
-        }
-    }
 
-    &-panel {
-        height: 100%;
-
-        &-outline{
-            margin-top: 40px !important;
-        }
-
-        &-content {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            &-input {
-                margin: 0 30px;
-            }
-
-            &-options {
-                overflow: auto;
-
-                &-select-all {
-                    position: sticky !important;
-                    z-index: 1;
-                    top: 0;
-                    background-color: var(--theme-card-background-color) !important;
-                    &:hover,
-                    &.mat-active {
-                        // same color as default mat-option, but with no transparency
-                        background-color: var(--theme-dialog-background-color) !important;
-                    }
-                    //flex: 1 0 auto;
-                    .mat-pseudo-checkbox {
-                        display: none;
-                    }
-                    .mat-checkbox-ripple {
-                        display: none;
-                    }
+            &-select-all {
+                position: sticky !important;
+                z-index: 1;
+                top: 0;
+                background-color: var(--theme-card-background-color) !important;
+                &:hover,
+                &.mat-active {
+                    // same color as default mat-option, but with no transparency
+                    background-color: var(--theme-dialog-background-color) !important;
                 }
 
-                mat-option {
-                    &:not(.contezza-multiautocomplete-form-field-panel-content-options-select-all) .mat-option-text {
-                        display: flex;
-                        gap: 8px;
-                        &-label {
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                        }
-                    }
-                    &.mat-option-disabled {
-                        .mat-pseudo-checkbox {
-                            display: none;
-                        }
-                        .mat-checkbox-ripple {
-                            display: none;
-                        }
-                    }
+                .mdc-list-item__primary-text {
+                    font-size: 14px !important;
+                    mat-checkbox {
+                        width: 18px;
+                        height: 18px;
+                        margin-right: 16px;
 
-                    &.loading .mat-option-text {
-                        height: 100%;
-                        .mat-spinner {
-                            height: 100% !important;
-                            width: 100% !important;
-                            svg {
-                                height: 100% !important;
-                                width: 100% !important;
+                        .mdc-form-field {
+                            vertical-align: text-bottom;
+                            .mdc-checkbox .mdc-checkbox__background {
+                                --mdc-checkbox-disabled-unselected-icon-color: rgba(0, 0, 0, 0.54);
+                                --mdc-checkbox-disabled-selected-icon-color: var(--theme-primary-color);
+                                top: 1px;
+                                left: 0;
+                                height: 18px;
+                                width: 18px;
                             }
                         }
                     }
                 }
+
+                .mat-pseudo-checkbox {
+                    display: none;
+                }
+                .mat-checkbox-ripple {
+                    display: none;
+                }
             }
         }
     }
-}
-
-.my-arrow-wrapper {
-    display: table-cell;
-    vertical-align: middle;
-}
-
-.my-arrow {
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid;
-    margin: 0 4px;
-    color: var(--theme-text-color);
-}
-
-.mat-form-field.mat-focused.mat-primary .my-arrow {
-    color: var(--theme-primary-color);
-}
-
-.contezza-form-field.mat-form-field-disabled {
-    color: var(--theme-text-disabled-color);
 }
