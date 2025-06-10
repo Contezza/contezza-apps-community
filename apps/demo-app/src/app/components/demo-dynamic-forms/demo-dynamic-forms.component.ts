@@ -26,7 +26,9 @@ import { take } from 'rxjs';
         <ng-container>
             <mat-card>
                 <mat-card-content>
-                    <contezza-dynamic-form class="demo-dynamic-form" [dynamicForm]="dynamicForm" />
+                    <div class="demo-dynamic-form-container">
+                        <contezza-dynamic-form class="demo-dynamic-form" [dynamicForm]="dynamicForm" />
+                    </div>
                 </mat-card-content>
                 <mat-card-actions>
                     <button mat-raised-button [disabled]="!(dynamicForm.valid$ | async)" (click)="logFormValue()">Check</button>
@@ -40,8 +42,12 @@ import { take } from 'rxjs';
                 flex: 1;
             }
 
-            .demo-dynamic-form {
-                width: 200px;
+            .demo-dynamic-form-container {
+                width: 350px;
+                border: #000000 solid 2px;
+                padding: 20px;
+                height: 640px;
+                overflow: auto;
             }
         `,
     ],

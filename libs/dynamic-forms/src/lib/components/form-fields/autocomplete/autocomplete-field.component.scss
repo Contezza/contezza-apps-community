@@ -1,8 +1,4 @@
-@use '../../../ui/mixins/form-field-style' as *;
-
 .contezza-autocomplete-form-field {
-    @include form-field-style();
-
     &-trigger {
         display: flex;
         align-items: center;

@@ -1,8 +1,4 @@
-@use '../../../ui/mixins/form-field-style' as *;
-
 .contezza-multiautocomplete-form-field {
-    @include form-field-style();
-
     &-panel-content {
         &-input {
             margin: 0 30px;
