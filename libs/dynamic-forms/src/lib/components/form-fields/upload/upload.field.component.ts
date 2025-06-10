@@ -48,7 +48,7 @@ interface Settings {
                 [actionRef]="settings.uploadAction"
                 (keydown.enter)="upload.click()"
                 (click)="$event.stopPropagation(); $event.preventDefault(); upload.click()"
-            ></aca-toolbar-action>
+            />
             <input #upload style="display: none" type="file" [multiple]="settings.multiple" [accept]="settings.accept" (change)="onFileChange($event)" />
             <mat-form-field *ngIf="value?.length" [class.mat-form-field-disabled]="readonly" floatLabel="auto" [appearance]="field.settings?.appearance">
                 <mat-label *ngIf="field.label">
@@ -59,12 +59,13 @@ interface Settings {
                         {{ field.label | translate }}
                     </ng-template>
                 </mat-label>
-                <mat-chip-list #chipList [formControl]="control" [required]="required">
-                    <mat-chip *ngFor="let chip of value || []" [removable]="!readonly" (removed)="remove(chip)">
+                <mat-chip-grid #chipList [formControl]="control" [required]="required">
+                    <mat-chip-row *ngFor="let chip of value || []" [removable]="!readonly" (removed)="remove(chip)">
                         {{ chip.name }}
                         <mat-icon matChipRemove *ngIf="!readonly">cancel</mat-icon>
-                    </mat-chip>
-                </mat-chip-list>
+                    </mat-chip-row>
+                    <input spellcheck="false" data-lpignore="true" [matChipInputFor]="chipList" style="display: none" />
+                </mat-chip-grid>
             </mat-form-field>
         </ng-container>
     </ng-container>`,
