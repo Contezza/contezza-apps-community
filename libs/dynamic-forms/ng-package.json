@@ -8,7 +8,7 @@
             "output": "/assets/"
         },
         {
-            "glob": "dynamic-forms.theme.scss",
+            "glob": "**/*",
             "input": "./src/lib/ui",
             "output": "/ui/"
         }
