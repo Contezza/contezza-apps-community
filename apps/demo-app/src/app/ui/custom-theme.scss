@@ -1,6 +1,10 @@
 $mat-theme-ignore-duplication-warnings: true;
 
 @use '@angular/material' as mat;
+
+// imports mixins theme-color-variables, light-theme-variables, dark-theme-variables, tezza-extra-theme-variables
+@import 'variables';
+
 @import 'colors';
 
 $app-typography: mat.define-typography-config(
@@ -37,6 +41,7 @@ $custom-theme: mat.define-light-theme(
 
 :root {
     @include custom-theme($custom-theme);
+    @include theme-color-variables($custom-theme);
 
     --contezza-theme-header-text-color: var(--adf-header-text-color);
     --contezza-theme-header-background-color: var(--theme-primary-color-default-contrast);

@@ -187,9 +187,15 @@
                 ],
                 "inlineStyleLanguage": "scss",
                 "stylePreprocessorOptions": {
-                    "includePaths": ["node_modules", "node_modules/@alfresco/adf-core/lib", "node_modules/@alfresco/aca-content/ui"]
+                    "includePaths": ["node_modules", "node_modules/@alfresco/adf-core/lib", "node_modules/@alfresco/aca-content/ui", "libs/core/ui/mixins"]
                 },
-                "styles": ["node_modules/cropperjs/dist/cropper.min.css", "node_modules/pdfjs-dist/web/pdf_viewer.css", "apps/demo-app/src/styles.scss"],
+                "styles": [
+                    "node_modules/cropperjs/dist/cropper.min.css",
+                    "node_modules/pdfjs-dist/web/pdf_viewer.css",
+                    "libs/dynamic-forms/src/lib/ui/dynamic-forms.theme.scss",
+                    "libs/common/src/lib/ui/contezza-style-fixes.scss",
+                    "apps/demo-app/src/styles.scss"
+                ],
                 "scripts": ["node_modules/pdfjs-dist/build/pdf.js", "node_modules/pdfjs-dist/web/pdf_viewer.js", "node_modules/moment/min/moment.min.js"],
                 "buildOptimizer": false,
                 "optimization": false,

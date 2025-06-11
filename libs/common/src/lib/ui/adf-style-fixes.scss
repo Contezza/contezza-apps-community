@@ -1,0 +1,179 @@
+@mixin adf-style-fixes() {
+    // fixes before update aca 6 adf 7
+
+    // fix sidenav not filling the full height
+    .adf-sidenav-layout {
+        adf-layout-container {
+            & > mat-sidenav-container > mat-sidenav > div > div {
+                height: 100%;
+            }
+        }
+    }
+
+    // resize header in aca-page-layout
+    .aca-page-layout .aca-content-header {
+        display: flex;
+        align-items: center;
+        flex: 0 0 0;
+        border-bottom: 1px solid var(--theme-border-color, rgba(0, 0, 0, 0.07));
+        padding: 0;
+        background: none;
+
+        & > .aca-page-layout-header {
+            padding: 0 24px;
+            min-height: 48px;
+            background: var(--theme-background-color);
+        }
+    }
+
+    // overwrite hardcoded snackbar colours
+    .adf-error-snackbar {
+        .mdc-snackbar__surface {
+            background-color: var(--theme-warn-color);
+            color: var(--theme-warn-color-default-contrast);
+        }
+    }
+    .adf-warning-snackbar {
+        .mdc-snackbar__surface {
+            background-color: var(--theme-accent-color);
+            color: var(--theme-accent-color-default-contrast);
+        }
+    }
+    .adf-info-snackbar {
+        .mdc-snackbar__surface {
+            background-color: var(--theme-primary-color);
+            color: var(--theme-primary-color-default-contrast);
+        }
+    }
+
+    // fix toolbar-action colour
+    .aca-toolbar-action,
+    .app-toolbar-button {
+        color: var(--theme-text-color);
+
+        &:hover {
+            color: var(--theme-primary-color);
+        }
+    }
+
+    // fixes after update aca 6 adf 7
+
+    // fix base color of navbar items
+    adf-layout-container .adf-layout-container-sidenav {
+        color: var(--theme-text-color);
+    }
+
+    // restore
+    .adf-fill-remaining-space {
+        flex: 1 1 auto;
+    }
+
+    // restore
+    .adf-icon {
+        display: inline-flex;
+    }
+
+    // fix sidebar style
+    .aca-page-layout .aca-sidebar {
+        overflow-y: auto;
+        margin-bottom: 0;
+    }
+
+    .aca-page-layout .aca-content-header {
+        // revert height: 64px;
+        & > .aca-page-layout-header .adf-toolbar .adf-toolbar-container.adf-toolbar-container-row {
+            height: 48px;
+        }
+    }
+
+    .aca-context-menu .mat-mdc-menu-content .mat-mdc-menu-item .mat-mdc-menu-item-text,
+    .mat-mdc-menu-content .app-toolbar-menu-item .mat-mdc-menu-item .mat-mdc-menu-item-text {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        overflow: hidden;
+        span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
+    // checkbox colour is hardcoded in aca
+    .mat-mdc-checkbox.mat-primary {
+        .mdc-checkbox {
+            &:has(.mdc-checkbox__native-control:enabled:is(:checked, :indeterminate, [data-indeterminate='true'])) {
+                .mdc-checkbox__native-control:enabled ~ .mdc-checkbox__background:is(div) {
+                    border-color: var(--theme-primary-color);
+                    background-color: var(--theme-primary-color);
+                    --mdc-checkbox-selected-checkmark-color: var(--theme-primary-color-default-contrast);
+                }
+            }
+        }
+    }
+    .mat-mdc-checkbox.mat-accent {
+        .mdc-checkbox {
+            &:has(.mdc-checkbox__native-control:enabled:is(:checked, :indeterminate, [data-indeterminate='true'])) {
+                .mdc-checkbox__native-control:enabled ~ .mdc-checkbox__background:is(div) {
+                    border-color: var(--theme-accent-color);
+                    background-color: var(--theme-accent-color);
+                    --mdc-checkbox-selected-checkmark-color: var(--theme-accent-color-default-contrast);
+                }
+            }
+        }
+    }
+
+    // overwrite ng style and aca hardcoded colours for mat-slide-toggle
+    // this was already present before adf 7 aca 6, but completely rewritten with the upgrade
+    mat-slide-toggle.mat-mdc-slide-toggle.mat-mdc-slide-toggle.mat-mdc-slide-toggle.mat-mdc-slide-toggle {
+        // 3x selector to bump specificity
+        .mdc-form-field {
+            .mdc-switch {
+                .mdc-switch__track {
+                    border-radius: 8px;
+                    height: 14px;
+                    &:after {
+                        background-color: var(--mdc-switch-selected-track-color);
+                    }
+                }
+                .mdc-switch__handle-track {
+                    top: -10px;
+                    .mdc-switch__handle {
+                        width: 20px;
+                        height: 20px;
+                        transform: unset;
+                        background-color: transparent;
+                        .mdc-switch__ripple {
+                            display: initial;
+                        }
+                        .mdc-switch__shadow {
+                            background-color: transparent;
+                        }
+                    }
+                }
+                // fix handle color when checked and disabled
+                &.mdc-switch--checked:disabled {
+                    .mdc-switch__handle-track {
+                        .mdc-switch__handle {
+                            &:before {
+                                opacity: var(--mdc-switch-disabled-handle-opacity);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &.mat-primary {
+            //&.mat-primary.mat-mdc-slide-toggle-checked {
+            --mdc-switch-selected-track-color: var(--theme-primary-lighter-color);
+            .mdc-form-field {
+                .mdc-switch.mdc-switch--checked {
+                    --mdc-switch-handle-surface-color: var(--theme-primary-color);
+                    --mdc-switch-selected-hover-handle-color: var(--theme-primary-color);
+                    --mdc-switch-selected-focus-handle-color: var(--theme-primary-color);
+                    --mdc-switch-unselected-focus-handle-color: var(--theme-primary-color);
+                    --mdc-switch-disabled-selected-handle-color: var(--theme-primary-color);
+                }
+            }
+        }
+    }
+}
