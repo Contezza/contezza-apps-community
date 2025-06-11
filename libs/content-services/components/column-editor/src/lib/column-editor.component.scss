@@ -1,4 +1,12 @@
 .contezza {
+    &-column-sorter-button {
+        margin: 0 10px;
+        .mdc-button__label {
+            display: flex;
+            gap: 2px;
+            align-items: center;
+        }
+    }
     &-column-editor-menu {
         max-height: 500px;
         max-width: 50vw;
@@ -9,7 +17,7 @@
             position: fixed;
             padding: 0.5em 0 0.5em 0.5em;
             color: var(--theme-text-color);
-            .mat-checkbox {
+            .mdc-checkbox {
                 overflow: hidden;
                 margin-right: 8px;
                 &-layout,
@@ -34,10 +42,10 @@
         outline: none;
 
         .mat-stroked-button {
-            .mat-button-wrapper {
+            .mdc-button__label {
                 color: var(--theme-text-color);
             }
-            &:hover .mat-button-wrapper {
+            &:hover .mdc-button__label {
                 color: inherit;
             }
         }
@@ -65,7 +73,7 @@
                     vertical-align: top;
                     flex: 0 0 auto;
                 }
-                .mat-checkbox {
+                .mdc-checkbox {
                     overflow: hidden;
                     &-layout,
                     &-label {
@@ -94,7 +102,7 @@
                 padding-left: 4px;
                 color: var(--theme-text-color);
             }
-            mat-checkbox {
+            mdc-checkbox {
                 vertical-align: top;
             }
         }
