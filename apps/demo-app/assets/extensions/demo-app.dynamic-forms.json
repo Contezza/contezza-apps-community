@@ -86,6 +86,12 @@
                                         "label": "Optie 2"
                                     }
                                 ],
+                                "filters": [
+                                    {
+                                        "id": "delay",
+                                        "parameters": 2000
+                                    }
+                                ],
                                 "labelKey": "label"
                             },
                             "validations": [
@@ -98,7 +104,7 @@
                         {
                             "id": "multiautocomplete",
                             "type": "multiautocomplete",
-                            "label": "Multiutocomplete field",
+                            "label": "Multiautocomplete field",
                             "options": {
                                 "dynamic-source": [
                                     {
@@ -110,14 +116,14 @@
                                         "label": "Optie 2"
                                     }
                                 ],
+                                "filters": [
+                                    {
+                                        "id": "delay",
+                                        "parameters": 2000
+                                    }
+                                ],
                                 "labelKey": "label"
-                            },
-                            "validations": [
-                                {
-                                    "id": "hasProperties",
-                                    "parameters": ["id", "label"]
-                                }
-                            ]
+                            }
                         },
                         {
                             "id": "select",
@@ -132,6 +138,12 @@
                                     {
                                         "id": "option2",
                                         "label": "Optie 2"
+                                    }
+                                ],
+                                "filters": [
+                                    {
+                                        "id": "delay",
+                                        "parameters": 2000
                                     }
                                 ],
                                 "labelKey": "label"
@@ -152,6 +164,12 @@
                                         "label": "Optie 2"
                                     }
                                 ],
+                                "filters": [
+                                    {
+                                        "id": "delay",
+                                        "parameters": 2000
+                                    }
+                                ],
                                 "labelKey": "label"
                             }
                         },
@@ -163,6 +181,12 @@
                                 "dynamic-source": [
                                     { "id": "left", "label": "LINKS" },
                                     { "id": "right", "label": "RECHTS" }
+                                ],
+                                "filters": [
+                                    {
+                                        "id": "delay",
+                                        "parameters": 2000
+                                    }
                                 ],
                                 "labelKey": "label"
                             }
@@ -181,11 +205,6 @@
                             "id": "date",
                             "type": "date",
                             "label": "Date field"
-                        },
-                        {
-                            "id": "date-range",
-                            "type": "date-range",
-                            "label": "Date-range field"
                         },
                         {
                             "id": "dateRange",

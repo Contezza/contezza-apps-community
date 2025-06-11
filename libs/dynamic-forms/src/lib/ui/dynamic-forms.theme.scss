@@ -50,5 +50,29 @@
         .mat-mdc-form-field .mat-mdc-floating-label.mdc-floating-label {
             font-size: 14px;
         }
+
+        .contezza-form-field-loading {
+            // style loading indicator for options in autocomplete and multiautocomplete
+            label {
+                height: 100%;
+                width: 100%;
+                mat-label.loading {
+                    height: 100%;
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    .mat-mdc-progress-spinner {
+                        height: 100% !important;
+                    }
+                }
+            }
+            // style loading indicator for options in button-toggle
+            .mat-button-toggle-label-content {
+                height: var(--mat-form-field-container-height);
+                .mat-mdc-progress-spinner {
+                    height: 100% !important;
+                }
+            }
+        }
     }
 }
