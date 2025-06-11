@@ -50,7 +50,13 @@ interface Settings {
                 (click)="$event.stopPropagation(); $event.preventDefault(); upload.click()"
             />
             <input #upload style="display: none" type="file" [multiple]="settings.multiple" [accept]="settings.accept" (change)="onFileChange($event)" />
-            <mat-form-field *ngIf="value?.length" [class.mat-form-field-disabled]="readonly" floatLabel="auto" [appearance]="field.settings?.appearance">
+            <mat-form-field
+                *ngIf="value?.length"
+                class="contezza-form-field"
+                [class.mat-form-field-disabled]="readonly"
+                floatLabel="auto"
+                [appearance]="field.settings?.appearance"
+            >
                 <mat-label *ngIf="field.label">
                     <ng-container *ngIf="field.label | translatePropertyTitle as label$; else translatedLabel">
                         {{ label$ | async }}

@@ -7,14 +7,14 @@
 
     @include form-field-clear-button-style();
 
+    // full width for form fields
+    .contezza-form-field {
+        width: 100%;
+    }
+
     contezza-dynamic-form-field {
         .material-icons {
             color: var(--theme-text-color);
-        }
-
-        // full width for form fields
-        .contezza-form-field {
-            width: 100%;
         }
 
         // fix for class without correct css
@@ -49,6 +49,11 @@
         .mdc-text-field--filled .mdc-text-field__input,
         .mat-mdc-form-field .mat-mdc-floating-label.mdc-floating-label {
             font-size: 14px;
+        }
+
+        .mat-mdc-form-field-icon-suffix {
+            display: flex;
+            flex-wrap: nowrap;
         }
 
         .contezza-form-field-loading {
