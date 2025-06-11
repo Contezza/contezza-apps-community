@@ -99,24 +99,12 @@
     }
 
     // checkbox colour is hardcoded in aca
-    .mat-mdc-checkbox.mat-primary {
+    .mat-mdc-checkbox {
         .mdc-checkbox {
             &:has(.mdc-checkbox__native-control:enabled:is(:checked, :indeterminate, [data-indeterminate='true'])) {
                 .mdc-checkbox__native-control:enabled ~ .mdc-checkbox__background:is(div) {
-                    border-color: var(--theme-primary-color);
-                    background-color: var(--theme-primary-color);
-                    --mdc-checkbox-selected-checkmark-color: var(--theme-primary-color-default-contrast);
-                }
-            }
-        }
-    }
-    .mat-mdc-checkbox.mat-accent {
-        .mdc-checkbox {
-            &:has(.mdc-checkbox__native-control:enabled:is(:checked, :indeterminate, [data-indeterminate='true'])) {
-                .mdc-checkbox__native-control:enabled ~ .mdc-checkbox__background:is(div) {
-                    border-color: var(--theme-accent-color);
-                    background-color: var(--theme-accent-color);
-                    --mdc-checkbox-selected-checkmark-color: var(--theme-accent-color-default-contrast);
+                    border-color: var(--mdc-checkbox-selected-icon-color);
+                    background-color: var(--mdc-checkbox-selected-icon-color);
                 }
             }
         }
