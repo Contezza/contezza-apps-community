@@ -86,12 +86,6 @@
                                         "label": "Optie 2"
                                     }
                                 ],
-                                "filters": [
-                                    {
-                                        "id": "delay",
-                                        "parameters": 2000
-                                    }
-                                ],
                                 "labelKey": "label"
                             },
                             "validations": [
@@ -116,12 +110,6 @@
                                         "label": "Optie 2"
                                     }
                                 ],
-                                "filters": [
-                                    {
-                                        "id": "delay",
-                                        "parameters": 2000
-                                    }
-                                ],
                                 "labelKey": "label"
                             }
                         },
@@ -138,12 +126,6 @@
                                     {
                                         "id": "option2",
                                         "label": "Optie 2"
-                                    }
-                                ],
-                                "filters": [
-                                    {
-                                        "id": "delay",
-                                        "parameters": 2000
                                     }
                                 ],
                                 "labelKey": "label"
@@ -164,12 +146,6 @@
                                         "label": "Optie 2"
                                     }
                                 ],
-                                "filters": [
-                                    {
-                                        "id": "delay",
-                                        "parameters": 2000
-                                    }
-                                ],
                                 "labelKey": "label"
                             }
                         },
@@ -181,12 +157,6 @@
                                 "dynamic-source": [
                                     { "id": "left", "label": "LINKS" },
                                     { "id": "right", "label": "RECHTS" }
-                                ],
-                                "filters": [
-                                    {
-                                        "id": "delay",
-                                        "parameters": 2000
-                                    }
                                 ],
                                 "labelKey": "label"
                             }
