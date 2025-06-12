@@ -47,6 +47,7 @@
                         [required]="required"
                         [readonly]="readonly"
                         (keyup.enter)="onEnter()"
+                        (blur)="onBlur()"
                         [style.position]="!control.value?.contezzaDisplay?.value.html || editing ? '' : 'absolute'"
                         [style.width]="!control.value?.contezzaDisplay?.value.html || editing ? '' : '0'"
                         [style.display]="(!control.value?.contezzaDisplay?.value.html && !control.value?.contezzaDisplay?.value.icon) || editing ? 'unset' : 'none'"
@@ -58,7 +59,7 @@
 
                     <mat-autocomplete
                         #auto="matAutocomplete"
-                        class="contezza-autocomplete-form-field-panel"
+                        [class]="'contezza-form-field contezza-autocomplete-form-field-panel' + (optionsLoading ? ' contezza-form-field-loading' : '')"
                         [panelWidth]="field.settings?.panelWidth"
                         [displayWith]="displayFn"
                         (opened)="onAutocompleteOpened(trigger, auto)"
@@ -68,14 +69,18 @@
                             <!--                <ng-container *ngIf="selectableOptions$ | async as selectableOptions; else allResults">-->
                             <ng-container *ngIf="!optionsLoading; else loading">
                                 <div class="contezza-autocomplete-form-field-panel-options" *ngIf="selectableOptions && selectableOptions.length > 0; else noResults">
-                                    <mat-option *ngIf="field.settings?.showTotalItems" disabled class="total-items">
+                                    <mat-option *ngIf="field.settings?.showTotalItems" disabled class="total-items" (mousedown)="onOptionMouseDown()">
                                         {{ 'APP.AUTOCOMPLETE.TOTAL_ITEMS' | translate }}: {{ selectableOptions.length }}
                                     </mat-option>
                                     <ng-container *ngFor="let selectableOption of selectableOptions">
                                         <!-- prio: component -> html -> label -->
                                         <ng-container *ngIf="!selectableOption.contezzaDisplay.option.component">
                                             <ng-container *ngIf="!selectableOption.contezzaDisplay.option.html && !selectableOption.contezzaDisplay.option.icon">
-                                                <mat-option [value]="selectableOption" title="{{ selectableOption.contezzaDisplay.option.tooltip | translate }}">
+                                                <mat-option
+                                                    [value]="selectableOption"
+                                                    title="{{ selectableOption.contezzaDisplay.option.tooltip | translate }}"
+                                                    (mousedown)="onOptionMouseDown()"
+                                                >
                                                     {{ selectableOption.contezzaDisplay.option.label }}
                                                     <ng-container *ngIf="$any(selectableOption).metrics?.[0] as metric">
                                                         <span>({{ metric.value[metric.type] }})</span>
@@ -89,17 +94,22 @@
                                                     [innerHtml]="
                                                         selectableOption.contezzaDisplay.option.html | highlight : (field.settings?.highlight ? trigger.value : '') | sanitizeHtml
                                                     "
+                                                    (mousedown)="onOptionMouseDown()"
                                                 />
                                             </ng-container>
                                             <ng-container *ngIf="selectableOption.contezzaDisplay.option.icon">
-                                                <mat-option [value]="selectableOption" title="{{ selectableOption.contezzaDisplay.option.tooltip | translate }}">
+                                                <mat-option
+                                                    [value]="selectableOption"
+                                                    title="{{ selectableOption.contezzaDisplay.option.tooltip | translate }}"
+                                                    (mousedown)="onOptionMouseDown()"
+                                                >
                                                     <mat-icon svgIcon="{{ 'svg:' + selectableOption.contezzaDisplay.option.icon }}" />
                                                     {{ selectableOption.contezzaDisplay.option.label }}
                                                 </mat-option>
                                             </ng-container>
                                         </ng-container>
                                         <ng-container *ngIf="selectableOption.contezzaDisplay.option.component">
-                                            <mat-option [value]="selectableOption">
+                                            <mat-option [value]="selectableOption" (mousedown)="onOptionMouseDown()">
                                                 <contezza-dynamic-form-option [component]="selectableOption.contezzaDisplay.option.component" [value]="selectableOption" />
                                             </mat-option>
                                         </ng-container>
@@ -110,19 +120,23 @@
                         </ng-container>
                         <ng-template #allResults />
                         <ng-template #noResults>
-                            <mat-option disabled title="{{ 'APP.AUTOCOMPLETE.NO_SUGGESTIONS' | translate }}">
+                            <mat-option disabled title="{{ 'APP.AUTOCOMPLETE.NO_SUGGESTIONS' | translate }}" (mousedown)="onOptionMouseDown()">
                                 <span>
                                     {{ 'APP.AUTOCOMPLETE.NO_SUGGESTIONS' | translate }}
                                 </span>
                             </mat-option>
                         </ng-template>
                         <ng-template #loading>
-                            <mat-option disabled title="{{ 'APP.AUTOCOMPLETE.LOADING' | translate }}" class="loading">
+                            <mat-option disabled title="{{ 'APP.AUTOCOMPLETE.LOADING' | translate }}" class="loading" (mousedown)="onOptionMouseDown()">
                                 <mat-spinner color="primary" />
                             </mat-option>
                         </ng-template>
                         <ng-template #tooltipMinChars>
-                            <mat-option disabled title="{{ 'APP.AUTOCOMPLETE.TOOLTIP.MIN_CHARS' | translate : { minChars: field.settings?.minChars } }}">
+                            <mat-option
+                                disabled
+                                title="{{ 'APP.AUTOCOMPLETE.TOOLTIP.MIN_CHARS' | translate : { minChars: field.settings?.minChars } }}"
+                                (mousedown)="onOptionMouseDown()"
+                            >
                                 <span>
                                     {{ 'APP.AUTOCOMPLETE.TOOLTIP.MIN_CHARS' | translate : { minChars: field.settings?.minChars } }}
                                 </span>

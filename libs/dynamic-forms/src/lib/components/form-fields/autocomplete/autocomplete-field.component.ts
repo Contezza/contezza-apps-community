@@ -18,6 +18,23 @@ import { ContezzaBaseFieldComponent } from '../base-field.component';
     encapsulation: ViewEncapsulation.None,
 })
 export class AutocompleteFieldComponent<ValueType> extends ContezzaBaseFieldComponent<ValueType> implements OnInit {
+    /**
+     * NOTE: We use (mousedown) on <mat-option> to detect if the input's blur
+     * was caused by selecting an autocomplete option.
+     *
+     * This is necessary because:
+     * - (blur) on the input fires *before* (optionSelected) on mat-autocomplete.
+     * - event.relatedTarget in (blur) is null due to Angular Material rendering
+     *   the dropdown in an overlay (outside the DOM focus chain).
+     *
+     * The (mousedown) event occurs *before* blur, allowing us to set a flag
+     * that the blur handler can check reliably.
+     *
+     * ⚠️ This does NOT handle keyboard selection (Enter/Tab), but we're ignoring
+     * that for now.
+     */
+    private optionSelected = false;
+
     selectableOptions$: Observable<ContezzaDisplayableValue<ValueType>[]>;
 
     private readonly optionsLoadingSource = new BehaviorSubject<boolean>(false);
@@ -176,5 +193,18 @@ export class AutocompleteFieldComponent<ValueType> extends ContezzaBaseFieldComp
         if (panel) {
             panel.style['font-size'] = size;
         }
+    }
+
+    onOptionMouseDown() {
+        this.optionSelected = true;
+    }
+
+    onBlur() {
+        if (!this.optionSelected) {
+            this.trigger.closePanel();
+        }
+
+        // Reset for next interaction
+        this.optionSelected = false;
     }
 }
