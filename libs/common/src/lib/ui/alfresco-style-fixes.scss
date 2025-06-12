@@ -23,6 +23,12 @@
             padding: 0 24px;
             min-height: 48px;
             background: var(--theme-background-color);
+
+            .adf-breadcrumb-item {
+                font-size: 14px;
+                font-weight: 400;
+                color: var(--theme-text-bold-color);
+            }
         }
     }
 
@@ -176,5 +182,11 @@
     // overwrite aca 'height:auto'
     .mat-mdc-chip.mdc-evolution-chip.mat-mdc-standard-chip.mat-mdc-standard-chip {
         height: var(--mdc-chip-container-height);
+    }
+
+    .adf-viewer__file-title {
+        position: unset;
+        transform: none;
+        justify-content: center;
     }
 }

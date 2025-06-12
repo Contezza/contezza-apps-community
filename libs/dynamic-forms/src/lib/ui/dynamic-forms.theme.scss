@@ -10,6 +10,12 @@
     // full width for form fields
     .contezza-form-field {
         width: 100%;
+
+        // color for enabled and disabled fields
+        color: var(--mdc-filled-text-field-input-text-color);
+        &.mat-form-field-disabled {
+            color: var(--mdc-filled-text-field-disabled-input-text-color);
+        }
     }
 
     .contezza-form-field,
@@ -50,11 +56,18 @@
         .mdc-text-field--filled .mdc-text-field__input,
         .mat-mdc-form-field .mat-mdc-floating-label.mdc-floating-label {
             font-size: 14px;
+            color: inherit;
         }
 
+        // fix date clear and datetoggle field styling
         .mat-mdc-form-field-icon-suffix {
             display: flex;
             flex-wrap: nowrap;
+        }
+
+        // fix wrapper height
+        .mat-mdc-form-field-error-wrapper {
+            margin: -8px 0;
         }
     }
 
