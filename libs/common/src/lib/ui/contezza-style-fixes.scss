@@ -1,9 +1,9 @@
-@import 'adf-style-fixes';
+@import 'alfresco-style-fixes';
 @import 'ng-style-fixes';
 @import 'webkit-style-fixes';
 
 :root {
-    @include adf-style-fixes();
+    @include alfresco-style-fixes();
     @include ng-style-fixes();
     @include webkit-style-fixes();
 }
