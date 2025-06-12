@@ -183,4 +183,10 @@
     .mat-mdc-chip.mdc-evolution-chip.mat-mdc-standard-chip.mat-mdc-standard-chip {
         height: var(--mdc-chip-container-height);
     }
+
+    .adf-viewer__file-title {
+        position: unset;
+        transform: none;
+        justify-content: center;
+    }
 }
