@@ -135,7 +135,9 @@ export class PresetService {
                     },
                     buttons: { cancel: 'APP.BUTTONS.CANCEL', submit: 'APP.BUTTONS.OK' },
                 },
+                autoFocus: false,
                 width: '400px',
+                height: '250px',
             })
             .pipe(
                 filter((response) => !!response),
