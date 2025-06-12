@@ -20,7 +20,7 @@
                 <!--                <mat-option *ngIf="!field.disabledDefaultSelectOption && field.type === 'select'" [value]="'*'">{{ 'Alle' | translate }}</mat-option>-->
                 <mat-checkbox
                     *ngIf="field.type === 'multiselect'"
-                    class="checkbox mat-option"
+                    class="checkbox mat-mdc-option contezza-option"
                     color="primary"
                     [checked]="control?.value?.length === options?.length"
                     [indeterminate]="control?.value?.length > 0 && control?.value?.length < options?.length"

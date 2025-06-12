@@ -1,2 +1,18 @@
 .contezza-select-form-field {
 }
+
+mat-checkbox.mat-mdc-checkbox.contezza-option {
+    display: flex;
+
+    .mdc-form-field {
+        gap: 13px;
+        .mdc-label {
+            font-size: var(--mat-option-label-text-size);
+        }
+    }
+
+    .mdc-checkbox .mdc-checkbox__background {
+        width: 18px;
+        height: 18px;
+    }
+}
