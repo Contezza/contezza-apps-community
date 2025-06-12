@@ -12,6 +12,7 @@
         width: 100%;
     }
 
+    .contezza-form-field,
     contezza-dynamic-form-field {
         .material-icons {
             color: var(--theme-text-color);
@@ -55,28 +56,39 @@
             display: flex;
             flex-wrap: nowrap;
         }
+    }
 
-        .contezza-form-field-loading {
-            // style loading indicator for options in autocomplete and multiautocomplete
-            label {
+    .contezza-form-field-loading {
+        // style loading indicator for options in autocomplete and multiautocomplete
+        label {
+            height: 100%;
+            width: 100%;
+            mat-label.loading {
                 height: 100%;
                 width: 100%;
-                mat-label.loading {
-                    height: 100%;
-                    width: 100%;
-                    display: flex;
-                    justify-content: center;
-                    .mat-mdc-progress-spinner {
-                        height: 100% !important;
-                    }
-                }
-            }
-            // style loading indicator for options in button-toggle
-            .mat-button-toggle-label-content {
-                height: var(--mat-form-field-container-height);
+                display: flex;
+                justify-content: center;
                 .mat-mdc-progress-spinner {
                     height: 100% !important;
                 }
+            }
+        }
+        // style loading indicator for server-side-filtered options in autocomplete
+        mat-option.loading {
+            height: var(--mat-form-field-container-height);
+            .mdc-list-item__primary-text {
+                height: var(--mat-form-field-container-height);
+            }
+            .mat-mdc-progress-spinner {
+                height: 100% !important;
+                margin: auto;
+            }
+        }
+        // style loading indicator for options in button-toggle
+        .mat-button-toggle-label-content {
+            height: var(--mat-form-field-container-height);
+            .mat-mdc-progress-spinner {
+                height: 100% !important;
             }
         }
     }
