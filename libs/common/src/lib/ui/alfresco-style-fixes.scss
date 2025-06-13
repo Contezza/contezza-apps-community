@@ -184,10 +184,9 @@
         height: var(--mdc-chip-container-height);
     }
 
-    .adf-viewer__file-title {
-        position: unset;
-        transform: none;
-        justify-content: center;
+    // fix for adf class without correct css
+    .adf-full-width {
+        width: 100%;
     }
 
     // overwrite aca hardcoded colours in document lists
