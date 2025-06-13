@@ -190,8 +190,30 @@
         justify-content: center;
     }
 
-    // overwrite aca hardcoded hover colour for name column components
-    .adf-datatable-list .adf-datatable-row:is(adf-datatable-row) .adf-datatable-link:hover {
-        color: unset;
+    // overwrite aca hardcoded colours in document lists
+    .adf-datatable-list {
+        .adf-datatable-row.adf-datatable-row:is(adf-datatable-row) {
+            // overwrite aca hardcoded background colour for selected table rows
+            &.adf-is-selected,
+            &.adf-is-selected:hover {
+                background-color: var(--adf-theme-background-selected-button-color);
+            }
+            // overwrite aca hardcoded border colour for focussed table rows
+            &:focus {
+                outline: 1px solid var(--theme-accent-color-a200);
+            }
+            // overwrite aca hardcoded border colour for focussed table cells
+            .adf-cell-value:focus {
+                outline: 1px solid var(--theme-accent-color-a200);
+            }
+            // overwrite aca hardcoded border colour for focussed table headers
+            .adf-datatable-cell-header:focus {
+                outline: 1px solid var(--theme-accent-color-a200);
+            }
+            // overwrite aca hardcoded hover colour for name column components
+            .adf-datatable-link:hover {
+                color: unset;
+            }
+        }
     }
 }
