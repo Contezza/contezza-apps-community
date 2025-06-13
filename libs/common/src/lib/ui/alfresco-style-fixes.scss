@@ -189,4 +189,9 @@
         transform: none;
         justify-content: center;
     }
+
+    // overwrite aca hardcoded hover colour for name column components
+    .adf-datatable-list .adf-datatable-row:is(adf-datatable-row) .adf-datatable-link:hover {
+        color: unset;
+    }
 }
