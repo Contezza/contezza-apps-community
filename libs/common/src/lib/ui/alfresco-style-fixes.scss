@@ -183,4 +183,9 @@
     .mat-mdc-chip.mdc-evolution-chip.mat-mdc-standard-chip.mat-mdc-standard-chip {
         height: var(--mdc-chip-container-height);
     }
+
+    // fix for adf class without correct css
+    .adf-full-width {
+        width: 100%;
+    }
 }

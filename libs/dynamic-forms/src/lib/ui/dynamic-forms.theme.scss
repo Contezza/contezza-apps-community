@@ -24,11 +24,6 @@
             color: var(--theme-text-color);
         }
 
-        // fix for class without correct css
-        .adf-full-width {
-            width: 100%;
-        }
-
         // fix for standard chip with auto height
         .mat-mdc-chip.mdc-evolution-chip.mat-mdc-standard-chip {
             height: var(--mdc-chip-container-height);
