@@ -215,4 +215,9 @@
             }
         }
     }
+
+    // revert width: 36px;
+    .mdc-dialog .mat-mdc-slide-toggle .mdc-form-field {
+        width: unset;
+    }
 }
