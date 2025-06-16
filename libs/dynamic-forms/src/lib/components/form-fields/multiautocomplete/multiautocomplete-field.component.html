@@ -52,7 +52,7 @@
                         (click)="!readonly && beginEditing()"
                         (openedChange)="onOpenedChange($event)"
                     >
-                        <div class="contezza-multiautocomplete-form-field-panel-content">
+                        <div class="contezza-multiautocomplete-form-field-panel-content" [class.contezza-form-field-loading]="optionsLoading">
                             <div class="contezza-multiautocomplete-form-field-panel-content-input">
                                 <mat-form-field class="contezza-form-field contezza-multiautocomplete-form-field">
                                     <input
