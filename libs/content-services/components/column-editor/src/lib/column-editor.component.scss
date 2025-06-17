@@ -13,8 +13,12 @@
         overflow: hidden;
         display: flex;
 
+        .mat-mdc-menu-content {
+            display: flex;
+            flex-direction: column;
+        }
+
         .contezza-column-editor-menu-select-all {
-            position: fixed;
             padding: 0.5em 0 0.5em 0.5em;
             color: var(--theme-text-color);
             .mdc-checkbox {
@@ -55,7 +59,6 @@
             width: 100%;
             min-width: 200px;
             overflow: auto;
-            margin-top: 3em;
 
             .dragable-row {
                 width: 100%;
@@ -95,6 +98,11 @@
             margin-top: -4px;
             margin-left: -4px;
             font-size: 14px;
+
+            &.mat-mdc-card {
+                display: flex;
+                flex-direction: row; // overwrite mat-card's flex-direction: column
+            }
 
             mat-icon {
                 vertical-align: top;

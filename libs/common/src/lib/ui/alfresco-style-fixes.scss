@@ -65,6 +65,22 @@
         }
     }
 
+    // remove scaling based on vh in viewer, to allow viewer to be used within other components (secure-share)
+    .adf-viewer-render {
+        height: 100%;
+        display: flex;
+    }
+
+    // without this custom viewers are not sized correctly (e.g. email viewer cannot scroll, does not fill the page width)
+    .adf-viewer-render-content-container {
+        height: 100%;
+
+        adf-preview-extension {
+            height: 100%;
+            width: 100%;
+        }
+    }
+
     // fixes after update aca 6 adf 7
 
     // fix base color of navbar items
@@ -187,5 +203,37 @@
     // fix for adf class without correct css
     .adf-full-width {
         width: 100%;
+    }
+
+    // overwrite aca hardcoded colours in document lists
+    .adf-datatable-list {
+        .adf-datatable-row.adf-datatable-row:is(adf-datatable-row) {
+            // overwrite aca hardcoded background colour for selected table rows
+            &.adf-is-selected,
+            &.adf-is-selected:hover {
+                background-color: var(--adf-theme-background-selected-button-color);
+            }
+            // overwrite aca hardcoded border colour for focussed table rows
+            &:focus {
+                outline: 1px solid var(--theme-accent-color-a200);
+            }
+            // overwrite aca hardcoded border colour for focussed table cells
+            .adf-cell-value:focus {
+                outline: 1px solid var(--theme-accent-color-a200);
+            }
+            // overwrite aca hardcoded border colour for focussed table headers
+            .adf-datatable-cell-header:focus {
+                outline: 1px solid var(--theme-accent-color-a200);
+            }
+            // overwrite aca hardcoded hover colour for name column components
+            .adf-datatable-link:hover {
+                color: unset;
+            }
+        }
+    }
+
+    // revert width: 36px;
+    .mdc-dialog .mat-mdc-slide-toggle .mdc-form-field {
+        width: unset;
     }
 }

@@ -55,6 +55,17 @@
                     display: none;
                 }
             }
+
+            mat-option {
+                &.mdc-list-item--disabled {
+                    .mat-pseudo-checkbox {
+                        display: none;
+                    }
+                    .mat-checkbox-ripple {
+                        display: none;
+                    }
+                }
+            }
         }
     }
 }
