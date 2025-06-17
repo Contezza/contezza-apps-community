@@ -65,6 +65,22 @@
         }
     }
 
+    // remove scaling based on vh in viewer, to allow viewer to be used within other components (secure-share)
+    .adf-viewer-render {
+        height: 100%;
+        display: flex;
+    }
+
+    // without this custom viewers are not sized correctly (e.g. email viewer cannot scroll, does not fill the page width)
+    .adf-viewer-render-content-container {
+        height: 100%;
+
+        adf-preview-extension {
+            height: 100%;
+            width: 100%;
+        }
+    }
+
     // fixes after update aca 6 adf 7
 
     // fix base color of navbar items
