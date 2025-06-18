@@ -236,4 +236,19 @@
     .mdc-dialog .mat-mdc-slide-toggle .mdc-form-field {
         width: unset;
     }
+
+    // hide back arrow in default profile page because it always redirects to personal-files
+    app-view-profile .app-profile-title > .app-profile-icon {
+        display: none;
+    }
+
+    adf-add-permission-panel {
+        .mat-mdc-form-field .mat-mdc-form-field-infix {
+            margin-bottom: -20px !important;
+        }
+        .adf-permission-start-message,
+        .adf-permission-result-list {
+            height: calc(100% - 70px);
+        }
+    }
 }
