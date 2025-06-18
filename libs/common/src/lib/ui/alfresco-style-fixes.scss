@@ -241,4 +241,9 @@
     .adf-datatable-permission.adf-datatable .adf-authorityId-column {
         flex: 35%;
     }
+
+    // add padding bottom to edit properties in viewer
+    .adf-property-list .adf-property-label {
+        padding: 3px 0 6px;
+    }
 }
