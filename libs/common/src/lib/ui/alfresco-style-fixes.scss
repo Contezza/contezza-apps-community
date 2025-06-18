@@ -236,4 +236,9 @@
     .mdc-dialog .mat-mdc-slide-toggle .mdc-form-field {
         width: unset;
     }
+
+    // fix for adf datatable flex (permissions tab in viewer)
+    .adf-datatable-permission.adf-datatable .adf-authorityId-column {
+        flex: 35%;
+    }
 }
