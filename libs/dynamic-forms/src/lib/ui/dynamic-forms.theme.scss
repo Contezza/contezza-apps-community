@@ -63,6 +63,14 @@
         // fix wrapper height
         .mat-mdc-form-field-error-wrapper {
             margin: -8px 0;
+
+            // duplicated from contezza-dynamic-form-field-error so that it is applied to all mat-form-field.contezza-form-field
+            & > mat-error.mat-mdc-form-field-error,
+            & > *:not(mat-error) > mat-error.mat-mdc-form-field-error {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+            }
         }
     }
 
@@ -99,5 +107,9 @@
                 height: 100% !important;
             }
         }
+    }
+
+    .contezza-multiautocomplete-form-field-panel {
+        min-width: 300px;
     }
 }
