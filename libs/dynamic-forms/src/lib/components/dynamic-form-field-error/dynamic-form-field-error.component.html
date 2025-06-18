@@ -5,7 +5,7 @@
 </ng-container>
 <ng-container *ngIf="!control.hasError('required')">
     <ng-container *ngFor="let validation of otherValidations">
-        <mat-error>
+        <mat-error *ngIf="validation.message">
             {{ validation.message | translate }}
         </mat-error>
     </ng-container>
