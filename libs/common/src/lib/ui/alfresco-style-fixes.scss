@@ -236,4 +236,29 @@
     .mdc-dialog .mat-mdc-slide-toggle .mdc-form-field {
         width: unset;
     }
+
+    // fix for adf datatable flex (permissions tab in viewer)
+    .adf-datatable-permission.adf-datatable .adf-authorityId-column {
+        flex: 35%;
+    }
+
+    // add padding bottom to edit properties in viewer
+    .adf-property-list .adf-property-label {
+        padding: 3px 0 6px;
+    }
+
+    // hide back arrow in default profile page because it always redirects to personal-files
+    app-view-profile .app-profile-title > .app-profile-icon {
+        display: none;
+    }
+
+    adf-add-permission-panel {
+        .mat-mdc-form-field .mat-mdc-form-field-infix {
+            margin-bottom: -20px !important;
+        }
+        .adf-permission-start-message,
+        .adf-permission-result-list {
+            height: calc(100% - 70px);
+        }
+    }
 }

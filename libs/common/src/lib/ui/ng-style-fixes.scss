@@ -10,6 +10,8 @@
 
     // restore style in dialogs
     .mat-mdc-dialog-surface {
+        padding-bottom: 24px !important;
+
         // adjust space above title
         .mat-mdc-dialog-title.mdc-dialog__title::before {
             display: none;
@@ -21,6 +23,7 @@
         }
         // adjust space below actions
         .mat-mdc-dialog-actions {
+            background-color: inherit;
             padding: 8px 0;
             display: flex;
             flex-wrap: wrap;
