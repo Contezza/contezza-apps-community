@@ -168,6 +168,14 @@ contezza-table {
                     }
 
                     td {
+                        // with 'max-width: 0' all cells are compressed so that the table fit into the page
+                        // without 'max-width: 0' it is not possible to make cells smaller than their initial size
+                        // therefore we only apply 'max-width: 0' when resizing or resized
+                        &.resizing,
+                        &.contezza-resized {
+                            max-width: 0;
+                        }
+
                         &.resizing {
                             border-right: 1px dotted var(--theme-primary-color);
                         }
