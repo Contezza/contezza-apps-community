@@ -135,8 +135,6 @@ export class SearchResultsService {
     }
 
     private doSearch(parameters: SearchParameters): Observable<ResultSetPaging> {
-        console.log(parameters);
-        console.log(this.strategyId);
         return this.search.getSearchStrategy(this.strategyId)({ template: this._queryTemplate, parameters });
     }
 }
