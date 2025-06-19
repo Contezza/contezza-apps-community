@@ -5,12 +5,12 @@
 </mat-dialog-content>
 
 <mat-dialog-actions class="adf-dialog-buttons contezza-search-node-selector-dialog-actions">
-    <mat-chip-listbox class="contezza-search-node-selector-dialog-actions-selection">
-        <mat-chip-option *ngFor="let node of selectedNodes" [removable]="true" (removed)="removeNode(node)">
+    <mat-chip-set class="contezza-search-node-selector-dialog-actions-selection">
+        <mat-chip *ngFor="let node of selectedNodes" [removable]="true" (removed)="removeNode(node)">
             {{ node.entry.name }}
             <mat-icon matChipRemove>cancel</mat-icon>
-        </mat-chip-option>
-    </mat-chip-listbox>
+        </mat-chip>
+    </mat-chip-set>
 
     <span class="adf-fill-remaining-space"></span>
 
