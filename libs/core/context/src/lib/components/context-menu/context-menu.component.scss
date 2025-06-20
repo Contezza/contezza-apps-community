@@ -7,9 +7,13 @@
         position: absolute;
         visibility: hidden;
     }
+    ::ng-deep &-panel {
+        max-width: 100% !important;
+    }
 }
 
 ::ng-deep .contezza-context-menu-item.mat-mdc-menu-item {
+    width: 100vw !important;
     .mat-icon {
         flex-shrink: 0;
     }

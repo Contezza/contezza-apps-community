@@ -8,8 +8,17 @@ import { ColumnComponent } from '@contezza/content-services/shared';
     standalone: true,
     imports: [MatButtonModule, MatIconModule],
     selector: 'contezza-context-menu-column',
-    template: `<button mat-icon-button #button (click)="onClick(button._elementRef.nativeElement); $event.stopPropagation()"><mat-icon>more_vert</mat-icon></button>`,
+    template: `<button mat-icon-button #button (click)="onClick(button._elementRef.nativeElement); $event.stopPropagation()">
+        <mat-icon>more_vert</mat-icon>
+    </button>`,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    styles: [
+        `
+            ::ng-deep contezza-context-menu-column {
+                text-align: right;
+            }
+        `,
+    ],
 })
 export class ContextMenuColumnComponent extends ColumnComponent {
     onClick(button: HTMLElement) {

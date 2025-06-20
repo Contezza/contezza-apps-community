@@ -106,8 +106,13 @@
 
     .aca-page-layout .aca-content-header {
         // revert height: 64px;
-        & > .aca-page-layout-header .adf-toolbar .adf-toolbar-container.adf-toolbar-container-row {
-            height: 48px;
+        & > .aca-page-layout-header {
+            .aca-page-title {
+                font-size: 14px !important;
+            }
+            .adf-toolbar .adf-toolbar-container.adf-toolbar-container-row {
+                height: 48px;
+            }
         }
     }
 
@@ -251,7 +256,7 @@
     app-view-profile .app-profile-title > .app-profile-icon {
         display: none;
     }
-
+    // get rid of scrollbar in permissions dialog
     adf-add-permission-panel {
         .mat-mdc-form-field .mat-mdc-form-field-infix {
             margin-bottom: -20px !important;
