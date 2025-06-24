@@ -142,7 +142,7 @@
 
     // overwrite ng style and aca hardcoded colours for mat-slide-toggle
     // this was already present before adf 7 aca 6, but completely rewritten with the upgrade
-    mat-slide-toggle.mat-mdc-slide-toggle.mat-mdc-slide-toggle.mat-mdc-slide-toggle.mat-mdc-slide-toggle {
+    mat-slide-toggle.mat-mdc-slide-toggle.mat-mdc-slide-toggle.mat-mdc-slide-toggle.mat-mdc-slide-toggle.mat-mdc-slide-toggle.mat-mdc-slide-toggle {
         // 3x selector to bump specificity
         .mdc-form-field {
             .mdc-switch {
