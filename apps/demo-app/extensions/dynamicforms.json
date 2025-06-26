@@ -450,9 +450,25 @@
                             "label": "date"
                         },
                         {
+                            "id": "date-auto",
+                            "type": "date",
+                            "label": "date-auto",
+                            "settings": {
+                                "openPickerOnFocus": true
+                            }
+                        },
+                        {
                             "id": "dateRange",
                             "type": "dateRange",
                             "label": "dateRange"
+                        },
+                        {
+                            "id": "dateRange-auto",
+                            "type": "dateRange",
+                            "label": "dateRange-auto",
+                            "settings": {
+                                "openPickerOnFocus": true
+                            }
                         },
                         {
                             "id": "dateTime",
