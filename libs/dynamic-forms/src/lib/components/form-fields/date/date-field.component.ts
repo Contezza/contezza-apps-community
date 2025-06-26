@@ -56,7 +56,7 @@ export class DateFieldComponent extends ContezzaBaseFieldComponent<Moment> imple
 
         // if the picker is open when the form-field value is initialised,
         // then close and re-open it
-        // this happens e.g. with openPickerOnFocus=true in a dialog with autoFocus=false
+        // this happens e.g. with openPickerOnFocus=true in a dialog with autoFocus=true
         ContezzaDynamicForm.getValueSource(this.field)
             ?.pipe(takeUntil(this.destroy$))
             .subscribe(() => {
