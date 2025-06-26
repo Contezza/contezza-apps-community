@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
@@ -12,6 +12,8 @@ import { UserPreferencesService, UserPreferenceValues } from '@alfresco/adf-core
 
 import { DestroyService } from '@contezza/core/services';
 import { DATE_FORMATS } from '@contezza/core/utils';
+
+import { ContezzaDynamicForm } from '@contezza/dynamic-forms/shared';
 
 import { ContezzaBaseFieldComponent } from '../base-field.component';
 
@@ -29,6 +31,9 @@ import { ContezzaBaseFieldComponent } from '../base-field.component';
 export class DateFieldComponent extends ContezzaBaseFieldComponent<Moment> implements OnInit {
     min$: Observable<Moment>;
     max$: Observable<Moment>;
+
+    @ViewChild('input', { static: true })
+    input!: ElementRef;
 
     @ViewChild(MatDatepicker, { static: true })
     picker!: MatDatepicker<any>;
@@ -48,9 +53,29 @@ export class DateFieldComponent extends ContezzaBaseFieldComponent<Moment> imple
 
         this.min$ = this.field.extras?.min?.pipe(map((date) => moment(date))) || of(undefined);
         this.max$ = this.field.extras?.max?.pipe(map((date) => moment(date))) || of(undefined);
+
+        // if the picker is open when the form-field value is initialised,
+        // then close and re-open it
+        // this happens e.g. with openPickerOnFocus=true in a dialog with autoFocus=false
+        ContezzaDynamicForm.getValueSource(this.field)
+            ?.pipe(takeUntil(this.destroy$))
+            .subscribe(() => {
+                const isOpened = this.picker.opened;
+                if (isOpened) {
+                    this.picker.close();
+                    setTimeout(() => this.picker.open(), 0);
+                }
+            });
     }
 
-    onFocus() {
+    onInputClick() {
+        // trigger focus behaviour on click if the element is already focused
+        if (document.activeElement === this.input.nativeElement) {
+            this.onInputFocus();
+        }
+    }
+
+    onInputFocus() {
         if (this.field.settings?.openPickerOnFocus) {
             this.picker.open();
         }
