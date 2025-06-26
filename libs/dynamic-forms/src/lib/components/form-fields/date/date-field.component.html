@@ -16,6 +16,7 @@
             [matDatepicker]="picker"
             [formControl]="control"
             [placeholder]="field.placeholder | translate"
+            (focus)="onFocus()"
             (blur)="input.blur()"
             (focusout)="input.blur()"
             [required]="required"

@@ -15,6 +15,9 @@ export interface DynamicFormFieldSettings extends Partial<Settings> {
     rows?: number;
     cols?: number;
 
+    // date
+    openPickerOnFocus?: boolean;
+
     // autocomplete
     minChars?: number;
     showTotalItems?: boolean;

@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
+import { MatDatepicker } from '@angular/material/datepicker';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
 import moment, { Moment } from 'moment';
@@ -29,6 +30,9 @@ export class DateFieldComponent extends ContezzaBaseFieldComponent<Moment> imple
     min$: Observable<Moment>;
     max$: Observable<Moment>;
 
+    @ViewChild(MatDatepicker, { static: true })
+    picker!: MatDatepicker<any>;
+
     constructor(private readonly dateAdapter: DateAdapter<Moment>, private readonly userPreferencesService: UserPreferencesService, destroy$: DestroyService) {
         super(destroy$);
     }
@@ -44,5 +48,11 @@ export class DateFieldComponent extends ContezzaBaseFieldComponent<Moment> imple
 
         this.min$ = this.field.extras?.min?.pipe(map((date) => moment(date))) || of(undefined);
         this.max$ = this.field.extras?.max?.pipe(map((date) => moment(date))) || of(undefined);
+    }
+
+    onFocus() {
+        if (this.field.settings?.openPickerOnFocus) {
+            this.picker.open();
+        }
     }
 }
