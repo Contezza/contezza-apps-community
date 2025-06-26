@@ -8,12 +8,13 @@
         visibility: hidden;
     }
     ::ng-deep &-panel {
-        max-width: 100% !important;
+        max-height: 60vh !important;
+        max-width: unset;
+        width: 100%;
     }
 }
 
 ::ng-deep .contezza-context-menu-item.mat-mdc-menu-item {
-    width: 100vw !important;
     .mat-icon {
         flex-shrink: 0;
     }
