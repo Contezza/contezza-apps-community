@@ -81,6 +81,20 @@
         }
     }
 
+    // swap buttons in confirm dialog
+    .adf-confirm-dialog {
+        #adf-confirm-all {
+            order: 3;
+        }
+        #adf-confirm-accept {
+            order: 2;
+        }
+
+        #adf-confirm-cancel {
+            order: 1;
+        }
+    }
+
     // fixes after update aca 6 adf 7
 
     // fix base color of navbar items
