@@ -18,13 +18,31 @@ contezza-table {
                 position: relative;
 
                 th.mat-mdc-header-cell,
-                th.mat-mdc-header-cell .mat-form-field-label.mat-form-field-empty,
-                th.mat-mdc-header-cell .mat-mdc-form-field.mat-focused .mdc-floating-label,
-                th.mat-mdc-header-cell .mdc-floating-label:not(.mdc-floating-label--float-above) {
+                th.mat-mdc-header-cell .mat-form-field-label.mat-form-field-empty {
                     font-weight: 700;
                     font-size: var(--theme-caption-font-size);
                     color: var(--theme-text-fg-color) !important;
                     cursor: pointer;
+                }
+
+                // style dynamic forms in column headers
+                th.mat-mdc-header-cell {
+                    .mat-mdc-form-field .mdc-floating-label {
+                        font-weight: 700;
+                        font-size: var(--theme-caption-font-size);
+                        color: var(--theme-text-color);
+                    }
+                    .mat-mdc-form-field.mat-focused .mdc-floating-label,
+                    .mat-mdc-form-field .mdc-floating-label:not(.mdc-floating-label--float-above),
+                    .mat-mdc-form-field .mat-mdc-text-field-wrapper:hover .mdc-floating-label {
+                        color: var(--theme-text-fg-color) !important;
+                    }
+                    .mat-mdc-form-field.mat-form-field-appearance-outline {
+                        padding-top: 0;
+                        .mdc-floating-label.mat-mdc-floating-label.mdc-floating-label--float-above {
+                            padding-top: 6px;
+                        }
+                    }
                 }
 
                 th.mat-mdc-header-cell {
