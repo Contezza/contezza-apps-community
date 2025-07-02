@@ -280,4 +280,9 @@
             height: calc(100% - 70px);
         }
     }
+
+    // replace aca blue with primary
+    * {
+        --theme-blue-button-color: var(--theme-primary-color);
+    }
 }
