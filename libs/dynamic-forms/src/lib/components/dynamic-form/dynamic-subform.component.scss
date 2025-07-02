@@ -145,6 +145,9 @@
     .dynamicforms-hidden {
         visibility: hidden;
         position: absolute;
+        * {
+            visibility: hidden;
+        }
     }
 }
 
