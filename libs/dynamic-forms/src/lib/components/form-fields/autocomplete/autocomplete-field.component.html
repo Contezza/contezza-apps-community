@@ -58,6 +58,7 @@
                     </div>
 
                     <mat-autocomplete
+                        autoActiveFirstOption
                         #auto="matAutocomplete"
                         [class]="'contezza-form-field contezza-autocomplete-form-field-panel' + (optionsLoading ? ' contezza-form-field-loading' : '')"
                         [panelWidth]="field.settings?.panelWidth"
