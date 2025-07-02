@@ -1,6 +1,14 @@
 @use '@angular/material' as mat;
 
 :host,
+contezza-date-range-chip-field {
+    .mat-mdc-chip.mdc-evolution-chip.mat-mdc-standard-chip .mdc-evolution-chip__text-label {
+        align-items: center;
+    }
+}
+
+// TODO: everything below has not been checked with upgrade ng17
+:host,
 .adf-search-filter-chip {
     &.mat-chip {
         border: 2px solid transparent;
