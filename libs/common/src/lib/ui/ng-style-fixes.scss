@@ -47,4 +47,10 @@
     mat-form-field.mat-mdc-form-field.mat-form-field-appearance-outline {
         padding-top: 5px;
     }
+
+    // overwrite default max-width: calc(100% - 60px);
+    // without this form fields in small-resized column header do not show the label
+    .mat-mdc-form-field-type-mat-select.mat-form-field-appearance-outline .mdc-notched-outline__notch {
+        max-width: calc(100% - 30px);
+    }
 }
