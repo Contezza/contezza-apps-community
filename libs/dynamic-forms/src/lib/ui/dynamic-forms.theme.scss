@@ -72,6 +72,15 @@
                 align-items: flex-end;
             }
         }
+
+        &.contezza-form-field-disabled {
+            pointer-events: none;
+
+            .mdc-checkbox .mdc-checkbox__native-control:checked ~ .mdc-checkbox__background {
+                border-color: transparent !important;
+                background-color: var(--mdc-checkbox-disabled-selected-icon-color) !important;
+            }
+        }
     }
 
     .contezza-form-field-loading {
