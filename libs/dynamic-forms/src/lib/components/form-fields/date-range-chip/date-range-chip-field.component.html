@@ -1,6 +1,6 @@
 <ng-container *contezzaLet="displayValue$ | async as displayValue">
-    <mat-chip-grid aria-orientation="horizontal" role="listbox" [attr.aria-label]="'SEARCH.FILTER.ARIA-LABEL.SEARCH_FILTER' | translate">
-        <mat-chip-row
+    <mat-chip-set aria-orientation="horizontal" role="listbox" [attr.aria-label]="'SEARCH.FILTER.ARIA-LABEL.SEARCH_FILTER' | translate">
+        <mat-chip
             [disableRipple]="true"
             class="adf-search-filter-chip"
             [class.adf-search-toggle-chip]="menuTrigger.menuOpen"
@@ -21,7 +21,7 @@
 
             <span class="adf-search-filter-ellipsis" *ngIf="displayValue"> &nbsp; {{ displayValue | translate }} </span>
             <mat-icon>keyboard_arrow_down</mat-icon>
-        </mat-chip-row>
+        </mat-chip>
 
         <mat-menu #menu="matMenu" backdropClass="adf-search-filter-chip-menu">
             <div #menuContainer [attr.data-automation-id]="'search-field-' + field.label">
@@ -29,13 +29,13 @@
                     <div class="adf-search-filter-content">
                         <div class="contezza-form-field contezza-date-range-form-field">
                             <div class="contezza-date-range-form-field-dates">
-                                <contezza-date-field [field]="fromSubfield" [control]="fromSubcontrol"></contezza-date-field>
-                                <contezza-date-field [field]="toSubfield" [control]="toSubcontrol"></contezza-date-field>
+                                <contezza-date-field [field]="fromSubfield" [control]="fromSubcontrol" />
+                                <contezza-date-field [field]="toSubfield" [control]="toSubcontrol" />
                             </div>
                         </div>
                     </div>
 
-                    <mat-divider></mat-divider>
+                    <mat-divider />
 
                     <div class="adf-search-filter-actions">
                         <button mat-flat-button class="adf-search-action-button" color="primary" (click)="onRemove()">
@@ -45,5 +45,5 @@
                 </div>
             </div>
         </mat-menu>
-    </mat-chip-grid>
+    </mat-chip-set>
 </ng-container>
