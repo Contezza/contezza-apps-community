@@ -18,7 +18,9 @@ contezza-table {
                 position: relative;
 
                 th.mat-mdc-header-cell,
-                th.mat-mdc-header-cell .mat-form-field-label.mat-form-field-empty {
+                th.mat-mdc-header-cell .mat-form-field-label.mat-form-field-empty,
+                th.mat-mdc-header-cell .mat-mdc-form-field.mat-focused .mdc-floating-label,
+                th.mat-mdc-header-cell .mdc-floating-label:not(.mdc-floating-label--float-above) {
                     font-weight: 700;
                     font-size: var(--theme-caption-font-size);
                     color: var(--theme-text-fg-color) !important;
