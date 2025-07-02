@@ -12,7 +12,7 @@
         >
             <mat-select-trigger *ngIf="select.value?.contezzaDisplay">
                 <div title="{{ select.value?.contezzaDisplay.value.tooltip | translate }}">
-                    <adf-icon *ngIf="select.value?.contezzaDisplay.value.icon" [value]="select.value?.contezzaDisplay.value.icon" />
+                    <mat-icon *ngIf="select.value?.contezzaDisplay.value.icon" [contezzaIcon]="select.value?.contezzaDisplay.value.icon" />
                     {{ select.value?.contezzaDisplay.value.label || '' }}
                 </div>
             </mat-select-trigger>
@@ -30,7 +30,7 @@
                 </mat-checkbox>
                 <mat-divider *ngIf="field.type === 'multiselect'" />
                 <mat-option *ngFor="let option of options" [value]="option" title="{{ option.contezzaDisplay.option.tooltip | translate }}">
-                    <adf-icon *ngIf="option.contezzaDisplay.option.icon" [value]="option.contezzaDisplay.option.icon" />
+                    <mat-icon *ngIf="option.contezzaDisplay.option.icon" [contezzaIcon]="option.contezzaDisplay.option.icon" />
                     {{ option.contezzaDisplay.option.label || '' }}
                 </mat-option>
             </ng-container>

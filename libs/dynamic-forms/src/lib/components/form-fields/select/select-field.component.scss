@@ -1,4 +1,8 @@
 .contezza-select-form-field {
+    mat-select-trigger > div {
+        display: flex;
+        gap: 8px;
+    }
 }
 
 mat-checkbox.mat-mdc-checkbox.contezza-option {
