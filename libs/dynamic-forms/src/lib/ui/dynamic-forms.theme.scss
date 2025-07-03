@@ -41,9 +41,6 @@
             --mat-form-field-filled-with-label-container-padding-top: 22px;
             --mat-form-field-filled-with-label-container-padding-bottom: 0;
 
-            // replace min-height with exact height for consistency between different form fields
-            height: var(--mat-form-field-container-height);
-
             // bump otherwise these are overwritten for .mdc-text-field--no-label .mat-mdc-form-field-infix
             padding-top: var(--mat-form-field-filled-with-label-container-padding-top);
             padding-bottom: var(--mat-form-field-filled-with-label-container-padding-bottom);
