@@ -71,6 +71,7 @@ export class ExtensionModule {
                             include: ['path', 'properties', 'allowableOperations', 'permissions', 'aspectNames', 'isFavorite', 'definition'],
                             ...parameters.paging,
                             orderBy: SortingUtils.searchToNodesApi(parameters.sorting),
+                            where: '(assocType=cm:contains)',
                         });
                     } else {
                         return search.searchByQueryBody(
