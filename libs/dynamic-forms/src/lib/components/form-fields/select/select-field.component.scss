@@ -1,7 +1,14 @@
 .contezza-select-form-field {
+    mat-select {
+        height: var(--mat-select-trigger-text-line-height);
+    }
     mat-select-trigger > div {
         display: flex;
         gap: 8px;
+    }
+
+    button[matsuffix].mat-mdc-icon-button.mat-mdc-button-base {
+        padding: 20px 12px 4px 12px;
     }
 }
 
