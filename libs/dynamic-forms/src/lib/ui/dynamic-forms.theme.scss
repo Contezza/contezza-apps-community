@@ -58,6 +58,10 @@
             color: inherit;
         }
 
+        .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label:not(.mdc-floating-label--float-above) {
+            top: 50%;
+        }
+
         // fix date clear and datetoggle field styling
         .mat-mdc-form-field-icon-suffix {
             display: flex;
