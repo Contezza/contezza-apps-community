@@ -285,4 +285,49 @@
     * {
         --theme-blue-button-color: var(--theme-primary-color);
     }
+
+    // dark-theme fixes
+    .aca-custom-name-column .aca-name-column-container .aca-locked-by {
+        color: var(--theme-text-color);
+    }
+
+    .adf-viewer {
+        .adf-viewer-toolbar .mat-toolbar {
+            .adf-viewer__display-name {
+                color: var(--theme-text-color);
+            }
+            .mat-mdc-icon-button {
+                color: var(--theme-text-color);
+            }
+        }
+        .adf-toolbar .mat-toolbar {
+            background-color: var(--mat-toolbar-container-background-color) !important;
+            color: var(--theme-text-color) !important;
+
+            .adf-pdf-viewer__toolbar-page-selector > input {
+                background-color: inherit;
+            }
+
+            .mat-mdc-icon-button {
+                color: var(--theme-text-color);
+            }
+        }
+    }
+
+    .mdc-list-item__primary-text {
+        color: var(--mat-option-label-text-color);
+    }
+    .mat-calendar .mat-calendar-header button,
+    .mat-calendar .mat-calendar-content .mat-calendar-table-header th {
+        color: var(--theme-text-color) !important;
+    }
+    .adf-datatable-list {
+        background: var(--theme-dialog-background-color) !important;
+        .adf-datatable-cell-header,
+        .adf-datatable-cell-value,
+        .adf-cell-value,
+        .mat-icon {
+            color: var(--theme-text-color) !important;
+        }
+    }
 }
