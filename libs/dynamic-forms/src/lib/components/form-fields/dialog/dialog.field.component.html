@@ -2,6 +2,7 @@
     <mat-form-field
         class="contezza-form-field contezza-input-form-field"
         [class.mat-form-field-disabled]="readonly"
+        [class.contezza-form-field-disabled]="readonly"
         [floatLabel]="field.settings?.floatLabel"
         [appearance]="field.settings?.appearance"
     >
@@ -21,7 +22,7 @@
                 (focusin)="!readonly && openDialog$.next()"
             />
             <!-- fake autocomplete to use displayWith -->
-            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"></mat-autocomplete>
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" />
         </ng-container>
 
         <ng-template #multiple>
@@ -54,6 +55,6 @@
         >
             <mat-icon>cancel</mat-icon>
         </button>
-        <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length || control.errors" [validations]="field.validations" [control]="control"></mat-error>
+        <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length || control.errors" [validations]="field.validations" [control]="control" />
     </mat-form-field>
 </ng-container>
