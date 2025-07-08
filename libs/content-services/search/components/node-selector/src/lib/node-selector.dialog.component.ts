@@ -117,13 +117,13 @@ export class NodeSelectorDialogComponent implements AfterViewInit {
             if (!copiedSettings.queryTemplate.filterQueries) {
                 copiedSettings.queryTemplate.filterQueries = [];
             }
-            copiedSettings.queryTemplate.filterQueries.push({ query: this.data.allowedNodeIds.map((id) => `sys:node-uuid:'${id}'`).join(' OR ') });
+            copiedSettings.queryTemplate.filterQueries.push({ query: this.data.allowedNodeIds.map((id) => `sys:node-uuid:'${id}' OR ID:'${id}'`).join(' OR ') });
         }
         if (this.data.forbiddenNodeIds?.length && copiedSettings.queryTemplate && typeof copiedSettings.queryTemplate !== 'string') {
             if (!copiedSettings.queryTemplate.filterQueries) {
                 copiedSettings.queryTemplate.filterQueries = [];
             }
-            copiedSettings.queryTemplate.filterQueries.push({ query: `NOT (${this.data.forbiddenNodeIds.map((id) => `sys:node-uuid:'${id}'`).join(' OR ')})` });
+            copiedSettings.queryTemplate.filterQueries.push({ query: `NOT (${this.data.forbiddenNodeIds.map((id) => `sys:node-uuid:'${id}' OR ID:'${id}'`).join(' OR ')})` });
         }
         return copiedSettings;
     }
