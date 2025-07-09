@@ -72,6 +72,24 @@ export class RuleService extends AdfRuleService {
     }
 
     /**
+     * Evaluates a rule.
+     * Wraps the default `AdfRuleService.evaluateRule` to return false if the rule evaluation raises any error.
+     * This was the default behaviour before ADF 7.
+     *
+     * @param ruleId ID of the rule to evaluate
+     * @param context Custom rule execution context.
+     * @returns True if the rule passed, false otherwise
+     */
+    evaluateRule(ruleId: string, context?: RuleContext): boolean {
+        try {
+            return super.evaluateRule(ruleId, context);
+        } catch (e) {
+            console.warn(e);
+            return false;
+        }
+    }
+
+    /**
      * Applies adf extension filter to the given list based on the given rule context.
      * This was originally implemented as action filter and now refactored so that it can be applied to any list of extension elements with rules.
      *
