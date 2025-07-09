@@ -7,6 +7,7 @@
                     class="contezza-form-field contezza-multiautocomplete-form-field adf-property-field adf-card-textitem-field"
                     [class.contezza-form-field-loading]="formLoading"
                     [class.mat-form-field-disabled]="readonly"
+                    [class.contezza-form-field-disabled]="readonly"
                     floatLabel="auto"
                     [appearance]="field.settings?.appearance"
                 >
@@ -22,6 +23,7 @@
                     [class.contezza-form-field-no-options]="!selectableOptions || selectableOptions.length === 0"
                     [class.contezza-form-field-loading]="formLoading"
                     [class.mat-form-field-disabled]="readonly"
+                    [class.contezza-form-field-disabled]="readonly"
                     floatLabel="auto"
                     [appearance]="field.settings?.appearance"
                 >
@@ -168,11 +170,12 @@
                         class="contezza-form-field-clear"
                         aria-label="Clear"
                         *ngIf="!readonly && !formLoading && !control.disabled && control.value?.length"
+                        tabindex="-1"
                         (click)="clear($event)"
                     >
                         <mat-icon>cancel</mat-icon>
                     </button>
-                    <button mat-icon-button matSuffix *ngIf="!readonly && !optionsLoading && !control.disabled">
+                    <button mat-icon-button matSuffix *ngIf="!readonly && !optionsLoading && !control.disabled" tabindex="-1">
                         <mat-icon>arrow_drop_down</mat-icon>
                     </button>
                     <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control" />

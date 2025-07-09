@@ -54,6 +54,7 @@ interface Settings {
                 *ngIf="value?.length"
                 class="contezza-form-field"
                 [class.mat-form-field-disabled]="readonly"
+                [class.contezza-form-field-disabled]="readonly"
                 floatLabel="auto"
                 [appearance]="field.settings?.appearance"
             >
