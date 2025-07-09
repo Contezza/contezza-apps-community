@@ -12,6 +12,9 @@
         height: 100%;
         overflow: auto;
     }
+    .mat-mdc-tab:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label {
+        color: var(--theme-primary-color);
+    }
 
     .mat-tab-body-content {
         height: 100%;

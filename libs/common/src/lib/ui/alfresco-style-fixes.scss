@@ -330,4 +330,21 @@
             color: var(--theme-text-color) !important;
         }
     }
+
+    .adf-info-drawer-tabs div[role='tab'].adf-info-drawer-tab {
+        background-color: inherit !important;
+    }
+    .adf-info-drawer-layout-header-title > div,
+    .adf-edit-icon-buttons,
+    .adf-property-value,
+    .adf-property-read-only,
+    .adf-metadata-action-buttons-clear,
+    .adf-property-value-editable,
+    .adf-property-readonly-value,
+    .adf-property-value-editable.adf-property-value-editable .mat-mdc-select .mat-mdc-select-value {
+        color: var(--theme-text-color) !important;
+    }
+    .adf-property-list .adf-property-label {
+        color: var(--theme-foreground-text-color) !important;
+    }
 }

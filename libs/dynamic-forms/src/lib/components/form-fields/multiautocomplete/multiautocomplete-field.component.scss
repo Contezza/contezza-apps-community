@@ -21,6 +21,7 @@
                 z-index: 1;
                 top: 0;
                 background-color: var(--theme-card-background-color) !important;
+
                 &:hover,
                 &.mat-active {
                     // same color as default mat-option, but with no transparency
@@ -36,6 +37,18 @@
 
                         .mdc-form-field {
                             vertical-align: text-bottom;
+                            .mdc-checkbox .mdc-checkbox__native-control[disabled]:not(:checked):not(:indeterminate):not([data-indeterminate='true']) ~ .mdc-checkbox__background {
+                                border-color: var(--theme-text-color) !important;
+                            }
+                            .mdc-checkbox .mdc-checkbox__native-control:disabled ~ .mdc-checkbox__background {
+                                .mdc-checkbox__checkmark,
+                                .mdc-checkbox__mixedmark {
+                                    color: var(--mat-full-pseudo-checkbox-selected-checkmark-color);
+                                }
+                                .mdc-checkbox__mixedmark {
+                                    border-color: var(--mat-full-pseudo-checkbox-selected-checkmark-color);
+                                }
+                            }
                             .mdc-checkbox .mdc-checkbox__background {
                                 --mdc-checkbox-disabled-unselected-icon-color: rgba(0, 0, 0, 0.54);
                                 --mdc-checkbox-disabled-selected-icon-color: var(--theme-primary-color);
@@ -43,6 +56,7 @@
                                 left: 0;
                                 height: 18px;
                                 width: 18px;
+                                //border-color: var(--theme-text-color) !important;
                             }
                         }
                     }
