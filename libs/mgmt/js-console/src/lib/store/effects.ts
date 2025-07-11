@@ -8,7 +8,7 @@ import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
 
 import { SnackbarErrorAction, SnackbarInfoAction } from '@alfresco/aca-shared/store';
-import { ConfirmDialogComponent } from '@alfresco/adf-content-services';
+import { ConfirmDialogComponent } from '@alfresco/adf-core';
 
 import { JsConsoleActions } from './index';
 import { getConsolePayloadInfo, getScriptsList, getSelectedScript } from './selectors';

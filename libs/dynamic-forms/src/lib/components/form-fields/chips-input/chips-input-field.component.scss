@@ -1,17 +1,9 @@
-.contezza-input-wrapper {
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
-
-.contezza-input-form-field {
-    width: 100%;
-}
-
-.contezza-input-form-field-label {
-    margin-right: 5px;
-}
-
-.contezza-form-field.mat-form-field-disabled {
-    color: var(--theme-text-disabled-color);
+.contezza-chips-input-form-field {
+    &:hover ::ng-deep .mat-mdc-form-field-icon-suffix {
+        min-width: 48px !important;
+    }
+    &.mat-form-field-appearance-outline mat-chip-grid {
+        padding-top: 1em;
+        overflow: hidden;
+    }
 }

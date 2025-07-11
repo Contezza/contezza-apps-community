@@ -1,0 +1,139 @@
+@import './mixins/_form-field-style';
+
+:root {
+    //todo remove - double with contezza-apps variables.scss
+    --mdc-filled-text-field-container-color: transparent;
+    --mdc-filled-text-field-disabled-container-color: transparent;
+
+    @include form-field-clear-button-style();
+
+    // full width for form fields
+    .contezza-form-field {
+        width: 100%;
+
+        // color for enabled and disabled fields
+        color: var(--mdc-filled-text-field-input-text-color);
+        &.mat-form-field-disabled {
+            color: var(--mdc-filled-text-field-disabled-input-text-color);
+        }
+    }
+
+    .contezza-form-field,
+    contezza-dynamic-form-field {
+        .mat-mdc-form-field-icon-suffix .material-icons {
+            color: var(--theme-text-color);
+        }
+
+        // fix for standard chip with auto height
+        .mat-mdc-chip.mdc-evolution-chip.mat-mdc-standard-chip {
+            height: var(--mdc-chip-container-height);
+        }
+
+        // fix form-field font size and height
+        .mat-mdc-form-field {
+            font-size: 14px;
+            line-height: 1.125;
+        }
+
+        // fix form-field height
+        .mat-mdc-form-field-infix {
+            --mat-form-field-container-height: 46px;
+            --mat-form-field-filled-with-label-container-padding-top: 22px;
+            --mat-form-field-filled-with-label-container-padding-bottom: 0;
+
+            // bump otherwise these are overwritten for .mdc-text-field--no-label .mat-mdc-form-field-infix
+            padding-top: var(--mat-form-field-filled-with-label-container-padding-top);
+            padding-bottom: var(--mat-form-field-filled-with-label-container-padding-bottom);
+        }
+
+        // don't show mat-select arrow because of custom arrow after clear button
+        .mat-mdc-select-arrow {
+            display: none;
+        }
+
+        // fix label and form field font-sizes
+        .mdc-text-field--filled .mdc-text-field__input,
+        .mat-mdc-form-field .mat-mdc-floating-label.mdc-floating-label {
+            font-size: 14px;
+            color: inherit;
+        }
+
+        .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label:not(.mdc-floating-label--float-above) {
+            top: 50%;
+        }
+
+        // fix date clear and datetoggle field styling
+        .mat-mdc-form-field-icon-suffix {
+            display: flex;
+            flex-wrap: nowrap;
+        }
+
+        // fix wrapper height
+        .mat-mdc-form-field-error-wrapper {
+            margin: -8px 0;
+
+            // duplicated from contezza-dynamic-form-field-error so that it is applied to all mat-form-field.contezza-form-field
+            & > mat-error.mat-mdc-form-field-error,
+            & > *:not(mat-error) > mat-error.mat-mdc-form-field-error {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+            }
+        }
+
+        &.contezza-form-field-disabled {
+            pointer-events: none;
+
+            .mdc-checkbox .mdc-checkbox__native-control:checked ~ .mdc-checkbox__background {
+                border-color: transparent !important;
+                background-color: var(--mdc-checkbox-disabled-selected-icon-color) !important;
+            }
+
+            .mdc-text-field--filled .mdc-line-ripple::before {
+                border-bottom-color: var(--mdc-filled-text-field-disabled-active-indicator-color);
+            }
+        }
+    }
+
+    .contezza-form-field-loading {
+        // style loading indicator for options in autocomplete and multiautocomplete
+        label {
+            height: 100%;
+            width: 100%;
+            mat-label.loading {
+                height: 100%;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                .mat-mdc-progress-spinner {
+                    height: 100% !important;
+                }
+            }
+        }
+        // style loading indicator for server-side-filtered options in autocomplete
+        mat-option.loading {
+            height: var(--mat-form-field-container-height);
+            .mdc-list-item__primary-text {
+                height: var(--mat-form-field-container-height);
+            }
+            .mat-mdc-progress-spinner {
+                height: 100% !important;
+                margin: auto;
+            }
+        }
+        // style loading indicator for options in button-toggle
+        .mat-button-toggle-label-content {
+            height: var(--mat-form-field-container-height);
+            .mat-mdc-progress-spinner {
+                height: 100% !important;
+            }
+        }
+    }
+
+    .contezza-autocomplete-form-field-panel {
+        min-width: 92px;
+    }
+    .contezza-multiautocomplete-form-field-panel {
+        min-width: 300px;
+    }
+}

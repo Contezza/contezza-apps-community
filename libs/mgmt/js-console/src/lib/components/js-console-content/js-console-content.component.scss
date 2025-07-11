@@ -9,6 +9,9 @@
         width: 100%;
         min-width: 100px;
     }
+    .mat-mdc-tab:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label {
+        color: var(--theme-primary-color) !important;
+    }
     &-execution-time {
         display: flex;
         flex-direction: column;

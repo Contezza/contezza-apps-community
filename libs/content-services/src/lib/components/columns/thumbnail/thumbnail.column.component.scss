@@ -3,10 +3,15 @@
     overflow: visible !important;
     text-align: center;
 
-    &-selected ::ng-deep svg {
-        fill: var(--theme-accent-color);
+    &-selected {
         width: 30px;
         height: 30px;
+
+        ::ng-deep svg {
+            fill: var(--theme-accent-color);
+            width: 30px;
+            height: 30px;
+        }
     }
 
     & > span {

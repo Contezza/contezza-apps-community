@@ -4,20 +4,22 @@ import { CommonModule } from '@angular/common';
 import { PipeModule } from '@alfresco/adf-core';
 import { DocumentListPresetRef } from '@alfresco/adf-extensions';
 
+import { MimeTypeIconPipe } from '@contezza/core/pipes';
+
 import { TableCellService } from './table-cell.service';
 import { ToolbarComponent } from '../toolbar/toolbar.component';
 
 @Component({
     standalone: true,
-    imports: [CommonModule, PipeModule, ToolbarComponent],
+    imports: [CommonModule, PipeModule, ToolbarComponent, MimeTypeIconPipe],
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'td[contezza-table-cell]',
     template: `
         <ng-container *ngIf="!column.template" [ngSwitch]="column.type">
-            <ng-container *ngSwitchCase="'actions'"><contezza-toolbar [target]="$any(item)"></contezza-toolbar></ng-container>
+            <ng-container *ngSwitchCase="'actions'"><contezza-toolbar [target]="$any(item)" /></ng-container>
             <ng-container *ngSwitchCase="'date'">{{ value | date : 'dd-MM-yyyy' }}</ng-container>
             <ng-container *ngSwitchCase="'fileSize'">{{ value | adfFileSize }}</ng-container>
-            <ng-container *ngSwitchCase="'thumbnail'"><img [src]="value | adfMimeTypeIcon" alt="" style="vertical-align: middle" /></ng-container>
+            <ng-container *ngSwitchCase="'thumbnail'"><img [src]="value | contezzaAdfMimeTypeIcon" alt="" style="vertical-align: middle" /></ng-container>
             <ng-container *ngSwitchCase="'timeAgo'">{{ value | adfTimeAgo }}</ng-container>
             <ng-container *ngSwitchDefault>{{ value }}</ng-container>
         </ng-container>

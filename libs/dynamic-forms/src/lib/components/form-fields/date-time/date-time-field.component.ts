@@ -20,6 +20,7 @@ import { ContezzaBaseFieldComponent } from '../base-field.component';
 @Component({
     selector: 'contezza-date-time-field',
     templateUrl: './date-time-field.component.html',
+    styleUrls: ['./date-time-field.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         { provide: DateAdapter, useClass: MomentDateAdapter },

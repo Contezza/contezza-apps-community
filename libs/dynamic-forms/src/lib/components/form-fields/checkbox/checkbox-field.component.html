@@ -1,7 +1,10 @@
 <ng-container *contezzaLet="readonly$ | async as readonly">
     <mat-checkbox
+        #checkbox
         [color]="field.settings?.color || 'primary'"
-        class="mat-form-field contezza-form-field-checkbox"
+        class="mat-form-field contezza-form-field contezza-form-field-checkbox"
+        [class.mat-mdc-checkbox-disabled]="readonly"
+        [class.contezza-form-field-disabled]="readonly"
         [formControl]="control"
         [labelPosition]="field.settings?.labelPosition"
         [disabled]="readonly"

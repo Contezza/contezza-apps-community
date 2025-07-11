@@ -14,18 +14,38 @@ contezza-table {
             display: flex;
             flex-direction: column;
 
-            table.mat-table {
+            table.mat-mdc-table {
                 position: relative;
 
-                th.mat-header-cell,
-                th.mat-header-cell .mat-form-field-label.mat-form-field-empty {
+                th.mat-mdc-header-cell,
+                th.mat-mdc-header-cell .mat-form-field-label.mat-form-field-empty {
                     font-weight: 700;
                     font-size: var(--theme-caption-font-size);
                     color: var(--theme-text-fg-color) !important;
                     cursor: pointer;
                 }
 
-                th.mat-header-cell {
+                // style dynamic forms in column headers
+                th.mat-mdc-header-cell {
+                    .mat-mdc-form-field .mdc-floating-label {
+                        font-weight: 700;
+                        font-size: var(--theme-caption-font-size);
+                        color: var(--theme-text-color);
+                    }
+                    .mat-mdc-form-field.mat-focused .mdc-floating-label,
+                    .mat-mdc-form-field .mdc-floating-label:not(.mdc-floating-label--float-above),
+                    .mat-mdc-form-field .mat-mdc-text-field-wrapper:hover .mdc-floating-label {
+                        color: var(--theme-text-fg-color) !important;
+                    }
+                    .mat-mdc-form-field.mat-form-field-appearance-outline {
+                        padding-top: 0;
+                        .mdc-floating-label.mat-mdc-floating-label.mdc-floating-label--float-above {
+                            padding-top: 6px;
+                        }
+                    }
+                }
+
+                th.mat-mdc-header-cell {
                     .mat-sort-header-container,
                     .mat-sort-header-content,
                     contezza-dynamic-form-field {
@@ -41,7 +61,7 @@ contezza-table {
                         max-width: calc(100% - 12px);
                     }
 
-                    .mat-form-field {
+                    .mat-mdc-form-field {
                         font: revert;
 
                         &-wrapper {
@@ -63,9 +83,9 @@ contezza-table {
                     }
 
                     &.contezza-resized {
-                        max-width: 96px;
+                        max-width: 116px;
 
-                        .mat-form-field {
+                        .mat-mdc-form-field {
                             &-infix {
                                 width: unset;
                                 min-width: 30px;
@@ -80,15 +100,15 @@ contezza-table {
                     }
                 }
 
-                tr.mat-header-row,
-                tr.mat-row {
+                tr.mat-mdc-header-row,
+                tr.mat-mdc-row {
                     cursor: pointer;
 
                     &.selected {
                         background-color: var(--theme-selected-button-bg-color);
                     }
 
-                    &:not(.mat-header-row):not(.selected):hover {
+                    &:not(.mat-mdc-header-row):not(.selected):hover {
                         background-color: var(--theme-mat-table-hover-color);
                     }
 
@@ -112,12 +132,10 @@ contezza-table {
                         &:not(.contezza-resizable),
                         &.contezza-resizable:not(.contezza-resized):not(.resizing) {
                             min-width: fit-content;
-                            max-width: fit-content;
                             width: fit-content;
 
                             &.select {
-                                //min-width: 0;
-                                max-width: 0;
+                                //max-width: 0;
                                 width: 0;
                             }
 
@@ -145,7 +163,6 @@ contezza-table {
                                 &-100 {
                                     // max-width: % is set via js
                                     min-width: unset;
-                                    max-width: 0;
                                     width: unset;
                                 }
                             }
@@ -171,7 +188,13 @@ contezza-table {
                     }
 
                     td {
-                        max-width: 0;
+                        // with 'max-width: 0' all cells are compressed so that the table fit into the page
+                        // without 'max-width: 0' it is not possible to make cells smaller than their initial size
+                        // therefore we only apply 'max-width: 0' when resizing or resized
+                        &.resizing,
+                        &.contezza-resized {
+                            max-width: 0;
+                        }
 
                         &.resizing {
                             border-right: 1px dotted var(--theme-primary-color);
@@ -188,7 +211,7 @@ contezza-table {
         }
     }
 
-    .mat-paginator-container {
+    .mat-mdc-paginator-container {
         background-color: var(--theme-toolbar-background) !important;
         max-height: 43px;
         min-height: 43px !important;
@@ -209,16 +232,22 @@ contezza-table {
                     @for $i from 1 through 20 {
                         $width: $i * 5;
                         .contezza-responsive-mobile-table-cell-#{$width} {
-                            &.mat-cell:first-child,
-                            &.mat-cell:last-child {
+                            &.mat-mdc-cell:first-child,
+                            &.mat-mdc-cell:last-child {
                                 width: calc(#{$width}vw - 30px) !important;
+                                max-width: unset;
                             }
-                            &.mat-cell:not(:first-child):not(:last-child) {
+                            &.mat-mdc-cell:not(:first-child):not(:last-child) {
                                 width: calc(#{$width}vw - 20px) !important;
-                                max-width: inherit;
+                                max-width: unset;
                                 min-width: auto;
                             }
                         }
+                    }
+
+                    // with 'max-width: 0' all cells are compressed so that the table fit into the page
+                    td {
+                        max-width: 0;
                     }
                 }
             }

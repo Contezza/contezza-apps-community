@@ -7,4 +7,33 @@
         position: absolute;
         visibility: hidden;
     }
+    ::ng-deep &-panel {
+        width: 100%;
+    }
+}
+
+::ng-deep .contezza-context-menu-item.mat-mdc-menu-item {
+    &:focus-visible {
+        background-color: inherit !important;
+    }
+
+    .mat-icon {
+        flex-shrink: 0;
+    }
+    .mat-mdc-menu-item-text {
+        white-space: nowrap;
+        overflow: hidden;
+
+        span {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}
+@media (max-width: 768px) {
+    ::ng-deep.contezza-context-menu-panel {
+        max-height: 60vh !important;
+        max-width: unset;
+    }
 }

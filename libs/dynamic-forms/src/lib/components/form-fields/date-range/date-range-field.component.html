@@ -5,14 +5,8 @@
         </ng-container>
     </label>
     <div class="contezza-date-range-form-field-dates">
-        <contezza-date-field [field]="fromSubfield" [control]="fromSubcontrol"></contezza-date-field>
-        <contezza-date-field [field]="toSubfield" [control]="toSubcontrol"></contezza-date-field>
+        <contezza-date-field [field]="fromSubfield" [control]="fromSubcontrol" />
+        <contezza-date-field [field]="toSubfield" [control]="toSubcontrol" />
     </div>
-    <mat-error
-        class="contezza-date-range-form-field-error"
-        contezza-dynamic-form-field-error
-        *ngIf="control.errors"
-        [validations]="field.validations"
-        [control]="control"
-    ></mat-error>
+    <mat-error class="contezza-date-range-form-field-error" contezza-dynamic-form-field-error *ngIf="control.errors" [validations]="field.validations" [control]="control" />
 </div>

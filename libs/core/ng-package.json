@@ -6,6 +6,11 @@
     },
     "assets": [
         {
+            "glob": "**/*",
+            "input": "./ui",
+            "output": "/ui/"
+        },
+        {
             "glob": "responsive.theme.scss",
             "input": "./responsive/src/lib/ui",
             "output": "/responsive/ui/"

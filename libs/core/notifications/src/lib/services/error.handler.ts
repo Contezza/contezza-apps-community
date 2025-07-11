@@ -42,13 +42,7 @@ export class ErrorHandler extends NgErrorHandler {
             details = details.error;
         }
         if (details) {
-            if (
-                details.status?.code !== 401 &&
-                details.statusCode !== 401 &&
-                // upgrade ACA 4.0.0
-                // ignore error coming from category metadata tab
-                !details.errorKey?.includes('category-links')
-            ) {
+            if (details.status?.code !== 401 && details.statusCode !== 401) {
                 return { message: 'APP.MESSAGES.ERROR', details };
             }
         }

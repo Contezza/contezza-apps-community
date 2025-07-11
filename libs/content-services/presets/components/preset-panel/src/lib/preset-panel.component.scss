@@ -1,42 +1,51 @@
-.adf-info-drawer-layout{
+.adf-info-drawer-layout {
     &-header {
         padding: 13px 0 0 23px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 40px;
+        margin-bottom: 5px;
 
-        &-title{
+        &-title {
             width: 197px;
             height: 32px;
             font-size: var(--theme-title-font-size);
             line-height: 1.6;
-            letter-spacing: -.5px;
+            letter-spacing: -0.5px;
             text-align: left;
         }
-        &-title>div{
+        &-title > div {
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
         }
 
-        &-buttons{
+        &-buttons {
             margin-inline-end: 12px;
-
         }
     }
-    &-content{
+    &-content {
         padding: 10px;
-        height: calc(100% - 53px);
+        height: calc(100% - 86px);
     }
 }
 
-.preset-panel-info-drawer-card{
-    height: calc(100% - 53px);
+.preset-panel-info-drawer-card {
+    height: calc(100%);
     overflow: auto;
-    &-content{
-        &-preset{
-            &-icon{
+    &-content {
+        &-presets .mat-mdc-list-option {
+            ::ng-deep.mdc-list-item__end {
+                display: none;
+            }
+            ::ng-deep.mdc-list-item__primary-text {
+                display: flex;
+                gap: 20px;
+            }
+        }
+
+        &-preset {
+            &-icon {
                 color: var(--theme-secondary-text-color) !important;
             }
             &-text {
@@ -47,7 +56,6 @@
                 display: block;
                 text-overflow: ellipsis;
             }
-
         }
     }
 }

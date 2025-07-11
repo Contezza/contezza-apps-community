@@ -7,6 +7,7 @@ import { BehaviorSubject, filter, map, merge, Observable, switchMap, tap } from 
 import { ContentActionRef, ContentActionType, ExtensionService, reduceEmptyMenus, reduceSeparators, RuleContext } from '@alfresco/adf-extensions';
 import { AppExtensionService } from '@alfresco/aca-shared';
 
+import { RuleService } from '@contezza/core/extensions';
 import { ContezzaAdfUtils } from '@contezza/core/utils';
 
 import { RuleContextService } from './rule-context.service';
@@ -41,6 +42,7 @@ export class ActionsService {
     constructor(
         private readonly store: Store,
         private readonly extensions: ExtensionService,
+        private readonly rules: RuleService,
         private readonly ruleContext$: RuleContextService,
         @Optional() @Inject(FEATURE_KEY) featureKey: string
     ) {
@@ -75,7 +77,7 @@ export class ActionsService {
     private getAllowedActions(actions: ContentActionRef[], context: RuleContext): ContentActionRef[] {
         const actionsFilter = (list: ContentActionRef[]): ContentActionRef[] =>
             list
-                .filter((action) => this.filterVisible(action, context))
+                .filter((action) => this.rules.filterItem(action, context))
                 .map((action) => {
                     if (action.type === ContentActionType.custom && !action.data) {
                         action.data = { ...action };
@@ -88,10 +90,6 @@ export class ActionsService {
         const recursion = (list: ContentActionRef[]): ContentActionRef[] =>
             actionsFilter(list.map((item) => (item.children?.length ? { ...item, children: recursion(item.children) } : item)));
         return recursion(actions || []);
-    }
-
-    private filterVisible(action: ContentActionRef, context: RuleContext): boolean {
-        return action?.rules?.visible ? this.extensions.evaluateRule(action.rules.visible, context) : true;
     }
 
     private setActionDisabledFromRule(action: ContentActionRef, context: RuleContext) {

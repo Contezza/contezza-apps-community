@@ -1,15 +1,27 @@
 .contezza {
+    &-column-sorter-button {
+        margin: 0 10px;
+        .mdc-button__label {
+            display: flex;
+            gap: 2px;
+            align-items: center;
+        }
+    }
     &-column-editor-menu {
         max-height: 500px;
         max-width: 50vw;
         overflow: hidden;
         display: flex;
 
+        .mat-mdc-menu-content {
+            display: flex;
+            flex-direction: column;
+        }
+
         .contezza-column-editor-menu-select-all {
-            position: fixed;
             padding: 0.5em 0 0.5em 0.5em;
             color: var(--theme-text-color);
-            .mat-checkbox {
+            .mdc-checkbox {
                 overflow: hidden;
                 margin-right: 8px;
                 &-layout,
@@ -34,10 +46,10 @@
         outline: none;
 
         .mat-stroked-button {
-            .mat-button-wrapper {
+            .mdc-button__label {
                 color: var(--theme-text-color);
             }
-            &:hover .mat-button-wrapper {
+            &:hover .mdc-button__label {
                 color: inherit;
             }
         }
@@ -47,7 +59,6 @@
             width: 100%;
             min-width: 200px;
             overflow: auto;
-            margin-top: 3em;
 
             .dragable-row {
                 width: 100%;
@@ -65,7 +76,7 @@
                     vertical-align: top;
                     flex: 0 0 auto;
                 }
-                .mat-checkbox {
+                .mdc-checkbox {
                     overflow: hidden;
                     &-layout,
                     &-label {
@@ -88,13 +99,18 @@
             margin-left: -4px;
             font-size: 14px;
 
+            &.mat-mdc-card {
+                display: flex;
+                flex-direction: row; // overwrite mat-card's flex-direction: column
+            }
+
             mat-icon {
                 vertical-align: top;
                 margin-right: 8px;
                 padding-left: 4px;
                 color: var(--theme-text-color);
             }
-            mat-checkbox {
+            mdc-checkbox {
                 vertical-align: top;
             }
         }

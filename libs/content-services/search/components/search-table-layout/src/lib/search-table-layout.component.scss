@@ -69,6 +69,12 @@
                 }
             }
         }
+
+        contezza-floating-button {
+            position: absolute;
+            bottom: 70px;
+            right: 40px;
+        }
     }
 }
 
@@ -103,6 +109,9 @@
                     }
                 }
             }
+        }
+        contezza-floating-button {
+            bottom: 20px;
         }
     }
 }

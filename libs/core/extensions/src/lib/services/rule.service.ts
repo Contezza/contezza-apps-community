@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { ContezzaUtils, Tree } from '@contezza/core/utils';
+import { ContezzaUtils, OrArray, Tree } from '@contezza/core/utils';
 
 import { ExtensionElement, reduceEmptyMenus, reduceSeparators, RuleContext, RuleEvaluator, RuleParameter, RuleService as AdfRuleService } from '@alfresco/adf-extensions';
 
@@ -72,6 +72,24 @@ export class RuleService extends AdfRuleService {
     }
 
     /**
+     * Evaluates a rule.
+     * Wraps the default `AdfRuleService.evaluateRule` to return false if the rule evaluation raises any error.
+     * This was the default behaviour before ADF 7.
+     *
+     * @param ruleId ID of the rule to evaluate
+     * @param context Custom rule execution context.
+     * @returns True if the rule passed, false otherwise
+     */
+    evaluateRule(ruleId: string, context?: RuleContext): boolean {
+        try {
+            return super.evaluateRule(ruleId, context);
+        } catch (e) {
+            console.warn(e);
+            return false;
+        }
+    }
+
+    /**
      * Applies adf extension filter to the given list based on the given rule context.
      * This was originally implemented as action filter and now refactored so that it can be applied to any list of extension elements with rules.
      *
@@ -89,8 +107,14 @@ export class RuleService extends AdfRuleService {
         return recursion(list || []);
     }
 
-    filterItem<T extends { rules?: { visible?: string } }>(item: T, context: RuleContext): boolean {
-        return item?.rules?.visible ? this.evaluateRule(item.rules.visible, context) : true;
+    filterItem<T extends { rules?: { visible?: OrArray<string> } }>(item: T, context: RuleContext): boolean {
+        if (item?.rules?.visible) {
+            if (Array.isArray(item.rules.visible)) {
+                return item.rules.visible.every((rule) => this.evaluateRule(rule, context));
+            }
+            return this.evaluateRule(item.rules.visible, context);
+        }
+        return true;
     }
 
     private setDisabledFromRule<T extends { rules?: { enabled?: string } }>(item: T, context: RuleContext): T & { disabled: boolean } {

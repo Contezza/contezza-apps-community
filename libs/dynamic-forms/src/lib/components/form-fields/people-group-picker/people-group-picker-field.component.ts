@@ -17,8 +17,7 @@ import { ContezzaBaseFieldComponent } from '../base-field.component';
             peoplePlaceholder="APP.PEOPLE_GROUP_PICKER.PEOPLE.PLACEHOLDER"
             groupPlaceholder="APP.PEOPLE_GROUP_PICKER.GROUP.PLACEHOLDER"
             (onItemsChange)="onItemsChange($event)"
-        >
-        </contezza-people-group-picker>
+        />
     `,
 })
 export class PeopleGroupPickerFieldComponent<BaseValueType extends User | Group> extends ContezzaBaseFieldComponent<BaseValueType, BaseValueType[]> implements OnInit {
