@@ -23,8 +23,7 @@
                                             [checked]="totalSelected > 0 && totalSelected >= fullSelectionLength"
                                             [indeterminate]="totalSelected > 0 && totalSelected < fullSelectionLength"
                                             (change)="onSelectAll($event.checked)"
-                                        >
-                                        </mat-checkbox>
+                                        />
                                     </ng-container>
                                 </th>
                                 <td mat-cell *matCellDef="let item" [class]="column.class">
@@ -34,8 +33,8 @@
                                         [contezzaSelectable]="item"
                                         [isToggle]="true"
                                         [checked]="selectable.selected$ | async"
-                                        (click)="$event.preventDefault(); $event['selectionPrevented'] = true"
-                                    ></mat-checkbox>
+                                        (click)="$event.stopPropagation()"
+                                    />
                                 </td>
                             </ng-container>
                             <ng-container *ngIf="column.type !== 'select'">
@@ -59,7 +58,7 @@
                                                         (click)="$event.stopPropagation()"
                                                         (keydown.enter)="$event.stopPropagation()"
                                                         (keydown.space)="$event.stopPropagation()"
-                                                    ></contezza-dynamic-form-field>
+                                                    />
                                                 </ng-container>
                                                 <ng-template #columnTitle>{{ title }}</ng-template>
                                             </ng-container>
@@ -81,7 +80,7 @@
                     </ng-container>
                     <ng-container matColumnDef="spinner">
                         <td mat-footer-cell *matFooterCellDef [attr.colspan]="displayedColumns.length">
-                            <mat-progress-spinner #paginationSpinner style="margin: auto" mode="indeterminate" diameter="40"></mat-progress-spinner>
+                            <mat-progress-spinner #paginationSpinner style="margin: auto" mode="indeterminate" diameter="40" />
                         </td>
                     </ng-container>
 
@@ -109,7 +108,7 @@
                 </table>
                 <ng-container *ngIf="dataSource && !dataSource.data.length">
                     <div class="table-empty">
-                        <ng-content select="[table-empty]"></ng-content>
+                        <ng-content select="[table-empty]" />
                     </div>
                 </ng-container>
             </ng-container>
@@ -124,5 +123,5 @@
         [pageIndex]="pagingState.pageIndex"
         [pageSizeOptions]="[5, 10, 15, 20, 25, 50, 100, 250]"
         (page)="onPageChange($event)"
-    ></mat-paginator>
+    />
 </ng-container>

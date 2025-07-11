@@ -1,0 +1,44 @@
+@mixin form-field-clear-button-style() {
+    .contezza-form-field-clear {
+        .material-icons {
+            font-size: 18px;
+            line-height: 24px;
+        }
+    }
+    .contezza-form-field .contezza-form-field-clear {
+        --mdc-icon-button-state-layer-size: 26px !important;
+        visibility: hidden;
+        transition: opacity 0.15s ease-in-out;
+        pointer-events: none;
+    }
+
+    // make clear button visible on hover
+    // this construction ensures the correct behaviour in nested .contezza-form-field's
+    // with the previous selector hovering on the outer .contezza-form-field would make all .contezza-form-field-clear's of the inner .contezza-form-field's visible
+    // the construction below generates the selector:
+    // .contezza-form-field:hover > *:not(.contezza-form-field) > ... > *:not(.contezza-form-field) > .contezza-form-field-clear
+    // where *:not(.contezza-form-field) is repeated up to the given depth
+    // Limit to a reasonable depth (e.g. 5)
+    @for $i from 0 through 5 {
+        .contezza-form-field:hover {
+            $selector: '';
+            @for $j from 0 through $i {
+                $selector: if($j == 0, '&', '#{$selector} > *:not(.contezza-form-field)');
+            }
+            #{$selector} > .contezza-form-field-clear {
+                opacity: 1;
+                z-index: 999;
+                visibility: visible;
+                pointer-events: auto;
+                width: var(--mdc-icon-button-state-layer-size);
+            }
+        }
+    }
+
+    .contezza-form-field:not(:hover) .contezza-form-field-clear {
+        flex: 0;
+        min-width: 0;
+        width: 0 !important;
+        overflow: hidden;
+    }
+}

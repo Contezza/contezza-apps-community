@@ -7,7 +7,6 @@
     "targets": {
         "build": {
             "executor": "@angular-devkit/build-angular:ng-packagr",
-            "outputs": ["dist/@contezza/dynamic-forms"],
             "options": {
                 "tsConfig": "tsconfig.build.json",
                 "project": "libs/dynamic-forms/ng-package.json"

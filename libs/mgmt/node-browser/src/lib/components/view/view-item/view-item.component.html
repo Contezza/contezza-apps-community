@@ -11,17 +11,17 @@
                     <ng-container *ngFor="let dataset of _item.keyValueDataset | keyvalue">
                         <span [class]="'text-content-section-' + _item.type + '-item'">
                             <span [class]="'text-content-section-' + _item.type + '-item-key'">{{ dataset.key | translate }}:</span>
-                            <span [class]="'text-content-section-' + _item.type + '-item-value'">{{ data | columnProperty: dataset.value }}</span>
+                            <span [class]="'text-content-section-' + _item.type + '-item-value'">{{ data | columnProperty : dataset.value }}</span>
                         </span>
                     </ng-container>
                 </ng-container>
 
                 <ng-container *ngSwitchCase="'chipsArray'">
-                    <mat-chip-list>
+                    <mat-chip-grid>
                         <ng-container *ngFor="let arrayItem of data[_item.key]">
-                            <mat-chip>{{ _item.displayKey ? (arrayItem | columnProperty: _item.displayKey) : arrayItem }}</mat-chip>
+                            <mat-chip-row>{{ _item.displayKey ? (arrayItem | columnProperty : _item.displayKey) : arrayItem }}</mat-chip-row>
                         </ng-container>
-                    </mat-chip-list>
+                    </mat-chip-grid>
                 </ng-container>
 
                 <ng-container *ngSwitchCase="'table'">
@@ -32,7 +32,7 @@
                         <span [class]="'text-content-section-' + _item.type + '-item'">
                             <span [class]="'text-content-section-' + _item.type + '-item-key'">{{ dataset.key | translate }}:</span>
                             <span [class]="'text-content-section-' + _item.type + '-item-value'" style="margin-bottom: 10px">{{
-                                data[_item.key] | columnProperty: dataset.value
+                                data[_item.key] | columnProperty : dataset.value
                             }}</span>
                         </span>
                     </ng-container>

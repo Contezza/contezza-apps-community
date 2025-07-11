@@ -7,7 +7,6 @@
     "targets": {
         "build": {
             "executor": "@angular-devkit/build-angular:ng-packagr",
-            "outputs": ["dist/@contezza/people-group-picker"],
             "options": {
                 "tsConfig": "tsconfig.build.json",
                 "project": "libs/people-group-picker/ng-package.json"

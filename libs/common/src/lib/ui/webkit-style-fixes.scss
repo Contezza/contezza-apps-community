@@ -1,0 +1,28 @@
+@mixin webkit-style-fixes() {
+    // Mixin to apply custom scrollbar styling for WebKit-based browsers
+    // This includes Chrome, Safari, Edge (Chromium), and Opera.
+    // Note: Firefox uses different properties (scrollbar-width and scrollbar-color)
+
+    // Main scrollbar container (vertical and horizontal)
+    ::-webkit-scrollbar {
+        width: 8px; // Width of vertical scrollbar
+        height: 8px; // Height of horizontal scrollbar
+    }
+
+    // Scrollbar thumb (the draggable element)
+    ::-webkit-scrollbar-thumb {
+        height: 50px; // Minimum height of the thumb (mostly relevant for vertical scrolling)
+        background-color: var(--theme-text-disabled-color); // Color from theme variable
+        border-radius: 3px; // Rounded corners for a modern look
+    }
+
+    // Scrollbar track (area where the thumb slides)
+    ::-webkit-scrollbar-track {
+        background-color: var(--theme-text-color); // Base track color using a theme variable
+    }
+
+    // Scrollbar track piece (visible area of the track not covered by the thumb)
+    ::-webkit-scrollbar-track-piece {
+        background-color: var(--theme-background-color); // Background behind the track, often used for contrast
+    }
+}

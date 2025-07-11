@@ -1,0 +1,352 @@
+@mixin alfresco-style-fixes() {
+    // fixes before update aca 6 adf 7
+
+    // fix sidenav not filling the full height
+    .adf-sidenav-layout {
+        adf-layout-container {
+            & > mat-sidenav-container > mat-sidenav > div > div {
+                height: 100%;
+            }
+        }
+    }
+
+    // resize header in aca-page-layout
+    .aca-page-layout .aca-content-header {
+        display: flex;
+        align-items: center;
+        flex: 0 0 0;
+        border-bottom: 1px solid var(--theme-border-color, rgba(0, 0, 0, 0.07));
+        padding: 0;
+        background: none;
+
+        & > .aca-page-layout-header {
+            padding: 0 24px;
+            min-height: 48px;
+            background: var(--theme-background-color);
+
+            .adf-breadcrumb-item {
+                font-size: 14px;
+                font-weight: 400;
+                color: var(--theme-text-bold-color);
+            }
+        }
+    }
+
+    // overwrite hardcoded snackbar colours
+    .adf-error-snackbar {
+        .mdc-snackbar__surface {
+            background-color: var(--theme-warn-color);
+            color: var(--theme-warn-color-default-contrast);
+            .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) {
+                color: var(--adf-snackbar-error-action-color);
+            }
+        }
+    }
+    .adf-warning-snackbar {
+        .mdc-snackbar__surface {
+            background-color: var(--theme-accent-color);
+            color: var(--theme-accent-color-default-contrast);
+        }
+    }
+    .adf-info-snackbar {
+        .mdc-snackbar__surface {
+            background-color: var(--theme-primary-color);
+            color: var(--theme-primary-color-default-contrast);
+        }
+    }
+
+    // fix toolbar-action colour
+    .aca-toolbar-action,
+    .app-toolbar-button {
+        color: var(--theme-text-color);
+
+        &:hover {
+            color: var(--theme-primary-color);
+        }
+    }
+
+    // remove scaling based on vh in viewer, to allow viewer to be used within other components (secure-share)
+    .adf-viewer-render {
+        height: 100%;
+        display: flex;
+    }
+
+    // without this custom viewers are not sized correctly (e.g. email viewer cannot scroll, does not fill the page width)
+    .adf-viewer-render-content-container {
+        height: 100%;
+
+        adf-preview-extension {
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    // swap buttons in confirm dialog
+    .adf-confirm-dialog {
+        #adf-confirm-all {
+            order: 3;
+        }
+        #adf-confirm-accept {
+            order: 2;
+        }
+
+        #adf-confirm-cancel {
+            order: 1;
+        }
+    }
+
+    // fixes after update aca 6 adf 7
+
+    // fix base color of navbar items
+    adf-layout-container .adf-layout-container-sidenav {
+        color: var(--theme-text-color);
+    }
+
+    // restore
+    .adf-fill-remaining-space {
+        flex: 1 1 auto;
+    }
+
+    // restore
+    .adf-icon {
+        display: inline-flex;
+    }
+
+    // fix sidebar style
+    .aca-page-layout .aca-sidebar {
+        overflow-y: auto;
+        margin-bottom: 0;
+    }
+
+    .aca-page-layout .aca-content-header {
+        // revert height: 64px;
+        & > .aca-page-layout-header {
+            .aca-page-title {
+                font-size: 14px !important;
+            }
+            .adf-toolbar .adf-toolbar-container.adf-toolbar-container-row {
+                height: 48px;
+            }
+        }
+    }
+
+    .aca-context-menu .mat-mdc-menu-content .mat-mdc-menu-item .mat-mdc-menu-item-text,
+    .mat-mdc-menu-content .app-toolbar-menu-item .mat-mdc-menu-item .mat-mdc-menu-item-text {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        overflow: hidden;
+        span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
+    // checkbox colour is hardcoded in aca
+    .mat-mdc-checkbox {
+        .mdc-checkbox {
+            &:has(.mdc-checkbox__native-control:enabled:is(:checked, :indeterminate, [data-indeterminate='true'])) {
+                .mdc-checkbox__native-control:enabled ~ .mdc-checkbox__background:is(div) {
+                    border-color: var(--mdc-checkbox-selected-icon-color);
+                    background-color: var(--mdc-checkbox-selected-icon-color);
+                }
+            }
+        }
+    }
+
+    // overwrite ng style and aca hardcoded colours for mat-slide-toggle
+    // this was already present before adf 7 aca 6, but completely rewritten with the upgrade
+    mat-slide-toggle.mat-mdc-slide-toggle.mat-mdc-slide-toggle.mat-mdc-slide-toggle.mat-mdc-slide-toggle.mat-mdc-slide-toggle.mat-mdc-slide-toggle {
+        // 3x selector to bump specificity
+        .mdc-form-field {
+            .mdc-switch {
+                .mdc-switch__track {
+                    border-radius: 8px;
+                    height: 14px;
+                    &:after {
+                        background-color: var(--mdc-switch-selected-track-color);
+                    }
+                }
+                .mdc-switch__handle-track {
+                    top: -10px;
+                    .mdc-switch__handle {
+                        width: 20px;
+                        height: 20px;
+                        transform: unset;
+                        background-color: transparent;
+                        .mdc-switch__ripple {
+                            display: initial;
+                        }
+                        .mdc-switch__shadow {
+                            background-color: transparent;
+                        }
+                    }
+                }
+                // fix handle color when checked and disabled
+                &.mdc-switch--checked:disabled {
+                    .mdc-switch__handle-track {
+                        .mdc-switch__handle {
+                            &:before {
+                                opacity: var(--mdc-switch-disabled-handle-opacity);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &.mat-primary {
+            //&.mat-primary.mat-mdc-slide-toggle-checked {
+            --mdc-switch-selected-track-color: var(--theme-primary-lighter-color);
+            .mdc-form-field {
+                .mdc-switch.mdc-switch--checked {
+                    --mdc-switch-handle-surface-color: var(--theme-primary-color);
+                    --mdc-switch-selected-hover-handle-color: var(--theme-primary-color);
+                    --mdc-switch-selected-focus-handle-color: var(--theme-primary-color);
+                    --mdc-switch-unselected-focus-handle-color: var(--theme-primary-color);
+                    --mdc-switch-disabled-selected-handle-color: var(--theme-primary-color);
+                }
+            }
+        }
+    }
+
+    // overwrite aca hardcoded colour for active tab label in info-drawer
+    .adf-info-drawer-layout .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label.mdc-tab__text-label {
+        color: var(--mat-tab-header-active-label-text-color);
+    }
+
+    // overwrite aca 'height:auto'
+    .mat-mdc-chip.mdc-evolution-chip.mat-mdc-standard-chip.mat-mdc-standard-chip {
+        height: var(--mdc-chip-container-height);
+    }
+
+    // fix for adf class without correct css
+    .adf-full-width {
+        width: 100%;
+    }
+
+    // overwrite aca hardcoded colours in document lists
+    .adf-datatable-list {
+        .adf-datatable-row.adf-datatable-row:is(adf-datatable-row) {
+            // overwrite aca hardcoded background colour for selected table rows
+            &.adf-is-selected,
+            &.adf-is-selected:hover {
+                background-color: var(--adf-theme-background-selected-button-color);
+            }
+            // overwrite aca hardcoded border colour for focussed table rows
+            &:focus {
+                outline: 1px solid var(--theme-accent-color-a200);
+            }
+            // overwrite aca hardcoded border colour for focussed table cells
+            .adf-cell-value:focus {
+                outline: 1px solid var(--theme-accent-color-a200);
+            }
+            // overwrite aca hardcoded border colour for focussed table headers
+            .adf-datatable-cell-header:focus {
+                outline: 1px solid var(--theme-accent-color-a200);
+            }
+            // overwrite aca hardcoded hover colour for name column components
+            .adf-datatable-link:hover {
+                color: unset;
+            }
+        }
+    }
+
+    // revert width: 36px;
+    .mdc-dialog .mat-mdc-slide-toggle .mdc-form-field {
+        width: unset;
+    }
+
+    // fix for adf datatable flex (permissions tab in viewer)
+    .adf-datatable-permission.adf-datatable .adf-authorityId-column {
+        flex: 35%;
+    }
+
+    // add padding bottom to edit properties in viewer
+    .adf-property-list .adf-property-label {
+        padding: 3px 0 6px;
+    }
+
+    // hide back arrow in default profile page because it always redirects to personal-files
+    app-view-profile .app-profile-title > .app-profile-icon {
+        display: none;
+    }
+    // get rid of scrollbar in permissions dialog
+    adf-add-permission-panel {
+        .mat-mdc-form-field .mat-mdc-form-field-infix {
+            margin-bottom: -20px !important;
+        }
+        .adf-permission-start-message,
+        .adf-permission-result-list {
+            height: calc(100% - 70px);
+        }
+    }
+
+    // replace aca blue with primary
+    * {
+        --theme-blue-button-color: var(--theme-primary-color);
+    }
+
+    // dark-theme fixes
+    &.contezza-theme-dark {
+        .aca-custom-name-column .aca-name-column-container .aca-locked-by {
+            color: var(--theme-text-color);
+        }
+
+        .adf-viewer {
+            .adf-viewer-toolbar .mat-toolbar {
+                .adf-viewer__display-name {
+                    color: var(--theme-text-color);
+                }
+                .mat-mdc-icon-button {
+                    color: var(--theme-text-color);
+                }
+            }
+            .adf-toolbar .mat-toolbar {
+                background-color: var(--mat-toolbar-container-background-color) !important;
+                color: var(--theme-text-color) !important;
+
+                .adf-pdf-viewer__toolbar-page-selector > input {
+                    background-color: inherit;
+                }
+
+                .mat-mdc-icon-button {
+                    color: var(--theme-text-color);
+                }
+            }
+        }
+
+        .mdc-list-item__primary-text {
+            color: var(--mat-option-label-text-color);
+        }
+        .mat-calendar .mat-calendar-header button,
+        .mat-calendar .mat-calendar-content .mat-calendar-table-header th {
+            color: var(--theme-text-color) !important;
+        }
+        .adf-datatable-list {
+            background: var(--theme-dialog-background-color) !important;
+            .adf-datatable-cell-header,
+            .adf-datatable-cell-value,
+            .adf-cell-value,
+            .mat-icon {
+                color: var(--theme-text-color) !important;
+            }
+        }
+
+        .adf-info-drawer-tabs div[role='tab'].adf-info-drawer-tab {
+            background-color: inherit !important;
+        }
+        .adf-info-drawer-layout-header-title > div,
+        .adf-edit-icon-buttons,
+        .adf-property-value,
+        .adf-property-read-only,
+        .adf-metadata-action-buttons-clear,
+        .adf-property-value-editable,
+        .adf-property-readonly-value,
+        .adf-property-value-editable.adf-property-value-editable .mat-mdc-select .mat-mdc-select-value {
+            color: var(--theme-text-color) !important;
+        }
+        .adf-property-list .adf-property-label {
+            color: var(--theme-foreground-text-color) !important;
+        }
+    }
+}

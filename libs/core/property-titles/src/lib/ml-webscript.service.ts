@@ -25,7 +25,7 @@ export class MlWebscriptService extends WebscriptService {
                 httpMethod.toUpperCase(),
                 {},
                 undefined,
-                { 'Accept-Language': this._language },
+                { 'Accept-Language': this._language || navigator.language },
                 {},
                 body,
                 ['application/json'],

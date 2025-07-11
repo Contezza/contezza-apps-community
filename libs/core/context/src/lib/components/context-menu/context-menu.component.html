@@ -1,18 +1,18 @@
 <ng-container *ngIf="actions?.length">
     <button #trigger="matMenuTrigger" class="contezza-context-menu-trigger" [matMenuTriggerFor]="menu"></button>
-    <mat-menu #menu="matMenu" [hasBackdrop]="settings.hasBackdrop" backdropClass="contezza-context-menu-backdrop" (closed)="onClosed()">
+    <mat-menu #menu="matMenu" class="contezza-context-menu-panel" [hasBackdrop]="settings.hasBackdrop" backdropClass="contezza-context-menu-backdrop" (closed)="onClosed()">
         <ng-container *ngFor="let action of actions">
             <ng-container [ngSwitch]="action.type">
                 <ng-container *ngSwitchCase="'custom'">
-                    <adf-dynamic-component contezza-detect-changes [id]="action.component" [data]="action.data"></adf-dynamic-component>
+                    <adf-dynamic-component contezza-detect-changes [id]="action.component" [data]="action.data" />
                 </ng-container>
                 <ng-container *ngSwitchCase="'separator'">
-                    <mat-divider></mat-divider>
+                    <mat-divider />
                 </ng-container>
                 <ng-container *ngSwitchCase="'menu'">
                     <div>
-                        <button [id]="action.id" mat-menu-item tabindex="0" [disabled]="action.disabled" [matMenuTriggerFor]="childMenu">
-                            <mat-icon [contezzaIcon]="action.icon"></mat-icon>
+                        <button [id]="action.id" mat-menu-item class="contezza-context-menu-item" tabindex="0" [disabled]="action.disabled" [matMenuTriggerFor]="childMenu">
+                            <mat-icon [contezzaIcon]="action.icon" />
                             <span data-automation-id="menu-item-title">{{ action.title | translate }}</span>
                         </button>
                         <mat-menu #childMenu="matMenu">
@@ -21,12 +21,13 @@
                                     [id]="subchild.id"
                                     role="menuitem"
                                     mat-menu-item
+                                    class="contezza-context-menu-item"
                                     tabindex="0"
                                     [disabled]="subchild.disabled"
                                     [attr.title]="(subchild.disabled ? subchild['description-disabled'] : subchild.description || subchild.title) | translate"
                                     (click)="runAction(subchild)"
                                 >
-                                    <mat-icon [contezzaIcon]="subchild.icon"></mat-icon>
+                                    <mat-icon [contezzaIcon]="subchild.icon" />
                                     <span data-automation-id="menu-item-title">{{ subchild.title | translate }}</span>
                                 </button>
                             </ng-container>
@@ -38,12 +39,13 @@
                         [id]="action.id"
                         role="menuitem"
                         mat-menu-item
+                        class="contezza-context-menu-item"
                         tabindex="0"
                         [disabled]="action.disabled"
                         [attr.title]="(action.disabled ? action['description-disabled'] : action.description || action.title) | translate"
                         (click)="runAction(action)"
                     >
-                        <mat-icon [contezzaIcon]="action.icon"></mat-icon>
+                        <mat-icon [contezzaIcon]="action.icon" />
                         <span data-automation-id="menu-item-title">{{ action.title | translate }}</span>
                     </button>
                 </ng-container>

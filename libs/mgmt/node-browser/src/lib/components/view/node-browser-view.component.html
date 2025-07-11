@@ -4,11 +4,11 @@
     </aca-page-layout-header>
 
     <aca-page-layout-content>
-        <div class="main-content">
+        <div class="aca-main-content">
             <ng-container *contezzaLet="loading$ | async as loading">
                 <ng-container *contezzaLet="data$ | async as data">
                     <div *ngIf="loading" class="node-browser-loading">
-                        <mat-spinner></mat-spinner>
+                        <mat-spinner />
                     </div>
 
                     <div class="node-browser-view" *ngIf="!loading">
@@ -37,7 +37,7 @@
                                                 "
                                                 (click)="togglePanels(!expanded)"
                                             >
-                                                <adf-icon [value]="expanded ? 'svg:arrow-collapse' : 'svg:arrow-expand'"></adf-icon>
+                                                <adf-icon [value]="expanded ? 'svg:arrow-collapse' : 'svg:arrow-expand'" />
                                             </button>
                                         </ng-container>
                                     </div>
@@ -46,7 +46,7 @@
                         </mat-card>
                         <mat-accordion class="node-browser-view-accordion" multi="true">
                             <ng-container *ngFor="let item of viewItems; trackBy: trackById">
-                                <node-browser-view-item [item]="item" [data]="data"></node-browser-view-item>
+                                <node-browser-view-item [item]="item" [data]="data" />
                             </ng-container>
                         </mat-accordion>
                     </div>

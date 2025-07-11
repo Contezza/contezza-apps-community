@@ -1,6 +1,6 @@
 <div class="scripts-list">
     <div class="scripts-list-sidenav">
-        <contezza-search-form [debounceTime]="100" (searchValue)="searchValueChange($event)" (clearSearch)="searchValueChange('')"> </contezza-search-form>
+        <contezza-search-form [debounceTime]="100" (searchValue)="searchValueChange($event)" (clearSearch)="searchValueChange('')" />
 
         <div class="scripts-list-sidenav-section">
             <ng-container *contezzaLet="selectedScript$ | async as selected">
@@ -28,11 +28,11 @@
                             <mat-menu #menu="matMenu" [overlapTrigger]="false">
                                 <ng-template matMenuContent let-selectedScript="selectedScript">
                                     <button mat-menu-item class="action-button" (click)="duplicateScript(selectedScript, scripts)">
-                                        <adf-icon value="content_copy"></adf-icon>
+                                        <adf-icon value="content_copy" />
                                         <span class="action-button__label">{{ 'CONTEZZA.JS_CONSOLE.SCRIPTS.ACTIONS.DUPLICATE' | translate }}</span>
                                     </button>
                                     <button mat-menu-item class="action-button" (click)="deleteScript(selectedScript)">
-                                        <adf-icon value="delete"></adf-icon>
+                                        <adf-icon value="delete" />
                                         <span class="action-button__label">{{ 'CONTEZZA.JS_CONSOLE.SCRIPTS.ACTIONS.REMOVE' | translate }}</span>
                                     </button>
                                 </ng-template>

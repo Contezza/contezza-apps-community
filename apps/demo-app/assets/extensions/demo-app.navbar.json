@@ -1,0 +1,63 @@
+{
+    "$id": "demo-app.navbar",
+    "$version": "@@project.version@@",
+    "$name": "Demo App Navbar",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "navbar": [
+            {
+                "id": "demo-app.navbar.dynamic-forms",
+                "items": [
+                    {
+                        "id": "demo-app.navbar-item.dynamic-forms",
+                        "icon": "star",
+                        "title": "Dynamic Forms",
+                        "route": "dynamic-forms"
+                    }
+                ]
+            },
+            {
+                "id": "demo-app.navbar.search-table-pages",
+                "items": [
+                    {
+                        "id": "demo-app.navbar-item.search-table-page",
+                        "icon": "search",
+                        "title": "Search",
+                        "route": "search/favorites"
+                    }
+                ]
+            },
+            {
+                "id": "demo-app.navbar.mgmt-console",
+                "items": [
+                    {
+                        "id": "demo-app.navbar-items.mgmt-console",
+                        "order": 1000,
+                        "icon": "settings",
+                        "title": "APP.CONSOLE.TITLE",
+                        "description": "APP.CONSOLE.DESCRIPTION",
+                        "children": [
+                            {
+                                "id": "demo-app.navbar-item.js-console",
+                                "order": 100,
+                                "icon": "svg:console",
+                                "title": "CONTEZZA.JS_CONSOLE.NAVBAR.TITLE",
+                                "description": "CONTEZZA.JS_CONSOLE.NAVBAR.DESCRIPTION",
+                                "route": "javascript-console"
+                            },
+                            {
+                                "id": "demo-app.navbar-item.node-browser",
+                                "order": 200,
+                                "icon": "svg:travel_explore",
+                                "title": "APP.NODE_BROWSER.NAVBAR.TITLE",
+                                "description": "APP.NODE_BROWSER.NAVBAR.DESCRIPTION",
+                                "route": "node-browser"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

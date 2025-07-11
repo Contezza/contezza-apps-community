@@ -1,0 +1,56 @@
+@mixin ng-style-fixes() {
+    // fixes after update ng 17
+
+    // fix icon size in buttons, specifically in navbar
+    .mat-mdc-button > .mat-icon {
+        font-size: 1.125rem;
+        height: 1.125rem;
+        width: 1.125rem;
+    }
+
+    // restore style in dialogs
+    .mat-mdc-dialog-surface {
+        padding-bottom: 24px !important;
+
+        // adjust space above title
+        .mat-mdc-dialog-title.mdc-dialog__title::before {
+            display: none;
+        }
+        // adjust content margin
+        .mat-mdc-dialog-content {
+            padding: 0 24px !important;
+            margin: 0 -24px !important;
+        }
+        // adjust space below actions
+        .mat-mdc-dialog-actions {
+            background-color: inherit;
+            padding: 8px 0;
+            display: flex;
+            flex-wrap: wrap;
+            min-height: 52px;
+            align-items: center;
+            box-sizing: content-box;
+            margin-bottom: -24px;
+        }
+    }
+
+    // restore style for .mat-option-text
+    .mat-mdc-option > .mdc-list-item__primary-text {
+        display: inline-block;
+        flex-grow: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    // https://github.com/angular/components/issues/26352
+    mat-form-field.mat-mdc-form-field.mat-form-field-appearance-outline {
+        padding-top: 6px;
+    }
+
+    // overwrite default max-width: calc(100% - 60px);
+    // without this form fields in small-resized column header do not show the label
+    .mat-mdc-form-field-type-mat-select.mat-form-field-appearance-outline .mdc-notched-outline__notch {
+        max-width: calc(100% - 30px);
+    }
+}

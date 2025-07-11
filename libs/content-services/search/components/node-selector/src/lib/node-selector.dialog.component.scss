@@ -9,14 +9,14 @@
     }
 
     &-actions {
-        flex-wrap: nowrap;
+        flex-wrap: nowrap !important;
         &-selection {
             min-width: 0;
             ::ng-deep {
-                .mat-chip-list-wrapper {
+                .mdc-evolution-chip-set__chips {
                     flex-wrap: nowrap;
                     overflow: auto;
-                    .mat-chip.mat-standard-chip {
+                    .mat-mdc-chip.mat-mdc-standard-chip {
                         flex-shrink: 0;
                     }
                 }

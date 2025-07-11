@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector, runInInjectionContext } from '@angular/core';
 
 import { filter, map, Observable, take } from 'rxjs';
 
@@ -15,13 +15,12 @@ export class UploadService {
     private _uploadWithoutDialog?: AdfUploadService;
     private get uploadWithoutDialog(): AdfUploadService {
         if (!this._uploadWithoutDialog) {
-            const untypedUpload: any = this.upload;
-            this._uploadWithoutDialog = new AdfUploadService(untypedUpload.apiService, untypedUpload.appConfigService, untypedUpload.discoveryApiService);
+            this._uploadWithoutDialog = runInInjectionContext(this.injector, () => new AdfUploadService());
         }
         return this._uploadWithoutDialog;
     }
 
-    constructor(private readonly upload: AdfUploadService) {}
+    constructor(private readonly injector: Injector, private readonly upload: AdfUploadService) {}
 
     uploadFiles(files: FileModel[], options?: { showInUploadDialog?: boolean }): Observable<Node[]> {
         const showInUploadDialog = options?.showInUploadDialog ?? true;

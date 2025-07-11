@@ -6,7 +6,7 @@ import { Group } from '@alfresco/js-api';
 export class DisplayNamePipe implements PipeTransform {
     transform(model: Group | Pick<User, 'displayName' | 'firstName' | 'lastName'>): string {
         if (model) {
-            const displayName = 'id' in model ? model.displayName : `${model.firstName || ''} ${model.lastName || ''}`;
+            const displayName = !('firstName' in model || 'lastName' in model) ? model.displayName : `${model.firstName || ''} ${model.lastName || ''}`;
             return displayName.trim();
         }
         return '';

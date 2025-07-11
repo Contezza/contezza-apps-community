@@ -1,45 +1,58 @@
 {
+    "$schema": "../../../node_modules/@alfresco/adf-core/app.config.schema.json",
+
     "ecmHost": "{protocol}//{hostname}{:port}",
     "aosHost": "{protocol}//{hostname}{:port}/alfresco/aos",
     "baseShareUrl": "{protocol}//{hostname}{:port}/#/preview/s",
+    "identityHost": "{protocol}//{hostname}{:port}/auth/realms/alfresco",
     "providers": "ECM",
-    "authType": "BASIC",
-    "loginRoute": "login",
+    "authType": "OAUTH",
     "plugins": {
-        "aosPlugin": false,
+        "aosPlugin": true,
         "contentService": true,
-        "folderRules": true
+        "folderRules": true,
+        "categoriesEnabled": false
     },
     "oauth2": {
-        "host": "http://localhost:4200/auth/realms/alfresco",
-        "clientId": "alfresco",
+        "host": "https://docs.contezza.nl/auth/realms/alfresco",
+        "clientId": "alfresco-client",
         "scope": "openid",
         "secret": "",
         "implicitFlow": true,
         "silentLogin": true,
-        "publicUrls": ["**/preview/s/*", "**/settings", "**/blank"],
+        "publicUrls": ["**/preview/s/*", "**/settings", "**/blank", "**/secure/**"],
         "redirectSilentIframeUri": "{protocol}//{hostname}{:port}/assets/silent-refresh.html",
         "redirectUri": "/",
         "redirectUriLogout": "/logout"
     },
     "locale": "nl",
     "application": {
-        "storagePrefix": "aca_prod",
         "name": "Demo App",
         "version": "@@project.version@@",
-        "logo": "assets/demo-app/images/alfresco-logo-flower.svg",
-        "headerImagePath": "assets/images/mastHead-bg-shapesPattern.svg",
+        "logo": "assets/demo-app/images/contezza_logo.png",
         "copyright": "APP.COPYRIGHT"
     },
+    "contezza": {
+        "storagePrefix": "aca_prod",
+        "login": {
+            "successRoute": "",
+            "logoImageUrl": "./assets/demo-app/images/contezza_logo.png"
+        },
+        "msteams": {
+            "appId": "0f131700-a51f-44d5-86cd-20cad3d365af",
+            "scopes": ["channel.readbasic.all", "channelmessage.send", "chatmessage.send", "chat.create", "chat.readbasic", "people.read", "team.readbasic.all", "user.read"],
+            "teamsAppId": "aff51261-06b3-425c-a243-1970d95de3dd"
+        }
+    },
+    "alfresco-deployed-apps": [],
+    "alfrescoRepositoryName": "",
     "viewer.maxRetries": 1,
     "sharedLinkDateTimePickerType": "date",
-    "headerColor": "#ffffff",
-    "headerTextColor": "#000000",
     "customCssPath": "",
     "webFontPath": "",
     "pagination": {
         "size": 25,
-        "supportedPageSizes": [25, 50, 100]
+        "supportedPageSizes": [5, 10, 25, 50, 100]
     },
     "files": {
         "excluded": [".DS_Store", "desktop.ini", "Thumbs.db", ".git"],
@@ -50,7 +63,8 @@
     "dateValues": {
         "defaultDateFormat": "mediumDate",
         "defaultDateTimeFormat": "MMM d, y, h:mm",
-        "defaultLocale": "en"
+        "defaultLocale": "nl",
+        "fullDateFormat": "LL"
     },
     "adf-version-manager": {
         "allowComments": true,
@@ -58,77 +72,16 @@
     },
     "sideNav": {
         "preserveState": true,
-        "expandedSidenav": true
+        "expandedSidenav": false
     },
     "languages": [
-        {
-            "key": "de",
-            "label": "Deutsch"
-        },
         {
             "key": "en",
             "label": "English"
         },
         {
-            "key": "es",
-            "label": "Español"
-        },
-        {
-            "key": "fr",
-            "label": "Français"
-        },
-        {
-            "key": "it",
-            "label": "Italiano"
-        },
-        {
-            "key": "ja",
-            "label": "日本語"
-        },
-        {
-            "key": "nb",
-            "label": "Bokmål"
-        },
-        {
             "key": "nl",
             "label": "Nederlands"
-        },
-        {
-            "key": "pt-BR",
-            "label": "Português (Brasil)"
-        },
-        {
-            "key": "ru",
-            "label": "Русский"
-        },
-        {
-            "key": "zh-CN",
-            "label": "中文简体"
-        },
-        {
-            "key": "cs",
-            "label": "Čeština"
-        },
-        {
-            "key": "da",
-            "label": "Dansk"
-        },
-        {
-            "key": "fi",
-            "label": "Suomi"
-        },
-        {
-            "key": "pl",
-            "label": "Polski"
-        },
-        {
-            "key": "sv",
-            "label": "Svenska"
-        },
-        {
-            "key": "ar",
-            "label": "العربية",
-            "direction": "rtl"
         }
     ],
     "content-metadata": {
@@ -153,6 +106,7 @@
                         "exif:exif",
                         "cm:effectivity",
 
+                        "cm:emailed",
                         "cm:likesRatingSchemeRollups",
                         "cm:lockable",
                         "cm:ownable"
@@ -190,9 +144,7 @@
                     ]
                 }
             ]
-        },
-        "multi-value-pipe-separator": ", ",
-        "multi-value-chips": true
+        }
     },
     "search-headers": {
         "filterWithContains": true,

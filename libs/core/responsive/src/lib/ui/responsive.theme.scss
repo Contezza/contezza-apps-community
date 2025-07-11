@@ -11,10 +11,6 @@
         display: none;
     }
 
-    contezza-floating-button {
-        bottom: 20px;
-    }
-
     .cdk-overlay-connected-position-bounding-box:first-child {
         top: unset !important;
         right: unset !important;
@@ -43,8 +39,8 @@
                 left: 0 !important;
                 width: 100vw !important;
                 transform: unset !important;
-                .mat-menu-panel,
-                .mat-select-panel {
+                .mat-mdc-menu-panel,
+                .mat-mdc-select-panel {
                     max-width: unset !important;
                     min-width: unset !important;
                     width: 100vw !important;
@@ -132,12 +128,26 @@
         .mat-toolbar-single-row {
             flex-wrap: wrap;
             height: fit-content !important;
+            padding: 0 10px;
+            .mat-toolbar-single-row {
+                padding: 0;
+                column-gap: 6px;
+            }
         }
 
+        .adf-viewer__file-title {
+            align-self: end;
+            justify-self: anchor-center;
+            padding: 10px 0;
+        }
         &-actions {
             width: 100%;
             justify-content: center;
         }
+    }
+    .adf-pdf-viewer__toolbar .adf-toolbar .mat-toolbar .mat-mdc-button-base {
+        width: fit-content;
+        padding: 12px 8px;
     }
 
     article .app-info-main-content-header {

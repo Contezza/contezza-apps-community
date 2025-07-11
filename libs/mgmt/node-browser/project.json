@@ -7,7 +7,6 @@
     "targets": {
         "build": {
             "executor": "@angular-devkit/build-angular:ng-packagr",
-            "outputs": ["dist/@contezza/node-browser"],
             "options": {
                 "tsConfig": "tsconfig.build.json",
                 "project": "libs/mgmt/node-browser/ng-package.json"

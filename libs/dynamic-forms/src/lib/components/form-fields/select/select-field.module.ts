@@ -10,9 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import { IconModule } from '@alfresco/adf-core';
-
-import { ContezzaLetModule } from '@contezza/core/directives';
+import { ContezzaLetModule, IconDirective } from '@contezza/core/directives';
 import { ContezzaDynamicFormExtensionService } from '@contezza/dynamic-forms/shared';
 
 import { SelectFieldComponent } from './select-field.component';
@@ -23,7 +21,6 @@ import { ContezzaDynamicFormsCommonModule } from '../../../dynamic-forms.common.
         CommonModule,
         ContezzaDynamicFormsCommonModule,
         ContezzaLetModule,
-        IconModule,
         MatButtonModule,
         MatCheckboxModule,
         MatDividerModule,
@@ -31,6 +28,7 @@ import { ContezzaDynamicFormsCommonModule } from '../../../dynamic-forms.common.
         MatSelectModule,
         ReactiveFormsModule,
         TranslateModule,
+        IconDirective,
     ],
     declarations: [SelectFieldComponent],
     exports: [SelectFieldComponent],

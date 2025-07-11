@@ -14,8 +14,7 @@ import { combineLatest, Observable, Subject } from 'rxjs';
 import { map, startWith, take, takeUntil } from 'rxjs/operators';
 
 import { IconModule } from '@alfresco/adf-core';
-import { NodesApiService } from '@alfresco/adf-content-services';
-import { AppHookService } from '@alfresco/aca-shared';
+import { DocumentListService, NodesApiService } from '@alfresco/adf-content-services';
 
 import { ContezzaLetDirective } from '@contezza/core/directives';
 import { DestroyService } from '@contezza/core/services';
@@ -67,12 +66,12 @@ export class JsConsoleScriptsListComponent implements OnInit {
     constructor(
         readonly store: Store<unknown>,
         private readonly nodesApiService: NodesApiService,
-        private readonly appHookService: AppHookService,
+        private readonly appHookService: DocumentListService,
         @Inject(DestroyService) readonly destroy$: DestroyService
     ) {}
 
     ngOnInit(): void {
-        this.appHookService.reload.pipe(takeUntil(this.destroy$)).subscribe(() => this.store.dispatch(loadScriptsList({ selectScript: undefined })));
+        this.appHookService.reload$.pipe(takeUntil(this.destroy$)).subscribe(() => this.store.dispatch(loadScriptsList({ selectScript: undefined })));
     }
 
     trackByScript(_, script: ConsoleScript) {

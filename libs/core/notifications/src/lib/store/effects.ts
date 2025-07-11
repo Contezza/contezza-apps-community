@@ -60,8 +60,7 @@ export class Effects {
                             switchMap(({ dismissedByAction }) =>
                                 dismissedByAction
                                     ? this.dialog.open(() => import('../components/error-details/error-details.dialog.component').then((m) => m.ErrorDetailsDialogComponent), {
-                                          minWidth: 100,
-                                          maxWidth: '80%',
+                                          width: '60vw',
                                           autoFocus: false,
                                           data: payload.details,
                                       })

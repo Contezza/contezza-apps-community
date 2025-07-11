@@ -111,7 +111,7 @@ export class PresetService {
     }
 
     private get storagePrefix(): string {
-        return this.appConfig.get('application.storagePrefix', '');
+        return this.appConfig.get('contezza.storagePrefix', '');
     }
 
     save(payload: SavePresetPayload): Observable<Node> {
@@ -135,7 +135,9 @@ export class PresetService {
                     },
                     buttons: { cancel: 'APP.BUTTONS.CANCEL', submit: 'APP.BUTTONS.OK' },
                 },
+                autoFocus: false,
                 width: '400px',
+                height: '250px',
             })
             .pipe(
                 filter((response) => !!response),

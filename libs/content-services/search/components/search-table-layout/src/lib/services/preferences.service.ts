@@ -43,7 +43,7 @@ export class PreferencesService {
     private _id: string;
     private preferences$;
 
-    private readonly storagePrefix: string = this.appConfig.get('application.storagePrefix');
+    private readonly storagePrefix: string = this.appConfig.get('contezza.storagePrefix');
     private get username(): string {
         return this.auth.getEcmUsername();
     }

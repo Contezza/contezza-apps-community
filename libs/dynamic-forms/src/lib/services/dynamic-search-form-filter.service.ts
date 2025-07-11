@@ -63,7 +63,7 @@ export class ContezzaDynamicFormFilterService extends ComponentStore<FilterState
         const preferencesPath = new ContezzaStringTemplate(ContezzaDynamicFormFilterService.PATH_PREFERENCES.join('.')).evaluate({
             formId,
             layoutId,
-            storagePrefix: this.appConfig.get('application.storagePrefix'),
+            storagePrefix: this.appConfig.get('contezza.storagePrefix'),
         });
 
         this.dynamicForm = this.dynamicFormService.get(formId, layoutId);

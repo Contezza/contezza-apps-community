@@ -12,7 +12,7 @@
         >
             <mat-select-trigger *ngIf="select.value?.contezzaDisplay">
                 <div title="{{ select.value?.contezzaDisplay.value.tooltip | translate }}">
-                    <adf-icon *ngIf="select.value?.contezzaDisplay.value.icon" [value]="select.value?.contezzaDisplay.value.icon"></adf-icon>
+                    <mat-icon *ngIf="select.value?.contezzaDisplay.value.icon" [contezzaIcon]="select.value?.contezzaDisplay.value.icon" />
                     {{ select.value?.contezzaDisplay.value.label || '' }}
                 </div>
             </mat-select-trigger>
@@ -20,7 +20,7 @@
                 <!--                <mat-option *ngIf="!field.disabledDefaultSelectOption && field.type === 'select'" [value]="'*'">{{ 'Alle' | translate }}</mat-option>-->
                 <mat-checkbox
                     *ngIf="field.type === 'multiselect'"
-                    class="checkbox mat-option"
+                    class="checkbox mat-mdc-option contezza-option"
                     color="primary"
                     [checked]="control?.value?.length === options?.length"
                     [indeterminate]="control?.value?.length > 0 && control?.value?.length < options?.length"
@@ -28,28 +28,27 @@
                 >
                     {{ 'APP.FORM_FIELDS.SELECT.SELECT_ALL' | translate }}
                 </mat-checkbox>
-                <mat-divider *ngIf="field.type === 'multiselect'"></mat-divider>
+                <mat-divider *ngIf="field.type === 'multiselect'" />
                 <mat-option *ngFor="let option of options" [value]="option" title="{{ option.contezzaDisplay.option.tooltip | translate }}">
-                    <adf-icon *ngIf="option.contezzaDisplay.option.icon" [value]="option.contezzaDisplay.option.icon"></adf-icon>
+                    <mat-icon *ngIf="option.contezzaDisplay.option.icon" [contezzaIcon]="option.contezzaDisplay.option.icon" />
                     {{ option.contezzaDisplay.option.label || '' }}
                 </mat-option>
             </ng-container>
         </mat-select>
         <button
-            type="button"
             mat-icon-button
             matSuffix
-            class="adf-property-clear-value"
+            class="contezza-form-field-clear"
             aria-label="Clear"
             (click)="clear($event)"
-            *ngIf="!required && !readonly && !control.disabled"
+            *ngIf="!required && !readonly && !control.disabled && control.value"
             tabindex="-1"
         >
             <mat-icon>cancel</mat-icon>
         </button>
-        <button type="button" matSuffix class="mat-button my-arrow-wrapper" style="padding: 0; min-width: 0" *ngIf="!readonly && !control.disabled" tabindex="-1">
-            <div class="my-arrow"></div>
+        <button mat-icon-button matSuffix *ngIf="!readonly && !control.disabled">
+            <mat-icon>arrow_drop_down</mat-icon>
         </button>
-        <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control"></mat-error>
+        <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control" />
     </mat-form-field>
 </ng-container>

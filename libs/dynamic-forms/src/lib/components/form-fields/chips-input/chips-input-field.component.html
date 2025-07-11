@@ -1,6 +1,7 @@
 <mat-form-field
     class="contezza-form-field contezza-chips-input-form-field adf-property-field adf-card-textitem-field"
     [class.mat-form-field-disabled]="readonly"
+    [class.contezza-form-field-disabled]="readonly"
     floatLabel="auto"
     [appearance]="field.settings?.appearance"
 >
@@ -12,29 +13,27 @@
             {{ field.label | translate }}
         </ng-template>
     </mat-label>
-    <mat-chip-list #chipList [formControl]="control" [required]="required">
-        <mat-chip *ngFor="let chip of control.value || []" [selectable]="selectable" [removable]="removable" (removed)="remove(chip)">
+    <mat-chip-grid #chipGrid [formControl]="control" [required]="required">
+        <mat-chip-row *ngFor="let chip of control.value || []" [removable]="removable" (removed)="remove(chip)">
             {{ chip }}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-        </mat-chip>
+        </mat-chip-row>
         <input
             spellcheck="false"
             [placeholder]="field.placeholder | translate"
             [readonly]="readonly"
             class="adf-property-value"
             data-lpignore="true"
-            [matChipInputFor]="chipList"
+            [matChipInputFor]="chipGrid"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
             [matChipInputAddOnBlur]="addOnBlur"
-            style="margin: 0"
             (matChipInputTokenEnd)="add($event)"
         />
-    </mat-chip-list>
+    </mat-chip-grid>
     <button
-        type="button"
         mat-icon-button
         matSuffix
-        class="adf-property-clear-value contezza-form-field-clear"
+        class="contezza-form-field-clear"
         aria-label="Clear"
         *ngIf="!readonly && !control.disabled && control.value"
         tabindex="-1"
@@ -42,5 +41,5 @@
     >
         <mat-icon>cancel</mat-icon>
     </button>
-    <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control"></mat-error>
+    <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control" />
 </mat-form-field>

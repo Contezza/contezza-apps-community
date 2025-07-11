@@ -7,6 +7,7 @@
 **/.tmp
 /data
 /out-tsc
+/.nx
 /nxcache
 /e2e-output
 /e2e-artefacts
@@ -70,3 +71,6 @@ target/
 ci.env
 
 .angular
+
+.nx/cache
+.nx/workspace-data
