@@ -41,7 +41,7 @@
             <mat-icon>cancel</mat-icon>
         </button>
 
-        <mat-datepicker-toggle class="contezza-date-form-field-datepicker-toggle" matSuffix [for]="picker" />
+        <mat-datepicker-toggle class="contezza-date-form-field-datepicker-toggle" matSuffix [for]="picker" tabindex="-1" />
         <mat-datepicker #picker [disabled]="readonly" />
         <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control" />
     </mat-form-field>
