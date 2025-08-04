@@ -1,0 +1,5 @@
+.contezza-dialog-form-field {
+    &:hover ::ng-deep .mat-mdc-form-field-icon-suffix {
+        min-width: 48px !important;
+    }
+}
