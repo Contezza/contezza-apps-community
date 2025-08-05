@@ -1,0 +1,270 @@
+@use '@angular/material' as mat;
+
+// ---------------------------
+// Mixins
+// ---------------------------
+
+//noinspection ALL
+@mixin theme-color-variables($theme) {
+    $app-typography: map-get($theme, typography);
+
+    // Get theme settngs
+    $theme-foreground: map-get($theme, foreground);
+    $theme-background: map-get($theme, background);
+    $theme-primary: map-get($theme, primary);
+    $theme-accent: map-get($theme, accent);
+    $theme-warn: map-get($theme, warn);
+
+    // Set colors
+    $_primary_color: mat.get-color-from-palette($theme-primary);
+    $_primary_contrast_color: mat.get-color-from-palette($theme-primary, default-contrast);
+    $_primary_lighter_color: mat.get-color-from-palette($theme-primary, lighter);
+    $_primary_darker_color: mat.get-color-from-palette($theme-primary, darker);
+
+    $_accent_color: mat.get-color-from-palette($theme-accent);
+    $_accent_contrast_color: mat.get-color-from-palette($theme-accent, default-contrast);
+    $_accent_lighter_color: mat.get-color-from-palette($theme-accent, lighter);
+    $_accent_darker_color: mat.get-color-from-palette($theme-accent, darker);
+
+    $_text_color: mat.get-color-from-palette($theme-foreground, text, 0.57);
+    $_text_fg_color: mat.get-color-from-palette($theme-foreground, text);
+    $_text_fg_shadow_color: mat.get-color-from-palette($theme-foreground, text, 0.27);
+    $_text_foreground_color: mat.get-color-from-palette($theme-foreground, text, 0.72);
+    $_text_bold_color: mat.get-color-from-palette($theme-foreground, text, 0.87);
+    $_text_light_color: mat.get-color-from-palette($theme-foreground, text, 0.4);
+    $_text_disabled_color: mat.get-color-from-palette($theme-foreground, text, 0.38);
+    $_text_secondary_color: mat.get-color-from-palette($theme-foreground, secondary-text);
+
+    $_hover_background_color: mat.get-color-from-palette($theme_background, hover);
+    $_background_color: mat.get-color-from-palette($theme-background, background);
+    $_selected_button_background_color: mat.get-color-from-palette($theme-background, selected-button);
+    $_unselected_chip_background: mat.get-color-from-palette($theme-background, unselected-chip);
+    $_status_bar_background: mat.get-color-from-palette($theme-background, status-bar);
+
+    $_foreground_icon_color: mat.get-color-from-palette($theme-foreground, icon);
+    $_foreground_base_color: mat.get-color-from-palette($theme-foreground, base);
+    $_foreground_divider_color: mat.get-color-from-palette($theme-foreground, divider);
+    $_border_color: mat.get-color-from-palette($theme-foreground, divider, 0.07);
+    $_upload_border_color: mat.get-color-from-palette($theme-foreground, divider, 0.14);
+    $_card_background_color: mat.get-color-from-palette($theme-background, card);
+    $_card_background_light_color: mat.get-color-from-palette($theme-foreground, divider, 0.04);
+    $_card_background_box_shadow_color: mat.get-color-from-palette($theme-foreground, divider, 0.2);
+    $_card_background_bold_color: mat.get-color-from-palette($theme-background, card, 0.87);
+    $_dialog_background_color: mat.get-color-from-palette($theme-background, dialog);
+    $_toolbar_color: mat.get-color-from-palette($theme-background, app-bar);
+    $_table_hover_color: mat.get-color-from-palette($theme-background, app-bar, 0.54);
+
+    $_warn_color: mat.get-color-from-palette($theme-warn);
+    $_warn_contrast_color: mat.get-color-from-palette($theme-warn, default-contrast);
+
+    // fonts
+    $_theme_font_family: mat.font-family($app-typography);
+    $_theme_body_1_font_size: mat.font-size($app-typography, body-2);
+    $_theme_body_2_font_size: mat.font-size($app-typography, subtitle-2);
+    $_theme_body_1_line_height: mat.line-height($app-typography, body-2);
+    $_theme_display_1_font_size: mat.font-size($app-typography, headline-4);
+    $_theme_display_3_font_size: mat.font-size($app-typography, headline-2);
+    $_theme_display_4_font_size: mat.font-size($app-typography, headline-1);
+    $_theme_caption_font_size: mat.font-size($app-typography, caption);
+    $_theme_title_font_size: mat.font-size($app-typography, headline-6);
+    $_theme_subheading_1_font_size: mat.font-size($app-typography, body-1);
+    $_theme_subheading_2_font_size: mat.font-size($app-typography, subtitle-1);
+    $_theme_button_font_size: mat.font-size($app-typography, button);
+    $_theme_headline_font_size: mat.font-size($app-typography, headline-5);
+    $_theme_headline_line_height: mat.line-height($app-typography, headline-5);
+
+    // Set variables
+    --theme-primary-color: #{$_primary_color};
+    --theme-primary-color-default-contrast: #{$_primary_contrast_color};
+    --theme-primary-lighter-color: #{$_primary_lighter_color};
+    --theme-primary-darker-color: #{$_primary_darker_color};
+
+    --theme-accent-color: #{$_accent_color};
+    --theme-accent-color-default-contrast: #{$_accent_contrast_color};
+    --theme-accent-lighter-color: #{$_accent_lighter_color};
+    --theme-accent-darker-color: #{$_accent_darker_color};
+
+    --theme-text-color: #{$_text_color};
+    --theme-foreground-text-color: #{$_text_foreground_color};
+    --theme-text-bold-color: #{$_text_bold_color};
+    --theme-text-disabled-color: #{$_text_disabled_color};
+    --theme-secondary-text-color: #{$_text_secondary_color};
+    --theme-title-color: #{$_text_bold_color};
+
+    --theme-border-color: #{$_border_color};
+    --theme-card-background-color: #{$_card_background_color};
+    --theme-card-background-light-color: #{$_card_background_light_color};
+    --theme-card-background-box-shadow-color: #{$_card_background_box_shadow_color};
+    --theme-divider-color: #{$_border_color};
+    --theme-dialog-background-color: #{$_dialog_background_color};
+
+    --theme-warn-color: #{$_warn_color};
+    --theme-toolbar-background: #{$_toolbar_color};
+    --theme-mat-table-hover-color: #{$_table_hover_color};
+
+    --theme-icon-blue-color: #0a1f8f;
+    --theme-icon-green-color: #0fd850;
+    --theme-icon-red-color: #e6007e;
+
+    --theme-swichter-light-image: url('^assets/tezza/images/theme_switcher_light.svg');
+    --theme-swichter-dark-image: url('^assets/tezza/images/theme_switcher_dark.svg');
+
+    //ACA variables
+    --theme-warn-color-default-contrast: #{$_warn_contrast_color};
+    --theme-accent-color-a200: #{$_accent_color};
+    --adf-snackbar-error-bg-color: #{$_warn_color};
+    --adf-snackbar-error-action-color: #{$_warn_contrast_color};
+    --adf-snackbar-warning-bg-color: #{$_accent_color};
+    --adf-snackbar-warning-action-color: #{$_accent_contrast_color};
+    --adf-snackbar-info-bg-color: #{$_primary_color};
+    --adf-snackbar-info-action-color: #{$_primary_contrast_color};
+    --adf-breadcrumb-item-active-color: #{$_text_bold_color};
+    --adf-breadcrumb-item-active-hover-color: #{$_text_foreground_color};
+    --adf-node-selector-icon-color: #{$_text_color};
+    --adf-node-selector-base-color: #{$_text_light_color};
+    --adf-node-selector-base-bold-color: #{$_text_foreground_color};
+    --adf-datatable-cell-link-hover-color: #{$_accent_color};
+    --adf-datatable-selected-color: #{$_primary_lighter_color};
+    --adf-user-info-color: #{$_primary_color};
+    --adf-comment-list-primary-color: #{$_primary_lighter_color};
+    --adf-comment-list-ripple-color: #{$_primary_color};
+    --adf-search-input-bg-color: #{$_primary_lighter_color};
+    --adf-search-input-highlight-color: #{$_primary_darker_color};
+    --adf-tooltip-card-color: #{$_text_foreground_color};
+    --adf-card-view-text-color: #{$_text_fg_shadow_color};
+    --adf-card-view-label-color: #{$_text_light_color};
+    --adf-card-view-datetime-border-color: #{$_text_light_color};
+    --adf-upload-border-color: #{$_upload_border_color};
+    --adf-header-background-color: #{$_primary_contrast_color};
+    --adf-theme-background-dialog-color: #fff;
+
+    --theme-hover-bg-color: #{$_hover_background_color};
+    --theme-background-color: #{$_background_color};
+    --theme-text-fg-color: #{$_text_fg_color};
+    --theme-text-fg-shadow-color: #{$_text_fg_shadow_color};
+    --theme-card-bg-color: #{$_card_background_color};
+    --theme-card-bg-bold-color: #{$_card_background_bold_color};
+    --theme-dialog-bg-color: #{$_dialog_background_color};
+    --theme-bg-hover-color: #{$_hover_background_color};
+    --theme-fg-base-color: #{$_foreground_base_color};
+    --theme-fg-divider: #{$_foreground_divider_color};
+    --theme-disabled-text-color: #{$_text_disabled_color};
+    --theme-selected-button-bg-color: #{$_selected_button_background_color};
+    --theme-icon-fg-color: #{$_foreground_icon_color};
+    --theme-unselected-chip-bg-color: #{$_unselected_chip_background};
+    --theme-status-bar-bg-color: #{$_status_bar_background};
+    --theme-colors-mat-grey-dark: #{$_text_color};
+
+    // fonts
+    --theme-font-family: #{$_theme_font_family};
+    --theme-body-1-font-size: #{$_theme_body_1_font_size};
+    --theme-body-2-font-size: #{$_theme_body_2_font_size};
+    --theme-body-1-line-height: #{$_theme_body_1_line_height};
+    --theme-display-1-font-size: #{$_theme_display_1_font_size};
+    --theme-display-3-font-size: #{$_theme_display_3_font_size};
+    --theme-display-4-font-size: #{$_theme_display_4_font_size};
+    --theme-caption-font-size: #{$_theme_caption_font_size};
+    --theme-title-font-size: #{$_theme_title_font_size};
+    --theme-subheading-1-font-size: #{$_theme_subheading_1_font_size};
+    --theme-subheading-2-font-size: #{$_theme_subheading_2_font_size};
+    --theme-button-font-size: #{$_theme_button_font_size};
+    --theme-headline-font-size: #{$_theme_headline_font_size};
+    --theme-headline-line-height: #{$_theme_headline_line_height};
+
+    // input
+    --mdc-filled-text-field-container-color: transparent;
+    --mdc-filled-text-field-disabled-container-color: transparent;
+
+    // mat-slide-toggle
+    --mdc-switch-disabled-unselected-handle-color: var(--theme-card-background-color);
+    --mdc-switch-handle-surface-color: var(--theme-card-background-color);
+    --mdc-switch-unselected-handle-color: var(--theme-card-background-color);
+    --mdc-switch-unselected-focus-handle-color: var(--theme-card-background-color);
+    --mdc-switch-unselected-hover-handle-color: var(--theme-card-background-color);
+    --mdc-switch-unselected-pressed-handle-color: var(--theme-card-background-color);
+    --mdc-switch-disabled-handle-elevation-shadow: var(--mdc-switch-handle-elevation-shadow);
+
+    // mat-tab-group
+    --mat-tab-header-divider-height: 1px;
+    --mat-tab-header-divider-color: var(--theme-border-color);
+}
+
+//noinspection ALL
+@mixin light-theme-variables($theme) {
+    // Get theme settngs
+    $light-primary: map-get($theme, primary);
+    $light-accent: map-get($theme, accent);
+
+    // Set colors
+    $_zaak_color: mat.get-color-from-palette($light-primary);
+    $_object_color: mat.get-color-from-palette($light-accent, 900);
+    $_progress_bar_color: mat.get-color-from-palette($light-accent, 500);
+    $_progress_bar_buffer_color: mat.get-color-from-palette($light-accent, 100);
+
+    // Set variables
+    --theme-zaak-color: #{$_zaak_color};
+    --theme-object-color: #{$_object_color};
+    --theme-progress-bar-color: #{$_progress_bar_color};
+    --theme-progress-bar-buffer-color: #{$_progress_bar_buffer_color};
+}
+
+//noinspection ALL
+@mixin dark-theme-variables($theme) {
+    // Get theme settngs
+    $dark-primary: map-get($theme, primary);
+    $dark-accent: map-get($theme, accent);
+
+    // Set colors
+    $_zaak_color: mat.get-color-from-palette($dark-accent, 300);
+    $_object_color: mat.get-color-from-palette($dark-primary, 600);
+    $_progress_bar_color: mat.get-color-from-palette($dark-primary, 500);
+    $_progress_bar_buffer_color: mat.get-color-from-palette($dark-primary, 100);
+
+    // Set variables
+    --theme-zaak-color: #{$_zaak_color};
+    --theme-object-color: #{$_object_color};
+    --theme-progress-bar-color: #{$_progress_bar_color};
+    --theme-progress-bar-buffer-color: #{$_progress_bar_buffer_color};
+}
+
+//noinspection ALL
+@mixin tezza-extra-theme-variables($theme) {
+    $extra-status-done: map-get($theme, primary);
+    $extra-accent-pink: map-get($theme, accent);
+    $extra-status-expired: map-get($theme, warn);
+
+    $_status_done_color: mat.get-color-from-palette($extra-status-done, default);
+    $_status_expired_color: mat.get-color-from-palette($extra-status-expired, default);
+    $_dossier_color: mat.get-color-from-palette($extra-accent-pink, darker);
+
+    // Set variables
+    --theme-status-done-color: #{$_status_done_color};
+    --theme-status-expired-color: #{$_status_expired_color};
+    --theme-dossier-color: #{$_dossier_color};
+}
+
+@function define-light-theme($primary) {
+    @return mat.define-light-theme(
+        (
+            color: (
+                primary: $primary,
+                accent: $light-theme-accent,
+                warn: $light-theme-warn,
+            ),
+            typography: $app-typography,
+        )
+    );
+}
+
+@function define-dark-theme($primary) {
+    @return mat.define-dark-theme(
+        (
+            color: (
+                primary: $primary,
+                accent: $dark-theme-accent,
+                warn: $dark-theme-warn,
+            ),
+            typography: $app-typography,
+        )
+    );
+}

@@ -4,8 +4,8 @@ import { forkJoin, Observable, of } from 'rxjs';
 import { catchError, map, switchMap, take } from 'rxjs/operators';
 
 import { ResultSetPaging } from '@alfresco/js-api';
-import { AlfrescoApiService, AuthenticationService } from '@alfresco/adf-core';
-import { NodesApiService, SearchService } from '@alfresco/adf-content-services';
+import { AuthenticationService } from '@alfresco/adf-core';
+import { AlfrescoApiService, NodesApiService, SearchService } from '@alfresco/adf-content-services';
 import { ExtensionConfig, mergeObjects } from '@alfresco/adf-extensions';
 
 import { ContezzaObservables } from '@contezza/core/utils';

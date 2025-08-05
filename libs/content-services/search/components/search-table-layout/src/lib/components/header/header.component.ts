@@ -31,7 +31,7 @@ interface View {
     imports: [CommonModule, TranslateModule, BreadcrumbModule, ContezzaLetModule, NavigationActionComponent, ToolbarComponent, SearchComponent],
     selector: 'contezza-search-table-layout-header',
     template: `<ng-container *ngIf="view$ | async as view">
-        <contezza-responsive-navigation-action *ngIf="showMenuAction" [action]="view.action"></contezza-responsive-navigation-action>
+        <contezza-responsive-navigation-action *ngIf="showMenuAction" [action]="view.action" />
         <div class="contezza-search-table-layout-header-title">
             <ng-container *ngIf="view.breadcrumb as breadcrumb; else onlyTitle">
                 <adf-breadcrumb
@@ -39,14 +39,14 @@ interface View {
                     [rootId]="breadcrumb.rootId"
                     [root]="breadcrumb.root"
                     (navigate)="onBreadcrumbNavigate($event, breadcrumb.folderNode)"
-                ></adf-breadcrumb>
+                />
             </ng-container>
             <ng-template #onlyTitle>{{ title | translate }}</ng-template>
         </div>
         <ng-container *ngIf="searchControl">
-            <contezza-search-table-layout-header-search [control]="searchControl"></contezza-search-table-layout-header-search>
+            <contezza-search-table-layout-header-search [control]="searchControl" />
         </ng-container>
-        <contezza-toolbar [key]="toolbarKey"></contezza-toolbar>
+        <contezza-toolbar [key]="toolbarKey" />
     </ng-container>`,
     styleUrls: ['header.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,

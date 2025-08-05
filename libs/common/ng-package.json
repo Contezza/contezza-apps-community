@@ -11,6 +11,11 @@
             "glob": "images/**/*",
             "input": "./assets",
             "output": "/assets/"
+        },
+        {
+            "glob": "**/*",
+            "input": "./src/lib/ui",
+            "output": "/ui/"
         }
     ],
     "lib": {

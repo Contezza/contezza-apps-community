@@ -1,5 +1,5 @@
-<button color="primary" mat-stroked-button [matMenuTriggerFor]="columnMenu" (click)="refreshSelectAllState()">
-    <ng-content></ng-content>
+<button class="contezza-column-sorter-button" color="primary" mat-stroked-button [matMenuTriggerFor]="columnMenu" (click)="refreshSelectAllState()">
+    <ng-content />
 </button>
 <mat-menu #columnMenu="matMenu" class="columnMenu contezza-column-editor-menu">
     <div class="contezza-column-editor-menu-select-all" (click)="$event.stopPropagation()">

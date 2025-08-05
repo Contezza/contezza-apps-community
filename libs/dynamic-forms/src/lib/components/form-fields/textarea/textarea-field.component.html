@@ -1,7 +1,8 @@
 <ng-container *contezzaLet="readonly$ | async as readonly">
     <mat-form-field
-        class="contezza-form-field contezza-input-form-field adf-property-field adf-card-textitem-field"
+        class="contezza-form-field contezza-textarea-form-field adf-property-field adf-card-textitem-field"
         [class.mat-form-field-disabled]="readonly"
+        [class.contezza-form-field-disabled]="readonly"
         floatLabel="auto"
         [appearance]="field.settings?.appearance"
     >
@@ -17,6 +18,6 @@
             (keydown.enter)="$event.stopPropagation()"
         >
         </textarea>
-        <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control"></mat-error>
+        <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control" />
     </mat-form-field>
 </ng-container>

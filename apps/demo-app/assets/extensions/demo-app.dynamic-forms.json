@@ -1,0 +1,844 @@
+{
+    "$id": "demo-app.dynamic-forms",
+    "$version": "@@project.version@@",
+    "$name": "Demo App Dynamic Forms",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "dynamicforms": [
+            {
+                "id": "demo-app.dynamic-forms.demo-shell",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "formId",
+                            "type": "input",
+                            "label": "Form ID",
+                            "initialValue": "${form->formId}",
+                            "validations": ["required"]
+                        },
+                        {
+                            "id": "layoutId",
+                            "type": "input",
+                            "label": "Layout ID",
+                            "initialValue": "${form->layoutId}"
+                        },
+                        {
+                            "id": "style",
+                            "type": "input",
+                            "label": "Style",
+                            "initialValue": "${form->style}"
+                        }
+                    ]
+                },
+                "layouts": [
+                    {
+                        "id": "default",
+                        "layout": {
+                            "class": "dynamicforms-row",
+                            "subfields": [
+                                {
+                                    "id": "formId"
+                                },
+                                {
+                                    "id": "layoutId"
+                                },
+                                {
+                                    "id": "style"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "demo-app.dynamic-forms.test-array",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "dialog",
+                            "type": "array",
+                            "label": "dialog",
+                            "initialValue": "${initialValue}",
+                            "settings": {
+                                "formId": "demo-shell"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "id": "demo-app.dynamic-forms.all-field-types",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "autocomplete",
+                            "type": "autocomplete",
+                            "label": "Autocomplete field",
+                            "options": {
+                                "dynamic-source": [
+                                    {
+                                        "id": "option1",
+                                        "label": "Optie 1"
+                                    },
+                                    {
+                                        "id": "option2",
+                                        "label": "Optie 2"
+                                    }
+                                ],
+                                "labelKey": "label"
+                            },
+                            "validations": [
+                                {
+                                    "id": "hasProperties",
+                                    "parameters": ["id", "label"]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "multiautocomplete",
+                            "type": "multiautocomplete",
+                            "label": "Multiautocomplete field",
+                            "options": {
+                                "dynamic-source": [
+                                    {
+                                        "id": "option1",
+                                        "label": "Optie 1"
+                                    },
+                                    {
+                                        "id": "option2",
+                                        "label": "Optie 2"
+                                    }
+                                ],
+                                "labelKey": "label"
+                            }
+                        },
+                        {
+                            "id": "select",
+                            "type": "select",
+                            "label": "select field",
+                            "options": {
+                                "dynamic-source": [
+                                    {
+                                        "id": "option1",
+                                        "label": "Optie 1"
+                                    },
+                                    {
+                                        "id": "option2",
+                                        "label": "Optie 2"
+                                    }
+                                ],
+                                "labelKey": "label"
+                            }
+                        },
+                        {
+                            "id": "multiselect",
+                            "type": "multiselect",
+                            "label": "multiselect field",
+                            "options": {
+                                "dynamic-source": [
+                                    {
+                                        "id": "option1",
+                                        "label": "Optie 1"
+                                    },
+                                    {
+                                        "id": "option2",
+                                        "label": "Optie 2"
+                                    }
+                                ],
+                                "labelKey": "label"
+                            }
+                        },
+                        {
+                            "id": "button-toggle",
+                            "type": "button-toggle",
+                            "label": "Button-toggle field",
+                            "options": {
+                                "dynamic-source": [
+                                    { "id": "left", "label": "LINKS" },
+                                    { "id": "right", "label": "RECHTS" }
+                                ],
+                                "labelKey": "label"
+                            }
+                        },
+                        {
+                            "id": "checkbox",
+                            "type": "checkbox",
+                            "label": "Checkbox field"
+                        },
+                        {
+                            "id": "chipsInput",
+                            "type": "chipsInput",
+                            "label": "ChipsInput field"
+                        },
+                        {
+                            "id": "date",
+                            "type": "date",
+                            "label": "Date field"
+                        },
+                        {
+                            "id": "dateRange",
+                            "type": "dateRange",
+                            "label": "DateRange field"
+                        },
+                        {
+                            "id": "dateRangeChip",
+                            "type": "dateRangeChip",
+                            "label": "DateRangeChip field"
+                        },
+                        {
+                            "id": "dateRangeSingle",
+                            "type": "dateRangeSingle",
+                            "label": "DateRangeSingle field"
+                        },
+                        {
+                            "id": "dateTime",
+                            "type": "dateTime",
+                            "label": "dateTime field"
+                        },
+                        {
+                            "id": "input",
+                            "type": "input",
+                            "label": "Input field"
+                        },
+                        {
+                            "id": "peoplePicker",
+                            "type": "peoplePicker",
+                            "label": "peoplePicker field"
+                        },
+                        {
+                            "id": "radio-button",
+                            "type": "radio-button",
+                            "label": "radio-button field",
+                            "options": {
+                                "dynamic-source": [
+                                    {
+                                        "id": "option1",
+                                        "label": "Optie 1"
+                                    },
+                                    {
+                                        "id": "option2",
+                                        "label": "Optie 2"
+                                    }
+                                ],
+                                "labelKey": "label"
+                            }
+                        },
+                        {
+                            "id": "textarea",
+                            "type": "textarea",
+                            "label": "textarea field"
+                        },
+                        {
+                            "id": "toggle",
+                            "type": "toggle",
+                            "label": "toggle field"
+                        },
+                        {
+                            "id": "upload",
+                            "type": "upload",
+                            "label": "upload field"
+                        }
+                    ]
+                }
+            },
+            {
+                "id": "demo-app.dynamic-forms.test-dialog",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "input",
+                            "type": "input",
+                            "label": "test input"
+                        },
+                        {
+                            "id": "dialog",
+                            "type": "dialog",
+                            "label": "dialog",
+                            "extras": {
+                                "initialValue": [
+                                    {
+                                        "formId": "test1"
+                                    },
+                                    {
+                                        "formId": "test2"
+                                    }
+                                ]
+                            },
+                            "settings": {
+                                "dynamicFormId": "test-array",
+                                "multiple": true,
+                                "embedded": true,
+                                "labelTemplate": "${value.formId}",
+                                "matDialogConfig": {
+                                    "width": "1000px",
+                                    "maxWidth": "80vw",
+                                    "height": "50vh",
+                                    "autoFocus": false,
+                                    "panelClass": "dynamicforms-array-dialog"
+                                }
+                            }
+                        },
+                        {
+                            "id": "chips",
+                            "type": "chipsInput",
+                            "label": "chips",
+                            "validations": ["required"]
+                        }
+                    ]
+                },
+                "layouts": [
+                    {
+                        "id": "default",
+                        "layout": {
+                            "subfields": [
+                                {
+                                    "class": "dynamicforms-row",
+                                    "style": "align-items: flex-end",
+                                    "subfields": [
+                                        {
+                                            "id": "input"
+                                        },
+                                        {
+                                            "id": "dialog"
+                                        },
+                                        {
+                                            "id": "chips"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "demo-app.dynamic-forms.test-search-form-field",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "filter-ids",
+                            "type": "chipsInput",
+                            "label": "filter ids",
+                            "initialValue": ["ca985080-7581-4fd5-844b-d49fb05caba6"]
+                        },
+                        {
+                            "id": "selected-id",
+                            "type": "input",
+                            "label": "selected ids",
+                            "initialValue": ["ca985080-7581-4fd5-844b-d49fb05caba6"]
+                        },
+                        {
+                            "id": "search",
+                            "type": "search",
+                            "label": "test search odnhn",
+                            "initialValue": {
+                                "dynamic-source": "${selected-id}",
+                                "filters": [
+                                    {
+                                        "id": "ifDefined",
+                                        "parameters": [
+                                            "getNodeById",
+                                            {
+                                                "id": "map",
+                                                "parameters": "entry=>return {entry}"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "extras": {
+                                "queryTemplate": {
+                                    "filterQueries": [
+                                        {
+                                            "query": {
+                                                "dynamic-source": "${filter-ids}",
+                                                "filters": [
+                                                    {
+                                                        "id": "map",
+                                                        "parameters": "ids=>return (ids||[]).map(id=>`NOT sys:node-uuid:${id}`).join(' AND ') || '*'"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    "sort": [{ "type": "FIELD", "field": "name", "ascending": true }]
+                                }
+                            },
+                            "settings": {
+                                "dynamicFormId": {
+                                    "id": "test-search-subform",
+                                    "layoutId": "lay0"
+                                },
+                                "columnsId": "demo-app.columns.search-subform",
+                                "styles": {
+                                    "item": {
+                                        "style": ""
+                                    }
+                                }
+                            },
+                            "validations": ["required"]
+                        }
+                    ]
+                },
+                "layouts": [
+                    {
+                        "id": "with-filter",
+                        "layout": {
+                            "subfields": [{ "id": "filter-ids" }, { "id": "search" }]
+                        }
+                    },
+                    {
+                        "id": "with-selection",
+                        "layout": {
+                            "subfields": [{ "id": "selected-id" }, { "id": "search" }]
+                        }
+                    },
+                    {
+                        "id": "only-search",
+                        "layout": {
+                            "subfields": [{ "id": "search" }]
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "demo-app.dynamic-forms.test-formatters",
+                "form": {
+                    "format": {
+                        "query": {
+                            "function": "list=> return Object.values(list).filter(Boolean).join(' AND ')"
+                        }
+                    },
+                    "subfields": [
+                        {
+                            "id": "subform",
+                            "subfields": [
+                                {
+                                    "id": "name",
+                                    "type": "input",
+                                    "label": "name",
+                                    "initialValue": "ZAAK*",
+                                    "format": {
+                                        "query": {
+                                            "template": "name:${value}"
+                                        }
+                                    }
+                                },
+                                {
+                                    "id": "description",
+                                    "type": "input",
+                                    "label": "description",
+                                    "format": {
+                                        "value": {
+                                            "function": "data=>return data?'--'+data:''"
+                                        }
+                                    }
+                                }
+                            ],
+                            "format": {
+                                "value": {
+                                    "function": "data=>return data.name+data.description"
+                                },
+                                "query": {
+                                    "function": "list=> return Object.values(list).filter(Boolean).join(' AND ')"
+                                }
+                            }
+                        },
+                        {
+                            "id": "ASPECT",
+                            "type": "input",
+                            "label": "ASPECT",
+                            "initialValue": "xxx",
+                            "format": {
+                                "value": {
+                                    "template": "${value}test31"
+                                }
+                            },
+                            "validations": ["required"]
+                        },
+                        {
+                            "id": "test-autocomplete",
+                            "type": "autocomplete",
+                            "label": "test-autocomplete",
+                            "options": {
+                                "dynamic-source": "PATH:\"/app:company_home/st:sites/*\"",
+                                "filters": [
+                                    "search",
+                                    {
+                                        "id": "map",
+                                        "parameters": "list=>return list.map(({entry})=>entry)"
+                                    }
+                                ],
+                                "labelKey": "name"
+                            },
+                            "validations": [
+                                {
+                                    "id": "hasProperties",
+                                    "parameters": ["id"]
+                                }
+                            ],
+                            "settings": {
+                                "appearance": "outline"
+                            },
+                            "format": {
+                                "value": {
+                                    "key": "properties.cm:title"
+                                }
+                            }
+                        },
+                        {
+                            "id": "test-multiautocomplete",
+                            "type": "multiautocomplete",
+                            "label": "test-multiautocomplete",
+                            "options": {
+                                "dynamic-source": "PATH:\"/app:company_home/st:sites/*\"",
+                                "filters": [
+                                    "search",
+                                    {
+                                        "id": "map",
+                                        "parameters": "list=>return list.map(({entry})=>entry)"
+                                    }
+                                ],
+                                "labelKey": "name"
+                            },
+                            "settings": {
+                                "appearance": "outline"
+                            },
+                            "format": {
+                                "value": {
+                                    "function": "list=>return list?.length"
+                                }
+                            }
+                        },
+                        {
+                            "id": "dateRange",
+                            "type": "dateRange",
+                            "label": "dateRange",
+                            "format": {
+                                "value": {
+                                    "map": {
+                                        "id": "dateRangeQuery",
+                                        "parameters": "cm:created"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "id": "testtoggle",
+                            "type": "toggle"
+                        },
+                        {
+                            "id": "testDisabled1",
+                            "type": "input",
+                            "initialValue": "teststst1"
+                        },
+                        {
+                            "id": "testDisabled2",
+                            "type": "variable",
+                            "initialValue": "teststst2",
+                            "validations": ["required"]
+                        }
+                    ]
+                },
+                "layouts": [
+                    {
+                        "id": "default",
+                        "layout": {
+                            "subfields": [
+                                {
+                                    "id": "subform.name"
+                                },
+                                {
+                                    "id": "subform.description"
+                                },
+                                {
+                                    "id": "ASPECT"
+                                },
+                                {
+                                    "id": "test-autocomplete"
+                                },
+                                {
+                                    "id": "test-multiautocomplete"
+                                },
+                                {
+                                    "id": "dateRange"
+                                },
+                                {
+                                    "id": "testtoggle"
+                                },
+                                {
+                                    "id": "testDisabled2",
+                                    "disabled": "!(${testtoggle})"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "id": "lay0",
+                        "layout": {
+                            "subfields": [
+                                {
+                                    "id": "subform.name"
+                                },
+                                {
+                                    "id": "subform.description"
+                                },
+                                {
+                                    "id": "ASPECT"
+                                },
+                                {
+                                    "id": "testtoggle"
+                                },
+                                {
+                                    "id": "testDisabled1",
+                                    "disabled": "!(${testtoggle})"
+                                },
+                                {
+                                    "id": "testDisabled2",
+                                    "disabled": "!(${testtoggle})"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "id": "lay1",
+                        "layout": {
+                            "subfields": [
+                                {
+                                    "id": "ASPECT"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "demo-app.dynamic-forms.test-dates",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "date",
+                            "type": "date",
+                            "label": "date"
+                        },
+                        {
+                            "id": "date-auto",
+                            "type": "date",
+                            "label": "date-auto",
+                            "settings": {
+                                "openPickerOnFocus": true
+                            }
+                        },
+                        {
+                            "id": "dateRange",
+                            "type": "dateRange",
+                            "label": "dateRange"
+                        },
+                        {
+                            "id": "dateRange-auto",
+                            "type": "dateRange",
+                            "label": "dateRange-auto",
+                            "settings": {
+                                "openPickerOnFocus": true
+                            }
+                        },
+                        {
+                            "id": "dateTime",
+                            "type": "dateTime",
+                            "label": "dateTime"
+                        }
+                    ]
+                }
+            },
+            {
+                "id": "demo-app.dynamic-forms.test-multiautocomplete",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "test-multiautocomplete",
+                            "type": "multiautocomplete",
+                            "label": "test-multiautocomplete",
+                            "options": {
+                                "dynamic-source": "PATH:\"/app:company_home/st:sites/*\"",
+                                "filters": [
+                                    "tapLog",
+                                    "search",
+                                    {
+                                        "id": "map",
+                                        "parameters": "list=>return list.map(({entry})=>entry)"
+                                    }
+                                ],
+                                "labelKey": "name"
+                            },
+                            "settings": {
+                                "appearance": "outline",
+                                "preSelectAllOption": true
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "id": "demo-app.dynamic-forms.test-labels",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "test-input",
+                            "type": "input",
+                            "label": "ALFRESCO.cm:name"
+                        },
+                        {
+                            "id": "test-autocomplete",
+                            "type": "autocomplete",
+                            "label": "ALFRESCO.tza:zaakstatus",
+                            "options": {
+                                "dynamic-source": "PATH:\"/app:company_home/st:sites/*\"",
+                                "filters": [
+                                    "search",
+                                    {
+                                        "id": "map",
+                                        "parameters": "list=>return list.map(({entry})=>entry)"
+                                    }
+                                ],
+                                "labelKey": "name"
+                            }
+                        },
+                        {
+                            "id": "test-multiautocomplete",
+                            "type": "multiautocomplete",
+                            "label": "ALFRESCO.tza:zaaktypeUrl",
+                            "options": {
+                                "dynamic-source": "PATH:\"/app:company_home/st:sites/*\"",
+                                "filters": [
+                                    "search",
+                                    {
+                                        "id": "map",
+                                        "parameters": "list=>return list.map(({entry})=>entry)"
+                                    }
+                                ],
+                                "labelKey": "name"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "id": "demo-app.dynamic-forms.document-upload-object",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "cm:title",
+                            "label": "Titel",
+                            "type": "input"
+                        },
+                        {
+                            "id": "cm:author",
+                            "label": "Auteur",
+                            "type": "input"
+                        },
+                        {
+                            "id": "tza:documenttype",
+                            "label": "Documenttype",
+                            "type": "autocomplete",
+                            "initialValue": {
+                                "id": "${node->properties.tza:documenttype}"
+                            },
+                            "options": {
+                                "dynamic-source": [
+                                    {
+                                        "id": "Beschrijving",
+                                        "label": "Beschrijving"
+                                    },
+                                    {
+                                        "id": "Rapport",
+                                        "label": "Rapport"
+                                    },
+                                    {
+                                        "id": "Tekening",
+                                        "label": "Tekening"
+                                    },
+                                    {
+                                        "id": "Certificaat",
+                                        "label": "Certificaat"
+                                    },
+                                    {
+                                        "id": "Verklaring",
+                                        "label": "Verklaring"
+                                    },
+                                    {
+                                        "id": "Software",
+                                        "label": "Software"
+                                    }
+                                ],
+                                "labelKey": "label"
+                            },
+                            "validations": [
+                                "required",
+                                {
+                                    "id": "hasProperties",
+                                    "parameters": ["id", "label"]
+                                }
+                            ],
+                            "format": {
+                                "value": {
+                                    "key": "id"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "id": "demo-app.dynamic-forms.document-upload-object2",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "cm:title",
+                            "label": "Titel",
+                            "type": "input"
+                        },
+                        {
+                            "id": "cm:author",
+                            "label": "Auteur",
+                            "type": "input"
+                        },
+                        {
+                            "id": "tza:taal",
+                            "type": "autocomplete",
+                            "label": "Taal",
+                            "defaultValue": { "id": "nld" },
+                            "initialValue": {
+                                "dynamic-source": "${node->properties.tza:taal}",
+                                "filters": [
+                                    {
+                                        "id": "stringToObject",
+                                        "parameters": "id"
+                                    }
+                                ]
+                            },
+                            "options": {
+                                "type": "webscript",
+                                "dynamic-source": "api/zrc/zaken/waardelijsten?type=taal",
+                                "filters": ["tapLog"],
+                                "labelKey": "label"
+                            },
+                            "validations": [
+                                "required",
+                                {
+                                    "id": "hasProperties",
+                                    "parameters": ["id", "label"]
+                                }
+                            ],
+                            "format": {
+                                "value": {
+                                    "key": "id"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

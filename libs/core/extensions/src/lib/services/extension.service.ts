@@ -5,6 +5,7 @@ import { debounce, map, share, switchMap, take, tap } from 'rxjs/operators';
 
 import {
     ComponentRegisterService,
+    EXTENSION_JSON_VALUES,
     EXTENSION_JSONS,
     ExtensionConfig,
     ExtensionLoaderService,
@@ -80,9 +81,10 @@ export class ContezzaExtensionService extends ExtensionService {
         componentRegister: ComponentRegisterService,
         ruleService: RuleService,
         @Inject(EXTENSION_JSONS) extensionJsons: string[],
+        @Inject(EXTENSION_JSON_VALUES) extensionJsonValues: ExtensionConfig[],
         @Optional() @Inject(EXTENSION_PROCESSORS) private readonly extensionProcessors?: Processor[][]
     ) {
-        super(loader, componentRegister, ruleService, extensionJsons);
+        super(loader, componentRegister, ruleService, extensionJsons, extensionJsonValues);
     }
 
     /**

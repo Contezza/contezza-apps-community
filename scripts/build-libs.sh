@@ -2,6 +2,7 @@
 
 . scripts/config.sh
 
+nx reset
 rm -rf dist
 rm -rf nxcache
 

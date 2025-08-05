@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
 import { MAT_MENU_DEFAULT_OPTIONS, MatMenuModule } from '@angular/material/menu';
 
 import { TranslateModule } from '@ngx-translate/core';
@@ -10,16 +11,18 @@ import { TranslateModule } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { IconModule } from '@alfresco/adf-core';
 import { ContentActionRef, ContentActionType, ExtensionsModule } from '@alfresco/adf-extensions';
+
+import { IconDirective } from '@contezza/core/directives';
 
 import { ActionsService } from '../../services';
 
 @Component({
     standalone: true,
-    imports: [CommonModule, MatButtonModule, MatDividerModule, MatMenuModule, TranslateModule, IconModule, ExtensionsModule],
+    imports: [CommonModule, MatButtonModule, MatDividerModule, MatIconModule, MatMenuModule, TranslateModule, ExtensionsModule, IconDirective],
     selector: 'contezza-floating-button',
     templateUrl: 'floating-button.component.html',
+    styleUrls: ['floating-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [ActionsService.provider, { provide: MAT_MENU_DEFAULT_OPTIONS, useValue: { xPosition: 'before', yPosition: 'above' } }],
 })

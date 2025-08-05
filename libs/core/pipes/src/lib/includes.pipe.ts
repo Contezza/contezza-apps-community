@@ -7,7 +7,7 @@ import { DistributiveKeyof } from '@contezza/core/utils';
  */
 @Pipe({ standalone: true, name: 'includes' })
 export class IncludesPipe implements PipeTransform {
-    transform<T, TKey extends DistributiveKeyof<T>>(value: T, key: TKey): value is T & { [K in TKey]: any } {
+    transform<T extends object, TKey extends DistributiveKeyof<T>>(value: T, key: TKey): value is T & { [K in TKey]: any } {
         return key in value;
     }
 }

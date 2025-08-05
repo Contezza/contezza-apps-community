@@ -1,23 +1,14 @@
 .search-bar {
     &-form {
+        width: 100%;
         font-size: 12px !important;
         color: var(--theme-foreground-text-color) !important;
 
-        & > .mat-form-field-wrapper {
+        & > .mat-mdc-text-field-wrapper {
             padding-bottom: 0 !important;
             margin: 0 !important;
 
-            .mat-form-field-flex {
-                margin-top: 0 !important;
-            }
-
-            .mat-form-field-outline {
-                top: 0 !important;
-            }
-            .mat-form-field-infix {
-                border-top: 0 !important;
-            }
-            .mat-form-field-suffix:has(.search-bar-form-spinner) {
+            .mat-mdc-form-field-icon-suffix:has(.search-bar-form-spinner) {
                 align-self: center !important;
                 top: 0 !important;
 
@@ -25,10 +16,6 @@
                     overflow: visible;
                 }
             }
-        }
-
-        input {
-            margin-left: 8px;
         }
 
         .mat-icon {
@@ -43,6 +30,7 @@
 
             &-title {
                 font-weight: bold;
+                color: var(--theme-foreground-text-color);
             }
             &-totals {
                 color: var(--theme-secondary-text-color);
@@ -57,7 +45,7 @@
                 opacity: 0.4;
             }
 
-            &-option {
+            &-option.mat-mdc-option {
                 height: auto;
                 border-bottom: 1px solid var(--theme-border-color);
                 line-height: 38px;
@@ -82,9 +70,14 @@
             }
         }
 
-        &.mat-form-field-appearance-outline .mat-form-field-outline {
+        &.mat-form-field-appearance-outline .mdc-notched-outline {
             background-color: var(--theme-card-background-color);
             border-radius: 5px;
+            z-index: initial;
+        }
+
+        .mat-mdc-form-field-subscript-wrapper {
+            display: none;
         }
     }
 }

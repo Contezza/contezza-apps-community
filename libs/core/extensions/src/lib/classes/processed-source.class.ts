@@ -36,7 +36,7 @@ export class ContezzaProcessedSource<BaseType = any, ObservableType extends Cont
                         acc.pipe(
                             concatMap((value) => {
                                 if (value && typeof value === 'object' && ContezzaLoadingEvent.PROPERTY_LOADING in value) {
-                                    return of(value as ContezzaLoadingEvent);
+                                    return of(value as unknown as ContezzaLoadingEvent);
                                 } else {
                                     return of(value as unknown as BaseType).pipe(operation);
                                 }

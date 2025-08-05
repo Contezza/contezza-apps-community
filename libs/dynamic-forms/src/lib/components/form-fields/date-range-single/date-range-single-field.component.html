@@ -2,6 +2,7 @@
     <mat-form-field
         class="contezza-form-field contezza-date-range-single-form-field adf-property-field adf-card-textitem-field"
         [class.mat-form-field-disabled]="readonly"
+        [class.contezza-form-field-disabled]="readonly"
         floatLabel="auto"
         [appearance]="field.settings?.appearance"
     >
@@ -13,20 +14,19 @@
         </mat-date-range-input>
 
         <button
-            type="button"
             mat-icon-button
             matSuffix
-            class="adf-property-clear-value"
+            class="contezza-form-field-clear"
             aria-label="Clear"
-            *ngIf="!readonly && !control.disabled"
+            *ngIf="!readonly && !control.disabled && control.value"
             tabindex="-1"
             (click)="clear($event)"
         >
             <mat-icon>cancel</mat-icon>
         </button>
 
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-date-range-picker #picker [disabled]="readonly"></mat-date-range-picker>
-        <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control"></mat-error>
+        <mat-datepicker-toggle matSuffix [for]="picker" />
+        <mat-date-range-picker #picker [disabled]="readonly" />
+        <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control" />
     </mat-form-field>
 </ng-container>

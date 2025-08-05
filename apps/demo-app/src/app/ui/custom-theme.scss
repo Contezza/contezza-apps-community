@@ -1,0 +1,73 @@
+$mat-theme-ignore-duplication-warnings: true;
+
+@use '@angular/material' as mat;
+
+// imports mixins theme-color-variables, light-theme-variables, dark-theme-variables, tezza-extra-theme-variables
+@import 'variables';
+
+@import 'colors';
+
+$app-typography: mat.define-typography-config(
+    $font-family: 'Open Sans',
+    $headline-1: mat.define-typography-level(112px, 112px, 300),
+    $headline-2: mat.define-typography-level(56px, 56px, 400),
+    $headline-3: mat.define-typography-level(45px, 48px, 400),
+    $headline-4: mat.define-typography-level(34px, 40px, 400),
+    $headline-5: mat.define-typography-level(24px, 32px, 400),
+    $headline-6: mat.define-typography-level(20px, 32px, 500),
+    $subtitle-1: mat.define-typography-level(16px, 28px, 400),
+    $body-1: mat.define-typography-level(15px, 24px, 400),
+    $subtitle-2: mat.define-typography-level(14px, 24px, 500),
+    $body-2: mat.define-typography-level(14px, 20px, 400),
+    $caption: mat.define-typography-level(12px, 20px, 400),
+    $button: mat.define-typography-level(14px, 36px, 500),
+    // Line-height must be unit-less fraction of the font-size.,,,,,
+);
+
+$custom-theme-primary: mat.define-palette($primary-scale, A100);
+$custom-theme-accent: mat.define-palette($accent-scale, A200);
+$custom-theme-warn: mat.define-palette($warning-scale, A100);
+
+$custom-theme: mat.define-light-theme(
+    (
+        color: (
+            primary: $custom-theme-primary,
+            accent: $custom-theme-accent,
+            warn: $custom-theme-warn,
+        ),
+        typography: $app-typography,
+    )
+);
+
+:root {
+    @include custom-theme($custom-theme);
+    @include theme-color-variables($custom-theme);
+
+    --contezza-theme-header-text-color: var(--adf-header-text-color);
+    --contezza-theme-header-background-color: var(--theme-primary-color-default-contrast);
+    --contezza-theme-header-logo: url('^assets/demo-app/images/contezza_logo.png');
+
+    .adf-layout-header {
+        //#adf-sidebar-toggle-start,
+        .adf-app-title {
+            display: none;
+        }
+    }
+}
+
+.contezza-sidenav-header {
+    &-logo {
+        img {
+            width: 12em;
+            margin-top: 1em;
+        }
+    }
+}
+
+.search-table-layout-content-sidebar {
+    min-width: 420px;
+}
+
+.contezza-date-range-form-field-label {
+    font-size: 14px !important;
+}

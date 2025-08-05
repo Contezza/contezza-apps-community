@@ -1,0 +1,15 @@
+::ng-deep .contezza-floating-button-item.mat-mdc-menu-item {
+    .mat-icon {
+        flex-shrink: 0;
+    }
+    .mat-mdc-menu-item-text {
+        white-space: nowrap;
+        overflow: hidden;
+
+        span {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}

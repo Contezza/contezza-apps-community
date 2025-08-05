@@ -11,6 +11,7 @@
         <mat-form-field
             class="contezza-form-field contezza-input-form-field adf-property-field adf-card-textitem-field"
             [class.mat-form-field-disabled]="readonly"
+            [class.contezza-form-field-disabled]="readonly"
             [floatLabel]="field.settings?.floatLabel"
             [appearance]="field.settings?.appearance"
             [hideRequiredMarker]="field.settings?.hideRequiredMarker"
@@ -73,10 +74,9 @@
                 </ng-container>
             </ng-container>
             <button
-                type="button"
                 mat-icon-button
                 matSuffix
-                class="adf-property-clear-value contezza-form-field-clear"
+                class="contezza-form-field-clear"
                 aria-label="Clear"
                 *ngIf="!readonly && !control.disabled && control.value"
                 tabindex="-1"
@@ -84,7 +84,7 @@
             >
                 <mat-icon>cancel</mat-icon>
             </button>
-            <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length || control.errors" [validations]="field.validations" [control]="control"></mat-error>
+            <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length || control.errors" [validations]="field.validations" [control]="control" />
         </mat-form-field>
     </div>
 </ng-container>

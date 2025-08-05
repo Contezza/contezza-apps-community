@@ -7,7 +7,6 @@
     "targets": {
         "build": {
             "executor": "@angular-devkit/build-angular:ng-packagr",
-            "outputs": ["dist/@contezza/search"],
             "options": {
                 "tsConfig": "tsconfig.build.json",
                 "project": "libs/search/ng-package.json"

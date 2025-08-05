@@ -1,16 +1,16 @@
 <div mat-dialog-title>{{ data.title | translate }}</div>
 
 <mat-dialog-content>
-    <contezza-search-table-layout [settings]="settings"></contezza-search-table-layout>
+    <contezza-search-table-layout [settings]="settings" />
 </mat-dialog-content>
 
 <mat-dialog-actions class="adf-dialog-buttons contezza-search-node-selector-dialog-actions">
-    <mat-chip-list class="contezza-search-node-selector-dialog-actions-selection">
+    <mat-chip-set class="contezza-search-node-selector-dialog-actions-selection">
         <mat-chip *ngFor="let node of selectedNodes" [removable]="true" (removed)="removeNode(node)">
             {{ node.entry.name }}
             <mat-icon matChipRemove>cancel</mat-icon>
         </mat-chip>
-    </mat-chip-list>
+    </mat-chip-set>
 
     <span class="adf-fill-remaining-space"></span>
 

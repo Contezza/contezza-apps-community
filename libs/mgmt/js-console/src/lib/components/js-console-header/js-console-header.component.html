@@ -12,7 +12,7 @@
                     [value]="selectedSpaceNode?.nodeRef === '' ? 'CONTEZZA.JS_CONSOLE.HEADER.NODE_REFS.SPACE.DEFAULT' : selectedSpaceNode?.name"
                     [actionIcon]="'edit'"
                     (actionClick)="selectSpaceNode()"
-                ></js-console-noderef>
+                />
             </ng-container>
             <ng-container *ngIf="selectedNode$ | async as selectedNode">
                 <js-console-noderef
@@ -22,7 +22,7 @@
                     [secondActionIcon]="selectedNode.nodeRef !== '' ? 'close' : undefined"
                     (actionClick)="selectDocumentNode()"
                     (secondActionClick)="removeDocumentNode()"
-                ></js-console-noderef>
+                />
             </ng-container>
 
             <!--  Selected script   -->
@@ -32,7 +32,7 @@
                     [value]="script.text"
                     [actionIcon]="'close'"
                     (actionClick)="clearSelectedScript()"
-                ></js-console-noderef>
+                />
             </ng-container>
         </div>
 
@@ -47,12 +47,12 @@
             <!--            </button>-->
 
             <button class="app-toolbar-button" mat-icon-button aria-label="Save script" (click)="saveScript()">
-                <mat-icon svgIcon="svg:content-save-edit-outline" matTooltip="{{ 'CONTEZZA.JS_CONSOLE.HEADER.ACTIONS.SAVE' | translate }} "></mat-icon>
+                <mat-icon svgIcon="svg:content-save-edit-outline" matTooltip="{{ 'CONTEZZA.JS_CONSOLE.HEADER.ACTIONS.SAVE' | translate }} " />
             </button>
 
             <ng-container *ngIf="editorTheme$ | async as theme">
                 <button class="app-toolbar-button" mat-icon-button aria-label="Theme" (click)="toggleEditorTheme()">
-                    <mat-icon [svgIcon]="theme === 'vs' ? 'svg:dark_mode' : 'svg:light_mode'" matTooltip="{{ 'CONTEZZA.JS_CONSOLE.HEADER.ACTIONS.THEME' | translate }}"> </mat-icon>
+                    <mat-icon [svgIcon]="theme === 'vs' ? 'svg:dark_mode' : 'svg:light_mode'" matTooltip="{{ 'CONTEZZA.JS_CONSOLE.HEADER.ACTIONS.THEME' | translate }}" />
                 </button>
             </ng-container>
 
@@ -62,8 +62,7 @@
                     [svgIcon]="scriptListOpen ? 'svg:forwardburger' : 'svg:backburger'"
                     class="action-icon"
                     matTooltip="{{ 'CONTEZZA.JS_CONSOLE.HEADER.ACTIONS.SCRIPTS' | translate }}"
-                >
-                </mat-icon>
+                />
             </button>
         </div>
     </div>

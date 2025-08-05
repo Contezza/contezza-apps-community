@@ -1,6 +1,6 @@
 <ng-container *ngIf="data$ | async as data">
     <ng-container *ngIf="column.data?.withSelection && (isSelected$ | async); else thumbnail">
-        <mat-icon class="contezza-thumbnail-column-selected" svgIcon="selected"></mat-icon>
+        <mat-icon class="contezza-thumbnail-column-selected" svgIcon="selected" />
     </ng-container>
     <ng-template #thumbnail>
         <span [class]="data.class || ''" [style]="data.style || ''" [matBadge]="data.badge" [matTooltip]="data.tooltip || '' | translate">
@@ -8,7 +8,7 @@
                 <img style="vertical-align: middle" [src]="data.icon" alt="" />
             </ng-container>
             <ng-template #icon>
-                <mat-icon [contezzaIcon]="data.icon"></mat-icon>
+                <mat-icon [contezzaIcon]="data.icon" />
             </ng-template>
         </span>
     </ng-template>

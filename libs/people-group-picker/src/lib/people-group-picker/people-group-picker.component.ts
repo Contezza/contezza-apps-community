@@ -14,7 +14,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { from, Observable, of, throwError } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs/operators';
 
-import { AlfrescoApiService, FormBaseModule, FormFieldModel, FormModel, FormService, PipeModule, User, WidgetComponent } from '@alfresco/adf-core';
+import { FormBaseModule, FormFieldModel, FormModel, FormService, PipeModule, User, WidgetComponent } from '@alfresco/adf-core';
+import { AlfrescoApiService } from '@alfresco/adf-content-services';
 import { Group, GroupsApi, PeopleApi } from '@alfresco/js-api';
 
 import { WebscriptService } from '@contezza/core/services';

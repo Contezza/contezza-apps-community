@@ -8,9 +8,12 @@
 .console-tab-group {
     height: 100%;
 
-    .mat-tab-body-wrapper {
+    .mat-mdc-tab-body-wrapper {
         height: 100%;
         overflow: auto;
+    }
+    .mat-mdc-tab:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label {
+        color: var(--theme-primary-color);
     }
 
     .mat-tab-body-content {

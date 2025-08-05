@@ -3,11 +3,11 @@
         <div class="picker-source-input">
             <div [class.adf-invalid]="!field.isValid" [class.adf-readonly]="field.readOnly">
                 <mat-form-field class="adf-full-width">
-                    <mat-chip-list #chipList aria-label="Users / Groups selection">
-                        <mat-chip *ngFor="let item of selectedItems" [selectable]="selectable" [removable]="removable" (removed)="removeItem(item)">
-                            {{ (item | includes : 'id') ? item.displayName : (item | userFullName) }}
+                    <mat-chip-grid #chipList aria-label="Users / Groups selection">
+                        <mat-chip-row *ngFor="let item of selectedItems" [removable]="removable" (removed)="removeItem(item)">
+                            {{ !(item | includes : 'lastName') ? item.displayName : (item | userFullName) }}
                             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                        </mat-chip>
+                        </mat-chip-row>
                         <div style="display: flex; flex-direction: row; align-items: center; width: 100%">
                             <input
                                 #inputValue
@@ -36,7 +36,7 @@
                                 </mat-select-trigger>
                             </mat-select>
                         </div>
-                    </mat-chip-list>
+                    </mat-chip-grid>
 
                     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onItemSelect($event.option.value)" class="picker-autocomplete">
                         <mat-option *ngFor="let item of _pickerType === 'people' ? (users$ | async) : (groups$ | async)" [value]="item" [disabled]="itemExist(item)">
