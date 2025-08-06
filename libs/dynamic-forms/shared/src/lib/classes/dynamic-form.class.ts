@@ -1,4 +1,4 @@
-import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidatorFn } from '@angular/forms';
 
 import { BehaviorSubject, combineLatest, defer, merge, Observable, of, startWith, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, switchMap, take, takeUntil } from 'rxjs/operators';
@@ -103,17 +103,17 @@ export class ContezzaDynamicForm {
         return control;
     }
 
-    static composeValidations(validations?: ContezzaDynamicFormValidation[]): ValidatorFn {
+    static composeValidations(validations?: ContezzaDynamicFormValidation[]): ValidatorFn[] {
         if (validations?.length) {
-            const validList = [];
+            const validList: ValidatorFn[] = [];
             validations
                 .filter((valid) => !!valid.validator)
                 .forEach((valid) => {
                     validList.push(valid.validator);
                 });
-            return Validators.compose(validList);
+            return validList;
         }
-        return null;
+        return [];
     }
 
     constructor(
