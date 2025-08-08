@@ -1,6 +1,6 @@
 <ng-container *contezzaLet="readonly$ | async as readonly">
     <mat-form-field
-        class="contezza-form-field contezza-input-form-field"
+        class="contezza-form-field contezza-dialog-form-field"
         [class.mat-form-field-disabled]="readonly"
         [class.contezza-form-field-disabled]="readonly"
         [floatLabel]="field.settings?.floatLabel"
@@ -15,7 +15,6 @@
                 spellcheck="false"
                 [formControl]="control"
                 [placeholder]="field.placeholder | translate"
-                [required]="required"
                 [readonly]="readonly"
                 data-lpignore="true"
                 [matAutocomplete]="auto"
@@ -26,21 +25,23 @@
         </ng-container>
 
         <ng-template #multiple>
-            <mat-chip-grid #chipList [formControl]="control" [required]="required">
-                <mat-chip-row *ngFor="let chip of control.value || []" (removed)="!readonly && remove(chip)">
-                    {{ chip | displayWith : displayFn }}
+            <input
+                matInput
+                type="text"
+                spellcheck="false"
+                [formControl]="control"
+                [placeholder]="field.placeholder | translate"
+                [readonly]="readonly"
+                data-lpignore="true"
+                style="position: absolute; height: 0; color: transparent"
+                (focusin)="!readonly && openDialog$.next()"
+            />
+            <mat-chip-set #chipList>
+                <mat-chip *ngFor="let chip of control.value || []" (removed)="!readonly && remove(chip)">
+                    {{ chip | apply : displayFn }}
                     <mat-icon matChipRemove>cancel</mat-icon>
-                </mat-chip-row>
-                <input
-                    spellcheck="false"
-                    [placeholder]="field.placeholder | translate"
-                    [readonly]="readonly"
-                    data-lpignore="true"
-                    [matChipInputFor]="chipList"
-                    style="margin: 0"
-                    (focusin)="!readonly && openDialog$.next()"
-                />
-            </mat-chip-grid>
+                </mat-chip>
+            </mat-chip-set>
         </ng-template>
 
         <button

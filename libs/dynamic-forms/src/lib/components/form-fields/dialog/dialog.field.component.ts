@@ -17,7 +17,7 @@ import { filter, shareReplay, takeUntil, throttleTime } from 'rxjs/operators';
 
 import { DialogLoaderService } from '@contezza/core/dialogs';
 import { ContezzaLetDirective } from '@contezza/core/directives';
-import { DisplayWithPipe } from '@contezza/core/pipes';
+import { ApplyPipe } from '@contezza/core/pipes';
 import { ContezzaStringTemplate } from '@contezza/core/utils';
 import { DynamicFormDialogData, ExtendedDynamicFormDefinition } from '@contezza/dynamic-forms/shared';
 import { ContezzaIdResolverService } from '@contezza/core/extensions';
@@ -51,17 +51,11 @@ type Settings = {
         TranslateModule,
         ContezzaLetDirective,
         ContezzaDynamicFormFieldErrorModule,
-        DisplayWithPipe,
+        ApplyPipe,
     ],
     selector: 'contezza-dialog-field',
     templateUrl: 'dialog.field.component.html',
-    styles: [
-        `
-            ::ng-deep.mat-chip-list-wrapper {
-                margin: unset !important;
-            }
-        `,
-    ],
+    styleUrls: ['dialog.field.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogFieldComponent<ValueType> extends ContezzaBaseFieldComponent<ValueType> implements OnInit {
