@@ -29,10 +29,10 @@ import { getPaginatorIntl } from './utils/get-paginator-intl';
             provide: DATE_FORMATS,
             useValue: {
                 parse: {
-                    dateInput: 'l',
+                    dateInput: ['D-M-YYYY', 'DD-MM-YYYY'],
                 },
                 display: {
-                    dateInput: 'L',
+                    dateInput: 'DD-MM-YYYY',
                     monthYearLabel: 'MMM YYYY',
                     dateA11yLabel: 'LL',
                     monthYearA11yLabel: 'MMMM YYYY',
