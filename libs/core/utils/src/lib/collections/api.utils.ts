@@ -33,7 +33,7 @@ export class ApiUtils {
      *
      * @param queryParameters
      */
-    static queryParametersToString(queryParameters: Record<string, OrArray<string | number | boolean>>) {
+    static queryParametersToString<T extends { [K in keyof T]: OrArray<string | number | boolean> }>(queryParameters: T) {
         const queryParametersAsString: string = Object.entries(queryParameters)
             .filter(([, value]) => value !== null && value !== undefined)
             .map(([key, value]) => `${key}=${value}`)
