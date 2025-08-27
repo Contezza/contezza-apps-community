@@ -82,7 +82,11 @@
         }
 
         &.contezza-form-field-disabled {
-            pointer-events: none;
+            pointer-events: none !important;
+
+            & * {
+                pointer-events: none !important;
+            }
 
             .mdc-checkbox .mdc-checkbox__native-control:checked ~ .mdc-checkbox__background {
                 border-color: transparent !important;
