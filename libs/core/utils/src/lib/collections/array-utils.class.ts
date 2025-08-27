@@ -53,13 +53,22 @@ export class ArrayUtils {
      * @param key A key of the array elements. The array elements are sorted based on the corresponding value.
      * @param options Optional parameters: `ascending` (defaults to `true`).
      */
-    static sortBy<T>(array: T[], key: keyof T, options?: { ascending?: boolean }): T[] {
+    static sortBy<T>(array: T[], key: keyof T, options?: { ascending?: boolean }): T[];
+    /**
+     * Sorts the element of the given `array` in place based on the value obtained applying the given `extractor` to each item.
+     *
+     * @param array An array to be sorted.
+     * @param extractor A function to be applied to each array element. The array elements are sorted based on the obtained value.
+     * @param options Optional parameters: `ascending` (defaults to `true`).
+     */
+    static sortBy<T>(array: T[], extractor: (item: T) => string | number, options?: { ascending?: boolean }): T[];
+    static sortBy<T>(array: T[], keyOrExtractor: keyof T | ((item: T) => string | number), options?: { ascending?: boolean }): T[] {
         const ascendingFactor = options?.ascending === false ? -1 : 1;
+        const getLabel = (element: T): T[keyof T] | string | number => {
+            const label = typeof keyOrExtractor === 'function' ? keyOrExtractor(element) : element[keyOrExtractor];
+            return typeof label === 'string' ? label.toLowerCase() : label;
+        };
         return array.sort((a, b) => {
-            const getLabel = (element: T): T[keyof T] | string => {
-                const label = element[key];
-                return typeof label === 'string' ? label.toLowerCase() : label;
-            };
             const labelA = getLabel(a);
             const labelB = getLabel(b);
             if (labelA < labelB) {
