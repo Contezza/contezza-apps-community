@@ -155,7 +155,7 @@ export class ContezzaObservableOperators {
     static in = (whitelist: any[]): OperatorFunction<any, any> =>
         map((value) => value?.filter((item) => whitelist.find((obj) => (typeof obj === 'object' ? Object.entries(obj).every(([key, val]) => item[key] === val) : item === obj))));
 
-    static sortBy = <T>(property: keyof T): OperatorFunction<T[], T[]> => tap((array) => ContezzaArrayUtils.sortBy(array, property));
+    static sortBy = <T>(property: keyof T): OperatorFunction<T[], T[]> => tap((array) => (array ? ContezzaArrayUtils.sortBy(array, property) : array));
 
     static or: OperatorFunction<any[], any | null> = map((array) => array.find((element) => !!element) || null);
 

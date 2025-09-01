@@ -1,10 +1,11 @@
 import { ErrorHandler as NgErrorHandler, Injectable, Injector, NgZone } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { Store } from '@ngrx/store';
 
 import { catchError, of } from 'rxjs';
 
-import { openErrorDetailsDialog } from '../store/actions';
+import { openErrorDetailsDialog } from '../store';
 
 @Injectable({ providedIn: 'root' })
 export class ErrorHandler extends NgErrorHandler {
@@ -34,10 +35,17 @@ export class ErrorHandler extends NgErrorHandler {
     }
 
     static formatError(e: Error): { message: string; details: any } | undefined {
+        if (e instanceof HttpErrorResponse) {
+            if (e.status !== 401) {
+                return { message: 'APP.MESSAGES.ERROR', details: e };
+            } else {
+                return undefined;
+            }
+        }
         let details;
         try {
             details = JSON.parse(e.message);
-        } catch (e) {}
+        } catch (_) {}
         if (details?.error) {
             details = details.error;
         }
