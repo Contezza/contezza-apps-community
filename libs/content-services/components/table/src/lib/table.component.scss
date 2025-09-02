@@ -26,6 +26,45 @@ contezza-table {
                 }
 
                 // style dynamic forms in column headers
+                .mat-sort-header-content contezza-dynamic-form-field,
+                .mat-sort-header-content .contezza-form-field {
+                    --mdc-outlined-text-field-outline-color: transparent;
+                    .mat-mdc-form-field-infix {
+                        --mat-form-field-container-height: 22px !important;
+                        margin: auto;
+                        padding-top: 0 !important;
+                        padding-bottom: 0 !important;
+                    }
+                    .mat-mdc-button-touch-target {
+                        display: none !important;
+                    }
+                    .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label:not(.mdc-floating-label--float-above) {
+                        white-space: normal;
+                        font-size: 13px;
+                        top: 50%;
+                    }
+                    .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mdc-notched-outline--upgraded .mdc-floating-label--float-above {
+                        --mat-form-field-container-height: 14px !important;
+                    }
+                    .mdc-line-ripple,
+                    .mat-mdc-form-field-subscript-wrapper {
+                        display: none;
+                    }
+
+                    .mat-mdc-form-field-flex {
+                        min-height: var(--mat-form-field-container-height);
+                    }
+
+                    .mdc-evolution-chip__text-label {
+                        font-size: 13px !important;
+                        padding: 0 4px;
+                    }
+
+                    .mat-mdc-icon-button {
+                        --mdc-icon-button-state-layer-size: 24px !important;
+                        padding: 0 !important;
+                    }
+                }
                 th.mat-mdc-header-cell {
                     .mat-mdc-form-field .mdc-floating-label {
                         font-weight: 700;
