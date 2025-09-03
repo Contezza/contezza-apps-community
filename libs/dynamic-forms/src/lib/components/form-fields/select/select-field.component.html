@@ -1,5 +1,11 @@
 <ng-container *contezzaLet="readonly$ | async as readonly">
-    <mat-form-field class="contezza-form-field contezza-select-form-field adf-property-field adf-card-textitem-field" floatLabel="auto" [appearance]="field.settings?.appearance">
+    <mat-form-field
+        class="contezza-form-field contezza-select-form-field adf-property-field adf-card-textitem-field"
+        [class.mat-form-field-disabled]="readonly"
+        [class.contezza-form-field-disabled]="readonly"
+        floatLabel="auto"
+        [appearance]="field.settings?.appearance"
+    >
         <mat-label *ngIf="field.label">{{ field.label | translate }}</mat-label>
         <mat-select
             #select
@@ -8,7 +14,6 @@
             (selectionChange)="control.markAsTouched()"
             [required]="required"
             [compareWith]="displayFn"
-            [disabled]="readonly"
         >
             <mat-select-trigger *ngIf="select.value?.contezzaDisplay">
                 <div title="{{ select.value?.contezzaDisplay.value.tooltip | translate }}">

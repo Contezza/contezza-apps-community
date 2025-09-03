@@ -226,7 +226,7 @@ export class TableComponent<ItemType> implements AfterViewInit {
                 const tableWidth = element.nativeElement.clientWidth;
                 // allow percentages: 0%, 5%, 10%, 15%, ..., 100%
                 ArrayUtils.range(0, 101, 5).forEach((n) => {
-                    const list = element.nativeElement.querySelectorAll(`.mat-header-cell:not(.contezza-resized).contezza-table-cell-${n}`);
+                    const list = element.nativeElement.querySelectorAll(`.mat-mdc-header-cell:not(.contezza-resized).contezza-table-cell-${n}`);
                     if (list.length) {
                         // solving: width + padding = n% tableWidth
                         // max with 0 to prevent negative values

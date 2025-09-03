@@ -11,6 +11,15 @@ export class StringUtils {
     }
 
     /**
+     * Transforms the given string from camelCase to UPPER_SNAKE_CASE.
+     *
+     * @param string
+     */
+    static camelToUpperSnake<T extends string>(string: T): StringFormatConversion.CamelToUpperSnake<T> {
+        return string.replace(/[A-Z]/g, (x) => `_${x}`).toUpperCase() as StringFormatConversion.CamelToUpperSnake<T>;
+    }
+
+    /**
      * Transforms the given string from kebab case to camel case.
      *
      * @param string

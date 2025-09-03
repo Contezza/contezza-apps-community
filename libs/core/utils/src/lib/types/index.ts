@@ -8,6 +8,7 @@ export * from './join.type';
 export * from './key-of.type';
 export * from './non-empty-array';
 export * from './object-entry.type';
+export * from './optional-value-of';
 export * from './query-parameters';
 export * from './pick-by-type.type';
 export * from './split.type';
