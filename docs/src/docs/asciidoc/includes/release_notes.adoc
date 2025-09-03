@@ -10,6 +10,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2025-09-03
+|3.2.0
+|View <<Release 3.2.0,release details>>.
+
 |2025-08-21
 |3.1.1
 |View <<Release 3.1.1,release details>>.
@@ -285,6 +289,18 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 3.2.0
+
+Bugfixes/minor changes:
+
+- @contezza/content-services - Improve style of dynamic-form fields when used as column filters.
+- @contezza/core/effects-helper - Improve typing of `EffectsHelper.getPayload`.
+- @contezza/core/notifications - Support handling of `HttpErrorResponse`.
+- @contezza/core/utils - Improve `ArrayUtils.sortBy` to also support a generic key extractor as parameter.
+- @contezza/core/utils - Fix error in `ContezzaObservableOperators.sortBy` when parameter is `undefined`.
+- @contezza/core/utils - Utility type `OptionalValueOf` added.
+- @contezza/dynamic-forms -  Fix behaviour of `multiautocomplete` and `select` fields when readonly.
 
 ==== Release 3.1.1
 
