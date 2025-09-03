@@ -6,7 +6,7 @@ import { ObjectUtils } from '@alfresco/adf-core';
 
 import moment from 'moment';
 
-import { ContezzaArrayUtils } from './array-utils.class';
+import { ArrayUtils } from './array-utils.class';
 import { ContezzaObjectUtils } from './object-utils.class';
 import { ContezzaStringTemplate } from '../classes';
 import { DateRange } from '../interfaces';
@@ -25,7 +25,7 @@ export class ContezzaObservableOperators {
         );
 
     static removeDuplicates = <T>(keys: string | string[]): OperatorFunction<T[], T[]> =>
-        map((value: T[]) => value?.filter((item, pos, self) => self.findIndex((item2) => ContezzaArrayUtils.asArray(keys).every((key) => item[key] === item2[key])) === pos));
+        map((value: T[]) => value?.filter((item, pos, self) => self.findIndex((item2) => ArrayUtils.asArray(keys).every((key) => item[key] === item2[key])) === pos));
 
     static defined: OperatorFunction<any, any> = filter((value) => value !== undefined && value !== null);
 
@@ -155,14 +155,19 @@ export class ContezzaObservableOperators {
     static in = (whitelist: any[]): OperatorFunction<any, any> =>
         map((value) => value?.filter((item) => whitelist.find((obj) => (typeof obj === 'object' ? Object.entries(obj).every(([key, val]) => item[key] === val) : item === obj))));
 
-    static sortBy = <T>(property: keyof T): OperatorFunction<T[], T[]> => tap((array) => (array ? ContezzaArrayUtils.sortBy(array, property) : array));
+    static sortBy = <T>(property: keyof T): OperatorFunction<T[], T[]> =>
+        tap((array) => {
+            if (array) {
+                ArrayUtils.sortBy(array, property);
+            }
+        });
 
     static or: OperatorFunction<any[], any | null> = map((array) => array.find((element) => !!element) || null);
 
     static renameProperties = (payload: { oldName: string; newName: string } | { oldName: string; newName: string }[]): OperatorFunction<any, any> =>
         tap((value) =>
-            ContezzaArrayUtils.asArray(value).forEach((x) =>
-                ContezzaArrayUtils.asArray(payload).forEach(({ oldName, newName }) => {
+            ArrayUtils.asArray(value).forEach((x) =>
+                ArrayUtils.asArray(payload).forEach(({ oldName, newName }) => {
                     if (x[oldName]) {
                         x[newName] = x[oldName];
                         delete x[oldName];
