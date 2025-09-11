@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { of, tap } from 'rxjs';
+import { forkJoin, map, of, tap } from 'rxjs';
 
 import { provideTranslations } from '@alfresco/adf-core';
 import { FavoritesApiService, NodesApiService, SearchService, SitesService } from '@alfresco/adf-content-services';
@@ -73,6 +73,53 @@ export class ExtensionModule {
                             orderBy: SortingUtils.searchToNodesApi(parameters.sorting),
                             where: '(assocType=cm:contains)',
                         });
+                    } else {
+                        return search.searchByQueryBody(
+                            ContentServicesSearchExtensionService.makeSearchQuery(template, {
+                                ...parameters,
+                                headerQuery: activeQueries.includes('headerQuery')
+                                    ? // if headerQuery is active, then use currentFolder in an ANCESTOR call
+                                      `(${parameters.headerQuery}) AND ANCESTOR:"workspace://SpacesStore/${currentFolder.id}"`
+                                    : // otherwise use currentFolder in a PARENT call
+                                      `PARENT:"workspace://SpacesStore/${currentFolder.id}"`,
+                            })
+                        );
+                    }
+                } else {
+                    return search.searchByQueryBody(ContentServicesSearchExtensionService.makeSearchQuery(template, parameters));
+                }
+            },
+            'browse-files-with-facets': ({ template, parameters }) => {
+                const { currentFolder } = parameters;
+                if (currentFolder) {
+                    const activeQueries = (Object.keys(parameters) as (keyof SearchParameters)[]).filter((key) => !!parameters[key] && key.endsWith('Query'));
+                    if (activeQueries.length === 0) {
+                        // if no active queries, then do node-children call
+                        return forkJoin([
+                            nodes.getNodeChildren(currentFolder.id, {
+                                include: ['path', 'properties', 'allowableOperations', 'permissions', 'aspectNames', 'isFavorite', 'definition'],
+                                ...parameters.paging,
+                                orderBy: SortingUtils.searchToNodesApi(parameters.sorting),
+                                where: '(assocType=cm:contains)',
+                            }),
+                            // by every node-children call, perform also a search call
+                            search.searchByQueryBody(
+                                ContentServicesSearchExtensionService.makeSearchQuery(template, {
+                                    ...parameters,
+                                    headerQuery: activeQueries.includes('headerQuery')
+                                        ? // if headerQuery is active, then use currentFolder in an ANCESTOR call
+                                          `(${parameters.headerQuery}) AND ANCESTOR:"workspace://SpacesStore/${currentFolder.id}"`
+                                        : // otherwise use currentFolder in a PARENT call
+                                          `PARENT:"workspace://SpacesStore/${currentFolder.id}"`,
+                                })
+                            ),
+                        ]).pipe(
+                            map(([childrenResponse, searchResponse]) => {
+                                // enrich the results of the node-children call with the facets from the search call and return them
+                                childrenResponse.list['context'] = searchResponse.list.context;
+                                return childrenResponse;
+                            })
+                        );
                     } else {
                         return search.searchByQueryBody(
                             ContentServicesSearchExtensionService.makeSearchQuery(template, {
