@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { TranslationService } from '@alfresco/adf-core';
+import { provideTranslations } from '@alfresco/adf-core';
 
 import { ContezzaLetModule } from '@contezza/core/directives';
 
@@ -9,9 +9,6 @@ import { ContezzaDynamicFormFieldErrorModule } from './components/dynamic-form-f
 @NgModule({
     imports: [ContezzaDynamicFormFieldErrorModule, ContezzaLetModule],
     exports: [ContezzaDynamicFormFieldErrorModule, ContezzaLetModule],
+    providers: [provideTranslations('dynamic-forms', 'assets/dynamic-forms')],
 })
-export class ContezzaDynamicFormsCommonModule {
-    constructor(translation: TranslationService) {
-        translation.addTranslationFolder('dynamic-forms', 'assets/dynamic-forms');
-    }
-}
+export class ContezzaDynamicFormsCommonModule {}
