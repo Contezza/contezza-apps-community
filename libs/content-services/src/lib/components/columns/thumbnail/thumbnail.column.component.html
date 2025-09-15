@@ -3,7 +3,13 @@
         <mat-icon class="contezza-thumbnail-column-selected" svgIcon="selected" />
     </ng-container>
     <ng-template #thumbnail>
-        <span [class]="data.class || ''" [style]="data.style || ''" [matBadge]="data.badge" [matTooltip]="data.tooltip || '' | translate">
+        <span
+            [class]="data.class || ''"
+            [style]="data.style || ''"
+            [matBadge]="data.badge"
+            [matTooltip]="data.tooltip || '' | translate"
+            matTooltipClass="contezza-thumbnail-column-tooltip"
+        >
             <ng-container *ngIf="data.icon.startsWith('./assets'); else icon">
                 <img style="vertical-align: middle" [src]="data.icon" alt="" />
             </ng-container>

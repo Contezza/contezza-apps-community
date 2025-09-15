@@ -4,7 +4,9 @@ import { TranslationService } from '@alfresco/adf-core';
 
 import { ContezzaLetModule } from '@contezza/core/directives';
 
-import { ContezzaDynamicFormFieldErrorModule } from './components/dynamic-form-field-error/dynamic-form-field-error.module';
+import {
+    ContezzaDynamicFormFieldErrorModule
+} from './components/dynamic-form-field-error/dynamic-form-field-error.module';
 
 @NgModule({
     imports: [ContezzaDynamicFormFieldErrorModule, ContezzaLetModule],

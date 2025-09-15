@@ -91,7 +91,7 @@ export class SearchResultsService {
     }
 
     readonly facets$: Observable<Record<string, GenericFacetResponse>> = this._results$.pipe(
-        map((results) => results?.list.context.facets),
+        map((results) => results?.list.context?.facets),
         map((facets) => {
             const output = {};
             facets?.forEach((facet) => (output[ContezzaUtils.labelToId(facet.label)] = facet));
