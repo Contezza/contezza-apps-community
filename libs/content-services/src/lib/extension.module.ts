@@ -102,8 +102,7 @@ export class ExtensionModule {
 
         thumbnails.setThumbnailIconResolvers<Node>({
             // generic fallback to default icons
-            canApply: () => true,
-            getIcon: (item) => adfThumbnails.getMimeTypeIcon(item.content?.mimeType || 'folder'),
+            apply: (item) => adfThumbnails.getMimeTypeIcon(item.content?.mimeType || 'folder'),
             order: Number.MAX_SAFE_INTEGER,
         });
     }
