@@ -40,7 +40,6 @@ export class ItemDetailsComponent<TItem> {
 
     private readonly ruleContext = toSignal(this.ruleContext$);
     readonly list = computed(() => {
-        console.log('compute list!!!');
         const context = this.ruleContext();
         const item = this.item();
         const list = this.extensions.getPropertyDisplayListById(this.id());
