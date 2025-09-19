@@ -9,7 +9,7 @@ import { combineLatest } from 'rxjs';
 
 import { ConfirmDialogComponent } from '@alfresco/adf-core';
 
-import { makeShowSnackbarErrorAction, makeShowSnackbarInfoAction } from '@contezza/core/notifications';
+import { showSnackbarError, showSnackbarInfo } from '@contezza/core/notifications';
 
 import { JsConsoleActions } from './index';
 import { getConsolePayloadInfo, getScriptsList, getSelectedScript } from './selectors';
@@ -139,8 +139,8 @@ export class JsConsoleEffects {
                                 ? [
                                       JsConsoleActions.loadScriptsList({ selectScript: response.created }),
                                       !('errorMessage' in response)
-                                          ? makeShowSnackbarInfoAction('CONTEZZA.JS_CONSOLE.MESSAGES.SCRIPT_UPDATED_SUCCESSFULLY')
-                                          : makeShowSnackbarErrorAction(response.errorMessage),
+                                          ? showSnackbarError({ payload: 'CONTEZZA.JS_CONSOLE.MESSAGES.SCRIPT_UPDATED_SUCCESSFULLY' })
+                                          : showSnackbarError({ payload: response.errorMessage }),
                                   ]
                                 : []
                         )
@@ -180,8 +180,8 @@ export class JsConsoleEffects {
                                     ? [
                                           JsConsoleActions.loadScriptsList({ selectScript: undefined }),
                                           !('errorMessage' in response)
-                                              ? makeShowSnackbarInfoAction('CONTEZZA.JS_CONSOLE.MESSAGES.SCRIPT_CREATED_SUCCESSFULLY')
-                                              : makeShowSnackbarErrorAction(response.errorMessage),
+                                              ? showSnackbarInfo({ payload: 'CONTEZZA.JS_CONSOLE.MESSAGES.SCRIPT_CREATED_SUCCESSFULLY' })
+                                              : showSnackbarError({ payload: response.errorMessage }),
                                       ]
                                     : []
                             )
