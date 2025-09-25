@@ -7,6 +7,7 @@ import { map, switchMap, tap } from 'rxjs/operators';
 
 import { ObjectUtils } from '@alfresco/adf-core';
 
+import { showSnackbarError } from '@contezza/core/notifications';
 import { ContezzaObjectUtils } from '@contezza/core/utils';
 
 import { ContezzaDependenciesService } from './dependencies.service';
@@ -67,7 +68,7 @@ export class ContezzaDynamicSourceProcessorService {
                     tap(() => loading?.next(new ContezzaLoadingEvent(true))),
                     tap((res) => {
                         if (!res && source.error) {
-                            this.store.dispatch({ type: 'SNACKBAR_ERROR', payload: source.error });
+                            this.store.dispatch(showSnackbarError({ payload: source.error }));
                         }
                     })
                 )
