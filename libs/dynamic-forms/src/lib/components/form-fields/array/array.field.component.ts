@@ -8,7 +8,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map, shareReplay, takeUntil } from 'rxjs/operators';
 
 import { ContentActionRef, ContentActionType } from '@alfresco/adf-extensions';
-import { SharedToolbarModule } from '@alfresco/aca-shared';
+import { ToolbarActionComponent } from '@alfresco/aca-shared';
 
 import { ContezzaLetModule } from '@contezza/core/directives';
 import { DestroyService } from '@contezza/core/services';
@@ -22,19 +22,19 @@ import { ContezzaBaseFieldComponent } from '../base-field.component';
 @Component({
     selector: 'contezza-array-field',
     standalone: true,
-    imports: [CommonModule, TranslateModule, SharedToolbarModule, ContezzaLetModule, ContezzaDynamicFormComponent],
+    imports: [CommonModule, TranslateModule, ToolbarActionComponent, ContezzaLetModule, ContezzaDynamicFormComponent],
     template: `<ng-container *contezzaLet="readonly$ | async as readonly">
         <div class="contezza-form-field contezza-array-form-field adf-property-field adf-card-textitem-field">
             <div class="mat-form-field-label mat-form-field-empty contezza-array-form-field-label" *ngIf="field.label">{{ field.label | translate }}</div>
             <div *ngIf="forms$ | async as forms" class="contezza-array-form-field-list">
                 <ng-container *ngFor="let form of forms; trackBy: trackByKey">
                     <div class="contezza-array-form-field-list-item">
-                        <contezza-dynamic-form [dynamicForm]="form.value"></contezza-dynamic-form>
-                        <aca-toolbar-action *ngIf="!readonly" [actionRef]="deleteAction" (keydown.enter)="delete(form.key)" (click)="delete(form.key)"></aca-toolbar-action>
+                        <contezza-dynamic-form [dynamicForm]="form.value" />
+                        <aca-toolbar-action *ngIf="!readonly" [actionRef]="deleteAction" (keydown.enter)="delete(form.key)" (click)="delete(form.key)" />
                     </div>
                 </ng-container>
             </div>
-            <aca-toolbar-action *ngIf="!readonly" [actionRef]="addAction" (keydown.enter)="add()" (click)="add()"></aca-toolbar-action>
+            <aca-toolbar-action *ngIf="!readonly" [actionRef]="addAction" (keydown.enter)="add()" (click)="add()" />
         </div>
     </ng-container>`,
     styleUrls: ['./array.field.component.scss'],

@@ -6,6 +6,7 @@ import { startWith } from 'rxjs/operators';
 import { ContezzaBaseFieldComponent } from '../base-field.component';
 
 @Component({
+    standalone: false,
     selector: 'contezza-info-field',
     templateUrl: './info-field.component.html',
     styleUrls: ['./info-field.component.scss'],

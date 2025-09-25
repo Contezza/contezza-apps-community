@@ -5,6 +5,7 @@ import { ContezzaBaseFieldComponent } from '../base-field.component';
 import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
+    standalone: false,
     selector: 'contezza-chips-input-field',
     templateUrl: './chips-input-field.component.html',
     styleUrls: ['./chips-input-field.component.scss'],

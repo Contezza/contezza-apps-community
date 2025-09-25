@@ -17,6 +17,7 @@ import { executeSearch, loadStores, setSearchParam } from '../../store/actions';
 import { ColumnInfo } from '@contezza/node-browser/shared';
 
 @Component({
+    standalone: false,
     selector: 'mgmt-node-browser-search',
     templateUrl: './node-browser-search.component.html',
     styleUrls: ['./node-browser-search.component.scss'],

@@ -14,6 +14,7 @@ export interface DynamicFieldChangePayload {
 }
 
 @Component({
+    standalone: false,
     selector: 'contezza-dynamic-field',
     templateUrl: './dynamic-field.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,

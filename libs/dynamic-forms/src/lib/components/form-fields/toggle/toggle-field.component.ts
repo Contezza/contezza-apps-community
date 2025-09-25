@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ContezzaBaseFieldComponent } from '../base-field.component';
 
 @Component({
+    standalone: false,
     selector: 'contezza-toggle-field',
     templateUrl: 'toggle-field.component.html',
     styleUrls: ['toggle-field.component.scss'],

@@ -12,6 +12,7 @@ import { ContezzaDisplayableValue, ContezzaDynamicForm, ContezzaFormField } from
 import { ContezzaBaseFieldComponent } from '../base-field.component';
 
 @Component({
+    standalone: false,
     selector: 'contezza-multiautocomplete-field',
     templateUrl: './multiautocomplete-field.component.html',
     styleUrls: ['./multiautocomplete-field.component.scss'],

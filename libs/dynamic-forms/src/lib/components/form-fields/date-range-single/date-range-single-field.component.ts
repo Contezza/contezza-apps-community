@@ -15,6 +15,7 @@ import { DATE_FORMATS, DateRange } from '@contezza/core/utils';
 import { ContezzaBaseFieldComponent } from '../base-field.component';
 
 @Component({
+    standalone: false,
     selector: 'contezza-date-range-single-field',
     templateUrl: './date-range-single-field.component.html',
     styleUrls: ['./date-range-single-field.component.scss'],

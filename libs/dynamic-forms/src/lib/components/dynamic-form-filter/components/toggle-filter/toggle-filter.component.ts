@@ -1,15 +1,18 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { ThemePalette } from '@angular/material/core';
 
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, Observable } from 'rxjs';
 
 import { ContentActionRef, ContentActionType } from '@alfresco/adf-extensions';
+import { ToolbarButtonComponent } from '@alfresco/aca-shared';
 
 import { ContezzaDynamicFormFilterService } from '../../../../services/';
 
 @Component({
+    standalone: true,
+    imports: [CommonModule, ToolbarButtonComponent],
     selector: 'contezza-toggle-filter',
     templateUrl: './toggle-filter.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,

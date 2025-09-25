@@ -14,6 +14,7 @@ import { DateRange } from '@contezza/core/utils';
 import { ContezzaBaseFieldComponent } from '../base-field.component';
 
 @Component({
+    standalone: false,
     selector: 'contezza-date-range-chip-field',
     templateUrl: './date-range-chip-field.component.html',
     styleUrls: ['./date-range-chip-field.component.scss'],

@@ -7,6 +7,7 @@ import { DynamicFormItem } from '@contezza/dynamic-forms/shared';
 import { MultiDynamicFormShellStore } from '../../multi-dynamic-form-shell.store';
 
 @Directive({
+    standalone: true,
     selector: '[contezzaActivable]',
     exportAs: 'contezzaActivable',
 })

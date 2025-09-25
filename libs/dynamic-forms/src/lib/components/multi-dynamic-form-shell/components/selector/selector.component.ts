@@ -1,12 +1,19 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
+import { CommonModule } from '@angular/common';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
-import { combineLatest, Observable } from 'rxjs';
-import { debounceTime, map } from 'rxjs/operators';
+import { TranslateModule } from '@ngx-translate/core';
 
-import { SelectionStore } from '@contezza/core/context';
+import { combineLatest, debounceTime, map, Observable } from 'rxjs';
+
+import { ContezzaSelectableDirective, SelectionStore } from '@contezza/core/context';
 import { Column, DynamicFormItem, DynamicFormItemGroup } from '@contezza/dynamic-forms/shared';
+import { ContezzaLetDirective } from '@contezza/core/directives';
+
+import { TableCellComponent } from './components/table-cell/table-cell.component';
+import { ContezzaActivableDirective } from '../../directives/activable/activable.directive';
 
 export enum Mode {
     Expanded = 'expanded',
@@ -14,6 +21,18 @@ export enum Mode {
 }
 
 @Component({
+    standalone: true,
+    imports: [
+        CommonModule,
+        MatCheckboxModule,
+        MatSortModule,
+        MatTableModule,
+        TranslateModule,
+        ContezzaLetDirective,
+        ContezzaSelectableDirective,
+        TableCellComponent,
+        ContezzaActivableDirective,
+    ],
     selector: 'contezza-selector',
     templateUrl: './selector.component.html',
     styleUrls: ['./selector.component.scss'],

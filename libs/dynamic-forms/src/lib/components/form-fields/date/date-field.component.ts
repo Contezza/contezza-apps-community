@@ -18,6 +18,7 @@ import { ContezzaDynamicForm } from '@contezza/dynamic-forms/shared';
 import { ContezzaBaseFieldComponent } from '../base-field.component';
 
 @Component({
+    standalone: false,
     selector: 'contezza-date-field',
     templateUrl: './date-field.component.html',
     styleUrls: ['./date-field.component.scss'],

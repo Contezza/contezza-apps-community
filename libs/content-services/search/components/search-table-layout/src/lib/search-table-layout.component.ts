@@ -29,7 +29,7 @@ import { PaginationMode, Results, SelectionMode } from '@contezza/content-servic
 import { loadPreset, loadPresets, PresetType, saveNewVersion, savePreset } from '@contezza/content-services/presets/shared';
 import { PresetPanelComponent } from '@contezza/content-services/presets/components/preset-panel';
 import { ContezzaDynamicSearchForm, DYNAMIC_FORM_DEPENDENCIES, QueryMode } from '@contezza/dynamic-forms/shared';
-import { ContezzaDynamicFormFilterModule, ContezzaDynamicFormModule, ContezzaDynamicSearchFormService } from '@contezza/dynamic-forms';
+import { ContezzaDynamicFormFilterComponent, ContezzaDynamicFormModule, ContezzaDynamicSearchFormService } from '@contezza/dynamic-forms';
 import { InfoDrawerComponent } from '@contezza/core/components/info-drawer';
 import { LayoutItemTypes } from '@contezza/core/components/page-layout-content';
 import {
@@ -65,7 +65,7 @@ import { HeaderComponent } from './components';
         InfoDrawerComponent,
         ContezzaLetModule,
         ContezzaDynamicFormModule,
-        ContezzaDynamicFormFilterModule,
+        ContezzaDynamicFormFilterComponent,
         DynamicComponent,
         SearchResultsViewDirective,
         SearchResultPreviewDirective,

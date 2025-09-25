@@ -3,8 +3,9 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { DestroyService } from '@contezza/core/services';
 
 @Component({
+    standalone: false,
     selector: 'contezza-dynamic-form-option',
-    template: ` <ng-container dynamicFormOption [component]="component" [value]="value"></ng-container> `,
+    template: ` <ng-container dynamicFormOption [component]="component" [value]="value" /> `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [DestroyService],
 })

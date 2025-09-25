@@ -6,6 +6,7 @@ import { NodeBrowserViewItem, NodeBrowserViewResponse } from '../../../interface
 import { ColumnInfo } from '@contezza/node-browser/shared';
 
 @Component({
+    standalone: false,
     selector: 'node-browser-view-item',
     templateUrl: './view-item.component.html',
     styleUrls: ['./view-item.component.scss'],

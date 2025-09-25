@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs';
 import { ContezzaBaseFieldComponent } from '../base-field.component';
 
 @Component({
+    standalone: false,
     selector: 'contezza-checkbox-field',
     templateUrl: './checkbox-field.component.html',
     styleUrls: ['./checkbox-field.component.scss'],
