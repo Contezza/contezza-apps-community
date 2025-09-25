@@ -8,7 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { Subject } from 'rxjs';
 
-import { ContentActionRef, ExtensionsModule } from '@alfresco/adf-extensions';
+import { ContentActionRef, DynamicExtensionComponent } from '@alfresco/adf-extensions';
 
 import { DetectChangesDirective, IconDirective } from '@contezza/core/directives';
 
@@ -18,7 +18,7 @@ const defaultSettings: ContextMenuSettings = { hasBackdrop: false };
 
 @Component({
     standalone: true,
-    imports: [CommonModule, MatDividerModule, MatIconModule, MatMenuModule, TranslateModule, ExtensionsModule, DetectChangesDirective, IconDirective],
+    imports: [CommonModule, MatDividerModule, MatIconModule, MatMenuModule, TranslateModule, DynamicExtensionComponent, DetectChangesDirective, IconDirective],
     selector: 'contezza-context-menu',
     templateUrl: 'context-menu.component.html',
     styleUrls: ['context-menu.component.scss'],

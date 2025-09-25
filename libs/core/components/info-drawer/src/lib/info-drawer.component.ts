@@ -5,7 +5,7 @@ import { map, ReplaySubject, tap, withLatestFrom } from 'rxjs';
 
 import { Node } from '@alfresco/js-api';
 import { InfoDrawerModule } from '@alfresco/adf-core';
-import { ExtensionsModule, SidebarTabRef } from '@alfresco/adf-extensions';
+import { DynamicTabComponent, SidebarTabRef } from '@alfresco/adf-extensions';
 import { AppExtensionService, ToolbarComponent } from '@alfresco/aca-shared';
 
 import { DetectChangesDirective, ReloadOnChangeOfDirective } from '@contezza/core/directives';
@@ -13,7 +13,7 @@ import { DynamicComponent, IsDefinedPipe } from '@contezza/core/dynamic-componen
 
 @Component({
     standalone: true,
-    imports: [CommonModule, InfoDrawerModule, ExtensionsModule, ToolbarComponent, DetectChangesDirective, ReloadOnChangeOfDirective, DynamicComponent, IsDefinedPipe],
+    imports: [CommonModule, InfoDrawerModule, DynamicTabComponent, ToolbarComponent, DetectChangesDirective, ReloadOnChangeOfDirective, DynamicComponent, IsDefinedPipe],
     selector: 'contezza-info-drawer',
     templateUrl: 'info-drawer.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
