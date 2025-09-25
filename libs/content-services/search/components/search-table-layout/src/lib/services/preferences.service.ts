@@ -6,8 +6,9 @@ import { Observable, of, Subject, take } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, filter, map, pairwise, share, skip, switchMap, takeUntil, tap, timeout } from 'rxjs/operators';
 
 import { AppConfigService, AuthenticationService, ObjectUtils } from '@alfresco/adf-core';
-import { AppStore, getUserProfile, SnackbarInfoAction } from '@alfresco/aca-shared/store';
+import { AppStore, getUserProfile } from '@alfresco/aca-shared/store';
 
+import { showSnackbarInfo } from '@contezza/core/notifications';
 import { DestroyService, PreferencesService as CorePreferencesService } from '@contezza/core/services';
 import { ContezzaObservables, ContezzaStringTemplate } from '@contezza/core/utils';
 import { ContezzaDynamicForm } from '@contezza/dynamic-forms/shared';
@@ -82,7 +83,7 @@ export class PreferencesService {
         const preferencesPath = PreferencesService.TEMPLATE.evaluate({ storagePrefix, id });
         this.username$
             .pipe(switchMap((username) => this.preferences.delete(username, preferencesPath)))
-            .subscribe(() => this.store.dispatch(new SnackbarInfoAction('APP.MESSAGES.PREFERENCES_CLEARED')));
+            .subscribe(() => this.store.dispatch(showSnackbarInfo({ payload: 'APP.MESSAGES.PREFERENCES_CLEARED' })));
     }
 
     bind(form: ContezzaDynamicForm, id: string);

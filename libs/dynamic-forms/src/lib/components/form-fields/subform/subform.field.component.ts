@@ -67,7 +67,7 @@ export class SubformFieldComponent extends ContezzaBaseFieldComponent implements
         this.parent.addControl(SubformFieldComponent.FORM_CONTROL_NAME, this.subform.form);
 
         // sync this.control.value with this.subform.form.value
-        this.valueChangesSubscription = this.subform.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((value) => this.control.setValue(value));
+        this.valueChangesSubscription = this.subform.value$.pipe(takeUntil(this.destroy$)).subscribe((value) => this.control.setValue(value));
         this.control.setValue(this.subform.form.value);
     }
 }

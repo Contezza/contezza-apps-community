@@ -10,6 +10,14 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2025-09-25
+|3.2.3
+|View <<Release 3.2.3,release details>>.
+
+|2025-09-18
+|3.2.2
+|View <<Release 3.2.2,release details>>.
+
 |2025-09-11
 |3.2.1
 |View <<Release 3.2.1,release details>>.
@@ -293,6 +301,23 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 3.2.3
+
+New features:
+
+- @contezza/core/notifications - Add actions `showSnackbarInfo` and `showSnackbarError`,  implement the corresponding effects and refactor all libraries to use these actions instead of `SnackbarInfoAction` and `SnackbarErrorAction`. These new actions replace `SnackbarInfoAction` and `SnackbarErrorAction` which are being removed from ACA in version 7.0.0 https://support.contezza.nl/issues/34816[(#34816)].
+
+Bugfixes/minor changes:
+
+- @contezza/content-services - Improve `ItemDetailsComponent` to re-evaluate property visibility on rule-context change and to support dynamic-component styling https://support.contezza.nl/issues/34705[(#34705)].
+- @contezza/dynamic-forms - Field `subform` applies value formatting.
+
+==== Release 3.2.2
+
+Bugfixes/minor changes:
+
+- @contezza/core/translate - Fix bug preventing apps from switching from English to other languages https://support.contezza.nl/issues/34752[(#34752)].
 
 ==== Release 3.2.1
 

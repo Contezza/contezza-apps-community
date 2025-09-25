@@ -5,12 +5,14 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { of, switchMap, tap } from 'rxjs';
+import { map, of, switchMap, tap } from 'rxjs';
+
+import { NotificationService as AdfNotificationService } from '@alfresco/adf-core';
 
 import { DialogLoaderService } from '@contezza/core/dialogs';
 
 import { NotificationService } from '../services/notification.service';
-import { closeLoadingDialog, openErrorDetailsDialog, openLoadingDialog } from './actions';
+import { closeLoadingDialog, openErrorDetailsDialog, openLoadingDialog, showSnackbarError, showSnackbarInfo } from './actions';
 
 @Injectable()
 export class Effects {
@@ -19,6 +21,7 @@ export class Effects {
         private readonly snackbar: MatSnackBar,
         private readonly translate: TranslateService,
         private readonly dialog: DialogLoaderService,
+        private readonly adfNotifications: AdfNotificationService,
         private readonly notifications: NotificationService
     ) {}
 
@@ -68,6 +71,28 @@ export class Effects {
                             )
                         )
                 )
+            ),
+        { dispatch: false }
+    );
+
+    // snackbar
+
+    readonly showSnackbarInfo$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(showSnackbarInfo),
+                map(({ payload }) => (typeof payload === 'string' ? { message: payload } : payload)),
+                tap(({ message, interpolateArgs }) => this.adfNotifications.showInfo(message, null, interpolateArgs))
+            ),
+        { dispatch: false }
+    );
+
+    readonly showSnackbarError$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(showSnackbarError),
+                map(({ payload }) => (typeof payload === 'string' ? { message: payload } : payload)),
+                tap(({ message, interpolateArgs }) => this.adfNotifications.showError(message, null, interpolateArgs))
             ),
         { dispatch: false }
     );
