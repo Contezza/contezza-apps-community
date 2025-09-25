@@ -1,12 +1,11 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, HostBinding, input } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
 import { TranslateModule } from '@ngx-translate/core';
 
 import { Store } from '@ngrx/store';
-
-import { map, Observable } from 'rxjs';
 
 import { RuleContext } from '@alfresco/adf-extensions';
 
@@ -15,7 +14,7 @@ import { ContezzaLetDirective, IconDirective } from '@contezza/core/directives';
 import { ApplyPipe } from '@contezza/core/pipes';
 import { OrArray } from '@contezza/core/utils';
 import { RuleService } from '@contezza/core/extensions';
-import { ContentServicesExtensionService, DisplayPropertyPipe, PropertyDisplay } from '@contezza/content-services/shared';
+import { ContentServicesExtensionService, DisplayPropertyPipe } from '@contezza/content-services/shared';
 import { TranslatePropertyTitlePipe } from '@contezza/core/property-titles';
 import { DynamicComponent } from '@contezza/core/dynamic-component';
 
@@ -29,31 +28,32 @@ import { DynamicComponent } from '@contezza/core/dynamic-component';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ItemDetailsComponent<TItem> {
-    @Input()
-    item!: TItem;
+    // @Input()
+    readonly item = input.required<TItem>();
 
-    @Input()
-    set id(id: string) {
-        this._id = id;
-        this._list = this.extensions.getPropertyDisplayListById(id);
-    }
+    // @Input()
+    private readonly id = input.required<string>();
 
     @HostBinding('id')
     // @ts-ignore
     private _id?: string;
 
-    private _list?: ({ id: string } & PropertyDisplay)[];
-
-    readonly list$: Observable<({ id: string } & PropertyDisplay)[]> = this.ruleContext$.pipe(
-        map((context) => (this._list ? this.rules.filterList(this._list, { ...context, item: this.item } as RuleContext) : []))
-    );
+    private readonly ruleContext = toSignal(this.ruleContext$);
+    readonly list = computed(() => {
+        const context = this.ruleContext();
+        const item = this.item();
+        const list = this.extensions.getPropertyDisplayListById(this.id());
+        return list ? this.rules.filterList(list, { ...context, item } as RuleContext) : [];
+    });
 
     constructor(
         private readonly store: Store,
         private readonly rules: RuleService,
         private readonly ruleContext$: RuleContextService,
         private readonly extensions: ContentServicesExtensionService
-    ) {}
+    ) {
+        effect(() => (this._id = this.id()));
+    }
 
     readonly ifArray = (x: OrArray<any>): any[] | undefined => (Array.isArray(x) ? x : undefined);
 
