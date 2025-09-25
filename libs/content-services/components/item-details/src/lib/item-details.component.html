@@ -1,58 +1,54 @@
-<ng-container *ngIf="list$ | async as list">
-    <ng-container *ngIf="list?.length">
-        <ng-container *ngFor="let entry of list">
-            <ng-container *contezzaLet="entry.actions?.click as clickAction">
-                <div class="contezza-item-details-entry" [id]="entry.id">
-                    <ng-container *contezzaLet="entry.title ? (entry.title | translate) : '' as title">
-                        <mat-icon *ngIf="entry.icon" color="primary" class="contezza-item-details-entry-icon" [contezzaIcon]="entry.icon || ''" [title]="title"></mat-icon>
-                        <div class="contezza-item-details-entry-title">
-                            <ng-container *ngIf="title | translatePropertyTitle as label$; else translatedLabel">
-                                {{ label$ | async }}
-                            </ng-container>
-                            <ng-template #translatedLabel>
-                                {{ title }}
-                            </ng-template>
-                        </div>
-                    </ng-container>
-                    <ng-container *contezzaLet="item | displayProperty : entry | async as value">
-                        <ng-container *ngIf="entry.template">
-                            <div class="contezza-item-details-entry-value">
-                                <contezza-dynamic-component [id]="entry.template" [data]="{ item: item, column: entry }"></contezza-dynamic-component>
-                            </div>
-                        </ng-container>
-                        <ng-container *ngIf="!entry.template">
-                            <ng-container *ngIf="value | apply : ifArray as valueList; else simpleValue">
-                                <div class="contezza-item-details-entry-value list">
-                                    <ng-container *ngFor="let valueListItem of valueList">
-                                        <div
-                                            class="contezza-item-details-entry-value list-item"
-                                            [class]="entry.class"
-                                            [style]="entry.style"
-                                            [class.clickable]="!!clickAction"
-                                            [title]="valueListItem"
-                                            (click)="clickAction && execute(clickAction, valueListItem)"
-                                        >
-                                            {{ valueListItem }}
-                                        </div>
-                                    </ng-container>
-                                </div>
-                            </ng-container>
-                            <ng-template #simpleValue>
-                                <div
-                                    class="contezza-item-details-entry-value"
-                                    [class]="entry.class"
-                                    [style]="entry.style"
-                                    [class.clickable]="!!clickAction"
-                                    [title]="value"
-                                    (click)="clickAction && execute(clickAction, value)"
-                                >
-                                    {{ value }}
-                                </div>
-                            </ng-template>
-                        </ng-container>
-                    </ng-container>
+@if (list(); as list) { @if (list?.length) { @for (entry of list; track entry.id) {
+<ng-container *contezzaLet="entry.actions?.click as clickAction">
+    <div class="contezza-item-details-entry" [id]="entry.id">
+        <ng-container *contezzaLet="entry.title ? (entry.title | translate) : '' as title">
+            <mat-icon *ngIf="entry.icon" color="primary" class="contezza-item-details-entry-icon" [contezzaIcon]="entry.icon || ''" [title]="title" />
+            <div class="contezza-item-details-entry-title">
+                <ng-container *ngIf="title | translatePropertyTitle as label$; else translatedLabel">
+                    {{ label$ | async }}
+                </ng-container>
+                <ng-template #translatedLabel>
+                    {{ title }}
+                </ng-template>
+            </div>
+        </ng-container>
+        <ng-container *contezzaLet="item() | displayProperty : entry | async as value">
+            <ng-container *ngIf="entry.template">
+                <div class="contezza-item-details-entry-value" [class]="entry.class" [style]="entry.style">
+                    <contezza-dynamic-component [id]="entry.template" [data]="{ item: item(), column: entry }" />
                 </div>
             </ng-container>
+            <ng-container *ngIf="!entry.template">
+                <ng-container *ngIf="value | apply : ifArray as valueList; else simpleValue">
+                    <div class="contezza-item-details-entry-value list">
+                        <ng-container *ngFor="let valueListItem of valueList">
+                            <div
+                                class="contezza-item-details-entry-value list-item"
+                                [class]="entry.class"
+                                [style]="entry.style"
+                                [class.clickable]="!!clickAction"
+                                [title]="valueListItem"
+                                (click)="clickAction && execute(clickAction, valueListItem)"
+                            >
+                                {{ valueListItem }}
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+                <ng-template #simpleValue>
+                    <div
+                        class="contezza-item-details-entry-value"
+                        [class]="entry.class"
+                        [style]="entry.style"
+                        [class.clickable]="!!clickAction"
+                        [title]="value"
+                        (click)="clickAction && execute(clickAction, value)"
+                    >
+                        {{ value }}
+                    </div>
+                </ng-template>
+            </ng-container>
         </ng-container>
-    </ng-container>
+    </div>
 </ng-container>
+} } }

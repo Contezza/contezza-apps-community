@@ -7,8 +7,9 @@ import { Store } from '@ngrx/store';
 import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
 
-import { SnackbarErrorAction, SnackbarInfoAction } from '@alfresco/aca-shared/store';
 import { ConfirmDialogComponent } from '@alfresco/adf-core';
+
+import { showSnackbarError, showSnackbarInfo } from '@contezza/core/notifications';
 
 import { JsConsoleActions } from './index';
 import { getConsolePayloadInfo, getScriptsList, getSelectedScript } from './selectors';
@@ -138,8 +139,8 @@ export class JsConsoleEffects {
                                 ? [
                                       JsConsoleActions.loadScriptsList({ selectScript: response.created }),
                                       !('errorMessage' in response)
-                                          ? new SnackbarInfoAction('CONTEZZA.JS_CONSOLE.MESSAGES.SCRIPT_UPDATED_SUCCESSFULLY')
-                                          : new SnackbarErrorAction(response.errorMessage),
+                                          ? showSnackbarError({ payload: 'CONTEZZA.JS_CONSOLE.MESSAGES.SCRIPT_UPDATED_SUCCESSFULLY' })
+                                          : showSnackbarError({ payload: response.errorMessage }),
                                   ]
                                 : []
                         )
@@ -179,8 +180,8 @@ export class JsConsoleEffects {
                                     ? [
                                           JsConsoleActions.loadScriptsList({ selectScript: undefined }),
                                           !('errorMessage' in response)
-                                              ? new SnackbarInfoAction('CONTEZZA.JS_CONSOLE.MESSAGES.SCRIPT_CREATED_SUCCESSFULLY')
-                                              : new SnackbarErrorAction(response.errorMessage),
+                                              ? showSnackbarInfo({ payload: 'CONTEZZA.JS_CONSOLE.MESSAGES.SCRIPT_CREATED_SUCCESSFULLY' })
+                                              : showSnackbarError({ payload: response.errorMessage }),
                                       ]
                                     : []
                             )

@@ -13,10 +13,10 @@ import { defer, startWith } from 'rxjs';
 
 import { ContentActionRef, ContentActionType, mergeObjects } from '@alfresco/adf-extensions';
 import { ToolbarActionComponent } from '@alfresco/aca-shared';
-import { SnackbarErrorAction } from '@alfresco/aca-shared/store';
 
 import { ContezzaLetDirective } from '@contezza/core/directives';
 import { TranslatePropertyTitlePipe } from '@contezza/core/property-titles';
+import { showSnackbarError } from '@contezza/core/notifications';
 import { DeepPartial } from '@contezza/core/utils';
 
 import { ContezzaBaseFieldComponent } from '../base-field.component';
@@ -116,7 +116,7 @@ export class UploadFieldComponent extends ContezzaBaseFieldComponent<File, File[
                 // spread because otherwise there is no change
                 this.control.setValue([...value]);
             } else {
-                this.store.dispatch(new SnackbarErrorAction('CONTEZZA.MESSAGES.ERRORS.FILE_MIMETYPE_INVALID'));
+                this.store.dispatch(showSnackbarError({ payload: 'CONTEZZA.MESSAGES.ERRORS.FILE_MIMETYPE_INVALID' }));
             }
         }
     }

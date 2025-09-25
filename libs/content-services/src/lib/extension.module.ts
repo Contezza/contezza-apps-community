@@ -9,11 +9,11 @@ import { Node } from '@alfresco/js-api';
 import { provideTranslations, ThumbnailService as AdfThumbnailService } from '@alfresco/adf-core';
 import { FileUploadStatus } from '@alfresco/adf-content-services';
 import { ExtensionService as AdfExtensionService, provideExtensionConfig, RuleService } from '@alfresco/adf-extensions';
-import { SnackbarInfoAction } from '@alfresco/aca-shared/store';
 
 import { AdfUtils, ArrayUtils } from '@contezza/core/utils';
 import { UploadFilterService } from '@contezza/core/extensions';
 import { RuleContextService } from '@contezza/core/context';
+import { showSnackbarInfo } from '@contezza/core/notifications';
 
 import { ExtensionService, ThumbnailService } from '@contezza/content-services/shared';
 
@@ -73,12 +73,12 @@ export class ExtensionModule {
                                 // cancel folders upload if not allowed
                                 if (!canUploadFolder && folders.length) {
                                     folders.forEach((node) => (node.status = FileUploadStatus.Cancelled));
-                                    store.dispatch(new SnackbarInfoAction('CONTENT_SERVICES.MESSAGES.INFO.FOLDER_UPLOAD_NOT_ALLOWED'));
+                                    store.dispatch(showSnackbarInfo({ payload: 'CONTENT_SERVICES.MESSAGES.INFO.FOLDER_UPLOAD_NOT_ALLOWED' }));
                                 }
                                 // cancel files upload if not allowed
                                 if (!canUploadFile && files.length) {
                                     files.forEach((node) => (node.status = FileUploadStatus.Cancelled));
-                                    store.dispatch(new SnackbarInfoAction('CONTENT_SERVICES.MESSAGES.INFO.FILE_UPLOAD_NOT_ALLOWED'));
+                                    store.dispatch(showSnackbarInfo({ payload: 'CONTENT_SERVICES.MESSAGES.INFO.FILE_UPLOAD_NOT_ALLOWED' }));
                                 }
                             }
                         }
