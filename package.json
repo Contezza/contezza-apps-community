@@ -13,6 +13,7 @@
         "build:people-group-picker": "ng build people-group-picker",
         "build:search": "ng build search",
         "build-libs": "./scripts/build-libs.sh",
+        "bump-version": "./scripts/bump-version.sh",
         "pack-libs": "./scripts/pack-libs.sh",
         "publish-libs": "./scripts/publish-libs.sh",
         "lint": "nx lint",
