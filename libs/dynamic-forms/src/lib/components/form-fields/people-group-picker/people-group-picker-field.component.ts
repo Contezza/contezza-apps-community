@@ -9,6 +9,7 @@ import { Group } from '@alfresco/js-api';
 import { ContezzaBaseFieldComponent } from '../base-field.component';
 
 @Component({
+    standalone: false,
     selector: 'contezza-people-group-picker-field',
     template: `
         <contezza-people-group-picker

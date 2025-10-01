@@ -4,6 +4,7 @@ import { BaseOptionComponent } from '../base-option.component';
 import { User } from '@alfresco/adf-core';
 
 @Component({
+    standalone: false,
     selector: 'contezza-person-option',
     templateUrl: './person-option.component.html',
     styleUrls: ['./person-option.component.scss'],

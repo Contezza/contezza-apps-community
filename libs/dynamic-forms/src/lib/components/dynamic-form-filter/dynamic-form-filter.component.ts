@@ -1,13 +1,23 @@
 import { ChangeDetectionStrategy, Component, Inject, Input, OnInit, Optional } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
-import { takeUntil } from 'rxjs/operators';
+import { TranslateModule } from '@ngx-translate/core';
+
+import { takeUntil } from 'rxjs';
 
 import { DestroyService } from '@contezza/core/services';
 import { ContezzaDynamicSearchForm } from '@contezza/dynamic-forms/shared';
 
 import { ContezzaDynamicFormFilterService } from '../../services';
+import { ContezzaDynamicFormModule } from '../dynamic-form';
 
 @Component({
+    standalone: true,
+    imports: [CommonModule, ContezzaDynamicFormModule, MatButtonModule, MatCardModule, MatIconModule, MatProgressBarModule, TranslateModule],
     selector: 'contezza-dynamic-form-filter',
     templateUrl: './dynamic-form-filter.component.html',
     styleUrls: ['./dynamic-form-filter.component.scss'],

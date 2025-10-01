@@ -3,6 +3,7 @@ import { ComponentFactoryResolver, ComponentRef, Directive, Input, OnInit, ViewC
 import { ContezzaDynamicFormExtensionService } from '@contezza/dynamic-forms/shared';
 
 @Directive({
+    standalone: false,
     selector: '[dynamicFormOption]',
 })
 export class DynamicFormOptionDirective implements OnInit {

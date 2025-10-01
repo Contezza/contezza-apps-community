@@ -3,19 +3,19 @@ import { CommonModule } from '@angular/common';
 
 import { Observable } from 'rxjs';
 
-import { ToolbarModule } from '@alfresco/adf-core';
+import { ToolbarComponent as AdfToolbarComponent } from '@alfresco/adf-core';
 import { ContentActionRef } from '@alfresco/adf-extensions';
-import { SharedToolbarModule } from '@alfresco/aca-shared';
+import { ToolbarActionComponent } from '@alfresco/aca-shared';
 
 import { ActionsService } from '../../services';
 
 @Component({
     standalone: true,
-    imports: [CommonModule, ToolbarModule, SharedToolbarModule],
+    imports: [CommonModule, AdfToolbarComponent, ToolbarActionComponent],
     selector: 'contezza-toolbar',
     template: `<adf-toolbar class="adf-toolbar--inline">
         <ng-container *ngFor="let action of actions$ | async; trackBy: trackById">
-            <aca-toolbar-action [actionRef]="action"></aca-toolbar-action>
+            <aca-toolbar-action [actionRef]="action" />
         </ng-container>
     </adf-toolbar>`,
     changeDetection: ChangeDetectionStrategy.OnPush,

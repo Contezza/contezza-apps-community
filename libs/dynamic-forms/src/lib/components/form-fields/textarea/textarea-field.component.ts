@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ContezzaBaseFieldComponent } from '../base-field.component';
 
 @Component({
+    standalone: false,
     selector: 'contezza-textarea-field',
     templateUrl: './textarea-field.component.html',
     styleUrls: ['./textarea-field.component.scss'],

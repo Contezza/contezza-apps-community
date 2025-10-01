@@ -4,9 +4,9 @@ import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { ToolbarModule } from '@alfresco/adf-core';
+import { ToolbarComponent as AdfToolbarComponent } from '@alfresco/adf-core';
 import { ContentActionRef, ContentActionType } from '@alfresco/adf-extensions';
-import { SharedToolbarModule } from '@alfresco/aca-shared';
+import { ToolbarActionComponent } from '@alfresco/aca-shared';
 
 import { DynamicFormItem } from '@contezza/dynamic-forms/shared';
 
@@ -14,7 +14,7 @@ import { MultiDynamicFormShellStore } from '../../../../multi-dynamic-form-shell
 
 @Component({
     standalone: true,
-    imports: [CommonModule, SharedToolbarModule, ToolbarModule],
+    imports: [CommonModule, AdfToolbarComponent, ToolbarActionComponent],
     selector: 'contezza-toolbar',
     templateUrl: './toolbar.component.html',
     // styleUrls: ['./selector.component.scss'],

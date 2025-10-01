@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { Observable, of, tap } from 'rxjs';
 
 import { IconModule } from '@alfresco/adf-core';
-import { ExtensionsModule } from '@alfresco/adf-extensions';
+import { DynamicExtensionComponent } from '@alfresco/adf-extensions';
 
 import { SelectionStore } from '@contezza/core/context';
 import { ContezzaLetDirective } from '@contezza/core/directives';
@@ -19,16 +19,16 @@ import { DynamicTableCellDirective } from './dynamic-table-cell.directive';
 
 @Component({
     standalone: true,
-    imports: [CommonModule, MatIconModule, IconModule, ExtensionsModule, ContezzaLetDirective, DynamicComponent, IsDefinedPipe, DynamicTableCellDirective],
+    imports: [CommonModule, MatIconModule, IconModule, DynamicExtensionComponent, ContezzaLetDirective, DynamicComponent, IsDefinedPipe, DynamicTableCellDirective],
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'td[contezza-table-cell]',
     template: `
         <ng-container *ngIf="column.template">
             <ng-container *ngIf="column.template | isDefined; else adfDc">
-                <contezza-dynamic-component [id]="column.template" [data]="{ item, column }"></contezza-dynamic-component>
+                <contezza-dynamic-component [id]="column.template" [data]="{ item, column }" />
             </ng-container>
             <ng-template #adfDc>
-                <adf-dynamic-component contezza-dynamic-table-cell [id]="column.template" [data]="this"></adf-dynamic-component>
+                <adf-dynamic-component contezza-dynamic-table-cell [id]="column.template" [data]="this" />
             </ng-template>
         </ng-container>
         <ng-container *ngIf="!column.template">
@@ -37,14 +37,14 @@ import { DynamicTableCellDirective } from './dynamic-table-cell.directive';
                     <ng-container *ngSwitchCase="'thumbnail'">
                         <div style="width:30px">
                             <ng-container *ngIf="column.format === 'withSelection' && (isSelected$ | async); else thumbnail">
-                                <mat-icon class="contezza-table-cell-selected" svgIcon="selected"></mat-icon>
+                                <mat-icon class="contezza-table-cell-selected" svgIcon="selected" />
                             </ng-container>
                             <ng-template #thumbnail>
                                 <ng-container *ngIf="value.startsWith('./assets'); else adfIcon">
                                     <img [src]="value" alt="" style="vertical-align: middle" />
                                 </ng-container>
                                 <ng-template #adfIcon>
-                                    <adf-icon color="primary" [value]="value"></adf-icon>
+                                    <adf-icon color="primary" [value]="value" />
                                 </ng-template>
                             </ng-template>
                         </div>

@@ -8,6 +8,7 @@ import { DestroyService } from '@contezza/core/services';
 import { ColumnInfo, MaterialTableEmptyContent } from '@contezza/node-browser/shared';
 
 @Component({
+    standalone: false,
     selector: 'node-browser-result-table',
     templateUrl: './result-table.component.html',
     styleUrls: ['./result-table.component.scss'],

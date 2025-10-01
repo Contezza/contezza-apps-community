@@ -19,6 +19,7 @@ import { NodeBrowserViewItemComponent } from './view-item/view-item.component';
 import { NodeBrowserViewItem, NodeBrowserViewResponse } from '../../interfaces/node-browser-view';
 
 @Component({
+    standalone: false,
     selector: 'mgmt-node-browser-view',
     templateUrl: './node-browser-view.component.html',
     styleUrls: ['./node-browser-view.component.scss'],

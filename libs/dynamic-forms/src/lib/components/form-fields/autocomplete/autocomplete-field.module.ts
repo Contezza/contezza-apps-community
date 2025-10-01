@@ -37,8 +37,9 @@ import { HighlightPipe } from './highlight.pipe';
         TranslateModule,
         TranslatePropertyTitlePipe,
         SanitizeHtmlPipe,
+        HighlightPipe,
     ],
-    declarations: [AutocompleteFieldComponent, HighlightPipe],
+    declarations: [AutocompleteFieldComponent],
     exports: [AutocompleteFieldComponent],
 })
 export class ContezzaAutocompleteFieldModule {

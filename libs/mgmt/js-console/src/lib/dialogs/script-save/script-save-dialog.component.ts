@@ -6,6 +6,7 @@ import { DestroyService } from '@contezza/core/services';
 import { JsConsoleScriptSaveDialogService } from './script-save-dialog.service';
 
 @Component({
+    standalone: false,
     selector: 'js-console-script-save-dialog',
     templateUrl: './script-save-dialog.component.html',
     styleUrls: ['./script-save-dialog.component.scss'],

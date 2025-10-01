@@ -6,6 +6,7 @@ import { filter, startWith, takeUntil } from 'rxjs/operators';
 import { ContezzaBaseFieldComponent } from '../base-field.component';
 
 @Component({
+    standalone: false,
     selector: 'contezza-input-dialog-field',
     templateUrl: './input-dialog-field.component.html',
     styleUrls: ['./input-dialog-field.component.scss'],

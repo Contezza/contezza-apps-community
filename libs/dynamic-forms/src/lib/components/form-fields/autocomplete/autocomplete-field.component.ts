@@ -11,6 +11,7 @@ import { ContezzaDisplayableValue, ContezzaDynamicForm } from '@contezza/dynamic
 import { ContezzaBaseFieldComponent } from '../base-field.component';
 
 @Component({
+    standalone: false,
     selector: 'contezza-autocomplete-field',
     templateUrl: './autocomplete-field.component.html',
     styleUrls: ['./autocomplete-field.component.scss'],
