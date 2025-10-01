@@ -104,6 +104,27 @@ In contezza-apps repository:
 ```
 * run `npm i`
 
+### Release
+
+Release is performed via git pipeline on the main branch, by providing the following variables:
+```
+CI_COMMIT_MESSAGE = build-publish
+CI_NPM_STAGE = release
+```
+This performs the following actions:
+* The version in all package.json's is bumped to the next patch version, i.e. `1.0.0` becomes `1.0.1`, `2.3.4` becomes `2.3.5` and so on. This change is committed and pushed.
+* The main branch (including the change above) is tagged with name `contezza-apps-community-<version>`
+* All libraries are built and published to [Nexus](https://nexus.contezza.nl).
+
+N.B.: The pipeline always bump the version to the next patch version. For a major or minor release, say `<version>`, the version in all package.json's must be manually changed to `<version>-SNAPSHOT`. E.g. if version `2.3.4` has just been released and the next minor version must be released, the version in all package.json's must be manually changed to `2.4.0-SNAPSHOT`; if the next major version must be released, the version in all package.json's must be manually changed to `3.0.0-SNAPSHOT`.
+
+A second pipeline is available, triggered by providing the following variables:
+```
+CI_COMMIT_MESSAGE = build-publish
+CI_NPM_STAGE = prerelease
+```
+This pipeline does not perform any change on the repository. It only builds and publish all libraries to [Nexus](https://nexus.contezza.nl), using the next prerelease version, i.e. `1.0.0` becomes `1.0.1-A.0`, `2.3.4` becomes `2.3.5-A.0` and so on.
+
 ### Community branch
 
 The `community` branch is meant to be shared in [Github](https://github.com/Contezza/contezza-apps-community). After any release, the `main` branch is merged into the `community` branch and this is pushed into Github. To push `community` into Github:
