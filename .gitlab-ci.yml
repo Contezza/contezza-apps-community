@@ -11,6 +11,10 @@ build_publish:
     before_script:
         - mkdir -p $HOME/.docker
         - echo $DOCKER_AUTH_CONFIG > $HOME/.docker/config.json
+        # remove all local tags
+        - git tag -l | xargs -r -n 1 git tag -d
+        # sync refs and tags from origin
+        - git fetch origin --force --prune --tags --prune-tags
     script:
         - docker login -u $CNTZ_DOCKER_QUAY_USER -p $CNTZ_DOCKER_QUAY_PASSWD quay.io
         - docker login -u $CNTZ_DOCKER_HARBOR_USER -p $CNTZ_DOCKER_HARBOR_PASSWD harbor.contezza.nl
@@ -18,6 +22,22 @@ build_publish:
         - npm config set @contezza:registry https://nexus.contezza.nl/repository/npm-releases/
         - npm config set //nexus.contezza.nl/repository/npm-releases/:_authToken ${NPM_TOKEN}
         - npm config set legacy-peer-deps true
+        - git config --global user.email "beheer@contezza.nl"
+        - git config --global user.name "Contezza"
+        # if CI_NPM_STAGE == 'release' then bump version and create tag
+        - if [ "$CI_NPM_STAGE" = "release" ]; then
+            git fetch origin "${CI_COMMIT_REF_NAME}";
+            git checkout -B "${CI_COMMIT_REF_NAME}" "origin/${CI_COMMIT_REF_NAME}";
+            npm run bump-version;
+            VERSION=$(npm pkg get version | tr -d '"');
+            TAG="contezza-apps-community-$VERSION";
+            git add ':(glob)**/package.json';
+            git commit -m "[git] bump version";
+            git remote set-url origin "https://oauth2:${CNTZ_GIT_API_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git";
+            git push origin "${CI_COMMIT_REF_NAME}";
+            git tag -a "$TAG" -m "[git] copy for tag $TAG";
+            git push origin "$TAG";
+         fi
         - npm i -g nx && npm ci
         - chmod -R 777 ./
         - npm run publish-libs ${CI_NPM_STAGE}

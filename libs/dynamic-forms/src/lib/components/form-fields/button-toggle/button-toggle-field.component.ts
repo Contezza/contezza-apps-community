@@ -8,6 +8,7 @@ import { ContezzaDisplayableValue, ContezzaDynamicForm } from '@contezza/dynamic
 import { ContezzaBaseFieldComponent } from '../base-field.component';
 
 @Component({
+    standalone: false,
     selector: 'contezza-button-toggle-field',
     templateUrl: 'button-toggle-field.component.html',
     styleUrls: ['button-toggle-field.component.scss'],

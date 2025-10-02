@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'highlight' })
+@Pipe({ standalone: true, name: 'highlight' })
 export class HighlightPipe implements PipeTransform {
     transform(text: string, search): string {
         if (text && search) {

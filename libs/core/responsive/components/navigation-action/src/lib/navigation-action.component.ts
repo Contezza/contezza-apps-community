@@ -3,16 +3,16 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, Optional } from
 import { takeUntil } from 'rxjs/operators';
 
 import { ContentActionRef, ContentActionType } from '@alfresco/adf-extensions';
-import { SharedToolbarModule } from '@alfresco/aca-shared';
+import { ToolbarActionComponent } from '@alfresco/aca-shared';
 
 import { DestroyService } from '@contezza/core/services';
 import { ResponsiveService } from '@contezza/core/responsive';
 
 @Component({
     standalone: true,
-    imports: [SharedToolbarModule],
+    imports: [ToolbarActionComponent],
     selector: 'contezza-responsive-navigation-action',
-    template: `<aca-toolbar-action [actionRef]="actionRef" (click)="actionRef.click()"></aca-toolbar-action>`,
+    template: `<aca-toolbar-action [actionRef]="actionRef" (click)="actionRef.click()" />`,
     styles: [
         `
             :host:not(.mobile) {

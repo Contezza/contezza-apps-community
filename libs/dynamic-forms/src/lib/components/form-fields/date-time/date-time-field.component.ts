@@ -18,6 +18,7 @@ import moment, { Moment } from 'moment';
 import { ContezzaBaseFieldComponent } from '../base-field.component';
 
 @Component({
+    standalone: false,
     selector: 'contezza-date-time-field',
     templateUrl: './date-time-field.component.html',
     styleUrls: ['./date-time-field.component.scss'],

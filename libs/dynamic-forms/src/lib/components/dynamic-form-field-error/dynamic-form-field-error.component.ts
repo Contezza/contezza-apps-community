@@ -4,6 +4,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { ContezzaDynamicFormValidation } from '@contezza/dynamic-forms/shared';
 
 @Component({
+    standalone: false,
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[contezza-dynamic-form-field-error]',
     templateUrl: 'dynamic-form-field-error.component.html',

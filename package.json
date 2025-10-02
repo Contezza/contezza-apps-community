@@ -1,6 +1,6 @@
 {
     "name": "contezza-apps-community",
-    "version": "3.2.3",
+    "version": "3.3.0",
     "scripts": {
         "ng": "nx",
         "postinstall": "node ./decorate-angular-cli.js",
@@ -13,6 +13,7 @@
         "build:people-group-picker": "ng build people-group-picker",
         "build:search": "ng build search",
         "build-libs": "./scripts/build-libs.sh",
+        "bump-version": "./scripts/bump-version.sh",
         "pack-libs": "./scripts/pack-libs.sh",
         "publish-libs": "./scripts/publish-libs.sh",
         "lint": "nx lint",

@@ -4,6 +4,7 @@ import { distinctUntilChanged, finalize, map, switchMap, takeUntil, tap } from '
 import { BehaviorSubject, fromEvent } from 'rxjs';
 
 @Directive({
+    standalone: false,
     selector: '[contezzaResizable]',
     exportAs: 'contezzaResizable',
 })

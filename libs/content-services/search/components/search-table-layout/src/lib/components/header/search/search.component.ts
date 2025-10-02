@@ -6,7 +6,7 @@ import { BehaviorSubject, merge, Observable, Subject } from 'rxjs';
 import { debounceTime, map, scan, startWith, switchMap, tap } from 'rxjs/operators';
 
 import { ContentActionType } from '@alfresco/adf-extensions';
-import { SharedToolbarModule } from '@alfresco/aca-shared';
+import { ToolbarActionComponent } from '@alfresco/aca-shared';
 
 import { DestroyService } from '@contezza/core/services';
 import { InputFieldComponent } from '@contezza/dynamic-forms';
@@ -14,19 +14,19 @@ import { ContezzaDynamicFormField } from '@contezza/dynamic-forms/shared';
 
 @Component({
     standalone: true,
-    imports: [CommonModule, SharedToolbarModule, InputFieldComponent],
+    imports: [CommonModule, ToolbarActionComponent, InputFieldComponent],
     selector: 'contezza-search-table-layout-header-search',
     template: `
         <ng-container *ngIf="control$ | async as control">
             <div class="contezza-search-table-layout-header-search-input" [class.expanded]="expanded$ | async">
-                <contezza-input-field class="contezza-search-table-layout-header-search-input-field" [field]="field" [control]="control"></contezza-input-field>
+                <contezza-input-field class="contezza-search-table-layout-header-search-input-field" [field]="field" [control]="control" />
                 <ng-container *ngIf="!!control.value; else action">
-                    <aca-toolbar-action [actionRef]="clearAction" (click)="control.reset()"></aca-toolbar-action>
+                    <aca-toolbar-action [actionRef]="clearAction" (click)="control.reset()" />
                 </ng-container>
             </div>
-            <ng-container *ngTemplateOutlet="action"></ng-container>
+            <ng-container *ngTemplateOutlet="action" />
             <ng-template #action>
-                <aca-toolbar-action [actionRef]="searchAction" (click)="toggle$.next()"></aca-toolbar-action>
+                <aca-toolbar-action [actionRef]="searchAction" (click)="toggle$.next()" />
             </ng-template>
         </ng-container>
     `,

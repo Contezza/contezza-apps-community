@@ -1,18 +1,26 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, Input, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
-import { combineLatest, Observable } from 'rxjs';
-import { debounceTime, filter, map, tap } from 'rxjs/operators';
+import { TranslateModule } from '@ngx-translate/core';
+
+import { combineLatest, debounceTime, filter, map, Observable, tap } from 'rxjs';
 
 import { SelectionStore } from '@contezza/core/context';
+import { ContezzaLetModule } from '@contezza/core/directives';
 
 import { DynamicFormItem, DynamicFormItemGroup } from '@contezza/dynamic-forms/shared';
 
 import { MultiDynamicFormComponent } from '../multi-dynamic-form';
 
+import { SelectorComponent } from './components/selector/selector.component';
 import { Settings, Step } from './interfaces';
 import { MultiDynamicFormShellStore } from './multi-dynamic-form-shell.store';
 
 @Component({
+    standalone: true,
+    imports: [CommonModule, MatButtonModule, MatDialogModule, TranslateModule, ContezzaLetModule, MultiDynamicFormComponent, SelectorComponent],
     selector: 'contezza-multi-dynamic-form-shell',
     templateUrl: './multi-dynamic-form-shell.component.html',
     styleUrls: ['./multi-dynamic-form-shell.component.scss'],

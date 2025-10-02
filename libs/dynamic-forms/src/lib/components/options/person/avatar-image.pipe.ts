@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { AlfrescoApiService, ContentService } from '@alfresco/adf-content-services';
 
-@Pipe({ name: 'avatarImage' })
+@Pipe({ standalone: false, name: 'avatarImage' })
 export class AvatarImagePipe implements PipeTransform {
     constructor(private readonly alfrescoApi: AlfrescoApiService, private readonly contentService: ContentService) {}
 

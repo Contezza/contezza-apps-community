@@ -3,12 +3,13 @@ import { filter, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Component({
+    standalone: false,
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'th[contezzaResizable]',
     template: `
         <div class="wrapper">
             <div class="content">
-                <ng-content></ng-content>
+                <ng-content />
             </div>
             <div *ngIf="contezzaResizable" class="bar" (contezzaResizable)="onResize($event)" (resizing)="resizing.next($event)"></div>
         </div>

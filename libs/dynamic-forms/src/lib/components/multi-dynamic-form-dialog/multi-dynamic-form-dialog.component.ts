@@ -8,13 +8,13 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DialogTitleComponent } from '@contezza/core/dialogs';
 
 import { ContezzaDynamicFormModule } from '../dynamic-form';
-import { MultiDynamicFormShellModule, Settings, Step } from '../multi-dynamic-form-shell';
+import { MultiDynamicFormShellComponent, Settings, Step } from '../multi-dynamic-form-shell';
 
 import { DynamicFormItemGroup, MultiDynamicFormDialogData } from '@contezza/dynamic-forms/shared';
 
 @Component({
     standalone: true,
-    imports: [CommonModule, MatButtonModule, MatDialogModule, TranslateModule, DialogTitleComponent, ContezzaDynamicFormModule, MultiDynamicFormShellModule],
+    imports: [CommonModule, MatButtonModule, MatDialogModule, TranslateModule, DialogTitleComponent, ContezzaDynamicFormModule, MultiDynamicFormShellComponent],
     selector: 'contezza-multi-dynamic-form-dialog',
     templateUrl: './multi-dynamic-form-dialog.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,

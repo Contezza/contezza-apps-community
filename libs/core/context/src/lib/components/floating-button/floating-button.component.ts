@@ -11,7 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { ContentActionRef, ContentActionType, ExtensionsModule } from '@alfresco/adf-extensions';
+import { ContentActionRef, ContentActionType, DynamicExtensionComponent } from '@alfresco/adf-extensions';
 
 import { IconDirective } from '@contezza/core/directives';
 
@@ -19,7 +19,7 @@ import { ActionsService } from '../../services';
 
 @Component({
     standalone: true,
-    imports: [CommonModule, MatButtonModule, MatDividerModule, MatIconModule, MatMenuModule, TranslateModule, ExtensionsModule, IconDirective],
+    imports: [CommonModule, MatButtonModule, MatDividerModule, MatIconModule, MatMenuModule, TranslateModule, DynamicExtensionComponent, IconDirective],
     selector: 'contezza-floating-button',
     templateUrl: 'floating-button.component.html',
     styleUrls: ['floating-button.component.scss'],

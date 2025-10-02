@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ExtensionsModule } from '@alfresco/adf-extensions';
+import { DynamicExtensionComponent } from '@alfresco/adf-extensions';
 import { PageLayoutModule } from '@alfresco/aca-shared';
 import { IconModule } from '@alfresco/adf-core';
 
@@ -46,7 +46,7 @@ const routes: Routes = [
         FormsModule,
         ReactiveFormsModule,
         IconModule,
-        ExtensionsModule,
+        DynamicExtensionComponent,
         ContezzaLetModule,
         NodeBrowserMaterialModule,
         NodeBrowserStoreModule,
