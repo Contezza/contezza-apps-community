@@ -10,7 +10,7 @@ import { navigateTo } from '@contezza/core/actions';
 import { DialogLoaderService } from '@contezza/core/dialogs';
 import { EffectsHelper } from '@contezza/core/effects-helper';
 
-import { managePermissions, navigateToParent, rotateFileInViewer } from '@contezza/content-services/shared';
+import { managePermissions, navigateToParent, rotateFileInViewer, showComments } from '@contezza/content-services/shared';
 
 @Injectable()
 export class Effects {
@@ -32,6 +32,23 @@ export class Effects {
                         width: '60%',
                         minWidth: '620px',
                         data: node.id,
+                    })
+                )
+            ),
+        { dispatch: false }
+    );
+
+    readonly showComments$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(showComments),
+                this.helper.getPayload('last'),
+                switchMap((node) =>
+                    this.dialog.open(() => import('../components/dialogs/comments/comments.dialog.component').then((_) => _.CommentsDialogComponent), {
+                        width: '40%',
+                        data: {
+                            nodeId: node.id,
+                        },
                     })
                 )
             ),

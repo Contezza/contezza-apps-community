@@ -4,6 +4,7 @@
             "CREATE_FILE": "Create document",
             "EDIT_COLUMNS": "Edit columns",
             "MANAGE_PERMISSIONS": "Permissions",
+            "SHOW_COMMENTS": "Show comments",
             "NAVIGATE_TO_PARENT": "Show in folder",
             "ROTATE_FILE_IN_VIEWER": "Rotate document",
             "TOGGLE_VIEW": "Toggle view"
