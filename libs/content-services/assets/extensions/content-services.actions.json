@@ -143,7 +143,8 @@
         "toolbar": [
             {
                 "id": "content-services.toolbar.showComments",
-                "imports": "templates.actions[content-services.actions.showComments]"
+                "imports": "templates.actions[content-services.actions.showComments]",
+                "order": 220
             },
             {
                 "id": "app.toolbar.more",

@@ -45,6 +45,7 @@ export class Effects {
                 this.helper.getPayload('last'),
                 switchMap((node) =>
                     this.dialog.open(() => import('../components/dialogs/comments/comments.dialog.component').then((_) => _.CommentsDialogComponent), {
+                        autoFocus: false,
                         width: '40%',
                         data: {
                             nodeId: node.id,
