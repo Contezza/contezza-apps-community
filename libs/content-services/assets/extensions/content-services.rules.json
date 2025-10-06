@@ -49,14 +49,6 @@
             "id": "content-services.rules.canManagePermissions",
             "type": "core.every",
             "parameters": [
-                { "value":  "app.selection.file.canUpdate" },
-                { "value": "app.selection.aspectNames.includeSome", "parameters": ["fm:discussable"] }
-            ]
-        },
-        {
-            "id": "content-services.rules.canShowComments",
-            "type": "core.every",
-            "parameters": [
                 {
                     "value": "core.some",
                     "parameters": [
@@ -66,6 +58,21 @@
                         {
                             "value": "app.selection.file.canUpdate"
                         }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "content-services.rules.canShowComments",
+            "type": "core.every",
+            "parameters": [
+                {
+                    "value": "app.selection.file.canUpdate"
+                },
+                {
+                    "value": "app.selection.aspectNames.includeSome",
+                    "parameters": [
+                        "fm:discussable"
                     ]
                 }
             ]
