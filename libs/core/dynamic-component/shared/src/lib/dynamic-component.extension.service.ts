@@ -1,4 +1,4 @@
-import { Injectable, Type } from '@angular/core';
+import { Inject, Injectable, InjectionToken, Optional, Type } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
@@ -6,9 +6,21 @@ import { ContezzaObservables } from '@contezza/core/utils';
 
 export type ComponentResolver<TComponent> = () => Promise<Type<TComponent>>;
 
+type DynamicComponentRecord<TComponent = unknown> = Record<string, ComponentResolver<TComponent>>;
+const DYNAMIC_COMPONENTS = new InjectionToken<DynamicComponentRecord[]>('dynamic-components');
+export const provideDynamicComponents = <TComponent>(components: DynamicComponentRecord<TComponent>) => ({
+    provide: DYNAMIC_COMPONENTS,
+    useValue: components,
+    multi: true,
+});
+
 @Injectable({ providedIn: 'root' })
 export class DynamicComponentExtensionService {
     private readonly components: Record<string, ComponentResolver<any>> = {};
+
+    constructor(@Optional() @Inject(DYNAMIC_COMPONENTS) _dcrs?: DynamicComponentRecord[]) {
+        _dcrs.forEach((list) => this.setComponents(list));
+    }
 
     setComponents<TComponent, TComponents extends Record<string, ComponentResolver<TComponent>> = Record<string, ComponentResolver<TComponent>>>(values: TComponents) {
         if (values) {
