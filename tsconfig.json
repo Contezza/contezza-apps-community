@@ -78,8 +78,7 @@
 
             "@contezza/process-services": ["libs/process-services/src/index.ts"],
             "@contezza/process-services/shared": ["libs/process-services/shared/src/index.ts"],
-            "@contezza/process-services/components/*": ["libs/content-services/components/*/src"],
-
+            "@contezza/process-services/components/*": ["libs/process-services/components/*/src"],
 
             "@contezza/search/form": ["libs/search/form/src/index.ts"]
         }

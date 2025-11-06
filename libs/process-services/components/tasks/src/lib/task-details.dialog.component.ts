@@ -4,7 +4,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
 import { TaskDetailsComponent } from './task-details.component';
 
-interface Data {}
+interface Data {
+    task: any;
+}
 
 @Component({
     standalone: true,
@@ -13,7 +15,7 @@ interface Data {}
     template: `
         <h2 mat-dialog-title>Titel</h2>
         <mat-dialog-content>
-            <contezza-task-details />
+            <contezza-task-details [task]="task" />
         </mat-dialog-content>
         <mat-dialog-actions>
             <span class="adf-fill-remaining-space"></span>
@@ -25,7 +27,8 @@ interface Data {}
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskDetailsDialogComponent {
+    task: any;
     constructor(@Inject(MAT_DIALOG_DATA) data: Data) {
-        console.log(data);
+        this.task = data.task;
     }
 }

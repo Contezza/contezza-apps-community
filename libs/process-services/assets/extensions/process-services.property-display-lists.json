@@ -1,0 +1,18 @@
+{
+    "$id": "process-services.dynamic-forms",
+    "$version": "@@project.version@@",
+    "$name": "Process Services Dynamic Forms",
+    "$vendor": "Contezza BV",
+    "features": {
+        "propertyDisplayLists": {
+            "process-services.property-display-list.task-details": [
+                {
+                    "id": "gzac.processes.property-displays.details-startTime",
+                    "title": "Test",
+                    "icon": "info",
+                    "key": "description"
+                }
+            ]
+        }
+    }
+}

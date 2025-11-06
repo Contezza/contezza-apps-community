@@ -11,9 +11,11 @@ import { Effects } from './store/effects';
     providers: [
         provideTranslations('process-services', 'assets/process-services'),
         provideExtensionConfig([
+            'process-services.actions.json',
             'process-services.columns.json',
             'process-services.dashboard.json',
             'process-services.dynamic-form-filters.json',
+            'process-services.property-display-lists.json',
             'process-services.search-table-page-configs.json',
         ]),
     ],
@@ -21,7 +23,7 @@ import { Effects } from './store/effects';
 export class ExtensionModule {
     constructor(private readonly search: ContentServicesSearchExtensionService, private readonly tasks: TaskInstancesService) {
         this.search.setSearchStrategies({
-            'process-services.search-strategy.task-instances': ({ parameters, template }) => this.tasks.searchTasks(parameters),
+            'process-services.search-strategy.task-instances': ({ parameters }) => this.tasks.searchTasks(parameters),
         });
     }
 }

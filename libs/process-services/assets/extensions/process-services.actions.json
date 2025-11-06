@@ -1,0 +1,25 @@
+{
+    "$id": "process-services.actions",
+    "$version": "@@project.version@@",
+    "$name": "Process Services Actions",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "process-services": {
+            "toolbar" : {
+                "task-details": [
+                    {
+                        "id": "ea.toolbar.task-open",
+                        "order": 10,
+                        "type": "default",
+                        "title": "Taak openen",
+                        "icon": "launch",
+                        "actions": {
+                            "click": ""
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}
