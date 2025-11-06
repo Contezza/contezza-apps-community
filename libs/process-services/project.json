@@ -1,0 +1,39 @@
+{
+    "name": "process-services",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/process-services",
+    "prefix": "contezza",
+    "targets": {
+        "build": {
+            "executor": "@angular-devkit/build-angular:ng-packagr",
+            "outputs": ["{workspaceRoot}/dist/@contezza/process-services"],
+            "options": {
+                "tsConfig": "tsconfig.build.json",
+                "project": "libs/process-services/ng-package.json"
+            }
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/process-services/jest.config.ts",
+                "passWithNoTests": true
+            },
+            "configurations": {
+                "ci": {
+                    "ci": true,
+                    "codeCoverage": true
+                }
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["libs/process-services/**/*.ts", "libs/process-services/**/*.html"]
+            }
+        }
+    },
+    "tags": []
+}

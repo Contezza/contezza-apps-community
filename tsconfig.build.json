@@ -29,6 +29,9 @@
             "@contezza/people-group-picker/*": ["./dist/@contezza/people-group-picker/*"],
             "@contezza/people-group-picker": ["./dist/@contezza/people-group-picker/index"],
 
+            "@contezza/process-services/*": ["./dist/@contezza/process-services/*"],
+            "@contezza/process-services": ["./dist/@contezza/process-services/index"],
+
             "@contezza/search/*": ["./dist/@contezza/search/*"],
             "@contezza/search": ["./dist/@contezza/search/index"]
         }

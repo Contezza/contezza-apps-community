@@ -1,0 +1,65 @@
+{
+    "$id": "process-services.search-table-page-configs",
+    "$version": "@@project.version@@",
+    "$name": "Process Services Search Table Page Configs",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "searchTablePageConfigs": [
+            {
+                "id": "process-services-tasks-config",
+                "title": "APP.PROCESS.MY_TASKS.TITLE",
+                "actionContext": { "target": "search-table-page.process-services-tasks" },
+                "preferencesId": "process-services-tasks",
+                "preferences": ["columns", "sorting", "maxItems", "sidebar-filters"],
+                "actions": {
+                    "click": "dblClickIfMobile",
+                    "dblclick": "[PROCESS_SERVICES] NAVIGATE_TO_TASK_DETAILS",
+                    "contextmenu": "[PROCESS_SERVICES] CONTEXT_MENU"
+                },
+                "featureKeys": {
+                    "toolbar": "process-services-tasks-toolbar"
+                },
+                "searchStrategyId": "process-services.tasks",
+                "columnsId": "app.columns.process-services-tasks",
+                "sidebarFiltersId": "app.sidebar-filters-process-services-tasks",
+                "default": {
+                    "sorting": { "type": "FIELD", "field": "created", "ascending": true },
+                    "paging": { "maxItems": 10 }
+                },
+                "emptyContent": {
+                    "icon": "search",
+                    "title": "APP.PROCESS.MY_TASKS.EMPTY_CONTENT.TITLE",
+                    "subtitle": "APP.PROCESS.MY_TASKS.EMPTY_CONTENT.SUBTITLE"
+                }
+            },
+            {
+                "id": "process-services-workflows-config",
+                "title": "APP.PROCESS.MY_WORKFLOWS.TITLE",
+                "actionContext": { "target": "search-table-page.process-services-workflows" },
+                "preferencesId": "process-services-workflows",
+                "preferences": ["columns", "sorting", "maxItems", "sidebar-filters"],
+                "actions": {
+                    "click": "dblClickIfMobile",
+                    "dblclick": "[PROCESS_SERVICES] NAVIGATE_TO_WORKFLOW_DETAILS",
+                    "contextmenu": "[PROCESS_SERVICES] CONTEXT_MENU"
+                },
+                "featureKeys": {
+                    "toolbar": "process-services-workflows-toolbar"
+                },
+                "searchStrategyId": "process-services.workflows",
+                "columnsId": "app.columns.process-services-workflows",
+                "sidebarFiltersId": "app.sidebar-filters-process-services-workflows",
+                "default": {
+                    "sorting": { "type": "FIELD", "field": "started", "ascending": true },
+                    "paging": { "maxItems": 10 }
+                },
+                "emptyContent": {
+                    "icon": "search",
+                    "title": "APP.PROCESS.MY_WORKFLOWS.EMPTY_CONTENT.TITLE",
+                    "subtitle": "APP.PROCESS.MY_WORKFLOWS.EMPTY_CONTENT.SUBTITLE"
+                }
+            }
+        ]
+    }
+}

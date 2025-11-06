@@ -1,0 +1,13 @@
+{
+    "extends": ["../../.eslintrc.json"],
+    "ignorePatterns": ["!**/*"],
+    "overrides": [
+        {
+            "files": ["*.ts"],
+            "parserOptions": {
+                "project": ["libs/process-services/tsconfig.lib.json"],
+                "createDefaultProgram": true
+            }
+        }
+    ]
+}
