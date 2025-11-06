@@ -4,20 +4,19 @@ import { SearchParameters } from '@contezza/content-services/search/shared';
 import { map, Observable, tap } from 'rxjs';
 import { ResultSetPaging } from '@alfresco/js-api';
 import { clientSort, dateAt, parseSidebarQuery, toResultSet } from '../utils';
-import { AuthenticationService } from '@alfresco/adf-core';
 
 @Injectable({
     providedIn: 'root',
 })
 export class TaskInstancesService {
-    constructor(private readonly webscript: WebscriptService, private readonly auth: AuthenticationService) {}
+    constructor(private readonly webscript: WebscriptService) {}
 
     searchTasks(parameters: SearchParameters): Observable<ResultSetPaging> {
-        const { sorting, paging, sidebarQuery } = parameters;
+        const { sorting, paging, sidebarQuery, currentFolder } = parameters;
         const q = parseSidebarQuery(sidebarQuery);
 
-        const dateFmt = '11:59:59.999';
-        console.log(dateFmt);
+        const userId = currentFolder;
+
         const dueMap: Record<string, string> = {
             today: `dueAfter=${dateAt(11, 59, 59, 999)}&dueBefore=${dateAt()}`,
             tomorrow: `dueAfter=${dateAt()}&dueBefore=${dateAt()}`,
@@ -26,7 +25,7 @@ export class TaskInstancesService {
             noDate: 'dueBefore=',
         };
 
-        const params: string[] = [`authority=${this.auth.getEcmUsername()}`, `maxItems=${paging?.maxItems ?? 10}`, `skipCount=${paging?.skipCount ?? 0}`];
+        const params: string[] = [`authority=${userId}`, `maxItems=${paging?.maxItems ?? 10}`, `skipCount=${paging?.skipCount ?? 0}`];
 
         if (q['assignee']) params.push(`pooledTasks=${q['assignee'] !== 'me'}`);
         if (q['priority']) params.push(`priority=${q['priority']}`);

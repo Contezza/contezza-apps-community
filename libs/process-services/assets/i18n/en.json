@@ -2,14 +2,16 @@
     "PROCESS_SERVICES": {
         "ACTIONS": {},
         "BROWSE": {
-            "TITLE": "",
-            "SIDENAV_LINK": {
-                "LABEL": "",
-                "TOOLTIP": ""
-            },
-            "EMPTY_STATE": {
-                "TITLE": "",
-                "TEXT": ""
+            "TASK_INSTANCES": {
+                "TITLE": "Task",
+                "SIDENAV_LINK": {
+                    "LABEL": "",
+                    "TOOLTIP": ""
+                },
+                "EMPTY_STATE": {
+                    "TITLE": "",
+                    "TEXT": ""
+                }
             }
         },
         "DIALOGS": {
@@ -22,9 +24,29 @@
             "ERRORS": {}
         },
         "PROPERTIES": {
-            "NAMESPACE_PREFIX": {
-                "PROPERTY1": {
-                    "LABEL": ""
+            "TASK_INSTANCES": {
+                "DESCRIPTION": {
+                    "LABEL": "Description"
+                },
+                "MESSAGE": {
+                    "LABEL": "Message"
+                },
+                "STATUS": {
+                    "LABEL": "Status"
+                },
+                "PRIORITY": {
+                    "LABEL": "Priority",
+                    "OPTIONS": {
+                        "HIGH": "High",
+                        "MEDIUM": "Medium",
+                        "LOW": "Low"
+                    }
+                },
+                "START_DATE": {
+                    "LABEL": "Start date"
+                },
+                "DUE_DATE": {
+                    "LABEL": "Due date"
                 }
             }
         }

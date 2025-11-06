@@ -7,8 +7,8 @@
     "features": {
         "searchTablePageConfigs": [
             {
-                "id": "process-services-tasks-config",
-                "title": "APP.PROCESS.MY_TASKS.TITLE",
+                "id": "process-services.search-table-page-config.task-instances",
+                "title": "PROCESS_SERVICES.BROWSE.TASK_INSTANCES.TITLE",
                 "actionContext": { "target": "search-table-page.process-services-tasks" },
                 "preferencesId": "process-services-tasks",
                 "preferences": ["columns", "sorting", "maxItems", "sidebar-filters"],
@@ -20,17 +20,21 @@
                 "featureKeys": {
                     "toolbar": "process-services-tasks-toolbar"
                 },
-                "searchStrategyId": "process-services.tasks",
-                "columnsId": "app.columns.process-services-tasks",
-                "sidebarFiltersId": "app.sidebar-filters-process-services-tasks",
+                "searchStrategyId": "process-services.search-strategy.task-instances",
+                "columnsId": "process-services.columns.task-instances",
+                "sidebarFiltersId": "process-services.sidebar-filters.task-instances",
                 "default": {
                     "sorting": { "type": "FIELD", "field": "created", "ascending": true },
                     "paging": { "maxItems": 10 }
                 },
                 "emptyContent": {
                     "icon": "search",
-                    "title": "APP.PROCESS.MY_TASKS.EMPTY_CONTENT.TITLE",
-                    "subtitle": "APP.PROCESS.MY_TASKS.EMPTY_CONTENT.SUBTITLE"
+                    "title": "PROCESS_SERVICES.BROWSE.TASK_INSTANCES.EMPTY_STATE.TITLE",
+                    "subtitle": "PROCESS_SERVICES.BROWSE.TASK_INSTANCES.EMPTY_STATE.TEXT"
+                },
+                "currentFolder": {
+                    "type": "userProfile",
+                    "dynamic-source": "id"
                 }
             },
             {

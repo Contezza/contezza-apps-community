@@ -1,0 +1,32 @@
+{
+    "$id": "process-services.dashboard",
+    "$version": "@@project.version@@",
+    "$name": "Process Services Dashboard",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "dashboardWidgets": [
+            {
+                "id": "tasks-widget",
+                "component": "search-table-page-widget",
+                "title": "Taken",
+                "subtitle": "Taken",
+                "icon": "inbox",
+                "data": {
+                    "type": "tasks",
+                    "configKey": "process-services.search-table-page-config.task-instances"
+                },
+                "initView": {
+                    "cols": 8,
+                    "rows": 5,
+                    "minItemCols": 5,
+                    "minItemRows": 3,
+                    "maxItemCols": 12,
+                    "maxItemRows": 12,
+                    "resizeEnabled": true
+                }
+            }
+        ]
+
+    }
+}

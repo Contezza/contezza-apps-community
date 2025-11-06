@@ -1,0 +1,147 @@
+{
+    "$id": "process-services.dynamic-form-filters",
+    "$version": "@@project.version@@",
+    "$name": "Process Services Dynamic Form Filters",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "dynamicforms": [
+            {
+                "id": "process-services.sidebar-filters.task-instances",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "status",
+                            "type": "autocomplete",
+                            "label": "Status",
+                            "options": {
+                                "dynamic-source": [
+                                    {
+                                        "label": "Actief",
+                                        "query": ""
+                                    },
+                                    {
+                                        "label": "Voltooid",
+                                        "query": "state=COMPLETED"
+                                    }
+                                ],
+                                "labelKey": "label"
+                            },
+                            "defaultValue": {
+                                "label": "Actief",
+                                "query": "state=IN_PROGRESS"
+                            },
+                            "query": {
+                                "template": "${query}"
+                            },
+                            "initialValue": "${preferences->status}"
+                        },
+                        {
+                            "id": "priority",
+                            "type": "autocomplete",
+                            "label": "Priority",
+                            "options": {
+                                "dynamic-source": [
+                                    {
+                                        "label": "Hoog",
+                                        "query": "priority=1"
+                                    },
+                                    {
+                                        "label": "Gemiddeld",
+                                        "query": "priority=2"
+                                    },
+                                    {
+                                        "label": "Laag",
+                                        "query": "priority=3"
+                                    }
+                                ],
+                                "labelKey": "label"
+                            },
+                            "query": {
+                                "template": "${query}"
+                            },
+                            "initialValue": "${preferences->priority}"
+                        },
+                        {
+                            "id": "assignment",
+                            "type": "autocomplete",
+                            "label": "Assignment",
+                            "options": {
+                                "dynamic-source": [
+                                    {
+                                        "label": "Me",
+                                        "query": "pooledTasks=false"
+                                    },
+                                    {
+                                        "label": "Not assigned",
+                                        "query": "pooledTasks=true"
+                                    }
+                                ],
+                                "labelKey": "label"
+                            },
+                            "query": {
+                                "template": "${query}"
+                            },
+                            "initialValue": "${preferences->assignment}"
+                        },
+                        {
+                            "id": "dueAfter",
+                            "type": "autocomplete",
+                            "label": "Due after",
+                            "options": {
+                                "dynamic-source": [
+                                    {
+                                        "label": "Vandaag",
+                                        "query": "dueAfter=today"
+                                    },
+                                    {
+                                        "label": "Morgen",
+                                        "query": "dueAfter=tomorrow"
+                                    },
+                                    {
+                                        "label": "Komende zeven dagen",
+                                        "query": "dueAfter=next7Days"
+                                    },
+                                    {
+                                        "label": "Achterstallig",
+                                        "query": "dueAfter=overdue"
+                                    },
+                                    {
+                                        "label": "Geen datum",
+                                        "query": "dueAfter=noDate"
+                                    }
+                                ],
+                                "labelKey": "label"
+                            },
+                            "query": {
+                                "template": "${query}"
+                            },
+                            "initialValue": "${preferences->dueAfter}"
+                        }
+                    ]
+                },
+                "layouts": [
+                    {
+                        "id": "default",
+                        "layout": {
+                            "subfields": [
+                                {
+                                    "id": "status"
+                                },
+                                {
+                                    "id": "priority"
+                                },
+                                {
+                                    "id": "assignment"
+                                },
+                                {
+                                    "id": "dueAfter"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+            ]
+    }
+}

@@ -1,0 +1,76 @@
+{
+    "$id": "process-services.columns",
+    "$version": "@@project.version@@",
+    "$name": "Process Services Columns",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "columns": [
+            {
+                "id": "process-services.columns.task-instances",
+                "columns": [
+                    {
+                        "id": "process-services.columns.task-instances.thumbnail",
+                        "key": "thumbnail",
+                        "type": "thumbnail",
+                        "sortable": true,
+                        "order": 20
+                    },
+                    {
+                        "id": "process-services.columns.task-instances.description",
+                        "key": "item.description",
+                        "template": "app.columns.name",
+                        "sortingKey": "description",
+                        "title": "PROCESS_SERVICES.PROPERTIES.TASK_INSTANCES.DESCRIPTION.LABEL",
+                        "type": "text",
+                        "sortable": true
+                    },
+                    {
+                        "id": "process-services.columns.task-instances.message",
+                        "key": "item.workflowInstance.message",
+                        "sortingKey": "workflowInstance.message",
+                        "title": "PROCESS_SERVICES.PROPERTIES.TASK_INSTANCES.MESSAGE.LABEL",
+                        "class": "contezza-responsive-mobile-table-cell-55 contezza-responsive-embedded-activiti-tasks-message",
+                        "type": "text",
+                        "sortable": true
+                    },
+                    {
+                        "id": "process-services.columns.task-instances.status",
+                        "key": "item.propertyLabels.bpm_status",
+                        "sortingKey": "propertyLabels.bpm_status",
+                        "title": "PROCESS_SERVICES.PROPERTIES.TASK_INSTANCES.STATUS.LABEL",
+                        "type": "text",
+                        "sortable": true
+                    },
+                    {
+                        "id": "process-services.columns.task-instances.priority",
+                        "key": "item.propertyLabels.bpm_priority",
+                        "sortingKey": "propertyLabels.bpm_priority",
+                        "title": "PROCESS_SERVICES.PROPERTIES.TASK_INSTANCES.PRIORITY.LABEL",
+                        "type": "text",
+                        "sortable": true
+                    },
+                    {
+                        "id": "process-services.columns.task-instances.startDate",
+                        "key": "item.properties.bpm_startDate",
+                        "sortingKey": "properties.bpm_startDate",
+                        "title": "PROCESS_SERVICES.PROPERTIES.TASK_INSTANCES.START_DATE.LABEL",
+                        "type": "date",
+                        "format": "timeAgo",
+                        "hidden": ["mobile"],
+                        "sortable": true
+                    },
+                    {
+                        "id": "process-services.columns.task-instances.bpm_dueDate",
+                        "key": "item.properties.bpm_dueDate",
+                        "sortingKey": "properties.bpm_dueDate",
+                        "title": "PROCESS_SERVICES.PROPERTIES.TASK_INSTANCES.DUE_DATE.LABEL",
+                        "type": "date",
+                        "format": "timeAgo",
+                        "sortable": true
+                    }
+                ]
+            }
+            ]
+    }
+}
