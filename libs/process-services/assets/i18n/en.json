@@ -25,15 +25,30 @@
         },
         "PROPERTIES": {
             "TASK_INSTANCES": {
-                "DESCRIPTION": {
-                    "LABEL": "Description"
+                "ID": { "LABEL": "Identifier" },
+                "TITLE": { "LABEL": "Title" },
+                "NAME": { "LABEL": "Name" },
+                "DESCRIPTION": { "LABEL": "Description" },
+                "STATE": { "LABEL": "State" },
+                "TYPE": { "LABEL": "Type" },
+                "CREATOR": { "LABEL": "Creator" },
+                "OWNER": { "LABEL": "Owner" },
+                "OUTCOME": { "LABEL": "Outcome" },
+                "URL": { "LABEL": "Link" },
+                "IS_CLAIMABLE": { "LABEL": "Claimable" },
+                "IS_EDITABLE": { "LABEL": "Editable" },
+                "IS_RELEASABLE": { "LABEL": "Releasable" },
+                "PATH": { "LABEL": "Path" },
+                "BPM_DESCRIPTION": { "LABEL": "Task description" },
+                "BPM_START_DATE": { "LABEL": "Start date" },
+                "BPM_COMMENT": {
+                    "LABEL": "Comment"
                 },
-                "MESSAGE": {
-                    "LABEL": "Message"
-                },
-                "STATUS": {
-                    "LABEL": "Status"
-                },
+                "INVITEE_USERNAME": { "LABEL": "Invited user name" }
+            },
+            "WORKFLOW": {
+                "TITLE": { "LABEL": "Workflow title" },
+                "NAME": { "LABEL": "Workflow name" },
                 "PRIORITY": {
                     "LABEL": "Priority",
                     "OPTIONS": {
@@ -42,12 +57,12 @@
                         "LOW": "Low"
                     }
                 },
-                "START_DATE": {
-                    "LABEL": "Start date"
-                },
-                "DUE_DATE": {
-                    "LABEL": "Due date"
-                }
+                "START_DATE": { "LABEL": "Start date" },
+                "DUE_DATE": { "LABEL": "Due date" },
+                "END_DATE": { "LABEL": "End date" },
+                "INITIATOR": { "LABEL": "Initiator username" },
+                "INITIATOR_NAME": { "LABEL": "Initiator name" },
+                "IS_ACTIVE": { "LABEL": "Active" }
             }
         }
     }

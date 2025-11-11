@@ -25,29 +25,44 @@
         },
         "PROPERTIES": {
             "TASK_INSTANCES": {
-                "DESCRIPTION": {
-                    "LABEL": "Omschrijving"
+                "ID": { "LABEL": "Identificatie" },
+                "TITLE": { "LABEL": "Titel" },
+                "NAME": { "LABEL": "Naam" },
+                "DESCRIPTION": { "LABEL": "Omschrijving" },
+                "STATE": { "LABEL": "Status" },
+                "TYPE": { "LABEL": "Type" },
+                "CREATOR": { "LABEL": "Aangemaakt door" },
+                "OWNER": { "LABEL": "Eigenaar" },
+                "OUTCOME": { "LABEL": "Resultaat" },
+                "URL": { "LABEL": "Link" },
+                "IS_CLAIMABLE": { "LABEL": "Claimbaar" },
+                "IS_EDITABLE": { "LABEL": "Bewerkbaar" },
+                "IS_RELEASABLE": { "LABEL": "Vrij te geven" },
+                "PATH": { "LABEL": "Pad" },
+                "BPM_DESCRIPTION": { "LABEL": "Taakomschrijving" },
+                "BPM_START_DATE": { "LABEL": "Startdatum" },
+                "BPM_COMMENT": {
+                    "LABEL": "Opmerking"
                 },
-                "MESSAGE": {
-                    "LABEL": "Bericht"
-                },
-                "STATUS": {
-                    "LABEL": "Status"
-                },
+                "INVITEE_USERNAME": { "LABEL": "Gebruikersnaam aanvrager" }
+            },
+            "WORKFLOW": {
+                "TITLE": { "LABEL": "Workflowtitel" },
+                "NAME": { "LABEL": "Workflownaam" },
                 "PRIORITY": {
                     "LABEL": "Prioriteit",
                     "OPTIONS": {
                         "HIGH": "Hoog",
-                        "MEDIUM": "Middel",
+                        "MEDIUM": "Gemiddeld",
                         "LOW": "Laag"
                     }
                 },
-                "START_DATE": {
-                    "LABEL": "Start datum"
-                },
-                "DUE_DATE": {
-                    "LABEL": "Deadline"
-                }
+                "START_DATE": { "LABEL": "Startdatum" },
+                "DUE_DATE": { "LABEL": "Vervaldatum" },
+                "END_DATE": { "LABEL": "Einddatum" },
+                "INITIATOR": { "LABEL": "Initiator gebruikersnaam" },
+                "INITIATOR_NAME": { "LABEL": "Naam initiator" },
+                "IS_ACTIVE": { "LABEL": "Actief" }
             }
         }
     }

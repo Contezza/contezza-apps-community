@@ -24,7 +24,7 @@
                         "id": "demo-app.navbar-item.search-table-page",
                         "icon": "search",
                         "title": "Search",
-                        "route": "search/favorites"
+                        "route": "process-services/tasks"
                     }
                 ]
             },

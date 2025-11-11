@@ -10,12 +10,14 @@ import { PropertyTitleService } from '@contezza/core/property-titles';
 import { ContentServicesSearchExtensionModule } from '@contezza/content-services/search';
 import { JsConsoleExtensionModule } from '@contezza/js-console/shared';
 import { ContezzaNodeBrowserSharedModule } from '@contezza/node-browser/shared';
+import { ProcessServicesExtensionModule } from '@contezza/process-services';
 
 @NgModule({
     imports: [
         ContezzaCommonModule,
         AosExtensionModule,
         ContentServicesSearchExtensionModule,
+        ProcessServicesExtensionModule,
         JsConsoleExtensionModule.withConfig({ path: 'javascript-console' }),
         ContezzaNodeBrowserSharedModule,
     ],

@@ -1,0 +1,23 @@
+{
+    "$id": "process-services.dynamic-forms",
+    "$version": "@@project.version@@",
+    "$name": "Process Services Dynamic Forms",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "dynamicforms": [
+            {
+                "id": "process-services.dynamic-forms.comment",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "comment",
+                            "type": "input",
+                            "label": "New comment"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

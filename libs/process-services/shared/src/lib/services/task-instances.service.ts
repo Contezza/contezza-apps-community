@@ -1,49 +1,40 @@
 import { Injectable } from '@angular/core';
 import { WebscriptService } from '@contezza/core/services';
 import { SearchParameters } from '@contezza/content-services/search/shared';
-import { map, Observable, tap } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ResultSetPaging } from '@alfresco/js-api';
-import { clientSort, dateAt, parseSidebarQuery, toResultSet } from '../utils';
+import { toResultSet } from '../utils';
+import { Task } from '../models';
+import { StringUtils } from '@contezza/core/utils';
 
 @Injectable({
     providedIn: 'root',
 })
-export class TaskInstancesService {
+export class TaskService {
+    static readonly ENDPOINT_TASK_INSTANCES = 'api/task-instances';
+    static readonly ENDPOINT_TASK_FORM_PROCESSOR = 'api/task/${activitiId}/formprocessor';
+    static readonly TEMPLATE_TASK_FORM_PROCESSOR = StringUtils.toTemplate(TaskService.ENDPOINT_TASK_FORM_PROCESSOR);
+
     constructor(private readonly webscript: WebscriptService) {}
 
-    searchTasks(parameters: SearchParameters): Observable<ResultSetPaging> {
-        const { sorting, paging, sidebarQuery, currentFolder } = parameters;
-        const q = parseSidebarQuery(sidebarQuery);
+    readTasks(parameters: SearchParameters): Observable<ResultSetPaging> {
+        const { paging, currentFolder } = parameters;
+        const params: string[] = [`authority=${currentFolder}`, `maxItems=${paging?.maxItems ?? 10}`, `skipCount=${paging?.skipCount ?? 0}`];
 
-        const userId = currentFolder;
+        const url = `${TaskService.ENDPOINT_TASK_INSTANCES}?${params.join('&')}`;
 
-        const dueMap: Record<string, string> = {
-            today: `dueAfter=${dateAt(11, 59, 59, 999)}&dueBefore=${dateAt()}`,
-            tomorrow: `dueAfter=${dateAt()}&dueBefore=${dateAt()}`,
-            next7Days: `dueAfter=${dateAt()}&dueBefore=${dateAt()}`,
-            overdue: `dueBefore=${dateAt(11, 59, 59, 999)}`,
-            noDate: 'dueBefore=',
-        };
+        return this.webscript.get(url).pipe(map(({ data }) => toResultSet(data, paging)));
+    }
 
-        const params: string[] = [`authority=${userId}`, `maxItems=${paging?.maxItems ?? 10}`, `skipCount=${paging?.skipCount ?? 0}`];
+    readTask(taskId: string): Observable<Task> {
+        return this.webscript.get<{ data: Task }>(`${TaskService.ENDPOINT_TASK_INSTANCES}/${taskId}?detailed=true`).pipe(map((response) => response.data));
+    }
 
-        if (q['assignee']) params.push(`pooledTasks=${q['assignee'] !== 'me'}`);
-        if (q['priority']) params.push(`priority=${q['priority']}`);
-        if (q['dueAfter'] && dueMap[q['dueAfter']]) params.push(dueMap[q['dueAfter']]);
-        if (q['startedAfter']) {
-            const mapStarted: Record<string, string> = {
-                last7Days: `startedAfter=${dateAt(11, 59, 59, 999)}`,
-                last14Days: `startedAfter=${dateAt(11, 59, 59, 999)}`,
-                last28Days: `startedAfter=${dateAt(11, 59, 59, 999)}`,
-            };
-            if (mapStarted[q['startedAfter']]) params.push(mapStarted[q['startedAfter']]);
-        }
+    updateTask(activitiId: string, body: Record<string, any>) {
+        return this.webscript.put(`${TaskService.ENDPOINT_TASK_INSTANCES}/${activitiId}`, body);
+    }
 
-        const url = `api/task-instances?${params.join('&')}`;
-
-        return this.webscript.get(url).pipe(
-            tap(({ data }) => clientSort(data, sorting)),
-            map(({ data }) => toResultSet('task', data, paging))
-        );
+    processTask(activitiId: string, body: Record<string, any>) {
+        return this.webscript.post(TaskService.TEMPLATE_TASK_FORM_PROCESSOR({ activitiId }), body);
     }
 }

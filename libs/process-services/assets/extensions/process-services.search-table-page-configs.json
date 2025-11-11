@@ -11,18 +11,16 @@
                 "title": "PROCESS_SERVICES.BROWSE.TASK_INSTANCES.TITLE",
                 "actionContext": { "target": "search-table-page.process-services-tasks" },
                 "preferencesId": "process-services-tasks",
-                "preferences": ["columns", "sorting", "maxItems", "sidebar-filters"],
+                "preferences": ["columns", "sorting", "maxItems"],
                 "actions": {
-                    "click": "dblClickIfMobile",
-                    "dblclick": "[PROCESS_SERVICES] NAVIGATE_TO_TASK_DETAILS",
-                    "contextmenu": "[PROCESS_SERVICES] CONTEXT_MENU"
+                    "dblclick": "[CORE] NAVIGATE_TO",
+                    "contextmenu": "CONTEXT_MENU"
                 },
                 "featureKeys": {
                     "toolbar": "process-services-tasks-toolbar"
                 },
                 "searchStrategyId": "process-services.search-strategy.task-instances",
                 "columnsId": "process-services.columns.task-instances",
-                "sidebarFiltersId": "process-services.sidebar-filters.task-instances",
                 "default": {
                     "sorting": { "type": "FIELD", "field": "created", "ascending": true },
                     "paging": { "maxItems": 10 }

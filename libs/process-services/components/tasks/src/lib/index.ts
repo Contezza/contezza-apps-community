@@ -1,1 +1,1 @@
-export * from './task-details.dialog.component';
+export * from './task.component';
