@@ -20,7 +20,7 @@ LIBS=(
 );
 
 # Library paths in libs folder
-# neccessary for update library version before publishing
+# necessary for update library version before publishing
 LIBS_PATHS=(
     'core'
     'common'
@@ -30,4 +30,5 @@ LIBS_PATHS=(
     'people-group-picker'
     'dynamic-forms'
     'content-services'
+    'process-services'
 );
