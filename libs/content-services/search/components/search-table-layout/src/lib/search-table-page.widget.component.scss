@@ -1,6 +1,7 @@
 :host,
 contezza-search-table-page-widget {
     &.hide-toolbar {
+        .aca-content-header,
         aca-page-layout-header {
             display: none !important;
         }
