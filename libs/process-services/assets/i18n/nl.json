@@ -2,7 +2,7 @@
     "PROCESS_SERVICES": {
         "ACTIONS": {},
         "BROWSE": {
-            "TASK_INSTANCES": {
+            "TASKS": {
                 "TITLE": "Taken",
                 "SIDENAV_LINK": {
                     "LABEL": "",
@@ -24,12 +24,16 @@
             "ERRORS": {}
         },
         "PROPERTIES": {
-            "TASK_INSTANCES": {
+            "TASKS": {
                 "ID": { "LABEL": "Identificatie" },
                 "TITLE": { "LABEL": "Titel" },
                 "NAME": { "LABEL": "Naam" },
                 "DESCRIPTION": { "LABEL": "Omschrijving" },
+                "MESSAGE": {
+                    "LABEL": "Bericht"
+                },
                 "STATE": { "LABEL": "Status" },
+                "PRIORITY": { "LABEL": "Prioriteit" },
                 "TYPE": { "LABEL": "Type" },
                 "CREATOR": { "LABEL": "Aangemaakt door" },
                 "OWNER": { "LABEL": "Eigenaar" },
@@ -41,6 +45,7 @@
                 "PATH": { "LABEL": "Pad" },
                 "BPM_DESCRIPTION": { "LABEL": "Taakomschrijving" },
                 "BPM_START_DATE": { "LABEL": "Startdatum" },
+                "BPM_DUE_DATE": { "LABEL": "Einddatum" },
                 "BPM_COMMENT": {
                     "LABEL": "Opmerking"
                 },

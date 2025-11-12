@@ -1,1 +1,1 @@
-export * from './task-instances.service';
+export * from './tasks.service';

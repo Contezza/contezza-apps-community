@@ -8,7 +8,7 @@ const routes: Routes = [
             {
                 path: '',
                 loadChildren: () =>
-                    import('@contezza/content-services/search/page').then((_) => _.SearchTablePageRouterModule.asChild('process-services.search-table-page-config.task-instances')),
+                    import('@contezza/content-services/search/page').then((_) => _.SearchTablePageRouterModule.asChild('process-services.search-table-page-config.tasks')),
             },
             {
                 path: ':taskId',

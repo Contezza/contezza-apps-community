@@ -7,8 +7,8 @@
     "features": {
         "searchTablePageConfigs": [
             {
-                "id": "process-services.search-table-page-config.task-instances",
-                "title": "PROCESS_SERVICES.BROWSE.TASK_INSTANCES.TITLE",
+                "id": "process-services.search-table-page-config.tasks",
+                "title": "PROCESS_SERVICES.BROWSE.TASKS.TITLE",
                 "actionContext": { "target": "search-table-page.process-services-tasks" },
                 "preferencesId": "process-services-tasks",
                 "preferences": ["columns", "sorting", "maxItems"],
@@ -19,16 +19,16 @@
                 "featureKeys": {
                     "toolbar": "process-services-tasks-toolbar"
                 },
-                "searchStrategyId": "process-services.search-strategy.task-instances",
-                "columnsId": "process-services.columns.task-instances",
+                "searchStrategyId": "process-services.search-strategy.tasks",
+                "columnsId": "process-services.columns.tasks",
                 "default": {
                     "sorting": { "type": "FIELD", "field": "created", "ascending": true },
                     "paging": { "maxItems": 10 }
                 },
                 "emptyContent": {
                     "icon": "search",
-                    "title": "PROCESS_SERVICES.BROWSE.TASK_INSTANCES.EMPTY_STATE.TITLE",
-                    "subtitle": "PROCESS_SERVICES.BROWSE.TASK_INSTANCES.EMPTY_STATE.TEXT"
+                    "title": "PROCESS_SERVICES.BROWSE.TASKS.EMPTY_STATE.TITLE",
+                    "subtitle": "PROCESS_SERVICES.BROWSE.TASKS.EMPTY_STATE.TEXT"
                 },
                 "currentFolder": {
                     "type": "userProfile",
@@ -36,31 +36,9 @@
                 }
             },
             {
-                "id": "process-services-workflows-config",
-                "title": "APP.PROCESS.MY_WORKFLOWS.TITLE",
-                "actionContext": { "target": "search-table-page.process-services-workflows" },
-                "preferencesId": "process-services-workflows",
-                "preferences": ["columns", "sorting", "maxItems", "sidebar-filters"],
-                "actions": {
-                    "click": "dblClickIfMobile",
-                    "dblclick": "[PROCESS_SERVICES] NAVIGATE_TO_WORKFLOW_DETAILS",
-                    "contextmenu": "[PROCESS_SERVICES] CONTEXT_MENU"
-                },
-                "featureKeys": {
-                    "toolbar": "process-services-workflows-toolbar"
-                },
-                "searchStrategyId": "process-services.workflows",
-                "columnsId": "app.columns.process-services-workflows",
-                "sidebarFiltersId": "app.sidebar-filters-process-services-workflows",
-                "default": {
-                    "sorting": { "type": "FIELD", "field": "started", "ascending": true },
-                    "paging": { "maxItems": 10 }
-                },
-                "emptyContent": {
-                    "icon": "search",
-                    "title": "APP.PROCESS.MY_WORKFLOWS.EMPTY_CONTENT.TITLE",
-                    "subtitle": "APP.PROCESS.MY_WORKFLOWS.EMPTY_CONTENT.SUBTITLE"
-                }
+                "id": "process-services.search-table-page-config.tasks-widget",
+                "imports": "features.searchTablePageConfigs[process-services.search-table-page-config.tasks]",
+                "columnsId": "process-services.columns.tasks-widget"
             }
         ]
     }

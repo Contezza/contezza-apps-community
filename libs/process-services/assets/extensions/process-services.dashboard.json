@@ -14,7 +14,7 @@
                 "icon": "inbox",
                 "data": {
                     "type": "tasks",
-                    "configKey": "process-services.search-table-page-config.task-instances"
+                    "configKey": "process-services.search-table-page-config.tasks"
                 },
                 "initView": {
                     "cols": 8,
@@ -27,6 +27,5 @@
                 }
             }
         ]
-
     }
 }

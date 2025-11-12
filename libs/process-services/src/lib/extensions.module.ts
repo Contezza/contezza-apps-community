@@ -25,7 +25,7 @@ import { Effects } from './store/effects';
 export class ExtensionModule {
     constructor(private readonly search: ContentServicesSearchExtensionService, private readonly extensions: ExtensionService, private readonly tasks: TaskService) {
         this.search.setSearchStrategies({
-            'process-services.search-strategy.task-instances': ({ parameters }) => this.tasks.readTasks(parameters),
+            'process-services.search-strategy.tasks': ({ parameters }) => this.tasks.readTasks(parameters),
         });
 
         const isCompleted = (task: Task | null | undefined): boolean => !!task && task.state === 'COMPLETED';

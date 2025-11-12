@@ -2,7 +2,7 @@
     "PROCESS_SERVICES": {
         "ACTIONS": {},
         "BROWSE": {
-            "TASK_INSTANCES": {
+            "TASKS": {
                 "TITLE": "Task",
                 "SIDENAV_LINK": {
                     "LABEL": "",
@@ -24,12 +24,16 @@
             "ERRORS": {}
         },
         "PROPERTIES": {
-            "TASK_INSTANCES": {
+            "TASKS": {
                 "ID": { "LABEL": "Identifier" },
                 "TITLE": { "LABEL": "Title" },
                 "NAME": { "LABEL": "Name" },
                 "DESCRIPTION": { "LABEL": "Description" },
+                "MESSAGE": {
+                    "LABEL": "MESSAGE"
+                },
                 "STATE": { "LABEL": "State" },
+                "PRIORITY": { "LABEL": "Priority" },
                 "TYPE": { "LABEL": "Type" },
                 "CREATOR": { "LABEL": "Creator" },
                 "OWNER": { "LABEL": "Owner" },
@@ -41,6 +45,7 @@
                 "PATH": { "LABEL": "Path" },
                 "BPM_DESCRIPTION": { "LABEL": "Task description" },
                 "BPM_START_DATE": { "LABEL": "Start date" },
+                "BPM_DUE_DATE": { "LABEL": "Due date" },
                 "BPM_COMMENT": {
                     "LABEL": "Comment"
                 },
