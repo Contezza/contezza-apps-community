@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
-import { ActionsService, RuleContextService, SelectionStore, ToolbarComponent } from '@contezza/core/context';
+import { RuleContextService, ToolbarComponent } from '@contezza/core/context';
 import { ItemDetailsComponent } from '@contezza/content-services/components/item-details';
 import { RefreshSubject, SpinnerOverlayService } from '@contezza/core/services';
 import { Task, TaskService } from '@contezza/process-services/shared';
@@ -15,7 +15,7 @@ import { MatCardModule } from '@angular/material/card';
 @Component({
     standalone: true,
     imports: [ToolbarComponent, ItemDetailsComponent, MatCardModule, TaskActionsComponent],
-    providers: [ActionsService, SelectionStore],
+    providers: [],
     selector: 'contezza-task',
     template: `
         @if (task()){
