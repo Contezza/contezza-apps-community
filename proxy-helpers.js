@@ -1,6 +1,6 @@
 /* eslint-env es6 */
 
-const ALFRESCO_URL = 'https://dev-tezza.contezza.cloud/';
+const ALFRESCO_URL = 'https://dev-tezza.contezza.cloud';
 
 module.exports = {
     host: {
