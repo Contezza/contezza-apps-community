@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { ExtensionService, provideExtensionConfig, RuleContext } from '@alfresco/adf-extensions';
 import { provideTranslations } from '@alfresco/adf-core';
 import { ContentServicesSearchExtensionService } from '@contezza/content-services/search/shared';
-import { Task, TaskService } from '../../shared/src';
+import { Task, TaskService } from '@contezza/process-services/shared';
 import { EffectsModule } from '@ngrx/effects';
 import { Effects } from './store/effects';
 

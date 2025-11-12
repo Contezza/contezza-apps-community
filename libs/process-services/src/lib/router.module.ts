@@ -15,7 +15,7 @@ const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        loadComponent: () => import('@contezza/process-services/components/tasks').then((_) => _.TaskComponent),
+                        loadComponent: () => import('@contezza/process-services/components/task').then((_) => _.TaskComponent),
                     },
                 ],
             },

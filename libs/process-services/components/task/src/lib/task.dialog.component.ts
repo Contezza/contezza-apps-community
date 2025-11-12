@@ -3,8 +3,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 @Component({
     standalone: true,
     imports: [],
-    selector: 'contezza-task-details',
+    selector: 'contezza-task-dialog',
     template: `works`,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TaskDetailsComponent {}
+export class TaskDialogComponent {}

@@ -16,6 +16,7 @@ LIBS=(
     'people-group-picker'
     'dynamic-forms'
     'content-services'
+    'process-services'
 );
 
 # Library paths in libs folder
