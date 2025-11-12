@@ -22,7 +22,7 @@ export class Effects {
         private readonly refresh$: RefreshSubject
     ) {}
 
-    private readonly success$ = of(showSnackbarInfo({ payload: 'Gelukt' }));
+    private readonly success$ = of(showSnackbarInfo({ payload: 'PROCESS_SERVICES.MESSAGES.INFO.TASK_UPDATED_SUCCESS' }));
 
     private handleError(context: string) {
         return catchError((err) => {

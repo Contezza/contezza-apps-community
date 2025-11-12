@@ -20,7 +20,9 @@
             }
         },
         "MESSAGES": {
-            "INFO": {},
+            "INFO": {
+                "TASK_UPDATED_SUCCESS": "Taak succesvol aangepast"
+            },
             "ERRORS": {}
         },
         "PROPERTIES": {
