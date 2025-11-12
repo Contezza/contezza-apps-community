@@ -77,6 +77,20 @@ Waar:
 * `email@contezza.nl` is de email van de gebruiker
 * `encoded_password` is het wachtwoord van de gebruiker encoded via de commando `echo -n "password" | base64`
 
+### Nieuwe library toevoegen
+
+Aandachtspunten:
+
+* Library toevoegen aan scripts/config.sh
+* Naast elke src map een ng-package.json toevoegen: 
+```json
+{
+    "lib": {
+        "entryFile": "src/index.ts"
+    }
+}
+```
+
 ### Koppeling met de contezza-apps repository
 
 #### Direct koppeling voor ontwikkeling
