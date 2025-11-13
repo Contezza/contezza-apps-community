@@ -40,7 +40,7 @@ import { MatCardModule } from '@angular/material/card';
             }
 
             .mat-mdc-card-content {
-                height: 100%;
+                height: calc(100% - 256px);
                 overflow: auto;
             }
 

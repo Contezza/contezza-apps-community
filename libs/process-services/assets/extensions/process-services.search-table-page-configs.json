@@ -13,7 +13,7 @@
                 "preferencesId": "process-services-tasks",
                 "preferences": ["columns", "sorting", "maxItems"],
                 "actions": {
-                    "dblclick": "[CORE] NAVIGATE_TO",
+                    "dblclick": "[PROCESS_SERVICES] NAVIGATE_TO_TASK",
                     "contextmenu": "CONTEXT_MENU"
                 },
                 "featureKeys": {

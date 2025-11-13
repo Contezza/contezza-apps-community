@@ -13,7 +13,7 @@
                         {
                             "id": "comment",
                             "type": "input",
-                            "label": "New comment"
+                            "label": "PROCESS_SERVICES.PROPERTIES.BPM_COMMENT.LABEL"
                         }
                     ]
                 }

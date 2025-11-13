@@ -1,7 +1,9 @@
 import { createAction, props } from '@ngrx/store';
 import { Task } from '../models';
+import { NodeEntry } from '@alfresco/js-api';
 
 export enum ProcessActionType {
+    NavigateToTask = '[PROCESS_SERVICES] NAVIGATE_TO_TASK',
     Save = '[PROCESS_SERVICES] SAVE',
     Claim = '[PROCESS_SERVICES] CLAIM',
     Release = '[PROCESS_SERVICES] RELEASE',
@@ -15,6 +17,7 @@ interface TaskPayload {
     comment?: string;
 }
 
+export const navigateToTask = createAction(ProcessActionType.NavigateToTask, props<{ payload: NodeEntry }>());
 export const save = createAction(ProcessActionType.Save, props<{ payload: TaskPayload }>());
 export const claim = createAction(ProcessActionType.Claim);
 export const release = createAction(ProcessActionType.Release);

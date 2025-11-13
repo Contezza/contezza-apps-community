@@ -2,15 +2,14 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { EMPTY, of } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 import { catchError, filter, map, switchMap, take } from 'rxjs/operators';
 
 import { AppStore, getAppSelection, getRuleContext } from '@alfresco/aca-shared/store';
-import { SelectionState } from '@alfresco/adf-extensions';
-import { navigateTo } from '@contezza/core/actions';
-import { approve, claim, complete, reject, release, save, TaskService } from '@contezza/process-services/shared';
+import { approve, claim, complete, navigateToTask, reject, release, save, TaskService } from '@contezza/process-services/shared';
 import { showSnackbarInfo } from '@contezza/core/notifications';
 import { RefreshSubject } from '@contezza/core/services';
+import { NodeEntry } from '@alfresco/js-api';
 
 @Injectable()
 export class Effects {
@@ -36,17 +35,20 @@ export class Effects {
         return this.success$;
     }
 
-    readonly navigateTo$ = createEffect(
+    readonly navigateToTask$ = createEffect(
         () =>
             this.actions$.pipe(
-                ofType(navigateTo),
-                switchMap(() =>
-                    this.store.select(getAppSelection).pipe(
-                        take(1),
-                        map((selection: SelectionState) => selection?.last)
-                    )
+                ofType(navigateToTask),
+                switchMap(
+                    ({ payload }): Observable<NodeEntry> =>
+                        payload
+                            ? of(payload)
+                            : this.store.select(getAppSelection).pipe(
+                                  take(1),
+                                  map((selection) => selection.last)
+                              )
                 ),
-                switchMap((value) => this.router.navigate(['process-services', 'tasks', value.entry.id]))
+                switchMap(({ entry }) => this.router.navigate(['process-services', 'tasks', entry.id]))
             ),
         { dispatch: false }
     );
