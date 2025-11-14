@@ -4,6 +4,7 @@
         "BROWSE": {
             "TASKS": {
                 "TITLE": "Task",
+                "SUBTITLE": "An overview of all active tasks",
                 "SIDENAV_LINK": {
                     "LABEL": "",
                     "TOOLTIP": ""

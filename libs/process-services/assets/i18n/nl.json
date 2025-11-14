@@ -4,6 +4,7 @@
         "BROWSE": {
             "TASKS": {
                 "TITLE": "Taken",
+                "SUBTITLE": "Een overzicht van de lopende taken",
                 "SIDENAV_LINK": {
                     "LABEL": "",
                     "TOOLTIP": ""
