@@ -322,11 +322,17 @@ In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
 
+==== Release 3.4.1
+
+Bugfixes/minor changes:
+
+- @contezza/process-services - Fix task navigation issue, style fix and improvements to naming conventions
+
 ==== Release 3.4.0
 
 New features:
 
-- @contezza/process-services - New library `Process Services` https://support.contezza.nl/issues/35472[(#35472)].
+- @contezza/process-services - New library `Process Services` created https://support.contezza.nl/issues/35472[(#35472)].
 
 Bugfixes/minor changes:
 
