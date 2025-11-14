@@ -23,6 +23,14 @@
             align-items: center;
             justify-content: center;
         }
+
+        // remove right border when sidebar is not expanded
+        &:has(.search-table-layout-content-sidebar:not(.expanded)) {
+            .search-table-layout-content-main {
+                border: none;
+            }
+        }
+
         &-main {
             flex: 1;
             max-width: 100%;
