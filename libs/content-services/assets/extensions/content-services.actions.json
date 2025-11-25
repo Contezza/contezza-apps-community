@@ -81,6 +81,7 @@
                 "id": "search-table-page.floating-button.add",
                 "order": 1,
                 "icon": "add",
+                "title": "CONTENT_SERVICES.ACTIONS.ADD",
                 "type": "menu",
                 "children": [
                     {
