@@ -6,6 +6,8 @@ import { Store } from '@ngrx/store';
 
 import { delay, distinctUntilChanged, filter, map, Observable, of, startWith, switchMap, take } from 'rxjs';
 
+import { Moment } from 'moment';
+
 import { ResultSetPaging } from '@alfresco/js-api';
 import { AppConfigService, LocalizedDatePipe, ObjectUtils } from '@alfresco/adf-core';
 import { NodesApiService, SearchService } from '@alfresco/adf-content-services';
@@ -143,6 +145,7 @@ export class ExtensionLoaderService {
                 const resolvedFilters = filters.map((flt) => this.idResolver.resolve(flt, 'operator'));
                 return ($) => $.pipe(...resolvedFilters);
             },
+            formatDate: (format: string) => ($: Observable<Moment | null>) => $.pipe(map((date) => (date ? date.format(format) : date))),
         });
     }
 }
