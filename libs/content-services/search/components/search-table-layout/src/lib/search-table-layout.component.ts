@@ -181,7 +181,7 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
 
     @Input()
     set leftSidebarFiltersId(formId: string) {
-        this.sidebarFilters = { formId };
+        this.leftSidebarFilters = { formId };
     }
 
     @Input()
