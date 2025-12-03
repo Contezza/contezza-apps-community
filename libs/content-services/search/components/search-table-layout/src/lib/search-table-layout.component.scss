@@ -73,6 +73,16 @@
 
         &-left-sidebar {
             min-width: 420px;
+            &:not(.expanded) {
+                width: 0;
+                min-width: 0;
+            }
+            &-form {
+                &:not(.expanded) {
+                    visibility: hidden;
+                    position: absolute;
+                }
+            }
         }
 
         contezza-floating-button {

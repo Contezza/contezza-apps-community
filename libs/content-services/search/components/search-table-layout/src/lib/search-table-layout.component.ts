@@ -210,6 +210,9 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
     sidebarState: SidebarState = { expanded: false, hideTitle: false };
 
     @Input()
+    leftSidebarState: SidebarState = { expanded: true, hideTitle: true };
+
+    @Input()
     set emptyContent(value: SearchTableLayoutSettings['emptyContent']) {
         this.emptyContentLayoutItemsSource.next(
             Array.isArray(value)

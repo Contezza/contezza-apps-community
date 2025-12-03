@@ -23,12 +23,12 @@
 
                     <ng-container *contezzaLet="selection$ | async as selection">
                         <ng-container *ngIf="leftSidebarForm && ready">
-                            <div class="aca-sidebar search-table-layout-content-left-sidebar">
+                            <div class="aca-sidebar search-table-layout-content-left-sidebar" [class.expanded]="leftSidebarState.expanded">
                                 <contezza-dynamic-form-filter
-                                    class="search-table-layout-content-left-sidebar-search"
-                                    [class.expanded]="true"
+                                    class="search-table-layout-content-left-sidebar-form"
+                                    [class.expanded]="leftSidebarState.expanded"
                                     [dynamicForm]="leftSidebarForm"
-                                    [hideTitle]="true"
+                                    [hideTitle]="leftSidebarState.hideTitle"
                                 />
                             </div>
                         </ng-container>
