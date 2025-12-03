@@ -16,11 +16,23 @@
                     />
                 </aca-page-layout-header>
 
-                <aca-page-layout-content class="search-table-layout-content" [class.loading]="loading" [class.flipped]="sidebarState.position === 'left'">
+                <aca-page-layout-content class="search-table-layout-content" [class.loading]="loading">
                     <ng-container *ngIf="loading">
                         <div class="search-table-layout-content-spinner"><mat-spinner /></div>
                     </ng-container>
+
                     <ng-container *contezzaLet="selection$ | async as selection">
+                        <ng-container *ngIf="leftSidebarForm && ready">
+                            <div class="aca-sidebar search-table-layout-content-left-sidebar">
+                                <contezza-dynamic-form-filter
+                                    class="search-table-layout-content-left-sidebar-search"
+                                    [class.expanded]="true"
+                                    [dynamicForm]="leftSidebarForm"
+                                    [hideTitle]="true"
+                                />
+                            </div>
+                        </ng-container>
+
                         <div class="aca-main-content search-table-layout-content-main">
                             <div class="search-table-layout-content-main-header">
                                 <ng-container *ngIf="headerForm && ready">

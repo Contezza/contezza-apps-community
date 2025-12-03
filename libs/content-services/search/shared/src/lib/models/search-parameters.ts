@@ -6,6 +6,7 @@ export interface SearchParameters {
     headerQuery?: string;
     columnQuery?: string;
     sidebarQuery?: string;
+    leftSidebarQuery?: string;
     filterQuery?: string;
     currentFolder?: Node;
     sorting: RequestSortDefinitionInner;

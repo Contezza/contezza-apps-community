@@ -8,11 +8,6 @@ export enum SidebarContentType {
     Preset = 'preset',
 }
 
-export enum SidebarPosition {
-    Left = 'left',
-    Right = 'right',
-}
-
 interface DynamicComponentPayload {
     id: string;
     data?: any;
@@ -40,7 +35,6 @@ const areEqual = (x: SidebarContent, y: SidebarContent): boolean => {
 export interface SidebarState {
     expanded: boolean;
     content?: SidebarContent;
-    position?: SidebarPosition;
     hideTitle?: boolean;
 }
 

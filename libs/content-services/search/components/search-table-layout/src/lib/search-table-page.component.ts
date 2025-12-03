@@ -63,7 +63,7 @@ class PreferenceDefinition<T extends string> {
     selector: 'contezza-search-table-page',
     template: `
         <ng-container *ngIf="settings$ | async as settings">
-            <contezza-search-table-layout [settings]="settings" [extras]="extras"></contezza-search-table-layout>
+            <contezza-search-table-layout [settings]="settings" [extras]="extras" />
         </ng-container>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -225,6 +225,7 @@ export class SearchTablePageComponent {
                             { form: table.headerForm, preferenceType: PreferencesType.HeaderFilters },
                             { form: table.sidebarForm, preferenceType: PreferencesType.SidebarFilters },
                             { form: table.columnForm, preferenceType: PreferencesType.ColumnFilters },
+                            { form: table.leftSidebarForm, preferenceType: PreferencesType.LeftSidebarFilters },
                         ]
                             .filter(({ preferenceType }) => !!groupedPreferences[preferenceType])
                             .map(({ form, preferenceType }) =>
