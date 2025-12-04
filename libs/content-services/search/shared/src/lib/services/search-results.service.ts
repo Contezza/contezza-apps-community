@@ -2,7 +2,25 @@ import { Injectable, Optional } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-import { BehaviorSubject, catchError, combineLatest, debounceTime, EMPTY, filter, map, merge, Observable, of, pluck, share, Subject, switchMap, take, tap } from 'rxjs';
+import {
+    BehaviorSubject,
+    catchError,
+    combineLatest,
+    debounceTime,
+    EMPTY,
+    filter,
+    map,
+    merge,
+    Observable,
+    of,
+    pluck,
+    share,
+    shareReplay,
+    Subject,
+    switchMap,
+    take,
+    tap,
+} from 'rxjs';
 
 import { GenericFacetResponse, NodePaging, RequestPagination, ResultSetPaging, SearchRequest } from '@alfresco/js-api';
 
@@ -43,6 +61,9 @@ export class SearchResultsService {
 
     private readonly searchTrigger = new BehaviorSubject<void>(undefined);
 
+    private readonly manualResultsSource = new BehaviorSubject<ResultSetPaging | null>(null);
+    private readonly manualResults$ = this.manualResultsSource.asObservable().pipe(filter((r): r is ResultSetPaging => r !== null));
+
     private readonly _results$: Observable<ResultSetPaging> = combineLatest([this.searchParametersStore.parameters$, this.searchTrigger]).pipe(
         // first emit searching, then filter if searchParameters is switched off
         tap(() => this.searchingSource.next(true)),
@@ -66,28 +87,28 @@ export class SearchResultsService {
     );
 
     get results$(): Observable<NodePaging> {
-        return of(void 0)
-            .pipe(
-                switchMap(() => {
-                    switch (this._queryMode) {
-                        case QueryMode.ON_TRIGGER:
-                            // if query mode is ON_TRIGGER, then emit empty results first, then subscribe to this._results$
-                            return merge(
-                                // searchParametersStore is only read to ensure that the 'max items' parameter in the empty page is correct
-                                this.searchParametersStore.state$.pipe(
-                                    // debounce to capture full initialisation
-                                    debounceTime(100),
-                                    map(({ paging }) => SearchResultsService.getEmptyResultWithPaging(paging)),
-                                    take(1)
-                                ),
-                                this._results$
-                            );
-                        default:
-                            return this._results$;
-                    }
-                })
-            )
-            .pipe(tap(() => this.searchingSource.next(false))) as Observable<NodePaging>;
+        const base$ = of(void 0).pipe(
+            switchMap(() => {
+                switch (this._queryMode) {
+                    case QueryMode.ON_TRIGGER:
+                        return merge(
+                            this.searchParametersStore.state$.pipe(
+                                debounceTime(100),
+                                map(({ paging }) => SearchResultsService.getEmptyResultWithPaging(paging)),
+                                take(1)
+                            ),
+                            this._results$
+                        );
+                    default:
+                        return this._results$;
+                }
+            })
+        );
+
+        return merge(this.manualResults$, base$).pipe(
+            tap(() => this.searchingSource.next(false)),
+            shareReplay(1)
+        ) as Observable<NodePaging>;
     }
 
     readonly facets$: Observable<Record<string, GenericFacetResponse>> = this._results$.pipe(
@@ -122,6 +143,9 @@ export class SearchResultsService {
     set queryMode(queryMode: QueryMode) {
         this._queryMode = queryMode;
     }
+    get queryMode(): QueryMode {
+        return this._queryMode;
+    }
 
     constructor(
         private readonly store: Store,
@@ -132,6 +156,13 @@ export class SearchResultsService {
 
     reload() {
         this.searchTrigger.next();
+    }
+
+    clearResults(): void {
+        this.searchParametersStore.state$.pipe(take(1)).subscribe(({ paging }) => {
+            this.manualResultsSource.next(SearchResultsService.getEmptyResultWithPaging(paging));
+            this.searchingSource.next(false);
+        });
     }
 
     private doSearch(parameters: SearchParameters): Observable<ResultSetPaging> {

@@ -71,6 +71,7 @@
                                         [class.expanded]="sidebarContent === 'form'"
                                         [dynamicForm]="sidebarForm"
                                         [hideTitle]="sidebarState.hideTitle"
+                                        (cleared)="onFilterCleared()"
                                     />
                                 </ng-container>
                                 <ng-container *ngIf="sidebarContent === 'info'">

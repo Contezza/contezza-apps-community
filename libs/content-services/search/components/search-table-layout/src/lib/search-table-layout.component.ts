@@ -435,7 +435,7 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
                     form.query.pipe(
                         // swapping filter and distinctUntilChanged looks more logic but it breaks some pages
                         filter(() => form.form.valid), // Ensure only valid queries trigger
-                        distinctUntilChanged(), // Avoid redundant queries
+                        distinctUntilChanged((a, b) => (form.queryMode === QueryMode.ON_TRIGGER ? false : a === b)), // Avoid redundant queries, except when results are cleared
                         tap(() => {
                             this.awaitingSelectionReset = true;
                             this.fullSelectionSnapshot = undefined;
@@ -538,6 +538,13 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
         this.fullSelectionSnapshot = undefined;
 
         this.search.reload();
+    }
+
+    onFilterCleared() {
+        if (this.search.queryMode === QueryMode.ON_TRIGGER) {
+            this.search.clearResults();
+            this.selection.reset();
+        }
     }
 
     resetFilters() {
