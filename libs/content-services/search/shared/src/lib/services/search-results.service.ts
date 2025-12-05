@@ -91,8 +91,11 @@ export class SearchResultsService {
             switchMap(() => {
                 switch (this._queryMode) {
                     case QueryMode.ON_TRIGGER:
+                        // if query mode is ON_TRIGGER, then emit empty results first, then subscribe to this._results$
                         return merge(
+                            // searchParametersStore is only read to ensure that the 'max items' parameter in the empty page is correct
                             this.searchParametersStore.state$.pipe(
+                                // debounce to capture full initialisation
                                 debounceTime(100),
                                 map(({ paging }) => SearchResultsService.getEmptyResultWithPaging(paging)),
                                 take(1)
