@@ -10,6 +10,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2025-12-05
+|3.5.0
+|View <<Release 3.5.0,release details>>.
+
 |2025-11-27
 |3.4.2
 |View <<Release 3.4.2,release details>>.
@@ -329,6 +333,17 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 3.5.0
+
+New features:
+
+- @contezza/content-services - Added `leftSidebarFilters` to search-table-page https://support.contezza.nl/issues/35833[(#35833)].
+- @contezza/content-services - Clear results list after clearing sidebarfilters in QueryMode on-trigger https://support.contezza.nl/issues/35849[(#35849)].
+
+Bugfixes/minor changes:
+
+- @contezza/common - Define default map formatDate.
 
 ==== Release 3.4.2
 
