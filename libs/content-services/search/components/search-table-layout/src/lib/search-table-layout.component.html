@@ -29,6 +29,7 @@
                                     [class.expanded]="leftSidebarState.expanded"
                                     [dynamicForm]="leftSidebarForm"
                                     [hideTitle]="leftSidebarState.hideTitle"
+                                    (cleared)="onFilterCleared()"
                                 />
                             </div>
                         </ng-container>
