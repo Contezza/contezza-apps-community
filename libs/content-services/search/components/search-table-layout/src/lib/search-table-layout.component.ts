@@ -24,7 +24,7 @@ import { ContezzaLoadingObservable } from '@contezza/core/extensions';
 import { ContextMenuService, CurrentFolderStore, FloatingButtonComponent, RuleContextService, SelectionStore } from '@contezza/core/context';
 import { ContezzaObservables } from '@contezza/core/utils';
 import { ResponsiveService } from '@contezza/core/responsive';
-import { Column, ColumnsStore, SidebarContent, SidebarContentType, SidebarPosition, SidebarState, SidebarStore, ViewStore } from '@contezza/content-services/shared';
+import { Column, ColumnsStore, SidebarContent, SidebarContentType, SidebarState, SidebarStore, ViewStore } from '@contezza/content-services/shared';
 import { PaginationMode, Results, SelectionMode } from '@contezza/content-services/components/table/shared';
 import { loadPreset, loadPresets, PresetType, saveNewVersion, savePreset } from '@contezza/content-services/presets/shared';
 import { PresetPanelComponent } from '@contezza/content-services/presets/components/preset-panel';
@@ -180,6 +180,16 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
     sidebarForm?: ContezzaDynamicSearchForm;
 
     @Input()
+    set leftSidebarFiltersId(formId: string) {
+        this.leftSidebarFilters = { formId };
+    }
+
+    @Input()
+    leftSidebarFilters?: FormSettings;
+
+    leftSidebarForm?: ContezzaDynamicSearchForm;
+
+    @Input()
     default?: SearchTableLayoutSettings['default'];
 
     @Input()
@@ -193,10 +203,14 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
         PreferencesType.HeaderFilters,
         PreferencesType.ColumnFilters,
         PreferencesType.SidebarFilters,
+        PreferencesType.LeftSidebarFilters,
     ];
 
     @Input()
-    sidebarState: SidebarState = { expanded: false, position: SidebarPosition.Right, hideTitle: false };
+    sidebarState: SidebarState = { expanded: false, hideTitle: false };
+
+    @Input()
+    leftSidebarState: SidebarState = { expanded: true, hideTitle: true };
 
     @Input()
     set emptyContent(value: SearchTableLayoutSettings['emptyContent']) {
@@ -374,7 +388,19 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
                 .subscribe(([payload]) => this.store.dispatch({ type: this.actions.fileUploadComplete, payload }));
         }
 
-        const { searchStrategyId, baseQuery, columnsId, selectionMode, queryTemplate, headerFilters, columnFilters, sidebarFilters, preferencesId, preferences } = this;
+        const {
+            searchStrategyId,
+            baseQuery,
+            columnsId,
+            selectionMode,
+            queryTemplate,
+            headerFilters,
+            columnFilters,
+            sidebarFilters,
+            leftSidebarFilters,
+            preferencesId,
+            preferences,
+        } = this;
 
         this.columns.id = columnsId;
 
@@ -435,7 +461,7 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
                     form.query.pipe(
                         // swapping filter and distinctUntilChanged looks more logic but it breaks some pages
                         filter(() => form.form.valid), // Ensure only valid queries trigger
-                        distinctUntilChanged(), // Avoid redundant queries
+                        distinctUntilChanged((a, b) => (form.queryMode === QueryMode.ON_TRIGGER ? false : a === b)), // Avoid redundant queries, except when results are cleared
                         tap(() => {
                             this.awaitingSelectionReset = true;
                             this.fullSelectionSnapshot = undefined;
@@ -454,6 +480,7 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
         this.headerForm = loadForm({ formSettings: headerFilters, preferenceType: PreferencesType.HeaderFilters, queryKey: 'headerQuery' });
         this.columnForm = loadForm({ formSettings: columnFilters, preferenceType: PreferencesType.ColumnFilters, queryKey: 'columnQuery' });
         this.sidebarForm = loadForm({ formSettings: sidebarFilters, preferenceType: PreferencesType.SidebarFilters, queryKey: 'sidebarQuery' });
+        this.leftSidebarForm = loadForm({ formSettings: leftSidebarFilters, preferenceType: PreferencesType.LeftSidebarFilters, queryKey: 'leftSidebarQuery' });
 
         if (preferencesId && preferences.includes(PreferencesType.Columns)) {
             this.preferencesService.bind(
@@ -531,6 +558,7 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
         this.headerForm?.destroy();
         this.columnForm?.destroy();
         this.sidebarForm?.destroy();
+        this.leftSidebarForm?.destroy();
     }
 
     reload() {
@@ -540,10 +568,18 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
         this.search.reload();
     }
 
+    onFilterCleared() {
+        if (this.search.queryMode === QueryMode.ON_TRIGGER) {
+            this.search.clearResults();
+            this.selection.reset();
+        }
+    }
+
     resetFilters() {
         this.headerForm?.reset('default');
         this.columnForm?.reset('default');
         this.sidebarForm?.reset('default');
+        this.leftSidebarForm?.reset('default');
     }
 
     TOGGLE_INFO_DRAWER() {
@@ -608,6 +644,7 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
                 form: this.columnForm,
                 type: PresetType.ColumnFilters,
             },
+            { form: this.leftSidebarForm, type: PresetType.LeftSidebarFilters },
         ];
     }
 

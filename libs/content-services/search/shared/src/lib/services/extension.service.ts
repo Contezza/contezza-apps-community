@@ -98,14 +98,14 @@ export class ExtensionService {
 
     static makeSearchQuery(
         template: (_: SearchTemplateParameters) => string,
-        { baseQuery, headerQuery, columnQuery, sidebarQuery, filterQuery, sorting, paging }: SearchParameters
+        { baseQuery, headerQuery, columnQuery, sidebarQuery, leftSidebarQuery, filterQuery, sorting, paging }: SearchParameters
     ): SearchRequest {
         const makeTemplateParameter = (key: string, x?: string) => (x || x === '' ? { [key]: ExtensionService.patchForJSON(x || '*') } : {});
         const parsed = JSON.parse(
             template({
                 ...(baseQuery ? { baseQuery: ExtensionService.patchForJSON(baseQuery) } : {}),
                 query:
-                    [headerQuery, columnQuery, sidebarQuery, filterQuery]
+                    [headerQuery, columnQuery, sidebarQuery, leftSidebarQuery, filterQuery]
                         .filter((value) => !!value)
                         .map(ExtensionService.patchForJSON)
                         .map((value) => `(${value})`)
@@ -113,6 +113,7 @@ export class ExtensionService {
                 ...makeTemplateParameter('headerQuery', headerQuery),
                 ...makeTemplateParameter('columnQuery', columnQuery),
                 ...makeTemplateParameter('sidebarQuery', sidebarQuery),
+                ...makeTemplateParameter('leftSidebarQuery', leftSidebarQuery),
                 ...makeTemplateParameter('filterQuery', filterQuery),
                 sorting: JSON.stringify(sorting),
                 paging: JSON.stringify(paging),
