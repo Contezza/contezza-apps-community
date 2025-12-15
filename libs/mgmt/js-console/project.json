@@ -7,43 +7,14 @@
     "targets": {
         "build": {
             "executor": "@angular-devkit/build-angular:ng-packagr",
+            "outputs": ["{workspaceRoot}/dist/@contezza/js-console"],
             "options": {
-                "tsConfig": "tsconfig.build.json",
+                "tsConfig": "libs/mgmt/js-console/tsconfig.lib.json",
                 "project": "libs/mgmt/js-console/ng-package.json"
-            },
-            "dependsOn": [
-                {
-                    "target": "build",
-                    "projects": "dependencies",
-                    "params": "forward"
-                }
-            ]
-        },
-        "test": {
-            "executor": "@nrwl/jest:jest",
-            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-            "options": {
-                "jestConfig": "libs/mgmt/js-console/jest.config.ts",
-                "passWithNoTests": true
-            },
-            "configurations": {
-                "ci": {
-                    "ci": true,
-                    "codeCoverage": true
-                }
             }
         },
         "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "outputs": ["{options.outputFile}"],
-            "options": {
-                "lintFilePatterns": [
-                    "libs/mgmt/js-console/**/*.ts",
-                    "libs/mgmt/js-console/**/*.html",
-                    "libs/mgmt/js-console/shared/**/*.ts",
-                    "libs/mgmt/js-console/shared/**/*.html"
-                ]
-            }
+            "executor": "@nx/eslint:lint"
         }
     },
     "tags": []

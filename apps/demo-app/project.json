@@ -10,7 +10,7 @@
                 "outputPath": "dist/demo-app",
                 "index": "apps/demo-app/src/index.html",
                 "main": "apps/demo-app/src/main.ts",
-                "polyfills": "apps/demo-app/src/polyfills.ts",
+                "polyfills": ["zone.js"],
                 "tsConfig": "apps/demo-app/tsconfig.app.json",
                 "allowedCommonJsDependencies": [
                     "minimatch",
@@ -270,28 +270,16 @@
             },
             "configurations": {
                 "production": {
-                    "browserTarget": "demo-app:build:production"
+                    "buildTarget": "demo-app:build:production"
                 },
                 "development": {
-                    "browserTarget": "demo-app:build:development"
+                    "buildTarget": "demo-app:build:development"
                 }
             },
             "defaultConfiguration": "development"
         },
         "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": ["apps/demo-app/**/*.ts", "apps/demo-app/**/*.html"],
-                "cache": true,
-                "cacheLocation": ".eslintcache",
-                "ignorePath": ".eslintignore"
-            },
-            "outputs": ["{options.outputFile}"]
-        }
-    },
-    "cli": {
-        "cache": {
-            "enabled": false
+            "executor": "@nx/eslint:lint"
         }
     },
     "tags": ["scope:demo-app", "type:app", "category:demo-app"]
