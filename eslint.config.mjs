@@ -87,6 +87,10 @@ export default [
                     argsIgnorePattern: '^_',
                 },
             ],
+
+            // Prefer object property shorthand where possible
+            // so `{ foo: foo }` becomes `{ foo }`
+            'object-shorthand': ['error', 'always', { avoidQuotes: true }],
         },
     },
 
