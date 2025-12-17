@@ -32,7 +32,7 @@ export class ItemDetailsComponent<TItem> {
     readonly item = input.required<TItem>();
 
     // @Input()
-    private readonly id = input.required<string>();
+    readonly id = input.required<string>();
 
     @HostBinding('id')
     // @ts-ignore
