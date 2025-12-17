@@ -255,6 +255,7 @@ export class PresetService {
                   majorVersion: false,
                   newVersion: false,
                   parentId: nodeId,
+                  path: '',
                   properties,
               });
 
