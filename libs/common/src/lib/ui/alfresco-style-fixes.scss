@@ -224,6 +224,11 @@
         width: 100%;
     }
 
+    // fix adf-node-comments component
+    .adf-comment-list .adf-comment-list-item:has(.adf-comment-img-container) .adf-comment-contents .adf-comment-message {
+        word-break: break-word;
+    }
+
     // overwrite aca hardcoded colours in document lists
     .adf-datatable-list {
         .adf-datatable-row.adf-datatable-row:is(adf-datatable-row) {

@@ -26,6 +26,7 @@ export enum PreferencesType {
     HeaderFilters = 'header-filters',
     ColumnFilters = 'column-filters',
     SidebarFilters = 'sidebar-filters',
+    LeftSidebarFilters = 'left-sidebar-filters',
 }
 
 export interface TableLayoutSettings {
@@ -68,6 +69,7 @@ export interface SearchTableLayoutSettings extends TableLayoutSettings {
     headerFilters?: FormSettings;
     columnFilters?: FormSettings;
     sidebarFilters?: FormSettings;
+    leftSidebarFilters?: FormSettings;
     default?: { sorting?: SearchParameters['sorting']; paging?: SearchParameters['paging'] };
 }
 
@@ -75,6 +77,7 @@ export interface ExtendedSearchTableLayoutSettings extends SearchTableLayoutSett
     headerFiltersId?: string;
     columnFiltersId?: string;
     sidebarFiltersId?: string;
+    leftSidebarFiltersId?: string;
 }
 
 export type EmptyContent = { icon: string; title: string; subtitle?: string } | ExtendedLayoutItem[];

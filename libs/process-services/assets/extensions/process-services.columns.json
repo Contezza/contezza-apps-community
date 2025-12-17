@@ -1,0 +1,117 @@
+{
+    "$id": "process-services.columns",
+    "$version": "@@project.version@@",
+    "$name": "Process Services Columns",
+    "$vendor": "Contezza BV",
+
+    "templates": {
+        "columns": [
+            {
+                "id": "process-services.columns.tasks.thumbnail",
+                "key": "thumbnail",
+                "type": "thumbnail",
+                "sortable": true,
+                "order": 10
+            },
+            {
+                "id": "process-services.columns.tasks.description",
+                "key": "description",
+                "template": "app.columns.name",
+                "sortingKey": "description",
+                "title": "PROCESS_SERVICES.PROPERTIES.TASKS.DESCRIPTION.LABEL",
+                "type": "text",
+                "sortable": true
+            },
+            {
+                "id": "process-services.columns.tasks.status",
+                "key": "propertyLabels.bpm_status",
+                "sortingKey": "propertyLabels.bpm_status",
+                "title": "PROCESS_SERVICES.PROPERTIES.TASKS.STATE.LABEL",
+                "type": "text",
+                "sortable": true
+            },
+            {
+                "id": "process-services.columns.tasks.priority",
+                "key": "propertyLabels.bpm_priority",
+                "sortingKey": "propertyLabels.bpm_priority",
+                "title": "PROCESS_SERVICES.PROPERTIES.TASKS.PRIORITY.LABEL",
+                "type": "text",
+                "sortable": true
+            }
+        ]
+    },
+
+    "features": {
+        "columns": [
+            {
+                "id": "process-services.columns.tasks",
+                "columns": [
+                    {
+                        "id": "process-services.columns.tasks.thumbnail",
+                        "imports": "templates.columns[process-services.columns.tasks.thumbnail]"
+                    },
+                    {
+                        "id": "process-services.columns.tasks.description",
+                        "imports": "templates.columns[process-services.columns.tasks.description]"
+                    },
+                    {
+                        "id": "process-services.columns.tasks.message",
+                        "key": "workflowInstance.message",
+                        "sortingKey": "workflowInstance.message",
+                        "title": "PROCESS_SERVICES.PROPERTIES.TASKS.MESSAGE.LABEL",
+                        "class": "contezza-responsive-mobile-table-cell-55 contezza-responsive-embedded-activiti-tasks-message",
+                        "type": "text",
+                        "sortable": true
+                    },
+                    {
+                        "id": "process-services.columns.tasks.status",
+                        "imports": "templates.columns[process-services.columns.tasks.status]"
+                    },
+                    {
+                        "id": "process-services.columns.tasks.priority",
+                        "imports": "templates.columns[process-services.columns.tasks.priority]"
+                    },
+                    {
+                        "id": "process-services.columns.tasks.startDate",
+                        "key": "properties.bpm_startDate",
+                        "sortingKey": "properties.bpm_startDate",
+                        "title": "PROCESS_SERVICES.PROPERTIES.TASKS.BPM_START_DATE.LABEL",
+                        "type": "date",
+                        "format": "timeAgo",
+                        "sortable": true
+                    },
+                    {
+                        "id": "process-services.columns.tasks.bpm_dueDate",
+                        "key": "properties.bpm_dueDate",
+                        "sortingKey": "properties.bpm_dueDate",
+                        "title": "PROCESS_SERVICES.PROPERTIES.TASKS.BPM_DUE_DATE.LABEL",
+                        "type": "date",
+                        "format": "timeAgo",
+                        "sortable": true
+                    }
+                ]
+            },
+            {
+                "id": "process-services.columns.tasks-widget",
+                "columns": [
+                    {
+                        "id": "process-services.columns.tasks-widget.thumbnail",
+                        "imports": "templates.columns[process-services.columns.tasks.thumbnail]"
+                    },
+                    {
+                        "id": "process-services.columns.tasks-widget.description",
+                        "imports": "templates.columns[process-services.columns.tasks.description]"
+                    },
+                    {
+                        "id": "process-services.columns.tasks-widget.status",
+                        "imports": "templates.columns[process-services.columns.tasks.status]"
+                    },
+                    {
+                        "id": "process-services.columns.tasks-widget.priority",
+                        "imports": "templates.columns[process-services.columns.tasks.priority]"
+                    }
+                ]
+            }
+        ]
+    }
+}

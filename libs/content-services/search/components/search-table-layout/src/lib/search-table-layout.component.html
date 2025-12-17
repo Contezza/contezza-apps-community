@@ -16,11 +16,24 @@
                     />
                 </aca-page-layout-header>
 
-                <aca-page-layout-content class="search-table-layout-content" [class.loading]="loading" [class.flipped]="sidebarState.position === 'left'">
+                <aca-page-layout-content class="search-table-layout-content" [class.loading]="loading">
                     <ng-container *ngIf="loading">
                         <div class="search-table-layout-content-spinner"><mat-spinner /></div>
                     </ng-container>
+
                     <ng-container *contezzaLet="selection$ | async as selection">
+                        <ng-container *ngIf="leftSidebarForm && ready">
+                            <div class="aca-sidebar search-table-layout-content-left-sidebar" [class.expanded]="leftSidebarState.expanded">
+                                <contezza-dynamic-form-filter
+                                    class="search-table-layout-content-left-sidebar-form"
+                                    [class.expanded]="leftSidebarState.expanded"
+                                    [dynamicForm]="leftSidebarForm"
+                                    [hideTitle]="leftSidebarState.hideTitle"
+                                    (cleared)="onFilterCleared()"
+                                />
+                            </div>
+                        </ng-container>
+
                         <div class="aca-main-content search-table-layout-content-main">
                             <div class="search-table-layout-content-main-header">
                                 <ng-container *ngIf="headerForm && ready">
@@ -71,6 +84,7 @@
                                         [class.expanded]="sidebarContent === 'form'"
                                         [dynamicForm]="sidebarForm"
                                         [hideTitle]="sidebarState.hideTitle"
+                                        (cleared)="onFilterCleared()"
                                     />
                                 </ng-container>
                                 <ng-container *ngIf="sidebarContent === 'info'">

@@ -1,0 +1,61 @@
+{
+    "$id": "process-services.dynamic-forms",
+    "$version": "@@project.version@@",
+    "$name": "Process Services Dynamic Forms",
+    "$vendor": "Contezza BV",
+    "features": {
+        "propertyDisplayLists": {
+            "process-services.property-display-list.task": [
+                {
+                    "id": "process-services.property-display-list.task-details.description",
+                    "title": "PROCESS_SERVICES.PROPERTIES.TASKS.DESCRIPTION.LABEL",
+                    "icon": "notes",
+                    "key": "description"
+                },
+                {
+                    "id": "process-services.property-display-list.task-details.properties.bpm_description",
+                    "title": "PROCESS_SERVICES.PROPERTIES.TASKS.BPM_DESCRIPTION.LABEL",
+                    "icon": "info",
+                    "key": "properties.bpm_description"
+                },
+                {
+                    "id": "process-services.property-display-list.task-details.properties.bpm_startDate",
+                    "title": "PROCESS_SERVICES.PROPERTIES.TASKS.BPM_START_DATE.LABEL",
+                    "icon": "calendar_month",
+                    "key": "properties.bpm_startDate",
+                    "type": "dateTime"
+                },
+                {
+                    "id": "process-services.property-display-list.task-details.properties.bpm_comment",
+                    "title": "PROCESS_SERVICES.PROPERTIES.TASKS.BPM_COMMENT.LABEL",
+                    "icon": "comment",
+                    "key": "properties.bpm_comment"
+                },
+                {
+                    "id": "process-services.property-display-list.task-details.properties.imwf_inviteeUserName",
+                    "title": "PROCESS_SERVICES.PROPERTIES.TASKS.INVITEE_USERNAME.LABEL",
+                    "icon": "person",
+                    "key": "properties.imwf_inviteeUserName"
+                },
+                {
+                    "id": "process-services.property-display-list.task-details.state",
+                    "title": "PROCESS_SERVICES.PROPERTIES.TASKS.STATE.LABEL",
+                    "icon": "check_circle",
+                    "key": "state"
+                },
+                {
+                    "id": "process-services.property-display-list.task-details.owner",
+                    "title": "PROCESS_SERVICES.PROPERTIES.TASKS.OWNER.LABEL",
+                    "icon": "person_outline",
+                    "key": "owner.userName"
+                },
+                {
+                    "id": "process-services.property-display-list.task-details.outcome",
+                    "title": "PROCESS_SERVICES.PROPERTIES.TASKS.OUTCOME.LABEL",
+                    "icon": "flag",
+                    "key": "outcome"
+                }
+            ]
+        }
+    }
+}

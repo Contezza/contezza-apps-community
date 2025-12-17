@@ -183,6 +183,16 @@
                         "input": "libs/content-services/search/assets/extensions",
                         "output": "./assets/plugins",
                         "glob": "**/*.json"
+                    },
+                    {
+                        "input": "libs/process-services/assets",
+                        "output": "./assets/process-services",
+                        "glob": "**/*"
+                    },
+                    {
+                        "input": "libs/process-services/assets/extensions",
+                        "output": "./assets/plugins",
+                        "glob": "**/*.json"
                     }
                 ],
                 "inlineStyleLanguage": "scss",

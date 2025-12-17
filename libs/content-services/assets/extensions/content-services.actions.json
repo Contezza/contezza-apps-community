@@ -36,6 +36,17 @@
                 }
             },
             {
+                "id": "content-services.actions.showComments",
+                "title": "CONTENT_SERVICES.ACTIONS.SHOW_COMMENTS",
+                "icon": "chat",
+                "actions": {
+                    "click": "[CONTENT_SERVICES] SHOW_COMMENTS"
+                },
+                "rules": {
+                    "visible": "content-services.rules.canShowComments"
+                }
+            },
+            {
                 "id": "content-services.actions.navigateToParent",
                 "title": "CONTENT_SERVICES.ACTIONS.NAVIGATE_TO_PARENT",
                 "icon": "folder",
@@ -130,6 +141,11 @@
             }
         ],
         "toolbar": [
+            {
+                "id": "content-services.toolbar.showComments",
+                "imports": "templates.actions[content-services.actions.showComments]",
+                "order": 220
+            },
             {
                 "id": "app.toolbar.more",
                 "children": [

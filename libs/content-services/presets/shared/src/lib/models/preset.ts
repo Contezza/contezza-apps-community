@@ -4,6 +4,7 @@ export enum PresetType {
     HeaderFilters = 'header-filters',
     ColumnFilters = 'column-filters',
     SidebarFilters = 'sidebar-filters',
+    LeftSidebarFilters = 'left-sidebar-filters',
 }
 
 export interface SavePresetPayload {

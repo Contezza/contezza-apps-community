@@ -1,0 +1,45 @@
+{
+    "$id": "process-services.search-table-page-configs",
+    "$version": "@@project.version@@",
+    "$name": "Process Services Search Table Page Configs",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "searchTablePageConfigs": [
+            {
+                "id": "process-services.search-table-page-config.tasks",
+                "title": "PROCESS_SERVICES.BROWSE.TASKS.TITLE",
+                "actionContext": { "target": "search-table-page.process-services-tasks" },
+                "preferencesId": "process-services-tasks",
+                "preferences": ["columns", "sorting", "maxItems"],
+                "actions": {
+                    "dblclick": "[PROCESS_SERVICES] NAVIGATE_TO_TASK",
+                    "contextmenu": "CONTEXT_MENU"
+                },
+                "featureKeys": {
+                    "toolbar": "process-services-tasks-toolbar"
+                },
+                "searchStrategyId": "process-services.search-strategy.tasks",
+                "columnsId": "process-services.columns.tasks",
+                "default": {
+                    "sorting": { "type": "FIELD", "field": "created", "ascending": true },
+                    "paging": { "maxItems": 10 }
+                },
+                "emptyContent": {
+                    "icon": "search",
+                    "title": "PROCESS_SERVICES.BROWSE.TASKS.EMPTY_STATE.TITLE",
+                    "subtitle": "PROCESS_SERVICES.BROWSE.TASKS.EMPTY_STATE.TEXT"
+                },
+                "currentFolder": {
+                    "type": "userProfile",
+                    "dynamic-source": "id"
+                }
+            },
+            {
+                "id": "process-services.search-table-page-config.tasks-widget",
+                "imports": "features.searchTablePageConfigs[process-services.search-table-page-config.tasks]",
+                "columnsId": "process-services.columns.tasks-widget"
+            }
+        ]
+    }
+}

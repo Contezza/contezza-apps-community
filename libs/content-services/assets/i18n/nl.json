@@ -4,6 +4,7 @@
             "CREATE_FILE": "Document creëren",
             "EDIT_COLUMNS": "Kolommen bewerken",
             "MANAGE_PERMISSIONS": "Rechten",
+            "SHOW_COMMENTS": "Toon opmerkingen",
             "NAVIGATE_TO_PARENT": "In map tonen",
             "ROTATE_FILE_IN_VIEWER": "Document draaien",
             "TOGGLE_VIEW": "Weergave wisselen"

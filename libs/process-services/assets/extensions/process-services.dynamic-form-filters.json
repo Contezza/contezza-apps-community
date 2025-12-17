@@ -1,0 +1,10 @@
+{
+    "$id": "process-services.dynamic-form-filters",
+    "$version": "@@project.version@@",
+    "$name": "Process Services Dynamic Form Filters",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "dynamicforms": []
+    }
+}

@@ -26,6 +26,10 @@ export const APP_LAYOUT_ROUTES: Route = {
             loadChildren: () =>
                 import('@contezza/content-services/search/page').then((m) => m.MultiSearchTablePageRouterModule.withConfigKeyTemplate('demo-app.search-page-configs.${pageId}')),
         },
+        {
+            path: 'process-services',
+            loadChildren: () => import('@contezza/process-services').then((m) => m.ProcessServicesRouterModule),
+        },
         { path: 'javascript-console', loadChildren: () => import('@contezza/js-console').then((m) => m.JsConsoleModule) },
         { path: 'node-browser', loadChildren: () => import('@contezza/node-browser').then((m) => m.ContezzaNodeBrowserModule) },
         ...CONTENT_LAYOUT_ROUTES.children,

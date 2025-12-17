@@ -2,10 +2,24 @@ import { Injectable } from '@angular/core';
 
 import { ExtensionElement, ExtensionService as AdfExtensionService } from '@alfresco/adf-extensions';
 
-import { ComponentResolver, DynamicComponentExtensionService } from '@contezza/core/dynamic-component/shared';
+import { ComponentResolver, DynamicComponentExtensionService, provideDynamicComponents } from '@contezza/core/dynamic-component/shared';
 import { AdfUtils } from '@contezza/core/utils';
 
-import { Column, IActionComponent, IColumnComponent, PropertyDisplay } from '../models';
+import { Column, type ColumnComponentV2, IActionComponent, IColumnComponent, PropertyDisplay } from '../models';
+
+/**
+ * Wraps {@link provideDynamicComponents} while checking that the given components extend the {@link ColumnComponentV2} class.
+ * Please follow this name convention for column-component ids:
+ * <code>
+ * <module>.<submodules?>.columns.<component-name>
+ * </code>
+ * where `component-name` is the component class name without suffix 'ColumnComponent' in kebab-case,
+ * e.g. the `component-name` of `ContextMenuColumnComponent` is `context-menu`.
+ *
+ * @param components
+ */
+export const provideColumnComponents = <TItem = unknown, TData = undefined>(components: Record<string, ComponentResolver<ColumnComponentV2<TItem, TData>>>) =>
+    provideDynamicComponents(components);
 
 type ExtensionPropertyDisplay = ExtensionElement & PropertyDisplay;
 

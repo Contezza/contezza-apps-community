@@ -1,0 +1,77 @@
+{
+    "PROCESS_SERVICES": {
+        "ACTIONS": {},
+        "BROWSE": {
+            "TASKS": {
+                "TITLE": "Task",
+                "SUBTITLE": "An overview of all active tasks",
+                "SIDENAV_LINK": {
+                    "LABEL": "",
+                    "TOOLTIP": ""
+                },
+                "EMPTY_STATE": {
+                    "TITLE": "",
+                    "TEXT": ""
+                }
+            }
+        },
+        "DIALOGS": {
+            "DIALOG1": {
+                "TITLE": ""
+            }
+        },
+        "MESSAGES": {
+            "INFO": {
+                "TASK_UPDATED_SUCCESS": "Task updated successfully"
+            },
+            "ERRORS": {}
+        },
+        "PROPERTIES": {
+            "TASKS": {
+                "ID": { "LABEL": "Identifier" },
+                "TITLE": { "LABEL": "Title" },
+                "NAME": { "LABEL": "Name" },
+                "DESCRIPTION": { "LABEL": "Description" },
+                "MESSAGE": {
+                    "LABEL": "MESSAGE"
+                },
+                "STATE": { "LABEL": "State" },
+                "PRIORITY": { "LABEL": "Priority" },
+                "TYPE": { "LABEL": "Type" },
+                "CREATOR": { "LABEL": "Creator" },
+                "OWNER": { "LABEL": "Owner" },
+                "OUTCOME": { "LABEL": "Outcome" },
+                "URL": { "LABEL": "Link" },
+                "IS_CLAIMABLE": { "LABEL": "Claimable" },
+                "IS_EDITABLE": { "LABEL": "Editable" },
+                "IS_RELEASABLE": { "LABEL": "Releasable" },
+                "PATH": { "LABEL": "Path" },
+                "BPM_DESCRIPTION": { "LABEL": "Task description" },
+                "BPM_START_DATE": { "LABEL": "Start date" },
+                "BPM_DUE_DATE": { "LABEL": "Due date" },
+                "BPM_COMMENT": {
+                    "LABEL": "Comment"
+                },
+                "INVITEE_USERNAME": { "LABEL": "Invited user name" }
+            },
+            "WORKFLOW": {
+                "TITLE": { "LABEL": "Workflow title" },
+                "NAME": { "LABEL": "Workflow name" },
+                "PRIORITY": {
+                    "LABEL": "Priority",
+                    "OPTIONS": {
+                        "HIGH": "High",
+                        "MEDIUM": "Medium",
+                        "LOW": "Low"
+                    }
+                },
+                "START_DATE": { "LABEL": "Start date" },
+                "DUE_DATE": { "LABEL": "Due date" },
+                "END_DATE": { "LABEL": "End date" },
+                "INITIATOR": { "LABEL": "Initiator username" },
+                "INITIATOR_NAME": { "LABEL": "Initiator name" },
+                "IS_ACTIVE": { "LABEL": "Active" }
+            }
+        }
+    }
+}

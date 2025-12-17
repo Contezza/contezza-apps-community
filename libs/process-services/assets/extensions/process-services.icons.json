@@ -1,0 +1,35 @@
+{
+    "$id": "process-services.icons",
+    "$version": "@@project.version@@",
+    "$name": "Process Services Icons",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "icons": [
+            {
+                "id": "svg:clipboard-account-outline",
+                "value": "./assets/process-services/icons/clipboard-account-outline.svg"
+            },
+            {
+                "id": "svg:clipboard-alert-outline",
+                "value": "./assets/process-services/icons/clipboard-alert-outline.svg"
+            },
+            {
+                "id": "svg:clipboard-arrow-up-outline",
+                "value": "./assets/process-services/icons/clipboard-arrow-up-outline.svg"
+            },
+            {
+                "id": "svg:clipboard-cancel-outline",
+                "value": "./assets/process-services/icons/clipboard-cancel-outline.svg"
+            },
+            {
+                "id": "svg:clipboard-check-outline",
+                "value": "./assets/process-services/icons/clipboard-check-outline.svg"
+            },
+            {
+                "id": "svg:clipboard-plus-outline",
+                "value": "./assets/process-services/icons/clipboard-plus-outline.svg"
+            }
+        ]
+    }
+}

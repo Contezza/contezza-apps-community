@@ -1,0 +1,91 @@
+{
+    "$id": "process-services.actions",
+    "$version": "@@project.version@@",
+    "$name": "Process Services Actions",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "process-services": {
+            "toolbar": {
+                "task": [
+                    {
+                        "id": "process-services.toolbar.claim",
+                        "order": 10,
+                        "title": "Claim",
+                        "icon": "svg:clipboard-account-outline",
+                        "actions": {
+                            "click": "[PROCESS_SERVICES] CLAIM"
+                        },
+                        "rules": {
+                            "visible": "process-services.rules.canClaim"
+                        }
+                    },
+                    {
+                        "id": "process-services.toolbar.release",
+                        "order": 20,
+                        "title": "Vrijgeven",
+                        "icon": "svg:clipboard-arrow-up-outline",
+                        "actions": {
+                            "click": "[PROCESS_SERVICES] RELEASE"
+                        },
+                        "rules": {
+                            "visible": "process-services.rules.canRelease"
+                        }
+                    }
+                ]
+            },
+            "actions": {
+                "task": [
+                    {
+                        "id": "process-services.toolbar.save",
+                        "order": 5,
+                        "title": "Save",
+                        "icon": "save",
+                        "actions": {
+                            "click": "[PROCESS_SERVICES] SAVE"
+                        },
+                        "rules": {
+                            "visible": "process-services.rules.canSave"
+                        }
+                    },
+                    {
+                        "id": "process-services.toolbar.complete",
+                        "order": 30,
+                        "title": "Afronden",
+                        "icon": "svg:clipboard-check-outline",
+                        "actions": {
+                            "click": "[PROCESS_SERVICES] COMPLETE"
+                        },
+                        "rules": {
+                            "visible": "process-services.rules.canComplete"
+                        }
+                    },
+                    {
+                        "id": "process-services.toolbar.approve",
+                        "order": 40,
+                        "title": "Goedkeuren",
+                        "icon": "svg:clipboard-check-outline",
+                        "actions": {
+                            "click": "[PROCESS_SERVICES] APPROVE"
+                        },
+                        "rules": {
+                            "visible": "process-services.rules.canReview"
+                        }
+                    },
+                    {
+                        "id": "process-services.toolbar.reject",
+                        "order": 50,
+                        "title": "Afwijzen",
+                        "icon": "svg:clipboard-alert-outline",
+                        "actions": {
+                            "click": "[PROCESS_SERVICES] REJECT"
+                        },
+                        "rules": {
+                            "visible": "process-services.rules.canReview"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

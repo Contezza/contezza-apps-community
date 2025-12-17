@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, Input, OnInit, Optional } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, OnInit, Optional, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -34,6 +34,8 @@ export class ContezzaDynamicFormFilterComponent implements OnInit {
     @Input()
     hideTitle: boolean;
 
+    @Output() cleared = new EventEmitter<void>();
+
     constructor(@Optional() private readonly filterService: ContezzaDynamicFormFilterService, @Inject(DestroyService) readonly destroy$: DestroyService) {}
 
     ngOnInit(): void {
@@ -44,6 +46,7 @@ export class ContezzaDynamicFormFilterComponent implements OnInit {
 
     clearFilters() {
         this.dynamicForm.reset('default');
+        this.cleared.emit();
     }
 
     searchClicked() {

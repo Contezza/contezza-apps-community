@@ -15,7 +15,7 @@ import { UploadFilterService } from '@contezza/core/extensions';
 import { RuleContextService } from '@contezza/core/context';
 import { showSnackbarInfo } from '@contezza/core/notifications';
 
-import { ExtensionService, ThumbnailService } from '@contezza/content-services/shared';
+import { ExtensionService, provideColumnComponents, ThumbnailService } from '@contezza/content-services/shared';
 
 import { Effects } from './store/effects';
 
@@ -29,6 +29,9 @@ import { Effects } from './store/effects';
             'content-services.icons.json',
             'content-services.rules.json',
         ]),
+        provideColumnComponents({
+            'columns.dynamic-source': () => import('./components/columns/dynamic-source.column.component').then((_) => _.DynamicSourceColumnComponent),
+        }),
     ],
 })
 export class ExtensionModule {
@@ -94,7 +97,6 @@ export class ExtensionModule {
         extensions.setColumns({
             'columns.context-menu': () => import('./components/columns/context-menu.column.component').then((_) => _.ContextMenuColumnComponent),
             'columns.dynamic-form': () => import('./components/columns/dynamic-form.column.component').then((_) => _.DynamicFormColumnComponent),
-            'columns.dynamic-source': () => import('./components/columns/dynamic-source.column.component').then((_) => _.DynamicSourceColumnComponent),
             'columns.parent': () => import('./components/columns/parent.column.component').then((_) => _.ParentColumnComponent),
             'columns.site': () => import('./components/columns/site.column.component').then((_) => _.SiteColumnComponent),
             'columns.thumbnail': () => import('./components/columns/thumbnail/thumbnail.column.component').then((_) => _.ThumbnailColumnComponent),

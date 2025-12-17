@@ -10,6 +10,34 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2025-12-17
+|3.5.1
+|View <<Release 3.5.1,release details>>.
+
+|2025-12-05
+|3.5.0
+|View <<Release 3.5.0,release details>>.
+
+|2025-11-27
+|3.4.2
+|View <<Release 3.4.2,release details>>.
+
+|2025-11-14
+|3.4.1
+|View <<Release 3.4.1,release details>>.
+
+|2025-11-12
+|3.4.0
+|View <<Release 3.4.0,release details>>.
+
+|2025-10-30
+|3.3.2
+|View <<Release 3.3.2,release details>>.
+
+|2025-10-10
+|3.3.1
+|View <<Release 3.3.1,release details>>.
+
 |2025-10-01
 |3.3.0
 |View <<Release 3.3.0,release details>>.
@@ -309,6 +337,67 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 3.5.1
+
+New features:
+
+- @contezza/content-services - Add dialog component `ItemDetailsDialogComponent`.
+
+Bugfixes/minor changes:
+
+- @contezza/common - Fix style of `adf-node-comments` component.
+- @contezza/content-services - Fix bug which caused presets to be saved in folder 'undefined' https://support.contezza.nl/issues/35949[(#35949)].
+
+
+==== Release 3.5.0
+
+New features:
+
+- @contezza/content-services - Added `leftSidebarFilters` to search-table-page https://support.contezza.nl/issues/35833[(#35833)].
+- @contezza/content-services - Clear results list after clearing sidebarfilters in QueryMode on-trigger https://support.contezza.nl/issues/35849[(#35849)].
+
+Bugfixes/minor changes:
+
+- @contezza/common - Define default map formatDate.
+
+==== Release 3.4.2
+
+Bugfixes/minor changes:
+
+- @contezza/content-services - Style fixes.
+
+==== Release 3.4.1
+
+Bugfixes/minor changes:
+
+- @contezza/process-services - Fix task navigation issue, style fix and improvements to naming conventions
+
+==== Release 3.4.0
+
+New features:
+
+- @contezza/process-services - New library `Process Services` created https://support.contezza.nl/issues/35472[(#35472)].
+
+Bugfixes/minor changes:
+
+- @contezza/content-services - Style fixes.
+- @contezza/core/components/page-layout-content - Style fixes for WCAG 2.1
+
+==== Release 3.3.2
+
+Bugfixes/minor changes:
+
+- @contezza/core/dynamic-component - Add `provideDynamicComponents`.
+- @contezza/core/dynamic-component - Improve component `DynamicComponent` to update on data change.
+- @contezza/content-services - Add `provideColumnComponents`.
+- @contezza/content-services - Improve column component with id `columns.dynamic-source` to update on item change.
+
+==== Release 3.3.1
+
+New features:
+
+- @contezza/content-services - Add dialog component `CommentsDialogComponent` https://support.contezza.nl/issues/34965[(#34965)].
 
 ==== Release 3.3.0
 

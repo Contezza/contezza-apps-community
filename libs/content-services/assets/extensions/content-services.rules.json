@@ -63,6 +63,21 @@
             ]
         },
         {
+            "id": "content-services.rules.canShowComments",
+            "type": "core.every",
+            "parameters": [
+                {
+                    "value": "app.selection.file.canUpdate"
+                },
+                {
+                    "value": "app.selection.aspectNames.includeSome",
+                    "parameters": [
+                        "fm:discussable"
+                    ]
+                }
+            ]
+        },
+        {
             "id": "content-services.rules.canRotateFileInViewer",
             "type": "content-services.selection.file.mimeTypeIn",
             "parameters": ["application/pdf"]

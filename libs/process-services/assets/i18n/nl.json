@@ -1,0 +1,77 @@
+{
+    "PROCESS_SERVICES": {
+        "ACTIONS": {},
+        "BROWSE": {
+            "TASKS": {
+                "TITLE": "Taken",
+                "SUBTITLE": "Een overzicht van de lopende taken",
+                "SIDENAV_LINK": {
+                    "LABEL": "",
+                    "TOOLTIP": ""
+                },
+                "EMPTY_STATE": {
+                    "TITLE": "",
+                    "TEXT": ""
+                }
+            }
+        },
+        "DIALOGS": {
+            "DIALOG1": {
+                "TITLE": ""
+            }
+        },
+        "MESSAGES": {
+            "INFO": {
+                "TASK_UPDATED_SUCCESS": "Taak succesvol aangepast"
+            },
+            "ERRORS": {}
+        },
+        "PROPERTIES": {
+            "TASKS": {
+                "ID": { "LABEL": "Identificatie" },
+                "TITLE": { "LABEL": "Titel" },
+                "NAME": { "LABEL": "Naam" },
+                "DESCRIPTION": { "LABEL": "Omschrijving" },
+                "MESSAGE": {
+                    "LABEL": "Bericht"
+                },
+                "STATE": { "LABEL": "Status" },
+                "PRIORITY": { "LABEL": "Prioriteit" },
+                "TYPE": { "LABEL": "Type" },
+                "CREATOR": { "LABEL": "Aangemaakt door" },
+                "OWNER": { "LABEL": "Eigenaar" },
+                "OUTCOME": { "LABEL": "Resultaat" },
+                "URL": { "LABEL": "Link" },
+                "IS_CLAIMABLE": { "LABEL": "Claimbaar" },
+                "IS_EDITABLE": { "LABEL": "Bewerkbaar" },
+                "IS_RELEASABLE": { "LABEL": "Vrij te geven" },
+                "PATH": { "LABEL": "Pad" },
+                "BPM_DESCRIPTION": { "LABEL": "Taakomschrijving" },
+                "BPM_START_DATE": { "LABEL": "Startdatum" },
+                "BPM_DUE_DATE": { "LABEL": "Einddatum" },
+                "BPM_COMMENT": {
+                    "LABEL": "Opmerking"
+                },
+                "INVITEE_USERNAME": { "LABEL": "Gebruikersnaam aanvrager" }
+            },
+            "WORKFLOW": {
+                "TITLE": { "LABEL": "Workflowtitel" },
+                "NAME": { "LABEL": "Workflownaam" },
+                "PRIORITY": {
+                    "LABEL": "Prioriteit",
+                    "OPTIONS": {
+                        "HIGH": "Hoog",
+                        "MEDIUM": "Gemiddeld",
+                        "LOW": "Laag"
+                    }
+                },
+                "START_DATE": { "LABEL": "Startdatum" },
+                "DUE_DATE": { "LABEL": "Vervaldatum" },
+                "END_DATE": { "LABEL": "Einddatum" },
+                "INITIATOR": { "LABEL": "Initiator gebruikersnaam" },
+                "INITIATOR_NAME": { "LABEL": "Naam initiator" },
+                "IS_ACTIVE": { "LABEL": "Actief" }
+            }
+        }
+    }
+}
