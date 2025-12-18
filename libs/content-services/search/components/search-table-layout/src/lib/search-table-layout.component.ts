@@ -21,7 +21,7 @@ import { ContezzaLetModule } from '@contezza/core/directives';
 import { DynamicComponent } from '@contezza/core/dynamic-component';
 import { DestroyService, RefreshSubject } from '@contezza/core/services';
 import { ContezzaLoadingObservable } from '@contezza/core/extensions';
-import { ContextMenuService, CurrentFolderStore, FloatingButtonComponent, RuleContextService, SelectionStore } from '@contezza/core/context';
+import { ContextMenuService, CurrentFolderStore, FloatingButtonComponent, RuleContextService, SelectionStore, ToolbarComponent } from '@contezza/core/context';
 import { ContezzaObservables } from '@contezza/core/utils';
 import { ResponsiveService } from '@contezza/core/responsive';
 import { Column, ColumnsStore, SidebarContent, SidebarContentType, SidebarState, SidebarStore, ViewStore } from '@contezza/content-services/shared';
@@ -51,7 +51,6 @@ import { PreferencesService } from './services/preferences.service';
 import { CustomStoreService } from './services/store.service';
 import { SearchResultsViewDirective } from './directives/search-results-view.directive';
 import { SearchResultPreviewDirective } from './directives/search-result-preview.directive';
-import { ToolbarComponent } from './components/actions/toolbar/toolbar.component';
 import { HeaderComponent } from './components';
 
 @Component({
