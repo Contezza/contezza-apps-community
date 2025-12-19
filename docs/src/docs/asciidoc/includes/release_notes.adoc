@@ -10,6 +10,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2025-12-19
+|3.5.2
+|View <<Release 3.5.2,release details>>.
+
 |2025-12-17
 |3.5.1
 |View <<Release 3.5.1,release details>>.
@@ -337,6 +341,14 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 3.5.2
+
+Upgrades:
+
+* NX version upgraded to 20.8.2.
+* Eslint version upgraded to 9.8.0.
+* Prettier version upgraded to 3.1.1.
 
 ==== Release 3.5.1
 
