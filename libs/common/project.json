@@ -9,30 +9,12 @@
             "executor": "@angular-devkit/build-angular:ng-packagr",
             "outputs": ["{workspaceRoot}/dist/@contezza/common"],
             "options": {
-                "tsConfig": "tsconfig.build.json",
+                "tsConfig": "libs/common/tsconfig.lib.json",
                 "project": "libs/common/ng-package.json"
             }
         },
-        "test": {
-            "executor": "@nrwl/jest:jest",
-            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-            "options": {
-                "jestConfig": "libs/common/jest.config.ts",
-                "passWithNoTests": true
-            },
-            "configurations": {
-                "ci": {
-                    "ci": true,
-                    "codeCoverage": true
-                }
-            }
-        },
         "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "outputs": ["{options.outputFile}"],
-            "options": {
-                "lintFilePatterns": ["libs/common/**/*.ts", "libs/common/**/*.html"]
-            }
+            "executor": "@nx/eslint:lint"
         }
     },
     "tags": []

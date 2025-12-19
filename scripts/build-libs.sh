@@ -4,7 +4,6 @@
 
 nx reset
 rm -rf dist
-rm -rf nxcache
 
 for LIB in "${LIBS[@]}"
 do
