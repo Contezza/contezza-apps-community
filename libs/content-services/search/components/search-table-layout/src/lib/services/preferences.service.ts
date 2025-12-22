@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-import { Observable, of, Subject, take } from 'rxjs';
-import { catchError, debounceTime, distinctUntilChanged, filter, map, pairwise, share, skip, switchMap, takeUntil, tap, timeout } from 'rxjs/operators';
+import { catchError, debounceTime, distinctUntilChanged, filter, map, Observable, of, pairwise, share, skip, Subject, switchMap, take, takeUntil, tap, timeout } from 'rxjs';
 
-import { AppConfigService, AuthenticationService, ObjectUtils } from '@alfresco/adf-core';
 import { AppStore, getUserProfile } from '@alfresco/aca-shared/store';
+import { AppConfigService, AuthenticationService, ObjectUtils } from '@alfresco/adf-core';
 
 import { showSnackbarInfo } from '@contezza/core/notifications';
 import { DestroyService, PreferencesService as CorePreferencesService } from '@contezza/core/services';
@@ -34,8 +33,8 @@ export class PreferencesService {
     set id(id: string) {
         this._id = id;
         this.preferences$ = this.username$.pipe(
-            switchMap((username) => this.preferences.get(username, PreferencesService.TEMPLATE.evaluate({ storagePrefix: this.storagePrefix, id }))),
-            share()
+            switchMap(username => this.preferences.get(username, PreferencesService.TEMPLATE.evaluate({ storagePrefix: this.storagePrefix, id }))),
+            share(),
         );
     }
     get id(): string {
@@ -55,9 +54,9 @@ export class PreferencesService {
         return this.username
             ? of(this.username)
             : this.store.select(getUserProfile).pipe(
-                  map((profile) => profile.id),
+                  map(profile => profile.id),
                   filter(Boolean),
-                  take(1)
+                  take(1),
               );
     }
 
@@ -65,7 +64,7 @@ export class PreferencesService {
     get ready$(): Observable<boolean> {
         return ContezzaObservables.forkJoin(this.boundSources).pipe(
             tap(() => (this.boundSources = [])),
-            map(() => true)
+            map(() => true),
         );
     }
 
@@ -75,14 +74,14 @@ export class PreferencesService {
         private readonly preferences: CorePreferencesService,
         private readonly decoder: DecoderService,
         private readonly destroy$: DestroyService,
-        private readonly store: Store<AppStore>
+        private readonly store: Store<AppStore>,
     ) {}
 
     clear() {
         const { storagePrefix, id } = this;
         const preferencesPath = PreferencesService.TEMPLATE.evaluate({ storagePrefix, id });
         this.username$
-            .pipe(switchMap((username) => this.preferences.delete(username, preferencesPath)))
+            .pipe(switchMap(username => this.preferences.delete(username, preferencesPath)))
             .subscribe(() => this.store.dispatch(showSnackbarInfo({ payload: 'APP.MESSAGES.PREFERENCES_CLEARED' })));
     }
 
@@ -104,12 +103,12 @@ export class PreferencesService {
 
         form.provideDependencies({
             preferences: this.preferences$.pipe(
-                map((preferences) => ObjectUtils.getValue(preferences, preferencesPath)),
-                map((preferences) => (preferences ? this.decoder.decode(preferences, form.rootField) : undefined)),
+                map(preferences => ObjectUtils.getValue(preferences, preferencesPath)),
+                map(preferences => (preferences ? this.decoder.decode(preferences, form.rootField) : undefined)),
                 tap(() => {
                     subject.next();
                     subject.complete();
-                })
+                }),
             ),
         });
 
@@ -117,12 +116,13 @@ export class PreferencesService {
             .pipe(
                 debounceTime(PreferencesService.TYPING_DEBOUNCE_TIME),
                 // filter partial autocomplete values
-                filter(() => form.form.valid),
-                map((value) => this.decoder.encode(value, form.rootField)),
+                // check `form.form.touched` for`requiredAtLeastOneField` validation on initial load and when filters are cleared
+                filter(() => form.form.valid || !form.form.touched),
+                map(value => this.decoder.encode(value, form.rootField)),
                 pairwise(),
                 map(([oldValue, newValue]) => this.constructPreferencesRequest(preferencesPath, oldValue, newValue)),
-                filter((preferences) => Object.keys(preferences).length > 0),
-                switchMap((preferences) => this.postPreferences(preferences))
+                filter(preferences => Object.keys(preferences).length > 0),
+                switchMap(preferences => this.postPreferences(preferences)),
             )
             .subscribe();
 
@@ -131,13 +131,13 @@ export class PreferencesService {
 
     private constructPreferencesRequest(preferencesPath: string, oldValue: Record<string, string>, newValue: Record<string, string>): Record<string, string | null> {
         const keys = Object.keys(newValue);
-        Object.keys(oldValue).forEach((key) => {
+        Object.keys(oldValue).forEach(key => {
             if (!keys.includes(key)) {
                 keys.push(key);
             }
         });
         const body = {};
-        keys.forEach((key) => {
+        keys.forEach(key => {
             if (newValue[key] && (!oldValue[key] || oldValue[key] !== newValue[key])) {
                 body[`${preferencesPath}.${key}`] = newValue[key];
             } else if (!newValue[key] && oldValue[key]) {
@@ -149,9 +149,9 @@ export class PreferencesService {
 
     private postPreferences(preferences: Record<string, string | null>): Observable<object | undefined> {
         return this.username$.pipe(
-            switchMap((username) => this.preferences.post(username, preferences)),
+            switchMap(username => this.preferences.post(username, preferences)),
             timeout(5000),
-            catchError(() => of(undefined))
+            catchError(() => of(undefined)),
         );
     }
 
@@ -163,10 +163,10 @@ export class PreferencesService {
 
         this.preferences$
             .pipe(
-                map((preferences) => ObjectUtils.getValue(preferences, preferencesPath)),
-                map((preferences: string) => source.decode(preferences))
+                map(preferences => ObjectUtils.getValue(preferences, preferencesPath)),
+                map((preferences: string) => source.decode(preferences)),
             )
-            .subscribe((preferences) => {
+            .subscribe(preferences => {
                 source.next(preferences);
 
                 subject.next();
@@ -175,11 +175,11 @@ export class PreferencesService {
                 source
                     .asObservable()
                     .pipe(
-                        map((value) => source.encode(value)),
+                        map(value => source.encode(value)),
                         distinctUntilChanged(),
                         skip(1),
-                        switchMap((value) => this.postPreferences({ [preferencesPath]: value })),
-                        takeUntil(this.destroy$)
+                        switchMap(value => this.postPreferences({ [preferencesPath]: value })),
+                        takeUntil(this.destroy$),
                     )
                     .subscribe();
             });

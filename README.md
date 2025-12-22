@@ -59,6 +59,15 @@ Similar to the share/repo nodebrowser, but with extra:
 
 ## Ontwikkeling
 
+### WebStorm Configuratie
+
+Dit project gebruikt `eslint` en `prettier` om de code schoon, consistent en makkelijk leesbaar te houden.
+Om dit in WebStorm correct te configureren, stel in Settings › Tools › Actions on Save het volgende in:
+
+* zet 'Optimize imports' uit,
+* zet 'Run eslint --fix' aan, met 'Automatic ESLint configuration',
+* zet 'Run Prettier' aan, met 'Automatic Prettier configuration', en breid de lijst met bestandstypen uit met: `html,json,scss`.
+
 ### Nexus Configuratie
 
 De libraries kunnen worden geïmporteerd vanuit contezza-apps-community repository. Deze repository zit in [Nexus](https://nexus.contezza.nl) en om toegang tot Nexus te hebben moet de bestand `.npmrc` in de gebruikersmap zo eruit zien:
