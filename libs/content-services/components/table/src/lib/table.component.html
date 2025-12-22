@@ -54,6 +54,7 @@
                                             <ng-container *contezzaLet="title$ ? (title$ | async) : (column.title | translate) as title">
                                                 <ng-container *ngIf="column.filter; else columnTitle">
                                                     <contezza-dynamic-form-field
+                                                        [title]="title"
                                                         [field]="column.filter.field"
                                                         [control]="column.filter.control"
                                                         (click)="$event.stopPropagation()"
