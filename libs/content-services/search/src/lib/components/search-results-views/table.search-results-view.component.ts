@@ -1,17 +1,17 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Optional, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Optional, Output } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 
 import { ReplaySubject, takeUntil } from 'rxjs';
 
-import { DestroyService } from '@contezza/core/services';
-import { ResponsiveService } from '@contezza/core/responsive';
-import { ContezzaPageLayoutContentComponent } from '@contezza/core/components/page-layout-content';
-import { Column } from '@contezza/content-services/shared';
-import { Results, SelectionMode } from '@contezza/content-services/components/table/shared';
 import { TableComponent } from '@contezza/content-services/components/table';
+import { PaginatorSettings, Results, SelectionMode } from '@contezza/content-services/components/table/shared';
 import { ExtendedLayoutItem } from '@contezza/content-services/search/shared';
+import { Column } from '@contezza/content-services/shared';
+import { ContezzaPageLayoutContentComponent } from '@contezza/core/components/page-layout-content';
+import { ResponsiveService } from '@contezza/core/responsive';
+import { DestroyService } from '@contezza/core/services';
 
 @Component({
     standalone: true,
@@ -22,6 +22,7 @@ import { ExtendedLayoutItem } from '@contezza/content-services/search/shared';
         [results]="results$ | async"
         [columns]="columns$ | async"
         [selectionMode]="selectionMode"
+        [paginatorSettings]="paginatorSettings"
         [paginationStrategy]="$any(isMobile ? 'scroll' : 'browse')"
         (sorting)="sorting.next($event)"
         (paging)="paging.next($event)"
@@ -32,7 +33,7 @@ import { ExtendedLayoutItem } from '@contezza/content-services/search/shared';
         (rowRightClick)="mouseEvent.next($event)"
         (columnResized)="columnResized.next($event)"
     >
-        <contezza-page-layout-content table-empty [items]="emptyContentLayoutItems$ | async"></contezza-page-layout-content>
+        <contezza-page-layout-content table-empty [items]="emptyContentLayoutItems$ | async" />
     </contezza-table>`,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [DestroyService],
@@ -58,6 +59,9 @@ export class TableSearchResultsViewComponent<TItem> {
     private readonly emptyContentLayoutItemsSource = new ReplaySubject<ExtendedLayoutItem[]>(1);
     readonly emptyContentLayoutItems$ = this.emptyContentLayoutItemsSource.asObservable();
 
+    // dynamic-component data
+    paginatorSettings?: Partial<PaginatorSettings>;
+
     @Output()
     readonly sorting = new EventEmitter<Sort>();
 
@@ -80,6 +84,6 @@ export class TableSearchResultsViewComponent<TItem> {
     isMobile = false;
 
     constructor(destroy$: DestroyService, @Optional() responsive?: ResponsiveService) {
-        responsive?.isMobile$.pipe(takeUntil(destroy$)).subscribe((value) => (this.isMobile = value));
+        responsive?.isMobile$.pipe(takeUntil(destroy$)).subscribe(value => (this.isMobile = value));
     }
 }
