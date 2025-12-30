@@ -1,14 +1,15 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
+import { ToolbarActionComponent } from '@alfresco/aca-shared';
 import { ToolbarComponent as AdfToolbarComponent } from '@alfresco/adf-core';
 import { ContentActionRef } from '@alfresco/adf-extensions';
-import { ToolbarActionComponent } from '@alfresco/aca-shared';
 
-import { ActionsService } from '../../services';
 import { Stylable } from '@contezza/core/utils';
+
+import { ActionsService, ActionTrigger } from '../../services';
 
 @Component({
     standalone: true,
@@ -39,6 +40,7 @@ export class ToolbarComponent implements OnInit {
         } else {
             this.actionsService.featureKey = this.key;
         }
+        this.actionsService.trigger = ActionTrigger.TOOLBAR;
     }
 
     trackById(_, action: ContentActionRef) {

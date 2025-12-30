@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 
 import { BehaviorSubject, filter, map, merge, Observable, switchMap, tap } from 'rxjs';
 
-import { ContentActionRef, ContentActionType, ExtensionService, reduceEmptyMenus, reduceSeparators, RuleContext } from '@alfresco/adf-extensions';
 import { AppExtensionService } from '@alfresco/aca-shared';
+import { ContentActionRef, ContentActionType, ExtensionService, reduceEmptyMenus, reduceSeparators, RuleContext } from '@alfresco/adf-extensions';
 
 import { RuleService } from '@contezza/core/extensions';
 import { ContezzaAdfUtils } from '@contezza/core/utils';
@@ -13,6 +13,12 @@ import { ContezzaAdfUtils } from '@contezza/core/utils';
 import { RuleContextService } from './rule-context.service';
 
 const FEATURE_KEY = new InjectionToken<string>('feature-key');
+
+export enum ActionTrigger {
+    CONTEXT_MENU = 'CONTEXT_MENU',
+    FLOATING_BUTTON = 'FLOATING_BUTTON',
+    TOOLBAR = 'TOOLBAR',
+}
 
 @Injectable()
 export class ActionsService {
@@ -27,24 +33,29 @@ export class ActionsService {
     private readonly allActionsSource = new BehaviorSubject<ContentActionRef[]>(undefined);
     private readonly allActions$: Observable<ContentActionRef[]> = merge(
         this.featureKeySource.pipe(
-            filter((value) => !!value),
-            map((featureKey) => this.extensions.getFeature(featureKey))
+            filter(value => !!value),
+            map(featureKey => this.extensions.getFeature(featureKey)),
         ),
-        this.allActionsSource.pipe(filter((value) => !!value))
+        this.allActionsSource.pipe(filter(value => !!value)),
     );
 
     readonly actions$: Observable<ContentActionRef[]> = this.allActions$.pipe(
-        map((allActions) => ContezzaAdfUtils.filterAndSortFeature(allActions)),
-        tap((allActions) => allActions.forEach(ContezzaAdfUtils.setActionDefaults)),
-        switchMap((allActions) => this.ruleContext$.pipe(map((context) => this.getAllowedActions(allActions, context))))
+        map(allActions => ContezzaAdfUtils.filterAndSortFeature(allActions)),
+        tap(allActions => allActions.forEach(ContezzaAdfUtils.setActionDefaults)),
+        switchMap(allActions => this.ruleContext$.pipe(map(context => this.getAllowedActions(allActions, context)))),
     );
+
+    private _trigger?: ActionTrigger;
+    set trigger(trigger: ActionTrigger) {
+        this._trigger = trigger;
+    }
 
     constructor(
         private readonly store: Store,
         private readonly extensions: ExtensionService,
         private readonly rules: RuleService,
         private readonly ruleContext$: RuleContextService,
-        @Optional() @Inject(FEATURE_KEY) featureKey: string
+        @Optional() @Inject(FEATURE_KEY) featureKey: string,
     ) {
         if (featureKey) {
             this.featureKey = featureKey;
@@ -65,11 +76,13 @@ export class ActionsService {
             this.store.dispatch({
                 ...action,
                 ...additionalPayload,
+                ...(this._trigger ? { trigger: this._trigger } : {}),
             });
         } else {
             this.store.dispatch({
                 type: id,
                 ...additionalPayload,
+                ...(this._trigger ? { trigger: this._trigger } : {}),
             });
         }
     }
@@ -77,18 +90,18 @@ export class ActionsService {
     private getAllowedActions(actions: ContentActionRef[], context: RuleContext): ContentActionRef[] {
         const actionsFilter = (list: ContentActionRef[]): ContentActionRef[] =>
             list
-                .filter((action) => this.rules.filterItem(action, context))
-                .map((action) => {
+                .filter(action => this.rules.filterItem(action, context))
+                .map(action => {
                     if (action.type === ContentActionType.custom && !action.data) {
                         action.data = { ...action };
                     }
                     return action;
                 })
-                .map((action) => this.setActionDisabledFromRule(action, context))
+                .map(action => this.setActionDisabledFromRule(action, context))
                 .reduce(reduceEmptyMenus, [])
                 .reduce(reduceSeparators, []);
         const recursion = (list: ContentActionRef[]): ContentActionRef[] =>
-            actionsFilter(list.map((item) => (item.children?.length ? { ...item, children: recursion(item.children) } : item)));
+            actionsFilter(list.map(item => (item.children?.length ? { ...item, children: recursion(item.children) } : item)));
         return recursion(actions || []);
     }
 
