@@ -123,7 +123,7 @@
         [length]="pagingState.length"
         [pageSize]="pagingState.pageSize"
         [pageIndex]="pagingState.pageIndex"
-        [pageSizeOptions]="[5, 10, 15, 20, 25, 50, 100, 250]"
+        [pageSizeOptions]="paginatorSettings().pageSizeOptions"
         (page)="onPageChange($event)"
     />
 </ng-container>
