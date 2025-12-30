@@ -18,7 +18,7 @@ import { ResponsiveService } from '@contezza/core/responsive';
 import { NavigationActionComponent } from '@contezza/core/responsive/components/navigation-action';
 import { TableLayoutSettings } from '@contezza/content-services/search/shared';
 
-import { ToolbarComponent } from '../actions/toolbar/toolbar.component';
+import { ToolbarComponent } from '@contezza/core/context';
 import { SearchComponent } from './search/search.component';
 
 interface View {

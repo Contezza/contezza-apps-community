@@ -39,7 +39,7 @@
                         "type": "thumbnail",
                         "resizable": false,
                         "sortingKey": "content.mimetype",
-                        "sortable": true,
+                        "sortable": false,
                         "editable": false,
                         "order": 10
                     },
@@ -187,7 +187,7 @@
                         "type": "thumbnail",
                         "format": "withSelection",
                         "resizable": false,
-                        "sortable": true,
+                        "sortable": false,
                         "editable": false,
                         "sticky": true,
                         "order": 10
@@ -314,7 +314,7 @@
                         "type": "thumbnail",
                         "format": "withSelection",
                         "resizable": false,
-                        "sortable": true,
+                        "sortable": false,
                         "editable": false,
                         "sticky": true,
                         "order": 10

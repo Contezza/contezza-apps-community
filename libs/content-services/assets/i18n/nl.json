@@ -1,6 +1,7 @@
 {
     "CONTENT_SERVICES": {
         "ACTIONS": {
+            "ADD": "Toevoegen",
             "CREATE_FILE": "Document creëren",
             "EDIT_COLUMNS": "Kolommen bewerken",
             "MANAGE_PERMISSIONS": "Rechten",

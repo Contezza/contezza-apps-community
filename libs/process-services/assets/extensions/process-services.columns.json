@@ -10,7 +10,7 @@
                 "id": "process-services.columns.tasks.thumbnail",
                 "key": "thumbnail",
                 "type": "thumbnail",
-                "sortable": true,
+                "sortable": false,
                 "order": 10
             },
             {
