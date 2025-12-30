@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+
 import moment from 'moment';
-import { ContezzaDynamicFormField } from '@contezza/dynamic-forms/shared';
+
 import { ContezzaObjectUtils, DateRange } from '@contezza/core/utils';
+import { ContezzaDynamicFormField } from '@contezza/dynamic-forms/shared';
 
 @Injectable({ providedIn: 'root' })
 export class DecoderService {
@@ -39,14 +41,19 @@ export class DecoderService {
      */
     decodeElementary(value, type: string): any {
         switch (type) {
+            case 'date': {
+                const parsed = JSON.parse(value);
+                return parsed ? moment(parsed) : undefined;
+            }
             case 'dateRange':
-            case 'dateRangeChip':
+            case 'dateRangeChip': {
                 const parseDateRange = (date: { from: any; to: any }): DateRange => {
                     const from = date.from && moment(date.from);
                     const to = date.to && moment(date.to);
                     return from || to ? { from, to } : null;
                 };
                 return value ? parseDateRange(JSON.parse(value)) : undefined;
+            }
             case 'autocomplete':
             case 'multiautocomplete':
             case 'array':
@@ -94,20 +101,26 @@ export class DecoderService {
      *
      * @param value
      * @param type
+     * @param field
      */
     encodeElementary(value, field): any {
         switch (field.type) {
+            case 'date': {
+                const formattedDate = value ? moment(value).format('YYYY-MM-DD') : null;
+                return JSON.stringify(formattedDate);
+            }
             case 'dateRange':
-            case 'dateRangeChip':
+            case 'dateRangeChip': {
                 const from = value.from ? moment(value.from).format('YYYY-MM-DD') : null;
                 const to = value.to ? moment(value.to).format('YYYY-MM-DD') : null;
                 return JSON.stringify({ from, to });
+            }
             case 'autocomplete':
             case 'button-toggle':
                 return JSON.stringify(this.encodeObject(value, field));
             case 'multiautocomplete':
             case 'peoplePicker':
-                return JSON.stringify(value.filter(Boolean).map((item) => this.encodeObject(item, field)));
+                return JSON.stringify(value.filter(Boolean).map(item => this.encodeObject(item, field)));
             default:
                 return typeof value === 'string' ? value : JSON.stringify(value);
         }
@@ -119,7 +132,7 @@ export class DecoderService {
             .filter(([key, val]) =>
                 field.settings?.preFilteredOptions
                     ? key === 'contezzaDisplay' || ['string', 'number', 'boolean', 'object'].includes(typeof val)
-                    : key !== 'contezzaDisplay' && ['string', 'number', 'boolean', 'object'].includes(typeof val)
+                    : key !== 'contezzaDisplay' && ['string', 'number', 'boolean', 'object'].includes(typeof val),
             )
             .forEach(([key, val]) => (output[key] = val));
         return output;
