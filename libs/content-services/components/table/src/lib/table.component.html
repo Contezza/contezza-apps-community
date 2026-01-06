@@ -81,8 +81,8 @@
                         </ng-container>
                     </ng-container>
                     <ng-container matColumnDef="spinner">
-                        <td mat-footer-cell *matFooterCellDef [attr.colspan]="displayedColumns.length">
-                            <mat-progress-spinner #paginationSpinner style="margin: auto" mode="indeterminate" diameter="40" />
+                        <td mat-footer-cell *matFooterCellDef #paginationSpinner [attr.colspan]="displayedColumns.length">
+                            <mat-progress-spinner style="margin: auto" mode="indeterminate" diameter="40" />
                         </td>
                     </ng-container>
 
