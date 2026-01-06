@@ -51,7 +51,7 @@
         >
             <mat-icon>cancel</mat-icon>
         </button>
-        <button mat-icon-button matSuffix *ngIf="!readonly && !control.disabled">
+        <button mat-icon-button aria-label="Open dropdown" matSuffix *ngIf="!readonly && !control.disabled">
             <mat-icon>arrow_drop_down</mat-icon>
         </button>
         <mat-error contezza-dynamic-form-field-error *ngIf="field.validations?.length" [validations]="field.validations" [control]="control" />

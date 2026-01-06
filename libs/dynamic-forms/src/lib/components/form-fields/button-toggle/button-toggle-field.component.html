@@ -27,7 +27,12 @@
                     </mat-button-toggle>
                 </ng-container>
                 <ng-container *ngIf="!optionsLoading">
-                    <mat-button-toggle *ngFor="let option of selectableOptions" [value]="option" title="{{ option.contezzaDisplay.option.tooltip | translate }}">
+                    <mat-button-toggle
+                        *ngFor="let option of selectableOptions"
+                        [value]="option"
+                        title="{{ option.contezzaDisplay.option.tooltip | translate }}"
+                        aria-label="{{ option.contezzaDisplay.option.tooltip | translate }}"
+                    >
                         <adf-icon *ngIf="option.contezzaDisplay.option.icon" [value]="option.contezzaDisplay.option.icon" />
                         {{ option.contezzaDisplay.option.label || '' }}
                     </mat-button-toggle>

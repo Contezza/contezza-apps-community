@@ -10,6 +10,18 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2025-12-30
+|3.5.4
+|View <<Release 3.5.4,release details>>.
+
+|2025-12-19
+|3.5.3
+|View <<Release 3.5.3,release details>>.
+
+|2025-12-19
+|3.5.2
+|View <<Release 3.5.2,release details>>.
+
 |2025-12-17
 |3.5.1
 |View <<Release 3.5.1,release details>>.
@@ -338,6 +350,34 @@ In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
 
+==== Release 3.5.4
+
+Bugfixes/minor changes:
+
+- @contezza/dynamic-forms - Fix icon size in  `RadioButtonField` https://support.contezza.nl/issues/35989[(#35989)].
+- @contezza/content-services - Add support for type `Date` to decoder services https://support.contezza.nl/issues/36080[(#36080)].
+- @contezza/content-services - Style fixes for WCAG 2.1
+- @contezza/dynamic-forms - Style fixes for WCAG 2.1
+- @contezza/content-services - Fix refresh search-table-page with id `personal-files-config` after upload https://support.contezza.nl/issues/36077[(#36077)]
+- @contezza/content-services - Implement table parameter `paginatorSettings`
+- @contezza/core - Implement `trigger` in action payload https://support.contezza.nl/issues/36244[(#36244)]
+
+==== Release 3.5.3
+
+Bugfixes/minor changes:
+
+- @contezza/content-services - Fix preferences not saved with validation `requiredAtLeastOneField` https://support.contezza.nl/issues/36062[(#36062)].
+- @contezza/dynamic-forms - Fix touched in `DateRangeField` https://support.contezza.nl/issues/36062[(#36062)].
+- @contezza/core/utils - Fix `options` in `ArrayUtils.areEqual` not being optional.
+
+==== Release 3.5.2
+
+Upgrades:
+
+* NX version upgraded to 20.8.2.
+* Eslint version upgraded to 9.8.0.
+* Prettier version upgraded to 3.1.1.
+
 ==== Release 3.5.1
 
 New features:
@@ -348,7 +388,6 @@ Bugfixes/minor changes:
 
 - @contezza/common - Fix style of `adf-node-comments` component.
 - @contezza/content-services - Fix bug which caused presets to be saved in folder 'undefined' https://support.contezza.nl/issues/35949[(#35949)].
-
 
 ==== Release 3.5.0
 

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 
 import { Moment } from 'moment';
 
@@ -43,10 +43,11 @@ export class DateRangeFieldComponent extends ContezzaBaseFieldComponent<DateRang
 
         this.group.valueChanges
             .pipe(
+                debounceTime(0),
                 distinctUntilChanged((oldValue, newValue) => oldValue.from === newValue.from && oldValue.to === newValue.to),
-                takeUntil(this.destroy$)
+                takeUntil(this.destroy$),
             )
-            .subscribe((value) => {
+            .subscribe(value => {
                 if (this.fromSubcontrol.touched || this.toSubcontrol.touched) {
                     this.control.markAsTouched();
                 }

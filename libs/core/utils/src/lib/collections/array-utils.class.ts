@@ -119,7 +119,7 @@ export class ArrayUtils {
      * @param w Second array.
      * @param options Optional parameters: * `comparator` allows to define a custom comparison function, defaults to `===`; * `ordered` specifies if order matters when comparing arrays, in other words "shuffled" arrays are equal if this parameters is `false`, defaults to `false`.
      */
-    static areEqual<T>(v: T[], w: T[], options?: { comparator: (x: T, y: T) => boolean; ordered: boolean }): boolean {
+    static areEqual<T>(v: T[], w: T[], options?: { comparator?: (x: T, y: T) => boolean; ordered?: boolean }): boolean {
         // setting default options
         const comparator = options?.comparator || ((x, y) => x === y);
         const ordered = options?.ordered;

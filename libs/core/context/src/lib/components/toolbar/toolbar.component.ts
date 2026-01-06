@@ -1,13 +1,15 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
+import { ToolbarActionComponent } from '@alfresco/aca-shared';
 import { ToolbarComponent as AdfToolbarComponent } from '@alfresco/adf-core';
 import { ContentActionRef } from '@alfresco/adf-extensions';
-import { ToolbarActionComponent } from '@alfresco/aca-shared';
 
-import { ActionsService } from '../../services';
+import { Stylable } from '@contezza/core/utils';
+
+import { ActionsService, ActionTrigger } from '../../services';
 
 @Component({
     standalone: true,
@@ -15,14 +17,14 @@ import { ActionsService } from '../../services';
     selector: 'contezza-toolbar',
     template: `<adf-toolbar class="adf-toolbar--inline">
         <ng-container *ngFor="let action of actions$ | async; trackBy: trackById">
-            <aca-toolbar-action [actionRef]="action" />
+            <aca-toolbar-action [actionRef]="action" [class]="action.class" [style]="action.style" />
         </ng-container>
     </adf-toolbar>`,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [ActionsService.provider],
 })
 export class ToolbarComponent implements OnInit {
-    readonly actions$: Observable<ContentActionRef[]> = this.actionsService.actions$;
+    readonly actions$: Observable<(ContentActionRef & Stylable)[]> = this.actionsService.actions$;
 
     @Input()
     key = 'toolbar';
@@ -38,9 +40,15 @@ export class ToolbarComponent implements OnInit {
         } else {
             this.actionsService.featureKey = this.key;
         }
+        this.actionsService.trigger = ActionTrigger.TOOLBAR;
     }
 
-    trackById(_, { id }: ContentActionRef) {
-        return id;
+    trackById(_, action: ContentActionRef) {
+        if (action.type !== 'menu') {
+            return action.id;
+        } else {
+            // forceren om te zorgen dat de menu-items worden herladen voor toetsenbordtoegankelijkheid
+            return action.id + action.children.length;
+        }
     }
 }

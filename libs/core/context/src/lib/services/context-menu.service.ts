@@ -4,7 +4,7 @@ import { Observable, take } from 'rxjs';
 
 import { ContentActionRef } from '@alfresco/adf-extensions';
 
-import { ActionsService } from './actions.service';
+import { ActionsService, ActionTrigger } from './actions.service';
 import { ContextMenuOverlayService } from './context-menu-overlay.service';
 
 @Injectable()
@@ -13,7 +13,10 @@ export class ContextMenuService {
 
     readonly actions$: Observable<ContentActionRef[]> = this.actionsService.actions$;
 
-    constructor(private readonly overlay: ContextMenuOverlayService, private readonly actionsService: ActionsService) {}
+    constructor(
+        private readonly overlay: ContextMenuOverlayService,
+        private readonly actionsService: ActionsService,
+    ) {}
 
     init(config: { key?: string } | { actions: ContentActionRef[] } = {}) {
         if ('actions' in config) {
@@ -21,14 +24,15 @@ export class ContextMenuService {
         } else {
             this.actionsService.featureKey = config.key || 'contextMenu';
         }
+        this.actionsService.trigger = ActionTrigger.CONTEXT_MENU;
     }
 
     open(event: MouseEvent) {
         // actions snapshot otherwise:
         // if a second context menu is opened while a first one is still open, then the new action list is shown in the first context menu before it is closed
-        this.actions$.pipe(take(1)).subscribe((actions) => {
+        this.actions$.pipe(take(1)).subscribe(actions => {
             const contextMenu = this.overlay.open(actions, event);
-            contextMenu.actionClicked.subscribe((action) => this.runAction(action));
+            contextMenu.actionClicked.subscribe(action => this.runAction(action));
         });
     }
 

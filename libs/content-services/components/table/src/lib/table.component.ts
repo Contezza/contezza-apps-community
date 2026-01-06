@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -7,13 +8,13 @@ import {
     EventEmitter,
     HostBinding,
     Input,
+    input,
+    InputSignalWithTransform,
     Optional,
     Output,
     ViewChild,
     ViewEncapsulation,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -22,19 +23,32 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import { BehaviorSubject, combineLatest, Observable, OperatorFunction, ReplaySubject, Subject } from 'rxjs';
-import { buffer, debounceTime, distinctUntilChanged, filter, map, mapTo, scan, takeUntil } from 'rxjs/operators';
+import {
+    BehaviorSubject,
+    buffer,
+    combineLatest,
+    debounceTime,
+    distinctUntilChanged,
+    filter,
+    map,
+    mapTo,
+    Observable,
+    OperatorFunction,
+    ReplaySubject,
+    scan,
+    Subject,
+    takeUntil,
+} from 'rxjs';
 
+import { PaginationMode, PaginatorSettings, Results, SelectionMode } from '@contezza/content-services/components/table/shared';
+import { Column } from '@contezza/content-services/shared';
 import { ContezzaSelectableDirective, SelectionStore } from '@contezza/core/context';
 import { ContezzaLetDirective } from '@contezza/core/directives';
 import { TranslatePropertyTitlePipe } from '@contezza/core/property-titles';
+import { ResponsiveService } from '@contezza/core/responsive';
 import { DestroyService } from '@contezza/core/services';
 import { ArrayUtils, ContezzaObservables, ContezzaUtils } from '@contezza/core/utils';
-import { ResponsiveService } from '@contezza/core/responsive';
 import { ContezzaDynamicFormFieldModule } from '@contezza/dynamic-forms';
-
-import { Column } from '@contezza/content-services/shared';
-import { PaginationMode, Results, SelectionMode } from '@contezza/content-services/components/table/shared';
 
 import { ContezzaResizableModule } from './resizable/resizable.module';
 import { TableCellComponent } from './table-cell.component';
@@ -43,13 +57,13 @@ import { TableRowDirective } from './table-row.directive';
 // move to libs repo
 // source: https://stackblitz.com/edit/rxjs6-buffer-debounce?file=index.ts
 type BufferDebounce = <T>(debounce: number) => OperatorFunction<T, T[]>;
-const bufferDebounce: BufferDebounce = (debounce) => (source) =>
-    new Observable((observer) =>
+const bufferDebounce: BufferDebounce = debounce => source =>
+    new Observable(observer =>
         source.pipe(buffer(source.pipe(debounceTime(debounce)))).subscribe({
-            next: (x) => observer.next(x),
-            error: (err) => observer.error(err),
+            next: x => observer.next(x),
+            error: err => observer.error(err),
             complete: () => observer.complete(),
-        })
+        }),
     );
 
 @Component({
@@ -78,6 +92,10 @@ const bufferDebounce: BufferDebounce = (debounce) => (source) =>
     providers: [ContezzaUtils.ifnProvide(SelectionStore), DestroyService],
 })
 export class TableComponent<ItemType> implements AfterViewInit {
+    static readonly DEFAULT_PAGINATOR_SETTINGS: PaginatorSettings = {
+        pageSizeOptions: [5, 10, 15, 20, 25, 50, 100, 250],
+    };
+
     @Input()
     set results(results: Results<ItemType>) {
         if (results) {
@@ -87,7 +105,7 @@ export class TableComponent<ItemType> implements AfterViewInit {
 
             this.totalSelected$ = this.selection.selection$.pipe(
                 debounceTime(0),
-                map((selected) => selected.length)
+                map(selected => selected.length),
             );
 
             // if `selectionMode = SelectionMode.MULTI_PAGE` then equals the total items given by the `paging` object
@@ -102,7 +120,7 @@ export class TableComponent<ItemType> implements AfterViewInit {
             // loading prevents multiple calls
             let loading = false;
             const observer = new IntersectionObserver(
-                (entries) => {
+                entries => {
                     // isIntersecting is true when element and viewport are overlapping
                     // isIntersecting is false when element and viewport don't overlap
                     if (!loading && entries[0].isIntersecting === true) {
@@ -110,7 +128,7 @@ export class TableComponent<ItemType> implements AfterViewInit {
                         this.paging.next({ ...this.pagingState, pageIndex: this.pagingState.pageIndex + 1 });
                     }
                 },
-                { threshold: [0] }
+                { threshold: [0] },
             );
             observer.observe(this.paginationSpinner.nativeElement);
         }
@@ -141,6 +159,13 @@ export class TableComponent<ItemType> implements AfterViewInit {
     @Input()
     selectionMode: SelectionMode = SelectionMode.SINGLE_PAGE;
 
+    readonly paginatorSettings: InputSignalWithTransform<PaginatorSettings, Partial<PaginatorSettings> | null> = input(TableComponent.DEFAULT_PAGINATOR_SETTINGS, {
+        transform: value => ({
+            ...TableComponent.DEFAULT_PAGINATOR_SETTINGS,
+            ...(value || {}),
+        }),
+    });
+
     @Input()
     set paginationStrategy(paginationStrategy: PaginationMode) {
         this.paginationStrategySource.next(paginationStrategy);
@@ -165,15 +190,15 @@ export class TableComponent<ItemType> implements AfterViewInit {
         bufferDebounce(200),
         // emit if:
         filter(
-            (events) =>
+            events =>
                 // the container was at its top by each touch
                 events.every(({ scrollTop }) => scrollTop === 0) &&
                 // touch was long enough to generate at least two events
                 events.length >= 2 &&
                 // each touch point is below the previous touch point
-                events.map(({ event }) => event.touches[0].pageY).every((y, index, array) => index === 0 || y > array[index - 1])
+                events.map(({ event }) => event.touches[0].pageY).every((y, index, array) => index === 0 || y > array[index - 1]),
         ),
-        mapTo(void 0)
+        mapTo(void 0),
     );
 
     @Output()
@@ -195,7 +220,7 @@ export class TableComponent<ItemType> implements AfterViewInit {
             }
             return acc;
         }, []),
-        distinctUntilChanged((oldValue, newValue) => oldValue.length === newValue.length)
+        distinctUntilChanged((oldValue, newValue) => oldValue.length === newValue.length),
     );
 
     private readonly resizingSource = new BehaviorSubject<Column | undefined>(undefined);
@@ -215,17 +240,17 @@ export class TableComponent<ItemType> implements AfterViewInit {
         private readonly cd: ChangeDetectorRef,
         @Optional() responsive: ResponsiveService,
         private readonly selection: SelectionStore<ItemType>,
-        destroy$: DestroyService
+        destroy$: DestroyService,
     ) {
-        responsive?.isMobile$.pipe(takeUntil(destroy$)).subscribe((value) => (this.isMobile = value));
+        responsive?.isMobile$.pipe(takeUntil(destroy$)).subscribe(value => (this.isMobile = value));
         // resize columns with class contezza-table-cell-n, based on a percentage of the host width
-        combineLatest([this.afterViewInit$, this.contentInit$, ContezzaObservables.fromCallbackable((callback) => new ResizeObserver(callback).observe(element.nativeElement))])
+        combineLatest([this.afterViewInit$, this.contentInit$, ContezzaObservables.fromCallbackable(callback => new ResizeObserver(callback).observe(element.nativeElement))])
             .pipe(debounceTime(0), takeUntil(destroy$))
             .subscribe(() => {
                 // recompute table width
                 const tableWidth = element.nativeElement.clientWidth;
                 // allow percentages: 0%, 5%, 10%, 15%, ..., 100%
-                ArrayUtils.range(0, 101, 5).forEach((n) => {
+                ArrayUtils.range(0, 101, 5).forEach(n => {
                     const list = element.nativeElement.querySelectorAll(`.mat-mdc-header-cell:not(.contezza-resized).contezza-table-cell-${n}`);
                     if (list.length) {
                         // solving: width + padding = n% tableWidth

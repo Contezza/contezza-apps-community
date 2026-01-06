@@ -9,69 +9,12 @@
             "executor": "@angular-devkit/build-angular:ng-packagr",
             "outputs": ["{workspaceRoot}/dist/@contezza/core"],
             "options": {
-                "tsConfig": "tsconfig.build.json",
+                "tsConfig": "libs/core/tsconfig.lib.json",
                 "project": "libs/core/ng-package.json"
             }
         },
-        "test": {
-            "executor": "@nrwl/jest:jest",
-            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-            "options": {
-                "jestConfig": "libs/core/jest.config.ts",
-                "passWithNoTests": true
-            },
-            "configurations": {
-                "ci": {
-                    "ci": true,
-                    "codeCoverage": true
-                }
-            }
-        },
         "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "outputs": ["{options.outputFile}"],
-            "options": {
-                "lintFilePatterns": [
-                    "libs/core/**/*.ts",
-                    "libs/core/**/*.html",
-                    "libs/core/utils/**/*.ts",
-                    "libs/core/utils/**/*.html",
-                    "libs/core/actions/**/*.ts",
-                    "libs/core/actions/**/*.html",
-                    "libs/core/context/**/*.ts",
-                    "libs/core/context/**/*.html",
-                    "libs/core/extensions/**/*.ts",
-                    "libs/core/extensions/**/*.html",
-                    "libs/core/services/**/*.ts",
-                    "libs/core/services/**/*.html",
-                    "libs/core/directives/**/*.ts",
-                    "libs/core/directives/**/*.html",
-                    "libs/core/common/**/*.ts",
-                    "libs/core/common/**/*.html",
-                    "libs/core/stores/**/*.ts",
-                    "libs/core/stores/**/*.html",
-                    "libs/core/dialogs/**/*.ts",
-                    "libs/core/dialogs/**/*.html",
-                    "libs/core/dynamic-component/**/*.ts",
-                    "libs/core/dynamic-component/**/*.html",
-                    "libs/core/effects-helper/**/*.ts",
-                    "libs/core/effects-helper/**/*.html",
-                    "libs/core/guards/**/*.ts",
-                    "libs/core/guards/**/*.html",
-                    "libs/core/notifications/**/*.ts",
-                    "libs/core/notifications/**/*.html",
-                    "libs/core/pipes/**/*.ts",
-                    "libs/core/pipes/**/*.html",
-                    "libs/core/popover/**/*.ts",
-                    "libs/core/popover/**/*.html",
-                    "libs/core/property-titles/**/*.ts",
-                    "libs/core/property-titles/**/*.html",
-                    "libs/core/responsive/**/*.ts",
-                    "libs/core/responsive/**/*.html",
-                    "libs/core/translate/**/*.ts",
-                    "libs/core/translate/**/*.html"
-                ]
-            }
+            "executor": "@nx/eslint:lint"
         }
     },
     "tags": []
