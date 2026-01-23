@@ -7,7 +7,7 @@ stages:
 
 build_publish:
     stage: build-publish
-    image: harbor.contezza.nl/tooling/docker-npm-maven:1.0.7
+    image: harbor.contezza.nl/tooling/cicd-image:node18-openjdk17
     before_script:
         - mkdir -p $HOME/.docker
         - echo $DOCKER_AUTH_CONFIG > $HOME/.docker/config.json
