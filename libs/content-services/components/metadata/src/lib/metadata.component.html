@@ -1,0 +1,13 @@
+<contezza-item-details [id]="propertyDisplayListId()" [item]="item()" />
+@if (action(); as action) {
+    <button
+        mat-fab
+        color="primary"
+        [id]="action.id"
+        [title]="action.description || action.title | translate"
+        [attr.aria-label]="action.description || action.title | translate"
+        (click)="onEditMetadata()"
+    >
+        <mat-icon [contezzaIcon]="action.icon" />
+    </button>
+}

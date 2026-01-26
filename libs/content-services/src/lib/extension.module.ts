@@ -57,6 +57,8 @@ export class ExtensionModule {
             )
         );
 
+        import('@contezza/content-services/components/metadata').then(c => adfExtensions.setComponents({ 'sidebar-tabs.metadata': c.MetadataSidebarTabComponent }));
+
         uploadFilter.addFilters({
             'content-services.search': (queue$) =>
                 queue$.pipe(
