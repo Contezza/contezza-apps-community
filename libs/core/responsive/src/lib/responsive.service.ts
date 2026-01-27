@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Injectable } from '@angular/core';
 
 import { map, Observable, shareReplay, Subscription } from 'rxjs';
 
@@ -28,18 +28,18 @@ export class ResponsiveService {
         [ScreenSize.MOBILE]: { hasBackdrop: true },
     };
 
-    readonly screenSize$: Observable<ScreenSize> = this.breakpointObserver.observe(this.supportedBreakpoints.map((key) => Breakpoints[key])).pipe(
+    readonly screenSize$: Observable<ScreenSize> = this.breakpointObserver.observe(this.supportedBreakpoints.map(key => Breakpoints[key])).pipe(
         map(({ matches, breakpoints }) => {
             if (matches) {
                 const matchingMediaQuery = Object.entries(breakpoints)
                     .find(([, val]) => val)?.[0]
                     ?.trim();
                 if (matchingMediaQuery) {
-                    const matchingBreakpoint = this.supportedBreakpoints.find((key) =>
+                    const matchingBreakpoint = this.supportedBreakpoints.find(key =>
                         (Breakpoints[key] as string)
                             .split(',')
-                            .map((query) => query.trim())
-                            .includes(matchingMediaQuery)
+                            .map(query => query.trim())
+                            .includes(matchingMediaQuery),
                     );
                     if (matchingBreakpoint) {
                         return this.mapper[matchingBreakpoint];
@@ -49,12 +49,13 @@ export class ResponsiveService {
             console.warn('No matching screen size, using default: ' + this.default);
             return this.default;
         }),
-        shareReplay(1)
+        shareReplay(1),
     );
 
-    readonly isMobile$ = this.screenSize$.pipe(map((value) => value === ScreenSize.MOBILE));
-    readonly isTablet$ = this.screenSize$.pipe(map((value) => value === ScreenSize.TABLET));
-    readonly isDesktop$ = this.screenSize$.pipe(map((value) => value === ScreenSize.DESKTOP));
+    readonly isMobile$ = this.screenSize$.pipe(map(value => value === ScreenSize.MOBILE));
+    readonly isTablet$ = this.screenSize$.pipe(map(value => value === ScreenSize.TABLET));
+    readonly isDesktop$ = this.screenSize$.pipe(map(value => value === ScreenSize.DESKTOP));
+    readonly cssClass$ = this.screenSize$.pipe(map(size => this.getCssClass(size)));
 
     private subscription?: Subscription;
     readonly settings: Partial<ContextMenuSettings> = {};
@@ -63,10 +64,10 @@ export class ResponsiveService {
 
     init() {
         this.subscription?.unsubscribe();
-        this.subscription = this.screenSize$.subscribe((value) => {
+        this.subscription = this.screenSize$.subscribe(value => {
             // set css class on base DOM element
             const { classList } = document.documentElement;
-            classList.forEach((c) => {
+            classList.forEach(c => {
                 if (c.startsWith(this.cssPrefix)) {
                     classList.remove(c);
                 }
