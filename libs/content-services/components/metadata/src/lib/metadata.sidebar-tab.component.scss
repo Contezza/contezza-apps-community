@@ -1,0 +1,14 @@
+:host {
+    $padding: 16px;
+    padding: $padding;
+    // full height minus top and bottom padding
+    height: calc(100% - 2 * $padding);
+    display: block;
+
+    .spinner-wrapper {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

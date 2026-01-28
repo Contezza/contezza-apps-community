@@ -6,6 +6,7 @@ export * from './encrypted-http-client.class';
 export * from './json-registry.class';
 export * from './jwt';
 export * from './one-time-subject';
+export * from './property';
 export * from './query-parameters.class';
 export * from './repeating-observable.class';
 export * from './rule.class';
