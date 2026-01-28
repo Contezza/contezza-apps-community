@@ -286,6 +286,29 @@
         }
     }
 
+    // fix scrolled area in info-drawer
+    // without this the whole info-drawer scrolls, with this only the tab content
+    .adf-info-drawer-layout {
+        overflow: hidden;
+        &-content {
+            flex: 1;
+            min-height: 0;
+            & > mat-tab-group {
+                height: 100%;
+                & > .mat-mdc-tab-body-wrapper {
+                    flex: 1;
+                    .mat-mdc-tab-body-content {
+                        display: flex;
+                        flex-direction: column;
+                        & > adf-dynamic-tab {
+                            flex: 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     // replace aca blue with primary
     * {
         --theme-blue-button-color: var(--theme-primary-color);

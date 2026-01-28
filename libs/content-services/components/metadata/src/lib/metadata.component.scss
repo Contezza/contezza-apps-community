@@ -1,0 +1,25 @@
+:host {
+    display: block;
+    height: 100%;
+
+    contezza-item-details::ng-deep {
+        .contezza-item-details-entry {
+            flex-direction: column;
+            gap: 0;
+            align-items: initial;
+        }
+    }
+
+    button {
+        position: absolute;
+        bottom: 16px;
+        right: 16px;
+        // make button hidden when not used
+        opacity: 0;
+    }
+    &:hover button,
+    &:focus button,
+    &:focus-within button {
+        opacity: 1;
+    }
+}
