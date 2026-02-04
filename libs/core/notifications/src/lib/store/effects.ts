@@ -82,7 +82,10 @@ export class Effects {
             this.actions$.pipe(
                 ofType(showSnackbarInfo),
                 map(({ payload }) => (typeof payload === 'string' ? { message: payload } : payload)),
-                tap(({ message, interpolateArgs }) => this.adfNotifications.showInfo(message, null, interpolateArgs))
+                switchMap(({ message, interpolateArgs, action }) => {
+                    const ref = this.adfNotifications.showInfo(message, action.label, interpolateArgs, !!action);
+                    return action ? ref.onAction().pipe(switchMap(() => action.execute())) : of(void 0);
+                }),
             ),
         { dispatch: false }
     );
