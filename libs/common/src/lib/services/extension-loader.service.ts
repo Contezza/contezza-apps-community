@@ -145,7 +145,17 @@ export class ExtensionLoaderService {
                 const resolvedFilters = filters.map((flt) => this.idResolver.resolve(flt, 'operator'));
                 return ($) => $.pipe(...resolvedFilters);
             },
-            formatDate: (format: string) => ($: Observable<Moment | null>) => $.pipe(map((date) => (date ? date.format(format) : date))),
+            formatDate: (format: string) => ($: Observable<Moment | null>) => $.pipe(map(date => (date ? date.format(format) : date))),
+            translateBoolean: (key: string) => ($: Observable<object>) =>
+                $.pipe(
+                    map(item => {
+                        const value = ContezzaObjectUtils.getValue(item, key);
+                        if (typeof value === 'boolean') {
+                            return value ? this.translate.instant('APP.LABELS.YES') : this.translate.instant('APP.LABELS.NO');
+                        }
+                        return value;
+                    }),
+                ),
         });
     }
 }
