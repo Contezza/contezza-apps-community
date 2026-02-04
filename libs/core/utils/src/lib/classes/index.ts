@@ -9,5 +9,6 @@ export * from './one-time-subject';
 export * from './property';
 export * from './query-parameters.class';
 export * from './repeating-observable.class';
+export * from './resolver';
 export * from './rule.class';
 export * from './string-template.class';
