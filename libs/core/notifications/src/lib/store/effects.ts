@@ -83,7 +83,7 @@ export class Effects {
                 ofType(showSnackbarInfo),
                 map(({ payload }) => (typeof payload === 'string' ? { message: payload } : payload)),
                 switchMap(({ message, interpolateArgs, action }) => {
-                    const ref = this.adfNotifications.showInfo(message, action.label, interpolateArgs, !!action);
+                    const ref = this.adfNotifications.showInfo(message, action ? action.label : null, interpolateArgs);
                     return action ? ref.onAction().pipe(switchMap(() => action.execute())) : of(void 0);
                 }),
             ),
