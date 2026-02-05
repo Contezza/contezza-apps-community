@@ -1,6 +1,6 @@
 {
     "name": "@contezza/js-console",
-    "version": "3.7.0-SNAPSHOT",
+    "version": "3.7.0",
     "peerDependencies": {
         "@angular/common": "^14.2.0",
         "@angular/core": "^14.2.0"
