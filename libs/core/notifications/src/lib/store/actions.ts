@@ -1,5 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 
+import { Observable } from 'rxjs';
+
 import { Notification } from '../models';
 
 export enum ActionType {
@@ -19,5 +21,19 @@ export const closeLoadingDialog = createAction(ActionType.CLOSE_LOADING_DIALOG);
 export const openErrorDetailsDialog = createAction(ActionType.OPEN_ERROR_DETAILS_DIALOG, props<{ payload: { message: string; details: any; duration?: number } }>());
 
 // snackbar - replace ACA snackbar actions which are removed in 7.0.0
-export const showSnackbarInfo = createAction(ActionType.SHOW_SNACKBAR_INFO, props<{ payload: string | { message: string; interpolateArgs?: any } }>());
+export const showSnackbarInfo = createAction(
+    ActionType.SHOW_SNACKBAR_INFO,
+    props<{
+        payload:
+            | string
+            | {
+                  message: string;
+                  interpolateArgs?: any;
+                  action?: {
+                      label: string;
+                      execute: () => Observable<unknown>;
+                  };
+              };
+    }>(),
+);
 export const showSnackbarError = createAction(ActionType.SHOW_SNACKBAR_ERROR, props<{ payload: string | { message: string; interpolateArgs?: any } }>());

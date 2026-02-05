@@ -130,6 +130,10 @@
                 "CREATED": "Created",
                 "CREATED_BY": "Created by"
             }
+        },
+        "LABELS": {
+            "YES": "Yes",
+            "NO": "No"
         }
     },
     "SEARCH": {

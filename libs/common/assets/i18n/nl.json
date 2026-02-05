@@ -130,6 +130,10 @@
                 "CREATED": "Aangemaakt",
                 "CREATED_BY": "Aangemaakt door"
             }
+        },
+        "LABELS": {
+            "YES": "Ja",
+            "NO": "Nee"
         }
     },
     "SEARCH": {
