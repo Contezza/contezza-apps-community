@@ -1,4 +1,5 @@
-import { DialogData } from '@contezza/core/dialogs';
+import { DialogDataOld } from '@contezza/core/dialogs';
+
 import { Column, DynamicFormItem } from './dynamic-form-item.interface';
 
-export type MultiDynamicFormDialogData = DialogData & { items: DynamicFormItem[]; columns: Column[] };
+export type MultiDynamicFormDialogData = DialogDataOld & { items: DynamicFormItem[]; columns: Column[] };
