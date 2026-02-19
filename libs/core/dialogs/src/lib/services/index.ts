@@ -1,3 +1,4 @@
+export * from './dialog.service';
 export * from './dialog-component.service';
 export * from './dialog-loader.service';
 export * from './dialog-outlet.service';
