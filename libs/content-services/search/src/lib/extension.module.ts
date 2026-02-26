@@ -6,12 +6,11 @@ import { provideTranslations } from '@alfresco/adf-core';
 import { FavoritesApiService, NodesApiService, SearchService, SitesService } from '@alfresco/adf-content-services';
 import { ExtensionService as AdfExtensionService, provideExtensionConfig } from '@alfresco/adf-extensions';
 
-import { ContezzaObservables } from '@contezza/core/utils';
-
 import { ContentServicesExtensionModule } from '@contezza/content-services';
-import { ContentServicesExtensionService } from '@contezza/content-services/shared';
 import { ContentServicesPresetsExtensionModule } from '@contezza/content-services/presets';
 import { ContentServicesSearchExtensionService, SearchParameters, SortingUtils } from '@contezza/content-services/search/shared';
+import { ContentServicesExtensionService } from '@contezza/content-services/shared';
+import { AdfUtils, ContezzaObservables } from '@contezza/core/utils';
 
 import * as rules from './rules';
 
@@ -44,6 +43,9 @@ export class ExtensionModule {
             'search-table-page.target.hasIdIn': rules.hasIdIn,
             'search-table-page.target.hasTypeIn': rules.hasTypeIn,
         });
+        extensions.setEvaluators(AdfUtils.makeRules('canCreate', (node, context) => context.permissions.check(node, ['create']), { prefix: 'app' }));
+        extensions.setEvaluators(AdfUtils.makeRules('canUpload', (node, context) => context.permissions.check(node, ['create']), { prefix: 'app' }));
+        extensions.setEvaluators(AdfUtils.makeRules('canUpdate', (node, context) => context.permissions.check(node, ['update']), { prefix: 'app' }));
 
         csExtensions.setActions<any>({
             'actions.search-bar': () => import('./components/actions/search-bar.action.component').then((_) => _.SearchBarActionComponent),
