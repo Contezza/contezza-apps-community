@@ -2,7 +2,7 @@ import { Inject, Injectable, InjectionToken, Optional, Provider } from '@angular
 
 import { Store } from '@ngrx/store';
 
-import { BehaviorSubject, filter, map, merge, Observable, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, filter, map, merge, Observable, switchMap, take, tap } from 'rxjs';
 
 import { AppExtensionService } from '@alfresco/aca-shared';
 import { ContentActionRef, ContentActionType, ExtensionService, reduceEmptyMenus, reduceSeparators, RuleContext } from '@alfresco/adf-extensions';
@@ -73,10 +73,13 @@ export class ActionsService {
     runActionById(id: string, additionalPayload?: object) {
         const action = this.extensions.getActionById(id);
         if (action) {
-            this.store.dispatch({
-                ...action,
-                ...additionalPayload,
-                ...(this._trigger ? { trigger: this._trigger } : {}),
+            this.ruleContext$.pipe(take(1)).subscribe(context => {
+                this.store.dispatch({
+                    ...action,
+                    ...(action.payload ? { payload: this.extensions.runExpression(action.payload, context) } : {}),
+                    ...additionalPayload,
+                    ...(this._trigger ? { trigger: this._trigger } : {}),
+                });
             });
         } else {
             this.store.dispatch({
