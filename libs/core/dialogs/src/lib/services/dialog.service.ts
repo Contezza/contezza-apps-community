@@ -16,4 +16,8 @@ export class DialogService {
     open(data: MatDialogConfigWithRequiredData<DialogData>): Observable<unknown> {
         return from(import('../components').then(_ => _.DialogComponent)).pipe(switchMap(dialogComponent => this.dialog.open({ getComponent: () => dialogComponent }, data)));
     }
+
+    close(...ids: string[]) {
+        this.dialog.close(...ids);
+    }
 }
