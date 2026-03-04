@@ -10,6 +10,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2026-03-04
+|3.8.0
+|View <<Release 3.8.0,release details>>.
+
 |2026-02-19
 |3.7.1
 |View <<Release 3.7.1,release details>>.
@@ -365,6 +369,16 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 3.8.0
+
+Bugfixes/minor changes:
+
+- @contezza/core/context - Support for expressions in action payload implemented in `ActionsService`.
+- @contezza/core/dialogs - Method `close` added to abstract class `DialogOutletService`, implemented in `MatDialogService` and supported by `DialogService`.
+- @contezza/core/extensions - `SetupHelper` added.
+- @contezza/common - Providers `ContezzaExtensionService` and `MatDialogService` added to `ContezzaCommonModule`.
+- @contezza/content-services/search - Evaluators `canCreate`, `canUpdate`, `canUpload` added to `ContentServicesSearchExtensionModule`.
 
 ==== Release 3.7.1
 
