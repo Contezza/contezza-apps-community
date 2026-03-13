@@ -28,6 +28,6 @@ export class AlfrescoUtils {
         const { properties } = 'entry' in node ? node.entry : node;
         const { name, parseValue } = property;
         const value = properties?.[name];
-        return value ? parseValue(value) : null;
+        return value !== null && value !== undefined ? parseValue(value) : null;
     }
 }
