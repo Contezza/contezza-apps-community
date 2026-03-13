@@ -24,6 +24,7 @@ interface Data {
     multiple?: boolean;
     allowedNodeIds?: string[];
     forbiddenNodeIds?: string[];
+    filterQueries?: string[];
 }
 
 @Component({
@@ -124,6 +125,12 @@ export class NodeSelectorDialogComponent implements AfterViewInit {
                 copiedSettings.queryTemplate.filterQueries = [];
             }
             copiedSettings.queryTemplate.filterQueries.push({ query: `NOT (${this.data.forbiddenNodeIds.map((id) => `sys:node-uuid:'${id}' OR ID:'${id}'`).join(' OR ')})` });
+        }
+        if (this.data.filterQueries?.length && copiedSettings.queryTemplate && typeof copiedSettings.queryTemplate !== 'string') {
+            if (!copiedSettings.queryTemplate.filterQueries) {
+                copiedSettings.queryTemplate.filterQueries = [];
+            }
+            copiedSettings.queryTemplate.filterQueries.push(...this.data.filterQueries.map(query => ({ query })));
         }
         return copiedSettings;
     }
