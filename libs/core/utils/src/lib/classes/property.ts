@@ -10,6 +10,10 @@ export class Property<TName extends string, TValue> {
         readonly name: TName,
         readonly parseValue: (_: NonNullable<any>) => TValue,
     ) {}
+
+    toString() {
+        return this.name;
+    }
 }
 
 type PropertyToRecord<TProperty extends Property<any, any>> = TProperty extends Property<infer TName, infer TValue>
