@@ -1,16 +1,14 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
 import { Store } from '@ngrx/store';
 
-import { combineLatest, Observable, Subject } from 'rxjs';
-import { filter, map, startWith } from 'rxjs/operators';
-
-import { ContezzaSearchFormComponent } from '@contezza/search/form';
+import { combineLatest, filter, map, Observable, startWith, Subject } from 'rxjs';
 
 import { JsConsoleDumpOutputService } from '../../../services/dump-output.service';
 import { getExecuteConsoleOutput } from '../../../store/selectors';
+import { ContezzaSearchFormComponent } from '../../search-form/search-form.component';
 
 @Component({
     standalone: true,
@@ -30,8 +28,8 @@ export class JsConsoleOutputDumpComponent {
     dataSource: MatTableDataSource<any>;
 
     data$: Observable<{ columns: Array<string>; data: Array<any> }> = this.store.select(getExecuteConsoleOutput).pipe(
-        filter((output) => !!output?.dumpOutput?.length),
-        map(({ dumpOutput }) => this.dumpService.constructDumpInfo(dumpOutput))
+        filter(output => !!output?.dumpOutput?.length),
+        map(({ dumpOutput }) => this.dumpService.constructDumpInfo(dumpOutput)),
     );
 
     filteredData$: Observable<Array<Record<string, any>>> = combineLatest([this.data$, this.searchValueSource.asObservable().pipe(startWith(''))]).pipe(
@@ -39,7 +37,7 @@ export class JsConsoleOutputDumpComponent {
             const dump = data.data[0];
             const dumpArray = [dump];
 
-            this.dataColumns = data.columns.filter((column) => column.includes(searchValue));
+            this.dataColumns = data.columns.filter(column => column.includes(searchValue));
             this.dataSource = this.dumpService.getDatasource(dumpArray, this.dataColumns);
             this.displayedColumns = ['label'];
 
@@ -48,10 +46,13 @@ export class JsConsoleOutputDumpComponent {
             }
 
             return dumpArray;
-        })
+        }),
     );
 
-    constructor(private readonly store: Store<unknown>, private readonly dumpService: JsConsoleDumpOutputService) {}
+    constructor(
+        private readonly store: Store<unknown>,
+        private readonly dumpService: JsConsoleDumpOutputService,
+    ) {}
 
     searchValueChange(event: string) {
         this.searchValue = event.trim().toLowerCase();

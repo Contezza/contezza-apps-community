@@ -10,7 +10,6 @@
         "build:node-browser": "npx nx build node-browser",
         "build:people-group-picker": "npx nx build people-group-picker",
         "build:process-services": "npx nx build process-services",
-        "build:search": "npx nx build search",
         "build-libs": "./scripts/build-libs.sh",
         "bump-version": "./scripts/bump-version.sh",
         "pack-libs": "./scripts/pack-libs.sh",

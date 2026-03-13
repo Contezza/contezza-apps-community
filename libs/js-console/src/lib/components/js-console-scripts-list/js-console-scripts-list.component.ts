@@ -1,28 +1,27 @@
-import { ChangeDetectionStrategy, Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ThemePalette } from '@angular/material/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu';
+import { ThemePalette } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { TranslateModule } from '@ngx-translate/core';
 
 import { Store } from '@ngrx/store';
 
-import { combineLatest, Observable, Subject } from 'rxjs';
-import { map, startWith, take, takeUntil } from 'rxjs/operators';
+import { combineLatest, map, Observable, startWith, Subject, take, takeUntil } from 'rxjs';
 
-import { IconModule } from '@alfresco/adf-core';
 import { DocumentListService, NodesApiService } from '@alfresco/adf-content-services';
+import { IconModule } from '@alfresco/adf-core';
 
 import { ContezzaLetDirective } from '@contezza/core/directives';
 import { DestroyService } from '@contezza/core/services';
-import { ContezzaSearchFormComponent } from '@contezza/search/form';
 
 import { ConsoleScript } from '../../interfaces/js-console';
-import { getScriptsList, getSelectedScript } from '../../store/selectors';
 import { deleteScript, duplicateScript, loadScriptsList, loadSelectedNodeContent } from '../../store/actions';
+import { getScriptsList, getSelectedScript } from '../../store/selectors';
+import { ContezzaSearchFormComponent } from '../search-form/search-form.component';
 
 @Component({
     standalone: true,
@@ -44,11 +43,11 @@ export class JsConsoleScriptsListComponent implements OnInit {
         map(
             ([scripts, searchValue]) =>
                 scripts
-                    .map((script) => {
+                    .map(script => {
                         if (script.text.toLowerCase().includes(searchValue)) {
                             return script;
                         } else if (script.submenu) {
-                            const filteredItems = script?.submenu?.itemdata?.filter((subscript) => subscript.text.toLowerCase().includes(searchValue));
+                            const filteredItems = script?.submenu?.itemdata?.filter(subscript => subscript.text.toLowerCase().includes(searchValue));
                             if (filteredItems?.length) {
                                 //  nieuw object aanmaken om niet het originele object te overschrijven
                                 return { ...script, submenu: { ...script.submenu, itemdata: filteredItems } };
@@ -59,15 +58,15 @@ export class JsConsoleScriptsListComponent implements OnInit {
                             return false;
                         }
                     })
-                    .filter(Boolean) as any
-        )
+                    .filter(Boolean) as any,
+        ),
     );
 
     constructor(
         readonly store: Store<unknown>,
         private readonly nodesApiService: NodesApiService,
         private readonly appHookService: DocumentListService,
-        @Inject(DestroyService) readonly destroy$: DestroyService
+        @Inject(DestroyService) readonly destroy$: DestroyService,
     ) {}
 
     ngOnInit(): void {
@@ -103,7 +102,7 @@ export class JsConsoleScriptsListComponent implements OnInit {
         this.nodesApiService
             .getNode(nodeId)
             .pipe(take(1))
-            .subscribe((node) => this.store.dispatch(deleteScript({ payload: [{ entry: node }] })));
+            .subscribe(node => this.store.dispatch(deleteScript({ payload: [{ entry: node }] })));
     }
     openFolder(folder) {
         if (this.scriptFolder === folder) {
