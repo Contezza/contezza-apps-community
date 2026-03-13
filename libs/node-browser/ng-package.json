@@ -1,6 +1,6 @@
 {
-    "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
-    "dest": "../../../dist/@contezza/node-browser",
+    "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+    "dest": "../../dist/@contezza/node-browser",
     "assets": [
         {
             "glob": "i18n/*.json",
