@@ -4,5 +4,6 @@
     "assets": ["./assets"],
     "lib": {
         "entryFile": "src/index.ts"
-    }
+    },
+    "allowedNonPeerDependencies": ["monaco-editor", "ngx-monaco-editor-v2"]
 }
