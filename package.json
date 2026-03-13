@@ -8,7 +8,6 @@
         "build:dynamic-forms": "npx nx build dynamic-forms",
         "build:js-console": "npx nx build js-console",
         "build:node-browser": "npx nx build node-browser",
-        "build:people-group-picker": "npx nx build people-group-picker",
         "build:process-services": "npx nx build process-services",
         "build-libs": "./scripts/build-libs.sh",
         "bump-version": "./scripts/bump-version.sh",

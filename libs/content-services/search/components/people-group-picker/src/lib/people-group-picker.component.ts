@@ -1,8 +1,8 @@
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatAutocomplete, MatAutocompleteModule } from '@angular/material/autocomplete';
-import { CommonModule } from '@angular/common';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,17 +11,16 @@ import { MatSelectModule } from '@angular/material/select';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import { from, Observable, of, throwError } from 'rxjs';
-import { catchError, debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs/operators';
+import { catchError, debounceTime, distinctUntilChanged, filter, from, Observable, of, switchMap, tap, throwError } from 'rxjs';
 
-import { FormBaseModule, FormFieldModel, FormModel, FormService, PipeModule, User, WidgetComponent } from '@alfresco/adf-core';
 import { AlfrescoApiService } from '@alfresco/adf-content-services';
+import { FormBaseModule, FormFieldModel, FormModel, FormService, PipeModule, User, WidgetComponent } from '@alfresco/adf-core';
 import { Group, GroupsApi, PeopleApi } from '@alfresco/js-api';
 
-import { WebscriptService } from '@contezza/core/services';
 import { IncludesPipe } from '@contezza/core/pipes';
+import { WebscriptService } from '@contezza/core/services';
 
-import { AvatarImagePipe, DisplayNamePipe, UserFullNamePipe } from '../pipes';
+import { AvatarImagePipe, DisplayNamePipe, UserFullNamePipe } from './pipes';
 
 export type PeoplePickerType = 'people' | 'group' | 'people-group';
 
@@ -81,7 +80,7 @@ export class ContezzaPeopleGroupPickerComponent extends WidgetComponent {
     set pickerType(type: PeoplePickerType) {
         if (type) {
             this._pickerType = type;
-            this.filteredTypes = type === 'people-group' ? this.types : this.types.filter((type) => type.id === this._pickerType);
+            this.filteredTypes = type === 'people-group' ? this.types : this.types.filter(type => type.id === this._pickerType);
         }
     }
 
@@ -135,16 +134,16 @@ export class ContezzaPeopleGroupPickerComponent extends WidgetComponent {
         filter(() => !!this._pickerType),
         debounceTime(250),
         distinctUntilChanged(),
-        switchMap((searchTerm) =>
+        switchMap(searchTerm =>
             typeof searchTerm === 'string' && this._pickerType === 'people'
                 ? from(this.getUsers(searchTerm)).pipe(
-                      catchError((err) => {
+                      catchError(err => {
                           this.errorMsg = err.message;
                           return of([]);
-                      })
+                      }),
                   )
-                : of([])
-        )
+                : of([]),
+        ),
     );
 
     groups$ = this.searchTerms$.pipe(
@@ -152,19 +151,23 @@ export class ContezzaPeopleGroupPickerComponent extends WidgetComponent {
         filter(() => !!this._pickerType),
         distinctUntilChanged(),
         debounceTime(250),
-        switchMap((searchTerm) =>
+        switchMap(searchTerm =>
             typeof searchTerm === 'string' && this._pickerType === 'group'
                 ? from(this.getGroups(searchTerm)).pipe(
-                      catchError((err) => {
+                      catchError(err => {
                           this.errorMsg = err.message;
                           return of([]);
-                      })
+                      }),
                   )
-                : of([])
-        )
+                : of([]),
+        ),
     );
 
-    constructor(public readonly formService: FormService, private readonly apiService: AlfrescoApiService, private readonly webscript: WebscriptService) {
+    constructor(
+        readonly formService: FormService,
+        private readonly apiService: AlfrescoApiService,
+        private readonly webscript: WebscriptService,
+    ) {
         super(formService);
         this.field = new FormFieldModel(new FormModel(), {});
     }
@@ -212,14 +215,14 @@ export class ContezzaPeopleGroupPickerComponent extends WidgetComponent {
     getPerson(personId: string, options: any): Observable<any> {
         const promise = this.peopleApi.getPerson(personId, options);
 
-        return from(promise).pipe(catchError((error) => throwError(error || 'Server error')));
+        return from(promise).pipe(catchError(error => throwError(error || 'Server error')));
     }
 
     itemExist(entity: User | Group): boolean {
         return (
             (this.selectedItems.length > 0 &&
-                !!this.selectedItems.some((selected) => ('userName' in entity ? selected['userName'] === entity['userName'] : selected.id === entity.id))) ||
-            (this.existingPeople.length > 0 && !!this.existingPeople.some((existing) => existing.roltoelichting.split('|')[0] === entity['userName']))
+                !!this.selectedItems.some(selected => ('userName' in entity ? selected['userName'] === entity['userName'] : selected.id === entity.id))) ||
+            (this.existingPeople.length > 0 && !!this.existingPeople.some(existing => existing.roltoelichting.split('|')[0] === entity['userName']))
         );
     }
 
@@ -228,7 +231,7 @@ export class ContezzaPeopleGroupPickerComponent extends WidgetComponent {
         const paging = await this.webscript.get<any>(`api/people?filter=${searchTerm}`).toPromise();
 
         if (paging?.people?.length > 0) {
-            users.push(...paging.people.map((people) => people));
+            users.push(...paging.people.map(people => people));
         }
         return users;
     }
@@ -238,12 +241,12 @@ export class ContezzaPeopleGroupPickerComponent extends WidgetComponent {
         const paging = await this.groupsApi.listGroupMembershipsForPerson('-me-');
 
         if (paging?.list?.entries) {
-            groups.push(...paging.list.entries.map((obj) => obj.entry));
+            groups.push(...paging.list.entries.map(obj => obj.entry));
         }
 
         return !this.skipSystemGroupsFiltering
             ? groups.filter(
-                  (group) =>
+                  group =>
                       !!group.displayName &&
                       !group.id.startsWith('GROUP_ALFRESCO_') &&
                       !group.id.startsWith('GROUP_TEZZA_') &&
@@ -252,7 +255,7 @@ export class ContezzaPeopleGroupPickerComponent extends WidgetComponent {
                       !group.id.startsWith('GROUP_SITE_') &&
                       !group.id.startsWith('GROUP_site_') &&
                       !group.id.startsWith('GROUP_Administrator') &&
-                      group.displayName.toUpperCase().includes(searchTerm.toUpperCase())
+                      group.displayName.toUpperCase().includes(searchTerm.toUpperCase()),
               )
             : groups.filter((group: Group) => !!group.displayName && group.displayName.toUpperCase().includes(searchTerm.toUpperCase()));
     }

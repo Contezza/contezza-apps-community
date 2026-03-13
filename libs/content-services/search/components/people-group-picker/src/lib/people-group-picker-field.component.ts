@@ -1,15 +1,18 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map, Observable, startWith } from 'rxjs';
 
 import { User } from '@alfresco/adf-core';
 import { Group } from '@alfresco/js-api';
 
-import { ContezzaBaseFieldComponent } from '../base-field.component';
+import { ContezzaBaseFieldComponent } from '@contezza/dynamic-forms';
+
+import { ContezzaPeopleGroupPickerComponent } from './people-group-picker.component';
 
 @Component({
-    standalone: false,
+    standalone: true,
+    imports: [CommonModule, ContezzaPeopleGroupPickerComponent],
     selector: 'contezza-people-group-picker-field',
     template: `
         <contezza-people-group-picker
@@ -28,7 +31,7 @@ export class PeopleGroupPickerFieldComponent<BaseValueType extends User | Group>
         super.ngOnInit();
         this.selectedItems$ = this.control.valueChanges.pipe(
             startWith(this.control.value),
-            map((value) => value || [])
+            map(value => value || []),
         );
     }
 

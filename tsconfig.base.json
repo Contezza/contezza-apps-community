@@ -66,8 +66,6 @@
             "@contezza/node-browser": ["libs/node-browser/src/index.ts"],
             "@contezza/node-browser/shared": ["libs/node-browser/shared/src/index.ts"],
 
-            "@contezza/people-group-picker": ["libs/people-group-picker/src/index.ts"],
-
             "@contezza/process-services": ["libs/process-services/src"],
             "@contezza/process-services/shared": ["libs/process-services/shared/src"],
             "@contezza/process-services/components/*": ["libs/process-services/components/*/src"]
