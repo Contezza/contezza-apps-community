@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
-import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { MatPaginatorIntl } from '@angular/material/paginator';
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 
 import { TranslateService } from '@ngx-translate/core';
 
 import { EffectsModule } from '@ngrx/effects';
 
 import { provideTranslations } from '@alfresco/adf-core';
+import { ExtensionService } from '@alfresco/adf-extensions';
 
-import { RouterExtensionService, RuleService } from '@contezza/core/extensions';
+import { MatDialogService } from '@contezza/core/dialogs';
+import { ContezzaExtensionService, RouterExtensionService, RuleService } from '@contezza/core/extensions';
 import { NotificationsModule } from '@contezza/core/notifications';
 import { RouterStoreModule } from '@contezza/core/stores';
 import { DATE_FORMATS } from '@contezza/core/utils';
@@ -46,6 +48,8 @@ import { getPaginatorIntl } from './utils/get-paginator-intl';
         provideTranslations('contezza-common', 'assets/contezza-common'),
         RouterExtensionService.provider,
         RuleService.provider,
+        { provide: ExtensionService, useClass: ContezzaExtensionService },
+        MatDialogService.provider,
     ],
 })
 export class ContezzaCommonModule {

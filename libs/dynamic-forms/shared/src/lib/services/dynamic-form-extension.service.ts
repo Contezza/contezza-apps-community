@@ -1,15 +1,26 @@
-import { Injectable, Type } from '@angular/core';
+import { Inject, Injectable, InjectionToken, Optional, Type } from '@angular/core';
 import { AbstractControl, ValidationErrors, Validators } from '@angular/forms';
 
 import { from, Observable, of } from 'rxjs';
 
-import { ContezzaAsyncDialogService } from '@contezza/core/services';
-import { ContezzaIdResolverService } from '@contezza/core/extensions';
-import { ContezzaUtils, ContezzaValidators } from '@contezza/core/utils';
-
 import moment from 'moment';
 
+import { ComponentResolver } from '@contezza/core/dynamic-component/shared';
+import { ContezzaIdResolverService } from '@contezza/core/extensions';
+import { ContezzaAsyncDialogService } from '@contezza/core/services';
+import { ContezzaUtils, ContezzaValidators } from '@contezza/core/utils';
+
 import { ContezzaBaseFieldComponentInterface, ContezzaBaseOptionComponentInterface } from '../components';
+
+type DynamicComponentRecord = Record<string, ComponentResolver<ContezzaBaseFieldComponentInterface>>;
+const DYNAMIC_FORM_FIELD_COMPONENTS = new InjectionToken<DynamicComponentRecord[]>('DYNAMIC_FORM_FIELD_COMPONENTS');
+export function provideDynamicFormFieldComponents(components: DynamicComponentRecord) {
+    return {
+        provide: DYNAMIC_FORM_FIELD_COMPONENTS,
+        useValue: components,
+        multi: true,
+    };
+}
 
 @Injectable({
     providedIn: 'root',
@@ -19,8 +30,12 @@ export class ContezzaDynamicFormExtensionService {
     private readonly optionComponents: Record<string, Type<ContezzaBaseOptionComponentInterface>> = {};
     private readonly dialogServices: Record<string, ContezzaAsyncDialogService<any, any, any>> = {};
 
-    constructor(private readonly idResolver: ContezzaIdResolverService) {
+    constructor(
+        private readonly idResolver: ContezzaIdResolverService,
+        @Optional() @Inject(DYNAMIC_FORM_FIELD_COMPONENTS) _dcrs?: DynamicComponentRecord[],
+    ) {
         this.loadDefault();
+        _dcrs?.forEach(list => this.setFieldComponents(list));
     }
 
     loadDefault() {

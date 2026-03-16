@@ -1,6 +1,10 @@
 {
     "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
     "dest": "../../dist/@contezza/dynamic-forms",
+    "lib": {
+        "entryFile": "src/index.ts"
+    },
+    "allowedNonPeerDependencies": ["@ngrx/component-store", "@ngneat/input-mask", "inputmask"],
     "assets": [
         {
             "glob": "i18n/*.json",
@@ -12,8 +16,5 @@
             "input": "./src/lib/ui",
             "output": "/ui/"
         }
-    ],
-    "lib": {
-        "entryFile": "src/index.ts"
-    }
+    ]
 }

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 
-import { DynamicFormFieldComponent } from './dynamic-form-field.component';
 import {
     ArrayFieldModule,
     ContezzaAutocompleteFieldModule,
@@ -17,7 +16,6 @@ import {
     ContezzaInputDialogFieldModule,
     ContezzaInputFieldModule,
     ContezzaMultiautocompleteFieldModule,
-    ContezzaPeopleGroupPickerFieldModule,
     ContezzaRadioButtonFieldModule,
     ContezzaSelectFieldModule,
     ContezzaTextareaFieldModule,
@@ -29,6 +27,7 @@ import { SearchFieldModule } from '../form-fields/search/search.field.module';
 import { SubformFieldModule } from '../form-fields/subform/subform.field.module';
 import { UploadFieldModule } from '../form-fields/upload/upload.field.module';
 import { VariableFieldModule } from '../form-fields/variable/variable.field.module';
+import { DynamicFormFieldComponent } from './dynamic-form-field.component';
 
 @NgModule({
     imports: [
@@ -51,7 +50,6 @@ import { VariableFieldModule } from '../form-fields/variable/variable.field.modu
         ContezzaSelectFieldModule,
         ContezzaTextareaFieldModule,
         ContezzaToggleFieldModule,
-        ContezzaPeopleGroupPickerFieldModule,
         DynamicFormFieldComponent,
         DialogFieldModule,
         HelpFieldModule,

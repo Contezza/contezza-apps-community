@@ -30,15 +30,15 @@ Or if you use VSCODE
 
 This will run a Default Alfresco-Content-App (ACA) with some libraries.
 One of the most important Contezza libraries are the Javascript-Console & Node-browser in ADF
-`libs/mgmt/js-console`
-`libs/mgmt/node-browser`
+`libs/js-console`
+`libs/node-browser`
 
 ## Custom Menu
 In the default ACA you'll see an extra menu-item with name Admin console
 ![Menu Item](docs/src/docs/asciidoc/images/Personal%20Files%20-%20Demo%20App-%20extra%20Menu%20Item.png "Menu Item")
 
 ## Javascript Console
-[Code](libs/mgmt/js-console)
+[Code](libs/js-console)
 ![Javascript Console](docs/src/docs/asciidoc/images/Personal%20Files%20-%20Demo%20App-%20Javascript%20console.png "Javascript Console")
 
 ### Features
@@ -49,7 +49,7 @@ Similar to the share Javascript Console, but with extra:
 - Easy Save features
 
 ## Nodebrowser
-[Code](libs/mgmt/node-browser)
+[Code](libs/node-browser)
 ![Nodebrowser](docs/src/docs/asciidoc/images/Personal%20Files%20-%20Demo%20App-%20Nodebrowser.png "Nodebrowser")
 
 ### Features
