@@ -64,6 +64,8 @@
             "@contezza/js-console/shared": ["libs/js-console/shared/src/index.ts"],
 
             "@contezza/layout": ["libs/layout/src"],
+            "@contezza/layout/components/*": ["libs/layout/components/*/src"],
+            "@contezza/layout/shared": ["libs/layout/shared/src"],
 
             "@contezza/node-browser": ["libs/node-browser/src/index.ts"],
             "@contezza/node-browser/shared": ["libs/node-browser/shared/src/index.ts"],

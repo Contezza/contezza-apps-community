@@ -9,8 +9,8 @@ VERSION_IN_PACKAGE_JSON=`node -p "require('$ROOT_DIR/package.json')".version;`;
 
 LIBS=(
     'core'
-    'layout'
     'common'
+    'layout'
     'js-console'
     'node-browser'
     'dynamic-forms'
@@ -22,8 +22,8 @@ LIBS=(
 # necessary for update library version before publishing
 LIBS_PATHS=(
     'core'
-    'layout'
     'common'
+    'layout'
     'js-console'
     'node-browser'
     'dynamic-forms'
