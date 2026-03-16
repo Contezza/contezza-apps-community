@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 
 import { forkJoin, map, of, tap } from 'rxjs';
 
-import { provideTranslations } from '@alfresco/adf-core';
 import { FavoritesApiService, NodesApiService, SearchService, SitesService } from '@alfresco/adf-content-services';
+import { provideTranslations } from '@alfresco/adf-core';
 import { ExtensionService as AdfExtensionService, provideExtensionConfig } from '@alfresco/adf-extensions';
 
 import { ContentServicesExtensionModule } from '@contezza/content-services';
@@ -11,6 +11,7 @@ import { ContentServicesPresetsExtensionModule } from '@contezza/content-service
 import { ContentServicesSearchExtensionService, SearchParameters, SortingUtils } from '@contezza/content-services/search/shared';
 import { ContentServicesExtensionService } from '@contezza/content-services/shared';
 import { AdfUtils, ContezzaObservables } from '@contezza/core/utils';
+import { provideDynamicFormFieldComponents } from '@contezza/dynamic-forms/shared';
 
 import * as rules from './rules';
 
@@ -26,6 +27,9 @@ import * as rules from './rules';
             'search-table-page.document-lists.json',
             'search-table-page.dynamicforms.json',
         ]),
+        provideDynamicFormFieldComponents({
+            peoplePicker: () => import('@contezza/content-services/search/components/people-group-picker').then(m => m.PeopleGroupPickerFieldComponent),
+        }),
     ],
 })
 export class ExtensionModule {
@@ -36,7 +40,7 @@ export class ExtensionModule {
         sites: SitesService,
         extensions: AdfExtensionService,
         csExtensions: ContentServicesExtensionService,
-        searchExtensions: ContentServicesSearchExtensionService
+        searchExtensions: ContentServicesSearchExtensionService,
     ) {
         extensions.setEvaluators({
             'search-table-page.target.isSearchTablePage': rules.isSearchTablePage,
@@ -48,25 +52,25 @@ export class ExtensionModule {
         extensions.setEvaluators(AdfUtils.makeRules('canUpdate', (node, context) => context.permissions.check(node, ['update']), { prefix: 'app' }));
 
         csExtensions.setActions<any>({
-            'actions.search-bar': () => import('./components/actions/search-bar.action.component').then((_) => _.SearchBarActionComponent),
-            'app.components.toggle-filters-button': () => import('./components/actions/toggle-filters-button.component').then((_) => _.ToggleFiltersButtonComponent),
+            'actions.search-bar': () => import('./components/actions/search-bar.action.component').then(_ => _.SearchBarActionComponent),
+            'app.components.toggle-filters-button': () => import('./components/actions/toggle-filters-button.component').then(_ => _.ToggleFiltersButtonComponent),
         });
 
         searchExtensions.setSearchResultsViews({
-            'search-results-views.table': () => import('./components/search-results-views/table.search-results-view.component').then((_) => _.TableSearchResultsViewComponent),
+            'search-results-views.table': () => import('./components/search-results-views/table.search-results-view.component').then(_ => _.TableSearchResultsViewComponent),
         });
 
         searchExtensions.setSearchResultPreviews({
             'search-result-previews.viewer': () =>
-                import('./components/search-result-previews/viewer.search-result-preview.component').then((_) => _.ViewerSearchResultPreviewComponent),
+                import('./components/search-result-previews/viewer.search-result-preview.component').then(_ => _.ViewerSearchResultPreviewComponent),
         });
 
         searchExtensions.setSearchStrategies({
-            default: (payload) => searchExtensions.searchDefault(payload),
+            default: payload => searchExtensions.searchDefault(payload),
             'browse-files': ({ template, parameters }) => {
                 const { currentFolder } = parameters;
                 if (currentFolder) {
-                    const activeQueries = (Object.keys(parameters) as (keyof SearchParameters)[]).filter((key) => !!parameters[key] && key.endsWith('Query'));
+                    const activeQueries = (Object.keys(parameters) as (keyof SearchParameters)[]).filter(key => !!parameters[key] && key.endsWith('Query'));
                     if (activeQueries.length === 0) {
                         // if no active queries, then do node children call
                         return nodes.getNodeChildren(currentFolder.id, {
@@ -84,7 +88,7 @@ export class ExtensionModule {
                                       `(${parameters.headerQuery}) AND ANCESTOR:"workspace://SpacesStore/${currentFolder.id}"`
                                     : // otherwise use currentFolder in a PARENT call
                                       `PARENT:"workspace://SpacesStore/${currentFolder.id}"`,
-                            })
+                            }),
                         );
                     }
                 } else {
@@ -94,7 +98,7 @@ export class ExtensionModule {
             'browse-files-with-facets': ({ template, parameters }) => {
                 const { currentFolder } = parameters;
                 if (currentFolder) {
-                    const activeQueries = (Object.keys(parameters) as (keyof SearchParameters)[]).filter((key) => !!parameters[key] && key.endsWith('Query'));
+                    const activeQueries = (Object.keys(parameters) as (keyof SearchParameters)[]).filter(key => !!parameters[key] && key.endsWith('Query'));
                     if (activeQueries.length === 0) {
                         // if no active queries, then do node-children call
                         return forkJoin([
@@ -113,14 +117,14 @@ export class ExtensionModule {
                                           `(${parameters.headerQuery}) AND ANCESTOR:"workspace://SpacesStore/${currentFolder.id}"`
                                         : // otherwise use currentFolder in a PARENT call
                                           `PARENT:"workspace://SpacesStore/${currentFolder.id}"`,
-                                })
+                                }),
                             ),
                         ]).pipe(
                             map(([childrenResponse, searchResponse]) => {
                                 // enrich the results of the node-children call with the facets from the search call and return them
                                 childrenResponse.list['context'] = searchResponse.list.context;
                                 return childrenResponse;
-                            })
+                            }),
                         );
                     } else {
                         return search.searchByQueryBody(
@@ -131,7 +135,7 @@ export class ExtensionModule {
                                       `(${parameters.headerQuery}) AND ANCESTOR:"workspace://SpacesStore/${currentFolder.id}"`
                                     : // otherwise use currentFolder in a PARENT call
                                       `PARENT:"workspace://SpacesStore/${currentFolder.id}"`,
-                            })
+                            }),
                         );
                     }
                 } else {
@@ -152,10 +156,10 @@ export class ExtensionModule {
                         ...parameters.paging,
                         where: parameters.baseQuery,
                         include: ['path', 'properties', 'allowableOperations', 'permissions', 'aspectNames', 'definition'],
-                    })
+                    }),
                 ).pipe(
-                    tap((results) => {
-                        results.list.entries.forEach((entry) => {
+                    tap(results => {
+                        results.list.entries.forEach(entry => {
                             Object.assign(entry.entry, entry.entry.target.file || entry.entry.target.folder || entry.entry.target.site);
                             // if file or folder then delete guid, to prevent confusion with site
                             if (entry.entry.target.file || entry.entry.target.folder) {
@@ -163,18 +167,19 @@ export class ExtensionModule {
                             }
                             delete entry.entry.target;
                         });
-                    })
+                    }),
                 ) as any,
             /**
              * Returns a list of extension elements as search results.
              * The key used to retrieve the elements is defined by the template.
              *
+             * @param template.template
              * @param template
              */
             extensionElements: ({ template }) => {
                 const extensionKey = template({});
                 const results = extensions.getElements(extensionKey, []);
-                return of({ list: { entries: results.map((entry) => ({ entry })) } });
+                return of({ list: { entries: results.map(entry => ({ entry })) } });
             },
         });
     }

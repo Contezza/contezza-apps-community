@@ -4,6 +4,7 @@
     "lib": {
         "entryFile": "index.ts"
     },
+    "allowedNonPeerDependencies": ["@ngrx/component-store", "@ncstate/sat-popover"],
     "assets": [
         {
             "glob": "**/*",

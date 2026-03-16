@@ -135,22 +135,22 @@
                         "glob": "**/*"
                     },
                     {
-                        "input": "libs/mgmt/js-console/assets/extensions",
+                        "input": "libs/js-console/assets/extensions",
                         "output": "./assets/plugins",
                         "glob": "*.json"
                     },
                     {
-                        "input": "libs/mgmt/js-console/assets",
+                        "input": "libs/js-console/assets",
                         "output": "./assets/js-console",
                         "glob": "**/*"
                     },
                     {
-                        "input": "libs/mgmt/node-browser/extensions",
+                        "input": "libs/node-browser/extensions",
                         "output": "./assets/plugins",
                         "glob": "*.json"
                     },
                     {
-                        "input": "libs/mgmt/node-browser/assets",
+                        "input": "libs/node-browser/assets",
                         "output": "./assets/node-browser",
                         "glob": "**/*"
                     },

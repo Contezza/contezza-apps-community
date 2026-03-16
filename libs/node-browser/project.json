@@ -1,0 +1,21 @@
+{
+    "name": "node-browser",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/node-browser/src",
+    "prefix": "contezza",
+    "targets": {
+        "build": {
+            "executor": "@angular-devkit/build-angular:ng-packagr",
+            "outputs": ["{workspaceRoot}/dist/@contezza/node-browser"],
+            "options": {
+                "tsConfig": "libs/node-browser/tsconfig.lib.json",
+                "project": "libs/node-browser/ng-package.json"
+            }
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint"
+        }
+    },
+    "tags": []
+}
