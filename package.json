@@ -1,6 +1,6 @@
 {
     "name": "contezza-apps-community",
-    "version": "3.8.1",
+    "version": "3.8.2",
     "scripts": {
         "build:common": "npx nx build common",
         "build:content-services": "npx nx build content-services",
