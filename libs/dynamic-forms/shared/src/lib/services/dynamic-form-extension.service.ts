@@ -35,7 +35,7 @@ export class ContezzaDynamicFormExtensionService {
         @Optional() @Inject(DYNAMIC_FORM_FIELD_COMPONENTS) _dcrs?: DynamicComponentRecord[],
     ) {
         this.loadDefault();
-        _dcrs.forEach(list => this.setFieldComponents(list));
+        _dcrs?.forEach(list => this.setFieldComponents(list));
     }
 
     loadDefault() {

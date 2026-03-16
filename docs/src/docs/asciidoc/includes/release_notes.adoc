@@ -10,6 +10,14 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2026-03-16
+|3.8.2
+|View <<Release 3.8.2,release details>>.
+
+|2026-03-13
+|3.8.1
+|View <<Release 3.8.1,release details>>.
+
 |2026-03-05
 |3.8.0
 |View <<Release 3.8.0,release details>>.
@@ -369,6 +377,21 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 3.8.2
+
+The following libraries have been removed:
+
+- @contezza/people-group-picker - It is now part of @contezza/content-services.
+- @contezza/search
+
+==== Release 3.8.1
+
+Bugfixes/minor changes:
+
+- @contezza/core/utils - Class `Property` improved, bug in method `AlfrescoUtils.getNodePropertyValue` fixed.
+- @contezza/content-services/search - Support for parameter `filterQueries` implemented in `NodeSelectorDialogComponent`.
+- @contezza/dynamic-forms - Provider helper `provideDynamicFormFieldComponents` added.
 
 ==== Release 3.8.0
 

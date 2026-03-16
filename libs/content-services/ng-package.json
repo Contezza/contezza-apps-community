@@ -4,6 +4,7 @@
     "lib": {
         "entryFile": "src/index.ts"
     },
+    "allowedNonPeerDependencies": ["@ngrx/component-store"],
     "assets": [
         {
             "input": "./assets",

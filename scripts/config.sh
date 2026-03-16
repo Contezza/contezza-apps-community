@@ -10,10 +10,8 @@ VERSION_IN_PACKAGE_JSON=`node -p "require('$ROOT_DIR/package.json')".version;`;
 LIBS=(
     'core'
     'common'
-    'search'
     'js-console'
     'node-browser'
-    'people-group-picker'
     'dynamic-forms'
     'content-services'
     'process-services'
@@ -24,10 +22,8 @@ LIBS=(
 LIBS_PATHS=(
     'core'
     'common'
-    'search'
-    'mgmt/js-console'
-    'mgmt/node-browser'
-    'people-group-picker'
+    'js-console'
+    'node-browser'
     'dynamic-forms'
     'content-services'
     'process-services'
