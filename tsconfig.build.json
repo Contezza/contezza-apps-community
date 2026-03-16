@@ -23,6 +23,9 @@
             "@contezza/js-console/*": ["./dist/@contezza/js-console/*"],
             "@contezza/js-console": ["./dist/@contezza/js-console/index"],
 
+            "@contezza/layout/*": ["./dist/@contezza/layout/*"],
+            "@contezza/layout": ["./dist/@contezza/layout/index"],
+
             "@contezza/node-browser/*": ["./dist/@contezza/node-browser/*"],
             "@contezza/node-browser": ["./dist/@contezza/node-browser/index"],
 

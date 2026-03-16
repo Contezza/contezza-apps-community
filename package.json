@@ -7,6 +7,7 @@
         "build:core": "npx nx build core",
         "build:dynamic-forms": "npx nx build dynamic-forms",
         "build:js-console": "npx nx build js-console",
+        "build:layout": "npx nx build layout",
         "build:node-browser": "npx nx build node-browser",
         "build:process-services": "npx nx build process-services",
         "build-libs": "./scripts/build-libs.sh",

@@ -9,6 +9,7 @@ VERSION_IN_PACKAGE_JSON=`node -p "require('$ROOT_DIR/package.json')".version;`;
 
 LIBS=(
     'core'
+    'layout'
     'common'
     'js-console'
     'node-browser'
@@ -21,6 +22,7 @@ LIBS=(
 # necessary for update library version before publishing
 LIBS_PATHS=(
     'core'
+    'layout'
     'common'
     'js-console'
     'node-browser'

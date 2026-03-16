@@ -63,6 +63,8 @@
             "@contezza/js-console": ["libs/js-console/src/index.ts"],
             "@contezza/js-console/shared": ["libs/js-console/shared/src/index.ts"],
 
+            "@contezza/layout": ["libs/layout/src"],
+
             "@contezza/node-browser": ["libs/node-browser/src/index.ts"],
             "@contezza/node-browser/shared": ["libs/node-browser/shared/src/index.ts"],
 
