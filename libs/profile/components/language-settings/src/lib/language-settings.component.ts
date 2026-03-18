@@ -1,37 +1,25 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { LanguageItem, LanguageService, UserPreferencesService } from '@alfresco/adf-core';
 
-import { ResponsiveService } from '@contezza/core/responsive';
-
 @Component({
     standalone: true,
-    imports: [CommonModule, TranslateModule, MatButtonToggleModule, MatIconModule, MatMenuModule],
+    imports: [CommonModule, MatIconModule, MatMenuModule, TranslatePipe],
     selector: 'contezza-profile-language-settings',
-    templateUrl: './language-settings.component.html',
+    templateUrl: 'language-settings.component.html',
     styles: [
         `
             :host {
                 color: var(--theme-text-color);
                 padding: 25px;
                 width: calc(100% - 2 * 25px) !important;
-            }
-
-            mat-radio-group {
-                display: flex;
-                flex-direction: column;
-            }
-
-            mat-radio-button {
-                height: 56px;
             }
         `,
     ],
@@ -41,12 +29,9 @@ export class LanguageSettingsComponent {
     // constructor
     private readonly languageService = inject(LanguageService);
     private readonly userPrefService = inject(UserPreferencesService);
-    private readonly responsive? = inject(ResponsiveService, { optional: true });
 
     readonly languages$: Observable<LanguageItem[]> = this.languageService.languages$;
     currentLanguageSet: string = this.userPrefService.locale;
-
-    readonly isMobile$ = this.responsive?.isMobile$ || of(false);
 
     changeLanguage(language: LanguageItem) {
         this.languageService.changeLanguage(language);

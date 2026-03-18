@@ -7,9 +7,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { TranslatePipe } from '@ngx-translate/core';
 
-import { filter, map } from 'rxjs';
+import { filter, map, of } from 'rxjs';
 
 import { ContezzaLetDirective } from '@contezza/core/directives';
+import { ResponsiveDirective, ResponsiveService } from '@contezza/core/responsive';
 import { ProfileExtensionService, Tab } from '@contezza/profile/shared';
 
 import { TabComponent } from './tab.component';
@@ -20,6 +21,7 @@ import { TabComponent } from './tab.component';
     selector: 'contezza-profile-page',
     templateUrl: 'page.component.html',
     styleUrls: ['page.component.scss'],
+    hostDirectives: [ResponsiveDirective],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PageComponent {
@@ -27,8 +29,11 @@ export class PageComponent {
     private readonly route = inject(ActivatedRoute);
     private readonly router = inject(Router);
     private readonly extensions = inject(ProfileExtensionService);
+    private readonly responsive? = inject(ResponsiveService, { optional: true });
 
     readonly tabs: Tab[] = this.extensions.activeTabs;
+
+    readonly isMobile$ = this.responsive?.isMobile$ || of(false);
 
     private readonly indexToFragment: string[] = this.tabs.map(_ => _.urlFragment);
     private readonly fragmentToIndex: Record<string, number> = Object.fromEntries(this.indexToFragment.map((fragment, index) => [fragment, index]));
@@ -58,5 +63,9 @@ export class PageComponent {
 
     onSelectedTabChange(event: MatTabChangeEvent) {
         this.router.navigate([], { relativeTo: this.route, fragment: this.indexToFragment[event.index] });
+    }
+
+    toggleSidenav() {
+        this.responsive?.toggleSidenav();
     }
 }

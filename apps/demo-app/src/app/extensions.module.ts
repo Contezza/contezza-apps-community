@@ -8,6 +8,7 @@ import { ContentServicesSearchExtensionModule } from '@contezza/content-services
 import { MatDialogService } from '@contezza/core/dialogs';
 import { ContezzaExtensionService } from '@contezza/core/extensions';
 import { PropertyTitleService } from '@contezza/core/property-titles';
+import { ResponsiveModule } from '@contezza/core/responsive';
 import { JsConsoleExtensionModule } from '@contezza/js-console/shared';
 import { ContezzaNodeBrowserSharedModule } from '@contezza/node-browser/shared';
 import { ProcessServicesExtensionModule } from '@contezza/process-services';
@@ -22,6 +23,7 @@ import { ProfileExtensionModule } from '@contezza/profile';
         ProcessServicesExtensionModule,
         JsConsoleExtensionModule.withConfig({ path: 'javascript-console' }),
         ContezzaNodeBrowserSharedModule,
+        ResponsiveModule,
     ],
     providers: [
         { provide: ExtensionService, useClass: ContezzaExtensionService },

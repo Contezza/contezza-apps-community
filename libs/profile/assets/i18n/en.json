@@ -1,6 +1,7 @@
 {
     "PROFILE": {
         "BROWSE": {
+            "TITLE": "My profile",
             "APP_INFO": {
                 "TITLE": "App info"
             },

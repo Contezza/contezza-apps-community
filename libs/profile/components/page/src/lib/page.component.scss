@@ -26,4 +26,10 @@
             }
         }
     }
+
+    &.contezza-responsive-mobile ::ng-deep {
+        .mat-mdc-tab-body-wrapper {
+            flex-grow: 1 !important;
+        }
+    }
 }

@@ -1,14 +1,6 @@
 <h3>{{ 'PROFILE.LANGUAGE_SETTINGS.TITLE' | translate }}</h3>
-@if (!(isMobile$ | async)) {
-    <div>
-        <button mat-menu-item *ngFor="let language of languages$ | async" (click)="changeLanguage(language)">
-            <mat-icon *ngIf="language.key === currentLanguageSet">done</mat-icon>{{ language.label }}
-        </button>
-    </div>
-} @else {
-    <mat-button-toggle-group name="language">
-        <mat-button-toggle *ngFor="let language of languages$ | async" (click)="changeLanguage(language)">
-            <mat-icon *ngIf="language.key === currentLanguageSet">done</mat-icon>{{ language.label }}
-        </mat-button-toggle>
-    </mat-button-toggle-group>
-}
+<div>
+    <button mat-menu-item *ngFor="let language of languages$ | async" (click)="changeLanguage(language)">
+        <mat-icon *ngIf="language.key === currentLanguageSet">done</mat-icon>{{ language.label }}
+    </button>
+</div>
