@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { EffectsModule } from '@ngrx/effects';
 
-import { provideTranslations } from '@alfresco/adf-core';
+import { provideTranslations, TranslationService } from '@alfresco/adf-core';
 import { ExtensionService } from '@alfresco/adf-extensions';
 
 import { MatDialogService } from '@contezza/core/dialogs';
