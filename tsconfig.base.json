@@ -68,7 +68,11 @@
 
             "@contezza/process-services": ["libs/process-services/src"],
             "@contezza/process-services/shared": ["libs/process-services/shared/src"],
-            "@contezza/process-services/components/*": ["libs/process-services/components/*/src"]
+            "@contezza/process-services/components/*": ["libs/process-services/components/*/src"],
+
+            "@contezza/profile": ["libs/profile/src"],
+            "@contezza/profile/components/*": ["libs/profile/components/*/src"],
+            "@contezza/profile/shared": ["libs/profile/shared/src"]
         }
     },
     "exclude": ["node_modules", "tmp"],

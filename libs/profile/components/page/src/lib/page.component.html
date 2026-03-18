@@ -1,0 +1,35 @@
+<!--<div class="contezza-profile">-->
+<!--    <ng-container *contezzaLet="isMobile$ | async as isMobile">-->
+<!--        <ng-container *ngIf="isMobile; else regularTabs">-->
+<!--            <div style="padding: 0 24px; min-height: 48px">-->
+<!--                <button mat-icon-button class="ea-details-header-section-top-button" (click)="toggleSidenav()">-->
+<!--                    <mat-icon>menu</mat-icon>-->
+<!--                </button>-->
+<!--                {{ 'TEZZA.PROFILE.TITLE' | translate }}-->
+<!--            </div>-->
+<!--            <mat-tab-group-->
+<!--                style="overflow-y: scroll; height: calc(100% - 40px)"-->
+<!--                (selectedTabChange)="onSelectedTabChange($event)"-->
+<!--                mat-stretch-tabs-->
+<!--                backgroundColor="primary"-->
+<!--                headerPosition="below"-->
+<!--            >-->
+<!--                <mat-tab *ngFor="let tab of tabs">-->
+<!--                    <ng-template *ngIf="isMobile && tab.icon" mat-tab-label>-->
+<!--                        <mat-icon class="example-tab-icon">{{ tab.icon }}</mat-icon>-->
+<!--                    </ng-template>-->
+<!--                    <contezza-profile-tab [tab]="tab" />-->
+<!--                </mat-tab>-->
+<!--            </mat-tab-group>-->
+<!--        </ng-container>-->
+<!--        <ng-template #regularTabs>-->
+<mat-tab-group class="contezza-profile" (selectedTabChange)="onSelectedTabChange($event)" headerPosition="above">
+    @for (tab of tabs; track tab.id) {
+        <mat-tab label="{{ tab.label | translate }}">
+            <contezza-profile-tab [tab]="tab" class="contezza-profile-tab" />
+        </mat-tab>
+    }
+</mat-tab-group>
+<!--        </ng-template>-->
+<!--    </ng-container>-->
+<!--</div>-->

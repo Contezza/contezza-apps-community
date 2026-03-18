@@ -1,0 +1,98 @@
+{
+    "$id": "profile",
+    "$version": "@@project.version@@",
+    "$name": "Contezza Profile",
+    "$description": "Default profile configuration",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "profile": {
+            "tabs": [
+                {
+                    "id": "profile.tabs.user-details",
+                    "label": "PROFILE.BROWSE.USER_DETAILS.TITLE",
+                    "icon": "person",
+                    "urlFragment": "data",
+                    "order": 10,
+                    "components": [
+                        {
+                            "id": "user-info",
+                            "order": 10,
+                            "component": "profile.tab-components.user-info"
+                        },
+                        {
+                            "id": "user-form",
+                            "order": 20,
+                            "component": "profile.tab-components.user-form"
+                        },
+                        {
+                            "id": "user-groups",
+                            "order": 30,
+                            "component": "profile.tab-components.user-groups"
+                        }
+                    ]
+                },
+                {
+                    "id": "profile.tabs.app-info",
+                    "label": "PROFILE.BROWSE.APP_INFO.TITLE",
+                    "icon": "info",
+                    "urlFragment": "info",
+                    "order": 20,
+                    "components": [
+                        {
+                            "id": "app-info",
+                            "order": 10,
+                            "component": {
+                                "id": "profile.tab-components.app-info",
+                                "data": { "//docsUrl": "https://develop.contezza.io/products/contezza-apps" }
+                            }
+                        },
+                        {
+                            "id": "alfresco-info",
+                            "order": 20,
+                            "component": "profile.tab-components.alfresco-info"
+                        }
+                    ]
+                },
+                {
+                    "id": "profile.tabs.settings",
+                    "label": "PROFILE.BROWSE.SETTINGS.TITLE",
+                    "icon": "settings",
+                    "urlFragment": "settings",
+                    "order": 30,
+                    "components": [
+                        {
+                            "id": "language-settings",
+                            "order": 10,
+                            "component": "profile.tab-components.language-settings"
+                        }
+                    ]
+                }
+            ]
+        },
+        "propertyDisplayLists": {
+            "profile.property-display-lists.identity-user-details": [
+                {
+                    "id": "profile.property-displays.firstName",
+                    "title": "PROFILE.PROPERTIES.FIRST_NAME.LABEL",
+                    "key": "firstName"
+                },
+                {
+                    "id": "profile.property-displays.lastName",
+                    "title": "PROFILE.PROPERTIES.LAST_NAME.LABEL",
+                    "key": "lastName"
+                },
+                {
+                    "id": "profile.property-displays.email",
+                    "title": "PROFILE.PROPERTIES.EMAIL.LABEL",
+                    "key": "email"
+                },
+                {
+                    "id": "profile.property-displays.organization",
+                    "title": "PROFILE.PROPERTIES.ORGANIZATION.LABEL",
+                    "key": "company.organization"
+                }
+            ]
+        }
+    }
+}
