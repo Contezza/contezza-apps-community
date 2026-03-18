@@ -14,7 +14,7 @@ export class ExtensionService {
     static readonly FEATURE_KEY = 'profile.tabs';
 
     static filterAndSortTabs(tabs: Tab[]): Tab[] {
-        tabs.forEach(tab => AdfUtils.filterAndSort(tab.components));
+        tabs.forEach(tab => (tab.components = AdfUtils.filterAndSort(tab.components)));
         return AdfUtils.filterAndSort(tabs);
     }
 
@@ -24,19 +24,19 @@ export class ExtensionService {
 
     private _tabs?: Tab[];
     private get tabs() {
-        console.log('get tabs');
-        return (this._tabs ??= ExtensionService.filterAndSortTabs(this.extensions.getFeature<Tab[]>('profile.tabs')));
+        return (this._tabs ??= ExtensionService.filterAndSortTabs(this.extensions.getFeature<Tab[]>(ExtensionService.FEATURE_KEY)));
     }
 
     get activeTabs(): Tab[] {
-        return this.tabs.filter(tab => this.filterVisible(tab));
+        const filteredTabs = this.tabs.filter(tab => this.filterVisible(tab));
+        filteredTabs.forEach(tab => (tab.components = tab.components.filter(item => this.filterVisible(item))));
+        return filteredTabs;
     }
 
     private filterVisible(action: { rules?: { visible?: string } }): boolean {
         if (action.rules?.visible) {
             return this.extensions.evaluateRule(action.rules.visible, this.appExtensions);
         }
-        // TODO: apply to children
         return true;
     }
 }

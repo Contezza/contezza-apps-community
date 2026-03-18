@@ -23,7 +23,7 @@
 <!--            </mat-tab-group>-->
 <!--        </ng-container>-->
 <!--        <ng-template #regularTabs>-->
-<mat-tab-group class="contezza-profile" (selectedTabChange)="onSelectedTabChange($event)" headerPosition="above">
+<mat-tab-group class="contezza-profile" [selectedIndex]="selectedIndex$ | async" (selectedTabChange)="onSelectedTabChange($event)" headerPosition="above">
     @for (tab of tabs; track tab.id) {
         <mat-tab label="{{ tab.label | translate }}">
             <contezza-profile-tab [tab]="tab" class="contezza-profile-tab" />

@@ -18,12 +18,18 @@
                         {
                             "id": "user-info",
                             "order": 10,
-                            "component": "profile.tab-components.user-info"
+                            "component": "profile.tab-components.user-info",
+                            "rules": {
+                                "visible": "auth.isOauth"
+                            }
                         },
                         {
                             "id": "user-form",
                             "order": 20,
-                            "component": "profile.tab-components.user-form"
+                            "component": "profile.tab-components.user-form",
+                            "rules": {
+                                "visible": "!auth.isOauth"
+                            }
                         },
                         {
                             "id": "user-groups",
