@@ -4,5 +4,11 @@
     "lib": {
         "entryFile": "src/index.ts"
     },
-    "assets": []
+    "assets": [
+        {
+            "input": "./assets",
+            "output": "/assets/",
+            "glob": "**/*"
+        }
+    ]
 }
