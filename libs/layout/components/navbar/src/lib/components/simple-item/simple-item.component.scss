@@ -1,0 +1,65 @@
+:host,
+.contezza-navbar-simple-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    .contezza-navbar-simple-item-button {
+        color: var(--theme-text-color);
+    }
+
+    &.expanded {
+        .contezza-navbar-simple-item-button {
+            width: 100%;
+            padding: 0 8px;
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            text-decoration: none;
+
+            ::ng-deep.mdc-button__label {
+                min-width: 0;
+            }
+
+            &-label {
+                display: block;
+                margin: 0 8px !important;
+                font-size: 1rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            ::ng-deep mat-icon {
+                margin-right: 0;
+                font-size: 24px;
+                height: 24px;
+                width: 24px;
+                flex-shrink: 0;
+                overflow: visible;
+                svg {
+                    width: 24px;
+                }
+
+            }
+        }
+    }
+
+    &.collapsed {
+        .contezza-navbar-simple-item-button {
+            padding: 0;
+        }
+    }
+
+    &:hover,
+    &.active {
+        .contezza-navbar-simple-item-button {
+            color: var(--theme-primary-color) !important;
+            background: var(--theme-bg-hover-color);
+        }
+    }
+}

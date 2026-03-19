@@ -1,14 +1,17 @@
 import { Observable } from 'rxjs';
 
 import { HttpClient } from '../interfaces';
-import { BaseHttpClient } from './base-http-client.class';
+import { BaseHttpClient } from './base-http-client';
 
 /**
  * Implementation of `HttpClient` which parses each response using a given decryption function.
  * To be used in combination with API calls whose responses are encrypted.
  */
 export class EncryptedHttpClient extends BaseHttpClient implements HttpClient {
-    constructor(http: HttpClient, private readonly decrypt: <T>(_: Observable<any>) => Observable<T>) {
+    constructor(
+        http: HttpClient,
+        private readonly decrypt: <T>(_: Observable<any>) => Observable<T>,
+    ) {
         super(http);
     }
 
@@ -26,5 +29,9 @@ export class EncryptedHttpClient extends BaseHttpClient implements HttpClient {
 
     delete<T>(url: string): Observable<T> {
         return this.decrypt<T>(super.delete(url));
+    }
+
+    patch<T>(url: string, body: any): Observable<T> {
+        return this.decrypt<T>(super.patch(url, body));
     }
 }

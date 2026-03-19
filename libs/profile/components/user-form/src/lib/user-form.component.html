@@ -1,0 +1,128 @@
+@if (ecmUser$ | async; as ecmUser) {
+    <mat-expansion-panel #generalPanel>
+        <mat-expansion-panel-header>
+            <div class="contezza-profile-user-form-panel-header">
+                <h3 class="contezza-profile-user-form-panel-header-title">{{ 'PROFILE.USER_FORM.GENERAL.TITLE' | translate }}</h3>
+                <div class="contezza-profile-user-groups-header-actions">
+                    @if (generalFormDisabled) {
+                        <button mat-button color="primary" (click)="$event.stopPropagation(); generalPanel.expanded = true; toggleGeneralForm(true)">
+                            {{ 'PROFILE.USER_FORM.ACTIONS.EDIT' | translate }}
+                        </button>
+                    } @else {
+                        <button mat-button (click)="$event.stopPropagation(); toggleGeneralForm(false)">{{ 'PROFILE.USER_FORM.ACTIONS.CANCEL' | translate }}</button>
+                        <button mat-button color="primary" (click)="$event.stopPropagation(); onSaveGeneralData(generalForm)" [disabled]="!generalForm?.valid">
+                            {{ 'PROFILE.USER_FORM.ACTIONS.SAVE' | translate }}
+                        </button>
+                    }
+                </div>
+            </div>
+        </mat-expansion-panel-header>
+        <div class="contezza-profile-user-form-panel-content" [ngClass]="!generalFormDisabled ? 'about-card-content edit-mode' : 'about-card-content'">
+            <div class="profile-picture">
+                <div>
+                    @if (ecmUser.avatarId) {
+                        <div>
+                            <img class="profile-image" alt="ecm-profile-image" [src]="getEcmAvatar(ecmUser.avatarId)" />
+                        </div>
+                    } @else {
+                        <div [outerHTML]="ecmUser | usernameInitials: 'adf-userinfo-pic'"></div>
+                    }
+                </div>
+                <div class="profile-photo-edit" *ngIf="!generalFormDisabled">
+                    <button mat-raised-button [adf-upload]="true" [mode]="['click']" [multiple]="false" [accept]="'image/*'" (upload-files)="onUploadAvatar($event)">
+                        {{ 'PROFILE.USER_FORM.ACTIONS.UPLOAD_PHOTO.TITLE' | translate }}
+                    </button>
+                    <p>{{ 'PROFILE.USER_FORM.ACTIONS.UPLOAD_PHOTO.INFO1' | translate }}</p>
+                    <p>{{ 'PROFILE.USER_FORM.ACTIONS.UPLOAD_PHOTO.INFO2' | translate }}</p>
+                </div>
+            </div>
+            <form [formGroup]="generalForm">
+                <h3>{{ ecmUser | fullName }}</h3>
+                <div class="form-field">
+                    <mat-label for="first-name">{{ 'PROFILE.PROPERTIES.FIRST_NAME.LABEL' | translate }}</mat-label>
+                    <input matInput spellcheck="false" data-lpignore="true" id="first-name" type="text" formControlName="firstName" />
+                </div>
+                <div class="form-field">
+                    <mat-label for="last-name">{{ 'PROFILE.PROPERTIES.LAST_NAME.LABEL' | translate }} </mat-label>
+                    <input matInput spellcheck="false" data-lpignore="true" id="last-name" type="text" formControlName="lastName" />
+                </div>
+                <div class="form-field">
+                    <mat-label for="status"> {{ 'PROFILE.PROPERTIES.STATUS.LABEL' | translate }} </mat-label>
+                    <input matInput spellcheck="false" data-lpignore="true" id="status" type="text" formControlName="status" />
+                </div>
+                <div class="form-field">
+                    <mat-label for="jobTitle"> {{ 'PROFILE.PROPERTIES.JOB_TITLE.LABEL' | translate }} </mat-label>
+                    <input matInput spellcheck="false" data-lpignore="true" id="jobTitle" type="text" formControlName="jobTitle" />
+                </div>
+                <div class="form-field">
+                    <mat-label for="email"> {{ 'PROFILE.PROPERTIES.EMAIL.LABEL' | translate }} </mat-label>
+                    <input matInput spellcheck="false" data-lpignore="true" id="email" type="text" formControlName="email" />
+                </div>
+                <div class="form-field">
+                    <mat-label for="mobile"> {{ 'PROFILE.PROPERTIES.MOBILE.LABEL' | translate }} </mat-label>
+                    <input matInput spellcheck="false" data-lpignore="true" id="mobile" type="text" formControlName="mobile" />
+                </div>
+                <div *ngIf="generalForm.controls['mobile'].hasError('pattern')">
+                    <p class="form-error">{{ 'PROFILE.PROPERTIES.MOBILE.ERROR' | translate }}</p>
+                </div>
+                <div class="form-field">
+                    <mat-label for="description">{{ 'PROFILE.PROPERTIES.DESCRIPTION.LABEL' | translate }}</mat-label>
+                    <textarea matInput spellcheck="false" data-lpignore="true" id="description" type="text" formControlName="description"></textarea>
+                </div>
+            </form>
+        </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel #companyPanel>
+        <mat-expansion-panel-header>
+            <div class="contezza-profile-user-form-panel-header">
+                <h3 class="contezza-profile-user-groups-header-title">{{ 'PROFILE.USER_FORM.COMPANY.TITLE' | translate }}</h3>
+                <div class="contezza-profile-user-groups-header-actions">
+                    @if (companyFormDisabled) {
+                        <button mat-button color="primary" (click)="$event.stopPropagation(); companyPanel.expanded = true; toggleCompanyForm(true)">
+                            {{ 'PROFILE.USER_FORM.ACTIONS.EDIT' | translate }}
+                        </button>
+                    } @else {
+                        <button mat-button (click)="$event.stopPropagation(); toggleCompanyForm(false)">{{ 'PROFILE.USER_FORM.ACTIONS.CANCEL' | translate }}</button>
+                        <button mat-button color="primary" (click)="$event.stopPropagation(); onSaveCompanyData(companyForm)" [disabled]="!companyForm.valid">
+                            {{ 'PROFILE.USER_FORM.ACTIONS.SAVE' | translate }}
+                        </button>
+                    }
+                </div>
+            </div>
+        </mat-expansion-panel-header>
+        <div class="about-card-content contezza-profile-user-form-panel-content">
+            <div class="profile-data">
+                <form [formGroup]="companyForm">
+                    <div class="form-field">
+                        <mat-label for="location"> {{ 'PROFILE.PROPERTIES.LOCATION.LABEL' | translate }} </mat-label>
+                        <input matInput spellcheck="false" data-lpignore="true" id="location" type="text" formControlName="location" />
+                    </div>
+                    <div class="form-field">
+                        <mat-label for="companyName"> {{ 'PROFILE.PROPERTIES.COMPANY_NAME.LABEL' | translate }} </mat-label>
+                        <input matInput spellcheck="false" data-lpignore="true" id="company" type="text" formControlName="companyName" />
+                    </div>
+                    <div class="form-field">
+                        <mat-label for="companyAddress"> {{ 'PROFILE.PROPERTIES.ADDRESS.LABEL' | translate }} </mat-label>
+                        <input matInput spellcheck="false" data-lpignore="true" id="companyAddress" type="text" formControlName="companyAddress" />
+                    </div>
+                    <div class="form-field">
+                        <mat-label for="companyPostCode"> {{ 'PROFILE.PROPERTIES.POST_CODE.LABEL' | translate }} </mat-label>
+                        <input matInput spellcheck="false" data-lpignore="true" id="companyPostCode" type="text" formControlName="companyPostCode" />
+                    </div>
+                    <div class="form-field">
+                        <mat-label for="companyTelephone"> {{ 'PROFILE.PROPERTIES.TELEPHONE.LABEL' | translate }} </mat-label>
+                        <input matInput spellcheck="false" data-lpignore="true" id="companyTelephone" type="text" formControlName="companyTelephone" />
+                    </div>
+                    <div class="form-field">
+                        <mat-label for="companyEmail"> {{ 'PROFILE.PROPERTIES.EMAIL.LABEL' | translate }} </mat-label>
+                        <input matInput spellcheck="false" data-lpignore="true" id="companyEmail" type="text" formControlName="companyEmail" />
+                    </div>
+                    <div *ngIf="companyForm.controls['companyEmail'].hasError('email')">
+                        <p class="form-error">{{ 'PROFILE.PROPERTIES.EMAIL.ERROR' | translate }}</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </mat-expansion-panel>
+}

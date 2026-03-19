@@ -1,0 +1,32 @@
+:host,
+.contezza-dropdown {
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    &.right-arrow {
+        &:after {
+            content: '';
+            position: absolute;
+            top: calc(50% - 3px);
+            left: calc(100% - 8px);
+            width: 6px;
+            height: 6px;
+            border: solid;
+            border-width: 0 3px 3px 0;
+
+            transform: rotate(-45deg);
+        }
+
+        .fake-menu-trigger {
+            position: absolute;
+            top: -8px;
+            left: 60px;
+        }
+    }
+
+    &:hover {
+        color: var(--theme-primary-color) !important;
+    }
+}

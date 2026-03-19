@@ -193,6 +193,16 @@
                         "input": "libs/process-services/assets/extensions",
                         "output": "./assets/plugins",
                         "glob": "**/*.json"
+                    },
+                    {
+                        "input": "libs/profile/assets",
+                        "output": "./assets/profile",
+                        "glob": "**/*"
+                    },
+                    {
+                        "input": "libs/profile/assets/extensions",
+                        "output": "./assets/plugins",
+                        "glob": "**/*.json"
                     }
                 ],
                 "inlineStyleLanguage": "scss",

@@ -19,7 +19,7 @@ export class DynamicComponentExtensionService {
     private readonly components: Record<string, ComponentResolver<any>> = {};
 
     constructor(@Optional() @Inject(DYNAMIC_COMPONENTS) _dcrs?: DynamicComponentRecord[]) {
-        _dcrs.forEach((list) => this.setComponents(list));
+        _dcrs?.forEach((list) => this.setComponents(list));
     }
 
     setComponents<TComponent, TComponents extends Record<string, ComponentResolver<TComponent>> = Record<string, ComponentResolver<TComponent>>>(values: TComponents) {

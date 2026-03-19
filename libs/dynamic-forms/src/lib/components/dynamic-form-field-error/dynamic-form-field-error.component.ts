@@ -14,16 +14,16 @@ import { ContezzaDynamicFormValidation } from '@contezza/dynamic-forms/shared';
 })
 export class DynamicFormFieldErrorComponent implements OnInit {
     @Input()
-    private readonly validations: ContezzaDynamicFormValidation[];
+    validations: ContezzaDynamicFormValidation[];
 
     requiredValidation?: ContezzaDynamicFormValidation;
     otherValidations: ContezzaDynamicFormValidation[] = [];
 
     @Input()
-    readonly control: FormControl;
+    control: FormControl;
 
     ngOnInit() {
-        this.validations?.forEach((validation) => {
+        this.validations?.forEach(validation => {
             if (validation.validator === Validators.required) {
                 this.requiredValidation = validation;
             } else {

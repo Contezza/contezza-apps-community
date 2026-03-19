@@ -5,4 +5,5 @@ export interface HttpClient {
     post<T>(url: string, body: any): Observable<T>;
     put<T>(url: string, body: any): Observable<T>;
     delete<T>(url: string): Observable<T>;
+    patch<T>(url: string, body: any): Observable<T>;
 }

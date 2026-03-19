@@ -1,0 +1,13 @@
+:host,
+.contezza-navbar {
+    overflow-x: hidden;
+
+    &-item-group {
+        padding: 8px;
+        border-bottom: 1px solid var(--theme-divider-color);
+
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
+}
