@@ -15,6 +15,7 @@ LIBS=(
     'node-browser'
     'dynamic-forms'
     'content-services'
+    'profile'
     'process-services'
 );
 
@@ -28,5 +29,6 @@ LIBS_PATHS=(
     'node-browser'
     'dynamic-forms'
     'content-services'
+    'profile'
     'process-services'
 );

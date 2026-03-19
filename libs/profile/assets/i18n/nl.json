@@ -1,0 +1,86 @@
+{
+    "PROFILE": {
+        "BROWSE": {
+            "TITLE": "Mijn profiel",
+            "APP_INFO": {
+                "TITLE": "App info"
+            },
+            "SETTINGS": {
+                "TITLE": "Instellingen"
+            },
+            "USER_DETAILS": {
+                "TITLE": "Gegevens"
+            }
+        },
+        "PROPERTIES": {
+            "ADDRESS": {
+                "LABEL": "Adres"
+            },
+            "COMPANY_NAME": {
+                "LABEL": "Bedrijf"
+            },
+            "DESCRIPTION": {
+                "LABEL": "Beschrijving"
+            },
+            "EMAIL": {
+                "LABEL": "E-mail",
+                "ERROR": "Ongeldig e-mailadres"
+            },
+            "FIRST_NAME": {
+                "LABEL": "Voornaam"
+            },
+            "JOB_TITLE": {
+                "LABEL": "Functie"
+            },
+            "LAST_NAME": {
+                "LABEL": "Achternaam"
+            },
+            "LOCATION": {
+                "LABEL": "Locatie"
+            },
+            "MOBILE": {
+                "LABEL": "Mobiel",
+                "ERROR": "Ongeldig telefoonnummer"
+            },
+            "ORGANIZATION": {
+                "LABEL": "Afdeling"
+            },
+            "POST_CODE": {
+                "LABEL": "Postcode"
+            },
+            "STATUS": {
+                "LABEL": "Status"
+            },
+            "TELEPHONE": {
+                "LABEL": "Telefoonnummer"
+            }
+        },
+        "LANGUAGE_SETTINGS": {
+            "TITLE": "Taalinstellingen"
+        },
+        "USER_FORM": {
+            "COMPANY": {
+                "TITLE": "Bedrijfsgegevens"
+            },
+            "GENERAL": {
+                "TITLE": "Persoonlijke informatie"
+            },
+            "ACTIONS": {
+                "CANCEL": "Annuleren",
+                "EDIT": "Bewerken",
+                "SAVE": "Opslaan",
+                "UPLOAD_PHOTO": {
+                    "TITLE": "Profielfoto uploaden",
+                    "INFO1": "Je afbeelding wordt verkleind naar 64px bij 64px.",
+                    "INFO2": "Wijzigingen in uw profielfoto zijn onmiddellijk van kracht."
+                }
+            }
+        },
+        "USER_GROUPS": {
+            "TITLE": "Groepslidmaatschappen"
+        },
+        "USER_INFO": {
+            "TITLE": "Persoonlijke informatie"
+        }
+    }
+}

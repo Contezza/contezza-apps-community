@@ -1,0 +1,54 @@
+@if (repository(); as repository) {
+    <div class="contezza-profile-tab-component-card">
+        <mat-toolbar class="contezza-profile-tab-component-card-header">
+            <span>Alfresco Content Services</span>
+        </mat-toolbar>
+        <div class="contezza-profile-tab-component-card-content" style="padding: 0 24px">
+            <p>
+                {{ 'APP.ABOUT.VERSION' | translate }} {{ repository.edition }}
+                {{ repository.version.display }}
+            </p>
+        </div>
+    </div>
+
+    @if (repository.license) {
+        <div class="contezza-profile-tab-component-card">
+            <mat-toolbar class="contezza-profile-tab-component-card-header">
+                <span>{{ 'APP.ABOUT.LICENSE.TITLE' | translate }}</span>
+            </mat-toolbar>
+            <div class="contezza-profile-tab-component-card-content" style="padding: 0">
+                <mat-table [dataSource]="$any(repository.license) | keyvalue: keepOrder">
+                    <ng-container *ngFor="let column of licenseColumns" [matColumnDef]="column.columnDef">
+                        <mat-header-cell *matHeaderCellDef>
+                            {{ column.header | translate }}
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{ column.cell(row) }}</mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedLicenseColumns" />
+                    <mat-row *matRowDef="let row; columns: displayedLicenseColumns" />
+                </mat-table>
+            </div>
+        </div>
+    }
+    @if (repository.modules) {
+        <div class="contezza-profile-tab-component-card">
+            <mat-toolbar class="contezza-profile-tab-component-card-header">
+                <span>{{ 'APP.ABOUT.MODULES.TITLE' | translate }}</span>
+            </mat-toolbar>
+            <div class="contezza-profile-tab-component-card-content" style="padding: 0">
+                <mat-table [dataSource]="repository.modules">
+                    <ng-container *ngFor="let column of modulesColumns" [matColumnDef]="column.columnDef">
+                        <mat-header-cell *matHeaderCellDef>
+                            {{ column.header | translate }}
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{ column.cell(row) }}</mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedModulesColumns" />
+                    <mat-row *matRowDef="let row; columns: displayedModulesColumns" />
+                </mat-table>
+            </div>
+        </div>
+    }
+}

@@ -30,7 +30,10 @@
             "@contezza/node-browser": ["./dist/@contezza/node-browser/index"],
 
             "@contezza/process-services/*": ["./dist/@contezza/process-services/*"],
-            "@contezza/process-services": ["./dist/@contezza/process-services/index"]
+            "@contezza/process-services": ["./dist/@contezza/process-services/index"],
+
+            "@contezza/profile/*": ["./dist/@contezza/profile/*"],
+            "@contezza/profile": ["./dist/@contezza/profile/index"]
         }
     },
     "angularCompilerOptions": {
