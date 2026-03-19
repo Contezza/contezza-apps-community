@@ -82,4 +82,8 @@ export class ResponsiveService {
     getCssClass(size: ScreenSize): string {
         return this.cssPrefix + size;
     }
+
+    toggleSidenav() {
+        document.getElementById('adf-sidebar-toggle-start')?.click();
+    }
 }

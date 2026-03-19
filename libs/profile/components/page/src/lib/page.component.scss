@@ -1,0 +1,35 @@
+:host {
+    display: block;
+    height: 100%;
+
+    mat-tab-group.contezza-profile {
+        height: 100%;
+
+        ::ng-deep .contezza-profile-tab-component-card {
+            color: var(--theme-text-color);
+            border: 0.5px solid var(--theme-border-color);
+            border-radius: 4px;
+            box-shadow:
+                0 1px 3px var(--theme-border-color),
+                0 1px 2px var(--theme-border-color);
+            background-color: var(--theme-card-background-color);
+            width: 100% !important;
+
+            &-header {
+                height: 40px !important;
+                font-size: 15px;
+                font-weight: 700;
+            }
+
+            &-content {
+                padding: 24px;
+            }
+        }
+    }
+
+    &.contezza-responsive-mobile ::ng-deep {
+        .mat-mdc-tab-body-wrapper {
+            flex-grow: 1 !important;
+        }
+    }
+}

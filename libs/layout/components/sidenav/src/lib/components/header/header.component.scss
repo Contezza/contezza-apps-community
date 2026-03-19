@@ -1,0 +1,19 @@
+:host,
+.contezza-sidenav-header {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+
+    &-logo {
+        flex-basis: 50%;
+        img {
+            padding: 0 16px;
+            content: var(--contezza-theme-header-logo) !important;
+        }
+    }
+
+    &-actions {
+        display: flex;
+        align-items: center;
+    }
+}

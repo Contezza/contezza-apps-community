@@ -38,6 +38,7 @@ export class ExtensionLoaderService {
 
     loadDefaults() {
         this.extensions.setEvaluators({
+            'auth.isOauth': context => context.auth.isOauth(),
             'app.selection.single': ({ selection }) => selection?.count === 1,
         });
         this.extensions.setAuthGuards({

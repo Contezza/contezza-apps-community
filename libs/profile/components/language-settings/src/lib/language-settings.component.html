@@ -1,0 +1,6 @@
+<h3>{{ 'PROFILE.LANGUAGE_SETTINGS.TITLE' | translate }}</h3>
+<div>
+    <button mat-menu-item *ngFor="let language of languages$ | async" (click)="changeLanguage(language)">
+        <mat-icon *ngIf="language.key === currentLanguageSet">done</mat-icon>{{ language.label }}
+    </button>
+</div>

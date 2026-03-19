@@ -1,0 +1,42 @@
+:host,
+contezza-header {
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.02), 0px 6px 10px 0px rgba(0, 0, 0, 0.014), 0px 1px 18px 0px rgba(0, 0, 0, 0.012);
+    z-index: 2;
+
+    adf-layout-header {
+        .mat-toolbar.mat-toolbar-single-row {
+            color: var(--contezza-theme-header-text-color) !important;
+            background-color: var(--contezza-theme-header-background-color) !important;
+            background-image: var(--contezza-theme-header-background-image) !important;
+            background-size: cover !important;
+            background-repeat: no-repeat !important;
+
+            .adf-app-logo {
+                height: 38px !important;
+                content: var(--contezza-theme-header-logo) !important;
+            }
+
+            .adf-app-title {
+                font-weight: 500 !important;
+            }
+
+            .adf-app-title,
+            .contezza-header-env {
+                height: 38px;
+            }
+        }
+    }
+
+    .contezza-header-actions {
+        flex: 1;
+
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 16px;
+
+        .aca-toolbar-action {
+            color: inherit;
+        }
+    }
+}

@@ -1,14 +1,16 @@
 {
     "name": "contezza-apps-community",
-    "version": "3.8.2",
+    "version": "3.8.3",
     "scripts": {
         "build:common": "npx nx build common",
         "build:content-services": "npx nx build content-services",
         "build:core": "npx nx build core",
         "build:dynamic-forms": "npx nx build dynamic-forms",
         "build:js-console": "npx nx build js-console",
+        "build:layout": "npx nx build layout",
         "build:node-browser": "npx nx build node-browser",
         "build:process-services": "npx nx build process-services",
+        "build:profile": "npx nx build profile",
         "build-libs": "./scripts/build-libs.sh",
         "bump-version": "./scripts/bump-version.sh",
         "pack-libs": "./scripts/pack-libs.sh",

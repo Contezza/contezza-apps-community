@@ -1,0 +1,39 @@
+<ng-container *ngIf="mode === 'expanded'; else collapsed">
+    <contezza-navbar-simple-item class="contezza-navbar-item-with-children-title" [item]="item" [mode]="mode" (click)="onTitleClick()"></contezza-navbar-simple-item>
+    <div *ngIf="item.children?.length; else noChildren" class="contezza-navbar-item-with-children-children">
+        <ng-container *ngFor="let child of item.children; trackBy: trackById">
+            <contezza-navbar-simple-item [item]="child" [mode]="mode"></contezza-navbar-simple-item>
+        </ng-container>
+    </div>
+    <ng-template #noChildren>
+        <div class="contezza-navbar-item-with-children-empty">{{ TRANSLATIONS.EMPTY | translate }}</div>
+    </ng-template>
+</ng-container>
+<ng-template #collapsed>
+    <ng-container *ngIf="item.openInCollapsed; else dropdown">
+        <div *ngFor="let child of item.children">
+            <contezza-navbar-simple-item [item]="child" [mode]="mode"></contezza-navbar-simple-item>
+        </div>
+    </ng-container>
+    <ng-template #dropdown>
+        <ng-container *ngIf="item.children?.length; else noChildren" class="contezza-navbar-item-with-children-children">
+            <contezza-dropdown>
+                <contezza-navbar-simple-item
+                    contezza-dropdown-trigger
+                    class="contezza-navbar-item-with-children-title"
+                    [item]="item"
+                    [mode]="mode"
+                    (click)="onTitleClick()"
+                ></contezza-navbar-simple-item>
+                <div contezza-dropdown-menu class="contezza-navbar-item-with-children-children">
+                    <ng-container *ngFor="let child of item.children; trackBy: trackById">
+                        <contezza-navbar-simple-item [item]="child" [mode]="EXPANDED"></contezza-navbar-simple-item>
+                    </ng-container>
+                </div>
+            </contezza-dropdown>
+        </ng-container>
+        <ng-template #noChildren>
+            <contezza-navbar-simple-item class="contezza-navbar-item-with-children-title" [item]="item" [mode]="mode" (click)="onTitleClick()"></contezza-navbar-simple-item>
+        </ng-template>
+    </ng-template>
+</ng-template>
