@@ -38,7 +38,7 @@ export class ContezzaDynamicFormDisplayService {
                     this.SOURCE_TYPES.forEach((sourceType) => {
                         if (display[port][unit + sourceType.label]) {
                             const mappedValue = sourceType.map(value, display[port][unit + sourceType.label])?.toString();
-                            output[port][unit] = unit === 'label' && mappedValue ? this.translate.instant(mappedValue) : mappedValue;
+                            output[port][unit] = unit === 'label' && mappedValue ? this.translateValue(mappedValue) : mappedValue;
                         }
                     });
                 });
@@ -50,5 +50,16 @@ export class ContezzaDynamicFormDisplayService {
             }
         });
         return output;
+    }
+
+    private translateValue(value: string) {
+        const translatedValue = this.translate.instant(value);
+        if (translatedValue && typeof translatedValue === 'string') {
+            // return the translation only if it is a string
+            // otherwise values matching a partial i18n key would display [object Object]
+            return translatedValue;
+        } else {
+            return value;
+        }
     }
 }
