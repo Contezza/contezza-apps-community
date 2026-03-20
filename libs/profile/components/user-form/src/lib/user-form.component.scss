@@ -1,0 +1,119 @@
+:host,
+contezza-profile-user-form,
+.contezza-profile-user-form {
+    display: flex !important;
+    flex-direction: column;
+    gap: 16px;
+
+    &-panel {
+        &-header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-right: 8px;
+
+            &-title {
+                color: var(--theme-text-bold-color);
+            }
+            &-actions {
+            }
+        }
+        &-content {
+            color: var(--theme-text-color);
+        }
+    }
+
+    form {
+        .form-field {
+            display: flex;
+            flex-direction: row;
+            margin-block-start: 12px;
+
+            ::ng-deep .mat-mdc-input-element {
+                padding: 4px;
+                font: inherit;
+                background: transparent;
+                color: currentColor;
+                border: 1px solid var(--theme-border-color);
+                outline: none;
+                margin: 0;
+                width: 100%;
+                max-width: 100%;
+                vertical-align: bottom;
+                text-align: inherit;
+
+                &:disabled {
+                    font: inherit;
+                    background: transparent;
+                    color: currentColor;
+                    border: none;
+                    outline: none;
+                    margin: 0;
+                    width: 100%;
+                    max-width: 100%;
+                    vertical-align: bottom;
+                    text-align: inherit;
+                }
+            }
+
+            mat-label {
+                width: 160px;
+                padding: 4px;
+            }
+        }
+
+        .form-error {
+            color: var(--theme-warn-color);
+            margin-inline-start: 4px;
+        }
+    }
+
+    .edit-mode {
+        flex-direction: column !important;
+    }
+
+    .about-card-content {
+        display: flex;
+        flex-direction: column;
+
+        @media screen and (min-width: 768px) {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .profile-picture {
+            display: flex;
+            padding: 5px 18px;
+
+            div {
+                img {
+                    min-width: 160px;
+                    max-width: 220px;
+                }
+            }
+
+            .profile-photo-edit {
+                padding: 5px 18px;
+            }
+        }
+
+        .profile-data {
+            flex: 1;
+            .about-data-field {
+                height: 32px;
+                display: flex;
+                flex-direction: row;
+
+                .about-data-field-label {
+                    color: var(--theme-text-color);
+                    width: 120px;
+                }
+
+                .about-data-field-user {
+                    flex: 1;
+                }
+            }
+        }
+    }
+}

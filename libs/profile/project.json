@@ -1,0 +1,21 @@
+{
+    "name": "profile",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/profile/src",
+    "prefix": "contezza",
+    "targets": {
+        "build": {
+            "executor": "@angular-devkit/build-angular:ng-packagr",
+            "outputs": ["{workspaceRoot}/dist/@contezza/profile"],
+            "options": {
+                "tsConfig": "libs/profile/tsconfig.lib.json",
+                "project": "libs/profile/ng-package.json"
+            }
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint"
+        }
+    },
+    "tags": []
+}

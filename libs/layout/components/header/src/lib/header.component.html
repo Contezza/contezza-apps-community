@@ -1,0 +1,8 @@
+<adf-layout-header [ngClass]="getEnvClass(appName)" redirectUrl="" [tooltip]="appName.title" [title]="appName.title" (clicked)="onToggle()">
+    <h1 *ngIf="appName.env" class="contezza-header-env">&nbsp;- {{ appName.env }}</h1>
+    <div class="contezza-header-actions">
+        <ng-container *ngFor="let actionRef of actions$ | async; trackBy: trackByActionId">
+            <aca-toolbar-action [actionRef]="actionRef" [style]="$any(actionRef).style"></aca-toolbar-action>
+        </ng-container>
+    </div>
+</adf-layout-header>

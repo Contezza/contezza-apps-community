@@ -1,0 +1,6 @@
+<a class="contezza-sidenav-header-logo" [routerLink]="redirectUrl"><img [alt]="appName" /></a>
+<div class="contezza-sidenav-header-actions">
+    <ng-container *ngFor="let actionRef of actions$ | async; trackBy: trackByActionId">
+        <aca-toolbar-action [actionRef]="actionRef" [style]="$any(actionRef).style"></aca-toolbar-action>
+    </ng-container>
+</div>

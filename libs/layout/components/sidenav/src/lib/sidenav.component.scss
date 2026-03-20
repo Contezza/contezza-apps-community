@@ -1,0 +1,15 @@
+:host,
+.contezza-sidenav {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: var(--theme-background-color);
+
+    &-create-menu {
+        padding: 8px 14px;
+        border-bottom: 1px solid var(--theme-divider-color);
+    }
+    &-navbar {
+        overflow-y: auto;
+    }
+}

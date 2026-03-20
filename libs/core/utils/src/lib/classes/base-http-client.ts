@@ -23,4 +23,8 @@ export class BaseHttpClient implements HttpClient {
     delete<T>(url: string): Observable<T> {
         return this.http.delete(url);
     }
+
+    patch<T>(url: string, body: any): Observable<T> {
+        return this.http.patch(url, body);
+    }
 }

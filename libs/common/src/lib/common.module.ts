@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { EffectsModule } from '@ngrx/effects';
 
-import { provideTranslations } from '@alfresco/adf-core';
+import { provideTranslations, TranslationService } from '@alfresco/adf-core';
 import { ExtensionService } from '@alfresco/adf-extensions';
 
 import { MatDialogService } from '@contezza/core/dialogs';
@@ -57,3 +57,18 @@ export class ContezzaCommonModule {
         extensions.loadDefaults();
     }
 }
+
+// https://support.contezza.nl/issues/34753
+TranslationService.prototype.loadTranslation = function (lang: string, fallback?: string) {
+    this.translate.getTranslation(lang).subscribe(
+        () => {
+            // this.translate.use(lang);
+            // this.onTranslationChanged(lang);
+        },
+        () => {
+            if (fallback && fallback !== lang) {
+                this.loadTranslation(fallback);
+            }
+        },
+    );
+};

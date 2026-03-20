@@ -1,0 +1,86 @@
+{
+    "PROFILE": {
+        "BROWSE": {
+            "TITLE": "My profile",
+            "APP_INFO": {
+                "TITLE": "App info"
+            },
+            "SETTINGS": {
+                "TITLE": "Settings"
+            },
+            "USER_DETAILS": {
+                "TITLE": "About"
+            }
+        },
+        "PROPERTIES": {
+            "ADDRESS": {
+                "LABEL": "Address"
+            },
+            "COMPANY_NAME": {
+                "LABEL": "Company"
+            },
+            "DESCRIPTION": {
+                "LABEL": "Description"
+            },
+            "EMAIL": {
+                "LABEL": "E-mail",
+                "ERROR": "Invalid e-mail address"
+            },
+            "FIRST_NAME": {
+                "LABEL": "Firstname"
+            },
+            "JOB_TITLE": {
+                "LABEL": "Job title"
+            },
+            "LAST_NAME": {
+                "LABEL": "Lastname"
+            },
+            "LOCATION": {
+                "LABEL": "Location"
+            },
+            "MOBILE": {
+                "LABEL": "Mobile",
+                "ERROR": "Invalid phone number"
+            },
+            "ORGANIZATION": {
+                "LABEL": "Department"
+            },
+            "POST_CODE": {
+                "LABEL": "Postcode"
+            },
+            "STATUS": {
+                "LABEL": "Status"
+            },
+            "TELEPHONE": {
+                "LABEL": "Telephone"
+            }
+        },
+        "LANGUAGE_SETTINGS": {
+            "TITLE": "Language settings"
+        },
+        "USER_FORM": {
+            "COMPANY": {
+                "TITLE": "Company information"
+            },
+            "GENERAL": {
+                "TITLE": "Personal information"
+            },
+            "ACTIONS": {
+                "CANCEL": "Cancel",
+                "EDIT": "Edit",
+                "SAVE": "Save",
+                "UPLOAD_PHOTO": {
+                    "TITLE": "Upload photo",
+                    "INFO1": "Your image will be resized to 64px by 64px.",
+                    "INFO2": "Changes to your photo image take effect immediately."
+                }
+            }
+        },
+        "USER_GROUPS": {
+            "TITLE": "Group memberships"
+        },
+        "USER_INFO": {
+            "TITLE": "Personal information"
+        }
+    }
+}

@@ -1,46 +1,46 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { WebscriptApi } from '@alfresco/js-api';
 import { AlfrescoApiService } from '@alfresco/adf-content-services';
 
 import { ContezzaObservables, HttpClient, HttpMethod } from '@contezza/core/utils';
 
 /**
- * Facilitates Alfresco `WebscriptApi`.
+ * Facilitates Alfresco `WebscriptApi` while allowing PATCH HTTP method.
  */
 @Injectable({ providedIn: 'root' })
 export class WebscriptService implements HttpClient {
-    private _webscriptApi: WebscriptApi;
-    private get webscript(): WebscriptApi {
-        if (!this._webscriptApi) {
-            this._webscriptApi = new WebscriptApi(this.apiService.getInstance());
-        }
-        return this._webscriptApi;
-    }
-
-    constructor(private readonly apiService: AlfrescoApiService) {}
+    // constructor
+    private readonly apiService = inject(AlfrescoApiService);
 
     get<T>(url: string): Observable<T> {
-        return this.execute(HttpMethod.Get, url);
+        return this.execute(HttpMethod.GET, url);
     }
 
     post<T>(url: string, body: any): Observable<T> {
-        return this.execute(HttpMethod.Post, url, body);
+        return this.execute(HttpMethod.POST, url, body);
     }
 
     put<T>(url: string, body: any): Observable<T> {
-        return this.execute(HttpMethod.Put, url, body);
+        return this.execute(HttpMethod.PUT, url, body);
     }
 
     delete<T>(url: string): Observable<T> {
-        return this.execute(HttpMethod.Delete, url);
+        return this.execute(HttpMethod.DELETE, url);
     }
 
-    execute<T>(httpMethod: HttpMethod.Get | HttpMethod.Delete, url: string): Observable<T>;
-    execute<T>(httpMethod: HttpMethod.Post | HttpMethod.Put, url: string, body: any): Observable<T>;
+    patch<T>(url: string, body: any): Observable<T> {
+        return this.execute(HttpMethod.PATCH, url, body);
+    }
+
+    execute<T>(httpMethod: HttpMethod.GET | HttpMethod.DELETE, url: string): Observable<T>;
+    execute<T>(httpMethod: HttpMethod.POST | HttpMethod.PUT | HttpMethod.PATCH, url: string, body: any): Observable<T>;
     execute<T>(httpMethod: HttpMethod, url: string, body?: any): Observable<T> {
-        return ContezzaObservables.from(() => this.webscript.executeWebScript(httpMethod.toString().toUpperCase(), url, '', '', '', body));
+        return ContezzaObservables.from(() =>
+            this.apiService
+                .getInstance()
+                .contentClient.callApi('/service/' + url, httpMethod, {}, '', {}, {}, body, ['application/json'], ['application/json', 'text/html'], null, 'alfresco'),
+        );
     }
 }

@@ -63,12 +63,20 @@
             "@contezza/js-console": ["libs/js-console/src/index.ts"],
             "@contezza/js-console/shared": ["libs/js-console/shared/src/index.ts"],
 
+            "@contezza/layout": ["libs/layout/src"],
+            "@contezza/layout/components/*": ["libs/layout/components/*/src"],
+            "@contezza/layout/shared": ["libs/layout/shared/src"],
+
             "@contezza/node-browser": ["libs/node-browser/src/index.ts"],
             "@contezza/node-browser/shared": ["libs/node-browser/shared/src/index.ts"],
 
             "@contezza/process-services": ["libs/process-services/src"],
             "@contezza/process-services/shared": ["libs/process-services/shared/src"],
-            "@contezza/process-services/components/*": ["libs/process-services/components/*/src"]
+            "@contezza/process-services/components/*": ["libs/process-services/components/*/src"],
+
+            "@contezza/profile": ["libs/profile/src"],
+            "@contezza/profile/components/*": ["libs/profile/components/*/src"],
+            "@contezza/profile/shared": ["libs/profile/shared/src"]
         }
     },
     "exclude": ["node_modules", "tmp"],

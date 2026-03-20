@@ -1,0 +1,30 @@
+{
+    "name": "@contezza/profile",
+    "version": "3.8.4",
+    "dependencies": {
+        "tslib": "^2.8.1"
+    },
+    "peerDependencies": {
+        "@alfresco/aca-content": "^6.0.0",
+        "@alfresco/aca-shared": "^6.0.0",
+        "@alfresco/adf-content-services": "^7.0.0",
+        "@alfresco/adf-core": "^7.0.0",
+        "@alfresco/adf-extensions": "^7.0.0",
+        "@alfresco/js-api": "^8.0.0",
+        "@angular/cdk": "^17.0.0",
+        "@angular/common": "^17.0.0",
+        "@angular/core": "^17.0.0",
+        "@angular/forms": "^17.0.0",
+        "@angular/material": "^17.0.0",
+        "@angular/router": "^17.0.0",
+        "@contezza/content-services": "^3.0.0",
+        "@contezza/core": "^3.0.0",
+        "@ngrx/effects": "^18.0.0",
+        "@ngrx/store": "^18.0.0",
+        "@ngx-translate/core": "^16.0.0",
+        "rxjs": "^7.8.0"
+    },
+    "publishConfig": {
+        "registry": "https://nexus.contezza.nl/repository/npm-releases/"
+    }
+}
