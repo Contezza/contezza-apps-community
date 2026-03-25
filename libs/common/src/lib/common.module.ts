@@ -5,10 +5,14 @@ import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapte
 import { TranslateService } from '@ngx-translate/core';
 
 import { EffectsModule } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 
-import { provideTranslations, TranslationService } from '@alfresco/adf-core';
+import { debounceTime, filter, merge, take } from 'rxjs';
+
+import { AppConfigService, AuthenticationService, ContentAuth, provideTranslations, TranslationService } from '@alfresco/adf-core';
 import { ExtensionService } from '@alfresco/adf-extensions';
 
+import { login, logout } from '@contezza/core/actions';
 import { MatDialogService } from '@contezza/core/dialogs';
 import { ContezzaExtensionService, RouterExtensionService, RuleService } from '@contezza/core/extensions';
 import { NotificationsModule } from '@contezza/core/notifications';
@@ -53,7 +57,17 @@ import { getPaginatorIntl } from './utils/get-paginator-intl';
     ],
 })
 export class ContezzaCommonModule {
-    constructor(extensions: ExtensionLoaderService) {
+    constructor(store: Store, auth: AuthenticationService, contentAuth: ContentAuth, app: AppConfigService, extensions: ExtensionLoaderService) {
+        app.onLoad.pipe(filter(Boolean), take(1)).subscribe(() => {
+            // convert subjects into actions
+            // eslint-disable-next-line rxjs-x/no-nested-subscribe
+            auth.onLogin.pipe(debounceTime(0)).subscribe(() => store.dispatch(login()));
+            merge(auth.onLogout, contentAuth.onLogout)
+                .pipe(debounceTime(0))
+                // eslint-disable-next-line rxjs-x/no-nested-subscribe
+                .subscribe(() => store.dispatch(logout()));
+        });
+
         extensions.loadDefaults();
     }
 }
