@@ -1,0 +1,32 @@
+{
+    "ALFRESCO": {
+        "RM": {
+            "ACTIONS": {
+                "READ_RMAUDITLOG": "Open audit"
+            },
+            "DIALOGS": {
+                "RMAUDITLOG": {
+                    "TITLE": "Audit log for {{name}}"
+                }
+            },
+            "RMAUDITLOG": {
+                "PROPERTIES": {
+                    "CHANGED_VALUES": {
+                        "LABEL": "Changed values",
+                        "PROPERTIES": {
+                            "NAME": "Property",
+                            "NEW": "New value",
+                            "PREVIOUS": "Previous value"
+                        }
+                    },
+                    "EVENT": "Event",
+                    "FULL_NAME": "User",
+                    "IDENTIFIER": "Identification",
+                    "NODE_TYPE": "Type",
+                    "PATH": "Location",
+                    "TIMESTAMP": "Timestamp"
+                }
+            }
+        }
+    }
+}

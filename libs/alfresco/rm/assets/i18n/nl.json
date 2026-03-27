@@ -1,0 +1,32 @@
+{
+    "ALFRESCO": {
+        "RM": {
+            "ACTIONS": {
+                "READ_RMAUDITLOG": "Audit weergeven"
+            },
+            "DIALOGS": {
+                "RMAUDITLOG": {
+                    "TITLE": "Audit log voor {{name}}"
+                }
+            },
+            "RMAUDITLOG": {
+                "PROPERTIES": {
+                    "CHANGED_VALUES": {
+                        "LABEL": "Gewijzigde waarden",
+                        "PROPERTIES": {
+                            "NAME": "Eigenschap",
+                            "NEW": "Nieuwe waarde",
+                            "PREVIOUS": "Vorige waarde"
+                        }
+                    },
+                    "EVENT": "Gebeurtenis",
+                    "FULL_NAME": "Gebruiker",
+                    "IDENTIFIER": "Identificatie",
+                    "NODE_TYPE": "Type",
+                    "PATH": "Locatie",
+                    "TIMESTAMP": "Tijdstempel"
+                }
+            }
+        }
+    }
+}

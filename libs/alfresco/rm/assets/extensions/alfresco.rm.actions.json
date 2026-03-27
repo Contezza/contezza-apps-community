@@ -1,0 +1,33 @@
+{
+    "$id": "alfresco.rm.actions",
+    "$version": "@@project.version@@",
+    "$name": "Contezza Alfresco Record Management Actions",
+    "$vendor": "Contezza BV",
+
+    "templates": {
+        "actions": [
+            {
+                "id": "alfresco.rm.actions.readRmauditlog",
+                "title": "ALFRESCO.RM.ACTIONS.READ_RMAUDITLOG",
+                "icon": "alfresco.rm:text_box_search_outline",
+                "actions": {
+                    "click": "[ALFRESCO.RM] READ_RMAUDITLOG"
+                },
+                "rules": {
+                    "visible": "alfresco.rm.rules.canReadRmauditlog"
+                }
+            }
+        ]
+    },
+
+    "features": {
+        "contextMenu": [
+            {
+                "id": "alfresco.rm.contextMenu.readRmauditlog",
+                "imports": "templates.actions[alfresco.rm.actions.readRmauditlog]"
+            }
+        ],
+        "toolbar": [],
+        "viewer": {}
+    }
+}

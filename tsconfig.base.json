@@ -21,6 +21,13 @@
         "noImplicitReturns": true,
         "useDefineForClassFields": false,
         "paths": {
+            "@contezza/alfresco": ["libs/alfresco/src"],
+            "@contezza/alfresco/shared": ["libs/alfresco/shared/src"],
+            "@contezza/alfresco/rm": ["libs/alfresco/rm/src"],
+            "@contezza/alfresco/rm/apis": ["libs/alfresco/rm/apis/src"],
+            "@contezza/alfresco/rm/components/*": ["libs/alfresco/rm/components/*/src"],
+            "@contezza/alfresco/rm/shared": ["libs/alfresco/rm/shared/src"],
+
             "@contezza/common": ["libs/common/src/index.ts"],
 
             "@contezza/content-services": ["libs/content-services/src"],

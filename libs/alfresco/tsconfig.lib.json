@@ -1,0 +1,7 @@
+{
+    "extends": "../../tsconfig.build.json",
+    "compilerOptions": {
+        "strict": true,
+        "noUncheckedIndexedAccess": true
+    }
+}
