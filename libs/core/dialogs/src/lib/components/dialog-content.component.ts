@@ -45,6 +45,7 @@ export class DialogContentComponent {
                             }
                         });
                     }
+                    componentRef.changeDetectorRef.detectChanges();
                     this.component = componentRef.instance;
                 });
             }
