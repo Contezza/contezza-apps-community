@@ -8,6 +8,9 @@
         "inlineSources": true,
         "types": [],
         "paths": {
+            "@contezza/alfresco/*": ["./dist/@contezza/alfresco/*"],
+            "@contezza/alfresco": ["./dist/@contezza/alfresco/index"],
+
             "@contezza/common/*": ["./dist/@contezza/common/*"],
             "@contezza/common": ["./dist/@contezza/common/index"],
 

@@ -4,9 +4,9 @@
 STAGE=$1
  echo -e "======== STAGE: $STAGE ========\n";
 
-for LIB_PATH in "${LIBS_PATHS[@]}"
+for LIB in "${LIBS[@]}"
 do
-    cd $LIBS_DIR/${LIB_PATH}
+    cd $LIBS_DIR/${LIB}
 
     case $1 in
         "release")

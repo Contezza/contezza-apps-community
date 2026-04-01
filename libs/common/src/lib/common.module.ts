@@ -14,7 +14,7 @@ import { ExtensionService } from '@alfresco/adf-extensions';
 
 import { login, logout } from '@contezza/core/actions';
 import { MatDialogService } from '@contezza/core/dialogs';
-import { ContezzaExtensionService, RouterExtensionService, RuleService } from '@contezza/core/extensions';
+import { ContezzaExtensionService, provideEvaluators, RouterExtensionService, RuleService } from '@contezza/core/extensions';
 import { NotificationsModule } from '@contezza/core/notifications';
 import { RouterStoreModule } from '@contezza/core/stores';
 import { DATE_FORMATS } from '@contezza/core/utils';
@@ -54,6 +54,12 @@ import { getPaginatorIntl } from './utils/get-paginator-intl';
         RuleService.provider,
         { provide: ExtensionService, useClass: ContezzaExtensionService },
         MatDialogService.provider,
+        provideEvaluators({
+            'user.groups.includeSome': ({ profile }, ...groups: string[]) => {
+                const userGroupIds = profile?.groups?.map(({ id }) => id);
+                return userGroupIds?.length && groups.some(group => userGroupIds.includes(group));
+            },
+        }),
     ],
 })
 export class ContezzaCommonModule {

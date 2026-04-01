@@ -1,8 +1,17 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable, InjectionToken } from '@angular/core';
+
+import {
+    ExtensionElement,
+    ExtensionLoaderService,
+    reduceEmptyMenus,
+    reduceSeparators,
+    RuleContext,
+    RuleEvaluator,
+    RuleParameter,
+    RuleService as AdfRuleService,
+} from '@alfresco/adf-extensions';
 
 import { ContezzaUtils, OrArray, Tree } from '@contezza/core/utils';
-
-import { ExtensionElement, reduceEmptyMenus, reduceSeparators, RuleContext, RuleEvaluator, RuleParameter, RuleService as AdfRuleService } from '@alfresco/adf-extensions';
 
 interface ExtensionElementWithRules extends ExtensionElement {
     rules?: {
@@ -14,18 +23,36 @@ interface ExtensionElementWithRules extends ExtensionElement {
 
 type ExtensionElementWithRulesTree = Tree<ExtensionElementWithRules, 'children', '*'>;
 
+const EVALUATORS = new InjectionToken<Record<string, RuleEvaluator>[]>('EVALUATORS');
+export const provideEvaluators = (evaluators: Record<string, RuleEvaluator>) => ({
+    provide: EVALUATORS,
+    useValue: evaluators,
+    multi: true,
+});
+
 /**
  * Extends RuleService, supporting:
- * * Evaluator groups, i.e. evaluators resolved based on regex instead of exact id.
- * * Logical operators `&&` and `||` (besides `!`) by evaluators. Priority is `! > && > ||`, parentheses are not supported.
- * * Evaluators with parameters, format is `evaluatorKey(parameters)` where `parameters` is an array for consistency with extension rules.
- * * Default evaluation to `false` for not-existing rules.
+ * - Evaluator groups, i.e. evaluators resolved based on regex instead of exact id.
+ * - Logical operators `&&` and `||` (besides `!`) by evaluators. Priority is `! > && > ||`, parentheses are not supported.
+ * - Evaluators with parameters, format is `evaluatorKey(parameters)` where `parameters` is an array for consistency with extension rules.
+ * - Default evaluation to `false` for not-existing rules.
+ * - Definition of evaluators via provider.
  */
 @Injectable({ providedIn: 'root' })
 export class RuleService extends AdfRuleService {
     static readonly provider = { provide: AdfRuleService, useExisting: RuleService };
 
+    // constructor
+    private readonly providedEvaluators = inject(EVALUATORS, { optional: true });
+
     private readonly groups: Record<string, AdfRuleService['evaluateRule']> = {};
+
+    // eslint-disable-next-line @angular-eslint/prefer-inject
+    constructor(loader: ExtensionLoaderService) {
+        super(loader);
+
+        this.providedEvaluators?.forEach(list => this.setEvaluators(list));
+    }
 
     setEvaluatorGroups(values: RuleService['groups']) {
         Object.assign(this.groups, values);
