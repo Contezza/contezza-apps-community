@@ -1,6 +1,6 @@
 {
     "name": "@contezza/dynamic-forms",
-    "version": "3.9.0-SNAPSHOT",
+    "version": "3.9.0",
     "dependencies": {
         "@ngrx/component-store": "18.1.1",
         "@ngneat/input-mask": "6.1.0",
