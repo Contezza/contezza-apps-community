@@ -14,7 +14,15 @@ export interface ComponentDialogContent<TComponent> {
     inputs?: any;
 }
 
-export type DialogContent = ComponentDialogContent<unknown>;
+export interface HtmlDialogContent {
+    html: string;
+}
+
+export interface TextDialogContent {
+    text: string;
+}
+
+export type DialogContent = ComponentDialogContent<unknown> | HtmlDialogContent | TextDialogContent;
 
 export interface DialogAction {
     id: string;

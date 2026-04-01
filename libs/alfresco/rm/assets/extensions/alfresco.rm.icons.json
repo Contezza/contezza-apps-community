@@ -1,0 +1,15 @@
+{
+    "$id": "alfresco.rm.icons",
+    "$version": "@@project.version@@",
+    "$name": "Contezza Alfresco Record Management Icons",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "icons": [
+            {
+                "id": "alfresco.rm:text_box_search_outline",
+                "value": "./assets/alfresco/rm/icons/text_box_search_outline.svg"
+            }
+        ]
+    }
+}

@@ -15,20 +15,7 @@ LIBS=(
     'node-browser'
     'dynamic-forms'
     'content-services'
-    'profile'
-    'process-services'
-);
-
-# Library paths in libs folder
-# necessary for update library version before publishing
-LIBS_PATHS=(
-    'core'
-    'common'
-    'layout'
-    'js-console'
-    'node-browser'
-    'dynamic-forms'
-    'content-services'
+    'alfresco'
     'profile'
     'process-services'
 );

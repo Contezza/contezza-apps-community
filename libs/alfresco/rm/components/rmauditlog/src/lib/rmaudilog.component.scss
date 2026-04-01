@@ -1,0 +1,41 @@
+:host,
+.contezza-alfresco-rm-rmaudilog {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    &-item {
+        border: 1px solid var(--theme-border-color);
+
+        display: flex;
+        flex-direction: column;
+
+        &-row {
+            height: 42px;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            &:first-of-type {
+                background-color: var(--theme-border-color);
+            }
+
+            &-property {
+                display: flex;
+                gap: 4px;
+                overflow: hidden;
+                max-width: 50%;
+
+                &-label {
+                    font-weight: bold;
+                }
+                &-value {
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+}

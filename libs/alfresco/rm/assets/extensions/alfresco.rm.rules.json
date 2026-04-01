@@ -1,0 +1,19 @@
+{
+    "$id": "alfresco.rm.rules",
+    "$version": "@@project.version@@",
+    "$name": "Contezza Alfresco Record Management Rules",
+    "$vendor": "Contezza BV",
+
+    "rules": [
+        {
+            "id": "alfresco.rm.rules.canReadRmauditlog",
+            "type": "core.every",
+            "parameters": [
+                {
+                    "value": "alfresco.selection.aspectNames.includeSome",
+                    "parameters": ["rma:filePlanComponent"]
+                }
+            ]
+        }
+    ]
+}

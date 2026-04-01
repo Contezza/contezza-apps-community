@@ -185,6 +185,26 @@
                         "glob": "**/*.json"
                     },
                     {
+                        "input": "libs/alfresco/assets",
+                        "output": "./assets/alfresco",
+                        "glob": "**/*"
+                    },
+                    {
+                        "input": "libs/alfresco/assets/extensions",
+                        "output": "./assets/plugins",
+                        "glob": "**/*.json"
+                    },
+                    {
+                        "input": "libs/alfresco/rm/assets",
+                        "output": "./assets/alfresco/rm",
+                        "glob": "**/*"
+                    },
+                    {
+                        "input": "libs/alfresco/rm/assets/extensions",
+                        "output": "./assets/plugins",
+                        "glob": "**/*.json"
+                    },
+                    {
                         "input": "libs/process-services/assets",
                         "output": "./assets/process-services",
                         "glob": "**/*"
