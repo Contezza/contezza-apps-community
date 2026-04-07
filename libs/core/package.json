@@ -1,6 +1,6 @@
 {
     "name": "@contezza/core",
-    "version": "3.9.0",
+    "version": "3.9.1",
     "dependencies": {
         "@ngrx/component-store": "18.1.1",
         "@ncstate/sat-popover": "10.0.0",
