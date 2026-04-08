@@ -1,5 +1,5 @@
 @if (ecmUser$ | async; as ecmUser) {
-    <mat-expansion-panel #generalPanel>
+    <mat-expansion-panel #generalPanel [expanded]="true">
         <mat-expansion-panel-header>
             <div class="contezza-profile-user-form-panel-header">
                 <h3 class="contezza-profile-user-form-panel-header-title">{{ 'PROFILE.USER_FORM.GENERAL.TITLE' | translate }}</h3>

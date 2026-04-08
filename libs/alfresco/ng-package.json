@@ -1,0 +1,24 @@
+{
+    "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+    "dest": "../../dist/@contezza/alfresco",
+    "lib": {
+        "entryFile": "src/index.ts"
+    },
+    "assets": [
+        {
+            "input": "./assets",
+            "output": "/assets/",
+            "glob": "**/*"
+        },
+        {
+            "input": "./rm/assets",
+            "output": "/assets/rm/",
+            "glob": "**/*"
+        },
+        {
+            "input": "./rm/assets/extensions",
+            "output": "/assets/extensions/",
+            "glob": "**/*"
+        }
+    ]
+}

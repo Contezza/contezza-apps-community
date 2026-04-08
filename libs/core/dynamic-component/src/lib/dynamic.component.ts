@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 
 import { defer, ReplaySubject } from 'rxjs';
 
-import { ContezzaObservables } from '@contezza/core/utils';
-
 import { ComponentResolver, DynamicComponentExtensionService } from '@contezza/core/dynamic-component/shared';
+import { ContezzaObservables } from '@contezza/core/utils';
 
 import { CreatorComponent } from './creator.component';
 
@@ -17,7 +16,7 @@ import { CreatorComponent } from './creator.component';
     imports: [CommonModule, CreatorComponent],
     selector: 'contezza-dynamic-component',
     template: `<ng-container *ngIf="component$ | async as component">
-        <contezza-creator [data]="data" [component]="component" (ready)="onComponentReady($event)"></contezza-creator>
+        <contezza-creator [data]="data" [component]="component" (ready)="onComponentReady($event)" />
     </ng-container>`,
     styles: [
         `
@@ -36,16 +35,16 @@ export class DynamicComponent<TComponent extends object> {
      */
     @Input()
     @HostBinding('id')
-    readonly id?: string;
+    id?: string;
 
     @Input()
-    readonly component?: ComponentResolver<TComponent>;
+    component?: ComponentResolver<TComponent>;
 
     /**
      * Additional data.
      */
     @Input()
-    readonly data?: TComponent;
+    data?: TComponent;
 
     readonly component$ = defer(() => {
         if (this.id) {

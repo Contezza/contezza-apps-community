@@ -46,6 +46,7 @@ export default [
                         ['^\\w'],
                         // 5. Organisation / product specific scoped packages
                         ['^@alfresco'],
+                        ['^@contezza/core'],
                         ['^@contezza'],
                         // 6. Relative imports from current project
                         ['^\\.'],

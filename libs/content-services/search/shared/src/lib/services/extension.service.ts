@@ -1,14 +1,17 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable, InjectionToken } from '@angular/core';
 
-import { SearchRequest } from '@alfresco/js-api';
 import { SearchService } from '@alfresco/adf-content-services';
 import { ExtensionElement, ExtensionService as AdfExtensionService } from '@alfresco/adf-extensions';
+import { SearchRequest } from '@alfresco/js-api';
 
 import { ComponentResolver, DynamicComponentExtensionService } from '@contezza/core/dynamic-component/shared';
 import { ContezzaIdResolverService } from '@contezza/core/extensions';
 
 import { SearchBarSettings } from '@contezza/content-services/search/components/search-bar/shared';
+
 import { ExtendedSearchTableLayoutSettings, ISearchResultPreview, ISearchResultsView, SearchParameters, SearchStrategy, SearchTemplateParameters } from '../models';
+
+export const SEARCH_STRATEGIES = new InjectionToken<Record<string, SearchStrategy>[]>('SEARCH_STRATEGIES');
 
 @Injectable({ providedIn: 'root' })
 export class ExtensionService {
@@ -17,12 +20,16 @@ export class ExtensionService {
 
     static readonly TYPE_SEARCH_STRATEGY = 'searchStrategy';
 
-    constructor(
-        private readonly search: SearchService,
-        private readonly extensions: AdfExtensionService,
-        private readonly dc: DynamicComponentExtensionService,
-        private readonly idResolver: ContezzaIdResolverService
-    ) {}
+    // constructor
+    private readonly search = inject(SearchService);
+    private readonly extensions = inject(AdfExtensionService);
+    private readonly dc = inject(DynamicComponentExtensionService);
+    private readonly idResolver = inject(ContezzaIdResolverService);
+    private readonly _ssrs? = inject(SEARCH_STRATEGIES, { optional: true });
+
+    constructor() {
+        this._ssrs?.forEach(list => this.setSearchStrategies(list));
+    }
 
     /**
      * Retrieves the search-bar configuration having the given key from the extensions.

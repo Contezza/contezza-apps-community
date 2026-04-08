@@ -4,8 +4,8 @@
 
 npm version patch --no-git-tag-version
 
-for LIB_PATH in "${LIBS_PATHS[@]}"
+for LIB in "${LIBS[@]}"
 do
-    cd $LIBS_DIR/${LIB_PATH}
+    cd $LIBS_DIR/${LIB}
     npm version patch --no-git-tag-version
 done

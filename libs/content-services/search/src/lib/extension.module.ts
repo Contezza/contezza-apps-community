@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { inject, NgModule } from '@angular/core';
 
 import { forkJoin, map, of, tap } from 'rxjs';
 
@@ -6,13 +6,15 @@ import { FavoritesApiService, NodesApiService, SearchService, SitesService } fro
 import { provideTranslations } from '@alfresco/adf-core';
 import { ExtensionService as AdfExtensionService, provideExtensionConfig } from '@alfresco/adf-extensions';
 
+import { AdfUtils, ContezzaObservables } from '@contezza/core/utils';
+
 import { ContentServicesExtensionModule } from '@contezza/content-services';
 import { ContentServicesPresetsExtensionModule } from '@contezza/content-services/presets';
 import { ContentServicesSearchExtensionService, SearchParameters, SortingUtils } from '@contezza/content-services/search/shared';
 import { ContentServicesExtensionService } from '@contezza/content-services/shared';
-import { AdfUtils, ContezzaObservables } from '@contezza/core/utils';
 import { provideDynamicFormFieldComponents } from '@contezza/dynamic-forms/shared';
 
+import { provideSearchStrategies } from './providers';
 import * as rules from './rules';
 
 @NgModule({
@@ -29,6 +31,91 @@ import * as rules from './rules';
         ]),
         provideDynamicFormFieldComponents({
             peoplePicker: () => import('@contezza/content-services/search/components/people-group-picker').then(m => m.PeopleGroupPickerFieldComponent),
+        }),
+        provideSearchStrategies({
+            default:
+                (search = inject(SearchService)) =>
+                ({ template, parameters }) =>
+                    search.searchByQueryBody(ContentServicesSearchExtensionService.makeSearchQuery(template, parameters)),
+            'browse-files':
+                (nodes = inject(NodesApiService), search = inject(SearchService)) =>
+                ({ template, parameters }) => {
+                    const { currentFolder } = parameters;
+                    if (currentFolder) {
+                        const activeQueries = (Object.keys(parameters) as (keyof SearchParameters)[]).filter(key => !!parameters[key] && key.endsWith('Query'));
+                        if (activeQueries.length === 0) {
+                            // if no active queries, then do node children call
+                            return nodes.getNodeChildren(currentFolder.id, {
+                                include: ['path', 'properties', 'allowableOperations', 'permissions', 'aspectNames', 'isFavorite', 'definition'],
+                                ...parameters.paging,
+                                orderBy: SortingUtils.searchToNodesApi(parameters.sorting),
+                                where: '(assocType=cm:contains)',
+                            });
+                        } else {
+                            return search.searchByQueryBody(
+                                ContentServicesSearchExtensionService.makeSearchQuery(template, {
+                                    ...parameters,
+                                    headerQuery: activeQueries.includes('headerQuery')
+                                        ? // if headerQuery is active, then use currentFolder in an ANCESTOR call
+                                          `(${parameters.headerQuery}) AND ANCESTOR:"workspace://SpacesStore/${currentFolder.id}"`
+                                        : // otherwise use currentFolder in a PARENT call
+                                          `PARENT:"workspace://SpacesStore/${currentFolder.id}"`,
+                                }),
+                            );
+                        }
+                    } else {
+                        return search.searchByQueryBody(ContentServicesSearchExtensionService.makeSearchQuery(template, parameters));
+                    }
+                },
+            'browse-files-with-facets':
+                (nodes = inject(NodesApiService), search = inject(SearchService)) =>
+                ({ template, parameters }) => {
+                    const { currentFolder } = parameters;
+                    if (currentFolder) {
+                        const activeQueries = (Object.keys(parameters) as (keyof SearchParameters)[]).filter(key => !!parameters[key] && key.endsWith('Query'));
+                        if (activeQueries.length === 0) {
+                            // if no active queries, then do node-children call
+                            return forkJoin([
+                                nodes.getNodeChildren(currentFolder.id, {
+                                    include: ['path', 'properties', 'allowableOperations', 'permissions', 'aspectNames', 'isFavorite', 'definition'],
+                                    ...parameters.paging,
+                                    orderBy: SortingUtils.searchToNodesApi(parameters.sorting),
+                                    where: '(assocType=cm:contains)',
+                                }),
+                                // by every node-children call, perform also a search call
+                                search.searchByQueryBody(
+                                    ContentServicesSearchExtensionService.makeSearchQuery(template, {
+                                        ...parameters,
+                                        headerQuery: activeQueries.includes('headerQuery')
+                                            ? // if headerQuery is active, then use currentFolder in an ANCESTOR call
+                                              `(${parameters.headerQuery}) AND ANCESTOR:"workspace://SpacesStore/${currentFolder.id}"`
+                                            : // otherwise use currentFolder in a PARENT call
+                                              `PARENT:"workspace://SpacesStore/${currentFolder.id}"`,
+                                    }),
+                                ),
+                            ]).pipe(
+                                map(([childrenResponse, searchResponse]) => {
+                                    // enrich the results of the node-children call with the facets from the search call and return them
+                                    childrenResponse.list['context'] = searchResponse.list.context;
+                                    return childrenResponse;
+                                }),
+                            );
+                        } else {
+                            return search.searchByQueryBody(
+                                ContentServicesSearchExtensionService.makeSearchQuery(template, {
+                                    ...parameters,
+                                    headerQuery: activeQueries.includes('headerQuery')
+                                        ? // if headerQuery is active, then use currentFolder in an ANCESTOR call
+                                          `(${parameters.headerQuery}) AND ANCESTOR:"workspace://SpacesStore/${currentFolder.id}"`
+                                        : // otherwise use currentFolder in a PARENT call
+                                          `PARENT:"workspace://SpacesStore/${currentFolder.id}"`,
+                                }),
+                            );
+                        }
+                    } else {
+                        return search.searchByQueryBody(ContentServicesSearchExtensionService.makeSearchQuery(template, parameters));
+                    }
+                },
         }),
     ],
 })
@@ -66,82 +153,6 @@ export class ExtensionModule {
         });
 
         searchExtensions.setSearchStrategies({
-            default: payload => searchExtensions.searchDefault(payload),
-            'browse-files': ({ template, parameters }) => {
-                const { currentFolder } = parameters;
-                if (currentFolder) {
-                    const activeQueries = (Object.keys(parameters) as (keyof SearchParameters)[]).filter(key => !!parameters[key] && key.endsWith('Query'));
-                    if (activeQueries.length === 0) {
-                        // if no active queries, then do node children call
-                        return nodes.getNodeChildren(currentFolder.id, {
-                            include: ['path', 'properties', 'allowableOperations', 'permissions', 'aspectNames', 'isFavorite', 'definition'],
-                            ...parameters.paging,
-                            orderBy: SortingUtils.searchToNodesApi(parameters.sorting),
-                            where: '(assocType=cm:contains)',
-                        });
-                    } else {
-                        return search.searchByQueryBody(
-                            ContentServicesSearchExtensionService.makeSearchQuery(template, {
-                                ...parameters,
-                                headerQuery: activeQueries.includes('headerQuery')
-                                    ? // if headerQuery is active, then use currentFolder in an ANCESTOR call
-                                      `(${parameters.headerQuery}) AND ANCESTOR:"workspace://SpacesStore/${currentFolder.id}"`
-                                    : // otherwise use currentFolder in a PARENT call
-                                      `PARENT:"workspace://SpacesStore/${currentFolder.id}"`,
-                            }),
-                        );
-                    }
-                } else {
-                    return search.searchByQueryBody(ContentServicesSearchExtensionService.makeSearchQuery(template, parameters));
-                }
-            },
-            'browse-files-with-facets': ({ template, parameters }) => {
-                const { currentFolder } = parameters;
-                if (currentFolder) {
-                    const activeQueries = (Object.keys(parameters) as (keyof SearchParameters)[]).filter(key => !!parameters[key] && key.endsWith('Query'));
-                    if (activeQueries.length === 0) {
-                        // if no active queries, then do node-children call
-                        return forkJoin([
-                            nodes.getNodeChildren(currentFolder.id, {
-                                include: ['path', 'properties', 'allowableOperations', 'permissions', 'aspectNames', 'isFavorite', 'definition'],
-                                ...parameters.paging,
-                                orderBy: SortingUtils.searchToNodesApi(parameters.sorting),
-                                where: '(assocType=cm:contains)',
-                            }),
-                            // by every node-children call, perform also a search call
-                            search.searchByQueryBody(
-                                ContentServicesSearchExtensionService.makeSearchQuery(template, {
-                                    ...parameters,
-                                    headerQuery: activeQueries.includes('headerQuery')
-                                        ? // if headerQuery is active, then use currentFolder in an ANCESTOR call
-                                          `(${parameters.headerQuery}) AND ANCESTOR:"workspace://SpacesStore/${currentFolder.id}"`
-                                        : // otherwise use currentFolder in a PARENT call
-                                          `PARENT:"workspace://SpacesStore/${currentFolder.id}"`,
-                                }),
-                            ),
-                        ]).pipe(
-                            map(([childrenResponse, searchResponse]) => {
-                                // enrich the results of the node-children call with the facets from the search call and return them
-                                childrenResponse.list['context'] = searchResponse.list.context;
-                                return childrenResponse;
-                            }),
-                        );
-                    } else {
-                        return search.searchByQueryBody(
-                            ContentServicesSearchExtensionService.makeSearchQuery(template, {
-                                ...parameters,
-                                headerQuery: activeQueries.includes('headerQuery')
-                                    ? // if headerQuery is active, then use currentFolder in an ANCESTOR call
-                                      `(${parameters.headerQuery}) AND ANCESTOR:"workspace://SpacesStore/${currentFolder.id}"`
-                                    : // otherwise use currentFolder in a PARENT call
-                                      `PARENT:"workspace://SpacesStore/${currentFolder.id}"`,
-                            }),
-                        );
-                    }
-                } else {
-                    return search.searchByQueryBody(ContentServicesSearchExtensionService.makeSearchQuery(template, parameters));
-                }
-            },
             sites: ({ parameters }) => {
                 const term = parameters.headerQuery;
                 const options = {
