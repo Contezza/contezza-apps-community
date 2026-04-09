@@ -12,7 +12,6 @@ import { debounceTime, filter, merge, take } from 'rxjs';
 import { AppConfigService, AuthenticationService, ContentAuth, TranslationService } from '@alfresco/adf-core';
 import { ExtensionService } from '@alfresco/adf-extensions';
 
-import { provideCoreExtension } from '@contezza/core';
 import { login, logout } from '@contezza/core/actions';
 import { MatDialogService } from '@contezza/core/dialogs';
 import { ContezzaExtensionService, RouterExtensionService, RuleService } from '@contezza/core/extensions';
@@ -20,6 +19,7 @@ import { NotificationsModule } from '@contezza/core/notifications';
 import { RouterStoreModule } from '@contezza/core/stores';
 import { DATE_FORMATS } from '@contezza/core/utils';
 
+import { provideCoreExtension } from './provide-extension';
 import { Effects } from './store/effects';
 import { getPaginatorIntl } from './utils/get-paginator-intl';
 
@@ -56,7 +56,7 @@ import { getPaginatorIntl } from './utils/get-paginator-intl';
         provideCoreExtension(),
     ],
 })
-export class ContezzaCommonModule {
+export class ExtensionModule {
     constructor(store: Store, auth: AuthenticationService, contentAuth: ContentAuth, app: AppConfigService) {
         app.onLoad.pipe(filter(Boolean), take(1)).subscribe(() => {
             // convert subjects into actions
@@ -84,3 +84,5 @@ TranslationService.prototype.loadTranslation = function (lang: string, fallback?
         },
     );
 };
+
+export { ExtensionModule as CoreExtensionModule };

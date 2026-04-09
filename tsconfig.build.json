@@ -11,9 +11,6 @@
             "@contezza/alfresco/*": ["./dist/@contezza/alfresco/*"],
             "@contezza/alfresco": ["./dist/@contezza/alfresco/index"],
 
-            "@contezza/common/*": ["./dist/@contezza/common/*"],
-            "@contezza/common": ["./dist/@contezza/common/index"],
-
             "@contezza/content-services/*": ["./dist/@contezza/content-services/*"],
             "@contezza/content-services": ["./dist/@contezza/content-services/index"],
 

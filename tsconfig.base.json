@@ -28,8 +28,6 @@
             "@contezza/alfresco/rm/components/*": ["libs/alfresco/rm/components/*/src"],
             "@contezza/alfresco/rm/shared": ["libs/alfresco/rm/shared/src"],
 
-            "@contezza/common": ["libs/common/src/index.ts"],
-
             "@contezza/content-services": ["libs/content-services/src"],
             "@contezza/content-services/components/*": ["libs/content-services/components/*/src"],
             "@contezza/content-services/components/*/shared": ["libs/content-services/components/*/shared/src"],
