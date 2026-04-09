@@ -42,6 +42,7 @@
             "@contezza/content-services/search/shared": ["libs/content-services/search/shared/src"],
             "@contezza/content-services/shared": ["libs/content-services/shared/src"],
 
+            "@contezza/core": ["libs/core/src"],
             "@contezza/core/actions": ["libs/core/actions/src"],
             "@contezza/core/components/*": ["libs/core/components/*/src"],
             "@contezza/core/context": ["libs/core/context/src/index.ts"],

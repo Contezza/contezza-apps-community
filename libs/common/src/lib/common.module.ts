@@ -12,14 +12,14 @@ import { debounceTime, filter, merge, take } from 'rxjs';
 import { AppConfigService, AuthenticationService, ContentAuth, provideTranslations, TranslationService } from '@alfresco/adf-core';
 import { ExtensionService } from '@alfresco/adf-extensions';
 
+import { provideCoreExtension } from '@contezza/core';
 import { login, logout } from '@contezza/core/actions';
 import { MatDialogService } from '@contezza/core/dialogs';
-import { ContezzaExtensionService, provideEvaluators, RouterExtensionService, RuleService } from '@contezza/core/extensions';
+import { ContezzaExtensionService, RouterExtensionService, RuleService } from '@contezza/core/extensions';
 import { NotificationsModule } from '@contezza/core/notifications';
 import { RouterStoreModule } from '@contezza/core/stores';
 import { DATE_FORMATS } from '@contezza/core/utils';
 
-import { ExtensionLoaderService } from './services/extension-loader.service';
 import { Effects } from './store/effects';
 import { getPaginatorIntl } from './utils/get-paginator-intl';
 
@@ -54,16 +54,11 @@ import { getPaginatorIntl } from './utils/get-paginator-intl';
         RuleService.provider,
         { provide: ExtensionService, useClass: ContezzaExtensionService },
         MatDialogService.provider,
-        provideEvaluators({
-            'user.groups.includeSome': ({ profile }, ...groups: string[]) => {
-                const userGroupIds = profile?.groups?.map(({ id }) => id);
-                return userGroupIds?.length && groups.some(group => userGroupIds.includes(group));
-            },
-        }),
+        provideCoreExtension(),
     ],
 })
 export class ContezzaCommonModule {
-    constructor(store: Store, auth: AuthenticationService, contentAuth: ContentAuth, app: AppConfigService, extensions: ExtensionLoaderService) {
+    constructor(store: Store, auth: AuthenticationService, contentAuth: ContentAuth, app: AppConfigService) {
         app.onLoad.pipe(filter(Boolean), take(1)).subscribe(() => {
             // convert subjects into actions
             // eslint-disable-next-line rxjs-x/no-nested-subscribe
@@ -73,8 +68,6 @@ export class ContezzaCommonModule {
                 // eslint-disable-next-line rxjs-x/no-nested-subscribe
                 .subscribe(() => store.dispatch(logout()));
         });
-
-        extensions.loadDefaults();
     }
 }
 
