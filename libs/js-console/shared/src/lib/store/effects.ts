@@ -1,16 +1,15 @@
 import { Inject, Injectable, Optional } from '@angular/core';
 
-import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 
-import { Observable, of } from 'rxjs';
-import { filter, map, pluck, switchMap, take } from 'rxjs/operators';
+import { filter, map, Observable, of, pluck, switchMap, take } from 'rxjs';
 
-import { NodeEntry, SiteEntry } from '@alfresco/js-api';
-import { SelectionState } from '@alfresco/adf-extensions';
 import { AppStore, getAppSelection } from '@alfresco/aca-shared/store';
+import { SelectionState } from '@alfresco/adf-extensions';
+import { NodeEntry, SiteEntry } from '@alfresco/js-api';
 
-import { navigate } from '@contezza/common';
+import { navigate } from '@contezza/core/actions';
 
 import { EXTENSION_CONFIG, ExtensionConfig } from '../models';
 import { openNode } from './actions';
@@ -19,7 +18,11 @@ import { openNode } from './actions';
 export class Effects {
     static readonly NODEREF_PREFIX = 'workspace://SpacesStore';
 
-    constructor(private readonly actions$: Actions, private readonly store: Store<AppStore>, @Inject(EXTENSION_CONFIG) @Optional() private readonly config?: ExtensionConfig) {}
+    constructor(
+        private readonly actions$: Actions,
+        private readonly store: Store<AppStore>,
+        @Inject(EXTENSION_CONFIG) @Optional() private readonly config?: ExtensionConfig,
+    ) {}
 
     readonly openNode$ = createEffect(() =>
         this.actions$.pipe(
@@ -35,13 +38,13 @@ export class Effects {
             switchMap(({ payload }) => (payload ? of(payload) : this.selection$.pipe(pluck('last')))),
             filter<NodeEntry | SiteEntry>(Boolean),
             pluck('entry'),
-            map((node) => ('guid' in node ? { id: node.guid, name: node.title } : node)),
+            map(node => ('guid' in node ? { id: node.guid, name: node.title } : node)),
             map(({ id, name }) =>
                 navigate({
                     payload: [[this.config.path], { queryParams: { nodeRef: `${Effects.NODEREF_PREFIX}/${id}`, name } }],
-                })
-            )
-        )
+                }),
+            ),
+        ),
     );
 
     private get selection$(): Observable<SelectionState> {

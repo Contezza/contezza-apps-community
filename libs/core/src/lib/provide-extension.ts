@@ -10,7 +10,7 @@ import { Moment } from 'moment';
 
 import { getUserProfile } from '@alfresco/aca-shared/store';
 import { NodesApiService, SearchService } from '@alfresco/adf-content-services';
-import { AppConfigService, LocalizedDatePipe, ObjectUtils } from '@alfresco/adf-core';
+import { AppConfigService, LocalizedDatePipe, ObjectUtils, provideTranslations } from '@alfresco/adf-core';
 import { ExtensionService } from '@alfresco/adf-extensions';
 import { ResultSetPaging } from '@alfresco/js-api';
 
@@ -31,7 +31,7 @@ import { AdfUtils, ContezzaObjectUtils, ContezzaObservableOperators, ContezzaObs
 
 export function provideExtension(): EnvironmentProviders {
     return makeEnvironmentProviders([
-        // provideTranslations('alfresco', 'assets/alfresco'),
+        provideTranslations('core', 'assets/core'),
         provideEvaluators({
             'app.selection.single': ({ selection }) => selection?.count === 1,
             'auth.isOauth': context => context.auth.isOauth(),

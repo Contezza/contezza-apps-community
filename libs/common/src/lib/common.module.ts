@@ -9,7 +9,7 @@ import { Store } from '@ngrx/store';
 
 import { debounceTime, filter, merge, take } from 'rxjs';
 
-import { AppConfigService, AuthenticationService, ContentAuth, provideTranslations, TranslationService } from '@alfresco/adf-core';
+import { AppConfigService, AuthenticationService, ContentAuth, TranslationService } from '@alfresco/adf-core';
 import { ExtensionService } from '@alfresco/adf-extensions';
 
 import { provideCoreExtension } from '@contezza/core';
@@ -49,7 +49,6 @@ import { getPaginatorIntl } from './utils/get-paginator-intl';
             provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS,
             useValue: { strict: true },
         },
-        provideTranslations('contezza-common', 'assets/contezza-common'),
         RouterExtensionService.provider,
         RuleService.provider,
         { provide: ExtensionService, useClass: ContezzaExtensionService },

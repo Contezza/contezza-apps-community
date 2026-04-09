@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Optional, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ThemePalette } from '@angular/material/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Optional, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { ThemePalette } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
@@ -9,15 +9,15 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { Store } from '@ngrx/store';
 
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, Observable } from 'rxjs';
 
-import { navigate } from '@contezza/common';
+import { navigate } from '@contezza/core/actions';
+
 import { EXTENSION_CONFIG, ExtensionConfig } from '@contezza/js-console/shared';
 
 import { ConsoleScript, SelectedNode } from '../../interfaces/js-console';
-import { getEditorOptions, getSelectedNode, getSelectedScript, getSelectedSpaceNode } from '../../store/selectors';
 import { executeScript, saveScript, selectScriptPayloadNode, setSelectedScript, toggleEditorTheme } from '../../store/actions';
+import { getEditorOptions, getSelectedNode, getSelectedScript, getSelectedSpaceNode } from '../../store/selectors';
 import { JsConsoleNoderefComponent } from './noderef/js-console-noderef.component';
 
 @Component({
@@ -33,12 +33,15 @@ export class JsConsoleHeaderComponent {
     readonly selectedNode$: Observable<SelectedNode> = this.store.select(getSelectedNode);
     readonly selectedSpaceNode$: Observable<SelectedNode> = this.store.select(getSelectedSpaceNode);
     readonly selectedScript$: Observable<ConsoleScript> = this.store.select(getSelectedScript);
-    readonly editorTheme$: Observable<string> = this.store.select(getEditorOptions).pipe(map((options) => options.theme));
+    readonly editorTheme$: Observable<string> = this.store.select(getEditorOptions).pipe(map(options => options.theme));
 
     @Output()
     toggleScriptListOpenState = new EventEmitter();
 
-    constructor(readonly store: Store<unknown>, @Inject(EXTENSION_CONFIG) @Optional() private readonly config?: ExtensionConfig) {}
+    constructor(
+        readonly store: Store<unknown>,
+        @Inject(EXTENSION_CONFIG) @Optional() private readonly config?: ExtensionConfig,
+    ) {}
 
     get toggleIconColor(): ThemePalette {
         return this.scriptListOpen ? 'primary' : undefined;
@@ -60,7 +63,7 @@ export class JsConsoleHeaderComponent {
                     selectNodeTitle: 'CONTEZZA.JS_CONSOLE.HEADER.NODE_REFS.SPACE.SELECT_TITLE',
                     showFilesInSelect: false,
                 },
-            })
+            }),
         );
     }
 
@@ -72,7 +75,7 @@ export class JsConsoleHeaderComponent {
                     selectNodeTitle: 'CONTEZZA.JS_CONSOLE.HEADER.NODE_REFS.DOCUMENT.SELECT_TITLE',
                     showFilesInSelect: true,
                 },
-            })
+            }),
         );
     }
 

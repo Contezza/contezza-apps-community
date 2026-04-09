@@ -7,9 +7,14 @@
     "allowedNonPeerDependencies": ["@ngrx/component-store", "@ncstate/sat-popover"],
     "assets": [
         {
+            "input": "./assets",
+            "output": "/assets/",
+            "glob": "**/*"
+        },
+        {
             "glob": "**/*",
-            "input": "./ui",
-            "output": "/ui/"
+            "input": "./styles",
+            "output": "/styles/"
         },
         {
             "glob": "responsive.theme.scss",
