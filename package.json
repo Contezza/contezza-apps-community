@@ -2,7 +2,6 @@
     "name": "contezza-apps-community",
     "version": "3.9.1",
     "scripts": {
-        "build:common": "npx nx build common",
         "build:content-services": "npx nx build content-services",
         "build:core": "npx nx build core",
         "build:dynamic-forms": "npx nx build dynamic-forms",

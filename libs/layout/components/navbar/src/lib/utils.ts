@@ -2,7 +2,7 @@ import { NavigationExtras, PRIMARY_OUTLET, UrlTree } from '@angular/router';
 
 import { Action } from '@ngrx/store';
 
-import { navigate } from '@contezza/common';
+import { navigate } from '@contezza/core/actions';
 
 import { NavbarItem } from './models';
 
@@ -55,7 +55,7 @@ export class NavbarItemUtils {
      */
     static getNavigationTargetChild(item: NavbarItem): NavbarItem | null {
         if (item.children?.length) {
-            return item.children.find((child) => !!child.favourite) ?? item.children[0]!;
+            return item.children.find(child => !!child.favourite) ?? item.children[0]!;
         } else {
             return null;
         }

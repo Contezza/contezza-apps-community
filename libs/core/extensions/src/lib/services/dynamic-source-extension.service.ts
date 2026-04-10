@@ -6,6 +6,9 @@ import { ArrayUtils, ContezzaObjectUtils } from '@contezza/core/utils';
 
 import { ContezzaIdResolverService } from './id-resolver.service';
 
+/**
+ * @deprecated use providers instead of setters
+ */
 @Injectable({ providedIn: 'root' })
 export class DynamicSourceExtensionService {
     constructor(private readonly idResolver: ContezzaIdResolverService) {}
@@ -18,7 +21,7 @@ export class DynamicSourceExtensionService {
 
     setServiceOperators(values: Record<string, any>) {
         if (values) {
-            const getFn = (service: object, fnName: string, error: string = `Function ${fnName} not found`): ((...args: any) => Observable<any>) => {
+            const getFn = (service: object, fnName: string, error = `Function ${fnName} not found`): ((...args: any) => Observable<any>) => {
                 const fn = service[fnName];
                 if (!fn || typeof fn !== 'function') {
                     throw new Error(error);
@@ -30,8 +33,8 @@ export class DynamicSourceExtensionService {
                     Object.entries(values).map(([key, service]) => [
                         key,
                         (method: string) => switchMap((args: any) => getFn(service, method, `Function ${method} not found in service ${key}`)(...ArrayUtils.asArray(args))),
-                    ])
-                )
+                    ]),
+                ),
             );
         }
     }

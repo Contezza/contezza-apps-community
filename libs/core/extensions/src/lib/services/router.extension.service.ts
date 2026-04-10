@@ -1,31 +1,50 @@
-import { Injectable, Type } from '@angular/core';
-import { LoadChildren, Route } from '@angular/router';
+import { inject, Injectable, InjectionToken, Type } from '@angular/core';
+import { CanActivate, LoadChildren, Route, Router } from '@angular/router';
 
-import { RouteRef } from '@alfresco/adf-extensions';
 import { ExtensionRoute as AcaExtensionRoute, RouterExtensionService as AcaRouterExtensionService } from '@alfresco/aca-shared';
+import { ExtensionService, RouteRef } from '@alfresco/adf-extensions';
 
 import { ContezzaAdfUtils } from '@contezza/core/utils';
 
+// TODO: improve to also support canActivateFn and other models
+type AuthGuards = Record<string, Type<CanActivate>>;
+const AUTH_GUARDS = new InjectionToken<AuthGuards[]>('AUTH_GUARDS');
+export const provideAuthGuards = (authGuards: AuthGuards) => ({
+    provide: AUTH_GUARDS,
+    useValue: authGuards,
+    multi: true,
+});
+
 /**
  * Extends `@alfresco/adf-extensions/RouteRef` allowing to define:
- * * the route using `loadChildren` or `loadComponent`,
- * * guards using `canActivate` or `canActivateChild`.
+ * - the route using `loadChildren` or `loadComponent`,
+ * - guards using `canActivate` or `canActivateChild`.
  */
 export type ExtensionRoute = Omit<RouteRef, 'component'> &
     ({ component: string } | { loadChildren: string } | { loadComponent: string }) & { canActivate?: string[]; canActivateChild?: string[] };
 
 /**
  * Extends `@alfresco/aca-shared/RouterExtensionService` improving support for extension routes with the following features:
- * * Parameter `disabled` can be used to disable extension routes.
- * * Besides `component`, parameters `loadChildren` and `loadComponent` can also be used to define an extension route; the corresponding resolver must be defined using method `setLoadChildren` or `setLoadComponent` respectively; this resolver must implement the same interface as the corresponding property of `@angular/router/Route`.
- * * Besides `auth`, parameters `canActivate` and `canActivateChild` can also be used to apply guards to an extension route; the corresponding resolver must be defined using method `setAuthGuards` from `@alfresco/adf-extensions/ExtensionService`.
+ * - Parameter `disabled` can be used to disable extension routes.
+ * - Besides `component`, parameters `loadChildren` and `loadComponent` can also be used to define an extension route; the corresponding resolver must be defined using method `setLoadChildren` or `setLoadComponent` respectively; this resolver must implement the same interface as the corresponding property of `@angular/router/Route`.
+ * - Besides `auth`, parameters `canActivate` and `canActivateChild` can also be used to apply guards to an extension route; the corresponding resolver must be defined using method `setAuthGuards` from `@alfresco/adf-extensions/ExtensionService`.
  */
 @Injectable({ providedIn: 'root' })
 export class RouterExtensionService extends AcaRouterExtensionService {
     static readonly provider = { provide: AcaRouterExtensionService, useExisting: RouterExtensionService };
 
+    // constructor
+    providedAuthGuards = inject(AUTH_GUARDS, { optional: true });
+
     private readonly loadChildrenRegistry: Record<string, LoadChildren> = {};
     private readonly loadComponentRegistry: Record<string, Route['loadComponent']> = {};
+
+    // eslint-disable-next-line @angular-eslint/prefer-inject
+    constructor(router: Router, extensions: ExtensionService) {
+        super(router, extensions);
+
+        this.providedAuthGuards?.forEach(list => this.extensions.setAuthGuards(list));
+    }
 
     setLoadChildren(values: RouterExtensionService['loadChildrenRegistry']) {
         if (values) {
@@ -58,7 +77,7 @@ export class RouterExtensionService extends AcaRouterExtensionService {
     getApplicationRoutes(): AcaExtensionRoute[] {
         // filter disabled routes
         const routes: ExtensionRoute[] = ContezzaAdfUtils.filterAndSortFeature(this.extensions.routes);
-        return routes.map((route) => {
+        return routes.map(route => {
             const guards = this.extensions.getAuthGuards(route.auth && route.auth.length > 0 ? route.auth : this.defaults.auth);
             const canActivate = route.canActivate?.length ? this.extensions.getAuthGuards(route.canActivate) : [];
             const canActivateChild = route.canActivateChild?.length ? this.extensions.getAuthGuards(route.canActivateChild) : [];
@@ -73,7 +92,7 @@ export class RouterExtensionService extends AcaRouterExtensionService {
                 parentRoute: route.parentRoute ?? '',
                 children: [
                     ...(route['children']
-                        ? route['children'].map((child) => ({
+                        ? route['children'].map(child => ({
                               path: child.path,
                               outlet: child.outlet,
                               data: child.data,
@@ -96,10 +115,10 @@ export class RouterExtensionService extends AcaRouterExtensionService {
     private getRouteComponent(route: { loadChildren: string }): { loadChildren: LoadChildren };
     private getRouteComponent(route: { loadComponent: string }): { loadComponent: Route['loadComponent'] };
     private getRouteComponent(
-        route: { component: RouteRef['component'] } | { loadChildren: string } | { loadComponent: string }
+        route: { component: RouteRef['component'] } | { loadChildren: string } | { loadComponent: string },
     ): { component: Type<unknown> } | { loadChildren: LoadChildren } | { loadComponent: Route['loadComponent'] };
     private getRouteComponent(
-        route: { component: RouteRef['component'] } | { loadChildren: string } | { loadComponent: string }
+        route: { component: RouteRef['component'] } | { loadChildren: string } | { loadComponent: string },
     ): { component: Type<unknown> } | { loadChildren: LoadChildren } | { loadComponent: Route['loadComponent'] } {
         if ('component' in route) {
             return { component: (this as any).getComponentById(route.component) };

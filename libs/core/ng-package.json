@@ -2,14 +2,19 @@
     "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
     "dest": "../../dist/@contezza/core",
     "lib": {
-        "entryFile": "index.ts"
+        "entryFile": "src/index.ts"
     },
     "allowedNonPeerDependencies": ["@ngrx/component-store", "@ncstate/sat-popover"],
     "assets": [
         {
+            "input": "./assets",
+            "output": "/assets/",
+            "glob": "**/*"
+        },
+        {
             "glob": "**/*",
-            "input": "./ui",
-            "output": "/ui/"
+            "input": "./styles",
+            "output": "/styles/"
         },
         {
             "glob": "responsive.theme.scss",
