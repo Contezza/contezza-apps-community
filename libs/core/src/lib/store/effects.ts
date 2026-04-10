@@ -5,30 +5,32 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { tap } from 'rxjs';
 
-import { refresh } from '@contezza/core/actions';
+import { navigate, refresh } from '@contezza/core/actions';
 import { RefreshSubject } from '@contezza/core/services';
-
-import { navigate } from './actions';
 
 @Injectable()
 export class Effects {
-    constructor(private readonly actions$: Actions, private readonly router: Router, private readonly _refresh$: RefreshSubject) {}
+    constructor(
+        private readonly actions$: Actions,
+        private readonly router: Router,
+        private readonly _refresh$: RefreshSubject,
+    ) {}
 
     readonly navigate$ = createEffect(
         () =>
             this.actions$.pipe(
                 ofType(navigate),
-                tap(({ payload }) => this.router.navigate(...payload))
+                tap(({ payload }) => this.router.navigate(...payload)),
             ),
-        { dispatch: false }
+        { dispatch: false },
     );
 
     readonly refresh$ = createEffect(
         () =>
             this.actions$.pipe(
                 ofType(refresh),
-                tap(() => this._refresh$.next())
+                tap(() => this._refresh$.next()),
             ),
-        { dispatch: false }
+        { dispatch: false },
     );
 }

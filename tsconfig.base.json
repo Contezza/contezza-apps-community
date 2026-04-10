@@ -28,8 +28,6 @@
             "@contezza/alfresco/rm/components/*": ["libs/alfresco/rm/components/*/src"],
             "@contezza/alfresco/rm/shared": ["libs/alfresco/rm/shared/src"],
 
-            "@contezza/common": ["libs/common/src/index.ts"],
-
             "@contezza/content-services": ["libs/content-services/src"],
             "@contezza/content-services/components/*": ["libs/content-services/components/*/src"],
             "@contezza/content-services/components/*/shared": ["libs/content-services/components/*/shared/src"],
@@ -42,6 +40,7 @@
             "@contezza/content-services/search/shared": ["libs/content-services/search/shared/src"],
             "@contezza/content-services/shared": ["libs/content-services/shared/src"],
 
+            "@contezza/core": ["libs/core/src"],
             "@contezza/core/actions": ["libs/core/actions/src"],
             "@contezza/core/components/*": ["libs/core/components/*/src"],
             "@contezza/core/context": ["libs/core/context/src/index.ts"],

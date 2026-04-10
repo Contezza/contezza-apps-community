@@ -30,6 +30,14 @@ export const provideEvaluators = (evaluators: Record<string, RuleEvaluator>) => 
     multi: true,
 });
 
+type EvaluatorGroups = Record<string, AdfRuleService['evaluateRule']>;
+const EVALUATOR_GROUPS = new InjectionToken<EvaluatorGroups[]>('EVALUATOR_GROUPS');
+export const provideEvaluatorGroups = (evaluatorGroups: EvaluatorGroups) => ({
+    provide: EVALUATOR_GROUPS,
+    useValue: evaluatorGroups,
+    multi: true,
+});
+
 /**
  * Extends RuleService, supporting:
  * - Evaluator groups, i.e. evaluators resolved based on regex instead of exact id.
@@ -44,29 +52,31 @@ export class RuleService extends AdfRuleService {
 
     // constructor
     private readonly providedEvaluators = inject(EVALUATORS, { optional: true });
+    private readonly providedEvaluatorGroups = inject(EVALUATOR_GROUPS, { optional: true });
 
-    private readonly groups: Record<string, AdfRuleService['evaluateRule']> = {};
+    private readonly groups: EvaluatorGroups = {};
 
     // eslint-disable-next-line @angular-eslint/prefer-inject
     constructor(loader: ExtensionLoaderService) {
         super(loader);
 
         this.providedEvaluators?.forEach(list => this.setEvaluators(list));
+        this.providedEvaluatorGroups?.forEach(list => this.setEvaluatorGroups(list));
     }
 
-    setEvaluatorGroups(values: RuleService['groups']) {
+    setEvaluatorGroups(values: EvaluatorGroups) {
         Object.assign(this.groups, values);
     }
 
     getEvaluator(key: string): RuleEvaluator {
         if (key.includes('||')) {
             // support ||
-            const evaluators = key.split('||').map((simpleKey) => this.getEvaluator(simpleKey.trim()));
-            return (context: RuleContext, ...args: RuleParameter[]): boolean => evaluators.some((fn) => fn(context, ...args));
+            const evaluators = key.split('||').map(simpleKey => this.getEvaluator(simpleKey.trim()));
+            return (context: RuleContext, ...args: RuleParameter[]): boolean => evaluators.some(fn => fn(context, ...args));
         } else if (key.includes('&&')) {
             // support &&
-            const evaluators = key.split('&&').map((simpleKey) => this.getEvaluator(simpleKey.trim()));
-            return (context: RuleContext, ...args: RuleParameter[]): boolean => evaluators.every((fn) => fn(context, ...args));
+            const evaluators = key.split('&&').map(simpleKey => this.getEvaluator(simpleKey.trim()));
+            return (context: RuleContext, ...args: RuleParameter[]): boolean => evaluators.every(fn => fn(context, ...args));
         } else if (key.startsWith('!')) {
             // support !
             const evaluator = this.getEvaluator(key.substring(1));
@@ -78,7 +88,7 @@ export class RuleService extends AdfRuleService {
             const params = ContezzaUtils.stringToFunction('_ => return ' + paramsAsString)();
             const evaluator = this.getElementaryEvaluator(evaluatorKey);
             // TODO: this has not been testen with group evaluators
-            return (context) => evaluator(context, ...params);
+            return context => evaluator(context, ...params);
         } else {
             return this.getElementaryEvaluator(key);
         }
@@ -91,7 +101,7 @@ export class RuleService extends AdfRuleService {
             // note that this is only applied if no exact match (rule or evaluator) is found
             const match = Object.entries(this.groups).find(([groupPattern]) => key.match(new RegExp(groupPattern)))?.[1];
             if (match) {
-                return (context) => match(key, context);
+                return context => match(key, context);
             }
         }
         // if the evaluator does not exist, then the rule always evaluates to false
@@ -126,18 +136,18 @@ export class RuleService extends AdfRuleService {
     filterList<T extends ExtensionElementWithRulesTree>(list: T[], context: RuleContext): T[] {
         const flt = (l: T[]): T[] =>
             l
-                .filter((li) => this.filterItem(li, context))
-                .map((li) => this.setDisabledFromRule(li, context))
+                .filter(li => this.filterItem(li, context))
+                .map(li => this.setDisabledFromRule(li, context))
                 .reduce(reduceEmptyMenus as any, [])
                 .reduce(reduceSeparators, []);
-        const recursion = (l: T[]): T[] => flt(l.map((li) => (li.children?.length ? { ...li, children: recursion(li.children as T[]) } : li)));
+        const recursion = (l: T[]): T[] => flt(l.map(li => (li.children?.length ? { ...li, children: recursion(li.children as T[]) } : li)));
         return recursion(list || []);
     }
 
     filterItem<T extends { rules?: { visible?: OrArray<string> } }>(item: T, context: RuleContext): boolean {
         if (item?.rules?.visible) {
             if (Array.isArray(item.rules.visible)) {
-                return item.rules.visible.every((rule) => this.evaluateRule(rule, context));
+                return item.rules.visible.every(rule => this.evaluateRule(rule, context));
             }
             return this.evaluateRule(item.rules.visible, context);
         }

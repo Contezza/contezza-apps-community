@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { AosExtensionModule } from '@alfresco/aca-content/ms-office';
 import { ExtensionService, provideExtensionConfig } from '@alfresco/adf-extensions';
 
+import { CoreExtensionModule } from '@contezza/core';
 import { MatDialogService } from '@contezza/core/dialogs';
 import { ContezzaExtensionService } from '@contezza/core/extensions';
 import { PropertyTitleService } from '@contezza/core/property-titles';
@@ -10,7 +11,6 @@ import { ResponsiveModule } from '@contezza/core/responsive';
 
 import { AlfrescoExtensionModule } from '@contezza/alfresco';
 import { AlfrescoRmExtensionModule } from '@contezza/alfresco/rm';
-import { ContezzaCommonModule } from '@contezza/common';
 import { ContentServicesSearchExtensionModule } from '@contezza/content-services/search';
 import { JsConsoleExtensionModule } from '@contezza/js-console/shared';
 import { LayoutExtensionModule } from '@contezza/layout';
@@ -20,7 +20,7 @@ import { ProfileExtensionModule } from '@contezza/profile';
 
 @NgModule({
     imports: [
-        ContezzaCommonModule,
+        CoreExtensionModule,
         LayoutExtensionModule,
         AosExtensionModule,
         ContentServicesSearchExtensionModule,
