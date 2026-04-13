@@ -1,6 +1,5 @@
-import { ExtensionElement } from '@alfresco/adf-extensions';
-
-export interface Theme extends ExtensionElement {
+export interface Theme {
+    id: string;
     label?: string;
     image?: string;
     cssClass?: string;

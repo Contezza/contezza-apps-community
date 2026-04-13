@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 
 import { filter, map, Observable, ReplaySubject, Subscription, take } from 'rxjs';
 
-import { ExtensionService } from '@alfresco/adf-extensions';
+import { ExtensionElement, ExtensionService } from '@alfresco/adf-extensions';
 
 import { AdfUtils } from '@contezza/core/utils';
 
@@ -10,7 +10,7 @@ import { Theme } from '../models';
 
 /**
  * Manages the app theme:
- * - Retrieves the list of available themes from app configuration.
+ * - Retrieves the list of available themes from app extensions. This is defined using feature key `themes`.
  * - Manages the selection of the current theme, persisting it in local storage and reading it by app initialisation.
  * - Listens to changes in the current theme and places the corresponding CSS class into the root HTML element of the page.
  */
@@ -27,7 +27,7 @@ export class ThemeService {
 
     private _themes?: Theme[];
     get themes() {
-        return (this._themes ??= AdfUtils.filterAndSortFeature(this.extensions.getFeature<Theme[]>(ThemeService.FEATURE_KEY, [])));
+        return (this._themes ??= AdfUtils.filterAndSort(this.extensions.getFeature<(Theme & ExtensionElement)[]>(ThemeService.FEATURE_KEY, [])));
     }
 
     private readonly activeThemeIdSource = new ReplaySubject<string | null>(1);
