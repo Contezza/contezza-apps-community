@@ -7,3 +7,5 @@ This services manages the app theme:
 - Retrieves the list of available themes from app extensions. This is defined using feature key `themes`.
 - Manages the selection of the current theme, persisting it in local storage and reading it by app initialisation.
 - Listens to changes in the current theme and places the corresponding CSS class into the root HTML element of the page.
+
+N.B.: This does not apply any styles. It only adds a CSS class that the application can use.
