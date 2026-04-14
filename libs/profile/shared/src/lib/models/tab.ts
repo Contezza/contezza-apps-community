@@ -1,18 +1,22 @@
-import { ExtensionElement } from '@alfresco/adf-extensions';
+import { Stylable } from '@contezza/core/utils';
 
-interface ExtensionElementWithRules extends ExtensionElement {
-    rules?: {
-        enabled?: string;
-        visible?: string;
-    };
-}
-interface ExtensionComponent extends ExtensionElementWithRules {
-    component: string | { id: string; data?: any };
+export enum ComponentType {
+    CARD = 'card',
+    CUSTOM = 'custom',
 }
 
-export interface Tab extends ExtensionElementWithRules {
+export interface Component extends Stylable {
+    id: string;
+    title?: string;
+    type?: ComponentType;
+    component: string;
+    inputs?: any;
+}
+
+export interface Tab {
+    id: string;
     label: string;
     icon?: string;
     urlFragment: string;
-    components: ExtensionComponent[];
+    components: Component[];
 }

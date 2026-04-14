@@ -3,26 +3,22 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 
-import { TranslatePipe } from '@ngx-translate/core';
-
 import { Observable } from 'rxjs';
 
 import { LanguageItem, LanguageService, UserPreferencesService } from '@alfresco/adf-core';
 
 @Component({
     standalone: true,
-    imports: [CommonModule, MatIconModule, MatMenuModule, TranslatePipe],
+    imports: [CommonModule, MatIconModule, MatMenuModule],
     selector: 'contezza-profile-language-settings',
-    templateUrl: 'language-settings.component.html',
-    styles: [
-        `
-            :host {
-                color: var(--theme-text-color);
-                padding: 25px;
-                width: calc(100% - 2 * 25px) !important;
+    template: `@for (language of languages$ | async; track language.key) {
+        <button mat-menu-item (click)="changeLanguage(language)">
+            @if (language.key === currentLanguageSet) {
+                <mat-icon *ngIf="language.key === currentLanguageSet">done</mat-icon>
             }
-        `,
-    ],
+            {{ language.label }}
+        </button>
+    }`,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LanguageSettingsComponent {

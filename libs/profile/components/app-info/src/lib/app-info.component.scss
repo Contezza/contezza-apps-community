@@ -1,11 +1,9 @@
 :host,
 .contezza-profile-app-info {
-    .contezza-profile-tab-component-card-content {
-        display: flex !important;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 24px;
-    }
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 24px;
 
     &-logo {
         min-width: 140px;
