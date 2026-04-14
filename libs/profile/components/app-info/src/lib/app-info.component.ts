@@ -20,7 +20,7 @@ import { ApplyPipe } from '@contezza/core/pipes';
                 <div class="contezza-profile-app-info-data-version">
                     <p>{{ 'APP.ABOUT.VERSION' | translate }}</p>
                     @if (version | apply: makeVersionHref.bind(this); as href) {
-                        <a [href]="href" target="_blank">{{ version }}</a>
+                        <a class="contezza-profile-app-info-data-version-link" [href]="href" target="_blank">{{ version }}</a>
                     } @else {
                         <div>{{ version }}</div>
                     }
