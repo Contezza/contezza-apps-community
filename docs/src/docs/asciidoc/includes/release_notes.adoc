@@ -10,6 +10,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2026-04-16
+|3.9.3
+|View <<Release 3.9.3,release details>>.
+
 |2026-04-09
 |3.9.2
 |View <<Release 3.9.2,release details>>.
@@ -397,6 +401,16 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 3.9.3
+
+New features:
+
+- @contezza/core/theme - New library created https://support.contezza.nl/issues/37344[(#37344)].
+
+Bugfixes/minor changes:
+
+- @contezza/profile - Improved to fully replace the library in contezza-apps https://support.contezza.nl/issues/37355[(#37355)].
 
 ==== Release 3.9.2
 
