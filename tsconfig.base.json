@@ -59,6 +59,9 @@
             "@contezza/core/responsive/components/*": ["libs/core/responsive/components/*/src"],
             "@contezza/core/services": ["libs/core/services/src/index.ts"],
             "@contezza/core/stores": ["libs/core/stores/src/index.ts"],
+            "@contezza/core/theme": ["libs/core/theme/src"],
+            "@contezza/core/theme/components/*": ["libs/core/theme/components/*/src"],
+            "@contezza/core/theme/shared": ["libs/core/theme/shared/src"],
             "@contezza/core/translate": ["libs/core/translate/src"],
             "@contezza/core/utils": ["libs/core/utils/src/index.ts"],
 

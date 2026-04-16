@@ -20,7 +20,7 @@ import { CreatorComponent } from './creator.component';
     </ng-container>`,
     styles: [
         `
-            :host > contezza-creator + ::ng-deep* {
+            :where(:host > contezza-creator + ::ng-deep*) {
                 display: block;
                 width: 100%;
                 height: 100%;

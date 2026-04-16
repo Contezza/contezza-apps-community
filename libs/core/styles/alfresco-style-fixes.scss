@@ -209,9 +209,12 @@
         }
     }
 
-    // overwrite aca hardcoded colour for active tab label in info-drawer
-    .adf-info-drawer-layout .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label.mdc-tab__text-label {
-        color: var(--mat-tab-header-active-label-text-color);
+    // revert ACA overridings for mat-mdc-tab (in: adf-info-drawer, contezza-profile-page)
+    .mat-mdc-tab:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label.mdc-tab__text-label {
+        color: var(--mat-tab-header-active-label-text-color); // was: var(--theme-tab-active-text-color);
+    }
+    .mat-mdc-tab.mat-mdc-tab.mat-mdc-tab:focus {
+        background: none; // was: map-get($aca-primary-blue, 50);
     }
 
     // overwrite aca 'height:auto'
