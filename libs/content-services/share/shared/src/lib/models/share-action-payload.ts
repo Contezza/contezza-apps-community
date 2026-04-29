@@ -7,7 +7,14 @@ import { Node } from '@alfresco/js-api';
 import { LinkSettings } from './link-settings';
 import { ShareSettings } from './share-settings';
 
-export type LinkGenerator = (nodes: Node[], settings: LinkSettings) => Observable<{ link: string; label: string; location?: string; endDate?: Moment }[]>;
+export interface GeneratedLink {
+    link: string;
+    label: string;
+    location?: string;
+    endDate?: Moment;
+}
+
+export type LinkGenerator = (nodes: Node[], settings: LinkSettings) => Observable<GeneratedLink[]>;
 
 export interface ShareActionPayload {
     nodes: Node[];
