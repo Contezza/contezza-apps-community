@@ -1,7 +1,5 @@
 import { EnvironmentProviders, makeEnvironmentProviders } from '@angular/core';
 
-import { provideTranslations } from '@alfresco/adf-core';
-
 import { provideEvaluators } from '@contezza/core/extensions';
 import { provideWebscriptApiService } from '@contezza/core/services';
 import { AdfUtils } from '@contezza/core/utils';
@@ -12,7 +10,7 @@ import { EmailService } from './services/email.service';
 
 export function provideExtension(): EnvironmentProviders {
     return makeEnvironmentProviders([
-        provideTranslations('alfresco', 'assets/alfresco'),
+        // provideTranslations('alfresco', 'assets/alfresco'),
         provideEvaluators({
             // alfresco.selection.aspectNames.includeSome
             ...AdfUtils.makeRules(
