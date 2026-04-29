@@ -10,7 +10,7 @@ import { ShareSettings } from './share-settings';
 export interface GeneratedLink {
     link: string;
     label: string;
-    location?: string;
+    node?: Node;
     endDate?: Moment;
 }
 

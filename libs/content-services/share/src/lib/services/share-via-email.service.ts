@@ -6,11 +6,11 @@ import { UserProfileService } from '@alfresco/aca-shared';
 
 import { EmailParameters, EmailService } from '@contezza/core/services';
 
-import { ShareActionPayload } from '@contezza/content-services/share/shared';
+import { GeneratedLink, ShareActionPayload } from '@contezza/content-services/share/shared';
 
 @Injectable({ providedIn: 'root' })
 export class ShareViaEmailService {
-    private static makeEmailBody(links: { label: string; link: string }[], sender: string, body: string): string {
+    private static makeEmailBody(links: GeneratedLink[], sender: string, body: string): string {
         return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html><head>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>

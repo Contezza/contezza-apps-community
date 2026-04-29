@@ -23,7 +23,7 @@ export function provideShare(): EnvironmentProviders {
                         nodes.map(node => ({
                             link: `${baseUrl}/#/view/(viewer:${node.id})`,
                             label: node.name,
-                            location: node.path?.elements?.find(el => el.nodeType === 'st:site')?.name,
+                            node,
                         })),
                     );
             },

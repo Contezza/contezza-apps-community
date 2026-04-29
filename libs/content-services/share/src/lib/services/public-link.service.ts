@@ -46,7 +46,7 @@ export class PublicLinkService {
                         map(id => ({
                             link: `${baseUrl}/#/preview/s/${id}`,
                             label: node.name,
-                            location: node.path?.elements?.find(el => el.nodeType === 'st:site')?.name,
+                            node,
                             endDate: settings.endDate,
                         })),
                     );
