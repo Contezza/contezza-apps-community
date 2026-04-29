@@ -1,0 +1,39 @@
+{
+    "$id": "content-services.share",
+    "$version": "@@project.version@@",
+    "$name": "Contezza Content Services Share",
+    "$description": "Default configuration for available options in Share action settings",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "content-services": {
+            "share": {
+                "linkTypes": [
+                    {
+                        "id": "content-services.share.link-types.public",
+                        "label": "CONTENT_SERVICES.SHARE.PROPERTIES.LINK_TYPE.OPTIONS.PUBLIC.LABEL",
+                        "description": "CONTENT_SERVICES.SHARE.PROPERTIES.LINK_TYPE.OPTIONS.PUBLIC.INFO",
+                        "endDateType": "optional"
+                    },
+                    {
+                        "id": "content-services.share.link-types.intern",
+                        "label": "CONTENT_SERVICES.SHARE.PROPERTIES.LINK_TYPE.OPTIONS.INTERN.LABEL",
+                        "description": "CONTENT_SERVICES.SHARE.PROPERTIES.LINK_TYPE.OPTIONS.INTERN.INFO"
+                    }
+                ],
+                "channels": [
+                    {
+                        "id": "content-services.share.channels.show",
+                        "label": "CONTENT_SERVICES.SHARE.PROPERTIES.CHANNEL.OPTIONS.SHOW.LABEL",
+                        "actionType": "[CONTENT_SERVICES.SHARE] SHOW"
+                    },
+                    {
+                        "id": "content-services.share.channels.email",
+                        "label": "CONTENT_SERVICES.SHARE.PROPERTIES.CHANNEL.OPTIONS.EMAIL.LABEL",
+                        "actionType": "[CONTENT_SERVICES.SHARE] EMAIL"
+                    }
+                ]
+            }
+        }
+    }
+}

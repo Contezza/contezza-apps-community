@@ -1,0 +1,73 @@
+{
+    "CONTENT_SERVICES": {
+        "SHARE": {
+            "ACTIONS": {
+                "SHARE": "Share",
+                "UPDATE_SHARE_SETTINGS": "Shared Link Settings"
+            },
+            "DIALOGS": {
+                "EMAIL": {
+                    "TITLE": {
+                        "SINGLE": "Share {{ name }} via Email",
+                        "MULTIPLE": "Share {{ number }} files via Email"
+                    },
+                    "DEFAULT_BODY": {
+                        "SINGLE": "I want to share a file with you. Click on the link below to open the file.",
+                        "MULTIPLE": "I want to share {{ number }} files with you.  Click on the link(s) below to open the files."
+                    }
+                },
+                "LINKS": {
+                    "TITLE": "Shared files"
+                },
+                "SHARE": {
+                    "INFO": {
+                        "SINGLE": "Here you can choose how to share the selected file.",
+                        "MULTIPLE": "Here you can choose how to share the selected file(s)."
+                    },
+                    "TITLE": {
+                        "SINGLE": "Share {{ name }}",
+                        "MULTIPLE": "Share {{ number }} files"
+                    }
+                }
+            },
+            "MESSAGES": {
+                "INFO": {
+                    "SHARED": "File(s) shared"
+                }
+            },
+            "PROPERTIES": {
+                "END_DATE": {
+                    "LABEL": "Expires on"
+                },
+                "LINK_TYPE": {
+                    "OPTIONS": {
+                        "INTERN": {
+                            "LABEL": "Intern",
+                            "INFO": {
+                                "SINGLE": "Option \"{{ label }}\" creates a link that only members of your organization can use.",
+                                "MULTIPLE": "Option \"{{ label }}\" creates links that only members of your organization can use."
+                            }
+                        },
+                        "PUBLIC": {
+                            "LABEL": "Public",
+                            "INFO": {
+                                "SINGLE": "Option \"{{ label }}\" creates a link that anyone can use to view the file.",
+                                "MULTIPLE": "Option \"{{ label }}\" creates links that anyone can use to view the files."
+                            }
+                        }
+                    }
+                },
+                "CHANNEL": {
+                    "OPTIONS": {
+                        "EMAIL": {
+                            "LABEL": "Email"
+                        },
+                        "SHOW": {
+                            "LABEL": "Show link(s)"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

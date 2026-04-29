@@ -1,0 +1,40 @@
+{
+    "$id": "content-services.dynamic-forms",
+    "$version": "@@project.version@@",
+    "$name": "Contezza Content Services Dynamic Forms",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "dynamicforms": [
+            {
+                "id": "content-services.dynamic-forms.email",
+                "form": {
+                    "subfields": [
+                        {
+                            "id": "to",
+                            "type": "input",
+                            "label": "CONTENT_SERVICES.PROPERTIES.EMAIL.TO.LABEL",
+                            "validations": ["required", "email"]
+                        },
+                        {
+                            "id": "subject",
+                            "type": "input",
+                            "label": "CONTENT_SERVICES.PROPERTIES.EMAIL.SUBJECT.LABEL",
+                            "validations": ["required"]
+                        },
+                        {
+                            "id": "body",
+                            "type": "textarea",
+                            "placeholder": "CONTENT_SERVICES.PROPERTIES.EMAIL.BODY.PLACEHOLDER",
+                            "initialValue": "${initialValue->body}",
+                            "settings": {
+                                "rows": 5
+                            },
+                            "validations": ["required"]
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

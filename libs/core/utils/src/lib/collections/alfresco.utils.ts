@@ -30,4 +30,21 @@ export class AlfrescoUtils {
         const value = properties?.[name];
         return value !== null && value !== undefined ? parseValue(value) : null;
     }
+
+    /**
+     * Sets a property value on the local representation of a node. This does not affect the node in Alfresco.
+     * It is useful to mimic the effect of an API call without needing to retrieve the node (or result list) again.
+     *
+     * @param node The {@link Node} or {@link NodeEntry} the property must be set in.
+     * @param property A {@link Property} definition.
+     * @param value The new value of the property.
+     */
+    static setNodePropertyValue<TName extends string, TValue>(node: Node | NodeEntry, property: Property<TName, TValue>, value: TValue) {
+        const target = 'entry' in node ? node.entry : node;
+        if (!target.properties) {
+            target.properties = {};
+        }
+        const { name } = property;
+        target.properties[name] = value;
+    }
 }

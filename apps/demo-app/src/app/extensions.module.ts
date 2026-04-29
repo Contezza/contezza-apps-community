@@ -12,6 +12,7 @@ import { ResponsiveModule } from '@contezza/core/responsive';
 import { AlfrescoExtensionModule } from '@contezza/alfresco';
 import { AlfrescoRmExtensionModule } from '@contezza/alfresco/rm';
 import { ContentServicesSearchExtensionModule } from '@contezza/content-services/search';
+import { ContentServicesShareExtensionModule } from '@contezza/content-services/share';
 import { JsConsoleExtensionModule } from '@contezza/js-console/shared';
 import { LayoutExtensionModule } from '@contezza/layout';
 import { ContezzaNodeBrowserSharedModule } from '@contezza/node-browser/shared';
@@ -24,6 +25,7 @@ import { ProfileExtensionModule } from '@contezza/profile';
         LayoutExtensionModule,
         AosExtensionModule,
         ContentServicesSearchExtensionModule,
+        ContentServicesShareExtensionModule,
         ProfileExtensionModule,
         AlfrescoExtensionModule,
         AlfrescoRmExtensionModule,

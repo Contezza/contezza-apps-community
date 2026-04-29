@@ -1,0 +1,73 @@
+{
+    "CONTENT_SERVICES": {
+        "SHARE": {
+            "ACTIONS": {
+                "SHARE": "Delen",
+                "UPDATE_SHARE_SETTINGS": "Instellingen gedeelde koppeling"
+            },
+            "DIALOGS": {
+                "EMAIL": {
+                    "TITLE": {
+                        "SINGLE": "Delen {{ name }} via E-mail",
+                        "MULTIPLE": "Delen {{ number }} bestanden via E-mail"
+                    },
+                    "DEFAULT_BODY": {
+                        "SINGLE": "Ik heb een bestand met u gedeeld. Klik op de onderstaande koppeling om het bestand te openen.",
+                        "MULTIPLE": "Ik heb {{ number }} bestanden met u gedeeld. Klik op de onderstaande koppeling(en) om de bestanden te openen."
+                    }
+                },
+                "LINKS": {
+                    "TITLE": "Gedeelde bestanden"
+                },
+                "SHARE": {
+                    "INFO": {
+                        "SINGLE": "Hier kunt u kiezen op welke manier u het geselecteerde bestand wilt delen.",
+                        "MULTIPLE": "Hier kunt u kiezen op welke manier u de geselecteerde bestanden wilt delen."
+                    },
+                    "TITLE": {
+                        "SINGLE": "Delen {{ name }}",
+                        "MULTIPLE": "Delen {{ number }} bestanden"
+                    }
+                }
+            },
+            "MESSAGES": {
+                "INFO": {
+                    "SHARED": "Bestand(en) gedeeld"
+                }
+            },
+            "PROPERTIES": {
+                "END_DATE": {
+                    "LABEL": "Verloopt op"
+                },
+                "LINK_TYPE": {
+                    "OPTIONS": {
+                        "INTERN": {
+                            "LABEL": "Intern",
+                            "INFO": {
+                                "SINGLE": "Bij \"{{ label }}\" wordt er een koppeling aangemaakt die alleen leden van uw organisatie kunnen gebruiken.",
+                                "MULTIPLE": "Bij \"{{ label }}\" worden er koppelingen aangemaakt die alleen leden van uw organisatie kunnen gebruiken."
+                            }
+                        },
+                        "PUBLIC": {
+                            "LABEL": "Publiek",
+                            "INFO": {
+                                "SINGLE": "Bij \"{{ label }}\" wordt er een koppeling aangemaakt die iedereen kan gebruiken om het bestand te bekijken.",
+                                "MULTIPLE": "Bij \"{{ label }}\" worden er koppelingen aangemaakt die iedereen kan gebruiken om de bestanden te bekijken."
+                            }
+                        }
+                    }
+                },
+                "CHANNEL": {
+                    "OPTIONS": {
+                        "EMAIL": {
+                            "LABEL": "E-mail"
+                        },
+                        "SHOW": {
+                            "LABEL": "Koppeling(en) tonen"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
