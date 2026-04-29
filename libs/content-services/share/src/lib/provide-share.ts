@@ -21,8 +21,9 @@ export function provideShare(): EnvironmentProviders {
                 return nodes =>
                     of(
                         nodes.map(node => ({
-                            label: node.name,
                             link: `${baseUrl}/#/view/(viewer:${node.id})`,
+                            label: node.name,
+                            location: node.path?.elements?.find(el => el.nodeType === 'st:site')?.name,
                         })),
                     );
             },

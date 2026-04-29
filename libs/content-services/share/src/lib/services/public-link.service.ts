@@ -42,7 +42,14 @@ export class PublicLinkService {
                                       map(data => data.entry.id),
                                       tap(id => AlfrescoUtils.setNodePropertyValue(node, PublicLinkService.PROPERTY_QSHARE_SHARED_ID, id)),
                                   )
-                    ).pipe(map(id => ({ label: node.name, link: `${baseUrl}/#/preview/s/${id}` })));
+                    ).pipe(
+                        map(id => ({
+                            link: `${baseUrl}/#/preview/s/${id}`,
+                            label: node.name,
+                            location: node.path?.elements?.find(el => el.nodeType === 'st:site')?.name,
+                            endDate: settings.endDate,
+                        })),
+                    );
                 }),
             );
         };
