@@ -2,27 +2,25 @@ import { inject, Injectable } from '@angular/core';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { filter, map, of, switchMap } from 'rxjs';
+import { filter, map, switchMap } from 'rxjs';
 
 import { DialogLoaderService, DialogService } from '@contezza/core/dialogs';
 import { EffectsHelper } from '@contezza/core/effects-helper';
 import { showSnackbarInfo } from '@contezza/core/notifications';
-import { TRANSLATE } from '@contezza/core/translate';
 
-import { email, ExtensionService, share, show } from '@contezza/content-services/share/shared';
-import { DynamicFormDialogService } from '@contezza/dynamic-forms/dialog';
+import { email, EmailService, ExtensionService, share, show } from '@contezza/content-services/share/shared';
 
 import { ShareViaEmailService } from '../services/share-via-email.service';
 
 @Injectable()
 export class Effects {
+    // constructor
     private readonly actions$ = inject(Actions);
     private readonly helper = inject(EffectsHelper);
-    private readonly translate = inject(TRANSLATE);
     private readonly dialog = inject(DialogService);
     private readonly dialogLoader = inject(DialogLoaderService);
-    private readonly dfDialog = inject(DynamicFormDialogService);
     private readonly extensions = inject(ExtensionService);
+    private readonly emailService = inject(EmailService);
     private readonly shareViaEmailService = inject(ShareViaEmailService);
 
     readonly share$ = createEffect(() =>
@@ -51,40 +49,12 @@ export class Effects {
     readonly email$ = createEffect(() =>
         this.actions$.pipe(
             ofType(email),
-            switchMap(({ payload }) => {
-                const { nodes } = payload;
-
-                const number = nodes.length;
-                const singular = number === 1;
-                const body = singular
-                    ? this.translate('CONTENT_SERVICES.SHARE.DIALOGS.EMAIL.DEFAULT_BODY.SINGLE')
-                    : this.translate('CONTENT_SERVICES.SHARE.DIALOGS.EMAIL.DEFAULT_BODY.MULTIPLE', { number });
-
-                return this.dfDialog
-                    .open({
-                        width: '700px',
-                        data: {
-                            title: singular
-                                ? {
-                                      label: 'CONTENT_SERVICES.SHARE.DIALOGS.EMAIL.TITLE.SINGLE',
-                                      params: { name: nodes[0].name },
-                                  }
-                                : {
-                                      label: 'CONTENT_SERVICES.SHARE.DIALOGS.EMAIL.TITLE.MULTIPLE',
-                                      params: { number },
-                                  },
-                            dynamicFormId: {
-                                id: 'content-services.dynamic-forms.email',
-                                providedDependencies: { initialValue: of({ body }) },
-                            },
-                            buttons: { cancel: 'APP.BUTTONS.CANCEL', submit: 'CONTENT_SERVICES.SHARE.ACTIONS.SHARE' },
-                        },
-                    })
-                    .pipe(
-                        filter(Boolean),
-                        this.helper.execute(response => this.shareViaEmailService.share(payload, response)),
-                    );
-            }),
+            switchMap(({ payload }) =>
+                this.emailService.openEmailDialog(payload.nodes).pipe(
+                    filter(Boolean),
+                    this.helper.execute(response => this.shareViaEmailService.share(payload, response)),
+                ),
+            ),
             map(() => showSnackbarInfo({ payload: 'CONTENT_SERVICES.SHARE.MESSAGES.INFO.SHARED' })),
         ),
     );
