@@ -15,6 +15,19 @@
                 "FOLDER_UPLOAD_NOT_ALLOWED": "It is not allowed to drag & drop folders at this location",
                 "FILE_UPLOAD_NOT_ALLOWED": "It is not allowed to drag & drop files at this location"
             }
+        },
+        "PROPERTIES": {
+            "EMAIL": {
+                "BODY": {
+                    "PLACEHOLDER": "Add a message"
+                },
+                "SUBJECT": {
+                    "LABEL": "Subject"
+                },
+                "TO": {
+                    "LABEL": "Email address"
+                }
+            }
         }
     }
 }

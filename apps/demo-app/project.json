@@ -165,6 +165,16 @@
                         "glob": "**/*.json"
                     },
                     {
+                        "input": "libs/content-services/share/assets",
+                        "output": "./assets/content-services/share",
+                        "glob": "**/*"
+                    },
+                    {
+                        "input": "libs/content-services/share/assets/extensions",
+                        "output": "./assets/plugins",
+                        "glob": "**/*.json"
+                    },
+                    {
                         "input": "libs/content-services/presets/assets",
                         "output": "./assets/content-services/presets",
                         "glob": "**/*"

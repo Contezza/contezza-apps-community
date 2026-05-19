@@ -1,0 +1,36 @@
+{
+    "$id": "content-services.share.rules",
+    "$version": "@@project.version@@",
+    "$name": "Contezza Content Services Share Rules",
+    "$vendor": "Contezza BV",
+
+    "rules": [
+        {
+            "id": "content-services.share.rules.canShare",
+            "type": "core.every",
+            "parameters": [
+                {
+                    "value": "context=>return !context.navigation.url?.startsWith('/trashcan')"
+                },
+                {
+                    "value": "context=>return context.repository.status.isQuickShareEnabled"
+                },
+                {
+                    "value": "app.selection.isFile"
+                }
+            ]
+        },
+        {
+            "id": "content-services.share.rules.canUpdateShareSettings",
+            "type": "core.every",
+            "parameters": [
+                {
+                    "value": "canToggleSharedLink"
+                },
+                {
+                    "value": "app.selection.file.isShared"
+                }
+            ]
+        }
+    ]
+}

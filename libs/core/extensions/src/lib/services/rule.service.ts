@@ -1,25 +1,10 @@
 import { inject, Injectable, InjectionToken } from '@angular/core';
 
-import {
-    ExtensionElement,
-    ExtensionLoaderService,
-    reduceEmptyMenus,
-    reduceSeparators,
-    RuleContext,
-    RuleEvaluator,
-    RuleParameter,
-    RuleService as AdfRuleService,
-} from '@alfresco/adf-extensions';
+import { ExtensionLoaderService, reduceEmptyMenus, reduceSeparators, RuleContext, RuleEvaluator, RuleParameter, RuleService as AdfRuleService } from '@alfresco/adf-extensions';
 
 import { ContezzaUtils, OrArray, Tree } from '@contezza/core/utils';
 
-interface ExtensionElementWithRules extends ExtensionElement {
-    rules?: {
-        [key: string]: string;
-        enabled?: string;
-        visible?: string;
-    };
-}
+import { ExtensionElementWithRules } from '../models';
 
 type ExtensionElementWithRulesTree = Tree<ExtensionElementWithRules, 'children', '*'>;
 

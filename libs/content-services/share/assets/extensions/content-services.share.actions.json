@@ -1,0 +1,97 @@
+{
+    "$id": "content-services.share.actions",
+    "$version": "@@project.version@@",
+    "$name": "Contezza Content Services Share Actions",
+    "$vendor": "Contezza BV",
+
+    "templates": {
+        "actions": [
+            {
+                "id": "content-services.share.actions.share",
+                "title": "CONTENT_SERVICES.SHARE.ACTIONS.SHARE",
+                "icon": "link",
+                "actions": {
+                    "click": "[CONTENT_SERVICES.SHARE] SHARE"
+                },
+                "rules": {
+                    "visible": "content-services.share.rules.canShare"
+                }
+            },
+            {
+                "id": "content-services.share.actions.updateShareSettings",
+                "title": "CONTENT_SERVICES.SHARE.ACTIONS.UPDATE_SHARE_SETTINGS",
+                "icon": "link",
+                "actions": {
+                    "$comment": "use ACA action",
+                    "click": "SHARE_NODE"
+                },
+                "rules": {
+                    "visible": "content-services.share.rules.canUpdateShareSettings"
+                }
+            }
+        ]
+    },
+
+    "features": {
+        "contextMenu": [
+            {
+                "id": "content-services.share.contextMenu.share",
+                "imports": "templates.actions[content-services.share.actions.share]",
+                "order": 650
+            },
+            {
+                "id": "content-services.share.contextMenu.updateShareSettings",
+                "imports": "templates.actions[content-services.share.actions.updateShareSettings]",
+                "order": 651
+            },
+            {
+                "id": "app.context.menu.share",
+                "disabled": true
+            }
+        ],
+
+        "toolbar": [
+            {
+                "id": "app.toolbar.share",
+                "disabled": true
+            },
+            {
+                "id": "app.toolbar.more",
+                "children": [
+                    {
+                        "id": "content-services.share.toolbar.share",
+                        "imports": "templates.actions[content-services.share.actions.share]",
+                        "order": 650
+                    },
+                    {
+                        "id": "content-services.share.toolbar.updateShareSettings",
+                        "imports": "templates.actions[content-services.share.actions.updateShareSettings]",
+                        "order": 651
+                    }
+                ]
+            }
+        ],
+        "//viewer": {
+            "toolbarActions": [
+                {
+                    "id": "content-services.viewer.toolbar-actions.rotateFileInViewer",
+                    "imports": "templates.actions[content-services.actions.rotateFileInViewer]"
+                },
+                {
+                    "id": "app.viewer.toolbar.more",
+                    "children": [
+                        {
+                            "id": "app.viewer.permissions",
+                            "imports": "templates.actions[content-services.actions.managePermissions]!important"
+                        },
+                        {
+                            "id": "content-services.viewer.toolbar-actions.navigateToParent",
+                            "imports": "templates.actions[content-services.actions.navigateToParent]",
+                            "order": 1000
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

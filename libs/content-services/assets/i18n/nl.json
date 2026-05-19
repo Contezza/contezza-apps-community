@@ -15,6 +15,19 @@
                 "FOLDER_UPLOAD_NOT_ALLOWED": "Het is niet toegestaan om mappen toe te voegen op deze locatie",
                 "FILE_UPLOAD_NOT_ALLOWED": "Het is niet toegestaan om documenten toe te voegen op deze locatie"
             }
+        },
+        "PROPERTIES": {
+            "EMAIL": {
+                "BODY": {
+                    "PLACEHOLDER": "Voeg een bericht toe"
+                },
+                "SUBJECT": {
+                    "LABEL": "Onderwerp"
+                },
+                "TO": {
+                    "LABEL": "E-mailadres"
+                }
+            }
         }
     }
 }

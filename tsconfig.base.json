@@ -22,6 +22,7 @@
         "useDefineForClassFields": false,
         "paths": {
             "@contezza/alfresco": ["libs/alfresco/src"],
+            "@contezza/alfresco/apis": ["libs/alfresco/apis/src"],
             "@contezza/alfresco/shared": ["libs/alfresco/shared/src"],
             "@contezza/alfresco/rm": ["libs/alfresco/rm/src"],
             "@contezza/alfresco/rm/apis": ["libs/alfresco/rm/apis/src"],
@@ -38,6 +39,9 @@
             "@contezza/content-services/search/components/*": ["libs/content-services/search/components/*/src"],
             "@contezza/content-services/search/page": ["libs/content-services/search/page/src"],
             "@contezza/content-services/search/shared": ["libs/content-services/search/shared/src"],
+            "@contezza/content-services/share": ["libs/content-services/share/src"],
+            "@contezza/content-services/share/components/*": ["libs/content-services/share/components/*/src"],
+            "@contezza/content-services/share/shared": ["libs/content-services/share/shared/src"],
             "@contezza/content-services/shared": ["libs/content-services/shared/src"],
 
             "@contezza/core": ["libs/core/src"],
@@ -59,6 +63,9 @@
             "@contezza/core/responsive/components/*": ["libs/core/responsive/components/*/src"],
             "@contezza/core/services": ["libs/core/services/src/index.ts"],
             "@contezza/core/stores": ["libs/core/stores/src/index.ts"],
+            "@contezza/core/theme": ["libs/core/theme/src"],
+            "@contezza/core/theme/components/*": ["libs/core/theme/components/*/src"],
+            "@contezza/core/theme/shared": ["libs/core/theme/shared/src"],
             "@contezza/core/translate": ["libs/core/translate/src"],
             "@contezza/core/utils": ["libs/core/utils/src/index.ts"],
 
