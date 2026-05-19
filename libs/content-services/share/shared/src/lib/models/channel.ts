@@ -1,8 +1,6 @@
 export interface Channel {
     id: string;
     actionType: string;
-    label?: string;
-    tooltip?: string;
-    description?: string;
+    label: string;
     allowedByLinkTypes?: string[];
 }
