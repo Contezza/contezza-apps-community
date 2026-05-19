@@ -30,6 +30,16 @@
             "input": "./search/assets/extensions",
             "output": "/assets/extensions/",
             "glob": "**/*"
+        },
+        {
+            "input": "./share/assets",
+            "output": "/assets/share/",
+            "glob": "**/*"
+        },
+        {
+            "input": "./share/assets/extensions",
+            "output": "/assets/extensions/",
+            "glob": "**/*"
         }
     ]
 }

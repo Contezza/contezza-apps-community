@@ -1,6 +1,6 @@
 import { inject, Injectable, InjectionToken, Type } from '@angular/core';
 
-import { Observable, OperatorFunction, switchMap } from 'rxjs';
+import { map, Observable, of, OperatorFunction, switchMap } from 'rxjs';
 import * as rxjs from 'rxjs/operators';
 
 import { ArrayUtils, ContezzaUtils, NgUtils } from '@contezza/core/utils';
@@ -63,6 +63,26 @@ export class ContezzaIdResolverService {
                 },
             },
             'map',
+        );
+
+        this.set(
+            {
+                applyTo: ({ key, filters }: { key: string; filters: ContezzaIdResolverSource[] }) =>
+                    switchMap((value?: Record<string, any>) =>
+                        value && key in value && filters.length
+                            ? filters
+                                  .map(flt => this.resolve(flt, 'operator'))
+                                  .reduce((acc, operator) => acc.pipe(operator), of(value[key]))
+                                  .pipe(
+                                      map(filtered => ({
+                                          ...value,
+                                          [key]: filtered,
+                                      })),
+                                  )
+                            : of(value),
+                    ),
+            },
+            'operator',
         );
     }
 

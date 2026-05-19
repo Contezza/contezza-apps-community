@@ -33,6 +33,8 @@ export function provideExtension(): EnvironmentProviders {
     return makeEnvironmentProviders([
         provideTranslations('core', 'assets/core'),
         provideEvaluators({
+            // app.selection.isFile
+            ...AdfUtils.makeRules('isFile', ({ isFile }) => isFile),
             'app.selection.single': ({ selection }) => selection?.count === 1,
             'auth.isOauth': context => context.auth.isOauth(),
             'user.groups.includeSome': ({ profile }, ...groups: string[]) => {

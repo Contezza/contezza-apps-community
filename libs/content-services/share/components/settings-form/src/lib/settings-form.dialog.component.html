@@ -1,0 +1,48 @@
+<div mat-dialog-title>
+    <contezza-dialog-title [title]="title()" />
+</div>
+<mat-dialog-content>
+    <form [formGroup]="form" class="contezza-share-settings-form">
+        <mat-radio-group formControlName="linkType" aria-label="Select an option" color="primary" class="contezza-share-settings-form-link-type">
+            @for (linkType of linkTypes; track linkType.id) {
+                <mat-radio-button [id]="linkType.id" [value]="linkType">{{ linkType.label | translate }}</mat-radio-button>
+            }
+        </mat-radio-group>
+        <div class="contezza-share-settings-form-end-date">
+            <mat-slide-toggle
+                color="primary"
+                data-automation-id="end-date"
+                aria-label="{{ 'CONTENT_SERVICES.SHARE.PROPERTIES.END_DATE.LABEL' | translate }}"
+                formControlName="hasEndDate"
+                labelPosition="before"
+            >
+                {{ 'CONTENT_SERVICES.SHARE.PROPERTIES.END_DATE.LABEL' | translate }}
+            </mat-slide-toggle>
+            <mat-form-field floatLabel="auto">
+                <input
+                    #startDateInput
+                    matInput
+                    [min]="TOMORROW"
+                    formControlName="endDate"
+                    [matDatepicker]="$any(startDatePicker)"
+                    placeholder="{{ 'CONTENT_SERVICES.SHARE.PROPERTIES.END_DATE.LABEL' | translate }}"
+                    (focus)="startDatePicker.open()"
+                    (focusout)="startDateInput.blur()"
+                />
+                <mat-datepicker-toggle matSuffix [for]="startDatePicker" />
+                <mat-datepicker #startDatePicker />
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions class="contezza-dialog-actions">
+    <button mat-button mat-dialog-close="">
+        {{ 'APP.BUTTONS.CANCEL' | translate }}
+    </button>
+    @for (channel of channels(); track channel.id) {
+        <button mat-button [id]="channel.id" [disabled]="form.invalid" (click)="onSubmit(channel)">
+            {{ channel.label | translate }}
+        </button>
+    }
+</mat-dialog-actions>

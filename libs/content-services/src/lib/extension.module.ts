@@ -26,6 +26,7 @@ import { Effects } from './store/effects';
         provideExtensionConfig([
             // meaningless comment to force items on multiple lines
             'content-services.actions.json',
+            'content-services.dynamic-forms.json',
             'content-services.icons.json',
             'content-services.rules.json',
         ]),

@@ -1,0 +1,28 @@
+.contezza-dialog-actions {
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.contezza-share-settings-form {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    &-link-type {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+
+        margin-top: 10px;
+    }
+
+    &-end-date {
+        display: flex;
+        flex-direction: column;
+
+        ::ng-deep .mat-mdc-slide-toggle .mdc-form-field .mdc-label {
+            padding-left: 0;
+        }
+    }
+}
