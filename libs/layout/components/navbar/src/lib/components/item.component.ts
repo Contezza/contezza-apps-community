@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Directive, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Directive, HostBinding, inject, input, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, NavigationExtras, Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
@@ -11,29 +11,33 @@ import { NavbarItem, NavbarMode } from '../models';
 import { NavbarItemUtils } from '../utils';
 
 @Directive()
-// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export abstract class ItemComponent implements OnInit, OnDestroy {
-    @Input()
-    item!: NavbarItem;
+    // constructor
+    private readonly cd = inject(ChangeDetectorRef);
+    private readonly router = inject(Router);
+    private readonly store = inject<Store<AppStore>>(Store);
 
-    @Input()
+    // inputs
+    readonly item = input.required<NavbarItem>();
+    readonly mode = input.required<NavbarMode>();
+
     @HostBinding('class')
-    mode!: NavbarMode;
+    get modeClass() {
+        return this.mode();
+    }
 
     @HostBinding('class.active')
     classActive = false;
 
     private readonly destroy$ = new Subject<void>();
 
-    constructor(private readonly cd: ChangeDetectorRef, private readonly router: Router, private readonly store: Store<AppStore>) {}
-
     ngOnInit() {
         // after each navigation check whether this element is active and update its html class accordingly
         this.router.events
             .pipe(
-                filter((event) => event instanceof NavigationEnd),
+                filter(event => event instanceof NavigationEnd),
                 startWith(void 0),
-                takeUntil(this.destroy$)
+                takeUntil(this.destroy$),
             )
             .subscribe(() => {
                 this.classActive = this.active;
@@ -54,7 +58,7 @@ export abstract class ItemComponent implements OnInit, OnDestroy {
     protected abstract get active(): boolean;
 
     protected navigateTo(item: NavbarItem, navigationExtras?: NavigationExtras) {
-        const action = NavbarItemUtils.getNavigationAction(item, (url) => this.router.parseUrl(url), navigationExtras);
+        const action = NavbarItemUtils.getNavigationAction(item, url => this.router.parseUrl(url), navigationExtras);
         if (action) {
             this.store.dispatch(action);
         }

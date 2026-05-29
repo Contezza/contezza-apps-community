@@ -1,28 +1,30 @@
-<ng-container *ngIf="mode === 'expanded'">
+@if (mode() === 'expanded') {
     <button
         mat-button
         class="contezza-navbar-simple-item-button"
         (click)="onClick()"
-        [id]="item.id"
-        [attr.aria-label]="item.title | translate"
-        [attr.data-automation-id]="item.id"
-        [attr.title]="item.description || '' | translate"
+        [id]="item().id"
+        [attr.aria-label]="item().title | translate"
+        [attr.data-automation-id]="item().id"
+        [attr.title]="item().description || '' | translate"
     >
-        <mat-icon *ngIf="item.icon" [contezzaIcon]="item.icon" />
-        <span class="contezza-navbar-simple-item-button-label">{{ item.title | translate }}</span>
+        @if (item().icon) {
+            <mat-icon [contezzaIcon]="item().icon" />
+        }
+        <span class="contezza-navbar-simple-item-button-label">{{ item().title | translate }}</span>
     </button>
-</ng-container>
-
-<ng-container *ngIf="mode === 'collapsed'">
+} @else {
     <button
         mat-icon-button
         class="contezza-navbar-simple-item-button"
         (click)="onClick()"
-        [id]="item.id"
-        [attr.aria-label]="item.title | translate"
-        [attr.data-automation-id]="item.id"
-        [attr.title]="item.description || '' | translate"
+        [id]="item().id"
+        [attr.aria-label]="item().title | translate"
+        [attr.data-automation-id]="item().id"
+        [attr.title]="item().description || '' | translate"
     >
-        <mat-icon *ngIf="item.icon" [contezzaIcon]="item.icon" />
+        @if (item().icon) {
+            <mat-icon [contezzaIcon]="item().icon" />
+        }
     </button>
-</ng-container>
+}
