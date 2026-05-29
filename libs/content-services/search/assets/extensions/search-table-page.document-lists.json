@@ -556,7 +556,7 @@
             },
             {
                 "id": "locked-config",
-                "title": "APP.DASHBOARD.SIDEBAR_ITEMS.LOCKED.TITLE",
+                "title": "CONTENT_SERVICES.SEARCH.BROWSE.LOCKED.TITLE",
                 "columnsId": "app.columns.locked",
                 "actionContext": { "target": "search-table-page.locked" },
                 "preferencesId": "locked",
@@ -568,8 +568,9 @@
                 },
                 "emptyContent": {
                     "icon": "folder",
-                    "title": "TEZZA.DASHBOARD.WIDGETS.FILES.EMPTY_LIST.TITLE",
-                    "subtitle": "TEZZA.DASHBOARD.WIDGETS.FILES.EMPTY_LIST.SUBTITLE"
+                    "title": "CONTENT_SERVICES.SEARCH.BROWSE.LOCKED.EMPTY_STATE.TITLE",
+                    "subtitle": "CONTENT_SERVICES.SEARCH.BROWSE.LOCKED.EMPTY_STATE.SUBTITLE"
+
                 },
                 "baseQuery": "ASPECT:\"cm:lockable\" AND (cm:lockType:\"READ_ONLY_LOCK\" OR cm:lockType:\"WRITE_LOCK\")",
                 "queryTemplate": {

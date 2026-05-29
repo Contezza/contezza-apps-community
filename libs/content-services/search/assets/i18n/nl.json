@@ -15,6 +15,13 @@
                         "TITLE": "Geen resultaten",
                         "TEXT": "Geen zip-bestanden gevonden"
                     }
+                },
+                "LOCKED": {
+                    "TITLE": "Vergrendelde bestanden",
+                    "EMPTY_STATE": {
+                        "TITLE": "Map is leeg",
+                        "SUBTITLE": "Geen objecten gevonden."
+                    }
                 }
             }
         }
