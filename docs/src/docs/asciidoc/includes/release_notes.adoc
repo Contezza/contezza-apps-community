@@ -10,6 +10,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2026-05-29
+|3.10.1
+|View <<Release 3.10.1,release details>>.
+
 |2026-05-19
 |3.10.0
 |View <<Release 3.10.0,release details>>.
@@ -405,6 +409,13 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 3.10.1
+
+Bugfixes/minor changes:
+
+- @contezza/content-services/search - Refactor `SearchBarComponent` for WCAG 2.1 https://support.contezza.nl/issues/36091[(#36091)].
+- @contezza/layout - Refactor `NavbarComponent` for WCAG 2.1 https://support.contezza.nl/issues/36855[(#36855)].
 
 ==== Release 3.10.0
 
