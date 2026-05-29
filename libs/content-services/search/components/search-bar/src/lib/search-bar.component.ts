@@ -1,27 +1,28 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
-import { MatAutocompleteModule, MatAutocompleteTrigger } from '@angular/material/autocomplete';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
+import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, OnInit, Output, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatDividerModule } from '@angular/material/divider';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import { Observable } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map, Observable, tap } from 'rxjs';
 
 import { GenericBucket, NodeEntry, ResultSetPaging, ResultSetRowEntry, SearchRequest } from '@alfresco/js-api';
 
-import { ContezzaLetModule } from '@contezza/core/directives';
+import { ActivableDirective, ContezzaLetModule } from '@contezza/core/directives';
 import { StringUtils } from '@contezza/core/utils';
-import { NavigateToResultPayload, SearchingService, SearchParametersStore, SearchResultsService } from '@contezza/content-services/search/shared';
-import { FacetSelection } from '@contezza/content-services/search/components/facet-suggestions/shared';
-import { FacetSuggestionsComponent } from '@contezza/content-services/search/components/facet-suggestions';
 
+import { FacetSuggestionsComponent } from '@contezza/content-services/search/components/facet-suggestions';
+import { FacetSelection } from '@contezza/content-services/search/components/facet-suggestions/shared';
 import { formatResultSettings, ResultSettings, SearchBarSettings } from '@contezza/content-services/search/components/search-bar/shared';
+import { NavigateToResultPayload, SearchingService, SearchParametersStore, SearchResultsService } from '@contezza/content-services/search/shared';
 
 import { SearchResultComponent } from './components/search-result/search-result.component';
 
@@ -41,6 +42,8 @@ import { SearchResultComponent } from './components/search-result/search-result.
         MatDividerModule,
         FacetSuggestionsComponent,
         SearchResultComponent,
+        CdkOverlayOrigin,
+        CdkConnectedOverlay,
     ],
     templateUrl: 'search-bar.component.html',
     styleUrls: ['search-bar.component.scss'],
@@ -50,6 +53,11 @@ import { SearchResultComponent } from './components/search-result/search-result.
     providers: [SearchingService, SearchParametersStore, SearchResultsService],
 })
 export class SearchBarComponent implements SearchBarSettings, OnInit {
+    // constructor
+    private readonly seachingSource = inject(SearchingService);
+    private readonly searchParametersStore = inject(SearchParametersStore);
+    private readonly searchResults = inject(SearchResultsService);
+
     @Input()
     set settings(settings: SearchBarSettings) {
         const { resultSettings, ...rest } = settings;
@@ -62,7 +70,7 @@ export class SearchBarComponent implements SearchBarSettings, OnInit {
 
     @Input()
     set searchQueryFields(searchQueryFields: string[]) {
-        this.searchQuery = searchQueryFields.map((field) => field + ':"${value}"').join(' OR ');
+        this.searchQuery = searchQueryFields.map(field => field + ':"${value}"').join(' OR ');
     }
     @Input()
     set searchQuery(searchQuery: string) {
@@ -83,24 +91,26 @@ export class SearchBarComponent implements SearchBarSettings, OnInit {
     @Output()
     search = new EventEmitter<NavigateToResultPayload | NodeEntry>();
 
-    searchInput: FormControl<string | NodeEntry>;
+    keyManager?: ActiveDescendantKeyManager<ActivableDirective>;
 
-    readonly alwaysFalse = () => false;
+    panelOpen = false;
 
-    @ViewChild('autocompleteInput')
-    autocompleteInput: any;
+    searchInput: FormControl<string>;
 
-    @ViewChild(MatAutocompleteTrigger)
-    autocomplete: MatAutocompleteTrigger;
+    @ViewChild(FacetSuggestionsComponent)
+    facetSuggestionsComponent!: FacetSuggestionsComponent;
+
+    @ViewChildren(SearchResultComponent)
+    searchResultComponents!: QueryList<SearchResultComponent<any>>;
 
     readonly loading$: Observable<boolean> = this.searchResults.searching$;
-    readonly nodeResults$: Observable<ResultSetPaging> = this.searchResults.results$;
+    readonly nodeResults$: Observable<ResultSetPaging> = this.searchResults.results$.pipe(
+        // refresh key manager when new results are loaded
+        // setTimeout is necessary because refreshKeyManager is based on ViewChild and ViewChildren that need to be rendered
+        tap(() => setTimeout(() => this.refreshKeyManager())),
+    );
 
-    constructor(
-        private readonly seachingSource: SearchingService,
-        private readonly searchParametersStore: SearchParametersStore,
-        private readonly searchResults: SearchResultsService
-    ) {}
+    readonly alwaysFalse = () => false;
 
     ngOnInit() {
         this.searchInput = new FormControl('', [Validators.required, Validators.minLength(this.minChars)]);
@@ -112,13 +122,7 @@ export class SearchBarComponent implements SearchBarSettings, OnInit {
 
         this.searchParametersStore.bindQuery(
             this.searchInput.valueChanges.pipe(
-                filter((value): value is string => {
-                    if (typeof value !== 'string') {
-                        this.navigateToNode(value);
-                        return false;
-                    }
-                    return true;
-                }),
+                tap(value => (this.panelOpen = !!value)),
                 tap(() => this.seachingSource.next(true)),
                 filter(() => {
                     const valid = this.searchInput.valid;
@@ -127,45 +131,100 @@ export class SearchBarComponent implements SearchBarSettings, OnInit {
                     }
                     return valid;
                 }),
-                map((value) => this.searchQueryTemplate({ value }))
+                map(value => this.searchQueryTemplate({ value })),
             ),
-            'filterQuery'
+            'filterQuery',
         );
-    }
-
-    trackById(_: number, node: ResultSetRowEntry) {
-        return node.entry.id;
-    }
-
-    displayFn(item): string {
-        return item?.entry ? item.entry.name : '';
     }
 
     clearInput() {
         this.searchInput.setValue('');
     }
 
-    closePanel() {
-        setTimeout(() => {
-            this.autocomplete.closePanel();
-        });
+    openPanel() {
+        this.panelOpen = true;
     }
 
-    onEnterPressed() {
-        const searchTerm = this.searchInput.value;
-        if (this.searchInput.valid && typeof searchTerm === 'string') {
-            this.search.next({ q: searchTerm });
+    closePanel() {
+        this.panelOpen = false;
+    }
+
+    /**
+     * Handles keyboard interaction for the search input and result panel.
+     *
+     * The input keeps focus at all times while the result list is managed through
+     * ActiveDescendantKeyManager using the `aria-activedescendant` pattern.
+     *
+     * Supported interactions:
+     * - ArrowUp / ArrowDown:
+     * Navigate through activable search results.
+     *
+     * - Enter:
+     * Activates the currently highlighted result.
+     * If no result is active, triggers a normal search using the current input value.
+     *
+     * - Escape:
+     * Closes the search panel.
+     *
+     * @param event
+     */
+    onInputKeydown(event: KeyboardEvent): void {
+        switch (event.key) {
+            // Navigate through search results.
+            case 'ArrowDown':
+            case 'ArrowUp':
+                this.keyManager.onKeydown(event);
+
+                // Ensure the active item remains visible inside the scroll container.
+                this.keyManager.activeItem?.scrollIntoView();
+
+                event.preventDefault();
+                break;
+
+            // Activate current item or trigger search.
+            case 'Enter':
+                if (this.keyManager?.activeItem) {
+                    // Delegate activation to the currently highlighted item.
+                    this.keyManager.activeItem.click();
+                } else {
+                    // No active result:
+                    // execute a normal search from the input value.
+                    const searchTerm = this.searchInput.value;
+
+                    if (this.searchInput.valid && typeof searchTerm === 'string') {
+                        this.search.next({ q: searchTerm });
+                    }
+                }
+
+                event.preventDefault();
+                break;
+
+            // Close the panel.
+            case 'Escape':
+                this.closePanel();
+                event.preventDefault();
+                break;
         }
     }
 
-    onFacetClicked(bucket: GenericBucket & { id: string }) {
+    onFacetClick(bucket: GenericBucket & { id: string }) {
         const searchTerm = this.searchInput.value;
         if (this.searchInput.valid && typeof searchTerm === 'string') {
             this.search.next({ q: searchTerm, bucket });
         }
     }
 
-    private navigateToNode(node: NodeEntry) {
-        this.search.next(node);
+    onResultClick(item: NodeEntry | ResultSetRowEntry) {
+        this.searchInput.setValue(item.entry.name, { emitEvent: false });
+        this.search.next(item as NodeEntry);
+    }
+
+    private refreshKeyManager() {
+        this.keyManager = new ActiveDescendantKeyManager([
+            // facet suggestions
+            ...(this.facetSuggestionsComponent?.activableElements.toArray() || []),
+            // search results
+            ...this.searchResultComponents.map(row => row.activableElements.toArray()).flat(),
+        ]).withWrap();
     }
 }

@@ -2,7 +2,7 @@
     <ng-container *contezzaLet="loading$ | async as loading">
         <ng-container *ngIf="loading">
             <div class="facet-search-loading">
-                <mat-spinner color="accent"></mat-spinner>
+                <mat-spinner color="accent" />
             </div>
         </ng-container>
         <ng-container *ngIf="facets$ | async as facets">
@@ -12,21 +12,22 @@
                         <div class="facet-search-suggestions-groups-group">
                             <div class="facet-search-suggestions-groups-group-title">{{ facet.label | translate }}</div>
                             <div class="facet-search-suggestions-groups-group-list" *ngIf="facet.buckets?.length > 0">
-                                <div
-                                    class="facet-search-suggestions-groups-group-list-entry"
-                                    *ngFor="let entry of facet.buckets.slice(0, 6)"
-                                    (click)="onEntryClicked(entry, facet)"
-                                >
-                                    <mat-icon *ngIf="!entry.icon.includes('svg')">{{ entry.icon }}</mat-icon>
-                                    <mat-icon *ngIf="entry.icon.includes('svg')" [svgIcon]="entry.icon.replace('svg:', '')"></mat-icon>
-
-                                    <span class="facet-search-suggestions-groups-group-list-entry-name" title="{{ entry.display || entry.label | translate }}"
-                                        >{{ entry.display || entry.label | translate }} ({{ entry.metrics[0].value[entry.metrics[0].type] }})
-                                    </span>
-                                </div>
+                                @for (entry of facet.buckets.slice(0, 6); track entry) {
+                                    <button
+                                        mat-button
+                                        class="facet-search-suggestions-groups-group-list-entry"
+                                        contezzaActivable
+                                        [title]="entry.display || entry.label | translate"
+                                        (click)="onEntryClicked(entry, facet)"
+                                    >
+                                        <mat-icon *ngIf="!entry.icon.includes('svg')">{{ entry.icon }}</mat-icon>
+                                        <mat-icon *ngIf="entry.icon.includes('svg')" [svgIcon]="entry.icon.replace('svg:', '')" />
+                                        {{ entry.display || entry.label | translate }} ({{ entry.metrics[0].value[entry.metrics[0].type] }})
+                                    </button>
+                                }
                             </div>
                         </div>
-                        <mat-divider></mat-divider>
+                        <mat-divider />
                     </ng-container>
                 </div>
             </div>

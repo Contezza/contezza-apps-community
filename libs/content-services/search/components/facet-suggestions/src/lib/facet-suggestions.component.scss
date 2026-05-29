@@ -33,19 +33,30 @@
                 &-list {
                     display: flex;
                     flex-direction: row;
+                    gap: 0 14px;
                     flex-wrap: wrap;
                     flex: 4;
 
                     &-entry {
-                        display: flex;
-                        flex-direction: row;
-                        //justify-content: space-between;
+                        height: 32px;
                         padding: 0 2px;
-                        margin: 4px 12px 4px 0;
-                        cursor: pointer;
                         color: var(--theme-foreground-text-color);
 
-                        &:hover {
+                        .mat-icon {
+                            height: 24px;
+                            width: 24px;
+                            margin-right: 6px;
+                            &:not([data-mat-icon-type='svg']) {
+                                font-size: 24px;
+                            }
+                        }
+
+                        ::ng-deep .mat-mdc-button-persistent-ripple {
+                            display: none;
+                        }
+
+                        &:hover,
+                        &.contezza-active {
                             font-weight: bold;
                             color: var(--theme-accent-color);
                         }

@@ -1,8 +1,10 @@
 :host {
     display: flex;
+    align-items: center;
     gap: 25px;
 
-    &:hover .search-result-name {
+    &:hover .search-result-name,
+    .search-result-name.contezza-active {
         color: var(--theme-accent-color);
     }
 
@@ -18,6 +20,8 @@
         min-width: 0;
 
         line-height: initial;
+
+        overflow: hidden;
     }
 
     .search-result-name {
@@ -44,6 +48,10 @@
 
         ::ng-deep span {
             font-size: 13px;
+        }
+
+        .contezza-active {
+            text-decoration: underline;
         }
     }
 }
