@@ -4,7 +4,7 @@ import { map, of, tap } from 'rxjs';
 
 import moment from 'moment';
 
-import { SharedLinksApiService } from '@alfresco/adf-content-services';
+import { RenditionService, SharedLinksApiService } from '@alfresco/adf-content-services';
 import { Node } from '@alfresco/js-api';
 
 import { AlfrescoUtils, ContezzaObservables, ContezzaUtils, Property } from '@contezza/core/utils';
@@ -21,6 +21,7 @@ export class PublicLinkService {
     }
 
     // constructor
+    private readonly renditionService = inject(RenditionService);
     private readonly sharedLinksApi = inject(SharedLinksApiService);
 
     get linkGenerator() {
@@ -41,6 +42,7 @@ export class PublicLinkService {
                                   .pipe(
                                       map(data => data.entry.id),
                                       tap(id => AlfrescoUtils.setNodePropertyValue(node, PublicLinkService.PROPERTY_QSHARE_SHARED_ID, id)),
+                                      tap(() => this.renditionService.getNodeRendition(node.id)),
                                   )
                     ).pipe(
                         map(id => ({
