@@ -17,6 +17,18 @@ export class AlfrescoUtils {
     }
 
     /**
+     * Checks whether the given node has the given aspect.
+     *
+     * @param node The {@link Node} or {@link NodeEntry} whose aspects must be checked.
+     * @param aspect An aspect name.
+     * @returns Whether the given node has the given aspect.
+     */
+    static hasAspect(node: Node | NodeEntry, aspect: string): boolean {
+        const { aspectNames } = 'entry' in node ? node.entry : node;
+        return !!aspectNames?.includes(aspect);
+    }
+
+    /**
      * Extracts a node property value.
      * The return type is inferred based on the given {@link Property} definition.
      *
