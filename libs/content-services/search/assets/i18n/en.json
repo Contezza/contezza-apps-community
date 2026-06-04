@@ -20,11 +20,10 @@
                     "TITLE": "Locked files",
                     "EMPTY_STATE": {
                         "TITLE": "Folder is empty",
-                        "SUBTITLE": "No objects found."
+                        "TEXT": "No objects found."
                     }
                 }
             }
-
         }
     }
 }

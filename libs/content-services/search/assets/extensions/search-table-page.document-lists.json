@@ -569,8 +569,7 @@
                 "emptyContent": {
                     "icon": "folder",
                     "title": "CONTENT_SERVICES.SEARCH.BROWSE.LOCKED.EMPTY_STATE.TITLE",
-                    "subtitle": "CONTENT_SERVICES.SEARCH.BROWSE.LOCKED.EMPTY_STATE.SUBTITLE"
-
+                    "subtitle": "CONTENT_SERVICES.SEARCH.BROWSE.LOCKED.EMPTY_STATE.TEXT"
                 },
                 "baseQuery": "ASPECT:\"cm:lockable\" AND (cm:lockType:\"READ_ONLY_LOCK\" OR cm:lockType:\"WRITE_LOCK\")",
                 "queryTemplate": {

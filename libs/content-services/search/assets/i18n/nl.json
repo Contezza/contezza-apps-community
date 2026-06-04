@@ -20,7 +20,7 @@
                     "TITLE": "Vergrendelde bestanden",
                     "EMPTY_STATE": {
                         "TITLE": "Map is leeg",
-                        "SUBTITLE": "Geen objecten gevonden."
+                        "TEXT": "Geen objecten gevonden."
                     }
                 }
             }
