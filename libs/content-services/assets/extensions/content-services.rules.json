@@ -50,15 +50,7 @@
             "type": "core.every",
             "parameters": [
                 {
-                    "value": "core.some",
-                    "parameters": [
-                        {
-                            "value": "app.selection.folder.canUpdate"
-                        },
-                        {
-                            "value": "app.selection.file.canUpdate"
-                        }
-                    ]
+                    "value": "app.selection.single"
                 }
             ]
         },
@@ -71,9 +63,7 @@
                 },
                 {
                     "value": "app.selection.aspectNames.includeSome",
-                    "parameters": [
-                        "fm:discussable"
-                    ]
+                    "parameters": ["fm:discussable"]
                 }
             ]
         },
