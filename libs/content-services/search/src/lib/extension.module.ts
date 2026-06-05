@@ -6,7 +6,8 @@ import { FavoritesApiService, NodesApiService, SearchService, SitesService } fro
 import { provideTranslations } from '@alfresco/adf-core';
 import { ExtensionService as AdfExtensionService, provideExtensionConfig } from '@alfresco/adf-extensions';
 
-import { AdfUtils, ContezzaObservables } from '@contezza/core/utils';
+import { provideEvaluators } from '@contezza/core/extensions';
+import { AdfUtils, AlfrescoUtils, ContezzaObservables, Property } from '@contezza/core/utils';
 
 import { ContentServicesExtensionModule } from '@contezza/content-services';
 import { ContentServicesPresetsExtensionModule } from '@contezza/content-services/presets';
@@ -29,6 +30,34 @@ import * as rules from './rules';
             'search-table-page.document-lists.json',
             'search-table-page.dynamicforms.json',
         ]),
+        provideEvaluators({
+            // app.selection.hasUpdatePermissions
+            ...AdfUtils.makeRules('hasUpdatePermissions', (node, context) => context.permissions.check(node, ['update']), { prefix: 'app' }),
+            // app.selection.canUpdate
+            ...AdfUtils.makeRules(
+                'canUpdate',
+                (node, context) => {
+                    if (context.permissions.check(node, ['update'])) {
+                        const lockOwner = AlfrescoUtils.getNodePropertyValue(node, new Property('cm:lockOwner', _ => _ as { id: string }));
+                        return !lockOwner || lockOwner.id === context.profile.id;
+                    } else {
+                        return false;
+                    }
+                },
+                { prefix: 'app' },
+            ),
+            // app.selection.hasDeletePermissions
+            ...AdfUtils.makeRules('hasDeletePermissions', (node, context) => context.permissions.check(node, ['delete']), { prefix: 'app' }),
+            // app.selection.isOwner
+            ...AdfUtils.makeRules(
+                'isOwner',
+                (node, context) => {
+                    const owner = AlfrescoUtils.getNodePropertyValue(node, new Property('cm:owner', _ => _ as { id: string }));
+                    return owner && owner.id === context.profile.id;
+                },
+                { prefix: 'app' },
+            ),
+        }),
         provideDynamicFormFieldComponents({
             peoplePicker: () => import('@contezza/content-services/search/components/people-group-picker').then(m => m.PeopleGroupPickerFieldComponent),
         }),
@@ -136,7 +165,22 @@ export class ExtensionModule {
         });
         extensions.setEvaluators(AdfUtils.makeRules('canCreate', (node, context) => context.permissions.check(node, ['create']), { prefix: 'app' }));
         extensions.setEvaluators(AdfUtils.makeRules('canUpload', (node, context) => context.permissions.check(node, ['create']), { prefix: 'app' }));
-        extensions.setEvaluators(AdfUtils.makeRules('canUpdate', (node, context) => context.permissions.check(node, ['update']), { prefix: 'app' }));
+        // app.selection.canDelete
+        // this must be placed here and not in provideEvaluators so that it can overwrite the one from default ACA
+        extensions.setEvaluators(
+            AdfUtils.makeRules(
+                'canDelete',
+                (node, context) => {
+                    if (!('archivedAt' in node) && context.permissions.check(node, ['delete'])) {
+                        const lockOwner = AlfrescoUtils.getNodePropertyValue(node, new Property('cm:lockOwner', _ => _ as { id: string }));
+                        return !lockOwner || lockOwner.id === context.profile.id;
+                    } else {
+                        return false;
+                    }
+                },
+                { prefix: 'app' },
+            ),
+        );
 
         csExtensions.setActions<any>({
             'actions.search-bar': () => import('./components/actions/search-bar.action.component').then(_ => _.SearchBarActionComponent),
