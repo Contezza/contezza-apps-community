@@ -1,7 +1,6 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
-
+import { CommonModule } from '@angular/common';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -12,7 +11,11 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { ContezzaLetDirective } from '@contezza/core/directives';
 import { TranslatePropertyTitlePipe } from '@contezza/core/property-titles';
+import { provideComponentTranslations } from '@contezza/core/translate';
+
 import { Column } from '@contezza/content-services/shared';
+
+import { i18n, TRANSLATIONS } from './i18n';
 
 @Component({
     standalone: true,
@@ -33,8 +36,11 @@ import { Column } from '@contezza/content-services/shared';
     styleUrls: ['./column-editor.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [provideComponentTranslations(i18n)],
 })
 export class ColumnEditorComponent implements AfterViewInit {
+    readonly TRANSLATIONS = TRANSLATIONS.CONTEZZA.CONTENT_SERVICES.COLUMN_EDITOR;
+
     @Input()
     columnsInfo: Array<Column>;
 
@@ -51,8 +57,8 @@ export class ColumnEditorComponent implements AfterViewInit {
     }
 
     refreshSelectAllState() {
-        this.allSelected = this.columnsInfo.every((column) => !column.hidden);
-        this.someSelected = !this.allSelected && this.columnsInfo.some((column) => !column.hidden);
+        this.allSelected = this.columnsInfo.every(column => !column.hidden);
+        this.someSelected = !this.allSelected && this.columnsInfo.some(column => !column.hidden);
     }
 
     columnMenuDropped(event: CdkDragDrop<any>): void {
@@ -67,7 +73,7 @@ export class ColumnEditorComponent implements AfterViewInit {
     }
 
     selectAllColumns(columns, event) {
-        columns.forEach((column) => (column.hidden = !event.checked));
+        columns.forEach(column => (column.hidden = !event.checked));
         this.emitColumns();
     }
 

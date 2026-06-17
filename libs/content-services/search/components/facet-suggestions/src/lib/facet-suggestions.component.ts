@@ -1,37 +1,40 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output, QueryList, ViewChildren } from '@angular/core';
+import { MatButton } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, switchMap } from 'rxjs/operators';
-
 import { TranslateModule } from '@ngx-translate/core';
+
+import { BehaviorSubject, filter, Observable, switchMap } from 'rxjs';
 
 import { GenericBucket } from '@alfresco/js-api';
 
-import { ContezzaLetDirective } from '@contezza/core/directives';
+import { ActivableDirective, ContezzaLetDirective, IconDirective } from '@contezza/core/directives';
 import { ContezzaUtils } from '@contezza/core/utils';
 
 import { ExtendedFacetResponse, FacetSelection, FacetSuggestionsService } from '@contezza/content-services/search/components/facet-suggestions/shared';
 
 @Component({
     standalone: true,
-    imports: [CommonModule, TranslateModule, MatDividerModule, MatIconModule, MatProgressSpinnerModule, ContezzaLetDirective],
+    imports: [CommonModule, TranslateModule, MatDividerModule, MatIconModule, MatProgressSpinnerModule, ContezzaLetDirective, ActivableDirective, MatButton, IconDirective],
     selector: 'contezza-search-facet-suggestions',
     templateUrl: 'facet-suggestions.component.html',
     styleUrls: ['facet-suggestions.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FacetSuggestionsComponent {
+    // constructor
+    private readonly facetSuggestionsService = inject(FacetSuggestionsService);
+
     @Input()
     loading$ = new BehaviorSubject<boolean>(false).asObservable();
 
     private readonly facetsSource = new BehaviorSubject<Array<ExtendedFacetResponse>>([]);
     readonly facets$: Observable<Array<ExtendedFacetResponse>> = this.facetsSource.pipe(
-        filter((value) => !!value),
-        switchMap((facets) => this.facetSuggestionsService.getFacets(facets, this.facetSelection))
+        filter(Boolean),
+        switchMap(facets => this.facetSuggestionsService.getFacets(facets, this.facetSelection)),
     );
 
     @Input()
@@ -50,5 +53,6 @@ export class FacetSuggestionsComponent {
         this.entryClicked.emit(entry as GenericBucket & { id: string });
     }
 
-    constructor(private readonly facetSuggestionsService: FacetSuggestionsService) {}
+    @ViewChildren(ActivableDirective)
+    activableElements!: QueryList<ActivableDirective>;
 }

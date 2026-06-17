@@ -15,6 +15,13 @@
                         "TITLE": "No results",
                         "TEXT": "No download zip files found"
                     }
+                },
+                "LOCKED": {
+                    "TITLE": "Locked files",
+                    "EMPTY_STATE": {
+                        "TITLE": "Folder is empty",
+                        "TEXT": "No objects found."
+                    }
                 }
             }
         }

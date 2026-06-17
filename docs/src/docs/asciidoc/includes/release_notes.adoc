@@ -10,6 +10,22 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2026-06-17
+|3.11.2
+|View <<Release 3.11.2,release details>>.
+
+|2026-06-12
+|3.11.1
+|View <<Release 3.11.1,release details>>.
+
+|2026-06-04
+|3.11.0
+|View <<Release 3.11.0,release details>>.
+
+|2026-05-29
+|3.10.1
+|View <<Release 3.10.1,release details>>.
+
 |2026-05-19
 |3.10.0
 |View <<Release 3.10.0,release details>>.
@@ -405,6 +421,36 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 3.11.2
+
+Bugfixes/minor changes:
+
+- @contezza/content-services - Update-rights requirement removed from rule `canManagePermissions`.
+- @contezza/content-services - Fix i18n for `ColumnEditorComponent`.
+- @contezza/content-services/search - Improve evaluators `canUpdate` and `canDelete` to also check the lock status of the target node https://support.contezza.nl/issues/37706[(#37706)].
+- @contezza/content-services/search - Evaluators `hasUpdatePermissions`, `hasDeletePermissions` and `isOwner` added to `ContentServicesSearchExtensionModule`.
+
+==== Release 3.11.1
+
+Bugfixes/minor changes:
+
+- @contezza/content-services - Improve supported paginator settings in `TableComponent` https://support.contezza.nl/issues/37825[(#37825)].
+
+==== Release 3.11.0
+
+Bugfixes/minor changes:
+
+- @contezza/content-services/search - Add i18n for search-table-page with id `locked-config`.
+- @contezza/content-services/share - Create rendition when creating a public link https://support.contezza.nl/issues/37753[(#37753)].
+- @contezza/core/utils - Method `AlfrescoUtils.hasAspect` created.
+
+==== Release 3.10.1
+
+Bugfixes/minor changes:
+
+- @contezza/content-services/search - Refactor `SearchBarComponent` for WCAG 2.1 https://support.contezza.nl/issues/36091[(#36091)].
+- @contezza/layout - Refactor `NavbarComponent` for WCAG 2.1 https://support.contezza.nl/issues/36855[(#36855)].
 
 ==== Release 3.10.0
 

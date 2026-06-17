@@ -119,7 +119,7 @@
     <mat-paginator
         *ngIf="pagingState && paginationStrategy === 'browse'"
         color="primary"
-        showFirstLastButtons
+        [showFirstLastButtons]="paginatorSettings().showFirstLastButtons"
         [length]="pagingState.length"
         [pageSize]="pagingState.pageSize"
         [pageIndex]="pagingState.pageIndex"

@@ -7,16 +7,18 @@ import {
     ElementRef,
     EventEmitter,
     HostBinding,
+    Inject,
     Input,
     input,
     InputSignalWithTransform,
+    OnInit,
     Optional,
     Output,
     ViewChild,
     ViewEncapsulation,
 } from '@angular/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -40,16 +42,18 @@ import {
     takeUntil,
 } from 'rxjs';
 
-import { PaginationMode, PaginatorSettings, Results, SelectionMode } from '@contezza/content-services/components/table/shared';
-import { Column } from '@contezza/content-services/shared';
 import { ContezzaSelectableDirective, SelectionStore } from '@contezza/core/context';
 import { ContezzaLetDirective } from '@contezza/core/directives';
 import { TranslatePropertyTitlePipe } from '@contezza/core/property-titles';
 import { ResponsiveService } from '@contezza/core/responsive';
 import { DestroyService } from '@contezza/core/services';
 import { ArrayUtils, ContezzaObservables, ContezzaUtils } from '@contezza/core/utils';
+
+import { PaginationMode, PaginatorSettings, Results, SelectionMode } from '@contezza/content-services/components/table/shared';
+import { Column } from '@contezza/content-services/shared';
 import { ContezzaDynamicFormFieldModule } from '@contezza/dynamic-forms';
 
+import { PaginationIntlService } from './paginator-intl.service';
 import { ContezzaResizableModule } from './resizable/resizable.module';
 import { TableCellComponent } from './table-cell.component';
 import { TableRowDirective } from './table-row.directive';
@@ -89,11 +93,20 @@ const bufferDebounce: BufferDebounce = debounce => source =>
     styleUrls: ['./table.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [ContezzaUtils.ifnProvide(SelectionStore), DestroyService],
+    providers: [
+        ContezzaUtils.ifnProvide(SelectionStore),
+        DestroyService,
+        {
+            provide: MatPaginatorIntl,
+            useClass: PaginationIntlService,
+        },
+    ],
 })
-export class TableComponent<ItemType> implements AfterViewInit {
+export class TableComponent<ItemType> implements AfterViewInit, OnInit {
     static readonly DEFAULT_PAGINATOR_SETTINGS: PaginatorSettings = {
         pageSizeOptions: [5, 10, 15, 20, 25, 50, 100, 250],
+        showFirstLastButtons: true,
+        showTotalItems: true,
     };
 
     @Input()
@@ -240,6 +253,7 @@ export class TableComponent<ItemType> implements AfterViewInit {
         private readonly cd: ChangeDetectorRef,
         @Optional() responsive: ResponsiveService,
         private readonly selection: SelectionStore<ItemType>,
+        @Inject(MatPaginatorIntl) private readonly paginator: PaginationIntlService,
         destroy$: DestroyService,
     ) {
         responsive?.isMobile$.pipe(takeUntil(destroy$)).subscribe(value => (this.isMobile = value));
@@ -263,6 +277,10 @@ export class TableComponent<ItemType> implements AfterViewInit {
                     }
                 });
             });
+    }
+
+    ngOnInit() {
+        this.paginator.showTotalItems = this.paginatorSettings().showTotalItems;
     }
 
     onTouchmove(event: TouchEvent, { scrollTop }: HTMLElement) {

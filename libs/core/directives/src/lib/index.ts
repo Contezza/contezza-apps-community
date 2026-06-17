@@ -1,3 +1,4 @@
+export * from './activable.directive';
 export * from './detect-changes.directive';
 export * from './drag-and-drop/index';
 export * from './icon.directive';
