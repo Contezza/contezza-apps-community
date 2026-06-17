@@ -4,7 +4,7 @@
 <mat-menu #columnMenu="matMenu" class="columnMenu contezza-column-editor-menu">
     <div class="contezza-column-editor-menu-select-all" (click)="$event.stopPropagation()">
         <mat-checkbox color="primary" (change)="selectAllColumns(this.columnsInfo, $event)" [checked]="allSelected" [indeterminate]="someSelected">
-            {{ 'APP.FORM_FIELDS.SELECT.SELECT_ALL' | translate }}
+            {{ TRANSLATIONS.SELECT_ALL | translate }}
         </mat-checkbox>
     </div>
     <div class="contezza-mat-table-dragable-container" cdkDropList cdkDropListLockAxis="y" cdkDropListOrientation="vertical">
