@@ -10,6 +10,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2026-06-17
+|3.11.2
+|View <<Release 3.11.2,release details>>.
+
 |2026-06-12
 |3.11.1
 |View <<Release 3.11.1,release details>>.
@@ -417,6 +421,15 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 3.11.2
+
+Bugfixes/minor changes:
+
+- @contezza/content-services - Update-rights requirement removed from rule `canManagePermissions`.
+- @contezza/content-services - Fix i18n for `ColumnEditorComponent`.
+- @contezza/content-services/search - Improve evaluators `canUpdate` and `canDelete` to also check the lock status of the target node https://support.contezza.nl/issues/37706[(#37706)].
+- @contezza/content-services/search - Evaluators `hasUpdatePermissions`, `hasDeletePermissions` and `isOwner` added to `ContentServicesSearchExtensionModule`.
 
 ==== Release 3.11.1
 
