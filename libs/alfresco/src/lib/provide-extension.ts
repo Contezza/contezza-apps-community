@@ -1,12 +1,13 @@
 import { EnvironmentProviders, makeEnvironmentProviders } from '@angular/core';
 
 import { provideEvaluators } from '@contezza/core/extensions';
-import { provideWebscriptApiService } from '@contezza/core/services';
+import { provideLinkResolvers, provideWebscriptApiService } from '@contezza/core/services';
 import { AdfUtils } from '@contezza/core/utils';
 
 import { CommunityRepoApi } from '@contezza/alfresco/apis';
 
 import { EmailService } from './services/email.service';
+import { FileLinkResolver } from './services/file.link.resolver';
 
 export function provideExtension(): EnvironmentProviders {
     return makeEnvironmentProviders([
@@ -33,6 +34,7 @@ export function provideExtension(): EnvironmentProviders {
         }),
         provideWebscriptApiService(CommunityRepoApi),
         EmailService.provide(),
+        provideLinkResolvers(FileLinkResolver),
     ]);
 }
 
