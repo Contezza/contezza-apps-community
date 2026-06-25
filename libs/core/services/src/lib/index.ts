@@ -3,6 +3,7 @@ export * from './destroy.service';
 export * from './email.service';
 export * from './folder-template.service';
 export * from './is-small-screen.service';
+export * from './navigation.service';
 export * from './preferences.service';
 export * from './provide-webscript-api-service';
 export * from './refresh.subject';

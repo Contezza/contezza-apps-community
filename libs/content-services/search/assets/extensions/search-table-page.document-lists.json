@@ -47,7 +47,7 @@
                         "id": "files.columns.name",
                         "title": "APP.DOCUMENT_LIST.COLUMNS.NAME",
                         "key": "name",
-                        "template": "app.columns.name",
+                        "template": "columns.navigation-link",
                         "type": "text",
                         "class": "name-column adf-expand-cell-10",
                         "sortable": true,

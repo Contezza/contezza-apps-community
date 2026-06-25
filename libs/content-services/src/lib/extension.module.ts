@@ -31,7 +31,8 @@ import { Effects } from './store/effects';
             'content-services.rules.json',
         ]),
         provideColumnComponents({
-            'columns.dynamic-source': () => import('./components/columns/dynamic-source.column.component').then((_) => _.DynamicSourceColumnComponent),
+            'columns.dynamic-source': () => import('./components/columns/dynamic-source.column.component').then(_ => _.DynamicSourceColumnComponent),
+            'columns.navigation-link': () => import('./components/columns/navigation-link.column.component').then(_ => _.NavigationLinkColumnComponent),
         }),
     ],
 })
