@@ -1,5 +1,6 @@
 export * from './async-dialog.service';
 export * from './destroy.service';
+export * from './docs.service';
 export * from './email.service';
 export * from './folder-template.service';
 export * from './is-small-screen.service';
