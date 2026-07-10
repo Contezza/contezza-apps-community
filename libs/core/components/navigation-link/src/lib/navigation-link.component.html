@@ -1,0 +1,18 @@
+@if (routerLinkParameters(); as parameters) {
+    <a [routerLink]="parameters.routerLink" [queryParams]="parameters.queryParams" [fragment]="parameters.fragment">
+        <ng-container *ngTemplateOutlet="content" />
+    </a>
+} @else {
+    @if (hrefParameters(); as parameters) {
+        <a [href]="parameters.href" [target]="parameters.target" [rel]="parameters.rel">
+            <ng-container *ngTemplateOutlet="content" />
+        </a>
+    } @else {
+        <span role="link" tabindex="0">
+            <ng-container *ngTemplateOutlet="content" />
+        </span>
+    }
+}
+<ng-template #content>
+    <ng-content />
+</ng-template>

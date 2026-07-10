@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { EnvironmentProviders, inject, makeEnvironmentProviders } from '@angular/core';
 
 import { TranslateService } from '@ngx-translate/core';
@@ -6,7 +7,7 @@ import { Store } from '@ngrx/store';
 
 import { delay, distinctUntilChanged, filter, map, Observable, of, startWith, switchMap, take } from 'rxjs';
 
-import { Moment } from 'moment';
+import { isMoment } from 'moment';
 
 import { getUserProfile } from '@alfresco/aca-shared/store';
 import { NodesApiService, SearchService } from '@alfresco/adf-content-services';
@@ -100,7 +101,52 @@ export function provideExtension(): EnvironmentProviders {
                 (callback: string) =>
                 (source: Observable<unknown>): Observable<string> =>
                     source.pipe(ContezzaObservableOperators.map(callback)),
-            formatDate: () => (format: string) => ($: Observable<Moment | null>) => $.pipe(map(date => (date ? date.format(format) : date))),
+            formatDate:
+                (adfLocalizedDate = inject(LocalizedDatePipe), datePipe = new DatePipe('en')) =>
+                (data: { key?: string; dateFormat?: string; timeFormat?: string }) =>
+                ($: Observable<any>) =>
+                    $.pipe(
+                        map(value => {
+                            if (value) {
+                                const { key, dateFormat, timeFormat } = data;
+                                if (!dateFormat && !timeFormat) {
+                                    throw new Error('At least one of `dateFormat` and `timeFormat` must be defined.');
+                                }
+                                // extract raw date if value is an object and a key is given
+                                const target = typeof value === 'object' && key ? ContezzaObjectUtils.getValue(value, key) : value;
+                                if (target) {
+                                    // convert raw date into Date object
+                                    let date: Date;
+                                    switch (true) {
+                                        case typeof target === 'string' || typeof target === 'number':
+                                            date = new Date(target);
+                                            break;
+                                        case isMoment(target):
+                                            date = target.toDate();
+                                            break;
+                                        case target instanceof Date:
+                                            date = target;
+                                            break;
+                                        default:
+                                            throw new Error('Value cannot be converted to a `Date`.');
+                                    }
+                                    // format output
+                                    const outputBuilder: string[] = [];
+                                    if (dateFormat) {
+                                        outputBuilder.push(adfLocalizedDate.transform(date, dateFormat));
+                                    }
+                                    if (timeFormat) {
+                                        outputBuilder.push(datePipe.transform(date, timeFormat));
+                                    }
+                                    return outputBuilder.join(' ');
+                                } else {
+                                    return target;
+                                }
+                            } else {
+                                return value;
+                            }
+                        }),
+                    ),
             translateBoolean:
                 (translate = inject(TranslateService)) =>
                 (key: string) =>
