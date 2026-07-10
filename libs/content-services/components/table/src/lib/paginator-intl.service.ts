@@ -11,9 +11,11 @@ export class PaginationIntlService extends MatPaginatorIntl {
         en: {
             ITEMS_PER_PAGE: 'Items per page:',
             NEXT_PAGE: 'Next page',
+            NEXT_PAGE_CAPPED: 'Next page, limited to first 10,000 results',
             PREVIOUS_PAGE: 'Previous page',
             FIRST_PAGE: 'First page',
             LAST_PAGE: 'Last page',
+            LAST_PAGE_CAPPED: 'Last page, limited to first 10,000 results',
             RANGE: {
                 DEFAULT: '{{startIndex}} - {{endIndex}} of {{length}}',
                 NO_RESULTS: '0 of {{length}}',
@@ -23,9 +25,11 @@ export class PaginationIntlService extends MatPaginatorIntl {
         nl: {
             ITEMS_PER_PAGE: 'Items per pagina:',
             NEXT_PAGE: 'Volgende pagina',
+            NEXT_PAGE_CAPPED: 'Volgende pagina, beperkt tot de eerste 10.000 resultaten',
             PREVIOUS_PAGE: 'Vorige pagina',
             FIRST_PAGE: 'Eerste pagina',
             LAST_PAGE: 'Laatste pagina',
+            LAST_PAGE_CAPPED: 'Laatste pagina, beperkt tot de eerste 10.000 resultaten',
             RANGE: {
                 DEFAULT: '{{startIndex}} - {{endIndex}} van {{length}}',
                 NO_RESULTS: '0 van {{length}}',
@@ -36,6 +40,14 @@ export class PaginationIntlService extends MatPaginatorIntl {
 
     private readonly translate = inject(TranslateService);
     private readonly parser = inject(TranslateParser);
+
+    private currentLanguage?: 'en' | 'nl';
+
+    private _capped?: boolean;
+    set capped(capped: boolean) {
+        this._capped = capped;
+        this.updateLabels();
+    }
 
     private _showTotalItems?: boolean;
     set showTotalItems(showTotalItems: boolean) {
@@ -51,35 +63,40 @@ export class PaginationIntlService extends MatPaginatorIntl {
             )
             .subscribe(lang => {
                 if (lang === 'en' || lang === 'nl') {
-                    const currentLangTranslations = PaginationIntlService.I18N[lang];
-                    this.itemsPerPageLabel = currentLangTranslations.ITEMS_PER_PAGE;
-                    this.nextPageLabel = currentLangTranslations.NEXT_PAGE;
-                    this.previousPageLabel = currentLangTranslations.PREVIOUS_PAGE;
-                    this.firstPageLabel = currentLangTranslations.FIRST_PAGE;
-                    this.lastPageLabel = currentLangTranslations.LAST_PAGE;
-                    this.getRangeLabel = (page: number, pageSize: number, length: number): string => {
-                        if (length === 0 || pageSize === 0) {
-                            return this.parser.interpolate(currentLangTranslations.RANGE.NO_RESULTS, { length });
-                        }
-                        length = Math.max(length, 0);
-                        const startIndex = page * pageSize;
-                        // If the start index exceeds the list length, do not try and fix the end index to the end.
-                        const endIndex = startIndex < length ? Math.min(startIndex + pageSize, length) : startIndex + pageSize;
-
-                        return this._showTotalItems
-                            ? this.parser.interpolate(currentLangTranslations.RANGE.DEFAULT, {
-                                  startIndex: startIndex + 1,
-                                  endIndex,
-                                  length,
-                              })
-                            : this.parser.interpolate(currentLangTranslations.RANGE.NO_TOTAL, {
-                                  startIndex: startIndex + 1,
-                                  endIndex,
-                              });
-                    };
-
-                    this.changes.next();
+                    this.currentLanguage = lang;
+                    this.updateLabels();
                 }
             });
+    }
+
+    private updateLabels() {
+        const currentLangTranslations = PaginationIntlService.I18N[this.currentLanguage];
+        this.itemsPerPageLabel = currentLangTranslations.ITEMS_PER_PAGE;
+        this.nextPageLabel = this._capped ? currentLangTranslations.NEXT_PAGE_CAPPED : currentLangTranslations.NEXT_PAGE;
+        this.previousPageLabel = currentLangTranslations.PREVIOUS_PAGE;
+        this.firstPageLabel = currentLangTranslations.FIRST_PAGE;
+        this.lastPageLabel = this._capped ? currentLangTranslations.LAST_PAGE_CAPPED : currentLangTranslations.LAST_PAGE;
+        this.getRangeLabel = (page: number, pageSize: number, length: number): string => {
+            if (length === 0 || pageSize === 0) {
+                return this.parser.interpolate(currentLangTranslations.RANGE.NO_RESULTS, { length });
+            }
+            length = Math.max(length, 0);
+            const startIndex = page * pageSize;
+            // If the start index exceeds the list length, do not try and fix the end index to the end.
+            const endIndex = startIndex < length ? Math.min(startIndex + pageSize, length) : startIndex + pageSize;
+
+            return this._showTotalItems
+                ? this.parser.interpolate(currentLangTranslations.RANGE.DEFAULT, {
+                      startIndex: startIndex + 1,
+                      endIndex,
+                      length,
+                  }) + (this._capped ? '+' : '')
+                : this.parser.interpolate(currentLangTranslations.RANGE.NO_TOTAL, {
+                      startIndex: startIndex + 1,
+                      endIndex,
+                  });
+        };
+
+        this.changes.next();
     }
 }
