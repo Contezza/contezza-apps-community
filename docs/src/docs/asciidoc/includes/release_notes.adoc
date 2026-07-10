@@ -10,6 +10,10 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2026-07-10
+|3.12.0
+|View <<Release 3.12.0,release details>>.
+
 |2026-06-25
 |3.11.3
 |View <<Release 3.11.3,release details>>.
@@ -425,6 +429,15 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 3.12.0
+
+Bugfixes/minor changes:
+
+- @contezza/content-services - Support capped pagination in `TableComponent` https://support.contezza.nl/issues/38079[(#38079)].
+- @contezza/core - Support time formatting in map `formatDate`.
+- @contezza/core/services - Abstract service `DocsService` created.
+- @contezza/profile - Use `DocsService` to generate link to release notes in `AppInfoComponent`.
 
 ==== Release 3.11.3
 

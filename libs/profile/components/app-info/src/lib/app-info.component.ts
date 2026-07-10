@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { TranslateModule } from '@ngx-translate/core';
 
 import { AppConfigPipe } from '@alfresco/adf-core';
 
 import { ApplyPipe } from '@contezza/core/pipes';
+import { DocsService } from '@contezza/core/services';
 
 @Component({
     standalone: true,
@@ -33,10 +34,10 @@ import { ApplyPipe } from '@contezza/core/pipes';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppInfoComponent {
-    readonly docsUrl = input<string>();
+    // constructor
+    private readonly docsService = inject(DocsService, { optional: true });
 
     makeVersionHref(version: string): string | null {
-        const docsUrl = this.docsUrl();
-        return docsUrl ? docsUrl + '/#release-' + version.replace(/\./g, '-') : null;
+        return this.docsService?.getReleaseNotesLink(version) || null;
     }
 }
