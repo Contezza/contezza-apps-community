@@ -18,6 +18,7 @@ import { ContezzaPeopleGroupPickerComponent } from './people-group-picker.compon
         <contezza-people-group-picker
             [pickerType]="(field.extras?.pickerType | async) || 'people-group'"
             [selectedItems]="selectedItems$ | async"
+            [label]="field.label"
             peoplePlaceholder="APP.PEOPLE_GROUP_PICKER.PEOPLE.PLACEHOLDER"
             groupPlaceholder="APP.PEOPLE_GROUP_PICKER.GROUP.PLACEHOLDER"
             (onItemsChange)="onItemsChange($event)"
