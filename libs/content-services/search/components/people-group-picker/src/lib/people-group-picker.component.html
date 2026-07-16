@@ -3,9 +3,18 @@
         <div class="picker-source-input">
             <div [class.adf-invalid]="!field.isValid" [class.adf-readonly]="field.readOnly">
                 <mat-form-field class="adf-full-width">
+                    @if (label) {
+                        <mat-label>
+                            @if (label | translatePropertyTitle; as label$) {
+                                {{ label$ | async }}
+                            } @else {
+                                {{ label | translate }}
+                            }
+                        </mat-label>
+                    }
                     <mat-chip-grid #chipList aria-label="Users / Groups selection">
                         <mat-chip-row *ngFor="let item of selectedItems" [removable]="removable" (removed)="removeItem(item)">
-                            {{ !(item | includes : 'lastName') ? item.displayName : (item | userFullName) }}
+                            {{ !(item | includes: 'lastName') ? item.displayName : (item | userFullName) }}
                             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                         </mat-chip-row>
                         <div style="display: flex; flex-direction: row; align-items: center; width: 100%">
@@ -41,7 +50,7 @@
                     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onItemSelect($event.option.value)" class="picker-autocomplete">
                         <mat-option *ngFor="let item of _pickerType === 'people' ? (users$ | async) : (groups$ | async)" [value]="item" [disabled]="itemExist(item)">
                             <div class="adf-people-widget-row">
-                                <div [outerHTML]="item | usernameInitials : 'adf-people-widget-pic'"></div>
+                                <div [outerHTML]="item | usernameInitials: 'adf-people-widget-pic'"></div>
                                 <div *ngIf="item?.avatar" class="adf-people-widget-image-row">
                                     <img class="adf-people-widget-avatar" [alt]="item | displayName" [src]="item.avatar | avatarImage" />
                                 </div>
@@ -50,8 +59,8 @@
                         </mat-option>
                     </mat-autocomplete>
                 </mat-form-field>
-                <error-widget [error]="field.validationSummary"></error-widget>
-                <error-widget *ngIf="isInvalidFieldRequired()" required="{{ 'FORM.FIELD.REQUIRED' | translate }}"> </error-widget>
+                <error-widget [error]="field.validationSummary" />
+                <error-widget *ngIf="isInvalidFieldRequired()" required="{{ 'FORM.FIELD.REQUIRED' | translate }}" />
             </div>
         </div>
     </div>

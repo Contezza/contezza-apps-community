@@ -18,6 +18,7 @@ import { FormBaseModule, FormFieldModel, FormModel, FormService, PipeModule, Use
 import { Group, GroupsApi, PeopleApi } from '@alfresco/js-api';
 
 import { IncludesPipe } from '@contezza/core/pipes';
+import { TranslatePropertyTitlePipe } from '@contezza/core/property-titles';
 import { WebscriptService } from '@contezza/core/services';
 
 import { AvatarImagePipe, DisplayNamePipe, UserFullNamePipe } from './pipes';
@@ -48,6 +49,7 @@ interface PeoplePickerEntry {
         FormBaseModule,
         PipeModule,
         IncludesPipe,
+        TranslatePropertyTitlePipe,
     ],
     templateUrl: './people-group-picker.component.html',
     styleUrls: ['./people-group-picker.component.scss'],
@@ -89,6 +91,9 @@ export class ContezzaPeopleGroupPickerComponent extends WidgetComponent {
 
     @Input()
     showInputValue = false;
+
+    @Input()
+    label?: string;
 
     @Input()
     peoplePlaceholder: string;
