@@ -171,7 +171,7 @@ export class ExtensionModule {
             AdfUtils.makeRules(
                 'canDelete',
                 (node, context) => {
-                    if (!('archivedAt' in node) && context.permissions.check(node, ['delete'])) {
+                    if ((!('archivedAt' in node) || !node.archivedAt) && context.permissions.check(node, ['delete'])) {
                         const lockOwner = AlfrescoUtils.getNodePropertyValue(node, new Property('cm:lockOwner', _ => _ as { id: string }));
                         return !lockOwner || lockOwner.id === context.profile.id;
                     } else {
