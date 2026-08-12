@@ -1,0 +1,47 @@
+{
+    "$id": "alfresco.rm.search-page-configs",
+    "$version": "@@project.version@@",
+    "$name": "Contezza Alfresco Record Management Search Page Configs",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "searchTablePageConfigs": [
+            {
+                "id": "rm.search-page-configs.events",
+                "title": "RM Logs title",
+                "columnsId": "keycloak.columns.events",
+                "featureKeys": {
+                    "contextMenu": "keycloak.events.contextMenu",
+                    "toolbar": "keycloak.events.toolbar"
+                },
+                "leftSidebarFilters": {
+                    "formId": "keycloak.sidebar-filters.events",
+                    "extras": {
+                        "queryMode": "on-trigger"
+                    }
+                },
+                "resultsComponent": {
+                    "id": "search-results-views.table",
+                    "data": {
+                        "paginatorSettings": {
+                            "showFirstLastButtons": false,
+                            "showTotalItems": false
+                        }
+                    }
+                },
+                "preferences": [],
+                "queryParams": [],
+                "actions": {
+                    "contextmenu": "CONTEXT_MENU",
+                    "dblclick": "[KEYCLOAK] SHOW_EVENT_DETAILS"
+                },
+                "searchStrategyId": "rm.search-strategies.events",
+                "emptyContent": {
+                    "icon": "search",
+                    "title": "KEYCLOAK.BROWSE.EVENTS.EMPTY_STATE.TITLE"
+                }
+            }
+        ]
+    }
+
+}
