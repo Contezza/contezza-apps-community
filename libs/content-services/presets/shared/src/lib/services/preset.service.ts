@@ -1,21 +1,18 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
-import { ContentApiService } from '@alfresco/aca-shared';
-import { AppStore, getUserProfile } from '@alfresco/aca-shared/store';
-import { AppConfigService, ObjectUtils } from '@alfresco/adf-core';
+import { BehaviorSubject, filter, map, Observable, of, shareReplay, switchMap, take } from 'rxjs';
+
+import { UserProfileService } from '@alfresco/aca-shared';
 import { FileModel, NodesApiService, SearchService } from '@alfresco/adf-content-services';
+import { AppConfigService, ObjectUtils } from '@alfresco/adf-core';
 import { ProfileState } from '@alfresco/adf-extensions';
-import { Node, ResultNode, ResultSetPaging } from '@alfresco/js-api';
+import { Node, ResultNode } from '@alfresco/js-api';
 
 import { UploadService } from '@contezza/core/services';
 import { ContezzaObservables, StringUtils } from '@contezza/core/utils';
+
 import { DynamicFormDialogService } from '@contezza/dynamic-forms/dialog';
 import { ContezzaDynamicForm, ContezzaDynamicSearchForm } from '@contezza/dynamic-forms/shared';
-
-import { Store } from '@ngrx/store';
-
-import { BehaviorSubject, map, Observable, of, shareReplay, switchMap, tap } from 'rxjs';
-import { filter, take } from 'rxjs/operators';
 
 import { PresetType, SavePresetPayload } from '../models';
 import { DecoderService } from './decoder.service';
@@ -29,30 +26,27 @@ export class PresetService {
 
     static readonly path = 'app:company_home/app:dictionary/app:saved_searches';
 
+    // constructor
+    private readonly search = inject(SearchService);
+    private readonly upload = inject(UploadService);
+    private readonly appConfig = inject(AppConfigService);
+    private readonly nodesApiService = inject(NodesApiService);
+    private readonly userProfileService = inject(UserProfileService);
+    private readonly dialog = inject(DynamicFormDialogService);
+    private readonly decoder = inject(DecoderService);
+
     presetNodes$: BehaviorSubject<ResultNode[]> = new BehaviorSubject<ResultNode[]>([]);
 
     private _savedSearchesFolderId$?: Observable<string>;
     private _userPresetFolderId$?: Observable<string>;
 
     private _userHomePath$?: Observable<string>;
-    private _userHomeFolder$?: Observable<ResultNode>;
-
-    constructor(
-        private readonly search: SearchService,
-        private readonly upload: UploadService,
-        private readonly store: Store<AppStore>,
-        private readonly appConfig: AppConfigService,
-        private readonly contentApiService: ContentApiService,
-        private readonly nodesApiService: NodesApiService,
-        private readonly dialog: DynamicFormDialogService,
-        private readonly decoder: DecoderService
-    ) {}
 
     private get savedSearchesFolderId$(): Observable<string> {
         if (!this._savedSearchesFolderId$) {
             this._savedSearchesFolderId$ = this.search.searchByQueryBody({ query: { query: `PATH:"${PresetService.path}"` } }).pipe(
-                map((response) => response.list.entries[0].entry.id),
-                shareReplay(1)
+                map(response => response.list.entries[0].entry.id),
+                shareReplay({ bufferSize: 1, refCount: true }),
             );
         }
         return this._savedSearchesFolderId$;
@@ -60,22 +54,41 @@ export class PresetService {
 
     private get userPresetFolderId$(): Observable<string> {
         if (!this._userPresetFolderId$) {
-            let parentId = '';
-            this._userPresetFolderId$ = this.userHomeFolder$.pipe(
-                tap((node) => {
-                    parentId = node.id;
-                }),
-                switchMap((node) => this.contentApiService.getNodeChildren(node.id).pipe(map((nodePaging) => nodePaging.list.entries))),
-                switchMap((entries) => {
-                    if (!!entries && entries.length > 0) {
-                        const savedSearchesFolder = entries.find((entry) => entry.entry.name === 'saved_searches');
-                        if (!!savedSearchesFolder) {
-                            return of(savedSearchesFolder.entry);
-                        }
-                    }
-                    return this.createUserPresetFolder(parentId);
-                }),
-                map((node) => node.id)
+            this._userPresetFolderId$ = this.userHomePath$.pipe(
+                switchMap((path: string) =>
+                    this.search
+                        .searchByQueryBody({
+                            query: {
+                                query: `${path}/cm:saved_searches"`,
+                                language: 'afts',
+                            },
+                        })
+                        .pipe(
+                            switchMap(savedSearchFolderResponse => {
+                                const savedSearchFolder = savedSearchFolderResponse.list.entries[0]?.entry;
+                                return savedSearchFolder
+                                    ? of(savedSearchFolder)
+                                    : this.search
+                                          .searchByQueryBody({
+                                              query: {
+                                                  query: `${path}"`,
+                                                  language: 'afts',
+                                              },
+                                          })
+                                          .pipe(
+                                              switchMap(parentFolderResponse => {
+                                                  const parentFolder = parentFolderResponse.list.entries[0]?.entry;
+                                                  if (!parentFolder) {
+                                                      throw new Error('User home folder not found');
+                                                  }
+                                                  return this.createUserPresetFolder(parentFolder.id);
+                                              }),
+                                          );
+                            }),
+                        ),
+                ),
+                map(node => node.id),
+                shareReplay({ bufferSize: 1, refCount: true }),
             );
         }
         return this._userPresetFolderId$;
@@ -83,31 +96,14 @@ export class PresetService {
 
     private get userHomePath$(): Observable<string> {
         if (!this._userHomePath$) {
-            this._userHomePath$ = this.store.select(getUserProfile).pipe(
+            this._userHomePath$ = this.userProfileService.userProfile$.pipe(
+                take(1),
                 map((profile: ProfileState) => (profile.id.includes('@') ? profile.id.replace('@', '_x0040_') : profile.id)),
-                map((id) => (id === 'admin' ? 'PATH:"app:company_home' : `PATH:"app:company_home/app:user_homes/cm:${id}`)),
-                shareReplay(1)
+                map(id => (id === 'admin' ? 'PATH:"app:company_home' : `PATH:"app:company_home/app:user_homes/cm:${id}`)),
+                shareReplay({ bufferSize: 1, refCount: true }),
             );
         }
         return this._userHomePath$;
-    }
-
-    private get userHomeFolder$(): Observable<ResultNode> {
-        if (!this._userHomeFolder$) {
-            this._userHomeFolder$ = this.userHomePath$.pipe(
-                map((path: string) => `${path}"`),
-                switchMap((query: string) =>
-                    this.search.searchByQueryBody({
-                        query: {
-                            query,
-                            language: 'afts',
-                        },
-                    })
-                ),
-                map((response: ResultSetPaging) => response.list.entries[0].entry)
-            );
-        }
-        return this._userHomeFolder$;
     }
 
     private get storagePrefix(): string {
@@ -120,7 +116,7 @@ export class PresetService {
         } else {
             const folderId$ = payload.global ? this.savedSearchesFolderId$ : this.userPresetFolderId$;
 
-            return folderId$.pipe(switchMap((id) => this.uploadPresetContent(false, payload.json, payload.nodeName, id, payload.properties)));
+            return folderId$.pipe(switchMap(id => this.uploadPresetContent(false, payload.json, payload.nodeName, id, payload.properties)));
         }
     }
 
@@ -140,8 +136,8 @@ export class PresetService {
                 height: '250px',
             })
             .pipe(
-                filter((response) => !!response),
-                map(({ title }) => title)
+                filter(response => !!response),
+                map(({ title }) => title),
             );
     }
 
@@ -152,46 +148,46 @@ export class PresetService {
     loadPresets(preferencesId: string): void {
         this.userHomePath$
             .pipe(
-                map((path) => `${path}/cm:saved_searches//*"`),
+                map(path => `${path}/cm:saved_searches//*"`),
                 map(
-                    (userHome) =>
-                        `(PATH:"${PresetService.path}//*" OR ${userHome}) AND TYPE:"cm:content" AND content.mimetype:"application/json" AND cm:name:"${this.storagePrefix}.${preferencesId}*"`
+                    userHome =>
+                        `(PATH:"${PresetService.path}//*" OR ${userHome}) AND TYPE:"cm:content" AND content.mimetype:"application/json" AND cm:name:"${this.storagePrefix}.${preferencesId}*"`,
                 ),
-                switchMap((query) =>
+                switchMap(query =>
                     this.search
                         .searchByQueryBody({
                             query: { query, language: 'afts' },
                             include: ['path', 'properties'],
                         })
-                        .pipe(map((response) => response.list.entries.map((entry) => entry.entry)))
-                )
+                        .pipe(map(response => response.list.entries.map(entry => entry.entry))),
+                ),
             )
-            .subscribe((resultNodes) => this.presetNodes$.next(resultNodes ?? []));
+            .subscribe(resultNodes => this.presetNodes$.next(resultNodes ?? []));
     }
 
     loadPresetById(presetId: string, forms: Array<{ form: ContezzaDynamicSearchForm; type: PresetType }>, options: { preferencesId: string }): void {
         this.getContent(presetId)
             .pipe(
-                filter((result) => !!result),
-                map((value) => {
-                    forms.forEach((form) => {
+                filter(result => !!result),
+                map(value => {
+                    forms.forEach(form => {
                         this.loadPreset(form.form, value, options.preferencesId, form.type);
                     });
-                })
+                }),
             )
             .subscribe();
     }
 
     getContent(id: string): Observable<any> {
         return this.nodesApiService.getNodeContent(id).pipe(
-            switchMap((content) =>
-                ContezzaObservables.fromEmitter<any>((emitter) => {
+            switchMap(content =>
+                ContezzaObservables.fromEmitter<any>(emitter => {
                     const reader = new FileReader();
                     reader.onload = () => emitter.next(JSON.parse(reader.result as string));
                     reader.readAsText(content);
-                })
+                }),
             ),
-            take(1)
+            take(1),
         );
     }
 
@@ -204,7 +200,7 @@ export class PresetService {
             form.reset('default');
 
             setTimeout(() => {
-                Object.keys(decodedForm).forEach((key) => {
+                Object.keys(decodedForm).forEach(key => {
                     if (this.customSelectAll(key, decodedForm)) {
                         form?.form?.get(key)?.setValue(['*']);
                     } else if (!this.storeTypeFix(key, form, decodedForm)) {
@@ -249,7 +245,7 @@ export class PresetService {
                       majorVersion: false,
                       newVersion: true,
                   },
-                  nodeId
+                  nodeId,
               )
             : new FileModel(new File([content], presetName), {
                   majorVersion: false,
@@ -259,7 +255,7 @@ export class PresetService {
                   properties,
               });
 
-        return this.upload.uploadFiles([file], { showInUploadDialog: false }).pipe(map((list) => list[0]!));
+        return this.upload.uploadFiles([file], { showInUploadDialog: false }).pipe(map(list => list[0]!));
     }
 
     // fix for bug that when material radiobutton gets the same value with setValue() method it becomes empty
