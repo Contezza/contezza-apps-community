@@ -129,7 +129,7 @@ export class TableComponent<ItemType> implements AfterViewInit, OnInit {
             delete this.pagingState;
             this.cd.detectChanges();
             this.pagingState = paging;
-            this.paginator.capped = this.pagingState.length === 10000;
+            this.paginator.capped = this.pagingState?.length === 10000;
 
             // loading prevents multiple calls
             let loading = false;
@@ -151,7 +151,7 @@ export class TableComponent<ItemType> implements AfterViewInit, OnInit {
     fullSelectionLength: number;
 
     sortingState: Sort;
-    pagingState: PageEvent;
+    pagingState?: PageEvent;
 
     dataSource: MatTableDataSource<ItemType>;
     totalSelected$: Observable<number>;
