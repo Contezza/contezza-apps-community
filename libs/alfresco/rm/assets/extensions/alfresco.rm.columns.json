@@ -1,0 +1,40 @@
+{
+    "$id": "alfresco.rm.columns",
+    "$version": "@@project.version@@",
+    "$name": "Contezza Alfresco Record Management Columns",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "columns": [
+            {
+                "id": "alfresco.rm.columns.events",
+                "columns": [
+                    {
+                        "id": "timestamp",
+                        "title": "ALFRESCO.RM.RMAUDITLOG.PROPERTIES.TIMESTAMP",
+                        "map": {
+                            "id": "formatDate",
+                            "parameters": {
+                                "key": "timestamp",
+                                "dateFormat": "d MMM yyyy",
+                                "timeFormat": "HH:mm:ss"
+                            }
+                        },
+                        "class": "contezza-table-cell-15"
+                    },
+                    {
+                        "id": "user",
+                        "title": "ALFRESCO.RM.RMAUDITLOG.PROPERTIES.FULL_NAME",
+                        "key": "fullName"
+                    },
+                    {
+                        "id": "event",
+                        "title": "ALFRESCO.RM.RMAUDITLOG.PROPERTIES.EVENT",
+                        "function": "item=> const value = item.event; return (value[0]+value.slice(1).toLowerCase()).replace(/_/g,' ')"
+                    }
+                ]
+            }
+        ]
+    }
+
+}

@@ -9,13 +9,13 @@
             {
                 "id": "rm.search-page-configs.events",
                 "title": "RM Logs title",
-                "columnsId": "keycloak.columns.events",
+                "columnsId": "alfresco.rm.columns.events",
                 "featureKeys": {
                     "contextMenu": "keycloak.events.contextMenu",
                     "toolbar": "keycloak.events.toolbar"
                 },
                 "leftSidebarFilters": {
-                    "formId": "keycloak.sidebar-filters.events",
+                    "formId": "alfresco.rm.sidebar-filters.events",
                     "extras": {
                         "queryMode": "on-trigger"
                     }

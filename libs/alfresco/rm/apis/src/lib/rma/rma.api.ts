@@ -21,7 +21,12 @@ export class RmaApi extends BaseApi {
         return this.http.get<{ data: Rmauditlog }>(RmaApi.TEMPLATE_ENDPOINT_NODE_RMAUDITLOG({ store_type, store_id, id }));
     }
 
-    readAllRmauditlogs(queryParameters: RmAuditlogQueryParameters = {}) {
-        return this.http.get<{ data: Rmauditlog }>(RmaApi.ENDPOINT_ALL_RMAUDITLOGS + queryParametersToString(queryParameters, { arrayFormat: 'repeat' }));
+    /**
+     * Returns an audit log of Records Management events.
+     *
+     * @param queryParameters
+     */
+    readAllRmAuditlogs(queryParameters: RmAuditlogQueryParameters = {}) {
+        return this.http.get<{ data: Rmauditlog }>(RmaApi.ENDPOINT_ALL_RMAUDITLOGS + queryParametersToString(queryParameters));
     }
 }

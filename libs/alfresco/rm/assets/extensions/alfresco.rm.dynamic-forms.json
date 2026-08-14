@@ -1,0 +1,164 @@
+{
+    "$id": "alfresco.rm.dynamic-forms",
+    "$version": "@@project.version@@",
+    "$name": "Contezza Alfresco Record Management Dynamic Forms",
+    "$vendor": "Contezza BV",
+
+    "features": {
+    "dynamicforms": [
+        {
+            "id": "alfresco.rm.sidebar-filters.events",
+            "form": {
+                "validations": ["requiredAtLeastOneField"],
+                "query": {
+                    "map": "alfresco.rm.formatQueryParams"
+                },
+                "subfields": [
+                    {
+                        "id": "dateRange",
+                        "type": "dateRange",
+                        "query": {
+                            "map": "alfresco.rm.dateRange"
+                        }
+                    },
+                    {
+                        "id": "user",
+                        "type": "autocomplete",
+                        "label": "ALFRESCO.RM.RMAUDITLOG.PROPERTIES.FULL_NAME",
+                        "options": {
+                            "dynamic-source": "${user$raw}",
+                            "filters": [
+                                {
+                                    "id": "map",
+                                    "parameters": "value=> return value && typeof value ==='string' && value.length >= 3 ? value : null"
+                                },
+                                {
+                                    "id": "ifDefined",
+                                    "parameters": [
+                                        {
+                                            "id": "delay",
+                                            "parameters": 700
+                                        },
+                                        {
+                                            "id": "template",
+                                            "parameters": "api/people?sortBy=fullName&dir=asc&filter=${value}&maxResults=250"
+                                        },
+                                        "webscript",
+                                        {
+                                            "id": "map",
+                                            "parameters": "value=>return value.people"
+                                        },
+                                        {
+                                            "id": "tap",
+                                            "parameters": "list=>list.forEach(user=>user.label=`${user.firstName || ''} ${user.lastName || ''}`)"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "map",
+                                    "parameters": "list=> return list ||[]"
+                                }
+                            ],
+                            "labelKey": "label"
+                        },
+                        "settings": {
+                            "preFilteredOptions": true,
+                            "minChars": 3
+                        },
+                        "validations": [
+                            {
+                                "id": "hasProperties",
+                                "parameters": ["userName"]
+                            }
+                        ],
+                        "query": {
+                            "template": "user=${value.userName}"
+                        }
+                    },
+                    {
+                        "id": "event",
+                        "type": "multiautocomplete",
+                        "label": "ALFRESCO.RM.RMAUDITLOG.PROPERTIES.EVENT",
+                        "options": {
+                            "dynamic-source": [
+                                "Aanmelden geslaagd",
+                                "Aanmelden niet geslaagd",
+                                "Accession",
+                                "Accession Complete",
+                                "Add Record Types",
+                                "Archiveren in",
+                                "Audit bekijken",
+                                "Audit starten",
+                                "Audit stoppen",
+                                "Audit wissen",
+                                "Bewaring maken",
+                                "Bewaring verwijderen",
+                                "Bijgewerkte metagegevens",
+                                "Close Record Folder",
+                                "Complete Event",
+                                "Complete Record",
+                                "Create Retention Schedule",
+                                "Cut Off",
+                                "Destroy",
+                                "Edit Retention Action As Of Date",
+                                "Edit Review As Of Date",
+                                "Execute Script",
+                                "File Report",
+                                "File Version as Record",
+                                "File as Record",
+                                "Gebruiker maken",
+                                "Gebruiker verwijderen",
+                                "Gebruikersgroep maken",
+                                "Gebruikersgroep verwijderen",
+                                "Hide Record",
+                                "Kopiëren naar",
+                                "Koppelen naar",
+                                "Move Record",
+                                "Object gemaakt",
+                                "Object verwijderen",
+                                "Open Record Folder",
+                                "Opties voor automatisch declareren",
+                                "Overgenomen rechten ingeschakeld",
+                                "Overgenomen rechten uitgeschakeld",
+                                "Recht instellen",
+                                "Reject",
+                                "Reopen Record",
+                                "Request Information",
+                                "Retain",
+                                "Reviewed",
+                                "Send Email",
+                                "Set Property Value",
+                                "Split Email",
+                                "Toevoegen aan bewaring",
+                                "Toevoegen aan gebruikersgroep",
+                                "Transfer",
+                                "Transfer Complete",
+                                "Undo Cut Off",
+                                "Undo Event",
+                                "Unlink from",
+                                "Verplaatsen naar",
+                                "Verwijderen uit bewaring",
+                                "Verwijderen uit gebruikersgroep",
+                                "WORM Lock"],
+                            "filters": [
+                                {
+                                    "id": "map",
+                                    "parameters": "list=>return list.map(value=>({value, label:(value[0]+value.slice(1).toLowerCase()).replace(/_/g,' ')}))"
+                                }
+                            ],
+                            "labelKey": "label"
+                        },
+                        "query": {
+                            "map": {
+                                "id": "map",
+                                "parameters": "values=>return values?.map(({value})=>'event='+value).join('&')"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+    }
+
+}
