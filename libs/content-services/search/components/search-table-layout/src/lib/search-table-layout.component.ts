@@ -1,37 +1,50 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, OnDestroy, OnInit, Optional } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, OnDestroy, OnInit, Optional } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
-
 import { PageEvent } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Sort } from '@angular/material/sort';
+import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
-import { BehaviorSubject, merge, Observable, of, shareReplay } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map, scan, share, switchMap, take, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
+import {
+    BehaviorSubject,
+    debounceTime,
+    distinctUntilChanged,
+    filter,
+    map,
+    merge,
+    Observable,
+    of,
+    scan,
+    share,
+    shareReplay,
+    switchMap,
+    take,
+    takeUntil,
+    tap,
+    withLatestFrom,
+} from 'rxjs';
 
-import { GenericFacetResponse, Node, ResultSetPaging, SearchRequest } from '@alfresco/js-api';
-import { TemplateModule } from '@alfresco/adf-core';
-import { DocumentListService, UploadModule, UploadService } from '@alfresco/adf-content-services';
 import { PageLayoutModule } from '@alfresco/aca-shared';
+import { DocumentListService, UploadModule, UploadService } from '@alfresco/adf-content-services';
+import { TemplateModule } from '@alfresco/adf-core';
+import { GenericFacetResponse, Node, ResultSetPaging, SearchRequest } from '@alfresco/js-api';
 
-import { ContezzaLetModule } from '@contezza/core/directives';
-import { DynamicComponent } from '@contezza/core/dynamic-component';
-import { DestroyService, RefreshSubject } from '@contezza/core/services';
-import { ContezzaLoadingObservable } from '@contezza/core/extensions';
-import { ContextMenuService, CurrentFolderStore, FloatingButtonComponent, RuleContextService, SelectionStore, ToolbarComponent } from '@contezza/core/context';
-import { ContezzaObservables } from '@contezza/core/utils';
-import { ResponsiveService } from '@contezza/core/responsive';
-import { Column, ColumnsStore, SidebarContent, SidebarContentType, SidebarState, SidebarStore, ViewStore } from '@contezza/content-services/shared';
-import { PaginationMode, Results, SelectionMode } from '@contezza/content-services/components/table/shared';
-import { loadPreset, loadPresets, PresetType, saveNewVersion, savePreset } from '@contezza/content-services/presets/shared';
-import { PresetPanelComponent } from '@contezza/content-services/presets/components/preset-panel';
-import { ContezzaDynamicSearchForm, DYNAMIC_FORM_DEPENDENCIES, QueryMode } from '@contezza/dynamic-forms/shared';
-import { ContezzaDynamicFormFilterComponent, ContezzaDynamicFormModule, ContezzaDynamicSearchFormService } from '@contezza/dynamic-forms';
 import { InfoDrawerComponent } from '@contezza/core/components/info-drawer';
 import { LayoutItemTypes } from '@contezza/core/components/page-layout-content';
+import { ContextMenuService, CurrentFolderStore, FloatingButtonComponent, RuleContextService, SelectionStore, ToolbarComponent } from '@contezza/core/context';
+import { ContezzaLetModule, ReloadOnChangeOfDirective } from '@contezza/core/directives';
+import { DynamicComponent } from '@contezza/core/dynamic-component';
+import { ContezzaLoadingObservable } from '@contezza/core/extensions';
+import { ResponsiveService } from '@contezza/core/responsive';
+import { DestroyService, RefreshSubject } from '@contezza/core/services';
+import { ArrayUtils, ContezzaObservables } from '@contezza/core/utils';
+
+import { PaginationMode, Results, SelectionMode } from '@contezza/content-services/components/table/shared';
+import { PresetPanelComponent } from '@contezza/content-services/presets/components/preset-panel';
+import { loadPreset, loadPresets, PresetType, saveNewVersion, savePreset } from '@contezza/content-services/presets/shared';
 import {
     ExtendedLayoutItem,
     ExtendedSearchTableLayoutSettings,
@@ -46,12 +59,15 @@ import {
     SortingUtils,
     TableLayoutSettings,
 } from '@contezza/content-services/search/shared';
+import { Column, ColumnsStore, SidebarContent, SidebarContentType, SidebarState, SidebarStore, ViewStore } from '@contezza/content-services/shared';
+import { ContezzaDynamicFormFilterComponent, ContezzaDynamicFormModule, ContezzaDynamicSearchFormService } from '@contezza/dynamic-forms';
+import { ContezzaDynamicSearchForm, DYNAMIC_FORM_DEPENDENCIES, QueryMode } from '@contezza/dynamic-forms/shared';
 
+import { HeaderComponent } from './components';
+import { SearchResultPreviewDirective } from './directives/search-result-preview.directive';
+import { SearchResultsViewDirective } from './directives/search-results-view.directive';
 import { PreferencesService } from './services/preferences.service';
 import { CustomStoreService } from './services/store.service';
-import { SearchResultsViewDirective } from './directives/search-results-view.directive';
-import { SearchResultPreviewDirective } from './directives/search-result-preview.directive';
-import { HeaderComponent } from './components';
 
 @Component({
     standalone: true,
@@ -63,6 +79,7 @@ import { HeaderComponent } from './components';
         PageLayoutModule,
         InfoDrawerComponent,
         ContezzaLetModule,
+        ReloadOnChangeOfDirective,
         ContezzaDynamicFormModule,
         ContezzaDynamicFormFilterComponent,
         DynamicComponent,
@@ -216,7 +233,7 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
         this.emptyContentLayoutItemsSource.next(
             Array.isArray(value)
                 ? value
-                : [{ type: LayoutItemTypes.Icon, value: value.icon }, { value: value.title, class: 'contezza-page-layout-content-title-small' }, { value: value.subtitle }]
+                : [{ type: LayoutItemTypes.Icon, value: value.icon }, { value: value.title, class: 'contezza-page-layout-content-title-small' }, { value: value.subtitle }],
         );
     }
     private readonly emptyContentLayoutItemsSource = new BehaviorSubject<ExtendedLayoutItem[]>(undefined);
@@ -229,11 +246,11 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
     actions: TableLayoutSettings['actions'] = { contextmenu: 'CONTEXT_MENU' };
 
     readonly columns$: Observable<Column[]> = this.columns.columns$.pipe(
-        tap((columns) => {
+        tap(columns => {
             if (this.columnForm) {
                 columns
                     .filter(({ filterable }) => filterable !== false)
-                    .forEach((column) => {
+                    .forEach(column => {
                         const id = column.id.split('.').pop();
                         const field = this.columnForm.getFieldById(id);
                         const control = this.columnForm.getControlById(id) as FormControl;
@@ -242,7 +259,7 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
                         }
                     });
             }
-        })
+        }),
     );
 
     /**
@@ -255,18 +272,18 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
 
     ready$: Observable<boolean>;
     readonly loading$: Observable<boolean> = this.search.searching$.pipe(
-        tap((searching) => {
+        tap(searching => {
             if (searching && (this.selectionMode !== SelectionMode.MULTI_PAGE || this.awaitingSelectionReset)) {
                 this.selection.reset();
                 this.awaitingSelectionReset = false;
             }
-        })
+        }),
     );
 
     readonly searchParameters$ = this.searchParametersStore.parameters$;
 
     readonly results$: Observable<Results<Node>> = this.search.results$.pipe(
-        filter((results) => !!results),
+        filter(Boolean),
         withLatestFrom(this.searchParametersStore.sorting$),
         map(([results, sorting]) => ({
             list: results.list.entries.map(({ entry }) => entry as Node),
@@ -289,14 +306,14 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
             }
             return newList ? { ...newResults, list: newList } : null;
         }, null),
-        filter((value) => !!value),
-        shareReplay(1)
+        filter(Boolean),
+        shareReplay({ bufferSize: 1, refCount: true }),
     );
     readonly facets$: Observable<Record<string, GenericFacetResponse>> = this.search.facets$;
 
     readonly selection$: Observable<Node[]> = this.selection.selection$;
 
-    readonly sidebarContent$ = this.sidebar.content$.pipe(tap((val) => (this.activeSidebarClass = val && typeof val !== 'string' ? val.activeSidebarClass : undefined)));
+    readonly sidebarContent$ = this.sidebar.content$.pipe(tap(val => (this.activeSidebarClass = val && typeof val !== 'string' ? val.activeSidebarClass : undefined)));
 
     @Input()
     extras?: {
@@ -334,10 +351,10 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
         private readonly selection: SelectionStore<Node>,
         private readonly contextMenu: ContextMenuService,
         @Optional() responsive: ResponsiveService,
-        private readonly destroy$: DestroyService
+        private readonly destroy$: DestroyService,
     ) {
         store.components.push(this);
-        responsive?.isMobile$.pipe(takeUntil(destroy$)).subscribe((value) => (this.isMobile = value));
+        responsive?.isMobile$.pipe(takeUntil(destroy$)).subscribe(value => (this.isMobile = value));
     }
 
     ngOnInit() {
@@ -352,8 +369,8 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
                             this.searchParametersStore.switch(false);
                         }
                     }),
-                    map(({ value }) => value)
-                )
+                    map(({ value }) => value),
+                ),
             );
             this.searchParametersStore.patchState(
                 currentFolder$.pipe(
@@ -361,8 +378,8 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
                     map(({ value }) => ({ currentFolder: value })),
                     tap(() => {
                         this.searchParametersStore.switch(true);
-                    })
-                )
+                    }),
+                ),
             );
         }
 
@@ -371,7 +388,7 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
                 // do not refresh in viewer mode
                 filter(() => !this.router.url.includes('viewer:view')),
                 debounceTime(100),
-                takeUntil(this.destroy$)
+                takeUntil(this.destroy$),
             )
             .subscribe(() => this.search.reload());
 
@@ -382,7 +399,7 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
                     withLatestFrom(this.currentFolder$),
                     filter(([event, currentFolder]) => currentFolder && event?.file?.options?.parentId === currentFolder.id),
                     debounceTime(1500),
-                    takeUntil(this.destroy$)
+                    takeUntil(this.destroy$),
                 )
                 .subscribe(([payload]) => this.store.dispatch({ type: this.actions.fileUploadComplete, payload }));
         }
@@ -440,7 +457,7 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
             const { formSettings, preferenceType, queryKey } = data;
             if (formSettings) {
                 const form = this.dynamicFormService.get(formSettings.formId, formSettings.layoutId);
-                if (!!formSettings.extras?.queryMode) {
+                if (formSettings.extras?.queryMode) {
                     form.queryMode = formSettings.extras.queryMode;
                     // if *at least* one form has query mode ON_TRIGGER, then the result service has query mode ON_TRIGGER
                     if (formSettings.extras.queryMode === QueryMode.ON_TRIGGER) {
@@ -464,11 +481,11 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
                         tap(() => {
                             this.awaitingSelectionReset = true;
                             this.fullSelectionSnapshot = undefined;
-                        })
+                        }),
                     ),
                     // pass form validity as observable
                     form.valid$,
-                    queryKey
+                    queryKey,
                 );
                 return form;
             } else {
@@ -484,28 +501,28 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
         if (preferencesId && preferences.includes(PreferencesType.Columns)) {
             this.preferencesService.bind(
                 {
-                    next: (columns) => this.columns.update(columns),
+                    next: columns => this.columns.update(columns),
                     asObservable: () => this.columns.preset$,
-                    decode: (value) => (value ? JSON.parse(value) : []),
-                    encode: (value) => (value ? JSON.stringify(value) : undefined),
+                    decode: value => (value ? JSON.parse(value) : []),
+                    encode: value => (value ? JSON.stringify(value) : undefined),
                 },
-                PreferencesType.Columns.toString()
+                PreferencesType.Columns.toString(),
             );
         }
 
         if (preferencesId && preferences.includes(PreferencesType.Sorting)) {
             this.preferencesService.bind(
                 {
-                    next: (sorting) => {
+                    next: sorting => {
                         if (sorting) {
                             this.searchParametersStore.patchState({ sorting });
                         }
                     },
                     asObservable: () => this.searchParametersStore.sorting$,
-                    decode: (value) => (value ? JSON.parse(value) : this.default?.sorting),
-                    encode: (value) => (value ? JSON.stringify(value) : undefined),
+                    decode: value => (value ? JSON.parse(value) : this.default?.sorting),
+                    encode: value => (value ? JSON.stringify(value) : undefined),
                 },
-                PreferencesType.Sorting.toString()
+                PreferencesType.Sorting.toString(),
             );
         } else if (this.default?.sorting) {
             this.searchParametersStore.patchState({ sorting: this.default.sorting });
@@ -513,43 +530,43 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
         if (preferencesId && preferences.includes(PreferencesType.MaxItems)) {
             this.preferencesService.bind(
                 {
-                    next: (paging) => {
+                    next: paging => {
                         if (paging) {
                             this.searchParametersStore.patchState({ paging });
                         }
                     },
                     asObservable: () => this.searchParametersStore.paging$,
-                    decode: (value) => (value ? JSON.parse(value) : this.default?.paging),
-                    encode: (value) => (value ? JSON.stringify({ maxItems: value.maxItems }) : undefined),
+                    decode: value => (value ? JSON.parse(value) : this.default?.paging),
+                    encode: value => (value ? JSON.stringify({ maxItems: value.maxItems }) : undefined),
                 },
-                PreferencesType.MaxItems.toString()
+                PreferencesType.MaxItems.toString(),
             );
         } else if (this.default?.paging) {
             this.searchParametersStore.patchState({ paging: this.default.paging });
         }
 
         this.ready$ = this.preferencesService.ready$.pipe(
-            tap((ready) => {
+            tap(ready => {
                 if (ready) {
                     if (this.extras?.browsingQueryParams$) {
                         this.searchParametersStore.patchState(
                             this.searchParametersStore.ready$.pipe(
                                 take(1),
-                                switchMap(() => this.extras.browsingQueryParams$)
-                            )
+                                switchMap(() => this.extras.browsingQueryParams$),
+                            ),
                         );
                     }
                     this.searchParametersStore.switch(true);
                 }
-            })
+            }),
         );
 
         this.contextMenu.init({ key: this.featureKeys?.contextMenu });
 
-        // dispatch on init action
-        const type = this.actions.onInit;
-        if (type) {
-            this.store.dispatch({ type });
+        // dispatch on init action(s)
+        const types = this.actions.onInit;
+        if (types) {
+            ArrayUtils.asArray(types).forEach(type => this.store.dispatch({ type }));
         }
     }
 
@@ -658,27 +675,27 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
                     ? of(this.fullSelectionSnapshot)
                     : this.searchParametersStore.state$.pipe(
                           tap(() => search.searchingSource.next(true)),
-                          switchMap((state) =>
+                          switchMap(state =>
                               ContezzaObservables.while<ResultSetPaging>(
                                   (response, i) => response?.list.pagination.totalItems > i * MAX_ITEMS,
                                   (_, i) => search.doSearch({ ...state, paging: { skipCount: i * MAX_ITEMS, maxItems: MAX_ITEMS } }),
                                   (response1, response2) => {
                                       response1.list.entries = response1.list.entries.concat(response2.list.entries);
                                       return response1;
-                                  }
-                              )
+                                  },
+                              ),
                           ),
                           tap(() => search.searchingSource.next(false)),
-                          map((response) => response.list.entries.map((_) => _.entry as Node)),
-                          tap((selection) => (this.fullSelectionSnapshot = selection))
+                          map(response => response.list.entries.map(_ => _.entry as Node)),
+                          tap(selection => (this.fullSelectionSnapshot = selection)),
                       );
                 break;
             case SelectionMode.SINGLE_PAGE:
-                selection$ = this.results$.pipe(map((_) => _.list));
+                selection$ = this.results$.pipe(map(_ => _.list));
                 break;
         }
 
-        selection$.pipe(take(1)).subscribe((selection) => this.selection.add(selection));
+        selection$.pipe(take(1)).subscribe(selection => this.selection.add(selection));
     }
 
     onSortingChange(sorting: Sort) {
@@ -690,7 +707,7 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
     }
 
     onTopOverscroll() {
-        this.searchParametersStore.paging$.pipe(take(1)).subscribe((paging) => {
+        this.searchParametersStore.paging$.pipe(take(1)).subscribe(paging => {
             if (paging.skipCount === 0) {
                 this.reload();
             } else {
@@ -706,7 +723,7 @@ export class SearchTableLayoutComponent implements SearchTableLayoutComponentInt
                 // dispatch any to force set currentFolder and selection
                 this.store.dispatch({ type: 'any' });
                 this.contextMenu.open(event);
-            } else {
+            } else if (typeof type === 'string') {
                 this.store.dispatch({ type, event });
             }
         }
