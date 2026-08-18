@@ -10,6 +10,14 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2026-08-13
+|3.13.0
+|View <<Release 3.13.0,release details>>.
+
+|2026-07-16
+|3.12.1
+|View <<Release 3.12.1,release details>>.
+
 |2026-07-10
 |3.12.0
 |View <<Release 3.12.0,release details>>.
@@ -429,6 +437,21 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 3.13.0
+
+Bugfixes/minor changes:
+
+- @contezza/content-services - Fix null check in `TableComponent`.
+- @contezza/content-services/presets - Fix retrieving of user's saved-search folder https://support.contezza.nl/issues/37541[(#37541)].
+- @contezza/content-services/search - Fix evaluator `canDelete` to also work with Search API response https://support.contezza.nl/issues/38479[(#38479)].
+- @contezza/dynamic-forms - Change Dutch label of date-range end date to 'tot en met'.
+
+==== Release 3.12.1
+
+Bugfixes/minor changes:
+
+- @contezza/content-services/search - Field `peoplePicker` supports `label` property.
 
 ==== Release 3.12.0
 
