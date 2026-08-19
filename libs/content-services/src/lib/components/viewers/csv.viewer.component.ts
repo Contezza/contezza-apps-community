@@ -1,25 +1,44 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgComponentOutlet } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
 
-import { filter, map, Observable, ReplaySubject, switchMap } from 'rxjs';
+import { defer, filter, map, Observable, ReplaySubject, switchMap } from 'rxjs';
 
 import { SelectionStore } from '@contezza/core/context';
 import { ContezzaObservables, CsvUtils } from '@contezza/core/utils';
 
-import { TableComponent } from '@contezza/content-services/components/table';
 import { Column } from '@contezza/content-services/shared';
 
 @Component({
     standalone: true,
-    imports: [AsyncPipe, TableComponent],
+    imports: [AsyncPipe, NgComponentOutlet],
     selector: 'tezza-csv-viewer',
     template: `@if (data$ | async; as data) {
-        @defer (on immediate) {
-            <!--lazy load contezza-table https://angular.dev/guide/templates/defer-->
-            <contezza-table style="display: flex; height: 100%" [results]="{ list: data.list }" [columns]="data.columns" />
+        <!-- TODO: replace with @defer with ng18+ https://github.com/angular/angular/issues/53936#issuecomment-2019427618-->
+        <!--        @defer (on immediate) {-->
+        <!--lazy load contezza-table https://angular.dev/guide/templates/defer-->
+        <!--            <contezza-table style="display: flex; height: 100%" [results]="{ list: data.list }" [columns]="data.columns" />-->
+        <!--        }-->
+        @if (tableComponent$ | async; as tableComponent) {
+            <ng-container
+                *ngComponentOutlet="
+                    tableComponent;
+                    inputs: {
+                        results: { list: data.list },
+                        columns: data.columns
+                    }
+                "
+            />
         }
     }`,
+    styles: [
+        `
+            :host ::ng-deep contezza-table {
+                display: flex;
+                height: 100%;
+            }
+        `,
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     // provide new SelectionStore so that selection in this table does not interfere with the SelectionStore of the parent table
     providers: [SelectionStore],
@@ -54,4 +73,7 @@ export class CsvViewerComponent {
             };
         }),
     );
+
+    // TODO: remove with ng18+
+    readonly tableComponent$ = defer(() => ContezzaObservables.from(() => import('@contezza/content-services/components/table'))).pipe(map(m => m.TableComponent));
 }
