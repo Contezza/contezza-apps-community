@@ -150,7 +150,7 @@ export class TableComponent<ItemType> implements AfterViewInit, OnInit {
 
     fullSelectionLength: number;
 
-    sortingState: Sort;
+    sortingState?: Sort;
     pagingState?: PageEvent;
 
     dataSource: MatTableDataSource<ItemType>;

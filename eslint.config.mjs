@@ -135,7 +135,7 @@ export default [
                 'error',
                 {
                     type: 'attribute',
-                    prefix: ['contezza'],
+                    prefix: ['contezza', 'tezza'],
                     style: 'camelCase',
                 },
             ],
@@ -144,7 +144,7 @@ export default [
                 'error',
                 {
                     type: 'element',
-                    prefix: ['contezza'],
+                    prefix: ['contezza', 'tezza'],
                     style: 'kebab-case',
                 },
             ],
