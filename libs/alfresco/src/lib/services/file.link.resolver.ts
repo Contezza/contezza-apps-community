@@ -17,7 +17,9 @@ export class FileLinkResolver implements ILinkResolver<Node> {
     resolve(target: Node) {
         if (target.isFile) {
             const currentUrl = this.router.url;
-            return currentUrl + `/(viewer:view/${target.id})?location=${currentUrl}`;
+            // necessary if underlying-table links are generated while in viewer overlay
+            const baseUrl = currentUrl.split('/(viewer:view/')[0]!;
+            return baseUrl + `/(viewer:view/${target.id})?location=${baseUrl}`;
         } else {
             return null;
         }

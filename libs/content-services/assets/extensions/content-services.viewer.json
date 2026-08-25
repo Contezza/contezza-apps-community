@@ -1,0 +1,18 @@
+{
+    "$id": "content-services.viewer",
+    "$version": "@@project.version@@",
+    "$name": "Tezza Content Services Viewer",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "viewer": {
+            "extensions": [
+                {
+                    "id": "contezza.viewer.csv",
+                    "fileExtension": ["csv"],
+                    "component": "viewers.csv"
+                }
+            ]
+        }
+    }
+}
