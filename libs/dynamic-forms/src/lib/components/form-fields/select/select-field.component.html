@@ -7,14 +7,7 @@
         [appearance]="field.settings?.appearance"
     >
         <mat-label *ngIf="field.label">{{ field.label | translate }}</mat-label>
-        <mat-select
-            #select
-            [formControl]="control"
-            [multiple]="field.type === 'multiselect'"
-            (selectionChange)="control.markAsTouched()"
-            [required]="required"
-            [compareWith]="displayFn"
-        >
+        <mat-select #select [formControl]="control" [multiple]="field.type === 'multiselect'" (selectionChange)="control.markAsTouched()" [compareWith]="displayFn">
             <mat-select-trigger *ngIf="select.value?.contezzaDisplay">
                 <div title="{{ select.value?.contezzaDisplay.value.tooltip | translate }}">
                     <mat-icon *ngIf="select.value?.contezzaDisplay.value.icon" [contezzaIcon]="select.value?.contezzaDisplay.value.icon" />

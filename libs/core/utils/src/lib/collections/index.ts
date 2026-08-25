@@ -3,6 +3,7 @@ export * from './adf-utils.class';
 export * from './alfresco.utils';
 export * from './api.utils';
 export * from './array-utils.class';
+export * from './csv.utils';
 export * from './dependency-syntax.class';
 export * from './enum.utils';
 export * from './geometry.utils';
