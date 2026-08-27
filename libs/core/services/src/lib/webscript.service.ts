@@ -40,7 +40,19 @@ export class WebscriptService implements HttpClient {
         return ContezzaObservables.from(() =>
             this.apiService
                 .getInstance()
-                .contentClient.callApi('/service/' + url, httpMethod, {}, '', {}, {}, body, ['application/json'], ['application/json', 'text/html'], null, 'alfresco'),
+                .contentClient.callApi(
+                    '/service/' + url,
+                    httpMethod,
+                    {},
+                    '',
+                    {},
+                    {},
+                    body,
+                    body ? ['application/json'] : ['multipart/form-data'],
+                    ['application/json', 'text/html'],
+                    null,
+                    'alfresco',
+                ),
         );
     }
 }
