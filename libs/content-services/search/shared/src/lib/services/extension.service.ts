@@ -135,13 +135,15 @@ export class ExtensionService {
     /**
      * Patches the given string so that it can be used as replacer for a string contained in a JSON.
      * The following patches are applied:
-     * * double quotes are escaped,
-     * * escape symbols are escaped.
+     * - double quotes are escaped,
+     * - escape symbols are escaped.
+     * - new line symbols '\n' are escaped.
      *
      * @param string
+     * @returns Patched string.
      */
     private static patchForJSON(string: string): string {
-        return string.replace(/["\\]/g, (match) => (match === '"' ? `\\"` : `\\\\`));
+        return string.replace(/["\\\n]/g, match => (match === '"' ? `\\"` : match === '\n' ? '\\n' : `\\\\`));
     }
 }
 
