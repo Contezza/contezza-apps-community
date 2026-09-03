@@ -8,7 +8,7 @@ import { DialogService } from '@contezza/core/dialogs';
 import { EffectsHelper } from '@contezza/core/effects-helper';
 
 import { RmaApi } from '@contezza/alfresco/rm/apis';
-import { readRmauditlog } from '@contezza/alfresco/rm/shared';
+import { readRmauditlog, showAuditlogDetails } from '@contezza/alfresco/rm/shared';
 
 @Injectable()
 export class Effects {
@@ -48,6 +48,37 @@ export class Effects {
                             }),
                         ),
                     ),
+                ),
+            ),
+        { dispatch: false },
+    );
+
+    readonly showAuditlogDetails$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(showAuditlogDetails),
+                this.helper.getPayload('last'),
+                switchMap(rmauditlogEntry =>
+                    this.dialog.open({
+                        autoFocus: false,
+                        width: '70%',
+                        data: {
+                            title: {
+                                label: 'ALFRESCO.RM.DIALOGS.SHOW_AUDITLOG_DETAILS.TITLE',
+                                params: { name: rmauditlogEntry.nodeName },
+                            },
+                            content: {
+                                component: () => import('@contezza/alfresco/rm/components/rmauditlog').then(_ => _.RmaudilogComponent),
+                                inputs: { rmauditlog: { entries: [rmauditlogEntry] } },
+                            },
+                            actions: [
+                                {
+                                    id: 'close',
+                                    title: 'APP.BUTTONS.CLOSE',
+                                },
+                            ],
+                        },
+                    }),
                 ),
             ),
         { dispatch: false },

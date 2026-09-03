@@ -2,14 +2,19 @@
     "ALFRESCO": {
         "RM": {
             "ACTIONS": {
-                "READ_RMAUDITLOG": "Open audit"
+                "READ_RMAUDITLOG": "Open audit",
+                "SHOW_AUDITLOG_DETAILS": "Show audit details"
             },
             "DIALOGS": {
                 "RMAUDITLOG": {
                     "TITLE": "Audit log for {{name}}"
+                },
+                "SHOW_AUDITLOG_DETAILS": {
+                    "TITLE": "Audit details {{name}}"
                 }
             },
             "RMAUDITLOG": {
+                "TITLE": "RM Audit",
                 "PROPERTIES": {
                     "CHANGED_VALUES": {
                         "LABEL": "Changed values",
@@ -24,7 +29,11 @@
                     "IDENTIFIER": "Identification",
                     "NODE_TYPE": "Type",
                     "PATH": "Location",
-                    "TIMESTAMP": "Timestamp"
+                    "TIMESTAMP": "Timestamp",
+                    "USER_ROLE": "Role"
+                },
+                "EMPTY_STATE": {
+                    "TITLE": "No audit log entries found"
                 }
             }
         }

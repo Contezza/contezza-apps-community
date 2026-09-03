@@ -7,7 +7,7 @@
     "features": {
         "columns": [
             {
-                "id": "alfresco.rm.columns.events",
+                "id": "alfresco.rm.columns.rmauditlogs",
                 "columns": [
                     {
                         "id": "timestamp",
@@ -28,9 +28,14 @@
                         "key": "fullName"
                     },
                     {
+                        "id": "userRole",
+                        "title": "ALFRESCO.RM.RMAUDITLOG.PROPERTIES.USER_ROLE",
+                        "key": "userRole"
+                    },
+                    {
                         "id": "event",
                         "title": "ALFRESCO.RM.RMAUDITLOG.PROPERTIES.EVENT",
-                        "function": "item=> const value = item.event; return (value[0]+value.slice(1).toLowerCase()).replace(/_/g,' ')"
+                        "function": "item=> return (item.event + (item.nodeName ? ' - ' + item.nodeName : '') )"
                     }
                 ]
             }

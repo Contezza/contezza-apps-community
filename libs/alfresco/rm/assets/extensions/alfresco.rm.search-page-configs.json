@@ -7,15 +7,15 @@
     "features": {
         "searchTablePageConfigs": [
             {
-                "id": "rm.search-page-configs.events",
-                "title": "RM Logs title",
-                "columnsId": "alfresco.rm.columns.events",
+                "id": "rm.search-page-configs.rmauditlogs",
+                "title": "ALFRESCO.RM.RMAUDITLOG.TITLE",
+                "columnsId": "alfresco.rm.columns.rmauditlogs",
                 "featureKeys": {
-                    "contextMenu": "keycloak.events.contextMenu",
-                    "toolbar": "keycloak.events.toolbar"
+                    "contextMenu": "rmAuditlog.contextMenu",
+                    "toolbar": "rmAuditlog.toolbar"
                 },
                 "leftSidebarFilters": {
-                    "formId": "alfresco.rm.sidebar-filters.events",
+                    "formId": "alfresco.rm.sidebar-filters.rmauditlogs",
                     "extras": {
                         "queryMode": "on-trigger"
                     }
@@ -24,6 +24,7 @@
                     "id": "search-results-views.table",
                     "data": {
                         "paginatorSettings": {
+                            "pageSizeOptions": [5,10,15,20,25,50,100],
                             "showFirstLastButtons": false,
                             "showTotalItems": false
                         }
@@ -33,12 +34,12 @@
                 "queryParams": [],
                 "actions": {
                     "contextmenu": "CONTEXT_MENU",
-                    "dblclick": "[KEYCLOAK] SHOW_EVENT_DETAILS"
+                    "dblclick": "[ALFRESCO.RM] SHOW_AUDITLOG_DETAILS"
                 },
-                "searchStrategyId": "rm.search-strategies.events",
+                "searchStrategyId": "rm.search-strategies.auditlog",
                 "emptyContent": {
                     "icon": "search",
-                    "title": "KEYCLOAK.BROWSE.EVENTS.EMPTY_STATE.TITLE"
+                    "title": "ALFRESCO.RM.RMAUDITLOG.EMPTY_STATE.TITLE"
                 }
             }
         ]

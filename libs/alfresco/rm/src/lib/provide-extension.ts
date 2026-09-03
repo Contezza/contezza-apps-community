@@ -27,7 +27,7 @@ export function provideExtension(): EnvironmentProviders {
         ]),
         provideWebscriptApiService(RmaApi),
         provideSearchStrategies({
-            'rm.search-strategies.events':
+            'rm.search-strategies.auditlog':
                 (rmaApi = inject(RmaApi)) =>
                 ({ parameters }) => {
                     const { skipCount, maxItems } = parameters.paging;

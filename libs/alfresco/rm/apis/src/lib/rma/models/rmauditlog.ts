@@ -9,6 +9,7 @@ export interface RmauditlogEntry {
     nodeRef: string;
     nodeName: string;
     nodeType: string;
+    userRole: string;
     path: string;
     identifier: string;
     changedValues: RmauditlogEntryChangedValue[];

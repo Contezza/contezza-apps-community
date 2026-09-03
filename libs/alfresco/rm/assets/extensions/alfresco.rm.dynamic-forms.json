@@ -5,160 +5,334 @@
     "$vendor": "Contezza BV",
 
     "features": {
-    "dynamicforms": [
-        {
-            "id": "alfresco.rm.sidebar-filters.events",
-            "form": {
-                "validations": ["requiredAtLeastOneField"],
-                "query": {
-                    "map": "alfresco.rm.formatQueryParams"
-                },
-                "subfields": [
-                    {
-                        "id": "dateRange",
-                        "type": "dateRange",
-                        "query": {
-                            "map": "alfresco.rm.dateRange"
-                        }
+        "dynamicforms": [
+            {
+                "id": "alfresco.rm.sidebar-filters.rmauditlogs",
+                "form": {
+                    "validations": ["requiredAtLeastOneField"],
+                    "query": {
+                        "map": "alfresco.rm.formatQueryParams"
                     },
-                    {
-                        "id": "user",
-                        "type": "autocomplete",
-                        "label": "ALFRESCO.RM.RMAUDITLOG.PROPERTIES.FULL_NAME",
-                        "options": {
-                            "dynamic-source": "${user$raw}",
-                            "filters": [
+                    "subfields": [
+                        {
+                            "id": "dateRange",
+                            "type": "dateRange",
+                            "query": {
+                                "map": "alfresco.rm.dateRange"
+                            }
+                        },
+                        {
+                            "id": "user",
+                            "type": "autocomplete",
+                            "label": "ALFRESCO.RM.RMAUDITLOG.PROPERTIES.FULL_NAME",
+                            "options": {
+                                "dynamic-source": "${user$raw}",
+                                "filters": [
+                                    {
+                                        "id": "map",
+                                        "parameters": "value=> return value && typeof value ==='string' && value.length >= 3 ? value : null"
+                                    },
+                                    {
+                                        "id": "ifDefined",
+                                        "parameters": [
+                                            {
+                                                "id": "delay",
+                                                "parameters": 700
+                                            },
+                                            {
+                                                "id": "template",
+                                                "parameters": "api/people?sortBy=fullName&dir=asc&filter=${value}&maxResults=250"
+                                            },
+                                            "webscript",
+                                            {
+                                                "id": "map",
+                                                "parameters": "value=>return value.people"
+                                            },
+                                            {
+                                                "id": "tap",
+                                                "parameters": "list=>list.forEach(user=>user.label=`${user.firstName || ''} ${user.lastName || ''}`)"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "map",
+                                        "parameters": "list=> return list ||[]"
+                                    }
+                                ],
+                                "labelKey": "label"
+                            },
+                            "settings": {
+                                "preFilteredOptions": true,
+                                "minChars": 3
+                            },
+                            "validations": [
                                 {
-                                    "id": "map",
-                                    "parameters": "value=> return value && typeof value ==='string' && value.length >= 3 ? value : null"
-                                },
-                                {
-                                    "id": "ifDefined",
-                                    "parameters": [
-                                        {
-                                            "id": "delay",
-                                            "parameters": 700
-                                        },
-                                        {
-                                            "id": "template",
-                                            "parameters": "api/people?sortBy=fullName&dir=asc&filter=${value}&maxResults=250"
-                                        },
-                                        "webscript",
-                                        {
-                                            "id": "map",
-                                            "parameters": "value=>return value.people"
-                                        },
-                                        {
-                                            "id": "tap",
-                                            "parameters": "list=>list.forEach(user=>user.label=`${user.firstName || ''} ${user.lastName || ''}`)"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "id": "map",
-                                    "parameters": "list=> return list ||[]"
+                                    "id": "hasProperties",
+                                    "parameters": ["userName"]
                                 }
                             ],
-                            "labelKey": "label"
-                        },
-                        "settings": {
-                            "preFilteredOptions": true,
-                            "minChars": 3
-                        },
-                        "validations": [
-                            {
-                                "id": "hasProperties",
-                                "parameters": ["userName"]
+                            "query": {
+                                "template": "user=${value.userName}"
                             }
-                        ],
-                        "query": {
-                            "template": "user=${value.userName}"
-                        }
-                    },
-                    {
-                        "id": "event",
-                        "type": "multiautocomplete",
-                        "label": "ALFRESCO.RM.RMAUDITLOG.PROPERTIES.EVENT",
-                        "options": {
-                            "dynamic-source": [
-                                "Aanmelden geslaagd",
-                                "Aanmelden niet geslaagd",
-                                "Accession",
-                                "Accession Complete",
-                                "Add Record Types",
-                                "Archiveren in",
-                                "Audit bekijken",
-                                "Audit starten",
-                                "Audit stoppen",
-                                "Audit wissen",
-                                "Bewaring maken",
-                                "Bewaring verwijderen",
-                                "Bijgewerkte metagegevens",
-                                "Close Record Folder",
-                                "Complete Event",
-                                "Complete Record",
-                                "Create Retention Schedule",
-                                "Cut Off",
-                                "Destroy",
-                                "Edit Retention Action As Of Date",
-                                "Edit Review As Of Date",
-                                "Execute Script",
-                                "File Report",
-                                "File Version as Record",
-                                "File as Record",
-                                "Gebruiker maken",
-                                "Gebruiker verwijderen",
-                                "Gebruikersgroep maken",
-                                "Gebruikersgroep verwijderen",
-                                "Hide Record",
-                                "Kopiëren naar",
-                                "Koppelen naar",
-                                "Move Record",
-                                "Object gemaakt",
-                                "Object verwijderen",
-                                "Open Record Folder",
-                                "Opties voor automatisch declareren",
-                                "Overgenomen rechten ingeschakeld",
-                                "Overgenomen rechten uitgeschakeld",
-                                "Recht instellen",
-                                "Reject",
-                                "Reopen Record",
-                                "Request Information",
-                                "Retain",
-                                "Reviewed",
-                                "Send Email",
-                                "Set Property Value",
-                                "Split Email",
-                                "Toevoegen aan bewaring",
-                                "Toevoegen aan gebruikersgroep",
-                                "Transfer",
-                                "Transfer Complete",
-                                "Undo Cut Off",
-                                "Undo Event",
-                                "Unlink from",
-                                "Verplaatsen naar",
-                                "Verwijderen uit bewaring",
-                                "Verwijderen uit gebruikersgroep",
-                                "WORM Lock"],
-                            "filters": [
+                        },
+                        {
+                            "id": "event",
+                            "type": "autocomplete",
+                            "label": "ALFRESCO.RM.RMAUDITLOG.PROPERTIES.EVENT",
+                            "options": {
+                                "dynamic-source": [
+                                    {
+                                        "label": "Aanmelden geslaagd",
+                                        "value": "Login.Success"
+                                    },
+                                    {
+                                        "label": "Aanmelden niet geslaagd",
+                                        "value": "Login.Failure"
+                                    },
+                                    {
+                                        "label": "Accession",
+                                        "value": "accession"
+                                    },
+                                    {
+                                        "label": "Accession Complete",
+                                        "value": "accessionComplete"
+                                    },
+                                    {
+                                        "label": "Add Record Types",
+                                        "value": "addRecordTypes"
+                                    },
+                                    {
+                                        "label": "Archiveren in",
+                                        "value": "fileTo"
+                                    },
+                                    {
+                                        "label": "Audit bekijken",
+                                        "value": "audit.view"
+                                    },
+                                    {
+                                        "label": "Audit starten",
+                                        "value": "audit.start"
+                                    },
+                                    {
+                                        "label": "Audit stoppen",
+                                        "value": "audit.stop"
+                                    },
+                                    {
+                                        "label": "Audit wissen",
+                                        "value": "audit.clear"
+                                    },
+                                    {
+                                        "label": "Bewaring maken",
+                                        "value": "Create Hold"
+                                    },
+                                    {
+                                        "label": "Bewaring verwijderen",
+                                        "value": "Delete Hold"
+                                    },
+                                    {
+                                        "label": "Bijgewerkte metagegevens",
+                                        "value": "Update RM Object"
+                                    },
+                                    {
+                                        "label": "Close Record Folder",
+                                        "value": "closeRecordFolder"
+                                    },
+                                    {
+                                        "label": "Complete Event",
+                                        "value": "completeEvent"
+                                    },
+                                    {
+                                        "label": "Complete Record",
+                                        "value": "declareRecord"
+                                    },
+                                    {
+                                        "label": "Create Retention Schedule",
+                                        "value": "createDispositionSchedule"
+                                    },
+                                    {
+                                        "label": "Cut Off",
+                                        "value": "cutoff"
+                                    },
+                                    {
+                                        "label": "Destroy",
+                                        "value": "destroy"
+                                    },
+                                    {
+                                        "label": "Edit Retention Action As Of Date",
+                                        "value": "editDispositionActionAsOfDate"
+                                    },
+                                    {
+                                        "label": "Edit Review As Of Date",
+                                        "value": "editReviewAsOfDate"
+                                    },
+                                    {
+                                        "label": "Execute Script",
+                                        "value": "executeScript"
+                                    },
+                                    {
+                                        "label": "File Report",
+                                        "value": "fileReport"
+                                    },
+                                    {
+                                        "label": "File Version as Record",
+                                        "value": "declare-as-version-record"
+                                    },
+                                    {
+                                        "label": "File as Record",
+                                        "value": "create-record"
+                                    },
+                                    {
+                                        "label": "Gebruiker maken",
+                                        "value": "Create Person"
+                                    },
+                                    {
+                                        "label": "Gebruiker verwijderen",
+                                        "value": "Delete Person"
+                                    },
+                                    {
+                                        "label": "Gebruikersgroep maken",
+                                        "value": "Create User Group"
+                                    },
+                                    {
+                                        "label": "Gebruikersgroep verwijderen",
+                                        "value": "Delete User Group"
+                                    },
+                                    {
+                                        "label": "Hide Record",
+                                        "value": "hide-record"
+                                    },
+                                    {
+                                        "label": "Kopiëren naar",
+                                        "value": "copyTo"
+                                    },
+                                    {
+                                        "label": "Koppelen naar",
+                                        "value": "linkTo"
+                                    },
+                                    {
+                                        "label": "Move Record",
+                                        "value": "move-dm-record"
+                                    },
+                                    {
+                                        "label": "Object gemaakt",
+                                        "value": "Create RM Object"
+                                    },
+                                    {
+                                        "label": "Object verwijderen",
+                                        "value": "Delete RM Object"
+                                    },
+                                    {
+                                        "label": "Open Record Folder",
+                                        "value": "openRecordFolder"
+                                    },
+                                    {
+                                        "label": "Opties voor automatisch declareren",
+                                        "value": "recordableVersionConfig"
+                                    },
+                                    {
+                                        "label": "Overgenomen rechten ingeschakeld",
+                                        "value": "enable-inherit-permission"
+                                    },
+                                    {
+                                        "label": "Overgenomen rechten uitgeschakeld",
+                                        "value": "disable-inherit-permission"
+                                    },
+                                    {
+                                        "label": "Recht instellen",
+                                        "value": "set-permission"
+                                    },
+                                    {
+                                        "label": "Reject",
+                                        "value": "reject"
+                                    },
+                                    {
+                                        "label": "Reopen Record",
+                                        "value": "undeclareRecord"
+                                    },
+                                    {
+                                        "label": "Request Information",
+                                        "value": "requestInfo"
+                                    },
+                                    {
+                                        "label": "Retain",
+                                        "value": "retain"
+                                    },
+                                    {
+                                        "label": "Reviewed",
+                                        "value": "reviewed"
+                                    },
+                                    {
+                                        "label": "Send Email",
+                                        "value": "sendEmail"
+                                    },
+                                    {
+                                        "label": "Set Property Value",
+                                        "value": "setPropertyValue"
+                                    },
+                                    {
+                                        "label": "Split Email",
+                                        "value": "splitEmail"
+                                    },
+                                    {
+                                        "label": "Toevoegen aan bewaring",
+                                        "value": "Add To Hold"
+                                    },
+                                    {
+                                        "label": "Toevoegen aan gebruikersgroep",
+                                        "value": "Add To User Group"
+                                    },
+                                    {
+                                        "label": "Transfer",
+                                        "value": "transfer"
+                                    },
+                                    {
+                                        "label": "Transfer Complete",
+                                        "value": "transferComplete"
+                                    },
+                                    {
+                                        "label": "Undo Cut Off",
+                                        "value": "unCutoff"
+                                    },
+                                    {
+                                        "label": "Undo Event",
+                                        "value": "undoEvent"
+                                    },
+                                    {
+                                        "label": "Unlink from",
+                                        "value": "unlinkFrom"
+                                    },
+                                    {
+                                        "label": "Verplaatsen naar",
+                                        "value": "moveTo"
+                                    },
+                                    {
+                                        "label": "Verwijderen uit bewaring",
+                                        "value": "Remove From Hold"
+                                    },
+                                    {
+                                        "label": "Verwijderen uit gebruikersgroep",
+                                        "value": "Remove From User Group"
+                                    },
+                                    {
+                                        "label": "WORM Lock",
+                                        "value": "wormLock"
+                                    }
+                                ],
+                                "labelKey": "label"
+                            },
+                            "validations": [
                                 {
-                                    "id": "map",
-                                    "parameters": "list=>return list.map(value=>({value, label:(value[0]+value.slice(1).toLowerCase()).replace(/_/g,' ')}))"
+                                    "id": "hasProperties",
+                                    "parameters": ["label"]
                                 }
                             ],
-                            "labelKey": "label"
-                        },
-                        "query": {
-                            "map": {
-                                "id": "map",
-                                "parameters": "values=>return values?.map(({value})=>'event='+value).join('&')"
+                            "query": {
+                                "template": "event=${value.value}"
                             }
                         }
-                    }
-                ]
+                    ]
+                }
             }
-        }
-    ]
+        ]
     }
-
 }
