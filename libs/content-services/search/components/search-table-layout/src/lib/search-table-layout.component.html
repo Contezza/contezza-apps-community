@@ -103,7 +103,7 @@
                                 <!-- if (sidebarContent && typeof sidebarContent !== 'string' && component.id) -->
                                 <ng-container *ngIf="$any(sidebarContent) as component">
                                     <ng-container *ngIf="component.id">
-                                        <contezza-dynamic-component [id]="component.id" [data]="component.data" />
+                                        <contezza-dynamic-component *contezzaReloadOnChangeOf="component.id" [id]="component.id" [data]="component.data" />
                                     </ng-container>
                                 </ng-container>
                             </div>
