@@ -10,6 +10,7 @@ import { AppConfigService, AuthenticationService, ObjectUtils } from '@alfresco/
 import { showSnackbarInfo } from '@contezza/core/notifications';
 import { DestroyService, PreferencesService as CorePreferencesService } from '@contezza/core/services';
 import { ContezzaObservables, ContezzaStringTemplate } from '@contezza/core/utils';
+
 import { ContezzaDynamicForm } from '@contezza/dynamic-forms/shared';
 
 import { DecoderService } from './decoder.service';
@@ -116,8 +117,8 @@ export class PreferencesService {
             .pipe(
                 debounceTime(PreferencesService.TYPING_DEBOUNCE_TIME),
                 // filter partial autocomplete values
-                // check `form.form.touched` for`requiredAtLeastOneField` validation on initial load and when filters are cleared
-                filter(() => form.form.valid || !form.form.touched),
+                // check `form.form.dirty` for`requiredAtLeastOneField` validation on initial load and when filters are cleared
+                filter(() => form.form.valid || !form.form.dirty),
                 map(value => this.decoder.encode(value, form.rootField)),
                 pairwise(),
                 map(([oldValue, newValue]) => this.constructPreferencesRequest(preferencesPath, oldValue, newValue)),

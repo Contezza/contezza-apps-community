@@ -16,11 +16,40 @@
                 "rules": {
                     "visible": "alfresco.rm.rules.canReadRmauditlog"
                 }
+            },
+            {
+                "id": "alfresco.rm.actions.showAuditlogDetails",
+                "title": "ALFRESCO.RM.ACTIONS.SHOW_AUDITLOG_DETAILS",
+                "icon": "alfresco.rm:text_box_search_outline",
+                "actions": {
+                    "click": "[ALFRESCO.RM] SHOW_AUDITLOG_DETAILS"
+                },
+                "rules": {
+                    "visible": "app.selection.single"
+                }
             }
         ]
     },
 
     "features": {
+        "rmAuditlog": {
+            "contextMenu": [
+                {
+                    "id": "alfresco.rm.contextMenu.showAuditlogDetails",
+                    "imports": "templates.actions[alfresco.rm.actions.showAuditlogDetails]"
+                }
+            ],
+            "toolbar": [
+                {
+                    "id": "alfresco.rm.contextMenu.showAuditlogDetails",
+                    "imports": "templates.actions[alfresco.rm.actions.showAuditlogDetails]"
+                },
+                {
+                    "id": "search.download-results.download-as",
+                    "imports": "templates.actions[search.download-results.download-as]"
+                }
+            ]
+        },
         "contextMenu": [
             {
                 "id": "alfresco.rm.contextMenu.readRmauditlog",

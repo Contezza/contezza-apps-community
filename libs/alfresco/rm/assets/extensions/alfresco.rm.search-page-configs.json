@@ -1,0 +1,48 @@
+{
+    "$id": "alfresco.rm.search-page-configs",
+    "$version": "@@project.version@@",
+    "$name": "Contezza Alfresco Record Management Search Page Configs",
+    "$vendor": "Contezza BV",
+
+    "features": {
+        "searchTablePageConfigs": [
+            {
+                "id": "rm.search-page-configs.rmauditlogs",
+                "title": "ALFRESCO.RM.RMAUDITLOG.TITLE",
+                "columnsId": "alfresco.rm.columns.rmauditlogs",
+                "featureKeys": {
+                    "contextMenu": "rmAuditlog.contextMenu",
+                    "toolbar": "rmAuditlog.toolbar"
+                },
+                "leftSidebarFilters": {
+                    "formId": "alfresco.rm.sidebar-filters.rmauditlogs",
+                    "extras": {
+                        "queryMode": "on-trigger"
+                    }
+                },
+                "resultsComponent": {
+                    "id": "search-results-views.table",
+                    "data": {
+                        "paginatorSettings": {
+                            "pageSizeOptions": [5,10,15,20,25,50,100],
+                            "showFirstLastButtons": false,
+                            "showTotalItems": false
+                        }
+                    }
+                },
+                "preferences": [],
+                "queryParams": [],
+                "actions": {
+                    "contextmenu": "CONTEXT_MENU",
+                    "dblclick": "[ALFRESCO.RM] SHOW_AUDITLOG_DETAILS"
+                },
+                "searchStrategyId": "rm.search-strategies.auditlog",
+                "emptyContent": {
+                    "icon": "search",
+                    "title": "ALFRESCO.RM.RMAUDITLOG.EMPTY_STATE.TITLE"
+                }
+            }
+        ]
+    }
+
+}

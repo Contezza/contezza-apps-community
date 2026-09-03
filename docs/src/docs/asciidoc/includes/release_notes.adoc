@@ -10,6 +10,18 @@ Overzicht van de release notities.
 |===
 |Datum |Versie  |Omschrijving
 
+|2026-09-03
+|3.14.0
+|View <<Release 3.14.0,release details>>.
+
+|2026-08-28
+|3.13.2
+|View <<Release 3.13.2,release details>>.
+
+|2026-08-21
+|3.13.1
+|View <<Release 3.13.1,release details>>.
+
 |2026-08-13
 |3.13.0
 |View <<Release 3.13.0,release details>>.
@@ -437,6 +449,37 @@ Overzicht van de release notities.
 In onderstaande paragrafen worden de release details beschreven.
 
 :sectnums!:
+
+==== Release 3.14.0
+
+
+New features:
+
+- @contezza/alfresco - Sidebar-tab component `CommentsSidebarComponent` created with id `alfresco.sidebars.comments`.
+- @contezza/alfresco/rm - Search-page configuration for RM Audit created with id `rm.search-page-configs.rmauditlogs` https://support.contezza.nl/issues/38412[(#38412)].
+- @contezza/layout - Refactor module to provider based.
+
+Bugfixes/minor changes:
+
+- @contezza/content-services/search - Fix issue with initialization of preferences.
+- @contezza/content-services/search - Support multiple 'onInit' actions in search-page configuration.
+- @contezza/content-services/search - Support `settings` in `ViewerSearchResultPreviewComponent`.
+- @contezza/profile - Use `DocsService` to generate link to license in `AppInfoComponent`.
+
+==== Release 3.13.2
+
+Bugfixes/minor changes:
+
+- @contezza/content-services/search - Fix issue with query formatting.
+
+==== Release 3.13.1
+
+Bugfixes/minor changes:
+
+- @contezza/alfresco - Fix link generation from viewer in `FileLinkResolver`.
+- @contezza/content-services - Viewer component `CsvViewerComponent` created, and associated to files with extension 'csv' https://support.contezza.nl/issues/38643[(#38643)].
+- @contezza/core/utils - Collection `CsvUtils` created, with method `parse`.
+- @contezza/core/utils - Validator `conditionallyRequire` added to collection `ContezzaValidators`.
 
 ==== Release 3.13.0
 
