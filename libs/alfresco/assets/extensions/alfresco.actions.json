@@ -1,0 +1,43 @@
+{
+    "$id": "alfresco.actions",
+    "$version": "@@project.version@@",
+    "$name": "Tezza Alfresco Actions",
+    "$vendor": "Contezza BV",
+
+    "actions": [
+        {
+            "id": "alfresco.actions.toggleSidebarContent.comments",
+            "type": "[SEARCH] TOGGLE_SIDEBAR_CONTENT",
+            "payload": {
+                "id": "alfresco.sidebars.comments",
+                "activeSidebarClass": "active-sidebar-alfresco-comments"
+            }
+        }
+    ],
+
+    "templates": {
+        "actions": [
+            {
+                "id": "alfresco.actions.toggleSidebarContent.comments",
+                "title": "ALFRESCO.ACTIONS.TOGGLE_SIDEBAR_COMMENTS",
+                "icon": "chat",
+                "actions": {
+                    "click": "alfresco.actions.toggleSidebarContent.comments"
+                }
+            }
+        ]
+    },
+
+    "features": {
+        "toolbar": [
+            {
+                "id": "alfresco.toolbar.toggleSidebarContent.comments",
+                "imports": "templates.actions[alfresco.actions.toggleSidebarContent.comments]",
+                "rules": {
+                    "visible": "context=>return context.component?.actions?.includes?.('toggleSidebarContent.comments')"
+                },
+                "order": 695
+            }
+        ]
+    }
+}

@@ -7,33 +7,28 @@
 
     &-logo {
         min-width: 140px;
+        text-align: center;
+        margin: auto 0;
     }
 
     &-data {
         display: flex;
         flex-direction: column;
-
-        h3 {
-            margin: 8px 0 !important;
-        }
-
-        p {
-            margin: 8px 0 !important;
-        }
+        gap: 16px;
 
         &-version {
             display: flex;
             flex-direction: row;
             align-items: center;
             gap: 8px;
+        }
 
-            &-link {
-                color: var(--theme-primary-color);
-                text-decoration: none;
+        &-link {
+            color: var(--theme-primary-color);
+            text-decoration: none;
 
-                &:hover {
-                    color: var(--theme-accent-color);
-                }
+            &:hover {
+                color: var(--theme-accent-color);
             }
         }
     }

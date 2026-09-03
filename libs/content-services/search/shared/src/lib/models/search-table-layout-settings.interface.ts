@@ -1,14 +1,14 @@
-import { SearchRequest } from '@alfresco/js-api';
 import { ExtensionElement } from '@alfresco/adf-extensions';
+import { SearchRequest } from '@alfresco/js-api';
 
-import { ContezzaDynamicSource } from '@contezza/core/extensions';
 import { LayoutItem } from '@contezza/core/components/page-layout-content';
+import { ContezzaDynamicSource } from '@contezza/core/extensions';
+
 import { SelectionMode } from '@contezza/content-services/components/table/shared';
-import { SearchParameters } from './search-parameters';
-
 import { SidebarState } from '@contezza/content-services/shared';
-
 import { QueryMode } from '@contezza/dynamic-forms/shared';
+
+import { SearchParameters } from './search-parameters';
 
 export interface FormSettings {
     formId: string;
@@ -52,13 +52,13 @@ export interface TableLayoutSettings {
     emptyContent: EmptyContent;
     featureKeys?: { contextMenu?: string; toolbar?: string; floatingButton?: string };
     actions?: {
-        [key: string]: string;
+        [key: string]: string | string[];
         click?: string;
         dblclick?: string;
         contextmenu?: string;
         breadcrumbNavigate?: string;
         fileUploadComplete?: string;
-        onInit?: string;
+        onInit?: string | string[];
     };
 }
 

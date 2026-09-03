@@ -1,3 +1,7 @@
 {
-    "ALFRESCO": {}
+    "ALFRESCO": {
+        "ACTIONS": {
+            "TOGGLE_SIDEBAR_COMMENTS": "Comments"
+        }
+    }
 }
