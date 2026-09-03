@@ -31,7 +31,7 @@
         "name": "Demo App",
         "version": "@@project.version@@",
         "logo": "assets/demo-app/images/contezza_logo.png",
-        "copyright": "APP.COPYRIGHT"
+        "copyright": "COPYRIGHT"
     },
     "contezza": {
         "storagePrefix": "aca",
