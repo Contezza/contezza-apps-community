@@ -14,7 +14,7 @@ import { AlfrescoRmExtensionModule } from '@contezza/alfresco/rm';
 import { ContentServicesSearchExtensionModule } from '@contezza/content-services/search';
 import { ContentServicesShareExtensionModule } from '@contezza/content-services/share';
 import { JsConsoleExtensionModule } from '@contezza/js-console/shared';
-import { LayoutExtensionModule } from '@contezza/layout';
+import { provideLayoutExtension } from '@contezza/layout';
 import { ContezzaNodeBrowserSharedModule } from '@contezza/node-browser/shared';
 import { ProcessServicesExtensionModule } from '@contezza/process-services';
 import { ProfileExtensionModule } from '@contezza/profile';
@@ -22,7 +22,6 @@ import { ProfileExtensionModule } from '@contezza/profile';
 @NgModule({
     imports: [
         CoreExtensionModule,
-        LayoutExtensionModule,
         AosExtensionModule,
         ContentServicesSearchExtensionModule,
         ContentServicesShareExtensionModule,
@@ -35,6 +34,7 @@ import { ProfileExtensionModule } from '@contezza/profile';
         ResponsiveModule,
     ],
     providers: [
+        provideLayoutExtension(),
         { provide: ExtensionService, useClass: ContezzaExtensionService },
         MatDialogService.provider,
         provideExtensionConfig(['demo-app.columns.json', 'demo-app.dynamic-forms.json', 'demo-app.navbar.json', 'demo-app.search-table-page-configs.json']),
