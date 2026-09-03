@@ -1,12 +1,12 @@
 import { ApiUtils, BaseApi } from '@contezza/core/utils';
 
-import { Rmauditlog, RmAuditlogQueryParameters } from './models';
+import { Rmauditlog, RmauditlogQueryParameters } from './models';
 
 const { toEndpointTemplate, queryParametersToString } = ApiUtils;
 
 export class RmaApi extends BaseApi {
     static readonly ENDPOINT_NODE_RMAUDITLOG = 'api/node/{store_type}/{store_id}/{id}/rmauditlog';
-    static readonly ENDPOINT_ALL_RMAUDITLOGS = 'api/rma/admin/rmauditlog';
+    static readonly ENDPOINT_ADMIN_RMAUDITLOG = 'api/rma/admin/rmauditlog';
 
     static readonly TEMPLATE_ENDPOINT_NODE_RMAUDITLOG = toEndpointTemplate(RmaApi.ENDPOINT_NODE_RMAUDITLOG);
 
@@ -26,7 +26,7 @@ export class RmaApi extends BaseApi {
      *
      * @param queryParameters
      */
-    readAllRmAuditlogs(queryParameters: RmAuditlogQueryParameters = {}) {
-        return this.http.get<{ data: Rmauditlog }>(RmaApi.ENDPOINT_ALL_RMAUDITLOGS + queryParametersToString(queryParameters));
+    readRmauditlog(queryParameters: RmauditlogQueryParameters = {}) {
+        return this.http.get<{ data: Rmauditlog }>(RmaApi.ENDPOINT_ADMIN_RMAUDITLOG + queryParametersToString(queryParameters));
     }
 }

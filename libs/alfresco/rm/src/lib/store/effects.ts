@@ -63,10 +63,7 @@ export class Effects {
                         autoFocus: false,
                         width: '70%',
                         data: {
-                            title: {
-                                label: 'ALFRESCO.RM.DIALOGS.SHOW_AUDITLOG_DETAILS.TITLE',
-                                params: { name: rmauditlogEntry.nodeName },
-                            },
+                            title: 'ALFRESCO.RM.DIALOGS.SHOW_AUDITLOG_DETAILS.TITLE',
                             content: {
                                 component: () => import('@contezza/alfresco/rm/components/rmauditlog').then(_ => _.RmaudilogComponent),
                                 inputs: { rmauditlog: { entries: [rmauditlogEntry] } },

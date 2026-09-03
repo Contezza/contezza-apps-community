@@ -11,7 +11,7 @@ import { provideMaps } from '@contezza/core/extensions';
 import { provideWebscriptApiService } from '@contezza/core/services';
 import { ApiUtils } from '@contezza/core/utils';
 
-import { RmaApi, RmAuditlogQueryParameters } from '@contezza/alfresco/rm/apis';
+import { RmaApi, RmauditlogQueryParameters } from '@contezza/alfresco/rm/apis';
 import { provideSearchStrategies } from '@contezza/content-services/search';
 
 export function provideExtension(): EnvironmentProviders {
@@ -33,8 +33,8 @@ export function provideExtension(): EnvironmentProviders {
                     const { skipCount, maxItems } = parameters.paging;
 
                     return rmaApi
-                        .readAllRmAuditlogs({
-                            ...(ApiUtils.stringToQueryParameters(parameters.leftSidebarQuery!) as unknown as RmAuditlogQueryParameters),
+                        .readRmauditlog({
+                            ...(ApiUtils.stringToQueryParameters(parameters.leftSidebarQuery!) as unknown as RmauditlogQueryParameters),
                             size: maxItems,
                         })
                         .pipe(

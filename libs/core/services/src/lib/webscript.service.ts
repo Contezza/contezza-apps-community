@@ -38,21 +38,23 @@ export class WebscriptService implements HttpClient {
     execute<T>(httpMethod: HttpMethod.POST | HttpMethod.PUT | HttpMethod.PATCH, url: string, body: any): Observable<T>;
     execute<T>(httpMethod: HttpMethod, url: string, body?: any): Observable<T> {
         return ContezzaObservables.from(() =>
-            this.apiService
-                .getInstance()
-                .contentClient.callApi(
-                    '/service/' + url,
-                    httpMethod,
-                    {},
-                    '',
-                    {},
-                    {},
-                    body,
-                    body ? ['application/json'] : ['multipart/form-data'],
-                    ['application/json', 'text/html'],
-                    null,
-                    'alfresco',
-                ),
+            this.apiService.getInstance().contentClient.callApi(
+                '/service/' + url,
+                httpMethod,
+                {},
+                '',
+                {},
+                {},
+                body,
+                // alfresco webscript GET api/rma/admin/rmauditlog does not read query parameters if Content-Type:'application/json'
+                // ADF forces 'application/json' by default
+                // to send a request without Content-Type we set 'multipart/form-data' and basically exploit this code
+                // https://github.com/Alfresco/alfresco-ng2-components/blob/develop/lib/core/auth/src/authentication-interceptor/authentication.interceptor.ts#L58
+                body ? ['application/json'] : ['multipart/form-data'],
+                ['application/json', 'text/html'],
+                null,
+                'alfresco',
+            ),
         );
     }
 }

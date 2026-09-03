@@ -10,7 +10,7 @@
                     "TITLE": "Audit log for {{name}}"
                 },
                 "SHOW_AUDITLOG_DETAILS": {
-                    "TITLE": "Audit details {{name}}"
+                    "TITLE": "Audit details"
                 }
             },
             "RMAUDITLOG": {
